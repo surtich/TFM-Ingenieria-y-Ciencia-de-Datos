@@ -1,0 +1,249 @@
+{{< include _setup.qmd >}}
+
+# Análisis de la varianza de un factor.
+
+Siguiendo a @lawson2018 [pp. 353-354] vamos a realizar un análisis de la varianza de un factor usando sólo la pregunta 18 que es una valoración general de subtitulado.
+
+## Preparación de datos
+
+TODO: Comentar y poner en bonito la tabla
+
+
+```{r}
+test_df
+```
+
+Disponemos de estos datos:
+```{r}
+test_df %>%
+    select(Group, Test) %>%
+    table()
+```
+
+Vamos a cambiar la nomenclatura para adaptarla a @lawson2018:
+
+* El grupo A pasará a llamarse AB.
+* El grupo B pasará a llamarse BA.
+
+* Los estudiantes se denominarán sujetos.
+* Los test 01 y 02 tratamientos.
+* Se introduce una variable periodo.
+
+Los valores del test de Likert se desplazarán para que tengan valores más lógicos:
+
+* 0 = No sé / No constesto
+* 1 = Muy en desacuerdo
+* 2 = En desacuerdo
+* 3 = Neutral
+* 4 = De acuerdo
+* 5 = Muy de acuerdo
+
+Finalmente la tabla se pasará a formato largo.
+
+```{r}
+#| echo: false
+df <- test_df %>%
+    mutate(Period = as.factor(if_else(Test == "01", 1, 2)), Treat = as.factor(if_else(Group == "A" & Test == "01" | Group == "B" & Test == "02", "A", "B")), Group = as.factor(if_else(Group == "A", "AB", "BA")), Subject = as.factor(User)) %>%
+    select(Group, Period, Treat, Subject, starts_with("Q")) %>%
+    mutate_at(vars(starts_with("Q")), ~ (. + 1) %% 6) %>%
+    pivot_longer(cols = all_of(starts_with("Q")), names_to = "Question", values_to = "Response") %>%
+    arrange(Subject, Period, Question)
+
+write_csv(df, "./data/preprocess/test_lg.csv")
+``` 
+
+
+```{r}
+#| echo: false
+df
+```
+
+El análisis de la varianza, ANOVA, se debe realizar una variable de respuesta cuantitativo (TODO: incluir supuestos de ANOVA).
+El test de Likert tiene una escala ordinal y, por lo tanto, ANOVA no es una técnica adecuada. De todas formas
+vamos a realizar un análisis de la varianza para la pregunta 18 que es una valoración general del subtitulado.
+
+```{r}
+#| echo: false
+#| include: false
+df18 <- df %>% filter(Question == "Q18" & Response != 0)
+```
+
+Vamos a seguir el proceso descrito en @meier2022 para realizar el ANOVA.
+
+## Análisis de la varianza de un factor.
+
+### Ajuste del modelo.
+
+El factor va a ser el tratamiento con dos niveles A y B
+^[Para este ejemplo en el que sólo hay dos niveles de factor, podríamos haber utilizado un $t$-test de comparación de medias.].
+
+El modelo que vamos a ajustar es:
+
+$$
+   Y_{ij} \sim N(\mu_i, \sigma^2), \textrm{ independientes}
+$$ {#eq-one-anova-1}
+
+Los valores observados $y_{ij}$ corresponden a las respuestas a la pregunta 18 del sujeto j-ésimo que recibió el i-ésimo tratamiento (A o B) y siguen una distribución normal con media $\mu_i$ y varianza $\sigma^2$. Es decir, que estamos suponiendo que los dos tratamientos tienen la misma varianza pero pueden tener distinta media.
+
+El modelo (@eq-one-anova-1) también se puede expresar:
+
+$$
+  Y_{ij} = \mu_i + \epsilon_{ij}
+$$ {#eq-one-anova-2}
+
+Con $\epsilon_{ij} \textrm{ i.i.d.} \sim N(0,\sigma^2)$. En esta ecuación simplemente hemos separado el término determinista $\mu_i$ del estocástico $\epsilon_{ij}$.
+
+Una reparametrización alternativa es:
+
+$$
+  Y_{ij} = \mu + \alpha_i + \epsilon_{ij}
+$$ {#eq-one-anova-3}
+
+En este caso, estamos considerando que existe un efecto fijo, $\mu$, y que cada factor tiene una desviación, $\alpha_i$, sobre el ese nivel fijo. Así $\displaystyle \sum_{i=1}^g \alpha_i = 0$. Lo que en nuestro, en el que sólo hay dos niveles ($g=2$),
+implica que $\alpha_A + \alpha_B = 0$. En R se puede elegir uno (@eq-one-anova-2) u otro (@eq-one-anova-2) tipo de parametrización.
+
+Podemos visualizar que los valores de respuesta cada nivel de tratamiento está claramente separado: 
+
+```{r}
+#| echo: false
+#| fig-cap: "Resumen de las respuestas a la pregunta 18 en cada nivel de tratamiento."
+df18 %>% ggplot(aes(x = Treat, y = Response)) +
+    geom_boxplot(aes(fill = Treat), show.legend = FALSE)
+```
+
+Finalmente ajustamos el modelo y mostramos los coeficientes:
+
+```{r}
+#| echo: true
+fit.q18 <- aov(Response ~ Treat, data = df18)
+coef.q18 <- coef(fit.q18)
+coef.q18
+```
+
+Por defecto R elige como nivel de referencia del factor el A por ser menor alfabéticamente y el término de intercepción se corresponde con este valor, así $\mu_A=`r round(coef.q18[[1]], 2)`$ y el nivel del tratamiento B está como diferencias sobre el de referencia. Por lo tanto, $\mu_B=`r round(coef.q18[[1]]+coef.q18[[2]], 2)`$.
+
+Alternativamente podemos obtener las medias de cada nivel de esta forma:
+
+```{r}
+#| echo: true
+predict(fit.q18, newdata = data.frame(Treat = c("A", "B")))
+```
+
+O con la librería `emmeans`, que también nos proporciona el intervalo de confianza con el 95%:
+
+```{r}
+#| echo: true
+library(emmeans)
+emmeans(fit.q18, specs = ~Treat)
+```
+
+Con R, podemos obtener los valores correspondientes a la segunda parametrización (@eq-one-anova-3) del modelo:
+
+```{r}
+#| echo: true
+options(contrasts = c("contr.sum", "contr.poly"))
+fit.q18.2 <- aov(Response ~ Treat, data = df18)
+coef.q18.2 <- coef(fit.q18.2)
+coef.q18.2
+options(contrasts = c("contr.treatment", "contr.poly"))
+```
+
+Vemos que cambian tanto los valores como el esquema de nombrado. Ahora el término de intercepción se corresponde con la media global ($\mu=`r round(coef.q18.2[[1]], 2)`$) y `Treat1` es la diferencia del nivel de factor 1 con esa media ($\alpha_A=`r round(coef.q18.2[[2]], 2)`$), como la suma de todos los niveles tiene que ser 0, $\alpha_B=`r -round(coef.q18.2[[2]], 2)`$.
+
+### Tests estadísticos.
+
+En ANOVA el contraste de hipótesis habitual es contrastar si las medias de los niveles de un factor son iguales o hay alguna diferente:
+
+$$
+\begin{array}{lll}
+H_0 & : & \mu_1 = \mu_2 = \ldots = \mu_g \\
+H_A & : & \mu_k \neq \mu_l \textrm{ para al menos un par } k \neq l \\
+\end{array}
+$$
+
+Los resultados de $F$-test son significativos y permiten rechazar la hipótesis nula de que los dos tratamientos son iguales, es decir que podemos concluir que el subtitulado de los vídeos es percibido por los estudiantes con diferente:
+
+```{r}
+#| echo: true
+summary(fit.q18)
+```
+
+Podemos calcular el estadístico F usando un test $drop1$ que consiste en ajustar el modelo con y sin variables predictoras y comparar los resultados.
+
+
+```{r}
+#| echo: true
+drop1(fit.q18, test = "F")
+```
+
+Una tercera forma obtener los mismos resultados es comparar mediante un $F$-test el modelo con un factor con el modelo nulo:
+
+```{r}
+#| echo: true
+fit.q18.single <- aov(Response ~ 1, data = df18)
+anova(fit.q18.single, fit.q18)
+```
+
+Podemos obtener las significación estadística y los intervalos de confianza de los $\alpha_i's$:
+
+```{r}
+#| echo: true
+summary.lm(fit.q18)
+```
+
+
+```{r}
+#| echo: true
+confint(fit.q18)
+```
+
+### Comprobación de los supuestos del modelo.
+
+La inferencia estadística solo es válida si se cumplen las siguientes premisas:
+
+* Los errores son independientes.
+* Los errores están distribuidos normalmente.
+* La varianza del error es constante.
+* Los errores tienen una media de cero.
+
+La independencia de los errores se consigue aleatorizando el experimento. Habría que hacer comprobaciones estadísticas de la representatividad de la muestra que no se abordan en este trabajo por no ser objeto del mismo. En cualquier caso, en un estudio cruzado los errores no son independientes y trataremos este problema más adelante.
+
+#### Análisis de residuos
+
+No observamos directamente los errores, $\epsilon_{ij}$, sino una estimación suya que denominamos residuos:
+
+$$
+r_{ij} = y_{ij} - \widehat{\mu}_{i}.
+$$
+
+Para comprobar la normalidad de los residuos es habitual utilizar un gráfico **QQ-plot** que compara los percentiles de los residuos obtenidos de tras ajustar el modelo con los que resultarían de un distribución normal.
+
+```{r}
+#| echo: true
+#| fig-cap: QQ-plot para comprobar la normalidad de los residuos.
+qqPlot(fit.q18, distribution = "norm")
+```
+
+Como era de esperar, una variable de respuesta ordinal no va a producir residuos con distribución normal.
+
+Si los residuos no tienen una distribución normal, el resto de test que hagamos carecen de sentido ya parten de la premisa de que los residuos son normales. De todas formas realizaremos algunos de estos test. Por ejemplo, para comprobar si los residuos tienen una varianza constante, podemos utilizar el **Tukey-Anscombe plot (TA-plot)**.
+
+```{r}
+#| echo: true
+#| fig-cap: TA-plot para comprobar la varianza constante de los residuos.
+plot(fit.q18, which = 1)
+```
+
+Constatamos que los residuos tienden a crecer ligeramente. 
+
+### Aproximaciones no paramétricas.
+
+Dado que la variable de respuesta es ordinal y no sigue una distribución normal, podemos hacer un test no paramétrico como es el **test de Kruskal-Wallis**.
+
+```{r}
+#| echo: true
+fit.q18.kw <- kruskal.test(Response ~ Treat, data = df18)
+fit.q18.kw
+```
+
+Este test produce significación estadística de la diferencia de medias.

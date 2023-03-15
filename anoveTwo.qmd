@@ -1,0 +1,39 @@
+{{< include _setup.qmd >}}
+
+# Análisis de la varianza de dos factores.
+
+Vamos a realizar el análisis pero ahora con dos factores. Hay varias posibilidades. Entre ellas vamos a seleccionar como factores el tratamiento (subtitulado) y las preguntas. Es decir, nos planteamos si hay diferencias entre las preguntas en los distintos tratamientos. Lógicamente esperamos que así sea, pero en el gráfico de interacción (@fig-anove-two) constatamos algunas cuestiones interesantes. Esperaríamos encontrar que uno de los tratamientos debería tener puntuaciones elevadas y el otro bajas ya que una actividad corresponde a un test sobre un vídeo con subtítulos correctos y en la otra hay deficiencias en el subtitulado. Esto es lo que se puede apreciar en el gráfico. Sin embargo en algunas preguntas esto no sucede.:
+
+* En las preguntas 4 y 13 ambos tratamientos tienen puntuaciones altas.
+* En las preguntas 15, 16 y 17 ambos tratamientos tienen puntuaciones medias y parecidas.
+* Las oscilaciones en el tratamiento B son mayores que en el tratamiento A, que excepto en las preguntas 15, 16 y 17, tiene puntuaciones muy planas y similares a la media.
+* Las preguntas 5 y 9 del tratamiento B tienen una puntuación inferior a la media del tratamiento.
+
+```{r}
+#| echo: false
+#| label: fig-anove-two
+#| fig-cap: Gráficos de interacción tratamiento y pregunta (valor medio de las respuestas).
+
+df_clean %>% ggplot(aes(x = Question, y = Response, color = Treat)) +
+    stat_summary(fun = mean, geom = "line", aes(group = Treat)) +
+    stat_smooth(method = "lm", formula = y ~ 1, aes(group = Treat), linetype = "dashed", linewidth = 1, se = FALSE, show.legend = FALSE) +
+    theme_bw() +
+    theme(axis.text.x = element_text(size = 8))
+```
+
+
+Podemos observar que las preguntas 14, 15 y 17 y sobre todo la 16 tienen una gran cantidad de respuestas "No sé / No Contesto".
+
+```{r}
+#| echo: false
+#| label: fig-anove-two-2
+#| fig-cap: Contestación a preguntas con valor No sé / No Contesto por tratamiento.
+
+df_0 %>% ggplot() +
+    geom_bar(aes(x = Question, fill = Treat)) +
+    theme_bw() +
+    scale_x_discrete(drop = FALSE) +
+    theme(axis.text.x = element_text(size = 8))
+```
+
+TODO: Probablemente los dos gráficos anteriores tienen más sentido en el EDA. Revisar.
