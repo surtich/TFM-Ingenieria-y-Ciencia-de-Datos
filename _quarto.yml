@@ -10,6 +10,7 @@ book:
     - index.qmd
     - anoveOne.qmd
     - anoveTwo.qmd
+    - anoveThree.qmd
     #- intro.qmd
     #- summary.qmd
     - references.qmd
@@ -33,6 +34,8 @@ format:
     toc-depth: 2
     lof: true
     lot: true
+    cite-method: biblatex
+    biblatexoptions: [backend=biber, style=authoryear,citestyle=authoryear]
     documentclass: memoir
 
 

@@ -68,6 +68,7 @@ vamos a realizar un análisis de la varianza para la pregunta 18 que es una valo
 df18 <- df %>% filter(Question == "Q18" & Response != 0)
 ```
 
+
 Vamos a seguir el proceso descrito en @meier2022 para realizar el ANOVA.
 
 ## Análisis de la varianza de un factor.

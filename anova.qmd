@@ -1,0 +1,366 @@
+---
+title: "Crossover ANOVA"
+description: |
+  Anova siguiendo capítulo 9 de Lawson.
+date: 2023-03-15
+params:
+  date: 2023-03-15
+  slug: "anova-lawson"
+bibliography: references.bib
+toc: true
+---
+
+{{< include _setup.qmd >}}
+
+# Análisis del diseño cruzado AB, BA con ANOVA
+
+Vamos a realizar un análisis de la varianza para diseños cruzados con dos niveles de factor (bien subtitulado/mal subtitulado) para la pregunta 18 del test que es una valoración general del subtitulado. Empezaremos realizando una preparación de los datos y especificaremos distintos modelos con complejidad creciente.
+
+## Preparación de datos
+
+TODO: Comentar y poner en bonito la tabla
+
+
+```{r}
+test_df
+```
+
+Disponemos de estos datos:
+```{r}
+test_df %>%
+    dplyr::select(Group, Test) %>%
+    table()
+```
+
+Vamos a cambiar la nomenclatura para adaptarla a @lawson2018:
+
+* El grupo A pasará a llamarse AB.
+* El grupo B pasará a llamarse BA.
+
+* Los estudiantes se denominarán sujetos.
+* Los test 01 y 02 tratamientos.
+* Se introduce una variable periodo.
+
+Los valores del test de Likert se desplazarán para que tengan valores más lógicos:
+
+* 0 = No sé / No constesto
+* 1 = Muy en desacuerdo
+* 2 = En desacuerdo
+* 3 = Neutral
+* 4 = De acuerdo
+* 5 = Muy de acuerdo
+
+Finalmente la tabla se pasará a formato largo.
+
+```{r}
+#| echo: false
+df <- test_df %>%
+    mutate(Period = as.factor(if_else(Test == "01", 1, 2)), Treat = as.factor(if_else(Group == "A" & Test == "01" | Group == "B" & Test == "02", "A", "B")), Group = as.factor(if_else(Group == "A", "AB", "BA")), Subject = as.factor(User)) %>%
+    dplyr::select(Group, Period, Treat, Subject, starts_with("Q")) %>%
+    mutate_at(vars(starts_with("Q")), ~ (. + 1) %% 6) %>%
+    pivot_longer(cols = all_of(starts_with("Q")), names_to = "Question", values_to = "Response") %>%
+    arrange(Subject, Period, Question)
+
+write_csv(df, "./data/preprocess/test_lg.csv")
+``` 
+
+
+
+```{r}
+#| echo: false
+df
+```
+
+El análisis de la varianza, ANOVA, se debe realizar una variable de respuesta cuantitativo (TODO: incluir supuestos de ANOVA).
+El test de Likert tiene una escala ordinal y, por lo tanto, ANOVA no es una técnica adecuada.
+
+```{r}
+#| echo: false
+#| include: false
+df18 <- df %>% filter(Question == "Q18" & Response != 0)
+```
+
+## Modelo nulo.
+
+### Especificación del modelo.
+
+Vamos a comenzar ajustando el modelo nulo que es aquel que no tiene predictores. La ecuación del modelo nulos será:
+
+$$
+   Y \sim N(\mu, \sigma^2), \textrm{ independientes}
+$$ {#eq-anova-1.1}
+
+Los valores observados $y$ corresponden a las respuestas a la pregunta 18 y siguen una distribución normal con media $\mu$ y varianza $\sigma^2$. Es decir, que estamos suponiendo que todas las respuestas tienen la misma media.
+
+El modelo (@eq-anova-1.1) también se puede expresar:
+
+$$
+  y = \mu + \epsilon
+$$ {#eq-one-anova-1.2}
+
+Con $\epsilon \textrm{ i.i.d.} \sim N(0,\sigma^2)$. En esta ecuación simplemente hemos separado el término determinista $\mu$ del estocástico $\epsilon$.
+
+### Ajuste del modelo.
+
+Finalmente ajustamos el modelo y mostramos los coeficientes:
+
+```{r}
+#| echo: true
+fit.1 <- aov(Response ~ 1, data = df18)
+coef.1 <- coef(fit.1)
+coef.1
+```
+
+El valor ajustado del intercepto se corresponde con las media de las preguntas.
+
+
+## ANOVA de un factor.
+
+En este apartado seguimos el desarrollo descrito en @meier2022 (chap. 2).
+
+### Especificación del modelo.
+
+El principal efecto que queremos conocer es el efecto que tiene la calidad del subtitulado sobre las respuestas de los estudiantes. Incluimos en el modelo la calidad del subtitulado. El nuevo modelo será:
+
+$$
+   Y_{i} \sim N(\mu_i, \sigma^2), \textrm{ independientes}
+$$ {#eq-one-anova-2.1}
+
+Los valores observados $y_{i}$ corresponden a las respuestas a la pregunta 18 del i-ésimo tratamiento (A o B) y siguen una distribución normal con media $\mu_i$ y varianza $\sigma^2$. Es decir, que estamos suponiendo que los dos tratamientos tienen la misma varianza pero pueden tener distinta media.
+
+El modelo (@eq-one-anova-2.1) también se puede expresar:
+
+$$
+  y_{i} = \mu_i + \epsilon_{i}
+$$ {#eq-one-anova-2.2}
+
+Con $\epsilon_{i} \textrm{ i.i.d.} \sim N(0,\sigma^2)$. En esta ecuación simplemente hemos separado el término determinista $\mu_i$ del estocástico $\epsilon_{ij}$.
+
+Una reparametrización alternativa es:
+
+$$
+  y_{i} = \mu + \tau_i + \epsilon_{i}
+$$ {#eq-one-anova-2.3}
+
+En este caso, estamos considerando que existe un efecto fijo, $\mu$, y que cada factor tiene una desviación, $\tau_i$, sobre el nivel fijo. Así, $\displaystyle \sum \tau_i = 0$. Lo que en nuestro caso, en el que sólo hay dos niveles,
+implica que $\tau_A + \tau_B = 0$. En R se puede elegir uno (@eq-one-anova-2.1) u otro (@eq-one-anova-2.2) tipo de parametrización al ajustar el modelo.
+
+### Ajuste del modelo.
+
+Podemos comprobar que los valores de respuesta de cada nivel de tratamiento están claramente separados: 
+
+```{r}
+#| echo: false
+#| fig-cap: "Resumen de las respuestas a la pregunta 18 en cada nivel de tratamiento."
+df18 %>% ggplot(aes(x = Treat, y = Response)) +
+    geom_boxplot(aes(fill = Treat), show.legend = FALSE)
+```
+
+Finalmente ajustamos el modelo y mostramos los coeficientes:
+
+```{r}
+#| echo: true
+fit.2 <- aov(Response ~ Treat, data = df18)
+coef.2 <- coef(fit.2)
+coef.2
+```
+
+Por defecto R elige como nivel de referencia del factor el A por ser menor alfabéticamente y el término de intercepción se corresponde con este valor, así $\mu_A=`r round(coef.2[[1]], 2)`$ y el nivel del tratamiento B está como diferencias sobre el de referencia. Por lo tanto, $\mu_B=`r round(coef.2[[1]]+coef.2[[2]], 2)`$.
+
+Alternativamente podemos obtener las medias de cada nivel de esta forma:
+
+```{r}
+#| echo: true
+predict(fit.2, newdata = data.frame(Treat = c("A", "B")))
+```
+
+O con la librería `emmeans`, que también nos proporciona el intervalo de confianza con el 95%:
+
+```{r}
+#| echo: true
+library(emmeans)
+emmeans(fit.2, specs = ~Treat)
+```
+
+Con R, podemos obtener los valores correspondientes a la segunda parametrización (@eq-one-anova-2.3) del modelo:
+
+```{r}
+#| echo: true
+options(contrasts = c("contr.sum", "contr.poly"))
+fit.2.bis <- aov(Response ~ Treat, data = df18)
+coef.2.bis <- coef(fit.2.bis)
+coef.2.bis
+options(contrasts = c("contr.treatment", "contr.poly"))
+```
+
+Vemos que cambian tanto los valores como el esquema de nombrado. Ahora el intercepto se corresponde con la media global ($\mu=`r round(coef.2.bis[[1]], 2)`$) y `Treat1` es la diferencia del nivel de factor 1 con esa media ($\tau_A=`r round(coef.2.bis[[2]], 2)`$). Como la suma de todos los niveles tiene que ser 0, $\tau_B=`r -round(coef.2.bis[[2]], 2)`$.
+
+### Tests estadísticos.
+
+En ANOVA se contrasta si las medias de los niveles de un factor son iguales o hay alguna diferente:
+
+$$
+\begin{array}{lll}
+H_0 & : & \mu_1 = \mu_2 = \ldots = \mu_g \\
+H_A & : & \mu_k \neq \mu_l \textrm{ para al menos un par } k \neq l \\
+\end{array}
+$$
+
+Los resultados de $F$-test son significativos y permiten rechazar la hipótesis nula de que los dos tratamientos son iguales, es decir que podemos concluir que el subtitulado de los vídeos es percibido por los estudiantes con diferente:
+
+```{r}
+#| echo: true
+summary(fit.2)
+```
+
+Podemos calcular el estadístico $F$ usando un test $drop1$ que consiste en ajustar el modelo con y sin variables predictoras y comparar los resultados:
+
+
+```{r}
+#| echo: true
+drop1(fit.2, test = "F")
+```
+
+Una tercera forma de obtener los mismos resultados es comparar mediante un $F$-test el modelo con un factor con el modelo nulo:
+
+```{r}
+#| echo: true
+anova(fit.1, fit.2)
+```
+
+Podemos obtener las significación estadística y los intervalos de confianza de los $\tau_i's$:
+
+```{r}
+#| echo: true
+summary.lm(fit.2)
+```
+
+
+```{r}
+#| echo: true
+confint(fit.2)
+```
+
+## ANOVA multifactorial.
+
+
+Siguiendo a @lawson2018 [pp. 353-354] vamos a realizar un ajuste para tres factores: Subtítulos (Treat), periodo (Period) y estudiantes (Subject).
+
+### Especificación del modelo.
+
+
+El modelo quedará especificado con la siguiente fórmula:
+
+$$ y_{ijk} = \mu + s_i + \pi_j + \tau_k + \epsilon_{ijk} $$ {#eq-one-anova-3}
+
+Donde,
+
+* $y_{ijk}$ es una observación de la respuesta a la pregunta 18 del test del sujeto $i$-èsimo, en el periodo $j$-èsimo y con el subtitulado $k$-èsimo.
+
+* $\mu$ es el valor fijo de respuesta independiente del nivel de factor.
+
+* $s_i$ es el efecto aleatorizado del sujeto (factor de bloque).
+
+* $\pi_j$ es el efecto periodo.
+
+* $\tau_j$ es el efecto tratamiento (subtítulo).
+
+* $\epsilon_{ijk}$ es el error no explicado.
+
+* El efecto de grupo no se incluye en este modelo.
+
+### Ajuste del modelo.
+
+Usamos un modelo de Anova tipo III que corresponde a un modelo completo en vez del tipo I (secuencial) usado por defecto, ya que las respuestas no están perfectamente balanceadas.
+
+```{r}
+#| echo: true
+library(car)
+fit.3 <- lm(Response ~ Subject + Period + Treat,
+    data = df18,
+    contrasts = list(
+        Subject = contr.sum, Period = contr.sum,
+        Treat = contr.sum
+    )
+)
+Anova(fit.3, type = "III")
+```
+
+Podemos constatar un efecto significativo de los subtítulos, que indica que hay una diferencia en las respuestas a la pregunta 18 sobre la valoración general del subtitulado de los vídeos. Sin embargo no hay efecto periodo significativo.
+
+
+Con la función lsmeans podemos contrastar la diferencia de niveles de tratamiento:
+```{r}
+#| echo: true
+library(emmeans)
+lsmeans(fit.3, pairwise ~ Treat)
+```
+
+## Modelo con inclusión de efecto `carryover`.
+
+Podemos evaluar si efecto del tratamiento del primer periodo afecta a los resultados obtenidos en el segundo periodo. Este efecto es conocido como `carryover`.
+
+### Especificación del modelo.
+
+Siguiendo a @lawson2018 (pags. 356-357), el modelo propuesto será:
+
+$$ y_{ijkl} = \mu + \psi_i + s_{ij} + \pi_k + \tau_l + \epsilon_{ijkl} $$ {#eq-one-anova-4}
+
+Sobre el modelo anterior (@eq-one-anova-3) se ha añadido el efecto aleatorio `carryover` $\psi_i$, que representa el efecto `carryover` de grupo
+^[En realidad hay dos efectos `carryover`: uno de pasar del tratamiento A al B y otro del B a A. Según @lawson2018, si asumimos que los efectos `carryover` son diferentes, la estimación de la diferencia de tratamientos queda sesgada por lo que se debe asumir que los efectos `carryover` son de la misma magnitud y por eso en nuestro modelo solo aparece un término para este efecto.] y $s_{ij}$ es ahora un efecto aleatorio del sujeto $i$-ésimo en el grupo $j$-èsimo. El resto de términos mantienen su significado.
+
+### Ajuste del modelo.
+
+Para evaluar el efecto `carryover` el efecto fijo Subject del modelo anterior (@eq-one-anova-3) se ha sustituido por un efecto aleatorio de la interacción entre sujeto y grupo.
+
+```{r}
+#| echo: true
+c1 <- c(0.5, -0.5)
+library(lme4)
+fit.4 <- lmer(Response ~ 1 + Group + (1 | Subject:Group) + Period + Treat,
+    data = df18,
+    contrasts = list(
+        Group = c1, Period = c1, Treat = c1
+    )
+)
+summary(fit.4)
+```
+
+Vemos que no hay evidencia significativa ni de efecto de grupo ni de efecto `carryover`. La varianza explicada del efecto `carryover` es cero. El efecto tratamiento sigue siendo significativo.
+
+### Comprobación de los supuestos del modelo.
+
+La inferencia estadística solo es válida si se cumplen las siguientes premisas:
+
+* Los errores son independientes.
+* Los errores están distribuidos normalmente.
+* La varianza del error es constante.
+* Los errores tienen una media de cero.
+
+La independencia de los errores se consigue aleatorizando el experimento. Habría que hacer comprobaciones estadísticas de la representatividad de la muestra que no se abordan en este trabajo por no ser objeto del mismo. En cualquier caso, en un estudio cruzado los errores no son independientes y trataremos este problema más adelante.
+
+#### Análisis de residuos
+
+No observamos directamente los errores, $\epsilon$, sino una estimación suya que denominamos residuos:
+
+$$
+r = y - \widehat{\mu}.
+$$
+
+Para comprobar la normalidad de los residuos es habitual utilizar un gráfico **QQ-plot** que compara los percentiles de los residuos obtenidos de tras ajustar el modelo con los que resultarían de un distribución normal.
+
+```{r}
+#| echo: true
+#| fig-cap: QQ-plot para comprobar la normalidad de los residuos.
+plot(fit.3, which = 2)
+```
+
+Como era de esperar, una variable de respuesta ordinal no va a producir residuos con distribución normal.
+
+Si los residuos no tienen una distribución normal, el resto de test que hagamos carecen de sentido ya parten de la premisa de que los residuos son normales.
+
+## Comparación de modelos
+
+TODO
+
+
