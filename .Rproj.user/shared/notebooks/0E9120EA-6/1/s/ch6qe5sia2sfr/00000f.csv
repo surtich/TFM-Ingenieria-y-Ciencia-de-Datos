@@ -1,0 +1,378 @@
+"0","source(""_setup.R"")"
+"2","Cargando paquete requerido: carData
+"
+"2","
+Adjuntando el paquete: ‘dplyr’
+
+"
+"2","The following object is masked from ‘package:car’:
+
+    recode
+
+"
+"2","The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+"
+"2","The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+"
+"2","Cargando paquete requerido: Matrix
+"
+"2","Cargando paquete requerido: mvtnorm
+"
+"2","Cargando paquete requerido: survival
+"
+"2","Cargando paquete requerido: TH.data
+"
+"2","Cargando paquete requerido: MASS
+"
+"2","
+Adjuntando el paquete: ‘MASS’
+
+"
+"2","The following object is masked from ‘package:dplyr’:
+
+    select
+
+"
+"2","
+Adjuntando el paquete: ‘TH.data’
+
+"
+"2","The following object is masked from ‘package:MASS’:
+
+    geyser
+
+"
+"2","
+Adjuntando el paquete: ‘ordinal’
+
+"
+"2","The following object is masked from ‘package:dplyr’:
+
+    slice
+
+"
+"2","
+Adjuntando el paquete: ‘purrr’
+
+"
+"2","The following object is masked from ‘package:magrittr’:
+
+    set_names
+
+"
+"2","The following object is masked from ‘package:car’:
+
+    some
+
+"
+"2","
+Adjuntando el paquete: ‘tidyr’
+
+"
+"2","The following object is masked from ‘package:magrittr’:
+
+    extract
+
+"
+"2","The following objects are masked from ‘package:Matrix’:
+
+    expand, pack, unpack
+
+"
+"1","── [1mAttaching core tidyverse packages[22m ───────────────────── tidyverse 2.0.0 ──
+[32m✔[39m [34mlubridate[39m 1.9.3     [32m✔[39m [34mtibble   [39m 3.2.1
+"
+"1","── [1mConflicts[22m ─────────────────────────────────────── tidyverse_conflicts() ──
+[31m✖[39m [34mtidyr[39m::[32mexpand()[39m    masks [34mMatrix[39m::expand()
+[31m✖[39m [34mtidyr[39m::[32mextract()[39m   masks [34mmagrittr[39m::extract()
+[31m✖[39m [34mdplyr[39m::[32mfilter()[39m    masks [34mstats[39m::filter()
+[31m✖[39m [34mdplyr[39m::[32mlag()[39m       masks [34mstats[39m::lag()
+[31m✖[39m [34mtidyr[39m::[32mpack()[39m      masks [34mMatrix[39m::pack()
+[31m✖[39m [34mdplyr[39m::[32mrecode()[39m    masks [34mcar[39m::recode()
+[31m✖[39m [34mMASS[39m::[32mselect()[39m     masks [34mdplyr[39m::select()
+[31m✖[39m [34mpurrr[39m::[32mset_names()[39m masks [34mmagrittr[39m::set_names()
+[31m✖[39m [34mordinal[39m::[32mslice()[39m   masks [34mdplyr[39m::slice()
+[31m✖[39m [34mpurrr[39m::[32msome()[39m      masks [34mcar[39m::some()
+[31m✖[39m [34mtidyr[39m::[32munpack()[39m    masks [34mMatrix[39m::unpack()
+[36mℹ[39m Use the ]8;;http://conflicted.r-lib.org/conflicted package]8;; to force all conflicts to become errors
+"
+"2","Cargando paquete requerido: vcd
+"
+"2","Cargando paquete requerido: grid
+"
+"2","Cargando paquete requerido: gnm
+"
+"2","
+Adjuntando el paquete: ‘gnm’
+
+"
+"2","The following object is masked from ‘package:mvtnorm’:
+
+    Mult
+
+"
+"2","
+Adjuntando el paquete: ‘vcdExtra’
+
+"
+"2","The following object is masked from ‘package:dplyr’:
+
+    summarise
+
+"
+"2","The following object is masked from ‘package:carData’:
+
+    Burt
+
+"
+"2","Registered S3 methods overwritten by 'htmltools':
+  method               from         
+  print.html           tools:rstudio
+  print.shiny.tag      tools:rstudio
+  print.shiny.tag.list tools:rstudio
+"
+"2","
+Adjuntando el paquete: ‘gtExtras’
+
+"
+"2","The following object is masked from ‘package:MASS’:
+
+    select
+
+"
+"2","Cargando paquete requerido: xtable
+"
+"2","
+Adjuntando el paquete: ‘likert’
+
+"
+"2","The following object is masked from ‘package:dplyr’:
+
+    recode
+
+"
+"2","The following object is masked from ‘package:car’:
+
+    recode
+
+"
+"2","
+Adjuntando el paquete: ‘patchwork’
+
+"
+"2","The following object is masked from ‘package:MASS’:
+
+    area
+
+"
+"2","Cargando paquete requerido: modeltools
+"
+"2","Cargando paquete requerido: stats4
+"
+"2","
+Adjuntando el paquete: ‘modeltools’
+
+"
+"2","The following object is masked from ‘package:gnm’:
+
+    parameters
+
+"
+"2","The following object is masked from ‘package:lme4’:
+
+    refit
+
+"
+"2","The following object is masked from ‘package:car’:
+
+    Predict
+
+"
+"2","Cargando paquete requerido: strucchange
+"
+"2","Cargando paquete requerido: zoo
+"
+"2","
+Adjuntando el paquete: ‘zoo’
+
+"
+"2","The following objects are masked from ‘package:base’:
+
+    as.Date, as.Date.numeric
+
+"
+"2","Cargando paquete requerido: sandwich
+"
+"2","
+Adjuntando el paquete: ‘strucchange’
+
+"
+"2","The following object is masked from ‘package:stringr’:
+
+    boundary
+
+"
+"2","
+Adjuntando el paquete: ‘party’
+
+"
+"2","The following object is masked from ‘package:dplyr’:
+
+    where
+
+"
+"2","Cargando paquete requerido: lattice
+"
+"2","
+Adjuntando el paquete: ‘lattice’
+
+"
+"2","The following object is masked from ‘package:gnm’:
+
+    barley
+
+"
+"2","Registered S3 method overwritten by 'data.table':
+  method           from
+  print.data.table     
+"
+"2","
+Adjuntando el paquete: ‘caret’
+
+"
+"2","The following object is masked from ‘package:purrr’:
+
+    lift
+
+"
+"2","The following object is masked from ‘package:survival’:
+
+    cluster
+
+"
+"2","Cargando paquete requerido: splines
+"
+"2","
+Adjuntando el paquete: ‘VGAM’
+
+"
+"2","The following object is masked from ‘package:caret’:
+
+    predictors
+
+"
+"2","The following objects are masked from ‘package:ordinal’:
+
+    dgumbel, dlgamma, pgumbel, plgamma, qgumbel, rgumbel, wine
+
+"
+"2","The following object is masked from ‘package:car’:
+
+    logit
+
+"
+"2","
+Adjuntando el paquete: ‘janitor’
+
+"
+"2","The following objects are masked from ‘package:stats’:
+
+    chisq.test, fisher.test
+
+"
+"2","Cargando paquete requerido: Rcpp
+"
+"2","Loading 'brms' package (version 2.21.0). Useful instructions
+can be found by typing help('brms'). A more detailed introduction
+to the package is available through vignette('brms_overview').
+"
+"2","
+Adjuntando el paquete: ‘brms’
+
+"
+"2","The following objects are masked from ‘package:VGAM’:
+
+    acat, cratio, cumulative, dfrechet, dirichlet, exponential,
+    frechet, geometric, lognormal, multinomial, negbinomial,
+    pfrechet, qfrechet, rfrechet, s, sratio
+
+"
+"2","The following object is masked from ‘package:modeltools’:
+
+    prior
+
+"
+"2","The following object is masked from ‘package:survival’:
+
+    kidney
+
+"
+"2","The following object is masked from ‘package:lme4’:
+
+    ngrps
+
+"
+"2","The following object is masked from ‘package:stats’:
+
+    ar
+
+"
+"2","
+Adjuntando el paquete: ‘tidybayes’
+
+"
+"2","The following objects are masked from ‘package:brms’:
+
+    dstudent_t, pstudent_t, qstudent_t, rstudent_t
+
+"
+"2","The following object is masked from ‘package:modeltools’:
+
+    parameters
+
+"
+"2","The following object is masked from ‘package:gnm’:
+
+    parameters
+
+"
+"2","
+Adjuntando el paquete: ‘modelr’
+
+"
+"2","The following object is masked from ‘package:broom’:
+
+    bootstrap
+
+"
+"2","`modelsummary` 2.0.0 now uses `tinytable` as its default
+  table-drawing backend. Learn more at:
+  https://vincentarelbundock.github.io/tinytable/
+
+Revert to `kableExtra` for one session:
+
+  options(modelsummary_factory_default = 'kableExtra')
+
+Change the default backend persistently:
+
+  config_modelsummary(factory_default = 'gt')
+
+Silence this message forever:
+
+  config_modelsummary(startup_message = FALSE)
+"
+"2","
+Adjuntando el paquete: ‘modelsummary’
+
+"
+"2","The following object is masked from ‘package:VGAM’:
+
+    Max
+
+"

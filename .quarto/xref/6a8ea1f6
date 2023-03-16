@@ -1,0 +1,1 @@
+{"entries":[{"order":{"section":[5,1,0,0,0,0,0],"number":1},"caption":"Descripción de las variables más importantes","key":"tbl-variables"},{"order":{"section":[5,1,0,0,0,0,0],"number":2},"caption":"Muestra del dataframe preparado para el modelado estadístico en formato largo.","key":"tbl-df_clean"}],"options":{"chapters":true},"headings":["variables"]}

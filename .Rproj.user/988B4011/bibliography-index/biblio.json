@@ -1,0 +1,1126 @@
+{
+    "sources": [
+        {
+            "DOI": "10.1007/s10209-020-00740-9",
+            "author": [
+                {
+                    "family": "Pérez Martín",
+                    "given": "Jorge"
+                },
+                {
+                    "family": "Rodríguez-Ascaso",
+                    "given": "Alejandro"
+                },
+                {
+                    "family": "Molanes-López",
+                    "given": "Elisa"
+                }
+            ],
+            "container-title": "Universal Access in the Information Society",
+            "id": "jperez1",
+            "issued": {
+                "date-parts": [
+                    [
+                        2021,
+                        11
+                    ]
+                ]
+            },
+            "page": "",
+            "title": "Quality of the captions produced by students of an accessibility MOOC using a semi-automatic tool",
+            "type": "article-journal",
+            "volume": "20"
+        },
+        {
+            "DOI": "10.1109/ACCESS.2021.3079199",
+            "author": [
+                {
+                    "family": "Molanes-López",
+                    "given": "Elisa M."
+                },
+                {
+                    "family": "Rodriguez-Ascaso",
+                    "given": "Alejandro"
+                },
+                {
+                    "family": "Letón",
+                    "given": "Emilio"
+                },
+                {
+                    "family": "Pérez-Martín",
+                    "given": "Jorge"
+                }
+            ],
+            "container-title": "IEEE Access",
+            "id": "jperez2",
+            "issue": "",
+            "issued": {
+                "date-parts": [
+                    [
+                        2021
+                    ]
+                ]
+            },
+            "page": "72357-72367",
+            "title": "Assessment of Video Accessibility by Students of a MOOC on Digital Materials for All",
+            "type": "article-journal",
+            "volume": "9"
+        },
+        {
+            "author": [
+                {
+                    "family": "Guerra",
+                    "given": "Andrea"
+                },
+                {
+                    "family": "Gidel",
+                    "given": "Thierry"
+                },
+                {
+                    "family": "Vezzetti",
+                    "given": "Enrico"
+                }
+            ],
+            "id": "likert1",
+            "issued": {
+                "date-parts": [
+                    [
+                        2016,
+                        5
+                    ]
+                ]
+            },
+            "page": "",
+            "title": "Toward a common procedure using likert and likert-type scales in small groups comparative design observations",
+            "type": "paper-conference"
+        },
+        {
+            "author": [
+                {
+                    "family": "AENOR"
+                }
+            ],
+            "id": "aenor2012",
+            "issued": {
+                "date-parts": [
+                    [
+                        2012
+                    ]
+                ]
+            },
+            "publisher": "Asociación Española de Normalización y Certificación",
+            "title": "UNE 153010 Subtitulado para personas sordas y personas con discapacidad auditiva",
+            "type": ""
+        },
+        {
+            "DOI": "10.1201/b17883",
+            "URL": "https://www.taylorfrancis.com/books/mono/10.1201/b17883/design-analysis-experiments-john-lawson",
+            "author": [
+                {
+                    "family": "Lawson",
+                    "given": "J."
+                }
+            ],
+            "editor": [
+                {
+                    "family": "Chapman"
+                },
+                {
+                    "family": "Hall/CRC"
+                }
+            ],
+            "id": "lawson2015",
+            "issued": {
+                "date-parts": [
+                    [
+                        2015
+                    ]
+                ]
+            },
+            "title": "Design and Analysis of Experiments with R (1st ed.)",
+            "type": ""
+        },
+        {
+            "DOI": "10.1002/0470854596",
+            "author": [
+                {
+                    "family": "Senn",
+                    "given": "Stephen"
+                }
+            ],
+            "editor": [
+                {
+                    "family": "John Wiley",
+                    "given": "Ltd"
+                }
+            ],
+            "id": "senn2022",
+            "issued": {
+                "date-parts": [
+                    [
+                        2022
+                    ]
+                ]
+            },
+            "title": "Cross‐over Trials In Clinical Research",
+            "type": ""
+        },
+        {
+            "DOI": "10.1002/9781119114710",
+            "ISBN": "9781119114680",
+            "author": [
+                {
+                    "family": "Lui",
+                    "given": "Kung-Jong"
+                }
+            ],
+            "container-title": "Crossover designs: Testing, estimation, and sample size",
+            "id": "lui2016",
+            "issued": {
+                "date-parts": [
+                    [
+                        2016,
+                        8
+                    ]
+                ]
+            },
+            "page": "",
+            "title": "Crossover Designs: Testing, Estimation, and Sample Size",
+            "title-short": "Crossover Designs",
+            "type": "book"
+        },
+        {
+            "DOI": "10.1002/9780470594001",
+            "ISBN": "9780470082898",
+            "author": [
+                {
+                    "family": "Agresti",
+                    "given": "Alan"
+                }
+            ],
+            "id": "agresti2010",
+            "issued": {
+                "date-parts": [
+                    [
+                        2010
+                    ]
+                ]
+            },
+            "title": "Analysis of Ordinal Categorical Data",
+            "type": "book"
+        },
+        {
+            "URL": "https://www.wiley.com/en-us/An+Introduction+to+Categorical+Data+Analysis%2C+3rd+Edition-p-9781119405283",
+            "author": [
+                {
+                    "family": "Agresti",
+                    "given": "Alan"
+                }
+            ],
+            "container-title": "Wiley.com",
+            "id": "agresti_2018",
+            "issued": {
+                "date-parts": [
+                    [
+                        2018,
+                        10
+                    ]
+                ]
+            },
+            "title": "An introduction to categorical data analysis, 3rd Edition",
+            "type": ""
+        },
+        {
+            "DOI": "10.1016/j.jesp.2018.08.009",
+            "ISSN": "0022-1031",
+            "URL": "https://www.sciencedirect.com/science/article/pii/S0022103117307746",
+            "author": [
+                {
+                    "family": "Liddell",
+                    "given": "Torrin M."
+                },
+                {
+                    "family": "Kruschke",
+                    "given": "John K."
+                }
+            ],
+            "container-title": "Journal of Experimental Social Psychology",
+            "id": "kruschke2018",
+            "issued": {
+                "date-parts": [
+                    [
+                        2018
+                    ]
+                ]
+            },
+            "keyword": "Ordinal data, Likert, Ordered-probit, Bayesian analysis",
+            "page": "328-348",
+            "title": "Analyzing ordinal data with metric models: What could possibly go wrong?",
+            "title-short": "Analyzing ordinal data with metric models",
+            "type": "article-journal",
+            "volume": "79"
+        },
+        {
+            "URL": "https://www.taylorfrancis.com/books/mono/10.1201/9781003146216/anova-mixed-models-lukas-meier",
+            "author": [
+                {
+                    "family": "Meier",
+                    "given": "Lukas"
+                }
+            ],
+            "id": "meier2022",
+            "issued": {
+                "date-parts": [
+                    [
+                        2022,
+                        11
+                    ]
+                ]
+            },
+            "publisher": "Chapman; Hall/CRC",
+            "title": "ANOVA and mixed models: A short introduction using R",
+            "title-short": "ANOVA and mixed models",
+            "type": "book"
+        },
+        {
+            "author": [
+                {
+                    "family": "Christensen",
+                    "given": "Rune Haubo Bojesen"
+                }
+            ],
+            "id": "christensen2018CumulativeLM",
+            "issued": {
+                "date-parts": [
+                    [
+                        2018
+                    ]
+                ]
+            },
+            "title": "Cumulative Link Models for Ordinal Regression with the R Package ordinal",
+            "type": "paper-conference"
+        },
+        {
+            "URL": "https://stats.oarc.ucla.edu/r/faq/ologit-coefficients",
+            "author": [
+                {
+                    "family": "Bruin",
+                    "given": "J"
+                }
+            ],
+            "id": "bruin2011",
+            "issued": {
+                "date-parts": [
+                    [
+                        2011
+                    ]
+                ]
+            },
+            "title": "How do I interpret the coefficients in an ordinal logistic regression in R",
+            "type": "webpage"
+        },
+        {
+            "URL": "https://tdunn.ca/posts/2020-03-15-ordinal-regression-in-r-part-1",
+            "author": [
+                {
+                    "family": "Dunn",
+                    "given": "Taylor"
+                }
+            ],
+            "id": "dunn2020",
+            "issued": {
+                "date-parts": [
+                    [
+                        2020,
+                        3,
+                        15
+                    ]
+                ]
+            },
+            "language": "en",
+            "title": "Ordinal Regression in R: Part 1",
+            "type": "webpage"
+        },
+        {
+            "author": [
+                {
+                    "family": "Schweinberger",
+                    "given": "Martin"
+                }
+            ],
+            "edition": "2020/12/11",
+            "id": "schweinberger2020survey",
+            "issued": {
+                "date-parts": [
+                    [
+                        2020
+                    ]
+                ]
+            },
+            "note": "https://slcladal.github.io/survey.html",
+            "publisher": "The University of Queensland, Australia. School of Languages; Cultures",
+            "publisher-place": "Brisbane",
+            "title": "Itemnaires and Surveys: Analyses with R",
+            "title-short": "Itemnaires and Surveys",
+            "type": "book"
+        },
+        {
+            "DOI": "10.1201/b19022",
+            "ISBN": "9780429154430",
+            "author": [
+                {
+                    "family": "Friendly",
+                    "given": "Michael"
+                },
+                {
+                    "family": "Meyer",
+                    "given": "David"
+                },
+                {
+                    "family": "Zeileis",
+                    "given": "Achim"
+                }
+            ],
+            "container-title": "Discrete Data Analysis with R: Visualization and Modeling Techniques for Categorical and Count Data",
+            "id": "frienly2015",
+            "issued": {
+                "date-parts": [
+                    [
+                        2015,
+                        12
+                    ]
+                ]
+            },
+            "page": "1-525",
+            "title": "Discrete Data Analysis with R: Visualization and Modeling Techniques for Categorical and Count Data",
+            "title-short": "Discrete Data Analysis with R",
+            "type": "book"
+        },
+        {
+            "author": [
+                {
+                    "family": "Friendly",
+                    "given": "Michael"
+                }
+            ],
+            "id": "frienly2015-2",
+            "issued": {
+                "date-parts": [
+                    [
+                        2015,
+                        12
+                    ]
+                ]
+            },
+            "title": "Classification and regression trees",
+            "type": "book"
+        },
+        {
+            "DOI": "10.1007/978-3-030-46216-1_25",
+            "ISBN": "978-3-030-46216-1",
+            "URL": "https://doi.org/10.1007/978-3-030-46216-1_25",
+            "abstract": "This chapter discusses popular non-parametric methods in corpus linguistics: conditional inference trees and conditional random forests. These methods, which allow the researcher to model and interpret the relationships between a numeric or categorical response variable and various predictors, are particularly attractive in “tricky” situations, when the use of parametric methods (in particular, regression models) can be problematic, for example, in the situations of “small n, large p”, complex interactions, non-linearity and correlated predictors. For illustration, the chapter discusses a case study of T and V politeness forms in Russian based on a corpus of film subtitles.",
+            "author": [
+                {
+                    "family": "Levshina",
+                    "given": "Natalia"
+                }
+            ],
+            "editor": [
+                {
+                    "family": "Paquot",
+                    "given": "Magali"
+                },
+                {
+                    "family": "Gries",
+                    "given": "Stefan Th."
+                }
+            ],
+            "id": "Levshina2020",
+            "issued": {
+                "date-parts": [
+                    [
+                        2020
+                    ]
+                ]
+            },
+            "page": "611-643",
+            "publisher": "Springer International Publishing",
+            "publisher-place": "Cham",
+            "title": "A Practical Handbook of Corpus Linguistics",
+            "type": "chapter"
+        },
+        {
+            "author": [
+                {
+                    "family": "Liu",
+                    "given": "Xing"
+                }
+            ],
+            "editor": [
+                {
+                    "family": "Ltd.",
+                    "given": "SAGE Publications"
+                }
+            ],
+            "id": "Liu2202",
+            "issued": {
+                "date-parts": [
+                    [
+                        2022,
+                        4
+                    ]
+                ]
+            },
+            "title": "Categorical Data Analysis and Multilevel Modeling Using R",
+            "type": "book"
+        },
+        {
+            "author": [
+                {
+                    "family": "Christensen",
+                    "given": "R. H. B."
+                }
+            ],
+            "id": "ordinalR",
+            "issued": {
+                "date-parts": [
+                    [
+                        2022
+                    ]
+                ]
+            },
+            "note": "R package version 2022.11-16. https://CRAN.R-project.org/package=ordinal",
+            "title": "ordinal—Regression Models for Ordinal Data",
+            "type": ""
+        },
+        {
+            "URL": "https://CRAN.R-project.org/package=VGAM",
+            "author": [
+                {
+                    "family": "Yee",
+                    "given": "T. W."
+                }
+            ],
+            "id": "VGAMR",
+            "issued": {
+                "date-parts": [
+                    [
+                        2023
+                    ]
+                ]
+            },
+            "note": "R package version 1.1-8",
+            "title": "VGAM: Vector Generalized Linear and Additive Models",
+            "title-short": "VGAM",
+            "type": "book"
+        },
+        {
+            "URL": "https://www.stats.ox.ac.uk/pub/MASS4/",
+            "author": [
+                {
+                    "family": "Venables",
+                    "given": "W. N."
+                },
+                {
+                    "family": "Ripley",
+                    "given": "B. D."
+                }
+            ],
+            "edition": "Fourth",
+            "id": "MASSR",
+            "issued": {
+                "date-parts": [
+                    [
+                        2002
+                    ]
+                ]
+            },
+            "note": "ISBN 0-387-95457-0",
+            "publisher": "Springer",
+            "publisher-place": "New York",
+            "title": "Modern Applied Statistics with S",
+            "type": "book"
+        },
+        {
+            "DOI": "10.1007/978-3-030-67583-7",
+            "ISBN": "978-3-030-67582-0",
+            "author": [
+                {
+                    "family": "Chen",
+                    "given": "Ding-Geng"
+                },
+                {
+                    "family": "Chen",
+                    "given": "Jenny"
+                }
+            ],
+            "id": "chen2021",
+            "issued": {
+                "date-parts": [
+                    [
+                        2021,
+                        1
+                    ]
+                ]
+            },
+            "page": "",
+            "title": "Statistical Regression Modeling with R: Longitudinal and Multi-level Modeling",
+            "title-short": "Statistical Regression Modeling with R",
+            "type": "book"
+        },
+        {
+            "DOI": "10.1201/b16018",
+            "ISBN": "9780429113079",
+            "author": [
+                {
+                    "family": "Gelman",
+                    "given": "Andrew"
+                },
+                {
+                    "family": "Carlin",
+                    "given": "John"
+                },
+                {
+                    "family": "Stern",
+                    "given": "Hal"
+                },
+                {
+                    "family": "Dunson",
+                    "given": "David"
+                },
+                {
+                    "family": "Vehtari",
+                    "given": "Aki"
+                },
+                {
+                    "family": "Rubin",
+                    "given": "Donald"
+                }
+            ],
+            "id": "gelman2013",
+            "issued": {
+                "date-parts": [
+                    [
+                        2013,
+                        11
+                    ]
+                ]
+            },
+            "page": "",
+            "title": "Bayesian Data Analysis",
+            "type": "book"
+        },
+        {
+            "DOI": "10.1177/2515245918823199",
+            "author": [
+                {
+                    "family": "Bürkner",
+                    "given": "Paul-Christian"
+                },
+                {
+                    "family": "Vuorre",
+                    "given": "Matti"
+                }
+            ],
+            "container-title": "Advances in Methods and Practices in Psychological Science",
+            "id": "burkner2019",
+            "issued": {
+                "date-parts": [
+                    [
+                        2019,
+                        2
+                    ]
+                ]
+            },
+            "page": "251524591882319",
+            "title": "Ordinal Regression Models in Psychology: A Tutorial",
+            "title-short": "Ordinal Regression Models in Psychology",
+            "type": "article-journal",
+            "volume": "2"
+        },
+        {
+            "DOI": "10.18637/jss.v100.i05",
+            "author": [
+                {
+                    "family": "Bürkner",
+                    "given": "Paul-Christian"
+                }
+            ],
+            "container-title": "Journal of Statistical Software",
+            "id": "burkner2021",
+            "issued": {
+                "date-parts": [
+                    [
+                        2021,
+                        11
+                    ]
+                ]
+            },
+            "page": "",
+            "title": "Bayesian Item Response Modeling in R with brms and Stan",
+            "type": "article-journal",
+            "volume": "100"
+        },
+        {
+            "DOI": "10.4135/9781412984812",
+            "ISBN": "9780761929895",
+            "author": [
+                {
+                    "family": "O’Connell",
+                    "given": "Ann"
+                }
+            ],
+            "id": "oconnell2006",
+            "issued": {
+                "date-parts": [
+                    [
+                        2006,
+                        1
+                    ]
+                ]
+            },
+            "page": "",
+            "title": "Logistic Regression Models for Ordinal Response Variables",
+            "type": "book"
+        },
+        {
+            "DOI": "10.1007/978-3-319-19425-7",
+            "ISBN": "978-3-319-19424-0",
+            "author": [
+                {
+                    "family": "Harrell",
+                    "given": "Frank"
+                }
+            ],
+            "id": "harrell2015",
+            "issued": {
+                "date-parts": [
+                    [
+                        2015,
+                        1
+                    ]
+                ]
+            },
+            "page": "",
+            "title": "Regression Modeling Strategies: With Applications to Linear Models, Logistic and Ordinal Regression, and Survival Analysis",
+            "title-short": "Regression Modeling Strategies",
+            "type": "book"
+        },
+        {
+            "URL": "https://vasishth.github.io/bayescogsci/book/",
+            "author": [
+                {
+                    "family": "Nicenboim Bruno",
+                    "given": "Vasishth Shravan",
+                    "suffix": "Schad Daniel"
+                }
+            ],
+            "id": "nicenboim2023",
+            "issued": {
+                "date-parts": [
+                    [
+                        2023
+                    ]
+                ]
+            },
+            "title": "An Introduction to Bayesian Data Analysis for Cognitive Science",
+            "type": "webpage"
+        },
+        {
+            "DOI": "10.4324/9781003285878",
+            "author": [
+                {
+                    "family": "Barreda S.",
+                    "given": "Silbert N."
+                }
+            ],
+            "edition": "1st",
+            "id": "barreda2023",
+            "issued": {
+                "date-parts": [
+                    [
+                        2023
+                    ]
+                ]
+            },
+            "publisher": "Routledge",
+            "title": "Bayesian Multilevel Models for Repeated Measures Data: A Conceptual and Practical Introduction in R",
+            "title-short": "Bayesian Multilevel Models for Repeated Measures Data",
+            "type": "book"
+        },
+        {
+            "URL": "https://www.fharrell.com/post/po/",
+            "author": [
+                {
+                    "family": "Harrell",
+                    "given": "F."
+                }
+            ],
+            "id": "harrell2020",
+            "issued": {
+                "date-parts": [
+                    [
+                        2020
+                    ]
+                ]
+            },
+            "title": "Violation of Proportional Odds is Not Fatal",
+            "type": "article-journal"
+        },
+        {
+            "DOI": "10.4097/kja.21165",
+            "author": [
+                {
+                    "family": "Lim",
+                    "given": "Chi-Yeon"
+                },
+                {
+                    "family": "In",
+                    "given": "Junyong"
+                }
+            ],
+            "container-title": "Korean Journal of Anesthesiology",
+            "id": "lim2021",
+            "issued": {
+                "date-parts": [
+                    [
+                        2021,
+                        7
+                    ]
+                ]
+            },
+            "page": "",
+            "title": "Considerations for crossover design in clinical study",
+            "type": "article-journal",
+            "volume": "74"
+        },
+        {
+            "URL": "https://www.john-uebersax.com/stat/likert.htm",
+            "author": [
+                {
+                    "family": "Uebersax",
+                    "given": "John S."
+                }
+            ],
+            "container-title": "Statistical Methods for Rater Agreement website",
+            "id": "uebersax2006",
+            "issued": {
+                "date-parts": [
+                    [
+                        2006
+                    ]
+                ]
+            },
+            "title": "Likert scales: dispelling the confusion",
+            "title-short": "Likert scales",
+            "type": "article-journal"
+        },
+        {
+            "URL": "https://www.w3.org/TR/WCAG21/",
+            "author": [
+                {
+                    "family": "W3C"
+                }
+            ],
+            "id": "WCAG21",
+            "issued": {
+                "date-parts": [
+                    [
+                        2018
+                    ]
+                ]
+            },
+            "title": "Web Content Accessibility Guidelines (WCAG) 2.1",
+            "type": ""
+        },
+        {
+            "author": [
+                {
+                    "family": "Parton",
+                    "given": "Becky Sue"
+                }
+            ],
+            "container-title": "Journal of Open, Flexible and Distance Learning",
+            "id": "parton2016",
+            "issued": {
+                "date-parts": [
+                    [
+                        2016
+                    ]
+                ]
+            },
+            "page": "8-18",
+            "title": "Video Captions for Online Courses: Do YouTube’s Auto-generated Captions Meet Deaf Students’ Needs?",
+            "title-short": "Video Captions for Online Courses",
+            "type": "article-journal",
+            "volume": "20"
+        },
+        {
+            "DOI": "10.1145/1414471.1414507",
+            "ISBN": "9781595939760",
+            "URL": "https://doi.org/10.1145/1414471.1414507",
+            "abstract": "Web content is under the control of site owners, and therefore the site owners have the responsibility to make their content accessible. This is a basic assumption of Web accessibility. Users who want access to inaccessible content must ask the site owners for help. However, the process is slow and too often the need is mooted before the content becomes accessible. Social Accessibility is an approach to drastically reduce the burden on site owners and to shorten the time to provide accessible Web content by allowing volunteers worldwide to - renovate’ any webpage on the Internet. Users encountering Web access problems anywhere at any time will be able to immediately report the problems to a social computing service. Volunteers can be quickly notified, and they can easily respond by creating and publishing the requested accessibility metadata–also helping any other users who encounter the same problems. Site owners can learn about the methods for future accessibility renovations based on the volunteers’ external metadata. There are two key technologies to enable this process, the external metadata that allows volunteers to annotate existing Web content, and the social computing service that supports the collaborative renovations. In this paper, we will first review previous approaches, and then propose the Social Accessibility approach. The scenario, implementation, and results of a pilot service are introduced, followed by discussion of future directions.",
+            "author": [
+                {
+                    "family": "Takagi",
+                    "given": "Hironobu"
+                },
+                {
+                    "family": "Kawanaka",
+                    "given": "Shinya"
+                },
+                {
+                    "family": "Kobayashi",
+                    "given": "Masatomo"
+                },
+                {
+                    "family": "Itoh",
+                    "given": "Takashi"
+                },
+                {
+                    "family": "Asakawa",
+                    "given": "Chieko"
+                }
+            ],
+            "collection-title": "Assets ’08",
+            "container-title": "Proceedings of the 10th International ACM SIGACCESS Conference on Computers and Accessibility",
+            "id": "kawanaka2008",
+            "issued": {
+                "date-parts": [
+                    [
+                        2008
+                    ]
+                ]
+            },
+            "keyword": "transcoding, web accessibility, collaborative authoring, social computing, metadata",
+            "page": "193-200",
+            "publisher": "Association for Computing Machinery",
+            "publisher-place": "New York, NY, USA",
+            "title": "Social Accessibility: Achieving Accessibility through Collaborative Metadata Authoring",
+            "title-short": "Social Accessibility",
+            "type": "paper-conference"
+        },
+        {
+            "ISSN": "0006341X, 15410420",
+            "URL": "http://www.jstor.org/stable/2532457",
+            "abstract": "The proportional odds model for ordinal logistic regression provides a useful extension of the binary logistic model to situations where the response variable takes on values in a set of ordered categories. The model may be represented by a series of logistic regressions for dependent binary variables, with common regression parameters reflecting the proportional odds assumption. Key to the valid application of the model is the assessment of the proportionality assumption. An approach is described arising from comparisons of the separate (correlated) fits to the binary logistic models underlying the overall model. Based on asymptotic distributional results, formal goodness-of-fit measures are constructed to supplement informal comparisons of the different fits. A number of proposals, including application of bootstrap simulation, are discussed and illustrated with a data example.",
+            "accessed": {
+                "date-parts": [
+                    [
+                        2023,
+                        5,
+                        20
+                    ]
+                ]
+            },
+            "author": [
+                {
+                    "family": "Brant",
+                    "given": "Rollin"
+                }
+            ],
+            "container-title": "Biometrics",
+            "id": "brant1990",
+            "issue": "4",
+            "issued": {
+                "date-parts": [
+                    [
+                        1990
+                    ]
+                ]
+            },
+            "page": "1171-1178",
+            "publisher": "[Wiley, International Biometric Society]",
+            "title": "Assessing Proportionality in the Proportional Odds Model for Ordinal Logistic Regression",
+            "type": "article-journal",
+            "volume": "46"
+        },
+        {
+            "DOI": "10.21105/joss.03139",
+            "author": [
+                {
+                    "family": "Lüdecke",
+                    "given": "Daniel"
+                },
+                {
+                    "family": "Ben-Shachar",
+                    "given": "Mattan S."
+                },
+                {
+                    "family": "Patil",
+                    "given": "Indrajeet"
+                },
+                {
+                    "family": "Waggoner",
+                    "given": "Philip"
+                },
+                {
+                    "family": "Makowski",
+                    "given": "Dominique"
+                }
+            ],
+            "container-title": "Journal of Open Source Software",
+            "id": "performance",
+            "issue": "60",
+            "issued": {
+                "date-parts": [
+                    [
+                        2021
+                    ]
+                ]
+            },
+            "page": "3139",
+            "title": "performance: An R Package for Assessment, Comparison and Testing of Statistical Models",
+            "title-short": "performance",
+            "type": "article-journal",
+            "volume": "6"
+        },
+        {
+            "DOI": "10.1198/106186007X237856",
+            "author": [
+                {
+                    "family": "Zeileis",
+                    "given": "Achim"
+                },
+                {
+                    "family": "Meyer",
+                    "given": "David"
+                },
+                {
+                    "family": "Hornik",
+                    "given": "Kurt"
+                }
+            ],
+            "container-title": "Journal of Computational and Graphical Statistics",
+            "id": "vcd",
+            "issue": "3",
+            "issued": {
+                "date-parts": [
+                    [
+                        2007
+                    ]
+                ]
+            },
+            "page": "507-525",
+            "title": "vcd: Residual-based Shadings for Visualizing (Conditional) Independence",
+            "title-short": "vcd",
+            "type": "article-journal",
+            "volume": "16"
+        },
+        {
+            "DOI": "10.18637/jss.v067.i01",
+            "author": [
+                {
+                    "family": "Bates",
+                    "given": "Douglas"
+                },
+                {
+                    "family": "Mächler",
+                    "given": "Martin"
+                },
+                {
+                    "family": "Bolker",
+                    "given": "Ben"
+                },
+                {
+                    "family": "Walker",
+                    "given": "Steve"
+                }
+            ],
+            "container-title": "Journal of Statistical Software",
+            "id": "lme4",
+            "issue": "1",
+            "issued": {
+                "date-parts": [
+                    [
+                        2015
+                    ]
+                ]
+            },
+            "page": "1-48",
+            "title": "Fitting Linear Mixed-Effects Models Using lme4",
+            "type": "article-journal",
+            "volume": "67"
+        },
+        {
+            "DOI": "10.18637/jss.v100.i05",
+            "author": [
+                {
+                    "family": "Bürkner",
+                    "given": "Paul-Christian"
+                }
+            ],
+            "container-title": "Journal of Statistical Software",
+            "id": "brms",
+            "issue": "5",
+            "issued": {
+                "date-parts": [
+                    [
+                        2021
+                    ]
+                ]
+            },
+            "page": "1-54",
+            "title": "Bayesian Item Response Modeling in R with brms and Stan",
+            "type": "article-journal",
+            "volume": "100"
+        },
+        {
+            "DOI": "10.1111/insr.12396",
+            "author": [
+                {
+                    "family": "Tutz",
+                    "given": "Gerhard"
+                }
+            ],
+            "container-title": "International Statistical Review",
+            "id": "tutz2020",
+            "issued": {
+                "date-parts": [
+                    [
+                        2020,
+                        7
+                    ]
+                ]
+            },
+            "page": "",
+            "title": "Hierarchical Models for the Analysis of Likert Scales in Regression and Item Response Analysis: Hierarchical Models",
+            "title-short": "Hierarchical Models for the Analysis of Likert Scales in Regression and Item Response Analysis",
+            "type": "article-journal",
+            "volume": "89"
+        },
+        {
+            "DOI": "10.22515/elereviews.v2i1.5180",
+            "URL": "https://ejournal.uinsaid.ac.id/index.php/ele-reviews/article/view/5180",
+            "author": [
+                {
+                    "family": "Khafik",
+                    "given": "Muhammad"
+                },
+                {
+                    "family": "Pratama",
+                    "given": "Ikke Dewi"
+                }
+            ],
+            "container-title": "ELE Reviews: English Language Education Reviews",
+            "id": "khafik2022",
+            "issue": "1",
+            "issued": {
+                "date-parts": [
+                    [
+                        2022,
+                        5
+                    ]
+                ]
+            },
+            "page": "59-73",
+            "title": "Analyzing Errors in Students’ Subtitle Products",
+            "type": "article-journal",
+            "volume": "2"
+        }
+    ],
+    "project_biblios": [
+        "references.bib"
+    ]
+}

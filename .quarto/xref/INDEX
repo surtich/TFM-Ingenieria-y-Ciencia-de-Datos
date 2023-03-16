@@ -1,0 +1,83 @@
+{
+  "index.qmd": {
+    "index.html": "e8298a40"
+  },
+  "intro.qmd": {
+    "intro.html": "7eaaad82"
+  },
+  "summary.qmd": {
+    "summary.html": "e3f0e5e6"
+  },
+  "references.qmd": {
+    "references.html": "1cd10082"
+  },
+  "anova18.qmd": {
+    "anova18.html": "ec6aef1f"
+  },
+  "anoveOne.qmd": {
+    "anoveOne.html": "da4f7ed5"
+  },
+  "anoveTwo.qmd": {
+    "anoveTwo.html": "c431fad3"
+  },
+  "anoveThree.qmd": {
+    "anoveThree.html": "b83e9848"
+  },
+  "10-Introduccion.qmd": {
+    "10-Introduccion.html": "1aad5999"
+  },
+  "20-Arte.qmd": {
+    "20-Arte.html": "181fd3c0"
+  },
+  "30-Metodos.qmd": {
+    "30-Metodos.html": "85836cd8"
+  },
+  "31-Preprocesamiento.qmd": {
+    "31-Preprocesamiento.html": "f8f4e81b"
+  },
+  "32-Modelo.qmd": {
+    "32-Modelo.html": "6a8ea1f6"
+  },
+  "50-Resultados.qmd": {
+    "50-Resultados.html": "8cbd2605"
+  },
+  "60-Conclusiones.qmd": {
+    "60-Conclusiones.html": "fc5c4a7a"
+  },
+  "99-Referencias.qmd": {
+    "99-Referencias.html": "3ac1d8c5"
+  },
+  "75-Preprocesado.qmd": {
+    "75-Preprocesado.html": "a669ae3a"
+  },
+  "40-EDA1.qmd": {
+    "40-EDA1.html": "5020c859"
+  },
+  "42-Analisis.qmd": {
+    "42-Analisis.html": "b89fbde3"
+  },
+  "43-Modelado.qmd": {
+    "43-Modelado.html": "9f74c142"
+  },
+  "76-Setup.qmd": {
+    "76-Setup.html": "a53d6189"
+  },
+  "77-Contrasts.qmd": {
+    "77-Contrasts.html": "31bf8dbd"
+  },
+  "78-Bayesiano.qmd": {
+    "78-Bayesiano.html": "e2bdcad7"
+  },
+  "2.qmd": {
+    "2.html": "e677a89e"
+  },
+  "3.qmd": {
+    "3.html": "524caaf8"
+  },
+  "4.qmd": {
+    "4.html": "83058cee"
+  },
+  "5.qmd": {
+    "5.html": "2dd84eaa"
+  }
+}

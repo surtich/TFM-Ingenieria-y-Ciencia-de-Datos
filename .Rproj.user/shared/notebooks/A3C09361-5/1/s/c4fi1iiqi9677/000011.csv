@@ -1,0 +1,17 @@
+"0","source(""_setup.R"")"
+"2","
+Adjuntando el paquete: ‘tidyr’
+
+"
+"2","The following object is masked from ‘package:magrittr’:
+
+    extract
+
+"
+"2","The following objects are masked from ‘package:Matrix’:
+
+    expand, pack, unpack
+
+"
+"2","Error en library(tidyverse): no hay paquete llamado ‘tidyverse’
+"
