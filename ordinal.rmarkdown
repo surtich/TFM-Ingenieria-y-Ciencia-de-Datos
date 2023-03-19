@@ -23,7 +23,76 @@ format:
         fig-pos: 'h'
 ---
 
-{{< include _setup.qmd >}}
+```{r}
+#| warning: false
+#| include: false
+#| echo: false
+#| cache: false
+
+library(car)
+library(dplyr)
+library(forcats)
+library(ggplot2)
+library(ggthemes)
+library(lme4)
+library(lmerTest)
+library(magrittr)
+library(multcomp)
+library(ordinal)
+library(purrr)
+library(stringr)
+library(readr)
+library(testit)
+library(tidyr)
+library(tidyverse)
+```
+
+```{r}
+#| warning: false
+#| include: false
+#| echo: false
+#| cache: false
+
+#| echo: false
+
+# Leemos el tibble preprocesado
+test_df <- read_delim("./data/preprocess/test.csv", delim = ",", show_col_types = FALSE)
+
+
+# Eliminamos aquellos usuarios que no han hecho uno de los test
+test_df %<>%
+    group_by(User) %>%
+    mutate(Rows = n()) %>%
+    filter(Rows > 1) %>%
+    ungroup()
+
+# Renombramos columnas de acuerdo con Lawson y ponemos en formato largo
+test_df
+
+
+
+##### SAVE TO FILE #####
+
+write_csv(test_df, "./data/preprocess/test.csv")
+
+```
+
+```{r}
+#| echo: false
+df <- test_df %>%
+    mutate(Period = as.factor(if_else(Test == "01", 1, 2)), Treat = as.factor(if_else(Group == "A" & Test == "01" | Group == "B" & Test == "02", "A", "B")), Group = as.factor(if_else(Group == "A", "AB", "BA")), Subject = as.factor(User)) %>%
+    dplyr::select(Group, Period, Treat, Subject, starts_with("Q")) %>%
+    mutate_at(vars(starts_with("Q")), ~ (. + 1) %% 6) %>%
+    pivot_longer(cols = all_of(starts_with("Q")), names_to = "Question", values_to = "Response") %>%
+    mutate(Question = as.factor(Question), Response = as.factor(Response)) %>%
+    arrange(Subject, Period, Question)
+
+write_csv(df, "./data/preprocess/test_lg.csv")
+
+df_clean <- df %>% filter(Response != 0)
+df_0 <- df %>% filter(Response == 0)
+```
+
 
 
 ```{r}
@@ -46,6 +115,7 @@ wine_red <- "#58181F"
 update_geom_defaults("point", list(color = wine_red))
 update_geom_defaults("line", list(color = wine_red))
 ```
+
 
 
 # Regresión ordinal
@@ -78,6 +148,7 @@ Según @burkner hay tres clases de regresión ordinal:
 * Regresión ordinal adyacente.
 
 Nos centraremos en la primera ya que es el más habitual y adecuado para nuestro caso.
+
 
 ```{r}
 #| freeze: true
@@ -135,6 +206,7 @@ for (i in 1:3) {
 
 ```
 
+
 El modelo acumulativo, CM, presupone que la variable ordinal observada, $Y$, proviene de la categorización de una variable latente (no observada) continua $\tilde{Y}$. Hay $K$ umbrales $\tau_k$ que particionan $\tilde{Y}$ en $K + 1$ categorías ordenadas observables. Si asumimos que $\tilde{Y}$ tiene una cierta distribución (por ejemplo, normal) con distribución acumulada $F$, se puede calcular la probabilidad de que $Y$ sea la categoría $k$ de esta forma:
 
 $$Pr(Y = k) = F(\tau_k) - F(\tau_{k-1})$$
@@ -172,6 +244,7 @@ Se puede demostrar que, por ejemplo:
 $$\frac{\frac{\mathrm{Pr}(Y \leq k_1 \mid \eta)}{\mathrm{Pr}(Y > k_1 \mid \eta)}}{\frac{\mathrm{Pr}(Y \leq k_2 \mid \eta)}{\mathrm{Pr}(Y > k_2 \mid \eta)}} = \exp(\tau_{k_1} - \tau_{k_2})$$
 
 
+
 ```{r}
 #| label: fig-cumulative
 #| fig-cap: Regresión ordinal acumulativa.
@@ -184,7 +257,9 @@ cumulative
 renv::use(lockfile = "renv.lock")
 ```
 
+
 ## Preparación
+
 
 ```{r}
 #| message: false
@@ -192,6 +267,7 @@ library(ordinal)
 df <- as_tibble(df_clean)
 glimpse(df)
 ```
+
 ```{r}
 df_resume <- df %>%
     dplyr::select(Subject, Period, Group, Treat, Response, Question) %>%
@@ -202,8 +278,6 @@ df_resume <- df %>%
 min_freq_response <- min(df_resume$n)
 max_freq_response <- max(df_resume$n)
 ```
-
-
 
 ```{r}
 #| label: resume
@@ -220,6 +294,7 @@ df_resume %>%
         )
     )
 ```
+
 ```{r}
 #| label: resume2
 #| fig-cap: Resumen de frecuencias de respuesta.
@@ -237,6 +312,7 @@ df_resume %>%
         panel.grid.minor = element_blank()
     )
 ```
+
 
 
 ## Modelo de enlace logit acumulado
@@ -271,4 +347,5 @@ En el caso particular de $K$ = 5, los umbrales $\tau_k$ se interpretan como:
 * $k$ = 2: log-odds del nivel = 1-2 vs. 3-5
 * $k$ = 3: log-odds del nivel = 1-3 vs. 4-5
 * $k$ = 4: log-odds del nivel = 1-4 vs. 5
+
 

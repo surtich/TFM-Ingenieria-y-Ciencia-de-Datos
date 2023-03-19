@@ -14,4 +14,39 @@
   author    = {Lukas Meier},
   year      = {2022},
   month     = {Nov}
-} 
+}
+
+@article{kruschke2018328,
+  title    = {Analyzing ordinal data with metric models: What could possibly go wrong?},
+  journal  = {Journal of Experimental Social Psychology},
+  volume   = {79},
+  pages    = {328-348},
+  year     = {2018},
+  issn     = {0022-1031},
+  doi      = {https://doi.org/10.1016/j.jesp.2018.08.009},
+  url      = {https://www.sciencedirect.com/science/article/pii/S0022103117307746},
+  author   = {Torrin M. Liddell and John K. Kruschke},
+  keywords = {Ordinal data, Likert, Ordered-probit, Bayesian analysis},
+  abstract = {We surveyed all articles in the Journal of Personality and Social Psychology (JPSP), Psychological Science (PS), and the Journal of Experimental Psychology: General (JEP:G) that mentioned the term “Likert,” and found that 100% of the articles that analyzed ordinal data did so using a metric model. We present novel evidence that analyzing ordinal data as if they were metric can systematically lead to errors. We demonstrate false alarms (i.e., detecting an effect where none exists, Type I errors) and failures to detect effects (i.e., loss of power, Type II errors). We demonstrate systematic inversions of effects, for which treating ordinal data as metric indicates the opposite ordering of means than the true ordering of means. We show the same problems — false alarms, misses, and inversions — for interactions in factorial designs and for trend analyses in regression. We demonstrate that averaging across multiple ordinal measurements does not solve or even ameliorate these problems. A central contribution is a graphical explanation of how and when the misrepresentations occur. Moreover, we point out that there is no sure-fire way to detect these problems by treating the ordinal values as metric, and instead we advocate use of ordered-probit models (or similar) because they will better describe the data. Finally, although frequentist approaches to some ordered-probit models are available, we use Bayesian methods because of their flexibility in specifying models and their richness and accuracy in providing parameter estimates. An R script is provided for running an analysis that compares ordered-probit and metric models.}
+}
+
+@article{burkner,
+  author   = {Paul-Christian Bürkner and Matti Vuorre},
+  title    = {Ordinal Regression Models in Psychology: A Tutorial},
+  journal  = {Advances in Methods and Practices in Psychological Science},
+  volume   = {2},
+  number   = {1},
+  pages    = {77-101},
+  year     = {2019},
+  doi      = {10.1177/2515245918823199},
+  url      = { 
+              https://doi.org/10.1177/2515245918823199
+              
+              },
+  eprint   = { 
+              https://doi.org/10.1177/2515245918823199
+              
+              },
+  abstract = { Ordinal variables, although extremely common in psychology, are almost exclusively analyzed with statistical models that falsely assume them to be metric. This practice can lead to distorted effect-size estimates, inflated error rates, and other problems. We argue for the application of ordinal models that make appropriate assumptions about the variables under study. In this Tutorial, we first explain the three major classes of ordinal models: the cumulative, sequential, and adjacent-category models. We then show how to fit ordinal models in a fully Bayesian framework with the R package brms, using data sets on opinions about stem-cell research and time courses of marriage. The appendices provide detailed mathematical derivations of the models and a discussion of censored ordinal models. Compared with metric models, ordinal models provide better theoretical interpretation and numerical inference from ordinal data, and we recommend their widespread adoption in psychology. }
+}
+

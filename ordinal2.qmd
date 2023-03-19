@@ -1,0 +1,245 @@
+---
+title: "Ordinal regression in R: part 1"
+description: |
+  A theoretical and applied walkthrough of ordinal regression.
+  Part 1: the frequentist approach with `ordinal`.
+date: 2020-03-15
+params:
+  date: 2020-03-15
+  slug: "ordinal-regression-in-r-part-1"
+categories:
+  - R
+  - regression
+  - ordinal
+  - frequentist statistics
+image: preview.png
+bibliography: references.bib
+lang: es
+
+execute:
+  echo: false
+---
+
+{{< include _setup.qmd >}}
+
+# Regresión ordinal
+
+## Introducción
+
+El test de Likert es una escala ordinal. Tratar las respuestas a un test de Likert como si fueran cuantitativas como se hizo en el análisis de la varianza del apartado anterior no es correcto por las siguientes razones:
+
+* Los niveles de respuesta pueden no ser equidistantes: la distancia entre un par de opciones de respuesta puede no ser la misma para todos los pares de opciones de respuesta. Por ejemplo, la diferencia entre "Muy en desacuerdo" y "En desacuerdo" puede ser mucho menor para un encuestado que la diferencia entre "De acuerdo" y "Muy de acuerdo".
+
+* La distribución de las respuestas ordinales puede ser no normal. En particular esto sucederá si hay frecuencias altas de respuesta en los extremos del cuestionario.
+
+* Las varianzas de las variables no observadas que subyacen a las variables ordinales observadas pueden diferir entre grupos, tratamientos, periodos, etc. 
+
+En @kruschke2018328 se han analizado los problemas que puede ocasionar tratar datos ordinales como si fueran cuantitativos constatando que se pueden presentar las siguientes situaciones:
+
+* Se pueden encontrar diferencias significativas entre grupos cuando no las hay: Error tipo I.
+* Se pueden obviar diferencias cuando en realidad sí existen: Error tipo II.
+* Incluso se pueden invertir los efectos de un tratamiento.
+* También puede malinterpretarse la interacción entre factores.
+
+Todos estos problemas pueden ser tratados con la regresión ordinal.
+
+## Variantes de la regresión ordinal.
+
+Has tres clases de regresión ordinal @burkner:
+
+* Regresión ordinal acumulativa.
+* Regresión ordinal secuencial.
+* Regresión ordinal adyacente.
+
+
+### Regresión ordinal acumulativa
+
+```{r}
+#| label: cumulative
+#| fig-cap: Regresión ordinal acumulativa.
+#| fig-pos: h
+x <- seq(-4, 4, length.out = 500)
+y <- dnorm(x, 0, 1.5)
+
+x_cuts <- c(-3, -1.1, 0.2, 1.8)
+x_labels <- c(expression(tau[1]), expression(tau[2]), expression(tau[3]), expression(tau[4]))
+
+data <- tibble(x, y)
+
+data %>% ggplot(aes(x = x, y = y)) +
+    geom_line() +
+    coord_fixed(ratio = 5) +
+    geom_vline(xintercept = x_cuts) +
+    geom_label(data = data.frame(x = x_cuts - 0.4, y = rep(0.22, 4), label = paste("Y = ", 1:4, sep = "")), aes(x = x, y = y, label = label)) +
+    theme_void() +
+    theme(axis.text.x = element_text(color = "black", size = 12, hjust = 0.5, vjust = -3)) +
+    scale_x_continuous(breaks = x_cuts, labels = x_labels)
+```
+
+
+
+```{r}
+#| include: false
+renv::use(lockfile = "renv.lock")
+```
+
+```{r}
+#| code-fold: true
+#| code-summary: "R setup"
+#| message: false
+
+library(tidyverse)
+library(dunnr)
+library(gt)
+library(broom)
+library(patchwork)
+
+extrafont::loadfonts(device = "all", quiet = TRUE)
+#theme_set(theme_td())
+set_geom_fonts()
+set_palette()
+
+wine_red <- "#58181F"
+update_geom_defaults("point", list(color = wine_red))
+update_geom_defaults("line", list(color = wine_red))
+```
+
+## Preparación
+
+```{r}
+#| message: false
+library(ordinal)
+df <- as_tibble(df_clean)
+glimpse(df)
+```
+```{r}
+df_resume <- df %>%
+    dplyr::select(Subject, Period, Group, Treat, Response, Question) %>%
+    group_by(Group, Period, Treat) %>%
+    count(Response) %>%
+    ungroup()
+
+min_freq_response <- min(df_resume$n)
+max_freq_response <- max(df_resume$n)
+```
+
+
+
+```{r}
+#| label: resume
+#| tbl-cap: Resumen de frecuencias de respuesta.
+#| fig-pos: h
+df_resume %>%
+    pivot_wider(id_cols = c(Group, Period, Treat), names_from = Response, values_from = n) %>%
+    gt() %>%
+    tab_spanner(columns = `1`:`5`, label = "Response") %>%
+    data_color(
+        columns = `1`:`5`,
+        colors = scales::col_numeric(
+            palette = c("white", wine_red), domain = c(min_freq_response, max_freq_response)
+        )
+    )
+```
+```{r}
+#| label: resume2
+#| fig-cap: Resumen de frecuencias de respuesta.
+#| fig-pos: h
+df_resume %>%
+    ggplot(aes(x = Treat, y = Response, color = Treat)) +
+    geom_point(aes(group = Treat, size = n)) +
+    facet_wrap(~Group,
+        scales = "free_x"
+    ) + add_facet_borders() +
+    theme_bw() +
+    theme(legend.position = "none", panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())
+```
+
+
+## Modelo de enlace logit acumulado
+
+### Teoría
+
+Si tenemos $J$ respuestas ordinales. La probabilidad de una respuesta concreta $j$ será $\pi_j$. Entonces, la función de probabilidad acumulada ordinal de una respuesta $y_i$ será:
+
+$$
+P(y_i \leq j) = \pi_{i1} + \dots + \pi_{ij}.
+$$
+
+Por ejemplo, si en nuestra muestra la proporción de respuestas correspondiera a los valores poblacionales, tendríamos la siguiente distribución acumulada:
+
+
+```{r}
+#| label: fig-resume3
+#| fig-pos: h
+#| fig-cap: Histograma de frecuencias de respuesta y distribución acumulada.
+df_hist <- df_resume %>%
+    group_by(Response) %>%
+    summarise(Total = sum(n)) %>%
+    ungroup() %>%
+    arrange(Response) %>%
+    mutate(p = Total / sum(Total), cumsum_p = cumsum(p))
+
+(
+    ggplot(df_hist, aes(x = Response, y = p)) +
+        geom_col(fill = wine_red) +
+        scale_y_continuous(labels = scales::percent, expand = c(0, 0)) +
+        labs(x = "j", y = "proportion")
+) +
+    (
+        ggplot(df_hist, aes(x = as.integer(Response) - 1, y = cumsum_p)) +
+            geom_point(size = 2) +
+            geom_line(linewidth = 1) +
+            labs(x = "j", y = "cumulative proportion")
+    ) +
+    (
+        ggplot(
+            df_hist,
+            aes(x = as.integer(Response) - 1, y = log(cumsum_p) - log(1 - cumsum_p))
+        ) +
+            geom_point(size = 2) +
+            geom_line(linewidth = 1) +
+            labs(x = "j", y = "logit(cumulative proportion)")
+    )
+
+```
+
+Aunque hay otras funciones de enlace, el enlace logit es el más utilizado y es el que se representa en el panel derecho (@fig-resume3).
+
+
+$$
+\text{logit} (P(y_i \leq j) = \log \frac{P(y_i \leq j)}{1 - P(y_i \leq j)}
+$$ {#eq-link-logit}
+
+La función de enlace logit acumulada (@eq-link-logit) no está definida para $j = J$, ya que $1 - P(Y_i \leq J) = 1 - 1 = 0$.
+
+En nuestra escala de Likert tenemos $J$ = 5 niveles, el modelo mixto que vamos a plantear es el siguiente:
+
+$$
+\begin{aligned}
+\text{logit}(p(y_i \leq j)) &= \theta_j - \beta_1 \text{Period}_i - \beta_2 \text{Treat}_i - u( \text{Subject}_i) - v( \text{Question}_i) \\
+i &= 1, \dots n \; \; \; \; \; \; j = 1, \dots, J - 1
+\end{aligned}
+$$
+
+donde $\theta_j$ es el umbral de la categoría $j$ y son $J-1$ = 4 interceptores.
+Los coeficientes de los efectos fijos, $\beta_1$ and $\beta_2$, son independientes $j$, por lo que cada $\beta$ tiene el mismo efecto en los $J-1$ logits acumulados.
+Los efectos aleatorios, Subject y Question, también son independientes de $j$, y se presupone que siguen una distribución normal: $u(\text{Subject}_i) \sim N(0, \sigma_u^2)$ y $u(\text{Question}_i) \sim N(0, \sigma_v^2)$ respectivamente.
+La función de enlace logit es la más popular aunque hay otras opciones. También es habitual encontrar la parametrización con los signos negativos en los parámetros $\beta$. De esta forma la interpretación de los valores de los parámetros $\beta$ es la misma que en una regresión lineal ordinaria. Es decir que a mayor valor 
+
+The subtraction of terms in the above model is new to me.
+The main reason seems to be for familiar interpretation: the larger the value of any independent term $\beta x$, the smaller the thresholds $\theta_j$, and therefore a larger probability of the a response falling into a category at the upper end of the scale.
+This way, $\beta$ has the same *direction* of effect as in ordinary linear regression.
+
+We are essentially modeling a "chain" of logistic regressions where the binary response is "less than or equal to a certain level" vs "greater than that level".
+In this case, with $J$ = 5, the thresholds $\theta_j$ are capturing the adjusted log-odds of observing:
+
+* $j$ = 1: log-odds of `rating` = 1 vs. 2-5
+* $j$ = 2: log-odds of `rating` = 1-2 vs. 3-5
+* $j$ = 3: log-odds of `rating` = 1-3 vs. 4-5
+* $j$ = 4: log-odds of `rating` = 1-4 vs. 5
+
+
+#
+#
+#
