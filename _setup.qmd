@@ -21,6 +21,8 @@ library(readr)
 library(testit)
 library(tidyr)
 library(tidyverse)
+library(broom)
+library(emmeans)
 ```
 
 ```{r}
@@ -60,11 +62,11 @@ df <- test_df %>%
     dplyr::select(Group, Period, Treat, Subject, starts_with("Q")) %>%
     mutate_at(vars(starts_with("Q")), ~ (. + 1) %% 6) %>%
     pivot_longer(cols = all_of(starts_with("Q")), names_to = "Question", values_to = "Response") %>%
-    mutate(Question = as.factor(Question), Response = as.factor(Response)) %>%
+    mutate(Question = relevel(as.factor(Question), ref = "Q18"), Response = factor(Response, ordered = TRUE)) %>%
     arrange(Subject, Period, Question)
 
 write_csv(df, "./data/preprocess/test_lg.csv")
-
+df_all <- df
 df_clean <- df %>% filter(Response != 0)
 df_0 <- df %>% filter(Response == 0)
 ```

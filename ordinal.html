@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="A theoretical and applied walkthrough of ordinal regression. Part 1: the frequentist approach with ordinal.">
 
-<title>Ordinal regression in R: part 1</title>
+<title>ordinal</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +20,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
@@ -58,45 +120,42 @@ div.csl-indent {
 
 </head>
 
-<body class="fullcontent">
+<body>
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#regresión-ordinal" id="toc-regresión-ordinal" class="nav-link active" data-scroll-target="#regresión-ordinal">Regresión ordinal</a>
+  <ul class="collapse">
+  <li><a href="#introducción" id="toc-introducción" class="nav-link" data-scroll-target="#introducción">Introducción</a></li>
+  <li><a href="#variantes-de-la-regresión-ordinal." id="toc-variantes-de-la-regresión-ordinal." class="nav-link" data-scroll-target="#variantes-de-la-regresión-ordinal.">Variantes de la regresión ordinal.</a></li>
+  <li><a href="#preparación" id="toc-preparación" class="nav-link" data-scroll-target="#preparación">Preparación</a></li>
+  <li><a href="#modelo-de-enlace-logit-acumulado" id="toc-modelo-de-enlace-logit-acumulado" class="nav-link" data-scroll-target="#modelo-de-enlace-logit-acumulado">Modelo de enlace logit acumulado</a></li>
+  <li><a href="#ajuste-del-modelo." id="toc-ajuste-del-modelo." class="nav-link" data-scroll-target="#ajuste-del-modelo.">Ajuste del modelo.</a></li>
+  <li><a href="#efecto-periodo." id="toc-efecto-periodo." class="nav-link" data-scroll-target="#efecto-periodo.">Efecto periodo.</a></li>
+  <li><a href="#modelo-con-interacción-entre-periodo-y-subtítulos." id="toc-modelo-con-interacción-entre-periodo-y-subtítulos." class="nav-link" data-scroll-target="#modelo-con-interacción-entre-periodo-y-subtítulos.">Modelo con interacción entre periodo y subtítulos.</a></li>
+  <li><a href="#modelo-con-efectos-mixtos." id="toc-modelo-con-efectos-mixtos." class="nav-link" data-scroll-target="#modelo-con-efectos-mixtos.">Modelo con efectos mixtos.</a></li>
+  <li><a href="#factor-preguntas." id="toc-factor-preguntas." class="nav-link" data-scroll-target="#factor-preguntas.">Factor preguntas.</a>
+  <ul class="collapse">
+  <li><a href="#preguntas-como-efecto-aleatorio." id="toc-preguntas-como-efecto-aleatorio." class="nav-link" data-scroll-target="#preguntas-como-efecto-aleatorio.">Preguntas como efecto aleatorio.</a></li>
+  <li><a href="#preguntas-como-efecto-fijo." id="toc-preguntas-como-efecto-fijo." class="nav-link" data-scroll-target="#preguntas-como-efecto-fijo.">Preguntas como efecto fijo.</a></li>
+  <li><a href="#análisis-del-efecto-periodo." id="toc-análisis-del-efecto-periodo." class="nav-link" data-scroll-target="#análisis-del-efecto-periodo.">Análisis del efecto periodo.</a></li>
+  </ul></li>
+  <li><a href="#predicciones" id="toc-predicciones" class="nav-link" data-scroll-target="#predicciones">Predicciones</a></li>
+  </ul></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"></a></li>
+  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"></a></li>
+  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3"></a></li>
+  </ul>
+</nav>
+</div>
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Ordinal regression in R: part 1</h1>
-  <div class="quarto-categories">
-    <div class="quarto-category">R</div>
-    <div class="quarto-category">regression</div>
-    <div class="quarto-category">ordinal</div>
-    <div class="quarto-category">frequentist statistics</div>
-  </div>
-  </div>
 
-<div>
-  <div class="description">
-    <p>A theoretical and applied walkthrough of ordinal regression. Part 1: the frequentist approach with <code>ordinal</code>.</p>
-  </div>
-</div>
-
-
-<div class="quarto-title-meta">
-
-    
-    <div>
-    <div class="quarto-title-meta-heading">Fecha de publicación</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">15 de marzo de 2020</p>
-    </div>
-  </div>
-  
-    
-  </div>
-  
-
-</header>
 
 <div class="cell">
 
@@ -110,7 +169,7 @@ div.csl-indent {
 <h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
 <p>El test de Likert es una escala ordinal. Tratar las respuestas a un test de Likert como si fueran cuantitativas como se hizo en el análisis de la varianza del apartado anterior no es correcto por las siguientes razones:</p>
 <ul>
-<li><p>Los niveles de respuesta pueden no ser equidistantes: la distancia entre un par de opciones de respuesta puede no ser la misma para todos los pares de opciones de respuesta. Por ejemplo, la diferencia entre “Muy en desacuerdo” y “En desacuerdo” puede ser mucho menor para un encuestado que la diferencia entre “De acuerdo” y “Muy de acuerdo”.</p></li>
+<li><p>Los niveles de respuesta pueden no ser equidistantes: la distancia entre un par de opciones de respuesta puede no ser la misma para todos los pares de opciones de respuesta. Por ejemplo, la diferencia entre “Muy en desacuerdo” y “En desacuerdo” y la diferencia entre “De acuerdo” y “Muy de acuerdo” es de un nivel, pero psicológicamente puede ser percibida de forma diferente para cada sujeto.</p></li>
 <li><p>La distribución de las respuestas ordinales puede ser no normal. En particular esto sucederá si hay frecuencias altas de respuesta en los extremos del cuestionario.</p></li>
 <li><p>Las varianzas de las variables no observadas que subyacen a las variables ordinales observadas pueden diferir entre grupos, tratamientos, periodos, etc.</p></li>
 </ul>
@@ -125,58 +184,50 @@ div.csl-indent {
 </section>
 <section id="variantes-de-la-regresión-ordinal." class="level2">
 <h2 class="anchored" data-anchor-id="variantes-de-la-regresión-ordinal.">Variantes de la regresión ordinal.</h2>
-<p>Has tres clases de regresión ordinal <span class="citation" data-cites="burkner">Bürkner y Vuorre (<a href="#ref-burkner" role="doc-biblioref">2019</a>)</span>:</p>
+<p>Según <span class="citation" data-cites="burkner">Bürkner y Vuorre (<a href="#ref-burkner" role="doc-biblioref">2019</a>)</span> hay tres clases de regresión ordinal:</p>
 <ul>
 <li>Regresión ordinal acumulativa.</li>
 <li>Regresión ordinal secuencial.</li>
 <li>Regresión ordinal adyacente.</li>
 </ul>
+<p>Nos centraremos en la primera ya que es el más habitual y adecuada para nuestro caso.</p>
 <div class="cell" data-freeze="true">
 
 </div>
-<section id="regresión-ordinal-acumulativa" class="level3">
-<h3 class="anchored" data-anchor-id="regresión-ordinal-acumulativa">Regresión ordinal acumulativa</h3>
-<p>El modelo acumulativo (<span class="citation" data-cites="cumulative">(<a href="#ref-cumulative" role="doc-biblioref"><strong>cumulative?</strong></a>)</span>) presupone que la variable ordinal observada, <span class="math inline">\(Y\)</span>, proviene de la categorización de una variable latente (no observada) continua <span class="math inline">\(\tilde{Y}\)</span>.</p>
+<p>El modelo acumulativo, CM, presupone que la variable ordinal observada, <span class="math inline">\(Y\)</span>, proviene de la categorización de una variable latente (no observada) continua, <span class="math inline">\(\tilde{Y}\)</span>. Hay <span class="math inline">\(K\)</span> umbrales <span class="math inline">\(\tau_k\)</span> que particionan <span class="math inline">\(\tilde{Y}\)</span> en <span class="math inline">\(K + 1\)</span> categorías ordenadas observables (ver <a href="#fig-cumulative">Figura&nbsp;1</a>). Si asumimos que <span class="math inline">\(\tilde{Y}\)</span> tiene una cierta distribución (por ejemplo, normal) con distribución acumulada <span class="math inline">\(F\)</span>, se puede calcular la probabilidad de que <span class="math inline">\(Y\)</span> sea la categoría <span class="math inline">\(k\)</span> de esta forma:</p>
+<p><span class="math display">\[Pr(Y = k) = F(\tau_k) - F(\tau_{k-1})\]</span></p>
+<p>Por ejemplo en la <a href="#fig-cumulative">Figura&nbsp;1</a>,</p>
+<p><span class="math display">\[Pr(Y = 2) = F(\tau_2) - F(\tau_{1})\]</span></p>
+<p>Si suponemos que, por ejemplo, <span class="math inline">\(\tilde{Y}\)</span> tiene una relación lineal con dos predictores:</p>
+<p><span class="math display">\[\tilde{Y} = \eta + \epsilon = \beta_1 x_1 + \beta_2 x_2 + \epsilon\]</span></p>
+<p>Y que los errores son <span class="math inline">\(N(0,\sigma^2)\)</span>.</p>
+<p>Entonces la función de probabilidad acumulada de los errores tendrá la misma forma que la de <span class="math inline">\(\tilde{Y}\)</span>:</p>
+<p><span class="math display">\[\mathrm{Pr}(\epsilon \leq z) = F(z)\]</span></p>
+<p>Y podremos calcular la distribución de probabilidad acumulada de <span class="math inline">\(Y\)</span>:</p>
+<p><span class="math display">\[\mathrm{Pr}(Y \leq k \mid \eta) = \mathrm{Pr}(\tilde{Y} \leq \tau_k \mid \eta) = \mathrm{Pr}(\eta + \epsilon \leq \tau k) = \mathrm{Pr}(\epsilon \leq \tau_k - \eta) = F(\tau_k - \eta)\]</span></p>
+<p>Por lo que asumiendo la normalidad de los errores:</p>
+<p><span class="math display">\[\mathrm{Pr}(Y = k) = \Phi(\tau_k - (\beta_1 x_1 + \beta_2 x_2)) - \Phi(\tau_{k - 1} - (\beta_1 x_1 + \beta_2 x_2))\]</span></p>
+<p>Donde hay que estimar los umbrales y los coeficientes de regresión.</p>
+<p>Otra popular elección es suponer que la función acumulada se comporta como una logística. En ese caso, la interpretación de los coeficientes varía y se asemeja a la de la regresión logística. Se parte del supuesto de que el <span class="math inline">\(logit\)</span> de la función de probabilidad es lineal:</p>
+<p><span class="math display">\[logit (P(Y \le k)) = \tau_{k} - \eta = \tau_{k} - (\beta_1 x_1 + \beta_2 x_2)\]</span></p>
+<p>Se puede demostrar que, por ejemplo:</p>
+<p><span class="math display">\[\frac{\frac{\mathrm{Pr}(Y \leq k \mid \eta)}{\mathrm{Pr}(Y &gt; k \mid \eta)}}{\frac{\mathrm{Pr}(Y \leq k+1 \mid \eta)}{\mathrm{Pr}(Y &gt; k+1 \mid \eta)}} = \exp(\tau_{k} - \tau_{k+1})\]</span></p>
+<p>Y que <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>:</p>
+<p><span class="math display">\[\frac{\frac{\mathrm{Pr}(Y \leq k \mid x_i = 1)}{\mathrm{Pr}(Y &gt; k \mid x_i = 1)}}{\frac{\mathrm{Pr}(Y \leq k \mid x_i=0)}{\mathrm{Pr}(Y &gt; k \mid x_i = 0)}} = \exp(-\beta_{i})\]</span></p>
 <div class="cell" data-freeze="true">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div id="fig-cumulative" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="ordinal_files/figure-html/cumulative-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Regresión ordinal acumulativa.</figcaption><p></p>
+<p><img src="ordinal_files/figure-html/fig-cumulative-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figura&nbsp;1: Regresión ordinal acumulativa.</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-<section id="regresión-ordinal-secuencial" class="level3">
-<h3 class="anchored" data-anchor-id="regresión-ordinal-secuencial">Regresión ordinal secuencial</h3>
-<div class="cell" data-freeze="true">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="ordinal_files/figure-html/sequence-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Regresión ordinal secuencial.</figcaption><p></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="regresión-ordinal-adyacente" class="level3">
-<h3 class="anchored" data-anchor-id="regresión-ordinal-adyacente">Regresión ordinal adyacente</h3>
-<div class="cell" data-freeze="true">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="ordinal_files/figure-html/adyacente-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Regresión ordinal adyacente.</figcaption><p></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
 </section>
 <section id="preparación" class="level2">
 <h2 class="anchored" data-anchor-id="preparación">Preparación</h2>
+<p>TODO: Comentar o llevar al EDA</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 2,980
@@ -185,8 +236,8 @@ $ Group    &lt;fct&gt; AB, AB, AB, AB, AB, AB, AB, AB, AB, AB, AB, AB, AB, AB, A
 $ Period   &lt;fct&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2…
 $ Treat    &lt;fct&gt; A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, B, B, B…
 $ Subject  &lt;fct&gt; 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4…
-$ Question &lt;fct&gt; Q01, Q02, Q03, Q04, Q05, Q06, Q07, Q08, Q09, Q10, Q11, Q12, Q…
-$ Response &lt;fct&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3…</code></pre>
+$ Question &lt;fct&gt; Q18, Q01, Q02, Q03, Q04, Q05, Q06, Q07, Q08, Q09, Q10, Q11, Q…
+$ Response &lt;ord&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3…</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -195,12 +246,12 @@ $ Response &lt;fct&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="xyuqcvydkh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="qzdbmadztj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-:where(#xyuqcvydkh) .gt_table {
+:where(#qzdbmadztj) .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -225,7 +276,7 @@ $ Response &lt;fct&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   border-left-color: #D3D3D3;
 }
 
-:where(#xyuqcvydkh) .gt_heading {
+:where(#qzdbmadztj) .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -237,12 +288,12 @@ $ Response &lt;fct&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   border-right-color: #D3D3D3;
 }
 
-:where(#xyuqcvydkh) .gt_caption {
+:where(#qzdbmadztj) .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-:where(#xyuqcvydkh) .gt_title {
+:where(#qzdbmadztj) .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -254,7 +305,7 @@ $ Response &lt;fct&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   border-bottom-width: 0;
 }
 
-:where(#xyuqcvydkh) .gt_subtitle {
+:where(#qzdbmadztj) .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -266,13 +317,13 @@ $ Response &lt;fct&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   border-top-width: 0;
 }
 
-:where(#xyuqcvydkh) .gt_bottom_border {
+:where(#qzdbmadztj) .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#xyuqcvydkh) .gt_col_headings {
+:where(#qzdbmadztj) .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -287,7 +338,7 @@ $ Response &lt;fct&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   border-right-color: #D3D3D3;
 }
 
-:where(#xyuqcvydkh) .gt_col_heading {
+:where(#qzdbmadztj) .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -307,7 +358,7 @@ $ Response &lt;fct&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   overflow-x: hidden;
 }
 
-:where(#xyuqcvydkh) .gt_column_spanner_outer {
+:where(#qzdbmadztj) .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -319,15 +370,15 @@ $ Response &lt;fct&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   padding-right: 4px;
 }
 
-:where(#xyuqcvydkh) .gt_column_spanner_outer:first-child {
+:where(#qzdbmadztj) .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#xyuqcvydkh) .gt_column_spanner_outer:last-child {
+:where(#qzdbmadztj) .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#xyuqcvydkh) .gt_column_spanner {
+:where(#qzdbmadztj) .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -339,7 +390,7 @@ $ Response &lt;fct&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   width: 100%;
 }
 
-:where(#xyuqcvydkh) .gt_group_heading {
+:where(#qzdbmadztj) .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -365,7 +416,7 @@ $ Response &lt;fct&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   text-align: left;
 }
 
-:where(#xyuqcvydkh) .gt_empty_group_heading {
+:where(#qzdbmadztj) .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -380,15 +431,15 @@ $ Response &lt;fct&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   vertical-align: middle;
 }
 
-:where(#xyuqcvydkh) .gt_from_md > :first-child {
+:where(#qzdbmadztj) .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#xyuqcvydkh) .gt_from_md > :last-child {
+:where(#qzdbmadztj) .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#xyuqcvydkh) .gt_row {
+:where(#qzdbmadztj) .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -407,7 +458,7 @@ $ Response &lt;fct&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   overflow-x: hidden;
 }
 
-:where(#xyuqcvydkh) .gt_stub {
+:where(#qzdbmadztj) .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -420,7 +471,7 @@ $ Response &lt;fct&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   padding-right: 5px;
 }
 
-:where(#xyuqcvydkh) .gt_stub_row_group {
+:where(#qzdbmadztj) .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -434,11 +485,11 @@ $ Response &lt;fct&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   vertical-align: top;
 }
 
-:where(#xyuqcvydkh) .gt_row_group_first td {
+:where(#qzdbmadztj) .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#xyuqcvydkh) .gt_summary_row {
+:where(#qzdbmadztj) .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -448,16 +499,16 @@ $ Response &lt;fct&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   padding-right: 5px;
 }
 
-:where(#xyuqcvydkh) .gt_first_summary_row {
+:where(#qzdbmadztj) .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-:where(#xyuqcvydkh) .gt_first_summary_row.thick {
+:where(#qzdbmadztj) .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#xyuqcvydkh) .gt_last_summary_row {
+:where(#qzdbmadztj) .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -467,7 +518,7 @@ $ Response &lt;fct&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   border-bottom-color: #D3D3D3;
 }
 
-:where(#xyuqcvydkh) .gt_grand_summary_row {
+:where(#qzdbmadztj) .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -477,7 +528,7 @@ $ Response &lt;fct&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   padding-right: 5px;
 }
 
-:where(#xyuqcvydkh) .gt_first_grand_summary_row {
+:where(#qzdbmadztj) .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -487,11 +538,11 @@ $ Response &lt;fct&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   border-top-color: #D3D3D3;
 }
 
-:where(#xyuqcvydkh) .gt_striped {
+:where(#qzdbmadztj) .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#xyuqcvydkh) .gt_table_body {
+:where(#qzdbmadztj) .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -500,7 +551,7 @@ $ Response &lt;fct&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   border-bottom-color: #D3D3D3;
 }
 
-:where(#xyuqcvydkh) .gt_footnotes {
+:where(#qzdbmadztj) .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -514,7 +565,7 @@ $ Response &lt;fct&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   border-right-color: #D3D3D3;
 }
 
-:where(#xyuqcvydkh) .gt_footnote {
+:where(#qzdbmadztj) .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -523,7 +574,7 @@ $ Response &lt;fct&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   padding-right: 5px;
 }
 
-:where(#xyuqcvydkh) .gt_sourcenotes {
+:where(#qzdbmadztj) .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -537,7 +588,7 @@ $ Response &lt;fct&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   border-right-color: #D3D3D3;
 }
 
-:where(#xyuqcvydkh) .gt_sourcenote {
+:where(#qzdbmadztj) .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -545,64 +596,64 @@ $ Response &lt;fct&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   padding-right: 5px;
 }
 
-:where(#xyuqcvydkh) .gt_left {
+:where(#qzdbmadztj) .gt_left {
   text-align: left;
 }
 
-:where(#xyuqcvydkh) .gt_center {
+:where(#qzdbmadztj) .gt_center {
   text-align: center;
 }
 
-:where(#xyuqcvydkh) .gt_right {
+:where(#qzdbmadztj) .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#xyuqcvydkh) .gt_font_normal {
+:where(#qzdbmadztj) .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#xyuqcvydkh) .gt_font_bold {
+:where(#qzdbmadztj) .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#xyuqcvydkh) .gt_font_italic {
+:where(#qzdbmadztj) .gt_font_italic {
   font-style: italic;
 }
 
-:where(#xyuqcvydkh) .gt_super {
+:where(#qzdbmadztj) .gt_super {
   font-size: 65%;
 }
 
-:where(#xyuqcvydkh) .gt_footnote_marks {
+:where(#qzdbmadztj) .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-:where(#xyuqcvydkh) .gt_asterisk {
+:where(#qzdbmadztj) .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#xyuqcvydkh) .gt_indent_1 {
+:where(#qzdbmadztj) .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#xyuqcvydkh) .gt_indent_2 {
+:where(#qzdbmadztj) .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#xyuqcvydkh) .gt_indent_3 {
+:where(#qzdbmadztj) .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#xyuqcvydkh) .gt_indent_4 {
+:where(#qzdbmadztj) .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#xyuqcvydkh) .gt_indent_5 {
+:where(#qzdbmadztj) .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -666,57 +717,645 @@ $ Response &lt;fct&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
 </div>
 </div>
 <div class="cell">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="ordinal_files/figure-html/resume2-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Resumen de frecuencias de respuesta.</figcaption><p></p>
-</figure>
-</div>
-</div>
+
 </div>
 </section>
 <section id="modelo-de-enlace-logit-acumulado" class="level2">
 <h2 class="anchored" data-anchor-id="modelo-de-enlace-logit-acumulado">Modelo de enlace logit acumulado</h2>
-<section id="teoría" class="level3">
-<h3 class="anchored" data-anchor-id="teoría">Teoría</h3>
-<p>Si tenemos <span class="math inline">\(J\)</span> respuestas ordinales. La probabilidad de una respuesta concreta <span class="math inline">\(j\)</span> será <span class="math inline">\(\pi_j\)</span>. Entonces, la función de probabilidad acumulada ordinal de una respuesta <span class="math inline">\(y_i\)</span> será:</p>
+<p>Vamos a ajustar el modelo con la función de enlace logit:</p>
+<p><span id="eq-link-logit"><span class="math display">\[
+\text{logit} (P(y_i \leq k) = \log \frac{P(y_i \leq k)}{1 - P(y_i \leq k)}
+\tag{1}\]</span></span></p>
+<p>La función de enlace logit acumulada (<a href="#eq-link-logit">Ecuación&nbsp;1</a>) no está definida para <span class="math inline">\(k = K\)</span>, ya que <span class="math inline">\(1 - P(Y_i \leq K) = 1 - 1 = 0\)</span>.</p>
+<p>En nuestra escala de Likert tenemos <span class="math inline">\(K\)</span> = 5 niveles, el modelo mixto que vamos a plantear es el siguiente:</p>
 <p><span class="math display">\[
-P(y_i \leq j) = \pi_{i1} + \dots + \pi_{ij}.
+\begin{aligned}
+\text{logit}(p(y_i \leq k)) &amp;= \tau_k - \beta_1 \text{Period}_i - \beta_2 \text{Treat}_i - \beta_3 \text{Question}_i - u( \text{Subject}_i) \\
+i &amp;= 1, \dots n \; \; \; \; \; \; k = 1, \dots, K - 1
+\end{aligned}
 \]</span></p>
-<p>Por ejemplo, si en nuestra muestra la proporción de respuestas correspondiera a los valores poblacionales, tendríamos la siguiente distribución acumulada:</p>
+<p>donde <span class="math inline">\(\tau_k\)</span> es el umbral de la categoría <span class="math inline">\(k\)</span> y son <span class="math inline">\(K-1\)</span> = 4 interceptores. Los coeficientes de los efectos fijos, <span class="math inline">\(\beta_1\)</span>, <span class="math inline">\(\beta_2\)</span> y <span class="math inline">\(\beta_3\)</span>, son independientes, por lo que cada <span class="math inline">\(\beta_i\)</span> tiene el mismo efecto en los <span class="math inline">\(K-1\)</span> logits acumulados. El efecto aleatorio, Subject, se presupone que sigue una distribución normal: <span class="math inline">\(u(\text{Subject}_i) \sim N(0, \sigma_u^2)\)</span>.</p>
+<p>En esencia lo que estamos haciendo es un modelo en cadena de regresiones logísticas donde la respuesta binaría se corresponde con “menor o igual que cierto nivel frente a mayor que ese nivel”.</p>
+<p>En el caso particular de <span class="math inline">\(K\)</span> = 5, los umbrales <span class="math inline">\(\tau_k\)</span> se interpretan como:</p>
+<ul>
+<li><span class="math inline">\(k\)</span> = 1: log-odds del nivel = 1 vs.&nbsp;2-5</li>
+<li><span class="math inline">\(k\)</span> = 2: log-odds del nivel = 1-2 vs.&nbsp;3-5</li>
+<li><span class="math inline">\(k\)</span> = 3: log-odds del nivel = 1-3 vs.&nbsp;4-5</li>
+<li><span class="math inline">\(k\)</span> = 4: log-odds del nivel = 1-4 vs.&nbsp;5</li>
+</ul>
+</section>
+<section id="ajuste-del-modelo." class="level2">
+<h2 class="anchored" data-anchor-id="ajuste-del-modelo.">Ajuste del modelo.</h2>
+<p>Su usarán las funciones <code>ordinal::clm</code> y <code>ordinal::clmm</code> que respectivamente permiten ajustar modelos únicamente con efectos fijos o modelos mixtos (que combinan efectos fijos y aleatorios).</p>
+<p>Comenzamos con un modelo simple que tiene un único predictor:</p>
+<p><span class="math display">\[
+\text{logit}(p(y_i \leq k)) = \tau_k - \beta_2 \text{Treat}_i
+\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>clm_likert_treat <span class="ot">&lt;-</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">clm</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        Response <span class="sc">~</span> Treat,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> df, <span class="at">link =</span> <span class="st">"logit"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(clm_likert_treat)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>formula: Response ~ Treat
+data:    df
+
+ link  threshold nobs logLik   AIC     niter max.grad cond.H 
+ logit flexible  2980 -3966.11 7942.21 5(0)  1.64e-10 3.1e+01
+
+Coefficients:
+       Estimate Std. Error z value Pr(&gt;|z|)    
+TreatB  -1.7206     0.0731  -23.54   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+    Estimate Std. Error z value
+1|2 -3.97230    0.09678 -41.045
+2|3 -2.45446    0.06812 -36.029
+3|4 -1.66453    0.05936 -28.042
+4|5 -0.10547    0.04946  -2.132</code></pre>
+</div>
+</div>
+<p>El método <code>summary</code> muestra la información resumen. Para su interpretación vamos a seguir <span class="citation" data-cites="christensen2018CumulativeLM">Christensen (<a href="#ref-christensen2018CumulativeLM" role="doc-biblioref">2018</a>)</span>.</p>
+<p>El número de condición Hessiano es inferior a <span class="math inline">\(10^4\)</span> lo que es indicativo de que no hay problemas de optimización <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+<p>La sección de coeficientes es la más importante. Se muestra la estimación de parámetros, el error “stardard” y la significación estadística de acuerdo al test de Wald <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. Comprobamos que el valor es claramente significativo. Es decir, que los estudiantes han valorado de forma diferente la calidad del subtitulado en ambos vídeos. El estimador de maxima verosimilitud del coeficiente <code>TreatB</code> es -1.72. Siguiendo la deducción de <span class="citation" data-cites="bruin2011">(<a href="#ref-bruin2011" role="doc-biblioref"><strong>bruin2011?</strong></a>)</span> podemos, por ejemplo, hacer la siguiente interpretación del significado de este coeficiente referido a dos niveles consecutivos de respuesta:</p>
+<p><span class="math display">\[
+\begin{aligned}
+logit (P(Y \le 1)) &amp; = &amp; -3.97 - (-1.72 x_2) \\
+logit (P(Y \le 2)) &amp; = &amp; -2.45 - (-1.72 x_2)
+\end{aligned}
+\]</span></p>
+<p>Por lo tanto los <span class="math inline">\(odds\)</span> serían:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\frac{P(Y \le 1 | x_2 = B)}{P(Y \gt 1 | x_2 = B)} &amp; = &amp; exp(-3.97)/exp(-1.72) \\
+\frac{P(Y \le 1 | x_2 = A)}{P(Y \gt 1 | x_2 = A)} &amp; = &amp; exp(-3.97) \\
+\frac{P(Y \le 2 | x_2 = B)}{P(Y \gt 2 | x_2 = B)} &amp; = &amp; exp(-2.45)/exp(-1.72) \\
+\frac{P(Y \le 2 | x_2 = A)}{P(Y \gt 2 | x_2 = A)} &amp; = &amp; exp(-2.45)
+\end{aligned}
+\]</span></p>
+<p>Y los <span class="math inline">\(OR\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\frac{P(Y \le 1 | x_2=B)}{P(Y \gt 1 | x_2=B)} / \frac{P(Y \le 1 | x_2=A)}{P(Y \gt 1 | x_2=A)} &amp; = &amp; 1/exp(-1.72) &amp; = &amp; 5.59 \\
+\frac{P(Y \le 2 | x_2=B)}{P(Y \gt 2 | x_2=B)} / \frac{P(Y \le 2 | x_2=A)}{P(Y \gt 2 | x_2=A)} &amp; = &amp; 1/exp(-1.72) &amp; = &amp; 5.59 \\
+\end{aligned}
+\]</span></p>
+<p>Se comprueba que el <span class="math inline">\(OR\)</span> es equivalente en todos los niveles de respuesta al cuestionario. Esta es una de las suposiciones de la regresión ordinal acumulativa. El <span class="math inline">\(odds\)</span> de respuesta al cuestionario entre los niveles inferiores y superiores a uno dado, <span class="math inline">\(k\)</span>, es 5.59 veces en el subtitulado <span class="math inline">\(B\)</span> que en el <span class="math inline">\(A\)</span>. Esto indica que el subtitulado <span class="math inline">\(B\)</span> es percibido por los estudiantes como de peor calidad que el subtitulado <span class="math inline">\(A\)</span>.</p>
+</section>
+<section id="efecto-periodo." class="level2">
+<h2 class="anchored" data-anchor-id="efecto-periodo.">Efecto periodo.</h2>
+<p>Añadimos un segundo predictor para constatar si existe efecto periodo.</p>
+<p><span class="math display">\[
+\text{logit}(p(y_i \leq k)) = \tau_k - \beta_1 \text{Period}_i - \beta_2 \text{Treat}_i
+\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>clm_likert_period_treat <span class="ot">&lt;-</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">clm</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        Response <span class="sc">~</span> Period <span class="sc">+</span> Treat,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> df, <span class="at">link =</span> <span class="st">"logit"</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(clm_likert_period_treat)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>formula: Response ~ Period + Treat
+data:    df
+
+ link  threshold nobs logLik   AIC     niter max.grad cond.H 
+ logit flexible  2980 -3957.88 7927.76 5(0)  1.94e-10 4.1e+01
+
+Coefficients:
+        Estimate Std. Error z value Pr(&gt;|z|)    
+Period2 -0.27560    0.06805   -4.05 5.12e-05 ***
+TreatB  -1.74090    0.07339  -23.72  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+    Estimate Std. Error z value
+1|2 -4.13085    0.10507 -39.314
+2|3 -2.60905    0.07872 -33.143
+3|4 -1.81652    0.07073 -25.681
+4|5 -0.25187    0.06153  -4.093</code></pre>
+</div>
+</div>
+<p>Vemos que ambos coeficientes son significativos y con signo negativo. Un signo negativo en el efecto periodo está asociado a que la valoración del subtitulado empeora en el segundo periodo independientemente de si se trata del subtitulado correcto o incorrecto. Aplicando el mismo razonamiento del apartado anterior, el <span class="math inline">\(OR\)</span> del efecto periodo es <span class="math inline">\(1/exp(-0.28) = 1.32\)</span>. Lo que quiere decir que una vez controlado el efecto principal del tratamiento, el subtitulado en el segundo periodo es valorado como de inferior calidad que en el primero. Esto estaría indicando que los estudiantes son más exigentes con el subtitulado en la segunda actividad independientemente de su calidad real.</p>
+<p>Podemos comparar ambos modelos con la prueba de razón de verosimilitud y comprobamos que el modelo con efecto periodo reduce la función de verosimilitud y, por lo tanto, debe ser aceptado:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(clm_likert_treat, clm_likert_period_treat)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Likelihood ratio tests of cumulative link models:
+ 
+                        formula:                  link: threshold:
+clm_likert_treat        Response ~ Treat          logit flexible  
+clm_likert_period_treat Response ~ Period + Treat logit flexible  
+
+                        no.par    AIC  logLik LR.stat df Pr(&gt;Chisq)    
+clm_likert_treat             5 7942.2 -3966.1                          
+clm_likert_period_treat      6 7927.8 -3957.9  16.448  1      5e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>Con la función <code>drop1</code> se puede realizar este mismo test, razón de verosimilitudes, para cada variable explicativa del modelo controlando las restantes.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(clm_likert_period_treat, <span class="at">test =</span> <span class="st">"Chi"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Single term deletions
+
+Model:
+Response ~ Period + Treat
+       Df    AIC    LRT Pr(&gt;Chi)    
+&lt;none&gt;    7927.8                    
+Period  1 7942.2  16.45    5e-05 ***
+Treat   1 8537.8 612.03   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>Y con la función <code>add1</code>, que hace el test de cada variable explicativa ignorando las restantes:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the null model first</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>clm_likert_null <span class="ot">&lt;-</span> <span class="fu">clm</span>(Response <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> df, <span class="at">link =</span> <span class="st">"logit"</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">add1</span>(clm_likert_null, <span class="at">scope =</span> <span class="sc">~</span> Period <span class="sc">+</span> Treat, <span class="at">test =</span> <span class="st">"Chi"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Single term additions
+
+Model:
+Response ~ 1
+       Df    AIC    LRT Pr(&gt;Chi)    
+&lt;none&gt;    8541.7                    
+Period  1 8537.8   5.91  0.01504 *  
+Treat   1 7942.2 601.49  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>En la <a href="#fig-clm_likert_period_treat-confint">Figura&nbsp;2</a> se muestran los intervalos de confianza de los parámetros del modelo.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-resume3" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-clm_likert_period_treat-confint" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="ordinal_files/figure-html/fig-resume3-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figura&nbsp;1: Histograma de frecuencias de respuesta y distribución acumulada.</figcaption><p></p>
+<p><img src="ordinal_files/figure-html/fig-clm_likert_period_treat-confint-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figura&nbsp;2: Intervalos de confianza</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Aunque hay otras funciones de enlace, el enlace logit es el más utilizado y es el que se representa en el panel derecho (<a href="#fig-resume3">Figura&nbsp;1</a>).</p>
-<p><span id="eq-link-logit"><span class="math display">\[
-\text{logit} (P(y_i \leq j) = \log \frac{P(y_i \leq j)}{1 - P(y_i \leq j)}
-\tag{1}\]</span></span></p>
-<p>La función de enlace logit acumulada (<a href="#eq-link-logit">Ecuación&nbsp;1</a>) no está definida para <span class="math inline">\(j = J\)</span>, ya que <span class="math inline">\(1 - P(Y_i \leq J) = 1 - 1 = 0\)</span>.</p>
-<p>En nuestra escala de Likert tenemos <span class="math inline">\(J\)</span> = 5 niveles, el modelo mixto que vamos a plantear es el siguiente:</p>
-<p><span class="math display">\[
-\begin{aligned}
-\text{logit}(p(y_i \leq j)) &amp;= \theta_j - \beta_1 \text{Period}_i - \beta_2 \text{Treat}_i - u( \text{Subject}_i) - v( \text{Question}_i) \\
-i &amp;= 1, \dots n \; \; \; \; \; \; j = 1, \dots, J - 1
-\end{aligned}
-\]</span></p>
-<p>donde <span class="math inline">\(\theta_j\)</span> es el umbral de la categoría <span class="math inline">\(j\)</span> y son <span class="math inline">\(J-1\)</span> = 4 interceptores. Los coeficientes de los efectos fijos, <span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\beta_2\)</span>, son independientes <span class="math inline">\(j\)</span>, por lo que cada <span class="math inline">\(\beta\)</span> tiene el mismo efecto en los <span class="math inline">\(J-1\)</span> logits acumulados. Los efectos aleatorios, Subject y Question, también son independientes de <span class="math inline">\(j\)</span>, y se presupone que siguen una distribución normal: <span class="math inline">\(u(\text{Subject}_i) \sim N(0, \sigma_u^2)\)</span> y <span class="math inline">\(u(\text{Question}_i) \sim N(0, \sigma_v^2)\)</span> respectivamente. La función de enlace logit es la más popular aunque hay otras opciones. También es habitual encontrar la parametrización con los signos negativos en los parámetros <span class="math inline">\(\beta\)</span>. De esta forma la interpretación de los valores de los parámetros <span class="math inline">\(\beta\)</span> es la misma que en una regresión lineal ordinaria. Es decir que a mayor valor</p>
-<p>The subtraction of terms in the above model is new to me. The main reason seems to be for familiar interpretation: the larger the value of any independent term <span class="math inline">\(\beta x\)</span>, the smaller the thresholds <span class="math inline">\(\theta_j\)</span>, and therefore a larger probability of the a response falling into a category at the upper end of the scale. This way, <span class="math inline">\(\beta\)</span> has the same <em>direction</em> of effect as in ordinary linear regression.</p>
-<p>We are essentially modeling a “chain” of logistic regressions where the binary response is “less than or equal to a certain level” vs “greater than that level”. In this case, with <span class="math inline">\(J\)</span> = 5, the thresholds <span class="math inline">\(\theta_j\)</span> are capturing the adjusted log-odds of observing:</p>
-<ul>
-<li><span class="math inline">\(j\)</span> = 1: log-odds of <code>rating</code> = 1 vs.&nbsp;2-5</li>
-<li><span class="math inline">\(j\)</span> = 2: log-odds of <code>rating</code> = 1-2 vs.&nbsp;3-5</li>
-<li><span class="math inline">\(j\)</span> = 3: log-odds of <code>rating</code> = 1-3 vs.&nbsp;4-5</li>
-<li><span class="math inline">\(j\)</span> = 4: log-odds of <code>rating</code> = 1-4 vs.&nbsp;5</li>
-</ul>
 </section>
+<section id="modelo-con-interacción-entre-periodo-y-subtítulos." class="level2">
+<h2 class="anchored" data-anchor-id="modelo-con-interacción-entre-periodo-y-subtítulos.">Modelo con interacción entre periodo y subtítulos.</h2>
+<p><span class="math display">\[
+\text{logit}(p(y_i \leq k)) = \tau_k - \beta_1 \text{Period}_i - \beta_2 \text{Treat}_i - \beta_3 \text{Period}_i\text{Treat}_i
+\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>clm_likert_period_treat_inter <span class="ot">&lt;-</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">clm</span>(</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>        Response <span class="sc">~</span> Period <span class="sc">*</span> Treat,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> df, <span class="at">link =</span> <span class="st">"logit"</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(clm_likert_period_treat_inter)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>formula: Response ~ Period * Treat
+data:    df
+
+ link  threshold nobs logLik   AIC     niter max.grad cond.H 
+ logit flexible  2980 -3953.01 7920.03 5(0)  2.15e-10 8.1e+01
+
+Coefficients:
+               Estimate Std. Error z value Pr(&gt;|z|)    
+Period2        -0.49179    0.09744  -5.047 4.49e-07 ***
+TreatB         -1.96046    0.10229 -19.166  &lt; 2e-16 ***
+Period2:TreatB  0.42510    0.13638   3.117  0.00183 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+    Estimate Std. Error z value
+1|2 -4.24649    0.11182 -37.977
+2|3 -2.72823    0.08821 -30.928
+3|4 -1.93833    0.08167 -23.732
+4|5 -0.36991    0.07308  -5.062</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(clm_likert_period_treat, clm_likert_period_treat_inter)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Likelihood ratio tests of cumulative link models:
+ 
+                              formula:                  link: threshold:
+clm_likert_period_treat       Response ~ Period + Treat logit flexible  
+clm_likert_period_treat_inter Response ~ Period * Treat logit flexible  
+
+                              no.par    AIC  logLik LR.stat df Pr(&gt;Chisq)   
+clm_likert_period_treat            6 7927.8 -3957.9                         
+clm_likert_period_treat_inter      7 7920.0 -3953.0   9.738  1   0.001805 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>Vemos que hay evidencia de que existe una interacción entre periodo y subtítulos. Cuando esto sucede se tiende a dar mayor importancia a esta interacción que a los efectos principales de cada factor.</p>
+</section>
+<section id="modelo-con-efectos-mixtos." class="level2">
+<h2 class="anchored" data-anchor-id="modelo-con-efectos-mixtos.">Modelo con efectos mixtos.</h2>
+<p>Añadimos al modelo a los sujetos como efecto aleatorio.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>clmm_likert_period_treat_inter_subject <span class="ot">&lt;-</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">clmm</span>(</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>        Response <span class="sc">~</span> Period <span class="sc">*</span> Treat <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Subject),</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> df, <span class="at">link =</span> <span class="st">"logit"</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(clmm_likert_period_treat_inter_subject)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cumulative Link Mixed Model fitted with the Laplace approximation
+
+formula: Response ~ Period * Treat + (1 | Subject)
+data:    df
+
+ link  threshold nobs logLik   AIC     niter     max.grad cond.H 
+ logit flexible  2980 -3655.71 7327.41 635(2507) 3.67e-04 5.8e+02
+
+Random effects:
+ Groups  Name        Variance Std.Dev.
+ Subject (Intercept) 1.278    1.131   
+Number of groups:  Subject 87 
+
+Coefficients:
+               Estimate Std. Error z value Pr(&gt;|z|)    
+Period2         -0.5985     0.2653  -2.256   0.0241 *  
+TreatB          -2.3926     0.2673  -8.951   &lt;2e-16 ***
+Period2:TreatB   0.5705     0.5072   1.125   0.2607    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+    Estimate Std. Error z value
+1|2  -5.0575     0.2154  -23.48
+2|3  -3.3828     0.2014  -16.80
+3|4  -2.4541     0.1969  -12.46
+4|5  -0.5248     0.1909   -2.75</code></pre>
+</div>
+</div>
+<p>Vemos que ahora la interacción periodo y tratamiento no es significativa. Eliminamos la interacción tratamiento y periodo mantenemos el efecto aleatorio de los estudiantes.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>clmm_likert_period_treat_subject <span class="ot">&lt;-</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">clmm</span>(</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>        Response <span class="sc">~</span> Period <span class="sc">+</span> Treat <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Subject),</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> df, <span class="at">link =</span> <span class="st">"logit"</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(clmm_likert_period_treat_subject)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cumulative Link Mixed Model fitted with the Laplace approximation
+
+formula: Response ~ Period + Treat + (1 | Subject)
+data:    df
+
+ link  threshold nobs logLik   AIC     niter     max.grad cond.H 
+ logit flexible  2980 -3656.34 7326.67 515(2063) 3.65e-04 1.1e+02
+
+Random effects:
+ Groups  Name        Variance Std.Dev.
+ Subject (Intercept) 1.296    1.139   
+Number of groups:  Subject 87 
+
+Coefficients:
+        Estimate Std. Error z value Pr(&gt;|z|)    
+Period2 -0.31159    0.07204  -4.325 1.53e-05 ***
+TreatB  -2.10685    0.07998 -26.344  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+    Estimate Std. Error z value
+1|2  -4.9122     0.1713 -28.668
+2|3  -3.2370     0.1533 -21.109
+3|4  -2.3079     0.1473 -15.669
+4|5  -0.3786     0.1399  -2.706</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(clmm_likert_period_treat_subject, clmm_likert_period_treat_inter_subject)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Likelihood ratio tests of cumulative link models:
+ 
+                                       formula:                                 
+clmm_likert_period_treat_subject       Response ~ Period + Treat + (1 | Subject)
+clmm_likert_period_treat_inter_subject Response ~ Period * Treat + (1 | Subject)
+                                       link: threshold:
+clmm_likert_period_treat_subject       logit flexible  
+clmm_likert_period_treat_inter_subject logit flexible  
+
+                                       no.par    AIC  logLik LR.stat df
+clmm_likert_period_treat_subject            7 7326.7 -3656.3           
+clmm_likert_period_treat_inter_subject      8 7327.4 -3655.7    1.26  1
+                                       Pr(&gt;Chisq)
+clmm_likert_period_treat_subject                 
+clmm_likert_period_treat_inter_subject     0.2617</code></pre>
+</div>
+</div>
+</section>
+<section id="factor-preguntas." class="level2">
+<h2 class="anchored" data-anchor-id="factor-preguntas.">Factor preguntas.</h2>
+<p>Las preguntas se pueden incorporar al modelo como efecto fijo o como efecto aleatorio.</p>
+<p>TODO: Comentar las implicaciones que tiene cada variante.</p>
+<section id="preguntas-como-efecto-aleatorio." class="level3">
+<h3 class="anchored" data-anchor-id="preguntas-como-efecto-aleatorio.">Preguntas como efecto aleatorio.</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>clmm_likert_period_treat_subject_question <span class="ot">&lt;-</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">clmm</span>(</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>        Response <span class="sc">~</span> Period <span class="sc">+</span> Treat <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Subject) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Question),</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> df, <span class="at">link =</span> <span class="st">"logit"</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(clmm_likert_period_treat_subject_question)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cumulative Link Mixed Model fitted with the Laplace approximation
+
+formula: Response ~ Period + Treat + (1 | Subject) + (1 | Question)
+data:    df
+
+ link  threshold nobs logLik   AIC     niter     max.grad cond.H 
+ logit flexible  2980 -3560.09 7136.19 834(3340) 8.28e-04 1.8e+02
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ Subject  (Intercept) 1.4546   1.2061  
+ Question (Intercept) 0.3395   0.5827  
+Number of groups:  Subject 87,  Question 18 
+
+Coefficients:
+        Estimate Std. Error z value Pr(&gt;|z|)    
+Period2 -0.32028    0.07286  -4.396  1.1e-05 ***
+TreatB  -2.23815    0.08226 -27.208  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+    Estimate Std. Error z value
+1|2  -5.1745     0.2269 -22.801
+2|3  -3.4119     0.2121 -16.087
+3|4  -2.4161     0.2070 -11.672
+4|5  -0.3715     0.2012  -1.847</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(clmm_likert_period_treat_subject, clmm_likert_period_treat_subject_question)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Likelihood ratio tests of cumulative link models:
+ 
+                                          formula:                                                  
+clmm_likert_period_treat_subject          Response ~ Period + Treat + (1 | Subject)                 
+clmm_likert_period_treat_subject_question Response ~ Period + Treat + (1 | Subject) + (1 | Question)
+                                          link: threshold:
+clmm_likert_period_treat_subject          logit flexible  
+clmm_likert_period_treat_subject_question logit flexible  
+
+                                          no.par    AIC  logLik LR.stat df
+clmm_likert_period_treat_subject               7 7326.7 -3656.3           
+clmm_likert_period_treat_subject_question      8 7136.2 -3560.1  192.48  1
+                                          Pr(&gt;Chisq)    
+clmm_likert_period_treat_subject                        
+clmm_likert_period_treat_subject_question  &lt; 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>En la sección <code>Random effects</code> vemos que la varianza explicada por el efecto aleatorio preguntas es muy inferior a la explicada por los estudiantes. Sin embargo, la comparación entre modelos es altamente significativa.</p>
+</section>
+<section id="preguntas-como-efecto-fijo." class="level3">
+<h3 class="anchored" data-anchor-id="preguntas-como-efecto-fijo.">Preguntas como efecto fijo.</h3>
+<p>Se ha usado la pregunta 18 como nivel de referencia porque al ser una pregunta sobre la valoración general del subtitulado tiene más interés su comparación con cada pregunta individual.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>clmm_likert_period_treat_question_subject <span class="ot">&lt;-</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">clmm</span>(</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>        Response <span class="sc">~</span> Period <span class="sc">+</span> Treat <span class="sc">+</span> Question <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Subject),</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> df, <span class="at">link =</span> <span class="st">"logit"</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(clmm_likert_period_treat_question_subject)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cumulative Link Mixed Model fitted with the Laplace approximation
+
+formula: Response ~ Period + Treat + Question + (1 | Subject)
+data:    df
+
+ link  threshold nobs logLik   AIC     niter       max.grad cond.H 
+ logit flexible  2980 -3527.39 7102.77 3514(14060) 8.70e-04 5.0e+02
+
+Random effects:
+ Groups  Name        Variance Std.Dev.
+ Subject (Intercept) 1.456    1.207   
+Number of groups:  Subject 87 
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)    
+Period2     -0.32093    0.07292  -4.401 1.08e-05 ***
+TreatB      -2.24865    0.08237 -27.299  &lt; 2e-16 ***
+QuestionQ01  0.61818    0.21231   2.912  0.00360 ** 
+QuestionQ02  0.53439    0.20777   2.572  0.01011 *  
+QuestionQ03  0.49715    0.20901   2.379  0.01738 *  
+QuestionQ04  1.55047    0.21998   7.048 1.81e-12 ***
+QuestionQ05 -0.34685    0.20937  -1.657  0.09760 .  
+QuestionQ06  0.23760    0.20489   1.160  0.24621    
+QuestionQ07 -0.03830    0.20786  -0.184  0.85380    
+QuestionQ08 -0.36754    0.20578  -1.786  0.07409 .  
+QuestionQ09 -0.85754    0.20902  -4.103 4.09e-05 ***
+QuestionQ10  0.29798    0.20750   1.436  0.15099    
+QuestionQ11  0.53886    0.20436   2.637  0.00837 ** 
+QuestionQ12  0.14719    0.20390   0.722  0.47038    
+QuestionQ13  1.38182    0.21602   6.397 1.59e-10 ***
+QuestionQ14 -0.22399    0.20880  -1.073  0.28338    
+QuestionQ15 -0.36190    0.21315  -1.698  0.08953 .  
+QuestionQ16 -0.33488    0.22010  -1.521  0.12814    
+QuestionQ17 -0.16177    0.21180  -0.764  0.44500    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+    Estimate Std. Error z value
+1|2  -5.0211     0.2268  -22.14
+2|3  -3.2526     0.2124  -15.31
+3|4  -2.2517     0.2079  -10.83
+4|5  -0.1984     0.2025   -0.98</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(clmm_likert_period_treat_subject, clmm_likert_period_treat_question_subject)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Likelihood ratio tests of cumulative link models:
+ 
+                                          formula:                                            
+clmm_likert_period_treat_subject          Response ~ Period + Treat + (1 | Subject)           
+clmm_likert_period_treat_question_subject Response ~ Period + Treat + Question + (1 | Subject)
+                                          link: threshold:
+clmm_likert_period_treat_subject          logit flexible  
+clmm_likert_period_treat_question_subject logit flexible  
+
+                                          no.par    AIC  logLik LR.stat df
+clmm_likert_period_treat_subject               7 7326.7 -3656.3           
+clmm_likert_period_treat_question_subject     24 7102.8 -3527.4   257.9 17
+                                          Pr(&gt;Chisq)    
+clmm_likert_period_treat_subject                        
+clmm_likert_period_treat_question_subject  &lt; 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>Vemos que la mayoría de los factores <code>Question</code> no son significativos.</p>
+</section>
+<section id="análisis-del-efecto-periodo." class="level3">
+<h3 class="anchored" data-anchor-id="análisis-del-efecto-periodo.">Análisis del efecto periodo.</h3>
+<p>En la sección anterior se ha constatado la existencia de efecto periodo. En este apartado nos planteamos si el efecto periodo afecta a todas las preguntas o podemos encontrar un grupo de preguntas que carezcan de efecto periodo.</p>
+<p>Vamos a agrupar las preguntas por la similitud de su frecuencia de respuestas y aplicaremos una técnica de <code>clustering</code> jerárquico aglomerativo para encontrar los grupos de preguntas más parecidos.</p>
+<p>En el dendograma (<a href="#fig-dendo">Figura&nbsp;3</a>) se aprecian claramente tres agrupamientos. Es muy interesante constatar que los tres grupos están formados por preguntas que en su mayor parte son correlativas. Esto es consistente con que al elaborar un test normalmente se colocan las preguntas por unidades temáticas y con que el que el encuestado también suele hacerlo teniendo en cuenta esta estructura y tiende a responder de forma similar a las preguntas correlativas.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-dendo" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="ordinal_files/figure-html/fig-dendo-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figura&nbsp;3: Dendograma del cluster de preguntas</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Podemos distinguir los siguientes grupos y subgrupos:</p>
+<ul>
+<li>Grupo 1: Es el más numeroso. En general está formado por preguntas sobre el grado de dificultad que presenta la lectura del subtítulo.
+<ul>
+<li>Subgrupo preguntas Q01, Q02, Q03: Colocación de los subtítulos.</li>
+<li>Subgrupo preguntas Q10, Q11, Q12: Sincronización, velocidad y número de líneas.</li>
+<li>Subgrupo preguntas Q04, Q13: Contraste y legibilidad.</li>
+</ul></li>
+<li>Grupo 2: Trata sobre la corrección del subtítulo.
+<ul>
+<li>Subgrupo 05, 06, 07, 08, 09: Preguntas sobre si la información que presenta el subtítulo es correcta y está bien escrita.</li>
+<li>Pregunta 18: Valoración general del subtitulado. El que esta pregunta esté incluida en el grupo sobre corrección estaría indicando que este es el apartado al que más importancia dan los estudiantes a la hora de valorar la calidad del subtitulado.</li>
+</ul></li>
+<li>Grupo 3: Es un grupo con preguntas heterogéneas y cuyo nexo parece ser únicamente su colocación al final del cuestionario. Está formado por las preguntas Q14, Q15, Q16 y Q17.</li>
+</ul>
+<p>Es interesante analizar si existe efecto periodo en cada grupo de preguntas. Para ello añadimos la columna <code>Cluster</code> al dataframe:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>cuts <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">cutree</span>(cluster, <span class="at">k =</span> <span class="dv">3</span>))</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Añadimos la columna cluster al dataframe</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(df, <span class="fu">data.frame</span>(<span class="at">Question =</span> <span class="fu">names</span>(cuts), <span class="at">Cluster =</span> cuts), <span class="at">by =</span> <span class="st">"Question"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Si analizamos el efecto periodo en las preguntas de cada cluster, constatamos que el único grupo de preguntas sin efecto periodo son las del tercer grupo. Esto es consistente con que son preguntas que presentan una valoración muy similar para ambos grupos en el mismo nivel de tratamiento (TODO: Poner enlace a la sección de la exploración inicial).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Cluster <span class="sc">==</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">clmm</span>(</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>        Response <span class="sc">~</span> Period <span class="sc">+</span> Treat <span class="sc">+</span> Question <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Subject),</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> ., <span class="at">link =</span> <span class="st">"logit"</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summary</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cumulative Link Mixed Model fitted with the Laplace approximation
+
+formula: Response ~ Period + Treat + Question + (1 | Subject)
+data:    .
+
+ link  threshold nobs logLik  AIC     niter     max.grad cond.H 
+ logit flexible  573  -757.54 1535.08 921(3665) 6.13e-04 5.2e+01
+
+Random effects:
+ Groups  Name        Variance Std.Dev.
+ Subject (Intercept) 1.564    1.251   
+Number of groups:  Subject 87 
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)    
+Period2      0.04608    0.15999   0.288    0.773    
+TreatB      -1.39151    0.16932  -8.218   &lt;2e-16 ***
+QuestionQ15 -0.13689    0.22483  -0.609    0.543    
+QuestionQ16 -0.03180    0.23000  -0.138    0.890    
+QuestionQ17  0.06966    0.22471   0.310    0.757    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+    Estimate Std. Error z value
+1|2  -4.8325     0.3550 -13.612
+2|3  -2.9019     0.2804 -10.349
+3|4  -1.0558     0.2539  -4.158
+4|5   0.8564     0.2499   3.427</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="predicciones" class="level2">
+<h2 class="anchored" data-anchor-id="predicciones">Predicciones</h2>
+<p>En la <a href="#fig-ordinal.pred">Figura&nbsp;4</a> mostramos la probabilidad de respuesta que produce el modelo ajustado para cada periodo y nivel de tratamiento. Constatamos que para ambos tratamientos en el segundo periodo las respuestas tienen mayor probabilidad de tener menor puntuación en el test de Likert.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-ordinal.pred" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="ordinal_files/figure-html/fig-ordinal.pred-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figura&nbsp;4: Predicción de la probabilidad de respuesta de la regresión ordinal para cada nivel de tratamiento y periodo.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Con el paquete <code>emmeans</code> ponemos computar la diferencia estimada de medias marginales para niveles de tratamiento y periodos.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>$`emmeans of Period`
+ Period emmean    SE  df asymp.LCL asymp.UCL
+ 1        1.73 0.143 Inf      1.45      2.01
+ 2        1.41 0.141 Inf      1.13      1.69
+
+Results are averaged over the levels of: Treat, Question 
+Confidence level used: 0.95 
+
+$`pairwise differences of Period`
+ 1                 estimate     SE  df z.ratio p.value
+ Period1 - Period2    0.321 0.0729 Inf   4.401  &lt;.0001
+
+Results are averaged over the levels of: Treat, Question 
+
+$`emmeans of Treat`
+ Treat emmean    SE  df asymp.LCL asymp.UCL
+ A      2.693 0.148 Inf     2.404     2.983
+ B      0.445 0.139 Inf     0.172     0.717
+
+Results are averaged over the levels of: Period, Question 
+Confidence level used: 0.95 
+
+$`pairwise differences of Treat`
+ 1     estimate     SE  df z.ratio p.value
+ A - B     2.25 0.0824 Inf  27.299  &lt;.0001
+
+Results are averaged over the levels of: Period, Question 
+
+$`emmeans of Period, Treat`
+ Period Treat emmean    SE  df asymp.LCL asymp.UCL
+ 1      A      2.854 0.154 Inf   2.55193     3.156
+ 2      A      2.533 0.150 Inf   2.23846     2.827
+ 1      B      0.605 0.143 Inf   0.32415     0.886
+ 2      B      0.284 0.144 Inf   0.00222     0.566
+
+Results are averaged over the levels of: Question 
+Confidence level used: 0.95 
+
+$`pairwise differences of Period, Treat`
+ 1                     estimate     SE  df z.ratio p.value
+ Period1 A - Period2 A    0.321 0.0729 Inf   4.401  0.0001
+ Period1 A - Period1 B    2.249 0.0824 Inf  27.299  &lt;.0001
+ Period1 A - Period2 B    2.570 0.1158 Inf  22.193  &lt;.0001
+ Period2 A - Period1 B    1.928 0.1039 Inf  18.552  &lt;.0001
+ Period2 A - Period2 B    2.249 0.0824 Inf  27.299  &lt;.0001
+ Period1 B - Period2 B    0.321 0.0729 Inf   4.401  0.0001
+
+Results are averaged over the levels of: Question 
+P value adjustment: tukey method for comparing a family of 4 estimates </code></pre>
+</div>
+</div>
+<p>Finalmente en la <a href="#fig-contint-ordinal">Figura&nbsp;5</a> mostramos los intervalos de confianza de las probabilidades de respuesta marginalizadas por periodo y tratamiento.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-contint-ordinal" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="ordinal_files/figure-html/fig-contint-ordinal-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figura&nbsp;5: Intervalos de confianza de la probabilidad de respuesta marginalizada.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Es interesante que la probabilidad de responder con valor 4 (De Acuerdo) no varía demasiado con el nivel de tratamiento y periodo. TODO: Poner enlace al gráfico de la exploración inicial en la que esto se puede constatar.</p>
 </section>
 </section>
 <section id="section" class="level1">
@@ -724,26 +1363,34 @@ i &amp;= 1, \dots n \; \; \; \; \; \; j = 1, \dots, J - 1
 </section>
 <section id="section-1" class="level1">
 <h1></h1>
-<section id="section-2" class="level2">
-<h2 class="anchored" data-anchor-id="section-2"></h2>
 </section>
-</section>
-<section id="section-3" class="level1">
+<section id="section-2" class="level1">
 <h1></h1>
 </section>
-<section id="section-4" class="level1 unnumbered">
+<section id="section-3" class="level1 unnumbered">
 
 
 </section>
+
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">Referencias</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
 <div id="ref-burkner" class="csl-entry" role="doc-biblioentry">
 Bürkner, Paul-Christian, y Matti Vuorre. 2019. <span>«Ordinal Regression Models in Psychology: A Tutorial»</span>. <em>Advances in Methods and Practices in Psychological Science</em> 2 (1): 77-101. <a href="https://doi.org/10.1177/2515245918823199">https://doi.org/10.1177/2515245918823199</a>.
 </div>
+<div id="ref-christensen2018CumulativeLM" class="csl-entry" role="doc-biblioentry">
+Christensen, Rune Haubo Bojesen. 2018. <span>«Cumulative Link Models for Ordinal Regression with the R Package ordinal»</span>. En.
+</div>
 <div id="ref-kruschke2018328" class="csl-entry" role="doc-biblioentry">
 Liddell, Torrin M., y John K. Kruschke. 2018. <span>«Analyzing ordinal data with metric models: What could possibly go wrong?»</span> <em>Journal of Experimental Social Psychology</em> 79: 328-48. https://doi.org/<a href="https://doi.org/10.1016/j.jesp.2018.08.009">https://doi.org/10.1016/j.jesp.2018.08.009</a>.
 </div>
-</div></section></div></main>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Notas</h2>
+
+<ol>
+<li id="fn1"><p>En el siguiente apartado se demuestra esta fórmula.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>El número de condición de Hessiano es una medida de la curvatura de una función en un punto. Si el número de condición de Hessiano es grande, la función es muy sensible a pequeñas perturbaciones y puede ser difícil de optimizar.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>El test de Wald es un contraste de hipótesis estadístico en el que se evalúa si el valor estimado es cero suponiendo que <span class="math inline">\(W = \left(\frac{\hat{\theta} - \theta_0}{se(\hat{\theta})}\right)^2 \sim \chi^{2}\)</span> .<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
