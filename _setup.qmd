@@ -23,6 +23,8 @@ library(tidyr)
 library(tidyverse)
 library(broom)
 library(emmeans)
+library(vcdExtra)
+library(gt)
 ```
 
 ```{r}

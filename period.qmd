@@ -1,0 +1,84 @@
+---
+bibliography: references.bib
+lang: es
+toc: true
+
+execute:
+  echo: false
+---
+
+{{< include _setup.qmd >}}
+
+# Discusión sobre la pregunta de investigación.
+
+La pregunta de investigación a la que se pretende responder con el diseño cruzado es si alguien no experto en accesibilidad pero que tiene interés en este campo, como es el caso de los estudiantes que participan en la actividad, es capaz de reconocer los errores en el subtitulado de un vídeo.
+
+Tenemos varias dificultades para responder a esta pregunta:
+
+* En primer lugar, no tenemos las respuestas "correctas" que habría dado un grupo de expertos. Es decir, no disponemos de una referencia o "gold standard" con el que comparar
+^[No podemos suponer que las contestaciones a todas las preguntas deberían estar en los extremos de la escala de Likert dependiendo de si el vídeo está bien o mal subtitulado. La calidad del subtitulado, además de ser una cuestión subjetiva, no es tal que justifique que todas las preguntas se deberían responder con valores extremos.].
+* En segundo lugar, las respuestas son cualitativas y, por lo tanto, subjetivas. Cada estudiante tiene una percepción diferente sobre la calidad del subtitulado y sobre lo que significa cada nivel de respuesta.
+* Por último, cada estudiante hace un interpretación diferente sobre lo que se le está preguntando.
+
+En esta sección se va a aventurar un procedimiento estadístico para tratar de responder a la pregunta de investigación.
+
+# Reflexión sobre el efecto periodo en el diseño cruzado.
+
+En un diseño cruzado la existencia de efecto periodo se considera negativa ya que el periodo influye en la variable de respuesta en vez de que, como sería deseable, la influencia se deba únicamente al nivel de tratamiento del factor.
+
+Con la regresión ordinal (TODO: poner enlace) hemos constatado que hay un efecto periodo significativo y no hemos sido capaces de eliminarlo añadiendo otros factores e interacciones. Este trabajo podría terminar aquí concluyendo que el efecto periodo imposibilita responder a la pregunta de investigación. Sin embargo, en esta sección, se va a tratar de justificar que el efecto periodo en este experimento puede ayudarnos a responder al objetivo del estudio.
+
+En ese diseño los estudiantes se enfrentan dos veces a una actividad de subtitulado. En el primer periodo un grupo verá el vídeo mal subtitulado y el otro grupo el vídeo bien subtitulado. En el segundo periodo cada grupo verá el otro vídeo. En este diseño parece inevitable que las respuestas al segundo vídeo estén condicionadas a lo que cada estudiante apreció en el primer vídeo. Por eso no puede sorprendernos que hayamos encontrado un efecto periodo. Por contra, en el primer visionado el estudiante no tiene con que comparar, excepto su experiencia previa y lo que haya aprendido en el curso. Así que podemos utilizar las respuestas de cada grupo en el primer periodo como el conocimiento que tienen sobre un subtitulado correcto y de forma recíproca sobre un subtitulado incorrecto. Las respuestas obtenidas en el segundo periodo las podemos utilizar como si se tratara de un conocimiento experto sobre subtitulado y, por lo tanto, nos permiten compararlo con los resultados del primer periodo
+^[Obsérvese que para hacer esto debemos hacer una comparación cruzada y no es necesario conjeturar qué grupo recibió cada vídeo en cada periodo.].
+
+¿Como se justifica que el segundo vídeo lo utilicemos como si de un conocimiento experto se tratara? Vamos a justificar la respuesta razonando sobre las dos situaciones que se pueden presentar:
+
+* En el primer periodo el estudiante vio el vídeo bien subtitulado. El estudiante no sabe qué vídeo está viendo en cada momento pero, cuando vea el segundo vídeo, enseguida será consciente de que tiene peor calidad de subtitulado que el primero. Por lo tanto, y dado el poco tiempo que habrá transcurrido entre el visionado de ambos vídeos (TODO: poner enlace al EDA dónde se analiza esto), podrá comparar el subtitulado del primero con el del segundo y valorar las diferencias. Por eso creemos que podemos utilizar las contestaciones al cuestionario del subtitulado del segundo vídeo como la referencia experta de vídeos mal subtitulados.
+* En el primer periodo el estudiante vio el vídeo mal subtitulado. Simplemente invertimos el razonamiento: Ahora en el segundo visionado verá el vídeo bien subtitulado y "aprenderá" lo que se espera en el vídeo con un subtitulado de calidad, reflejando sus contestaciones al segundo cuestionario este aprendizaje.
+
+Somos conscientes de que el razonamiento anterior es aventurado y no necesariamente correcto. Es evidente que hay variabilidad en las respuestas de los estudiantes en el segundo periodo, lo que indica que la percepción que tiene cada estudiante sobre la calidad del subtitulado y sobre lo que significa cada nivel de respuesta es personal y única. Pero no es menos cierto que también encontraríamos variabilidad si el cuestionario lo hubiera cumplimentado un grupo de expertos.
+
+Podemos comparar las tablas de contingencia del subtitulado cruzado y para cada pregunta evaluar si existen diferencias significativas. En caso de no encontrar estas diferencias podemos concluir que la valoración del subtitulado de los estudiantes es razonablemente bueno. Para comparar tablas de contingencia ordinales vamos a usar el test Cochran-Mantel-Haenszel tal y como se indica en @agresti_2018, pp. 43-46.
+
+Los resultados son los siguientes:
+
+```{r}
+#| label: tbl-cmh
+#| tbl-cap: p-values del test Cochran-Mantel-Haenszel para las tablas de contingencia por pregunta y nivel de subtítulo.
+#| fig-pos: h
+cmh.test <- df_clean %>%
+    group_by(Question, Treat) %>%
+    do(CMHtest(xtabs(~ Period + Response, data = ., drop.unused.levels = TRUE))$table["rmeans", "Prob"] %>% as_tibble()) %>%
+    rename("p-value" = value) %>%
+    ungroup()
+
+cmh.tbl <- cmh.test %>%
+    mutate(`p-value` = formatC(`p-value`, digits = 4, format = "f")) %>%
+    pivot_wider(id_cols = Question, names_from = Treat, names_prefix = "Treat", values_from = `p-value`)
+
+cmh.tbl %>%
+    gt() %>%
+    tab_style(
+        style = list(
+            cell_text(color = "red")
+        ),
+        locations = list(cells_body(
+            columns = c(TreatA),
+            rows = TreatA < 0.05
+        ), cells_body(
+            columns = c(TreatB),
+            rows = TreatB < 0.05
+        ))
+    )
+```
+
+Vemos que solo las tablas de contingencia cruzadas de las preguntas Q04 y Q06 en el nivel de tratamiento A tienen valores con significación estadística. Eso quiero decir que las respuestas de los estudiantes difieren considerablemente en este subtitulado; y podríamos considerar que en este nivel de tratamiento y en estas preguntas los estudiantes no han sido capaces de responder correctamente en el primer visionado.
+
+
+La pregunta 4 es sobre el contraste entre caracteres y fondo y la 6 sobre la literalidad. Podemos ver que el problema es que muchas de las respuestas con valor "Muy de acuerdo" del primer periodo se convierten en respuestas "De acuerdo" en el segundo periodo. Es decir, que los estudiantes no aprecian problemas en estas preguntas en el primer visionado. Pero si hubieran visto primero el otro vídeo, se hubieran mostrado algo más críticos con el subtitulado en estos apartados.
+
+```{r}
+df_clean %>% filter(Treat=="A" & Question %in% c("Q04", "Q06")) %>% xtabs(~ Period + Response + Treat + Question, data = ., drop.unused.levels = T) 
+```
+#
+#

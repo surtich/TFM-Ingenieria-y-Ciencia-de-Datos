@@ -38,20 +38,20 @@ update_geom_defaults("line", list(color = wine_red))
 
 El test de Likert es una escala ordinal. Tratar las respuestas a un test de Likert como si fueran cuantitativas como se hizo en el análisis de la varianza del apartado anterior no es correcto por las siguientes razones:
 
-* Los niveles de respuesta pueden no ser equidistantes: la distancia entre un par de opciones de respuesta puede no ser la misma para todos los pares de opciones de respuesta. Por ejemplo, la diferencia entre "Muy en desacuerdo" y "En desacuerdo" y la diferencia entre "De acuerdo" y "Muy de acuerdo" es de un nivel, pero psicológicamente puede ser percibida de forma diferente para cada sujeto.
+* Los niveles de respuesta no son necesariamente equidistantes: la distancia entre un par de opciones de respuesta puede no ser la misma para todos los pares de opciones de respuesta. Por ejemplo, la diferencia entre "Muy en desacuerdo" y "En desacuerdo" y la diferencia entre "De acuerdo" y "Muy de acuerdo" es de un nivel, pero psicológicamente puede ser percibida de forma diferente para cada sujeto.
 
-* La distribución de las respuestas ordinales puede ser no normal. En particular esto sucederá si hay frecuencias altas de respuesta en los extremos del cuestionario.
+* La distribución de las respuestas ordinales puede ser no normal. En particular esto sucederá si hay hay muchas respuestas en los extremos del cuestionario.
 
 * Las varianzas de las variables no observadas que subyacen a las variables ordinales observadas pueden diferir entre grupos, tratamientos, periodos, etc. 
 
-En @kruschke2018328 se han analizado los problemas que puede ocasionar tratar datos ordinales como si fueran cuantitativos constatando que se pueden presentar las siguientes situaciones:
+En @kruschke2018328 se han analizado los problemas potenciales de tratar datos ordinales como si fueran cuantitativos constatando que se pueden presentar las siguientes situaciones:
 
 * Se pueden encontrar diferencias significativas entre grupos cuando no las hay: Error tipo I.
 * Se pueden obviar diferencias cuando en realidad sí existen: Error tipo II.
 * Incluso se pueden invertir los efectos de un tratamiento.
 * También puede malinterpretarse la interacción entre factores.
 
-Todos estos problemas pueden ser tratados con la regresión ordinal.
+La regresión ordinal pretende dar respuesta a todos estos problemas.
 
 ## Variantes de la regresión ordinal.
 
@@ -61,7 +61,7 @@ Según @burkner hay tres clases de regresión ordinal:
 * Regresión ordinal secuencial.
 * Regresión ordinal adyacente.
 
-Nos centraremos en la primera ya que es el más habitual y adecuada para nuestro caso.
+Nos centraremos en la primera ya que es la más habitual y adecuada para nuestro caso.
 
 ```{r}
 #| freeze: true
@@ -139,7 +139,7 @@ $$\mathrm{Pr}(\epsilon \leq z) = F(z)$$
 
 Y podremos calcular la distribución de probabilidad acumulada de $Y$:
 
-$$\mathrm{Pr}(Y \leq k \mid \eta) = \mathrm{Pr}(\tilde{Y} \leq \tau_k \mid \eta) = \mathrm{Pr}(\eta + \epsilon \leq \tau k) = \mathrm{Pr}(\epsilon \leq \tau_k - \eta) = F(\tau_k - \eta)$$
+$$\mathrm{Pr}(Y \leq k \mid \eta) = \mathrm{Pr}(\tilde{Y} \leq \tau_k \mid \eta) = \mathrm{Pr}(\eta + \epsilon \leq \tau_k) = \mathrm{Pr}(\epsilon \leq \tau_k - \eta) = F(\tau_k - \eta)$$
 
 Por lo que asumiendo la normalidad de los errores:
 
@@ -147,7 +147,7 @@ $$\mathrm{Pr}(Y = k) = \Phi(\tau_k - (\beta_1 x_1 + \beta_2 x_2)) - \Phi(\tau_{k
 
 Donde hay que estimar los umbrales y los coeficientes de regresión.
 
-Otra popular elección es suponer que la función acumulada se comporta como una logística. En ese caso, la interpretación de los coeficientes varía y se asemeja a la de la regresión logística. Se parte del supuesto de que el $logit$ de la función de probabilidad es lineal:
+Otra popular elección, que usaremos en este trabajo, es suponer que la función acumulada se comporta como una logística. En ese caso, la interpretación de los coeficientes varía y se asemeja a la de la regresión logística. Se parte del supuesto de que el $logit$ de la función de probabilidad es lineal:
 
 $$logit (P(Y \le k)) = \tau_{k} - \eta = \tau_{k} - (\beta_1 x_1 + \beta_2 x_2)$$
 
@@ -256,7 +256,7 @@ donde $\tau_k$ es el umbral de la categoría $k$ y son $K-1$ = 4 interceptores.
 Los coeficientes de los efectos fijos, $\beta_1$, $\beta_2$ y $\beta_3$, son independientes, por lo que cada $\beta_i$ tiene el mismo efecto en los $K-1$ logits acumulados.
 El efecto aleatorio, Subject, se presupone que sigue una distribución normal: $u(\text{Subject}_i) \sim N(0, \sigma_u^2)$.
 
-En esencia lo que estamos haciendo es un modelo en cadena de regresiones logísticas donde la respuesta binaría se corresponde con "menor o igual que cierto nivel frente a mayor que ese nivel".
+En esencia lo que estamos haciendo es un modelo en cadena de regresiones logísticas donde la respuesta binaria se corresponde con "menor o igual que cierto nivel frente a mayor que ese nivel".
 
 En el caso particular de $K$ = 5, los umbrales $\tau_k$ se interpretan como:
 
@@ -315,10 +315,10 @@ Por lo tanto los $odds$ serían:
 
 $$
 \begin{aligned}
-\frac{P(Y \le 1 | x_2 = B)}{P(Y \gt 1 | x_2 = B)} & = & exp(`r intercept.1.2.coef`)/exp(`r treatB.coef`) \\
-\frac{P(Y \le 1 | x_2 = A)}{P(Y \gt 1 | x_2 = A)} & = & exp(`r intercept.1.2.coef`) \\
-\frac{P(Y \le 2 | x_2 = B)}{P(Y \gt 2 | x_2 = B)} & = & exp(`r intercept.2.3.coef`)/exp(`r treatB.coef`) \\
-\frac{P(Y \le 2 | x_2 = A)}{P(Y \gt 2 | x_2 = A)} & = & exp(`r intercept.2.3.coef`)
+\frac{P(Y \le 1 \mid x_2 = B)}{P(Y > 1 \mid x_2 = B)} & = & exp(`r intercept.1.2.coef`)/exp(`r treatB.coef`) \\
+\frac{P(Y \le 1 \mid x_2 = A)}{P(Y > 1 \mid x_2 = A)} & = & exp(`r intercept.1.2.coef`) \\
+\frac{P(Y \le 2 \mid x_2 = B)}{P(Y > 2 \mid x_2 = B)} & = & exp(`r intercept.2.3.coef`)/exp(`r treatB.coef`) \\
+\frac{P(Y \le 2 \mid x_2 = A)}{P(Y > 2 \mid x_2 = A)} & = & exp(`r intercept.2.3.coef`)
 \end{aligned}
 $$
 
@@ -326,8 +326,8 @@ Y los $OR$:
 
 $$
 \begin{aligned}
-\frac{P(Y \le 1 | x_2=B)}{P(Y \gt 1 | x_2=B)} / \frac{P(Y \le 1 | x_2=A)}{P(Y \gt 1 | x_2=A)} & = & 1/exp(`r treatB.coef`) & = & `r round(1/exp(coef(clm_likert_treat)["TreatB"]), 2)` \\
-\frac{P(Y \le 2 | x_2=B)}{P(Y \gt 2 | x_2=B)} / \frac{P(Y \le 2 | x_2=A)}{P(Y \gt 2 | x_2=A)} & = & 1/exp(`r treatB.coef`) & = & `r round(1/exp(coef(clm_likert_treat)["TreatB"]), 2)` \\
+\frac{P(Y \le 1 | x_2=B)}{P(Y > 1 | x_2=B)} / \frac{P(Y \le 1 | x_2=A)}{P(Y > 1 | x_2=A)} & = & 1/exp(`r treatB.coef`) & = & `r round(1/exp(coef(clm_likert_treat)["TreatB"]), 2)` \\
+\frac{P(Y \le 2 | x_2=B)}{P(Y > 2 | x_2=B)} / \frac{P(Y \le 2 | x_2=A)}{P(Y > 2 | x_2=A)} & = & 1/exp(`r treatB.coef`) & = & `r round(1/exp(coef(clm_likert_treat)["TreatB"]), 2)` \\
 \end{aligned}
 $$
 

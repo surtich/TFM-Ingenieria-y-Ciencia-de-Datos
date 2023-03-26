@@ -169,18 +169,18 @@ div.csl-indent {
 <h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
 <p>El test de Likert es una escala ordinal. Tratar las respuestas a un test de Likert como si fueran cuantitativas como se hizo en el análisis de la varianza del apartado anterior no es correcto por las siguientes razones:</p>
 <ul>
-<li><p>Los niveles de respuesta pueden no ser equidistantes: la distancia entre un par de opciones de respuesta puede no ser la misma para todos los pares de opciones de respuesta. Por ejemplo, la diferencia entre “Muy en desacuerdo” y “En desacuerdo” y la diferencia entre “De acuerdo” y “Muy de acuerdo” es de un nivel, pero psicológicamente puede ser percibida de forma diferente para cada sujeto.</p></li>
-<li><p>La distribución de las respuestas ordinales puede ser no normal. En particular esto sucederá si hay frecuencias altas de respuesta en los extremos del cuestionario.</p></li>
+<li><p>Los niveles de respuesta no son necesariamente equidistantes: la distancia entre un par de opciones de respuesta puede no ser la misma para todos los pares de opciones de respuesta. Por ejemplo, la diferencia entre “Muy en desacuerdo” y “En desacuerdo” y la diferencia entre “De acuerdo” y “Muy de acuerdo” es de un nivel, pero psicológicamente puede ser percibida de forma diferente para cada sujeto.</p></li>
+<li><p>La distribución de las respuestas ordinales puede ser no normal. En particular esto sucederá si hay hay muchas respuestas en los extremos del cuestionario.</p></li>
 <li><p>Las varianzas de las variables no observadas que subyacen a las variables ordinales observadas pueden diferir entre grupos, tratamientos, periodos, etc.</p></li>
 </ul>
-<p>En <span class="citation" data-cites="kruschke2018328">Liddell y Kruschke (<a href="#ref-kruschke2018328" role="doc-biblioref">2018</a>)</span> se han analizado los problemas que puede ocasionar tratar datos ordinales como si fueran cuantitativos constatando que se pueden presentar las siguientes situaciones:</p>
+<p>En <span class="citation" data-cites="kruschke2018328">Liddell y Kruschke (<a href="#ref-kruschke2018328" role="doc-biblioref">2018</a>)</span> se han analizado los problemas potenciales de tratar datos ordinales como si fueran cuantitativos constatando que se pueden presentar las siguientes situaciones:</p>
 <ul>
 <li>Se pueden encontrar diferencias significativas entre grupos cuando no las hay: Error tipo I.</li>
 <li>Se pueden obviar diferencias cuando en realidad sí existen: Error tipo II.</li>
 <li>Incluso se pueden invertir los efectos de un tratamiento.</li>
 <li>También puede malinterpretarse la interacción entre factores.</li>
 </ul>
-<p>Todos estos problemas pueden ser tratados con la regresión ordinal.</p>
+<p>La regresión ordinal pretende dar respuesta a todos estos problemas.</p>
 </section>
 <section id="variantes-de-la-regresión-ordinal." class="level2">
 <h2 class="anchored" data-anchor-id="variantes-de-la-regresión-ordinal.">Variantes de la regresión ordinal.</h2>
@@ -190,7 +190,7 @@ div.csl-indent {
 <li>Regresión ordinal secuencial.</li>
 <li>Regresión ordinal adyacente.</li>
 </ul>
-<p>Nos centraremos en la primera ya que es el más habitual y adecuada para nuestro caso.</p>
+<p>Nos centraremos en la primera ya que es la más habitual y adecuada para nuestro caso.</p>
 <div class="cell" data-freeze="true">
 
 </div>
@@ -204,11 +204,11 @@ div.csl-indent {
 <p>Entonces la función de probabilidad acumulada de los errores tendrá la misma forma que la de <span class="math inline">\(\tilde{Y}\)</span>:</p>
 <p><span class="math display">\[\mathrm{Pr}(\epsilon \leq z) = F(z)\]</span></p>
 <p>Y podremos calcular la distribución de probabilidad acumulada de <span class="math inline">\(Y\)</span>:</p>
-<p><span class="math display">\[\mathrm{Pr}(Y \leq k \mid \eta) = \mathrm{Pr}(\tilde{Y} \leq \tau_k \mid \eta) = \mathrm{Pr}(\eta + \epsilon \leq \tau k) = \mathrm{Pr}(\epsilon \leq \tau_k - \eta) = F(\tau_k - \eta)\]</span></p>
+<p><span class="math display">\[\mathrm{Pr}(Y \leq k \mid \eta) = \mathrm{Pr}(\tilde{Y} \leq \tau_k \mid \eta) = \mathrm{Pr}(\eta + \epsilon \leq \tau_k) = \mathrm{Pr}(\epsilon \leq \tau_k - \eta) = F(\tau_k - \eta)\]</span></p>
 <p>Por lo que asumiendo la normalidad de los errores:</p>
 <p><span class="math display">\[\mathrm{Pr}(Y = k) = \Phi(\tau_k - (\beta_1 x_1 + \beta_2 x_2)) - \Phi(\tau_{k - 1} - (\beta_1 x_1 + \beta_2 x_2))\]</span></p>
 <p>Donde hay que estimar los umbrales y los coeficientes de regresión.</p>
-<p>Otra popular elección es suponer que la función acumulada se comporta como una logística. En ese caso, la interpretación de los coeficientes varía y se asemeja a la de la regresión logística. Se parte del supuesto de que el <span class="math inline">\(logit\)</span> de la función de probabilidad es lineal:</p>
+<p>Otra popular elección, que usaremos en este trabajo, es suponer que la función acumulada se comporta como una logística. En ese caso, la interpretación de los coeficientes varía y se asemeja a la de la regresión logística. Se parte del supuesto de que el <span class="math inline">\(logit\)</span> de la función de probabilidad es lineal:</p>
 <p><span class="math display">\[logit (P(Y \le k)) = \tau_{k} - \eta = \tau_{k} - (\beta_1 x_1 + \beta_2 x_2)\]</span></p>
 <p>Se puede demostrar que, por ejemplo:</p>
 <p><span class="math display">\[\frac{\frac{\mathrm{Pr}(Y \leq k \mid \eta)}{\mathrm{Pr}(Y &gt; k \mid \eta)}}{\frac{\mathrm{Pr}(Y \leq k+1 \mid \eta)}{\mathrm{Pr}(Y &gt; k+1 \mid \eta)}} = \exp(\tau_{k} - \tau_{k+1})\]</span></p>
@@ -246,12 +246,12 @@ $ Response &lt;ord&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="qzdbmadztj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="rlvbdlttmy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-:where(#qzdbmadztj) .gt_table {
+:where(#rlvbdlttmy) .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -276,7 +276,7 @@ $ Response &lt;ord&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   border-left-color: #D3D3D3;
 }
 
-:where(#qzdbmadztj) .gt_heading {
+:where(#rlvbdlttmy) .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -288,12 +288,12 @@ $ Response &lt;ord&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   border-right-color: #D3D3D3;
 }
 
-:where(#qzdbmadztj) .gt_caption {
+:where(#rlvbdlttmy) .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-:where(#qzdbmadztj) .gt_title {
+:where(#rlvbdlttmy) .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -305,7 +305,7 @@ $ Response &lt;ord&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   border-bottom-width: 0;
 }
 
-:where(#qzdbmadztj) .gt_subtitle {
+:where(#rlvbdlttmy) .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -317,13 +317,13 @@ $ Response &lt;ord&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   border-top-width: 0;
 }
 
-:where(#qzdbmadztj) .gt_bottom_border {
+:where(#rlvbdlttmy) .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#qzdbmadztj) .gt_col_headings {
+:where(#rlvbdlttmy) .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -338,7 +338,7 @@ $ Response &lt;ord&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   border-right-color: #D3D3D3;
 }
 
-:where(#qzdbmadztj) .gt_col_heading {
+:where(#rlvbdlttmy) .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -358,7 +358,7 @@ $ Response &lt;ord&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   overflow-x: hidden;
 }
 
-:where(#qzdbmadztj) .gt_column_spanner_outer {
+:where(#rlvbdlttmy) .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -370,15 +370,15 @@ $ Response &lt;ord&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   padding-right: 4px;
 }
 
-:where(#qzdbmadztj) .gt_column_spanner_outer:first-child {
+:where(#rlvbdlttmy) .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#qzdbmadztj) .gt_column_spanner_outer:last-child {
+:where(#rlvbdlttmy) .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#qzdbmadztj) .gt_column_spanner {
+:where(#rlvbdlttmy) .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -390,7 +390,7 @@ $ Response &lt;ord&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   width: 100%;
 }
 
-:where(#qzdbmadztj) .gt_group_heading {
+:where(#rlvbdlttmy) .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -416,7 +416,7 @@ $ Response &lt;ord&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   text-align: left;
 }
 
-:where(#qzdbmadztj) .gt_empty_group_heading {
+:where(#rlvbdlttmy) .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -431,15 +431,15 @@ $ Response &lt;ord&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   vertical-align: middle;
 }
 
-:where(#qzdbmadztj) .gt_from_md > :first-child {
+:where(#rlvbdlttmy) .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#qzdbmadztj) .gt_from_md > :last-child {
+:where(#rlvbdlttmy) .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#qzdbmadztj) .gt_row {
+:where(#rlvbdlttmy) .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -458,7 +458,7 @@ $ Response &lt;ord&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   overflow-x: hidden;
 }
 
-:where(#qzdbmadztj) .gt_stub {
+:where(#rlvbdlttmy) .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -471,7 +471,7 @@ $ Response &lt;ord&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   padding-right: 5px;
 }
 
-:where(#qzdbmadztj) .gt_stub_row_group {
+:where(#rlvbdlttmy) .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -485,11 +485,11 @@ $ Response &lt;ord&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   vertical-align: top;
 }
 
-:where(#qzdbmadztj) .gt_row_group_first td {
+:where(#rlvbdlttmy) .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#qzdbmadztj) .gt_summary_row {
+:where(#rlvbdlttmy) .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -499,16 +499,16 @@ $ Response &lt;ord&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   padding-right: 5px;
 }
 
-:where(#qzdbmadztj) .gt_first_summary_row {
+:where(#rlvbdlttmy) .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-:where(#qzdbmadztj) .gt_first_summary_row.thick {
+:where(#rlvbdlttmy) .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#qzdbmadztj) .gt_last_summary_row {
+:where(#rlvbdlttmy) .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -518,7 +518,7 @@ $ Response &lt;ord&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   border-bottom-color: #D3D3D3;
 }
 
-:where(#qzdbmadztj) .gt_grand_summary_row {
+:where(#rlvbdlttmy) .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -528,7 +528,7 @@ $ Response &lt;ord&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   padding-right: 5px;
 }
 
-:where(#qzdbmadztj) .gt_first_grand_summary_row {
+:where(#rlvbdlttmy) .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -538,11 +538,11 @@ $ Response &lt;ord&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   border-top-color: #D3D3D3;
 }
 
-:where(#qzdbmadztj) .gt_striped {
+:where(#rlvbdlttmy) .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#qzdbmadztj) .gt_table_body {
+:where(#rlvbdlttmy) .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -551,7 +551,7 @@ $ Response &lt;ord&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   border-bottom-color: #D3D3D3;
 }
 
-:where(#qzdbmadztj) .gt_footnotes {
+:where(#rlvbdlttmy) .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -565,7 +565,7 @@ $ Response &lt;ord&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   border-right-color: #D3D3D3;
 }
 
-:where(#qzdbmadztj) .gt_footnote {
+:where(#rlvbdlttmy) .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -574,7 +574,7 @@ $ Response &lt;ord&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   padding-right: 5px;
 }
 
-:where(#qzdbmadztj) .gt_sourcenotes {
+:where(#rlvbdlttmy) .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -588,7 +588,7 @@ $ Response &lt;ord&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   border-right-color: #D3D3D3;
 }
 
-:where(#qzdbmadztj) .gt_sourcenote {
+:where(#rlvbdlttmy) .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -596,64 +596,64 @@ $ Response &lt;ord&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
   padding-right: 5px;
 }
 
-:where(#qzdbmadztj) .gt_left {
+:where(#rlvbdlttmy) .gt_left {
   text-align: left;
 }
 
-:where(#qzdbmadztj) .gt_center {
+:where(#rlvbdlttmy) .gt_center {
   text-align: center;
 }
 
-:where(#qzdbmadztj) .gt_right {
+:where(#rlvbdlttmy) .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#qzdbmadztj) .gt_font_normal {
+:where(#rlvbdlttmy) .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#qzdbmadztj) .gt_font_bold {
+:where(#rlvbdlttmy) .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#qzdbmadztj) .gt_font_italic {
+:where(#rlvbdlttmy) .gt_font_italic {
   font-style: italic;
 }
 
-:where(#qzdbmadztj) .gt_super {
+:where(#rlvbdlttmy) .gt_super {
   font-size: 65%;
 }
 
-:where(#qzdbmadztj) .gt_footnote_marks {
+:where(#rlvbdlttmy) .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-:where(#qzdbmadztj) .gt_asterisk {
+:where(#rlvbdlttmy) .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#qzdbmadztj) .gt_indent_1 {
+:where(#rlvbdlttmy) .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#qzdbmadztj) .gt_indent_2 {
+:where(#rlvbdlttmy) .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#qzdbmadztj) .gt_indent_3 {
+:where(#rlvbdlttmy) .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#qzdbmadztj) .gt_indent_4 {
+:where(#rlvbdlttmy) .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#qzdbmadztj) .gt_indent_5 {
+:where(#rlvbdlttmy) .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -735,7 +735,7 @@ i &amp;= 1, \dots n \; \; \; \; \; \; k = 1, \dots, K - 1
 \end{aligned}
 \]</span></p>
 <p>donde <span class="math inline">\(\tau_k\)</span> es el umbral de la categoría <span class="math inline">\(k\)</span> y son <span class="math inline">\(K-1\)</span> = 4 interceptores. Los coeficientes de los efectos fijos, <span class="math inline">\(\beta_1\)</span>, <span class="math inline">\(\beta_2\)</span> y <span class="math inline">\(\beta_3\)</span>, son independientes, por lo que cada <span class="math inline">\(\beta_i\)</span> tiene el mismo efecto en los <span class="math inline">\(K-1\)</span> logits acumulados. El efecto aleatorio, Subject, se presupone que sigue una distribución normal: <span class="math inline">\(u(\text{Subject}_i) \sim N(0, \sigma_u^2)\)</span>.</p>
-<p>En esencia lo que estamos haciendo es un modelo en cadena de regresiones logísticas donde la respuesta binaría se corresponde con “menor o igual que cierto nivel frente a mayor que ese nivel”.</p>
+<p>En esencia lo que estamos haciendo es un modelo en cadena de regresiones logísticas donde la respuesta binaria se corresponde con “menor o igual que cierto nivel frente a mayor que ese nivel”.</p>
 <p>En el caso particular de <span class="math inline">\(K\)</span> = 5, los umbrales <span class="math inline">\(\tau_k\)</span> se interpretan como:</p>
 <ul>
 <li><span class="math inline">\(k\)</span> = 1: log-odds del nivel = 1 vs.&nbsp;2-5</li>
@@ -791,17 +791,17 @@ logit (P(Y \le 2)) &amp; = &amp; -2.45 - (-1.72 x_2)
 <p>Por lo tanto los <span class="math inline">\(odds\)</span> serían:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\frac{P(Y \le 1 | x_2 = B)}{P(Y \gt 1 | x_2 = B)} &amp; = &amp; exp(-3.97)/exp(-1.72) \\
-\frac{P(Y \le 1 | x_2 = A)}{P(Y \gt 1 | x_2 = A)} &amp; = &amp; exp(-3.97) \\
-\frac{P(Y \le 2 | x_2 = B)}{P(Y \gt 2 | x_2 = B)} &amp; = &amp; exp(-2.45)/exp(-1.72) \\
-\frac{P(Y \le 2 | x_2 = A)}{P(Y \gt 2 | x_2 = A)} &amp; = &amp; exp(-2.45)
+\frac{P(Y \le 1 \mid x_2 = B)}{P(Y &gt; 1 \mid x_2 = B)} &amp; = &amp; exp(-3.97)/exp(-1.72) \\
+\frac{P(Y \le 1 \mid x_2 = A)}{P(Y &gt; 1 \mid x_2 = A)} &amp; = &amp; exp(-3.97) \\
+\frac{P(Y \le 2 \mid x_2 = B)}{P(Y &gt; 2 \mid x_2 = B)} &amp; = &amp; exp(-2.45)/exp(-1.72) \\
+\frac{P(Y \le 2 \mid x_2 = A)}{P(Y &gt; 2 \mid x_2 = A)} &amp; = &amp; exp(-2.45)
 \end{aligned}
 \]</span></p>
 <p>Y los <span class="math inline">\(OR\)</span>:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\frac{P(Y \le 1 | x_2=B)}{P(Y \gt 1 | x_2=B)} / \frac{P(Y \le 1 | x_2=A)}{P(Y \gt 1 | x_2=A)} &amp; = &amp; 1/exp(-1.72) &amp; = &amp; 5.59 \\
-\frac{P(Y \le 2 | x_2=B)}{P(Y \gt 2 | x_2=B)} / \frac{P(Y \le 2 | x_2=A)}{P(Y \gt 2 | x_2=A)} &amp; = &amp; 1/exp(-1.72) &amp; = &amp; 5.59 \\
+\frac{P(Y \le 1 | x_2=B)}{P(Y &gt; 1 | x_2=B)} / \frac{P(Y \le 1 | x_2=A)}{P(Y &gt; 1 | x_2=A)} &amp; = &amp; 1/exp(-1.72) &amp; = &amp; 5.59 \\
+\frac{P(Y \le 2 | x_2=B)}{P(Y &gt; 2 | x_2=B)} / \frac{P(Y \le 2 | x_2=A)}{P(Y &gt; 2 | x_2=A)} &amp; = &amp; 1/exp(-1.72) &amp; = &amp; 5.59 \\
 \end{aligned}
 \]</span></p>
 <p>Se comprueba que el <span class="math inline">\(OR\)</span> es equivalente en todos los niveles de respuesta al cuestionario. Esta es una de las suposiciones de la regresión ordinal acumulativa. El <span class="math inline">\(odds\)</span> de respuesta al cuestionario entre los niveles inferiores y superiores a uno dado, <span class="math inline">\(k\)</span>, es 5.59 veces en el subtitulado <span class="math inline">\(B\)</span> que en el <span class="math inline">\(A\)</span>. Esto indica que el subtitulado <span class="math inline">\(B\)</span> es percibido por los estudiantes como de peor calidad que el subtitulado <span class="math inline">\(A\)</span>.</p>
@@ -1355,7 +1355,7 @@ P value adjustment: tukey method for comparing a family of 4 estimates </code></
 </div>
 </div>
 </div>
-<p>Es interesante que la probabilidad de responder con valor 4 (De Acuerdo) no varía demasiado con el nivel de tratamiento y periodo. TODO: Poner enlace al gráfico de la exploración inicial en la que esto se puede constatar.</p>
+<p>Es interesante comprobar que la probabilidad de responder con valor 4 (De Acuerdo) no varía demasiado con el nivel de tratamiento y periodo. TODO: Poner enlace al gráfico de la exploración inicial en la que esto se puede constatar.</p>
 </section>
 </section>
 <section id="section" class="level1">

@@ -6,3 +6,11 @@
   quarto-pub:
     - id: 8009bb9d-d2e8-4765-9351-ed93d593a26c
       url: 'https://quartopub.com/sites/surtich/crossover-anova'
+- source: ordinal.qmd
+  quarto-pub:
+    - id: ccdf42de-917c-4203-9fda-1961b3a28d9a
+      url: 'https://quartopub.com/sites/surtich/ordinal'
+- source: period.qmd
+  quarto-pub:
+    - id: eaa21a2b-01a4-4b17-b21f-384ac0ee8dfb
+      url: 'https://quartopub.com/sites/surtich/period'
