@@ -1,0 +1,149 @@
+{{< include _setup.qmd >}}
+
+# Métodos.
+
+## Fuente de datos.
+
+Los datos proceden de la edición de 2022 del curso MOOC Materiales digitales accesibles de la UNED. Concretamente a los estudiantes matriculados se les propuso que realizaran una actividad voluntaria consistente en evaluar la calidad del subtitulado de dos vídeos. Los vídeos eran idénticos y se diferenciaban únicamente en la calidad del subtitulado. Los subtítulos de uno de los vídeos se realizaron [ver @jperez1; @jperez2] siguiendo las guía Web Content Accessibility Guidelines 2.1 (WCAG 2.1) del W3C (World Wide Web Consortium). El otro vídeo tenía un subtitulado similar pero se introdujeron pequeñas deficiencias inapreciables para alguien que carezca de conocimientos sobre accesibilidad. Los estudiantes fueron clasificados en dos grupos. Al primer grupo se le presentó primero el vídeo correctamente subtitulado y luego el otro. El segundo grupo realizó la actividad cruzada: primero evaluó el vídeo mal subtitulado y luego el bien subtitulado. Tras ver cada uno de los vídeos, los estudiantes tuvieron la oportunidad de valorar la calidad del subtitulado realizando un test en escala de Likert de 18 items y 5 niveles cada item ^[Para una descripción sobre cómo se debe realizar una escala de Likert consultar @likert1.]. Los 18 items de Likert pretenden asegurar los criterios de la norma UNE 153010 [ver @aenor2012].
+
+En la @tbl-likert-levels se muestran los 5 niveles de cada uno de los items de la escala de Likert:
+
+\clearpage
+
+```{r}
+#| label: tbl-likert-levels
+#| tbl-cap: Niveles de los items de la escala de Likert.
+data.frame(`levels` = response_labels) %>%
+    gt() %>%
+    as_raw_html()
+```
+
+En la @tbl-likert-scale se muestran los 18 items de la escala de Likert que se propuso a los alumnos para que evaluaran cada uno de los vídeos:
+
+
+```{r}
+#| label: tbl-likert-scale
+#| tbl-cap: Items de la escala de Likert.
+tibble(Item = levels(df_all$Question), Texto = levels(df_all$Question_l)) %>%
+    arrange(Item) %>%
+    gt()
+```
+
+Los datos personales de los estudiantes se suministraron anonimizados para evitar ninguna referencia a su identidad. Del estudio se han eliminado a aquellos estudiantes que, a pesar de haber realizado la actividad, no dieron su autorización para que sus datos se utilizaran en un estudio científicos.
+
+\clearpage
+Se dispuso de los siguientes ficheros `csv`:
+
+* El fichero `grade` contiene el identificador de estudiante y el grupo al que pertenece (campo `cohort`).
+* El fichero `abo` es la información socioeconómica que voluntariamente ha aportado el estudiante: sexo, año nacimiento, nivel de estudios, ocupación .
+* El fichero `conoc` contiene el test de evaluación inicial de conocimientos del estudiante.
+* El fichero `exp` es la evaluación del curso realizada por cada estudiante.
+* El fichero `acc` contiene la información sobre accesibilidad que utiliza el estudiante.
+* Los ficheros `test1` y `test2` son las repuestas al test de Likert sobre la calidad del subtitulado del primer y del segundo vídeo realizado por cada grupo respectivamente.
+
+## Características del diseño del experimento. {#sec-diseno}
+
+El diseño del experimento es completamente aleatorizado, de respuesta ordinal, cruzado $AB/BA$ y doble ciego. Es decir que la asignación de los estudiantes a cada grupo fue aleatoria; cada grupo vio los vídeos en orden inverso; los estudiantes no conocían a priori qué vídeo estaban viendo en cada momento y tampoco se disponía de esta información en el momento de realizar el análisis estadístico de los datos.
+
+Un diseño completamente aleatorizado [@lawson2015, pp. 18] "garantiza la validez del experimento contra sesgos causados por otras variables ocultas. Cuando las unidades experimentales se asignan aleatoriamente a los niveles de factor de tratamiento, se puede realizar una prueba exacta de la hipótesis de que el efecto del tratamiento es cero utilizando una prueba de aleatorización".
+
+Siguiendo a @senn2022, para que el ensayo sea de tipo cruzado no sería suficiente intercambiar las secuencias sino que debe ser objeto del ensayo el estudio de las diferencias entre los tratamientos individuales que componen las secuencias. Los principales problemas d eun diseño cruzado son el abandono, `drop-out`, de alguno de los participantes y la interacción entre el tratamiento y el periodo o `carry-over`. Además el análisis estadístico es más complicado y particularmente cuando la respuesta es ordinal y hay más de dos tratamientos. En la misma línea, @lui2016 afirma que "el objetivo principal de un diseño cruzado es estudiar la diferencia entre tratamientos individuales (en lugar de la diferencia entre secuencias de tratamiento). Debido a que cada paciente sirve como su propio control, el diseño cruzado es una alternativa útil al diseño de grupos paralelos para aumentar la potencia".
+
+Las respuestas a un test de Likert se realizan en escala ordinal. No es adecuado realizar operaciones aritméticas para calcular medias con este tipo de datos. Pero ellos los test estadísticos para analizar el efecto de un tratamiento con respuesta continua como son $ANOVA$ y $t$-test no son adecuados con datos ordinales. Según la investigación de @kruschke20182018328 ajustar datos ordinales con modelos cuantitativos puede producir los siguientes problemas:
+
+* Se pueden encontrar diferencias significativas entre grupos cuando no las hay: Error tipo I.
+* Se pueden obviar diferencias cuando en realidad sí existen: Error tipo II.
+* Incluso se pueden invertir los efectos de un tratamiento.
+* También puede malinterpretarse la interacción entre factores.
+
+Una opción es tratar los datos ordinales como si se tratara de datos categóricos y utilizar técnicas no paramétricas como el test de $Kruskal-Wallis$. El problema de este tipo de técnicas es que ignoran que los datos tienen una escala y, en el caso particular del diseño que nos ocupa se trata de datos longitudinales, es decir, que se toman varias medidas de cada sujeto y, por lo tanto, los datos no son independientes. @agresti2010 expone un catálogo de técnicas para analizar datos categóricos y ordinales.
+
+## Objetivo.
+
+El objetivo del estudio es responder a la pregunta de investigación:
+
+Son los estudiantes de un curso de accesibilidad capaces de encontrar los errores en el subtitulado de un vídeo. Para ello se propondrán diversos test y modelos estadísticos que tengan en consideración las características que se han comentado en el diseño del experimento (ver @sec-diseno). Particularmente se tendrá en cuenta que se trata de un diseño cruzado con variable respuesta ordinal y variables explicativas longitudinales.
+
+## Preprocesamiento.
+
+Partiendo de los ficheros suministrados (ver @sec-diseno), se realiza el siguiente preprocesado (para ver el código ejecutado consultar @sec-preprocess):
+
+1. Se lee el fichero de perfil del usuario. El número de fila con el que el usuario aparece en el fichero se utilizará como identificador del usuario para mantener la trazabilidad y comprobar que las transformaciones realizadas son correctas.
+
+2. Se eliminan del estudio a los estudiantes que aún habiendo realizado la actividad, no han dado su consentimiento para participar en el estudio.
+
+3. El valor del campo `cohort` se sustituye por una letra $A$ o $B$ en función del grupo asignado. En este momento se desconoce qué vídeo vio primero cada grupo.
+
+4. Se lee el fichero `profile` y se añade a los usuarios información sobre el sexo, el año de nacimiento y el novel de estudios.
+
+5. Se lee el fichero `conoc` y se calcula cuántas preguntas acertó cada usuario en el test de evaluación de conocimientos previos. Se añade esta información al perfil del usuario.
+
+6. Se leen los ficheros de test y se procesan. Se utiliza el nombre del fichero (`test1` o `test2`) para saber de qué vídeo se está respondiendo el test
+^[Se reitera que en este momento se desconoce si el vídeo es el correctamente  subtitulado o el otro. La única información que se almacena es si se está respondiendo al vídeo que se voy primero o al que se vio después.].
+
+7. Se seleccionan las preguntas que contienen las respuestas y se renombran para que sea más fácil saber de qué pregunta se trata
+^[En los fichero suministrados pla respuesta a cada pregunta ocupa varios campos y se selecciona en cada pregunta el que contiene el valor de la respuesta y se convierte a numérico.]. Se convierte el campo `LastTry`, que contiene la fecha y hora de realización del test, a formato fecha y hora.
+
+8. Se realizan algunas comprobaciones como la ausencia de valores nulos en la variables más relevantes o que no existan inconsistencias ni errores de procesado.
+
+9. Se eliminan los comentarios y se graban en fichero aparte para que no revelen información que podría descubrir el tipo de subtitulado que piensa que está evaluando el estudiante.
+
+10. Se almacenan los resultados de los test preprocesado en un fichero `csv`.
+
+\clearpage
+## Variables relevantes.
+
+En la @tbl-variables se describen las características más relevantes de las principales variables que se utilizarán en en modelado y en el análisis estadístico.
+\footnotesize
+
+```{r}
+#| label: tbl-variables
+#| tbl-cap: Descripción de las variables más importantes
+tibble(
+    Nombre = c("Response", "Treat", "Period", "Seq", "Subject", "Question", "Cluster"),
+    Desc = c(
+        "Respuesta a las preguntas del test.", "Subtítulos",
+        "Periodo", "Secuencia de aplicación de los tratamientos.", "Identificación del estudiante", "Número de la pregunta", "Grupo de la pregunta"
+    ),
+    Tipo = c("Factor ordenado", "Factor", "Factor", "Factor", "Factor", "Factor", "Factor"),
+    Valores = c("De 0 a 5", "A o B", "1 ó 2", "AB o BA", "Numérico", "Q01, Q02, ..., Q18", "1, 2, ó 3")
+) %>%
+    gt() %>%
+    gt_theme_guardian() %>%
+    tab_footnote(
+        footnote = "Se ha hecho una rotación sobre los valores originales. 0 = No sé, 1 = Muy en desacuerdo, ..., 5 Muy de acuerdo.",
+        locations = cells_body(
+            columns = Valores,
+            rows = Nombre == "Response"
+        )
+    ) %>%
+    tab_footnote(
+        footnote = "No se conoce si el tratamiento A es el subtitulado bueno o lo es el B.",
+        locations = cells_body(
+            columns = Valores,
+            rows = Nombre == "Treat"
+        )
+    ) %>%
+    tab_footnote(
+        footnote = "1 para el primer vídeo visto y 2 el segundo.",
+        locations = cells_body(
+            columns = Valores,
+            rows = Nombre == "Period"
+        )
+    ) %>%
+    tab_footnote(
+        footnote = "Se ha reorganizado de tal forma que $Q18$, que es la pregunta resumen, sea el valor primero y de referencia.",
+        locations = cells_body(
+            columns = Valores,
+            rows = Nombre == "Question"
+        )
+    ) %>%
+    tab_footnote(
+        footnote = "Se aplicará una técnica estadística de agrupamiento para agregar las preguntas.",
+        locations = cells_body(
+            columns = Valores,
+            rows = Nombre == "Cluster"
+        )
+    )
+```
+\normalsize

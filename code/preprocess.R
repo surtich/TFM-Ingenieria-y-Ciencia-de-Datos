@@ -35,6 +35,28 @@ assert("Comprobamos que no hay usuarios duplicados", grade_df %>% nrow() == grad
 # Unimos los tibbles para asignar en grupo como letra en lugar de la cohorte
 grade_df <- left_join(grade_df, groups) %>% dplyr::select(Username, Userid, Group)
 
+##### PROFILE #####
+profile_files <- list.files("data/original", pattern = ".*student_profile.*.csv", full.names = TRUE)
+profile_df <- map_dfr(
+    profile_files, ~ read_delim(.x, delim = ";", show_col_types = FALSE)
+)
+
+grade_df <- left_join(grade_df, profile_df %>% dplyr::select(-cohort), by = join_by(Username == username))
+
+
+##### CONOC #####
+conoc_files <- list.files("data/original", pattern = ".*conoc.*.csv", full.names = TRUE)
+conoc_df <- map_dfr(
+    conoc_files, ~ read_delim(.x, delim = ";", show_col_types = FALSE)
+)
+
+conoc_df <- conoc_df %>%
+    filter(Tries == 1) %>%
+    rowwise() %>%
+    mutate(level_of_knowledge = sum(c_across(starts_with(paste("Q", 1:10, "C", sep = ""))) == "correct")) %>%
+    dplyr::select(User, level_of_knowledge)
+
+grade_df <- left_join(grade_df, conoc_df, by = join_by(Username == User))
 
 ##### TEST #####
 # Leemos todos los archivos de test CSV
@@ -62,7 +84,7 @@ test_df %<>% # Con este operador del paquete magrittr hacemos las transformacion
     mutate(LastTry = strptime(LastTry, format = "%Y-%m-%dT%H:%M:%SZ")) %>% # Convertimos LastTry a formato fecha
     dplyr::select(all_of(columns)) %>% # Seleccionamos las columnas que nos interesan
     mutate(across(questions_original, ~ if_else(startsWith(.x, "choice_"), as.integer(str_extract(.x, "\\d+")), NA_integer_))) %>% # Extraemos la puntuación númerica de la pregunta
-    rename(setNames(questions_original, questions), setNames(comments_original, comments)) %>% # Renombramos los respuestas para que sean secuanciales
+    rename(setNames(questions_original, questions), setNames(comments_original, comments)) %>% # Renombramos los respuestas para que sean secuenciales
     arrange("Test", "Row") # nos aseguramos de que el orden filas es el mismo que el de los ficheros.
 
 # Guardamos el número de filas para posterior comprobación
@@ -83,7 +105,7 @@ assert("Comprobamos que no hay preguntas duplicadas en el dataframe de test", n_
     distinct(Group, Test, User) %>%
     nrow())
 
-assert("Comprobamos que no hay valores nulos", test_df %>% dplyr::select(-all_of(comments)) %>% filter(if_any(everything(), is.na)) %>% nrow() == 0)
+assert("Comprobamos que no hay valores nulos", test_df %>% dplyr::select(-c(comments, year_of_birth, gender, level_of_education, level_of_knowledge)) %>% filter(if_any(everything(), is.na)) %>% nrow() == 0)
 
 
 assert("Comprobamos que no hay respuestas con valores incorrectos", sum(sort(unique(unlist(test_df %>% dplyr::select(all_of(questions))))) == 0:5) == 6)
