@@ -25,6 +25,7 @@ library(broom)
 library(emmeans)
 library(vcdExtra)
 library(gt)
+library(bmmb)
 ```
 
 ```{r}
@@ -46,11 +47,6 @@ test_df %<>%
     filter(Rows > 1) %>%
     ungroup()
 
-# Renombramos columnas de acuerdo con Lawson y ponemos en formato largo
-test_df
-
-
-
 ##### SAVE TO FILE #####
 
 write_csv(test_df, "./data/preprocess/test.csv")
@@ -60,15 +56,83 @@ write_csv(test_df, "./data/preprocess/test.csv")
 ```{r}
 #| echo: false
 df <- test_df %>%
-    mutate(Period = as.factor(if_else(Test == "01", 1, 2)), Treat = as.factor(if_else(Group == "A" & Test == "01" | Group == "B" & Test == "02", "A", "B")), Group = as.factor(if_else(Group == "A", "AB", "BA")), Subject = as.factor(User)) %>%
-    dplyr::select(Group, Period, Treat, Subject, starts_with("Q")) %>%
+    mutate(
+        Period = as.factor(if_else(Test == "01", 1, 2)),
+        Treat = as.factor(if_else(Group == "A" & Test == "01" | Group == "B" & Test == "02", "A", "B")),
+        Seq = as.factor(if_else(Group == "A", "AB", "BA")), Subject = as.factor(User)
+    ) %>%
+    dplyr::select(Seq, Period, Treat, Subject, starts_with("Q")) %>%
     mutate_at(vars(starts_with("Q")), ~ (. + 1) %% 6) %>%
     pivot_longer(cols = all_of(starts_with("Q")), names_to = "Question", values_to = "Response") %>%
     mutate(Question = relevel(as.factor(Question), ref = "Q18"), Response = factor(Response, ordered = TRUE)) %>%
     arrange(Subject, Period, Question)
 
+response_labels <- c("No sé / No contesto", "Muy en desacuerdo", "En desacuerdo", "Neutral", "De acuerdo", "Muy de acuerdo")
+
+question_labels <- c(
+    "Los subtítulos del vídeo cumplen en general con los requisitos de accesibilidad.",
+    "La posición de los subtítulos.",
+    "El número de líneas por subtítulo.",
+    "La disposición del texto respecto a la caja donde se muestran los subtítulos.",
+    "El contraste entre los caracteres y el fondo.",
+    "La corrección ortográfica y gramatical.",
+    "La literalidad.",
+    "La identificación de los personajes.",
+    "La asignación de líneas a los personajes en los diálogos.",
+    "La descripción de efectos sonoros.",
+    "La sincronización de las entradas y salidas de los subtítulos.",
+    "La velocidad de exposición de los subtítulos.",
+    "El máximo número de caracteres por línea.",
+    "La legibilidad de la tipografía.",
+    "La separación en líneas diferentes de sintagmas nominales, verbales y preposicionales.",
+    "La utilización de puntos suspensivos.",
+    "La escritura de los números.",
+    "Las incorrecciones en el habla."
+)
+
+question_labels_reduced <- c(
+    "Valoración general",
+    "Posición",
+    "Número líneas",
+    "Texto dentro caja",
+    "Contraste",
+    "Corrección",
+    "Literalidad",
+    "Identificación personajes",
+    "Líneas/personajes",
+    "Efectos sonoros",
+    "Sincronización",
+    "Velocidad",
+    "Caracteres x línea",
+    "Tipografía",
+    "Separación sintagmas",
+    "Puntos suspensivos",
+    "Escritura números",
+    "Incorrecciones habla"
+)
+
+df <- df %>% mutate(
+    Response_v = as.numeric(Response) - 1,
+    Response_l = factor(Response_v, labels = response_labels),
+    Question_l = factor(Question, labels = question_labels),
+    Question_lr = factor(Question, labels = question_labels_reduced)
+)
+
+dist <- df %>%
+    xtabs(~ Question + Response, data = .) %>%
+    dist(x = ., method = "euclidean")
+
+cluster <- hclust(dist, method = "complete")
+cuts <- factor(cutree(cluster, k = 3))
+
+# Añadimos la columna cluster al dataframe
+df <- inner_join(df, data.frame(Question = factor(names(cuts), levels = levels(df$Question)), Cluster = as.factor(cuts)), by = "Question")
+
 write_csv(df, "./data/preprocess/test_lg.csv")
 df_all <- df
+
+df_all$Y <- model.matrix(~ Response - 1, data = df_all)
+
 df_clean <- df %>% filter(Response != 0)
 df_0 <- df %>% filter(Response == 0)
 ```

@@ -1,0 +1,173 @@
+---
+bibliography: references.bib
+lang: es
+toc: true
+
+execute:
+  echo: false
+---
+
+{{< include _setup.qmd >}}
+
+# Análisis bayesiano.
+
+# Modelo nulo
+
+$$
+\begin{equation}
+\begin{split}
+Response_{[i]} \sim \mathrm{N}(\mu_{[i]},\sigma) \\
+\mu_{[i]} = \mathrm{Intercept} \\
+\end{split}
+\end{equation}
+$$
+
+```{r}
+df <- df_clean
+```
+
+
+```{r}
+#| echo: true
+model.null <- brms::brm(Response ~ 1, data = df, chains = 1, cores = 1)
+bmmb::short_summary(model.null)
+```
+
+```{r}
+samples.null <- bmmb::get_samples(model.null)
+head(samples.null)
+```
+
+```{r}
+intercept.mean.null <- fixef(model.null)[1]
+intercept.sd.null <- fixef(model.null)[2]
+par(mfrow = c(1, 2), mar = c(4, 4, 1, 1))
+plot(samples.null[, 1], xlab = "Sample number", ylab = "Response", col = teal, pch = 16)
+abline(h = mean(samples.null[, 1]), lwd = 4, col = yellow)
+hist(samples.null[, 1], freq = FALSE, breaks = 15, main = "", xlab = "Response", col = maroon, ylim = c(0, 20))
+curve(dnorm(x, intercept.mean.null, intercept.sd.null), lwd = 4, add = TRUE, col = darkorange)
+```
+
+```{r}
+quantile(samples.null[, "b_Intercept"], c(.025, .975))
+```
+
+```{r}
+residuals.null <- residuals(model.null, summary = FALSE)
+head(residuals.null)
+```
+
+```{r}
+sigma.mean.null <- summary(model.null)$spec_pars[[1]]
+par(mfrow = c(1, 2), mar = c(4, 4, 1, 1))
+hist(residuals.null[1, ],
+    in = "", col = bmmb::cols[14],
+    eq = FALSE, xlab = "Model Residuals", xlim=c(-3,3)
+)
+curve(dnorm(x, 0, sigma.mean.null), xlim=c(-3,3), add = TRUE, lwd = 4, col = bmmb::cols[9])
+
+centered_response = df$Response - mean(df$Response)
+plot (jitter(residuals.null[1,]), jitter(centered_response),lwd=2,col=bmmb::cols[4],cex=1.5,
+    xlab="Model Residuals",ylab="Centered response")
+abli (0,1,col=bmmb::cols[3],lwd=2)
+```
+
+
+```{r}
+#| echo: true
+brms::get_prior(Response ~ 1, data = df)[, -c(7:9)]
+```
+
+```{r}
+#| echo: true
+prior.null = c(brms::set_prior("normal(3, 1)", class = "Intercept"),
+          brms::set_prior("normal(0, 1)", class = "sigma"))
+```
+
+```{
+par (mfrow = c(1,2), mar = c(4,4,1,1))
+
+## plot prior for mean
+hist (df$Response, xlim = c(1,5), freq = FALSE, col = deepgreen, ylab = 'Density', xlab = 'Response', main="")
+curve (dnorm(x,3,1),lwd = 2, col = 4, add = TRUE)
+
+## plot prior for standard deviations
+hist (abs (centered_response), freq = FALSE, col = yellow, main="",
+      ylab = 'Density', xlab = 'Abs diff')
+curve (dnorm(x,0,1),lwd = 2, col = 4, add = TRUE)
+```
+
+$$
+\beg{equation}
+\begin{split}
+\\
+Response_{[i]} \sim \mathrm{N}(\mu_{[i]},\sigma) \\
+\mu_{[i]} = \mathrm{Intercept} \\
+\\
+\textrm{Priors:} \\
+\mathrm{Intercept} \sim \mathrm{N}(3, 1) \\
+\sigma \sim \mathrm{N}(0, 1) \\
+\end{split}
+\end{equation}
+$$
+
+```{r}
+#| echo: true
+model.null <- brms::brm(Response ~ 1, data = df, chains = 1, cores = 1, prior=prior.null)
+bmmb::short_summary(model.null)
+```
+
+```{r}
+df.improved <- df %>%
+    pivot_wider(values_from = Response_v, names_from = Treat, names_prefix = "Treat", id_cols = c(Seq, Subject, Question)) %>%
+    filter(!is.na(TreatA) & !is.na(TreatB)) %>%
+    mutate(diff = TreatA - TreatB, Improved = as.numeric(diff > 0))
+```
+
+```{r}
+xtabs(~ Improved + Question, data = df.improved)
+```
+
+```{r}
+t.test(df$Response_v)
+```
+```{r}
+model.ols = lm(df$Response_v ~ 1)
+summary (model.ols)
+```
+
+```{r}
+options (contrasts = c('contr.sum','contr.sum'))
+brms::get_prior(Improved ~ Seq + (1|Subject) + (1|Question), data = df.improved)[, -c(7:9)]
+
+priors <- c(
+    set_prior("student_t(3, 0, 3)", class = "Intercept"),
+    set_prior("student_t(3, 0, 3)", class = "b"),
+    set_prior("student_t(3, 0, 3)", class = "sd")
+)
+
+model.improved.priors <-
+    brm(Improved ~ Seq + (1|Subject) + (1|Question),
+        data = df.improved, chains = 4, cores = 4,
+        family = "bernoulli", warmup = 1000, iter = 5000, thin = 4, prior = priors, sample_prior = "only"
+    )
+
+bmmb::p_check (model.improved.priors)
+
+model.improved <-
+    brm(Improved ~ Seq + (1 | Subject) + (1 | Question),
+        data = df.improved, chains = 4, cores = 4,
+        family = "bernoulli", warmup = 1000, iter = 5000, thin = 4, prior = priors
+    )
+
+short_summary(model.improved)
+
+model.improved.hypothesis = bmmb::short_hypothesis (
+  model.improved,
+  hypothesis = c("Intercept = 0",         # overall intercept
+                 "Intercept + Seq1 = 0",  # Group AB intercept
+                 "Intercept - Seq1 = 0"   # Group BA intercept
+                 ))
+
+model.improved.hypothesis
+```

@@ -490,12 +490,6 @@ En el dendograma (@fig-dendo) se aprecian claramente tres agrupamientos. Es muy 
 #| fig-cap: Dendograma del cluster de preguntas
 #| label: fig-dendo
 
-dist <- df_all %>%
-    xtabs(~ Question + Response, data = .) %>%
-    dist(x = ., method = "euclidean")
-
-cluster <- hclust(dist, method = "complete")
-
 
 plot(cluster)
 ```
@@ -514,18 +508,7 @@ Podemos distinguir los siguientes grupos y subgrupos:
 
 * Grupo 3: Es un grupo con preguntas heterogéneas y cuyo nexo parece ser únicamente su colocación al final del cuestionario. Está formado por las preguntas Q14, Q15, Q16 y Q17.
 
-Es interesante analizar si existe efecto periodo en cada grupo de preguntas. Para ello añadimos la columna `Cluster` al dataframe:
-
-```{r}
-#| echo: true
-cuts <- factor(cutree(cluster, k = 3))
-
-# Añadimos la columna cluster al dataframe
-df <- inner_join(df, data.frame(Question = names(cuts), Cluster = cuts), by = "Question")
-```
-
-
-Si analizamos el efecto periodo en las preguntas de cada cluster, constatamos que el único grupo de preguntas sin efecto periodo son las del tercer grupo. Esto es consistente con que son preguntas que presentan una valoración muy similar para ambos grupos en el mismo nivel de tratamiento (TODO: Poner enlace a la sección de la exploración inicial).
+Es interesante analizar si existe efecto periodo en cada grupo de preguntas. Si analizamos el efecto periodo en las preguntas de cada cluster, constatamos que el único grupo de preguntas sin efecto periodo son las del tercer grupo. Esto es consistente con que son preguntas que presentan una valoración muy similar para ambos grupos en el mismo nivel de tratamiento (TODO: Poner enlace a la sección de la exploración inicial).
 
 ```{r}
 #| echo: true
