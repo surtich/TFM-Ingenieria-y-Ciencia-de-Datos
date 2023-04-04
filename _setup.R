@@ -1,4 +1,3 @@
-```{r}
 #| warning: false
 #| include: false
 #| echo: false
@@ -10,7 +9,7 @@ library(forcats)
 library(ggplot2)
 library(ggthemes)
 library(lme4)
-#library(lmerTest)
+# library(lmerTest)
 library(magrittr)
 library(multcomp)
 library(ordinal)
@@ -26,6 +25,8 @@ library(vcdExtra)
 library(gt)
 library(gtExtras)
 library(bmmb)
+library(likert)
+library(patchwork)
 
 
 ## ggplot options
@@ -35,17 +36,6 @@ theme_update(
     plot.background = element_rect(fill = "transparent", colour = NA)
 )
 knitr::opts_chunk$set(dev.args = list(bg = "transparent"))
-
-
-```
-
-```{r}
-#| warning: false
-#| include: false
-#| echo: false
-#| cache: false
-
-#| echo: false
 
 # Leemos el tibble preprocesado
 test_all_df <- read_delim("./data/preprocess/test_all.csv", delim = ",", show_col_types = FALSE)
@@ -64,10 +54,6 @@ test_df <- test_all_df %>% filter(!User %in% c(1020, 85))
 
 write_csv(test_df, "./data/preprocess/test.csv")
 
-```
-
-```{r}
-#| echo: false
 df <- test_df %>%
     mutate(
         Period = as.factor(if_else(Test == "01", 1, 2)),
@@ -77,7 +63,10 @@ df <- test_df %>%
     dplyr::select(Seq, Period, Treat, Subject, gender, year_of_birth, level_of_education, starts_with("Q")) %>%
     mutate_at(vars(starts_with("Q")), ~ (. + 1) %% 6) %>%
     pivot_longer(cols = all_of(starts_with("Q")), names_to = "Question", values_to = "Response") %>%
-    mutate(Question = relevel(as.factor(Question), ref = "Q18"), Response = factor(Response, ordered = TRUE)) %>%
+    mutate(
+        Question = relevel(as.factor(Question), ref = "Q18"),
+        Response = factor(Response, ordered = TRUE)
+    ) %>%
     arrange(Subject, Period, Question)
 
 response_labels <- c("No sé / No contesto", "Muy en desacuerdo", "En desacuerdo", "Neutral", "De acuerdo", "Muy de acuerdo")
@@ -149,8 +138,17 @@ df_all$Y <- model.matrix(~ Response - 1, data = df_all)
 df_clean <- df %>% filter(Response != 0)
 df_clean <- df_clean %>% mutate(
     Response = factor(Response, levels = levels(Response)[-1]),
-    Response_l = ordered(Response_l, levels = levels(Response_l)[-1])
+    Response_l = ordered(Response_l, levels = levels(Response_l)[-1]),
+    Level = as.ordered(
+        ifelse(
+            Response %in% c(1, 2),
+            "Negative",
+            ifelse(
+                Response %in% c(4, 5),
+                "Positive",
+                "Neutral"
+            )
+        )
+    )
 )
 df_0 <- df %>% filter(Response == 0)
-```
-

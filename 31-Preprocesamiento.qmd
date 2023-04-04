@@ -1,4 +1,6 @@
-{{< include _setup.qmd >}}
+```{r}
+source("_setup.R")
+```
 
 # Métodos.
 
