@@ -4,6 +4,7 @@ project:
   output-dir: docs
 execute:
   echo: false
+  warning: false
 
 book:
   title: "Utilización de técnicas
@@ -13,15 +14,14 @@ accesibilidad en el subtitulado de
 vídeos"
   author: "Javier Pérez Arteaga"
   date: "10/03/2023"
-  description: "Quarto template based on LaTeX memoir class"
-  repo-url: https://GitHubID.github.io/Repository/
-  chapters:
+  description: "TFM UNED Máster en Ingeniería y Ciencia de Datos"
+  chapters:    
     - index.qmd
-    - 10-Introduccion.qmd
     - 20-Arte.qmd
     - 30-Metodos.qmd
     - 31-Preprocesamiento.qmd
     - 32-Modelo.qmd
+    - 40-EDA1.qmd
     - 50-Resultados.qmd
     - 60-Conclusiones.qmd
     - 99-Referencias.qmd
@@ -30,7 +30,6 @@ vídeos"
 
   cover-image: "images/logo-cover.png"
   favicon: "images/logo.png"
-  repo-actions: [edit]
   downloads: pdf
   sharing: [twitter, facebook]
   search: true
@@ -52,7 +51,9 @@ format:
     theme: cosmo
     csl: https://www.zotero.org/styles/chicago-author-date
 
-  pdf:    
+  pdf: 
+    fig-width: 7  
+    fig-pos: h 
     # Paper, font
     papersize: A4
     fontsize: 12pt

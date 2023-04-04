@@ -1,4 +1,3 @@
-
 ```{r}
 #| warning: false
 #| include: false
@@ -27,6 +26,17 @@ library(vcdExtra)
 library(gt)
 library(gtExtras)
 library(bmmb)
+
+
+## ggplot options
+theme_set(theme_bw())
+theme_update(
+    panel.background = element_rect(fill = "transparent", colour = NA),
+    plot.background = element_rect(fill = "transparent", colour = NA)
+)
+knitr::opts_chunk$set(dev.args = list(bg = "transparent"))
+
+
 ```
 
 ```{r}
@@ -38,15 +48,17 @@ library(bmmb)
 #| echo: false
 
 # Leemos el tibble preprocesado
-test_df <- read_delim("./data/preprocess/test.csv", delim = ",", show_col_types = FALSE)
-
+test_all_df <- read_delim("./data/preprocess/test_all.csv", delim = ",", show_col_types = FALSE)
 
 # Eliminamos aquellos usuarios que no han hecho uno de los test
-test_df %<>%
+test_all_df <- test_all_df %>%
     group_by(User) %>%
     mutate(Rows = n()) %>%
     filter(Rows > 1) %>%
     ungroup()
+
+# Eliminamos los test anómalos
+test_df <- test_all_df %>% filter(!User %in% c(1020, 85))
 
 ##### SAVE TO FILE #####
 

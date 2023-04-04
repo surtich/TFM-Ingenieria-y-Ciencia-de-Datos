@@ -123,4 +123,4 @@ write_csv(comments_df, "./data/preprocess/comments.csv")
 
 ##### SAVE TO FILE #####
 
-write_csv(test_df %>% dplyr::select(-all_of(comments)), "./data/preprocess/test.csv")
+write_csv(test_df %>% dplyr::select(-all_of(comments)), "./data/preprocess/test_all.csv")

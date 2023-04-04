@@ -1,0 +1,180 @@
+\clearpage
+## Análisis de las preguntas
+
+
+```{r, echo=FALSE, include=FALSE}
+likert_levels <- 0:5
+likert_labels <- c("Muy en desacuerdo", "En desacuerdo", "Neutral", "De acuerdo", "Muy de acuerdo", "No sé / No contesto")
+
+levels_df <- data.frame(Level = factor(c("Negativo", "Negativo", "Neutro", "Positivo", "Positivo"), levels = c("Negativo", "Neutro", "Positivo")), Response = head(likert_labels, -1))
+
+test_df <- read_csv("./data/preprocess/test_clean.csv", show_col_types = FALSE) %>%
+    mutate_at(vars(starts_with("Q")), ~ factor(., levels = likert_levels, labels = likert_labels))
+
+test_lg_df <- test_df %>%
+    pivot_longer(cols = all_of(starts_with("Q")), names_to = "Question", values_to = "Response")
+
+
+test_exclude5_df <- test_df %>%
+    mutate_at(vars(starts_with("Q")), ~fct_recode(., NULL=tail(likert_labels, 1))) %>% 
+    mutate(Test = factor(Test), Group = factor(Group))
+
+test_likert <- test_exclude5_df %>%
+    dplyr::select(all_of(starts_with("Q"))) %>%
+    data.frame() %>%
+    likert()
+
+q18_df <- test_df %>%
+    dplyr::select(Group, User, Test, Q18) %>%
+    pivot_wider(names_from = Test, values_from = Q18, names_prefix = "Test") %>%
+    mutate(SubtitlesOK = if_else(Group == "B", Test02, Test01), SubtitlesKO = if_else(Group == "B", Test01, Test02))
+
+
+test_lg_exclude5_df <- test_exclude5_df %>%
+    pivot_longer(cols = all_of(starts_with("Q")), names_to = "Question", values_to = "Response") %>%
+    filter(!is.na(Response))
+
+test_lg_exclude5_df <- left_join(test_lg_exclude5_df, levels_df)
+
+
+plot_likert_A01 <- test_exclude5_df %>% filter(Group == "A" & Test == "01") %>%
+    dplyr::select(all_of(starts_with("Q"))) %>%
+    data.frame() %>%
+    likert() %>% plot
+
+
+plot_likert_A02 <- test_exclude5_df %>%
+    filter(Group == "A" & Test == "02") %>%
+    dplyr::select(all_of(starts_with("Q"))) %>%
+    data.frame() %>%
+    likert() %>% plot
+
+
+plot_likert_B01 <- test_exclude5_df %>% filter(Group == "B" & Test == "01") %>%
+    dplyr::select(all_of(starts_with("Q"))) %>%
+    data.frame() %>%
+    likert() %>% plot
+
+
+plot_likert_B02 <- test_exclude5_df %>% filter(Group == "B" & Test == "02") %>%
+    dplyr::select(all_of(starts_with("Q"))) %>%
+    data.frame() %>%
+    likert() %>% plot
+
+```
+El gráfico \@ref(fig:04levels) muestra la frecuencia relativa por grupo y por test de las preguntas clasificadas por niveles. TODO: comentar
+
+```{r 04levels, echo=FALSE, out.width='\\widthw', fig.cap = "Frecuencias relativas de las respuestas por preguntas."}
+
+test_lg_exclude5_df %>%
+    group_by(Group, Test, Question, Level) %>%
+    count(Response) %>%
+    ggplot(aes(x = Question, y = n, fill = Level)) +
+    geom_bar(position = "fill", stat = "identity") +
+    scale_y_continuous(labels = scales::percent) +
+    scale_fill_brewer(name = "Valoración:", type = "div", palette = "Spectral", direction = -1) +
+    ylab("Porcentaje") +
+    theme_bw() +
+    theme(legend.position = "top", axis.text.y = element_text(size = 7)) +
+    facet_grid(rows = vars(Group), cols = vars(Test)) +
+    coord_flip() +
+    labs(x = "Bloque", y = "Porcentaje", fill = "Respuesta")
+```
+
+
+```{r, echo=FALSE, include=FALSE}
+block1 <- list(name = "ubicación", questions = paste0("Q", 1:4))
+block2 <- list(name = "corrección", questions = paste0("Q", 5:6))
+block3 <- list(name = "adecuación", questions = paste0("Q", 7:9))
+block4 <- list(name = "legibilidad", questions = paste0("Q", 10:17))
+block5 <- list(name = "valoración general", questions = paste0("Q", 18:18))
+
+blocks <- list(block1, block2, block3, block4, block5)
+block_names <- rep(c("ubicación", "corrección", "adecuación", "legibilidad", "valoración general"), c(
+    4, 2, 3,
+    8, 1
+))
+
+
+blocks <- c(
+    4, 2, 3,
+    8, 1
+)
+
+Block_n <- rep(1:length(blocks), blocks)
+
+Block <- rep(c("ubicación", "corrección", "adecuación", "legibilidad", "valoración general"), blocks)
+
+Question <- sprintf("Q%02d", seq(from = 1, by = 1, length.out = n_questions)) # Nombre de los campos que se usarán para renombrar los campos de respuesta al test
+
+blocks_df <- data.frame(Block_n, Block, Question)
+test_lg_df <- left_join(test_lg_df, blocks_df)
+```
+
+Otra forma de analizar las respuestas es organizarlas en bloques. Una posible organización puede ser la siguiente:
+
+* Preguntas 1 a 4 relacionadas con la **ubicación del subtítulo**.
+* Preguntas 5 y 6 relacionadas con la **corrección del subtítulo**.
+* Preguntas 7 a 9 relacionadas con la **adecuación del subtítulo**.
+* Preguntas 11 a 17 relacionadas con la **legibilidad del subtítulo**.
+* Pregunta 18 es una **valoración general**.
+
+El gráfico \@ref(fig:04blocks) muestra la frecuencia relativa de respuesta en cada bloque. TODO: comentar el gráfico.
+
+```{r 04blocks, out.width='\\widthw', echo=FALSE, fig.cap = "Frecuencias relativas de las respuestas por bloques."}
+
+test_lg_df %>%
+    group_by(Group, Test, Block, Response) %>%
+    count(Response) %>%
+    ggplot(aes(fill = Response, y = n, x = Block)) +
+    geom_bar(stat = "identity", position = "fill") +
+    facet_grid(rows = vars(Group), cols = vars(Test)) +
+    coord_flip() +
+    labs(x = "Bloque", y = "Porcentaje", fill = "Respuesta")
+```
+\clearpage
+La pregunta 18 es una valoración general del subtitulado. Dado que ya conocemos el orden en que se presentaron los subtítulos a cada grupo, podemos comparar la opinión general que sobre el subtitulado tiene cada grupo. El gráfico \@ref(fig:04q18) muestra esta información. TODO: Comentar el gráfico.
+
+```{r 04q18, out.width='\\widthw', echo=FALSE, fig.cap = "Comparación de la valoración general que cada grupo hace sobre el subtitulado de cada vídeo."}
+
+q18_df %>% ggplot(aes(x = SubtitlesOK, y = SubtitlesKO, group = Group, color = Group)) +
+    geom_jitter(alpha = 0.6, size = 2, width = 0.25, height = 0.25) +
+    coord_equal() +
+    scale_x_discrete(limits = likert_labels) +
+    scale_y_discrete(limits = likert_labels) +
+    labs(x = "Subtítulos correctos", y = "Subtítulos incorrectos", color = "Grupo") +
+     theme(axis.text.x = element_text(angle = 15, hjust = 1))
+
+
+```
+
+
+Los cuatro gráficos siguientes muestran las valoraciones por pregunta por grupo y por vídeo ordenadas de mejor a peor valoración. TODO: Comentar
+
+```{r, echo=FALSE, fig.cap = "Valoración de las preguntas para el grupo A en el vídeo con subtítulos correctos ordenados de mejor a peor valoración."}
+
+plot_likert_A01
+
+```
+
+
+```{r, echo=FALSE, fig.cap = "Valoración de las preguntas para el grupo B en el vídeo con subtítulos correctos ordenados de mejor a peor valoración."}
+
+plot_likert_B02
+
+```
+
+
+```{r, echo=FALSE, fig.cap = "Valoración de las preguntas para el grupo A en el vídeo con subtítulos incorrectos ordenados de mejor a peor valoración."}
+
+plot_likert_A02
+
+```
+
+
+```{r, echo=FALSE, fig.cap = "Valoración de las preguntas para el grupo B en el vídeo con subtítulos incorrectos ordenados de mejor a peor valoración."}
+
+plot_likert_B01
+
+```
+

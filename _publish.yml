@@ -1,7 +1,7 @@
 - source: project
   quarto-pub:
     - id: 4651547d-03c3-4988-ae2a-144e47ed05f9
-      url: 'https://quartopub.com/sites/surtich/tfm'
+      url: 'https://surtich.quarto.pub/tfm'
 - source: anova.qmd
   quarto-pub:
     - id: 8009bb9d-d2e8-4765-9351-ed93d593a26c

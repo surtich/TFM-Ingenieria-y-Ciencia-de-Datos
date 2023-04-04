@@ -13,7 +13,7 @@ En la @tbl-likert-levels se muestran los 5 niveles de cada uno de los items de l
 ```{r}
 #| label: tbl-likert-levels
 #| tbl-cap: Niveles de los items de la escala de Likert.
-data.frame(`levels` = response_labels) %>%
+data.frame(`values` = 0:5, `levels` = response_labels) %>%
     gt() %>%
     as_raw_html()
 ```
@@ -91,59 +91,3 @@ Partiendo de los ficheros suministrados (ver @sec-diseno), se realiza el siguien
 10. Se almacenan los resultados de los test preprocesado en un fichero `csv`.
 
 \clearpage
-## Variables relevantes.
-
-En la @tbl-variables se describen las características más relevantes de las principales variables que se utilizarán en en modelado y en el análisis estadístico.
-\footnotesize
-
-```{r}
-#| label: tbl-variables
-#| tbl-cap: Descripción de las variables más importantes
-tibble(
-    Nombre = c("Response", "Treat", "Period", "Seq", "Subject", "Question", "Cluster"),
-    Desc = c(
-        "Respuesta a las preguntas del test.", "Subtítulos",
-        "Periodo", "Secuencia de aplicación de los tratamientos.", "Identificación del estudiante", "Número de la pregunta", "Grupo de la pregunta"
-    ),
-    Tipo = c("Factor ordenado", "Factor", "Factor", "Factor", "Factor", "Factor", "Factor"),
-    Valores = c("De 0 a 5", "A o B", "1 ó 2", "AB o BA", "Numérico", "Q01, Q02, ..., Q18", "1, 2, ó 3")
-) %>%
-    gt() %>%
-    gt_theme_guardian() %>%
-    tab_footnote(
-        footnote = "Se ha hecho una rotación sobre los valores originales. 0 = No sé, 1 = Muy en desacuerdo, ..., 5 Muy de acuerdo.",
-        locations = cells_body(
-            columns = Valores,
-            rows = Nombre == "Response"
-        )
-    ) %>%
-    tab_footnote(
-        footnote = "No se conoce si el tratamiento A es el subtitulado bueno o lo es el B.",
-        locations = cells_body(
-            columns = Valores,
-            rows = Nombre == "Treat"
-        )
-    ) %>%
-    tab_footnote(
-        footnote = "1 para el primer vídeo visto y 2 el segundo.",
-        locations = cells_body(
-            columns = Valores,
-            rows = Nombre == "Period"
-        )
-    ) %>%
-    tab_footnote(
-        footnote = "Se ha reorganizado de tal forma que $Q18$, que es la pregunta resumen, sea el valor primero y de referencia.",
-        locations = cells_body(
-            columns = Valores,
-            rows = Nombre == "Question"
-        )
-    ) %>%
-    tab_footnote(
-        footnote = "Se aplicará una técnica estadística de agrupamiento para agregar las preguntas.",
-        locations = cells_body(
-            columns = Valores,
-            rows = Nombre == "Cluster"
-        )
-    )
-```
-\normalsize
