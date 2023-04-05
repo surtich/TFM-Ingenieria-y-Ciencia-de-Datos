@@ -22,11 +22,13 @@ vídeos"
     - 31-Preprocesamiento.qmd
     - 32-Modelo.qmd
     - 40-EDA1.qmd
+    - 42-Analisis.qmd
     - 50-Resultados.qmd
     - 60-Conclusiones.qmd
     - 99-Referencias.qmd
   appendices:
     - 75-Preprocesado.qmd
+    - 75-Setup.qmd
 
   cover-image: "images/logo-cover.png"
   favicon: "images/logo.png"

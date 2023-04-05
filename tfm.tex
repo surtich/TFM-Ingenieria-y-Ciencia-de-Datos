@@ -529,7 +529,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada nulla aug
 
 Phasellus vitae magna nec mi sagittis luctus vitae eu augue. Donec scelerisque laoreet arcu, eget tempor mi ultricies vel. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum at blandit ex. Vestibulum eu sagittis mauris. In hac habitasse platea dictumst. Duis eget ante vel lacus sollicitudin convallis quis eu velit. Sed auctor sem non nisi hendrerit, vel tincidunt tortor bibendum.
 
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[sharp corners, boxrule=0pt, breakable, interior hidden, borderline west={3pt}{0pt}{shadecolor}, enhanced, frame hidden]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, frame hidden, interior hidden, breakable, boxrule=0pt, enhanced, sharp corners]}{\end{tcolorbox}}\fi
 
 % Contents
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -782,15 +782,14 @@ Sección~\ref{sec-diseno}). Particularmente se tendrá en cuenta que se
 trata de un diseño cruzado con variable respuesta ordinal y variables
 explicativas longitudinales.
 
-\hypertarget{preprocesamiento.}{%
-\section{Preprocesamiento.}\label{preprocesamiento.}}
+\hypertarget{sec-preprocesado}{%
+\section{Preprocesamiento.}\label{sec-preprocesado}}
 
 Partiendo de los ficheros suministrados (ver Sección~\ref{sec-diseno}),
 se realiza el siguiente preprocesado (para ver el código ejecutado
 consultar Apéndice~\ref{sec-preprocess}):
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
+\begin{itemize}
 \item
   Se lee el fichero de perfil del usuario. El número de fila con el que
   el usuario aparece en el fichero se utilizará como identificador del
@@ -838,7 +837,7 @@ consultar Apéndice~\ref{sec-preprocess}):
 \item
   Se almacenan los resultados de los test preprocesado en un fichero
   \texttt{csv}.
-\end{enumerate}
+\end{itemize}
 
 \clearpage
 
@@ -860,38 +859,141 @@ y en el análisis estadístico. \footnotesize
 \caption{\label{tbl-variables}Descripción de las variables más importantes }\tabularnewline
 
 \toprule
-Nombre & Desc & Tipo & Valores \\ 
+Nombre & Descripción & Tipo & Valores \\ 
 \midrule
 Response & Respuesta a las preguntas del test. & Factor ordenado & De 0 a 5\textsuperscript{1} \\ 
-Treat & Subtítulos & Factor & A o B\textsuperscript{2} \\ 
-Period & Periodo & Factor & 1 ó 2\textsuperscript{3} \\ 
+Level & Valoración de la respuesta. & Factor ordenado & Negative, Neutral, Positive\textsuperscript{2} \\ 
+Treat & Subtítulos & Factor & A o B\textsuperscript{3} \\ 
+Period & Periodo & Factor & 1 ó 2\textsuperscript{4} \\ 
 Seq & Secuencia de aplicación de los tratamientos. & Factor & AB o BA \\ 
 Subject & Identificación del estudiante & Factor & Numérico \\ 
-Question & Número de la pregunta & Factor & Q01, Q02, ..., Q18\textsuperscript{4} \\ 
-Cluster & Grupo de la pregunta & Factor & 1, 2, ó 3\textsuperscript{5} \\ 
+Question & Número de la pregunta & Factor & Q01, Q02, ..., Q18\textsuperscript{5} \\ 
+Cluster & Grupo de la pregunta & Factor & 1, 2, ó 3\textsuperscript{6} \\ 
 \bottomrule
 \end{longtable}
 \begin{minipage}{\linewidth}
 \textsuperscript{1}Se ha hecho una rotación sobre los valores originales. 0 = No sé, 1 = Muy en desacuerdo, ..., 5 Muy de acuerdo.\\
-\textsuperscript{2}No se conoce si el tratamiento A es el subtitulado bueno o lo es el B.\\
-\textsuperscript{3}1 para el primer vídeo visto y 2 el segundo.\\
-\textsuperscript{4}Se ha reorganizado de tal forma que Q18, que es la pregunta resumen, sea el valor primero y de referencia.\\
-\textsuperscript{5}Se aplicará una técnica estadística de agrupamiento para agregar las preguntas.\\
+\textsuperscript{2}Positive cuando Response sea 4 ó 5, Negative cuando sea 1 ó 2 y Neutral para 3.\\
+\textsuperscript{3}No se conoce si el tratamiento A es el subtitulado bueno o lo es el B.\\
+\textsuperscript{4}1 para el primer vídeo visto y 2 el segundo.\\
+\textsuperscript{5}Se ha reorganizado de tal forma que Q18, que es la pregunta resumen, sea el valor primero y de referencia.\\
+\textsuperscript{6}Se aplicará una técnica estadística de agrupamiento para agregar las preguntas.\\
 \end{minipage}
 
 \normalsize
 
+Partiendo del \texttt{dataframe} que se construyó en el preprocesado
+(ver Sección~\ref{sec-preprocesado}) construimos el \texttt{dataframe}
+que usaremos a partir de este momento. Las operaciones principales que
+se han realizado han sido:
+
+\begin{itemize}
+\tightlist
+\item
+  Renombrar las variables para que se correspondan con las de nuestro
+  modelo (ver Tabla~\ref{tbl-variables}).
+\item
+  Eliminar del estudio los usuarios que solo han realizado uno de los
+  test como se explica en Sección~\ref{sec-eda-2}.
+\item
+  Transformar las variables que lo requieran en factores. La pregunta 18
+  se usará como referencia en el factor \texttt{Question}.
+\item
+  Rotar los valores de respuesta para que \enquote{No sé / No contesto}
+  tenga valor 0 y el resto de 1 a 5 desde \enquote{Muy en desacuerdo},
+  1, hasta \enquote{Muy de acuerdo}, 5.
+\item
+  Agrupar las preguntas por similitud de respuesta (ver
+  Sección~\ref{sec-cluster2}).
+\item
+  Crear el factor \texttt{Level} con los niveles \texttt{positive},
+  \texttt{neutral} y \texttt{negative} dependiendo de si la respuesta es
+  4 ó 5, 3, 1 ó 2 respectivamente.
+\item
+  Transformar el \texttt{dataframe} de formato ancho a largo: los
+  ficheros de respuestas se suministran en formato ancho. Es decir, que
+  cada fila es un test que contiene 18 columnas para las respuestas a
+  cada pregunta. Los nombres de las columnas son \(Q01\), \(Q02\),
+  \ldots, \(Q18\) y tendrán valores de 0 a 6 con las respuestas. La
+  mayoría de los paquetes de R que vamos a usar requieren que los datos
+  estén en formato largo. Esto que quiere decir que cada fila tendrá una
+  única respuesta por lo que habrá únicamente dos columnas, \(Question\)
+  y \(Response\). En la primera se almacenará el identificador de la
+  pregunta (\(Q01\), \(Q02\), \ldots, \(Q18\)) y en la segunda el valor
+  de la respuesta (de 0 a 6). De esta forma un test pasará de ocupar una
+  fila y 18 columnas en el formato ancho a 18 filas y dos columnas en el
+  largo.
+\end{itemize}
+
+En Apéndice~\ref{sec-setup} se puede consultar el código en R para
+realizar el proceso descrito anteriormente. Con estas transformaciones
+se crean los dos \texttt{dataframes} que se usarán en el análisis
+estadístico de los datos:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{df\_all} contiene en formato largo todas las respuestas a los
+  test.
+\item
+  \texttt{df\_clean} tiene la misma estructura que \texttt{df\_all} pero
+  en él se han eliminado las respuestas \enquote{No sé / No contesto}.
+\end{itemize}
+
+\texttt{df\_all} se utilizará cuando se traten las respuestas como
+categóricas y, por lo tanto, como no ordenadas. \texttt{df\_clean} se
+utilizará cuando se traten las respuestas como ordenadas y por ello no
+contiene las respuestas con valor \enquote{No sé / No contesto}.
+
+La estructura de estos \texttt{dataframes} es la siguiente:
+
+\begin{verbatim}
+tibble [2,980 x 8] (S3: tbl_df/tbl/data.frame)
+ $ Seq     : Factor w/ 2 levels "AB","BA": 1 1 1 1 1 1 1 1 1 1 ...
+ $ Period  : Factor w/ 2 levels "1","2": 1 1 1 1 1 1 1 1 1 1 ...
+ $ Treat   : Factor w/ 2 levels "A","B": 1 1 1 1 1 1 1 1 1 1 ...
+ $ Subject : Factor w/ 87 levels "4","33","35",..: 1 1 1 1 1 1 1 1 1 1 ...
+ $ Question: Factor w/ 18 levels "Q18","Q01","Q02",..: 1 2 3 4 5 6 7 8 9 10 ...
+ $ Cluster : Factor w/ 3 levels "1","2","3": 1 2 2 2 2 1 1 1 1 1 ...
+ $ Response: Ord.factor w/ 5 levels "1"<"2"<"3"<"4"<..: 3 3 3 3 3 3 3 3 3 3 ...
+ $ Level   : Ord.factor w/ 3 levels "Negative"<"Neutral"<..: 2 2 2 2 2 2 2 2 2..
+\end{verbatim}
+
+En el Tabla~\ref{tbl-df_clean} se muestran algunos ejemplos de estos
+\texttt{dataframes}.
+
+\hypertarget{tbl-df_clean}{}
+\begin{longtable}{cccccccc}
+\caption{\label{tbl-df_clean}Muestra del dataframe preparado para el modelado estadístico en formato
+largo. }\tabularnewline
+
+\toprule
+Seq & Period & Treat & Subject & Question & Cluster & Response & Level \\ 
+\midrule
+BA & 2 & A & 229 & Q14 & 3 & 4 & Positive \\ 
+AB & 2 & B & 788 & Q15 & 3 & 5 & Positive \\ 
+BA & 1 & B & 33 & Q14 & 3 & 2 & Negative \\ 
+BA & 2 & A & 371 & Q04 & 2 & 3 & Neutral \\ 
+AB & 2 & B & 850 & Q12 & 2 & 2 & Negative \\ 
+AB & 1 & A & 850 & Q04 & 2 & 5 & Positive \\ 
+BA & 2 & A & 85 & Q07 & 1 & 4 & Positive \\ 
+AB & 1 & A & 75 & Q12 & 2 & 4 & Positive \\ 
+BA & 1 & B & 819 & Q16 & 3 & 3 & Neutral \\ 
+BA & 2 & A & 220 & Q05 & 1 & 4 & Positive \\ 
+\bottomrule
+\end{longtable}
+
 \bookmarksetup{startatroot}
 
-\hypertarget{eda}{%
-\chapter{Exploración inicial.}\label{eda}}
+\hypertarget{sec-eda}{%
+\chapter{Exploración inicial.}\label{sec-eda}}
 
 \hypertarget{anuxe1lisis-de-la-calidad-de-los-datos.}{%
 \section{Análisis de la calidad de los
 datos.}\label{anuxe1lisis-de-la-calidad-de-los-datos.}}
 
-\hypertarget{respuestas-a-los-test.}{%
-\subsection{Respuestas a los test.}\label{respuestas-a-los-test.}}
+\hypertarget{sec-eda-2}{%
+\subsection{Respuestas a los test.}\label{sec-eda-2}}
 
 Como se explica en la Tabla~\ref{tbl-variables}, al subtitulado le
 denominamos tratamiento y a sus niveles (correcto e incorrecto) los
@@ -1151,10 +1253,10 @@ conocimiento.
 
 \end{table}
 
-\hypertarget{comparaciuxf3n-de-los-tratamientos-a-y-b-entre-grupos.}{%
+\hypertarget{sec-eda-3}{%
 \section{\texorpdfstring{Comparación de los tratamientos \(A\) y \(B\)
 entre
-grupos.}{Comparación de los tratamientos A y B entre grupos.}}\label{comparaciuxf3n-de-los-tratamientos-a-y-b-entre-grupos.}}
+grupos.}{Comparación de los tratamientos A y B entre grupos.}}\label{sec-eda-3}}
 
 La Figura~\ref{fig-diff} presenta una forma de comparar los dos test que
 realizados por los estudiantes. Para cada estudiante se comparó pregunta
@@ -1196,7 +1298,8 @@ alejadas de la tendencia de su grupo. En la Tabla~\ref{tbl-diff} se
 muestran los tiempos que han transcurrido entre la realización de los
 test de aquellos estudiantes cuyas respuestas difieren de forma
 importante de su grupo. Se observa que casi todos son tiempos entre
-actividades muy cortos.
+actividades muy cortos. En cualquier caso y, como no son muchos, se ha
+decidido no eliminarlos y realizar el análisis con ellos.
 
 \hypertarget{tbl-diff}{}
 \begin{longtable}{lrc}
@@ -1212,14 +1315,6 @@ BA & -10 & 50345.95 \\
 BA & -12 & 1.7 \\ 
 \bottomrule
 \end{longtable}
-
-Se considera que los estudiantes de la Tabla~\ref{tbl-diff} o no
-entendieron la actividad o contestaron de forma arbitraria. Se ha
-decidido eliminar del análisis estadístico a los dos estudiantes cuyas
-respuestas tienen valores más anómalos porque además coincide que
-realizaron el test con excesiva velocidad. Como es uno de cada grupo,
-los grupos siguen equilibrados. En adelante se prosigue el análisis sin
-los test de estos estudiantes.
 
 En la Figura~\ref{fig-freqs} representamos la frecuencia relativa del
 valor de respuesta para cada grupo y test en todas la preguntas. Esta es
@@ -1239,17 +1334,17 @@ La Figura~\ref{fig-freqs} muestra algunas cuestiones interesantes:
   En general los dos grupos muestran bastante acuerdo en el subtitulado
   en ambos niveles: En el nivel de tratamiento \(A\) los dos grupos
   tienen una frecuencia relativa similar de respuestas positivas
-  (valores 4 y 5). El grupo \(AB\) tiene un 84\% de respuestas positivas
+  (valores 4 y 5). El grupo \(AB\) tiene un 82\% de respuestas positivas
   frente a un 84\% el grupo \(BA\). No obstante, el grupo \(AB\) tiene
-  más respuestas con valor 5 que el grupo \(BA\) (57\% frente a 41\%).
+  más respuestas con valor 5 que el grupo \(BA\) (56\% frente a 41\%).
   La valoración es también similar entre grupos en el nivel de
-  tratamiento \(B\): el grupo \(AB\) tiene 43\% de respuestas positivas
-  y 46\% el grupo \(BA\). Las valoraciones negativas (1, 2), la neutra
+  tratamiento \(B\): el grupo \(AB\) tiene 44\% de respuestas positivas
+  y 47\% el grupo \(BA\). Las valoraciones negativas (1, 2), la neutra
   (3) y la \enquote*{No sé / No contesto} (0) son también muy similares.
 \item
   Las respuestas son similares entre periodos aunque ligeramente más
   negativas en el segundo. Así un 65\% de las respuestas son positivas
-  en el primer periodo frente a un 63\% en el segundo.
+  en el primer periodo frente a un 64\% en el segundo.
 \end{itemize}
 
 \begin{figure}[h]
@@ -1269,17 +1364,17 @@ estos resultados referidos a las preguntas con contestación positiva (4,
 
 \begin{itemize}
 \item
-  El tratamiento \(A\) tiene un 84\% marginalizado de respuestas
-  positivas frente al 44\% del tratamiento \(B\).
+  El tratamiento \(A\) tiene un 83\% marginalizado de respuestas
+  positivas frente al 46\% del tratamiento \(B\).
 \item
   El periodo 1 tiene un 65\% marginalizado de respuestas positivas
-  frente al 63\% del periodo 2.
+  frente al 64\% del periodo 2.
 \item
   Finalmente, la secuencia \(AB\) tiene un 63\% de respuestas positivas
-  frente 65\% de la secuencia \(BA\). Analizado por respuestas
+  frente 66\% de la secuencia \(BA\). Analizado por respuestas
   individuales, la respuesta 4 pasa de 24\% en la secuencia \(AB\) a
   37\% en la \(BA\) y, de forma contraria, en la respuesta 5 pasa de
-  40\% en \(AB\) a 28\% en \(BA\). En las respuestas negativas y no
+  39\% en \(AB\) a 29\% en \(BA\). En las respuestas negativas y no
   contestadas y neutra no se aprecian estas variaciones.
 \end{itemize}
 
@@ -1328,7 +1423,7 @@ valoración muy negativa en el nivel de subtitulado \(B\).
 }
 
 \caption{\label{fig-levels}Frecuencias relativas de las respuestas por
-pregunta}
+pregunta.}
 
 \end{figure}
 
@@ -1398,9 +1493,511 @@ mayor comodidad.
 \subcaption{\label{fig-likert-4}Seq BA , Treat B}
 \end{minipage}%
 
-\caption{\label{fig-likert}Preguntas ordenadas por valoración}
+\caption{\label{fig-likert}Preguntas ordenadas por valoración.}
 
 \end{figure}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{anuxe1lisis-estaduxedstico.}{%
+\chapter{Análisis estadístico.}\label{anuxe1lisis-estaduxedstico.}}
+
+\hypertarget{sec-cluster}{%
+\section{Agrupamientos de preguntas.}\label{sec-cluster}}
+
+\hypertarget{sec-cronbach}{%
+\subsection{Correlación entre preguntas con el alfa de
+Cronbach.}\label{sec-cronbach}}
+
+Normalmente las preguntas de un cuestionario pretenden medir una
+variable que está oculta o latente. En nuestro caso es la calidad del
+subtitulado. Las respuestas a estas preguntas relacionadas deben ser
+consistentes internamente, es decir, las respuestas deben
+correlacionarse fuerte y positivamente.
+
+Un índice que se utiliza habitualmente para medir la consistencia
+interna de un cuestionario es el coeficiente
+\texttt{alfa\ de\ Cronbach}, ver \textcite{schweinberger2020survey}. Se
+define de esta forma:
+
+\begin{equation}
+\alpha = \frac{N}{N-1} \left(1 - \frac{\sum_{i=1}^{N} s_{i}^{2}}{s^{2}} \right)
+\end{equation}
+
+Donde:
+
+\begin{itemize}
+\tightlist
+\item
+  \(\alpha\) es el coeficiente \texttt{alfa\ de\ Cronbach}.
+\item
+  \(N\) es el número de items de la escala de Likert.
+\item
+  \(s_{i}^{2}\) es la varianza de la puntuación del item \(i\).
+\item
+  \(s^{2}\) es la varianza total de las puntuaciones de todos los items.
+\end{itemize}
+
+Valores cercanos 1 indican una fuerte correlación en las respuestas y se
+admite que las preguntas del cuestionario están midiendo la misma
+variable latente.
+
+Para calcular en R este coeficiente podemos usar la función
+\texttt{alpha} del paquete \texttt{psych}:
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{alpha }\OtherTok{\textless{}{-}}\NormalTok{ df\_all }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{pivot\_wider}\NormalTok{(}
+        \AttributeTok{names\_from =}\NormalTok{ Question,}
+        \AttributeTok{values\_from =}\NormalTok{ Response\_v,}
+        \AttributeTok{id\_cols =} \FunctionTok{c}\NormalTok{(Treat, Subject)}
+\NormalTok{    ) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(Treat, Subject)) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{    psych}\SpecialCharTok{::}\FunctionTok{alpha}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+
+Se obtiene un coeficiente alfa de \texttt{alfa\ de\ Cronbach} de 0.92
+que indica una muy buena correlación entre las respuestas a todas las
+preguntas. Este valor apenas se ve alterado si se elimina una de las
+preguntas (ver Tabla~\ref{tbl-drop-alpha}).
+
+\scriptsize
+
+\begin{table}
+
+\caption{\label{tbl-drop-alpha}Valor del coeficiente alpha de Cronbach
+si se elimina una pregunta.}\begin{minipage}[t]{\linewidth}
+\subcaption{\label{tbl-drop-alpha-1}}
+
+{\centering 
+
+\begin{longtable*}{rrrrrrrrr}
+\toprule
+Q18 & Q01 & Q02 & Q03 & Q04 & Q05 & Q06 & Q07 & Q08 \\ 
+\midrule
+0.91 & 0.92 & 0.92 & 0.92 & 0.92 & 0.91 & 0.91 & 0.91 & 0.91 \\ 
+\bottomrule
+\end{longtable*}
+
+}
+
+\end{minipage}%
+\newline
+\begin{minipage}[t]{\linewidth}
+\subcaption{\label{tbl-drop-alpha-2}}
+
+{\centering 
+
+\begin{longtable*}{rrrrrrrrr}
+\toprule
+Q09 & Q10 & Q11 & Q12 & Q13 & Q14 & Q15 & Q16 & Q17 \\ 
+\midrule
+0.91 & 0.91 & 0.92 & 0.91 & 0.92 & 0.92 & 0.92 & 0.93 & 0.92 \\ 
+\bottomrule
+\end{longtable*}
+
+}
+
+\end{minipage}%
+
+\end{table}
+
+\normalsize
+
+En la Tabla~\ref{tbl-item-alpha} mostramos las preguntas que más
+contribuyen al índice \texttt{alpha\ de\ Cronbach}. Es interesante que
+la pregunta \(Q18\), que es la valoración general del cuestionario, sea
+la que mejor contribución tiene al índice.
+
+\scriptsize
+
+\begin{table}
+
+\caption{\label{tbl-item-alpha}Relación de cada pregunta con el índice
+alpha de Cronbach.}\begin{minipage}[t]{\linewidth}
+\subcaption{\label{tbl-item-alpha-1}}
+
+{\centering 
+
+\begin{longtable*}{rrrrrrrrr}
+\toprule
+Q18 & Q05 & Q06 & Q09 & Q08 & Q07 & Q10 & Q12 & Q02 \\ 
+\midrule
+0.86 & 0.81 & 0.79 & 0.79 & 0.77 & 0.75 & 0.73 & 0.72 & 0.71 \\ 
+\bottomrule
+\end{longtable*}
+
+}
+
+\end{minipage}%
+\newline
+\begin{minipage}[t]{\linewidth}
+\subcaption{\label{tbl-item-alpha-2}}
+
+{\centering 
+
+\begin{longtable*}{rrrrrrrrr}
+\toprule
+Q03 & Q14 & Q01 & Q11 & Q15 & Q13 & Q04 & Q16 & Q17 \\ 
+\midrule
+0.68 & 0.66 & 0.65 & 0.64 & 0.56 & 0.51 & 0.46 & 0.44 & 0.42 \\ 
+\bottomrule
+\end{longtable*}
+
+}
+
+\end{minipage}%
+
+\end{table}
+
+\normalsize
+
+\clearpage
+
+\hypertarget{sec-cluster2}{%
+\subsection{Agrupamiento jerárquico aglomerativo.}\label{sec-cluster2}}
+
+En en la Sección~\ref{sec-cronbach} y en la Sección~\ref{sec-eda-3}
+hemos visto que algunas de las preguntas tienen respuestas similares a
+otras pero diferentes del resto. Puede ser interesante aplicar una
+técnica de agrupamiento que nos permita crear grupos de preguntas que
+podremos analizar por separado.
+
+Vamos a realizar una agrupación jerárquica aglomerativa de las preguntas
+en función de la tabla de contingencia de las respuestas utilizando la
+distancia euclidea como medida de distancia y el método de aglomeración
+de enlace completo para unir conglomerados \footnote{El método de enlace
+  completo usa la distancia máxima entre dos conglomerados para
+  seleccionar los más cercanos a unir.}. Para ello primero calculamos la
+tabla de contingencia (ver Tabla~\ref{tbl-contingencia}) de preguntas y
+respuestas.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{table }\OtherTok{\textless{}{-}}\NormalTok{ df\_all }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{xtabs}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ Question }\SpecialCharTok{+}\NormalTok{ Response, }\AttributeTok{data =}\NormalTok{ .)}
+\end{Highlighting}
+\end{Shaded}
+
+\scriptsize
+
+\hypertarget{tbl-contingencia}{}
+\begin{longtable}{crrrrrr}
+\caption{\label{tbl-contingencia}Tabla de contingencia de preguntas y respuestas. }\tabularnewline
+
+\toprule
+Question & Response\_0 & Response\_1 & Response\_2 & Response\_3 & Response\_4 & Response\_5 \\ 
+\midrule
+Q18 & 0 & 11 & 33 & 18 & 52 & 60 \\ 
+Q01 & 0 & 10 & 20 & 10 & 59 & 75 \\ 
+Q02 & 0 & 5 & 26 & 14 & 58 & 71 \\ 
+Q03 & 5 & 5 & 26 & 11 & 60 & 67 \\ 
+Q04 & 0 & 2 & 7 & 10 & 61 & 94 \\ 
+Q05 & 1 & 29 & 31 & 12 & 34 & 67 \\ 
+Q06 & 1 & 6 & 29 & 21 & 53 & 64 \\ 
+Q07 & 0 & 13 & 32 & 14 & 54 & 61 \\ 
+Q08 & 4 & 15 & 41 & 19 & 40 & 55 \\ 
+Q09 & 1 & 39 & 29 & 12 & 42 & 51 \\ 
+Q10 & 8 & 4 & 24 & 18 & 59 & 61 \\ 
+Q11 & 3 & 2 & 14 & 23 & 75 & 57 \\ 
+Q12 & 5 & 4 & 26 & 18 & 69 & 52 \\ 
+Q13 & 1 & 2 & 2 & 19 & 62 & 88 \\ 
+Q14 & 21 & 9 & 29 & 27 & 44 & 44 \\ 
+Q15 & 26 & 5 & 25 & 36 & 47 & 35 \\ 
+Q16 & 47 & 2 & 5 & 57 & 39 & 24 \\ 
+Q17 & 29 & 4 & 15 & 44 & 49 & 33 \\ 
+\bottomrule
+\end{longtable}
+
+\normalsize
+
+Con la tabla de contingencia calculamos las distancias entre preguntas y
+realizamos el agrupamiento. En el dendograma se aprecian claramente tres
+agrupamientos. Es muy interesante constatar que los tres grupos están
+formados por preguntas que en su mayor parte son correlativas. Esto es
+consistente con que al elaborar un test normalmente se colocan las
+preguntas por unidades temáticas y con que el encuestado también suele
+hacerlo teniendo en cuenta esta estructura y tiende a responder de forma
+similar a las preguntas correlativas.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dist }\OtherTok{\textless{}{-}} \FunctionTok{dist}\NormalTok{(table, }\AttributeTok{method =} \StringTok{"euclidean"}\NormalTok{)}
+\NormalTok{cluster }\OtherTok{\textless{}{-}} \FunctionTok{hclust}\NormalTok{(dist, }\AttributeTok{method =} \StringTok{"complete"}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(cluster)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[h]
+
+{\centering \includegraphics[width=4.16667in,height=\textheight]{images/cluster.png}
+
+}
+
+\caption{Dendograma de aglomeramiento jerárquico de preguntas en función
+de la tabla de contingencia de respuestas.}
+
+\end{figure}
+
+Podemos distinguir los siguientes grupos y subgrupos:
+
+\begin{itemize}
+\tightlist
+\item
+  Grupo 1: Trata sobre la corrección del subtítulo.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Subgrupo 05, 06, 07, 08, 09: Preguntas sobre si la información que
+    presenta el subtítulo es correcta y está bien escrita.
+  \item
+    Pregunta 18: Valoración general del subtitulado. El que esta
+    pregunta esté incluida en el grupo sobre corrección estaría
+    indicando que este es el apartado al que más importancia dan los
+    estudiantes a la hora de valorar la calidad del subtitulado.
+  \end{itemize}
+\item
+  Grupo 2: Es el más numeroso. En general está formado por preguntas
+  sobre el grado de dificultad que presenta la lectura del subtítulo.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Subgrupo preguntas Q01, Q02, Q03: Colocación de los subtítulos.
+  \item
+    Subgrupo preguntas Q10, Q11, Q12: Sincronización, velocidad y número
+    de líneas.
+  \item
+    Subgrupo preguntas Q04, Q13: Contraste y legibilidad.
+  \end{itemize}
+\item
+  Grupo 3: Son preguntas que tratan también sobre la corrección del
+  subtítulo, pero con la diferencia sobre el grupo uno de que se trata
+  de cuestiones más sutiles y presumiblemente más difíciles de valorar
+  por un novato. Está formado por las preguntas Q14, Q15, Q16 y Q17.
+\end{itemize}
+
+\hypertarget{anuxe1lisis-de-tablas-de-contingencia.}{%
+\section{Análisis de tablas de
+contingencia.}\label{anuxe1lisis-de-tablas-de-contingencia.}}
+
+En esta sección se aplicarán técnicas estadísticas que se basan en
+tablas de contingencia. Una descripción teórica de este tipo de técnicas
+se pueden encontrar en \textcite{agresti_2018}. Un tratamiento aplicado
+y basado en gráficos, que será el enfoque que seguiremos en este
+trabajo, es realizado en \textcite{frienly2015}.
+
+\hypertarget{comparaciuxf3n-mediante-mosaicos.}{%
+\subsection{Comparación mediante
+mosaicos.}\label{comparaciuxf3n-mediante-mosaicos.}}
+
+En el Figura~\ref{fig-mosaic} se representan en forma de mosaico las
+tablas de contingencia de las respuestas por tratamiento y secuencia. La
+información mostrada es similar a la que presentamos en la
+Figura~\ref{fig-freqs}, aunque el gráfico es más intuitivo ya que la
+anchura y altura de los rectángulos son proporcionales a la frecuencia
+marginal de la secuencia y el tratamiento respectivamente y el área es
+proporcional a la frecuencia conjunta. En esta ocasión hemos decidido
+emparejar los tratamientos en lugar de hacerlo con la secuencia, como
+hicimos anteriormente. Esto permite una mejor comparación de las
+diferencias entre grupos. Con ello podemos ver fácilmente que el
+tratamiento \(A\) es mejor valorado por los estudiantes y que el grupo
+que realizó la secuencia \(AB\) tiene más respuestas 5 pero menor número
+de respuestas positivas totales que el grupo de secuencia \(BA\) en
+ambos niveles de tratamiento.
+
+\begin{figure}[h]
+
+{\centering \includegraphics{42-Analisis_files/figure-pdf/fig-mosaic-1.pdf}
+
+}
+
+\caption{\label{fig-mosaic}Mosaico de tratamientos y secuencias.}
+
+\end{figure}
+
+\hypertarget{comparaciuxf3n-con-odds-ratio.}{%
+\subsection{\texorpdfstring{Comparación con
+\(Odds\ Ratio\).}{Comparación con Odds\textbackslash{} Ratio.}}\label{comparaciuxf3n-con-odds-ratio.}}
+
+Hasta este momento ha quedado claro que el nivel de subtitulado \(A\) es
+preferido por los estudiantes y que las respuestas de ambos grupos son
+similares. Pero, ¿cuánto de similares son? Una forma de contestar esta
+pregunta es utilizar el \texttt{odds\ ratio} de tratamientos y grupos
+para cada nivel de respuesta.
+
+Es decir, calcular:
+
+\begin{equation}
+OR_{(Treat, Seq \mid Response=r)}=\frac{
+    \frac{
+            P(Treat=A \mid Seq=AB, Response=r)
+        }{
+            P(Treat=B \mid Seq=AB, Response=r)
+        }
+    }
+    {\frac{
+        P(Treat=A \mid Seq=BA, Response=r)
+        }{
+        P(Treat=B \mid Seq=BA, Response=r)
+    }
+}
+\end{equation}
+
+Si los \(OR\) son similares en todos los niveles de respuesta, podemos
+afirmar que los grupos son homogéneos. Los resultados en R no producen
+significación estadística en ningún nivel de respuesta:
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{loddsratio}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{+}\NormalTok{ Seq }\SpecialCharTok{+}\NormalTok{ Response\_l, }\AttributeTok{data =}\NormalTok{ df\_all))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+z test of coefficients:
+
+                    Estimate Std. Error z value Pr(>|z|)
+No sé / No contesto  0.19004    0.32746  0.5804   0.5617
+Muy en desacuerdo   -0.13517    1.01225 -0.1335   0.8938
+En desacuerdo       -0.24362    0.29066 -0.8382   0.4019
+Neutral              0.15219    0.21412  0.7108   0.4772
+De acuerdo          -0.20977    0.13363 -1.5698   0.1165
+Muy de acuerdo       0.11687    0.13671  0.8549   0.3926
+\end{verbatim}
+
+\normalsize
+
+La Figura~\ref{fig-or-1} presenta visualmente la misma información.
+
+\begin{figure}[h]
+
+{\centering \includegraphics{42-Analisis_files/figure-pdf/fig-or-1-1.pdf}
+
+}
+
+\caption{\label{fig-or-1}OR entre tratamiento y grupo por nivel de
+respuesta.}
+
+\end{figure}
+
+Sería interesante calcular el \(OR\) para cada nivel de respuesta y
+pregunta pero por desgracia la muestra es demasiado pequeña para
+hacerlo. Se ha calculado el \(OR\) sobre los agrupamientos de preguntas
+y se ha obtenido significación estadística tan solo en el agrupamiento 2
+y nivel de respuesta 2:
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{loddsratio}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{+}\NormalTok{ Seq }\SpecialCharTok{+}\NormalTok{ Cluster }\SpecialCharTok{+}\NormalTok{ Response\_l, }\AttributeTok{data =}\NormalTok{ df\_all))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+z test of coefficients:
+
+                      Estimate Std. Error z value Pr(>|z|)  
+1:No sé / No contesto -1.94591    1.75662 -1.1078  0.26797  
+2:No sé / No contesto  0.41074    1.12569  0.3649  0.71520  
+3:No sé / No contesto  0.29239    0.35972  0.8128  0.41632  
+1:Muy en desacuerdo   -0.12516    1.17012 -0.1070  0.91482  
+2:Muy en desacuerdo   -1.39488    1.66941 -0.8356  0.40341  
+3:Muy en desacuerdo    1.19870    1.69327  0.7079  0.47900  
+1:En desacuerdo        0.17829    0.49526  0.3600  0.71885  
+2:En desacuerdo       -1.34796    0.57253 -2.3544  0.01855 *
+3:En desacuerdo        0.23740    0.50928  0.4661  0.64111  
+1:Neutral              0.62181    0.46172  1.3467  0.17807  
+2:Neutral              0.53248    0.39619  1.3440  0.17895  
+3:Neutral             -0.24146    0.31560 -0.7651  0.44421  
+1:De acuerdo          -0.35125    0.25963 -1.3529  0.17609  
+2:De acuerdo          -0.28064    0.18244 -1.5382  0.12399  
+3:De acuerdo           0.22503    0.30663  0.7339  0.46303  
+1:Muy de acuerdo       0.27860    0.26542  1.0497  0.29387  
+2:Muy de acuerdo       0.23441    0.17892  1.3101  0.19015  
+3:Muy de acuerdo      -0.61437    0.38071 -1.6137  0.10659  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\normalsize
+
+Sin embargo no podemos asumir que esta significación no se deba al azar
+ya que estamos realizando 18 test diferentes y cada uno tiene un error
+tipo I asociado, con lo que la probabilidad de encontrar una
+significación estadística por puro azar aumenta. Se han propuesto
+correcciones del \(p\)-value como la de Bonferroni que no se aplican en
+este trabajo.
+
+Otro \(OR\) que tiene interés calcular es el de tratamiento y periodo
+para evaluar si las respuestas son homogéneas. Mostramos tanto la tabla
+de resultados en R como visualmente (ver Figura~\ref{fig-or-2}).
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{loddsratio}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{+}\NormalTok{ Period }\SpecialCharTok{+}\NormalTok{ Response\_l, }\AttributeTok{data =}\NormalTok{ df\_all))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+z test of coefficients:
+
+                    Estimate Std. Error z value  Pr(>|z|)    
+No sé / No contesto  0.33469    0.32746  1.0221 0.3067511    
+Muy en desacuerdo    0.13517    1.01225  0.1335 0.8937673    
+En desacuerdo       -0.12102    0.29067 -0.4164 0.6771467    
+Neutral              0.05540    0.21412  0.2587 0.7958414    
+De acuerdo          -0.85090    0.13363 -6.3674 1.922e-10 ***
+Muy de acuerdo       0.48634    0.13671  3.5574 0.0003745 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\normalsize
+
+\begin{figure}[h]
+
+{\centering \includegraphics{42-Analisis_files/figure-pdf/fig-or-2-1.pdf}
+
+}
+
+\caption{\label{fig-or-2}OR entre tratamiento y periodo por nivel de
+respuesta.}
+
+\end{figure}
+
+Podemos constatar la existencia de un efecto periodo de signo contrario
+para las preguntas 4 y 5. La razón de que se produzca este efecto
+periodo es que algunas de las respuestas de valoración 5 en ambos
+niveles de subtitulado y grupos en el primer periodo se convierten en
+valoración 4 en el segundo periodo. Es decir, que esto nos está
+indicando que los estudiantes de ambos grupos prestaron más atención o
+fueron más exigentes en el segundo visionado y decidieron no otorgar la
+puntuación máxima incluso en algunos items al subtitulado correcto. Que
+el efecto periodo sea contrario en dos preguntas no debe sorprendernos
+en este diseño de experimento, ya que un test es un juego de suma cero:
+la valoraciones que se ganan o se pierden en un nivel de respuesta
+necesariamente provoca que el resto de niveles pierdan o ganen
+respectivamente la misma cantidad. En cualquier caso, vemos que el
+efecto periodo es cuantitativa y cualitativamente pequeño. Al afectar
+solo al intercambio de valoraciones entre los niveles 4 y 5, y ser las
+dos positivas, es simplemente una pequeña corrección en la valoración
+del subtitulado.
 
 \bookmarksetup{startatroot}
 
@@ -1631,6 +2228,169 @@ suministran (ver Sección~\ref{sec-diseno}).
 \FunctionTok{write\_csv}\NormalTok{(}
 \NormalTok{    test\_df }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\FunctionTok{all\_of}\NormalTok{(comments)), }\StringTok{"./data/preprocess/test\_all.csv"}
 \NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+
+\hypertarget{sec-setup}{%
+\chapter{\texorpdfstring{Creación de los \texttt{dataframes\ df\_all} y
+\texttt{df\_clean}.}{Creación de los dataframes df\_all y df\_clean.}}\label{sec-setup}}
+
+Código que transforma los datos preprocesados (ver
+Apéndice~\ref{sec-preprocess}) en los \texttt{dataframes} que se usan en
+el análisis estadístico.
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Leemos el tibble preprocesado}
+\NormalTok{test\_all\_df }\OtherTok{\textless{}{-}} \FunctionTok{read\_delim}\NormalTok{(}
+    \StringTok{"./data/preprocess/test\_all.csv"}\NormalTok{,}
+    \AttributeTok{delim =} \StringTok{","}\NormalTok{, }\AttributeTok{show\_col\_types =} \ConstantTok{FALSE}
+\NormalTok{)}
+
+\CommentTok{\# Eliminamos aquellos usuarios que no han hecho uno de los test}
+\NormalTok{test\_df }\OtherTok{\textless{}{-}}\NormalTok{ test\_all\_df }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{group\_by}\NormalTok{(User) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Rows =} \FunctionTok{n}\NormalTok{()) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{filter}\NormalTok{(Rows }\SpecialCharTok{\textgreater{}} \DecValTok{1}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ungroup}\NormalTok{()}
+
+\DocumentationTok{\#\#\#\#\# SAVE TO FILE \#\#\#\#\#}
+\FunctionTok{write\_csv}\NormalTok{(test\_df, }\StringTok{"./data/preprocess/test.csv"}\NormalTok{)}
+
+\NormalTok{df }\OtherTok{\textless{}{-}}\NormalTok{ test\_df }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{mutate}\NormalTok{(}
+        \AttributeTok{Period =} \FunctionTok{as.factor}\NormalTok{(}
+            \FunctionTok{if\_else}\NormalTok{(Test }\SpecialCharTok{==} \StringTok{"01"}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\NormalTok{        ),}
+        \AttributeTok{Treat =} \FunctionTok{as.factor}\NormalTok{(}
+            \FunctionTok{if\_else}\NormalTok{(Group }\SpecialCharTok{==} \StringTok{"A"} \SpecialCharTok{\&}\NormalTok{ Test }\SpecialCharTok{==} \StringTok{"01"} \SpecialCharTok{|}\NormalTok{ Group }\SpecialCharTok{==} \StringTok{"B"} \SpecialCharTok{\&}\NormalTok{ Test }\SpecialCharTok{==} \StringTok{"02"}\NormalTok{, }\StringTok{"A"}\NormalTok{, }\StringTok{"B"}\NormalTok{)}
+\NormalTok{        ),}
+        \AttributeTok{Seq =} \FunctionTok{as.factor}\NormalTok{(}
+            \FunctionTok{if\_else}\NormalTok{(Group }\SpecialCharTok{==} \StringTok{"A"}\NormalTok{, }\StringTok{"AB"}\NormalTok{, }\StringTok{"BA"}\NormalTok{)}
+\NormalTok{        ),}
+        \AttributeTok{Subject =} \FunctionTok{as.factor}\NormalTok{(User)}
+\NormalTok{    ) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(}
+\NormalTok{        Seq, Period, Treat, Subject,}
+\NormalTok{        gender, year\_of\_birth, level\_of\_education, }\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"Q"}\NormalTok{)}
+\NormalTok{    ) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{mutate\_at}\NormalTok{(}
+        \FunctionTok{vars}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"Q"}\NormalTok{)), }\SpecialCharTok{\textasciitilde{}}\NormalTok{ (. }\SpecialCharTok{+} \DecValTok{1}\NormalTok{) }\SpecialCharTok{\%\%} \DecValTok{6}
+\NormalTok{    ) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{pivot\_longer}\NormalTok{(}
+        \AttributeTok{cols =} \FunctionTok{all\_of}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"Q"}\NormalTok{)),}
+        \AttributeTok{names\_to =} \StringTok{"Question"}\NormalTok{,}
+        \AttributeTok{values\_to =} \StringTok{"Response"}
+\NormalTok{    ) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{mutate}\NormalTok{(}
+        \AttributeTok{Question =} \FunctionTok{relevel}\NormalTok{(}\FunctionTok{as.factor}\NormalTok{(Question), }\AttributeTok{ref =} \StringTok{"Q18"}\NormalTok{),}
+        \AttributeTok{Response =} \FunctionTok{factor}\NormalTok{(Response, }\AttributeTok{ordered =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{    ) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{arrange}\NormalTok{(Subject, Period, Question)}
+
+\NormalTok{response\_labels }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}
+    \StringTok{"No sé / No contesto"}\NormalTok{,}
+    \StringTok{"Muy en desacuerdo"}\NormalTok{,}
+    \StringTok{"En desacuerdo"}\NormalTok{,}
+    \StringTok{"Neutral"}\NormalTok{,}
+    \StringTok{"De acuerdo"}\NormalTok{,}
+    \StringTok{"Muy de acuerdo"}
+\NormalTok{)}
+
+\NormalTok{question\_labels }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}
+    \StringTok{"Los subtítulos del vídeo cumplen en general con los requisitos de accesibilidad."}\NormalTok{,}
+    \StringTok{"La posición de los subtítulos."}\NormalTok{,}
+    \StringTok{"El número de líneas por subtítulo."}\NormalTok{,}
+    \StringTok{"La disposición del texto respecto a la caja donde se muestran los subtítulos."}\NormalTok{,}
+    \StringTok{"El contraste entre los caracteres y el fondo."}\NormalTok{,}
+    \StringTok{"La corrección ortográfica y gramatical."}\NormalTok{,}
+    \StringTok{"La literalidad."}\NormalTok{,}
+    \StringTok{"La identificación de los personajes."}\NormalTok{,}
+    \StringTok{"La asignación de líneas a los personajes en los diálogos."}\NormalTok{,}
+    \StringTok{"La descripción de efectos sonoros."}\NormalTok{,}
+    \StringTok{"La sincronización de las entradas y salidas de los subtítulos."}\NormalTok{,}
+    \StringTok{"La velocidad de exposición de los subtítulos."}\NormalTok{,}
+    \StringTok{"El máximo número de caracteres por línea."}\NormalTok{,}
+    \StringTok{"La legibilidad de la tipografía."}\NormalTok{,}
+    \StringTok{"La separación en líneas diferentes de sintagmas nominales, verbales y preposicionales."}\NormalTok{,}
+    \StringTok{"La utilización de puntos suspensivos."}\NormalTok{,}
+    \StringTok{"La escritura de los números."}\NormalTok{,}
+    \StringTok{"Las incorrecciones en el habla."}
+\NormalTok{)}
+
+\NormalTok{question\_labels\_reduced }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}
+    \StringTok{"Valoración general"}\NormalTok{,}
+    \StringTok{"Posición"}\NormalTok{,}
+    \StringTok{"Número líneas"}\NormalTok{,}
+    \StringTok{"Texto dentro caja"}\NormalTok{,}
+    \StringTok{"Contraste"}\NormalTok{,}
+    \StringTok{"Corrección"}\NormalTok{,}
+    \StringTok{"Literalidad"}\NormalTok{,}
+    \StringTok{"Identificación personajes"}\NormalTok{,}
+    \StringTok{"Líneas/personajes"}\NormalTok{,}
+    \StringTok{"Efectos sonoros"}\NormalTok{,}
+    \StringTok{"Sincronización"}\NormalTok{,}
+    \StringTok{"Velocidad"}\NormalTok{,}
+    \StringTok{"Caracteres x línea"}\NormalTok{,}
+    \StringTok{"Tipografía"}\NormalTok{,}
+    \StringTok{"Separación sintagmas"}\NormalTok{,}
+    \StringTok{"Puntos suspensivos"}\NormalTok{,}
+    \StringTok{"Escritura números"}\NormalTok{,}
+    \StringTok{"Incorrecciones habla"}
+\NormalTok{)}
+
+\NormalTok{df }\OtherTok{\textless{}{-}}\NormalTok{ df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{Response\_v =} \FunctionTok{as.numeric}\NormalTok{(Response) }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{,}
+    \AttributeTok{Response\_l =} \FunctionTok{ordered}\NormalTok{(Response\_v, }\AttributeTok{labels =}\NormalTok{ response\_labels),}
+    \AttributeTok{Question\_l =} \FunctionTok{factor}\NormalTok{(Question, }\AttributeTok{labels =}\NormalTok{ question\_labels),}
+    \AttributeTok{Question\_lr =} \FunctionTok{factor}\NormalTok{(Question, }\AttributeTok{labels =}\NormalTok{ question\_labels\_reduced)}
+\NormalTok{)}
+
+\NormalTok{dist }\OtherTok{\textless{}{-}}\NormalTok{ df }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{xtabs}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ Question }\SpecialCharTok{+}\NormalTok{ Response, }\AttributeTok{data =}\NormalTok{ .) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{dist}\NormalTok{(}\AttributeTok{x =}\NormalTok{ ., }\AttributeTok{method =} \StringTok{"euclidean"}\NormalTok{)}
+
+\NormalTok{cluster }\OtherTok{\textless{}{-}} \FunctionTok{hclust}\NormalTok{(dist, }\AttributeTok{method =} \StringTok{"complete"}\NormalTok{)}
+\NormalTok{cuts }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(}\FunctionTok{cutree}\NormalTok{(cluster, }\AttributeTok{k =} \DecValTok{3}\NormalTok{))}
+
+\CommentTok{\# Añadimos la columna cluster al dataframe}
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{inner\_join}\NormalTok{(}
+\NormalTok{    df,}
+    \FunctionTok{data.frame}\NormalTok{(}
+        \AttributeTok{Question =} \FunctionTok{factor}\NormalTok{(}\FunctionTok{names}\NormalTok{(cuts),}
+            \AttributeTok{levels =} \FunctionTok{levels}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{Question)}
+\NormalTok{        ),}
+        \AttributeTok{Cluster =} \FunctionTok{as.factor}\NormalTok{(cuts)}
+\NormalTok{    ),}
+    \AttributeTok{by =} \StringTok{"Question"}
+\NormalTok{)}
+
+\FunctionTok{write\_csv}\NormalTok{(df, }\StringTok{"./data/preprocess/test\_lg.csv"}\NormalTok{)}
+\NormalTok{df\_all }\OtherTok{\textless{}{-}}\NormalTok{ df}
+
+\NormalTok{df\_all}\SpecialCharTok{$}\NormalTok{Y }\OtherTok{\textless{}{-}} \FunctionTok{model.matrix}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ Response }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{, }\AttributeTok{data =}\NormalTok{ df\_all)}
+
+\NormalTok{df\_clean }\OtherTok{\textless{}{-}}\NormalTok{ df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(Response }\SpecialCharTok{!=} \DecValTok{0}\NormalTok{)}
+\NormalTok{df\_clean }\OtherTok{\textless{}{-}}\NormalTok{ df\_clean }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{Response =} \FunctionTok{factor}\NormalTok{(Response, }\AttributeTok{levels =} \FunctionTok{levels}\NormalTok{(Response)[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{]),}
+    \AttributeTok{Response\_l =} \FunctionTok{ordered}\NormalTok{(Response\_l, }\AttributeTok{levels =} \FunctionTok{levels}\NormalTok{(Response\_l)[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{]),}
+    \AttributeTok{Level =} \FunctionTok{as.ordered}\NormalTok{(}
+        \FunctionTok{ifelse}\NormalTok{(}
+\NormalTok{            Response }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{),}
+            \StringTok{"Negative"}\NormalTok{,}
+            \FunctionTok{ifelse}\NormalTok{(}
+\NormalTok{                Response }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{),}
+                \StringTok{"Positive"}\NormalTok{,}
+                \StringTok{"Neutral"}
+\NormalTok{            )}
+\NormalTok{        )}
+\NormalTok{    )}
+\NormalTok{)}
+\NormalTok{df\_0 }\OtherTok{\textless{}{-}}\NormalTok{ df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(Response }\SpecialCharTok{==} \DecValTok{0}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 

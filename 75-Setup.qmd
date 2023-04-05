@@ -1,43 +1,12 @@
+# Creación de los `dataframes df_all` y `df_clean`. {#sec-setup}
+
+Código que transforma los datos preprocesados (ver @sec-preprocess) en los `dataframes` que se usan en el análisis estadístico.
+
+\scriptsize
+```{r}
+#| echo: true
+#| eval: false
 #| warning: false
-#| include: false
-#| echo: false
-#| cache: false
-
-library(car)
-library(dplyr)
-library(forcats)
-library(ggplot2)
-library(ggthemes)
-library(lme4)
-# library(lmerTest)
-library(magrittr)
-library(multcomp)
-library(ordinal)
-library(purrr)
-library(stringr)
-library(readr)
-library(testit)
-library(tidyr)
-library(tidyverse)
-library(broom)
-library(emmeans)
-library(vcdExtra)
-library(gt)
-library(gtExtras)
-library(bmmb)
-library(likert)
-library(patchwork)
-library(colorspace)
-library(vcd)
-
-
-## ggplot options
-theme_set(theme_bw())
-theme_update(
-    panel.background = element_rect(fill = "transparent", colour = NA),
-    plot.background = element_rect(fill = "transparent", colour = NA)
-)
-knitr::opts_chunk$set(dev.args = list(bg = "transparent"))
 
 # Leemos el tibble preprocesado
 test_all_df <- read_delim(
@@ -151,13 +120,11 @@ dist <- df %>%
 cluster <- hclust(dist, method = "complete")
 cuts <- factor(cutree(cluster, k = 3))
 
-cuts <- c(1, 2, 2, 2, 2, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3)
-
 # Añadimos la columna cluster al dataframe
 df <- inner_join(
     df,
     data.frame(
-        Question = factor(levels(df$Question),
+        Question = factor(names(cuts),
             levels = levels(df$Question)
         ),
         Cluster = as.factor(cuts)
@@ -187,3 +154,6 @@ df_clean <- df_clean %>% mutate(
     )
 )
 df_0 <- df %>% filter(Response == 0)
+```
+
+\normalsize

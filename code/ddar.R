@@ -11,7 +11,7 @@ spineplot(Response ~ Question, data = df_all)
 
 df_clean %>%
     group_by(Treat, Question) %>%
-    summarise(Response = mean(Response_v)) %>%
+    summarize(Response = mean(Response_v)) %>%
     ungroup() %>%
     xyplot(Response ~ Question | Treat,
         data =
@@ -27,7 +27,7 @@ prop.table(ftable(df_all %>% dplyr::select(Treat, Period, Response)), margin = 1
     )
 
 # Test de independencia (pag 123)
-summary(loddsratio(~ Response_l + Treat, data = df_clean))
+summary(loddsratio(~ Treat + Period + Response_l, data = df_clean))
 summary(loddsratio(~ Response_l + Period, data = df_clean))
 
 library(vcdExtra)
@@ -41,6 +41,8 @@ CMHtest(~ Response + Period + Treat, data = df_clean)
 CMHtest(~ Response + Treat + Question, data = df_clean)
 
 # Página 134
+fourfold(xtabs(~ Treat + Seq + Response, data = df_all))
+
 fourfold(xtabs(~ Treat + Period + Response, data = df_all))
 
 fourfold(xtabs(~ Treat + Period + Response + Cluster, data = df_all))

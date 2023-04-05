@@ -13,13 +13,15 @@ En la @tbl-variables se describen las características más relevantes de las pr
 #| label: tbl-variables
 #| tbl-cap: Descripción de las variables más importantes
 tibble(
-    Nombre = c("Response", "Treat", "Period", "Seq", "Subject", "Question", "Cluster"),
-    Desc = c(
-        "Respuesta a las preguntas del test.", "Subtítulos",
+    Nombre = c("Response", "Level", "Treat", "Period", "Seq", "Subject", "Question", "Cluster"),
+    `Descripción` = c(
+        "Respuesta a las preguntas del test.",
+        "Valoración de la respuesta.",
+        "Subtítulos",
         "Periodo", "Secuencia de aplicación de los tratamientos.", "Identificación del estudiante", "Número de la pregunta", "Grupo de la pregunta"
     ),
-    Tipo = c("Factor ordenado", "Factor", "Factor", "Factor", "Factor", "Factor", "Factor"),
-    Valores = c("De 0 a 5", "A o B", "1 ó 2", "AB o BA", "Numérico", "Q01, Q02, ..., Q18", "1, 2, ó 3")
+    Tipo = c("Factor ordenado", "Factor ordenado", "Factor", "Factor", "Factor", "Factor", "Factor", "Factor"),
+    Valores = c("De 0 a 5", "Negative, Neutral, Positive", "A o B", "1 ó 2", "AB o BA", "Numérico", "Q01, Q02, ..., Q18", "1, 2, ó 3")
 ) %>%
     gt() %>%
     gt_theme_guardian() %>%
@@ -35,6 +37,13 @@ tibble(
         locations = cells_body(
             columns = Valores,
             rows = Nombre == "Treat"
+        )
+    ) %>%
+    tab_footnote(
+        footnote = "Positive cuando Response sea 4 ó 5, Negative cuando sea 1 ó 2 y Neutral para 3.",
+        locations = cells_body(
+            columns = Valores,
+            rows = Nombre == "Level"
         )
     ) %>%
     tab_footnote(
@@ -60,3 +69,40 @@ tibble(
     )
 ```
 \normalsize
+
+Partiendo del `dataframe` que se construyó en el preprocesado (ver @sec-preprocesado) construimos el `dataframe` que usaremos a partir de este momento. Las operaciones principales que se han realizado han sido:
+
+* Renombrar las variables para que se correspondan con las de nuestro modelo (ver @tbl-variables).
+* Eliminar del estudio los usuarios que solo han realizado uno de los test como se explica en @sec-eda-2.
+* Transformar las variables que lo requieran en factores. La pregunta 18 se usará como referencia en el factor `Question`.
+* Rotar los valores de respuesta para que "No sé / No contesto" tenga valor 0 y el resto de 1 a 5 desde "Muy en desacuerdo", 1, hasta "Muy de acuerdo", 5.
+* Agrupar las preguntas por similitud de respuesta (ver @sec-cluster2).
+* Crear el factor `Level` con los niveles `positive`, `neutral` y `negative` dependiendo de si la respuesta es 4 ó 5, 3, 1 ó 2 respectivamente.
+* Transformar el `dataframe` de formato ancho a largo: los ficheros de respuestas se suministran en formato ancho. Es decir, que cada fila es un test que contiene 18 columnas para las respuestas a cada pregunta. Los nombres de las columnas son $Q01$, $Q02$, ..., $Q18$ y tendrán valores de 0 a 6 con las respuestas. La mayoría de los paquetes de R que vamos a usar requieren que los datos estén en formato largo. Esto que quiere decir que cada fila tendrá una única respuesta por lo que habrá únicamente dos columnas, $Question$ y $Response$. En la primera se almacenará el identificador de la pregunta ($Q01$, $Q02$, ..., $Q18$) y en la segunda el valor de la respuesta (de 0 a 6). De esta forma un test pasará de ocupar una fila y 18 columnas en el formato ancho a 18 filas y dos columnas en el largo.
+
+En @sec-setup se puede consultar el código en R para realizar el proceso descrito anteriormente. Con estas transformaciones se crean los dos `dataframes` que se usarán en el análisis estadístico de los datos:
+
+* `df_all` contiene en formato largo todas las respuestas a los test.
+* `df_clean` tiene la misma estructura que `df_all` pero en él se han eliminado las respuestas "No sé / No contesto".
+
+`df_all` se utilizará cuando se traten las respuestas como categóricas y, por lo tanto, como no ordenadas. `df_clean` se utilizará cuando se traten las respuestas como ordenadas y por ello no contiene las respuestas con valor "No sé / No contesto".
+
+La estructura de estos `dataframes` es la siguiente:
+
+```{r}
+str(df_clean %>% dplyr::select(Seq, Period, Treat, Subject, Question, Cluster, Response, Level), strict.width = "cut")
+``` 
+
+En el @tbl-df_clean se muestran algunos ejemplos de estos `dataframes`.
+
+```{r}
+#| label: tbl-df_clean
+#| tbl-cap: Muestra del dataframe preparado para el modelado estadístico en formato largo.
+df_clean %>%
+    dplyr::select(Seq, Period, Treat, Subject, Question, Cluster, Response, Level) %>%
+    sample_n(10, Replace = F) %>%
+    dplyr::select(Seq, Period, Treat, Subject, Question, Cluster, Response, Level) %>%
+    sample_n(10, Replace = F) %>%
+    gt()
+
+``` 

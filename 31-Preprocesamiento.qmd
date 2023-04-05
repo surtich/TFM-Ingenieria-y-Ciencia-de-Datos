@@ -66,30 +66,30 @@ El objetivo del estudio es responder a la pregunta de investigación:
 
 Son los estudiantes de un curso de accesibilidad capaces de encontrar los errores en el subtitulado de un vídeo. Para ello se propondrán diversos test y modelos estadísticos que tengan en consideración las características que se han comentado en el diseño del experimento (ver @sec-diseno). Particularmente se tendrá en cuenta que se trata de un diseño cruzado con variable respuesta ordinal y variables explicativas longitudinales.
 
-## Preprocesamiento.
+## Preprocesamiento. {#sec-preprocesado}
 
 Partiendo de los ficheros suministrados (ver @sec-diseno), se realiza el siguiente preprocesado (para ver el código ejecutado consultar @sec-preprocess):
 
-1. Se lee el fichero de perfil del usuario. El número de fila con el que el usuario aparece en el fichero se utilizará como identificador del usuario para mantener la trazabilidad y comprobar que las transformaciones realizadas son correctas.
+* Se lee el fichero de perfil del usuario. El número de fila con el que el usuario aparece en el fichero se utilizará como identificador del usuario para mantener la trazabilidad y comprobar que las transformaciones realizadas son correctas.
 
-2. Se eliminan del estudio a los estudiantes que aún habiendo realizado la actividad, no han dado su consentimiento para participar en el estudio.
+* Se eliminan del estudio a los estudiantes que aún habiendo realizado la actividad, no han dado su consentimiento para participar en el estudio.
 
-3. El valor del campo `cohort` se sustituye por una letra $A$ o $B$ en función del grupo asignado. En este momento se desconoce qué vídeo vio primero cada grupo.
+* El valor del campo `cohort` se sustituye por una letra $A$ o $B$ en función del grupo asignado. En este momento se desconoce qué vídeo vio primero cada grupo.
 
-4. Se lee el fichero `profile` y se añade a los usuarios información sobre el sexo, el año de nacimiento y el novel de estudios.
+* Se lee el fichero `profile` y se añade a los usuarios información sobre el sexo, el año de nacimiento y el novel de estudios.
 
-5. Se lee el fichero `conoc` y se calcula cuántas preguntas acertó cada usuario en el test de evaluación de conocimientos previos. Se añade esta información al perfil del usuario.
+* Se lee el fichero `conoc` y se calcula cuántas preguntas acertó cada usuario en el test de evaluación de conocimientos previos. Se añade esta información al perfil del usuario.
 
-6. Se leen los ficheros de test y se procesan. Se utiliza el nombre del fichero (`test1` o `test2`) para saber de qué vídeo se está respondiendo el test
+* Se leen los ficheros de test y se procesan. Se utiliza el nombre del fichero (`test1` o `test2`) para saber de qué vídeo se está respondiendo el test
 ^[Se reitera que en este momento se desconoce si el vídeo es el correctamente  subtitulado o el otro. La única información que se almacena es si se está respondiendo al vídeo que se voy primero o al que se vio después.].
 
-7. Se seleccionan las preguntas que contienen las respuestas y se renombran para que sea más fácil saber de qué pregunta se trata
+* Se seleccionan las preguntas que contienen las respuestas y se renombran para que sea más fácil saber de qué pregunta se trata
 ^[En los fichero suministrados pla respuesta a cada pregunta ocupa varios campos y se selecciona en cada pregunta el que contiene el valor de la respuesta y se convierte a numérico.]. Se convierte el campo `LastTry`, que contiene la fecha y hora de realización del test, a formato fecha y hora.
 
-8. Se realizan algunas comprobaciones como la ausencia de valores nulos en la variables más relevantes o que no existan inconsistencias ni errores de procesado.
+* Se realizan algunas comprobaciones como la ausencia de valores nulos en la variables más relevantes o que no existan inconsistencias ni errores de procesado.
 
-9. Se eliminan los comentarios y se graban en fichero aparte para que no revelen información que podría descubrir el tipo de subtitulado que piensa que está evaluando el estudiante.
+* Se eliminan los comentarios y se graban en fichero aparte para que no revelen información que podría descubrir el tipo de subtitulado que piensa que está evaluando el estudiante.
 
-10. Se almacenan los resultados de los test preprocesado en un fichero `csv`.
+* Se almacenan los resultados de los test preprocesado en un fichero `csv`.
 
 \clearpage

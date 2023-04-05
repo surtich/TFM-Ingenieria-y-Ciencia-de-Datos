@@ -7,11 +7,11 @@ execute:
 source("_setup.R")
 ```
 
-# Exploración inicial. {#eda}
+# Exploración inicial. {#sec-eda}
 
 ## Análisis de la calidad de los datos.
 
-### Respuestas a los test.
+### Respuestas a los test. {#sec-eda-2}
 
 ```{r}
 # Leemos el tibble preprocesado
@@ -265,7 +265,7 @@ xtabs(~level_of_knowledge, data = test_all_df, addNA = T) %>%
 Tablas de contingencia de la información socioeconómica de los estudiantes.
 :::
 
-## Comparación de los tratamientos $A$ y $B$ entre grupos.
+## Comparación de los tratamientos $A$ y $B$ entre grupos. {#sec-eda-3}
 
 La @fig-diff presenta una forma de comparar los dos test que realizados por los estudiantes. Para cada estudiante se comparó pregunta a pregunta sus dos test y se contabilizó la diferencia entre el número de preguntas en que la puntuación en el segundo vídeo fue superior y en las que lo fue inferior (las que no variaron de puntuación no se consideraron). En el eje $x$ se muestra la diferencia entre preguntas. Cantidades negativas indican que hay más respuestas en el segundo de los test que han empeorado respecto al primero de las que han mejorado. En el eje $y$ se representa el número de estudiantes para cada diferencia. Esta frecuencia se representa en negativo cuando la diferencia es negativa ^[En la comparación se han omitido aquellas preguntas en las que el estudiante contestó "No sé/No contesto" en la pregunta correspondiente de uno de los test.]. Esto es una forma de evaluar si el estudiante valoró mejor o no el segundo vídeo que el primero. 
 
@@ -314,7 +314,7 @@ compare_test_df %>% ggplot(aes(x = Total, y = n, fill = Total >= 0)) +
 
 Vemos que en el grupo $AB$ las diferencias tienden a ser negativas y en el $BA$ positivas. Esto estaría indicando que los estudiantes valoran mejor el subtitulado de nivel $A$. Por ello es esperable que las respuestas de los estudiantes del grupo $AB$ hayan empeorado y que las diferencias sean negativas y que lo contrario haya sucedido con las del grupo $BA$. La diferencia más frecuente en el grupo $AB$ es `r -((compare_test_df %>% arrange(n)) %>% head(1))$Total` y en el grupo $BA$ este valor es `r ((compare_test_df %>% arrange(n)) %>% tail(1))$Total`.
 
-Resulta llamativo que haya estudiantes cuyas contestaciones estén tan alejadas de la tendencia de su grupo. En la @tbl-diff se muestran los tiempos que han transcurrido entre la realización de los test de aquellos estudiantes cuyas respuestas difieren de forma importante de su grupo. Se observa que casi todos son tiempos entre actividades muy cortos.
+Resulta llamativo que haya estudiantes cuyas contestaciones estén tan alejadas de la tendencia de su grupo. En la @tbl-diff se muestran los tiempos que han transcurrido entre la realización de los test de aquellos estudiantes cuyas respuestas difieren de forma importante de su grupo. Se observa que casi todos son tiempos entre actividades muy cortos. En cualquier caso y, como no son muchos, se ha decidido no eliminarlos y realizar el análisis con ellos.
 
 ```{r}
 #| label: tbl-diff
@@ -330,7 +330,6 @@ left_join(compare_test_user_df %>% filter(Seq == "AB" & Total >= 0 | Seq == "BA"
     gt()
 ```
 
-Se considera que los estudiantes de la @tbl-diff o no entendieron la actividad o contestaron de forma arbitraria. Se ha decidido eliminar del análisis estadístico a los dos estudiantes cuyas respuestas tienen valores más anómalos porque además coincide que realizaron el test con excesiva velocidad. Como es uno de cada grupo, los grupos siguen equilibrados. En adelante se prosigue el análisis sin los test de estos estudiantes.
 
 ```{r}
 df_freqs <- df_all %>%
@@ -456,7 +455,7 @@ Se muestra en primer lugar la pregunta 18 por ser una valoración global del sub
 #| label: fig-levels
 #| out-width: \\widthw
 #| fig-height: 6
-#| fig-cap: Frecuencias relativas de las respuestas por pregunta
+#| fig-cap: Frecuencias relativas de las respuestas por pregunta.
 
 df_clean %>%
     group_by(Seq, Treat, Question, Level) %>%
@@ -480,32 +479,36 @@ La figura @fig-likert clasifica la preguntas por valoración y permite constatar
 #| label: fig-likert
 #| layout-ncol: 2
 #| fig-height: 10
-#| fig-cap: Preguntas ordenadas por valoración
-#| fig-subcap: 
+#| fig-cap: Preguntas ordenadas por valoración.
+#| fig-subcap:
 #|   - "Seq AB , Treat A"
 #|   - "Seq AB , Treat B"
 #|   - "Seq BA , Treat A"
 #|   - "Seq BA , Treat B"
 likert_df %>%
-            filter(Seq == "AB" & Treat == "A") %>%
-            dplyr::select(-c(Subject, Treat, Period, Seq)) %>%
-            data.frame() %>%
-            likert() %>% plot()
+    filter(Seq == "AB" & Treat == "A") %>%
+    dplyr::select(-c(Subject, Treat, Period, Seq)) %>%
+    data.frame() %>%
+    likert() %>%
+    plot()
 
 likert_df %>%
-            filter(Seq == "AB" & Treat == "B") %>%
-            dplyr::select(-c(Subject, Treat, Period, Seq)) %>%
-            data.frame() %>%
-            likert() %>% plot()
+    filter(Seq == "AB" & Treat == "B") %>%
+    dplyr::select(-c(Subject, Treat, Period, Seq)) %>%
+    data.frame() %>%
+    likert() %>%
+    plot()
 likert_df %>%
-            filter(Seq == "BA" & Treat == "A") %>%
-            dplyr::select(-c(Subject, Treat, Period, Seq)) %>%
-            data.frame() %>%
-            likert() %>% plot()
+    filter(Seq == "BA" & Treat == "A") %>%
+    dplyr::select(-c(Subject, Treat, Period, Seq)) %>%
+    data.frame() %>%
+    likert() %>%
+    plot()
 
 likert_df %>%
-            filter(Seq == "BA" & Treat == "B") %>%
-            dplyr::select(-c(Subject, Treat, Period, Seq)) %>%
-            data.frame() %>%
-            likert() %>% plot()
+    filter(Seq == "BA" & Treat == "B") %>%
+    dplyr::select(-c(Subject, Treat, Period, Seq)) %>%
+    data.frame() %>%
+    likert() %>%
+    plot()
 ```
