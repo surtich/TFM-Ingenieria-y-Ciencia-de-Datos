@@ -529,7 +529,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada nulla aug
 
 Phasellus vitae magna nec mi sagittis luctus vitae eu augue. Donec scelerisque laoreet arcu, eget tempor mi ultricies vel. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum at blandit ex. Vestibulum eu sagittis mauris. In hac habitasse platea dictumst. Duis eget ante vel lacus sollicitudin convallis quis eu velit. Sed auctor sem non nisi hendrerit, vel tincidunt tortor bibendum.
 
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, frame hidden, interior hidden, breakable, boxrule=0pt, enhanced, sharp corners]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, enhanced, interior hidden, boxrule=0pt, breakable, frame hidden, sharp corners]}{\end{tcolorbox}}\fi
 
 % Contents
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1499,8 +1499,8 @@ mayor comodidad.
 
 \bookmarksetup{startatroot}
 
-\hypertarget{anuxe1lisis-estaduxedstico.}{%
-\chapter{Análisis estadístico.}\label{anuxe1lisis-estaduxedstico.}}
+\hypertarget{sec-analisis}{%
+\chapter{Análisis estadístico.}\label{sec-analisis}}
 
 \hypertarget{sec-cluster}{%
 \section{Agrupamientos de preguntas.}\label{sec-cluster}}
@@ -1823,9 +1823,9 @@ ambos niveles de tratamiento.
 
 \end{figure}
 
-\hypertarget{comparaciuxf3n-con-odds-ratio.}{%
+\hypertarget{sec-or}{%
 \subsection{\texorpdfstring{Comparación con
-\(Odds\ Ratio\).}{Comparación con Odds\textbackslash{} Ratio.}}\label{comparaciuxf3n-con-odds-ratio.}}
+\(Odds\ Ratio\).}{Comparación con Odds\textbackslash{} Ratio.}}\label{sec-or}}
 
 Hasta este momento ha quedado claro que el nivel de subtitulado \(A\) es
 preferido por los estudiantes y que las respuestas de ambos grupos son
@@ -1935,15 +1935,16 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 \normalsize
 
 Sin embargo no podemos asumir que esta significación no se deba al azar
-ya que estamos realizando 18 test diferentes y cada uno tiene un error
-tipo I asociado, con lo que la probabilidad de encontrar una
-significación estadística por puro azar aumenta. Se han propuesto
-correcciones del \(p\)-value como la de Bonferroni que no se aplican en
-este trabajo.
+ya que estamos realizando 18 contrastes de hipótesis diferentes y cada
+uno tiene un error tipo I asociado, con lo que la probabilidad de
+encontrar una significación estadística por puro azar aumenta. Se han
+propuesto correcciones del \(p\)-value como la de Bonferroni que no se
+aplican en este trabajo.
 
 Otro \(OR\) que tiene interés calcular es el de tratamiento y periodo
 para evaluar si las respuestas son homogéneas. Mostramos tanto la tabla
-de resultados en R como visualmente (ver Figura~\ref{fig-or-2}).
+de resultados en R y también su representación visual (ver
+Figura~\ref{fig-or-2}).
 
 \scriptsize
 
@@ -1998,6 +1999,141 @@ efecto periodo es cuantitativa y cualitativamente pequeño. Al afectar
 solo al intercambio de valoraciones entre los niveles 4 y 5, y ser las
 dos positivas, es simplemente una pequeña corrección en la valoración
 del subtitulado.
+
+\bookmarksetup{startatroot}
+
+\hypertarget{modelado-estaduxedstico.}{%
+\chapter{Modelado estadístico.}\label{modelado-estaduxedstico.}}
+
+En esta sección vamos a proponer varios modelos que permitan hacer
+inferencia sobre los datos.
+
+\hypertarget{uxe1rboles-de-inferencia-condicional.}{%
+\section{Árboles de inferencia
+condicional.}\label{uxe1rboles-de-inferencia-condicional.}}
+
+Los arboles de inferencia condicional (CIT) son un tipo de árbol de
+decisión en el que la selección de variables y de los puntos de división
+no se basan en medidas de homogeneidad como el índice de Gini, sino en
+un contrastes de hipótesis no paramétricos. El algoritmo que se utiliza
+es el siguiente, ver \textcite{Levshina2020}:
+
+El algoritmo consiste en contrastar la hipótesis nula de si la variable
+de respuesta \(Y\) es independiente de alguna variable explicativa
+\(Y \mid X\). Para probar la hipótesis, se utiliza un algoritmo de
+permutación de la variable respuesta y se mide la asociación con la
+variable explicativa antes y después de la permutación. Si la asociación
+no varía significativamente, podemos asumir que las variables de
+respuesta y explicativa son independientes. De esta forma se selecciona
+la variable explicativa que más influye en la respuesta y que se
+utilizará en el particionado. Para elegir el valor de la variable
+explicativa que dividirá el conjunto de datos, se procede de forma
+análoga midiendo el cambio en la diferencia de asociación. De acuerdo
+con \textcite{frienly2015-2}, los CIT resuelven los problemas de
+sobreajuste de los árboles de decisión tradicionales.
+
+Para realizar el particionado basado en CIT, vamos a usar la función
+\texttt{ctree} del paquete \texttt{party} de R. Presentamos aquí
+únicamente el modelo final elegido que incluye como variables
+explicativas \texttt{Treat}, \texttt{Period}, \texttt{Seq} y
+\texttt{Cluster} \footnote{Se han realizado simulaciones con otras
+  combinaciones de variables explicativas que no se incluyen por no
+  haber producido resultados relevantes.}.
+
+En la Figura~\ref{fig-ctree} podemos ver que el nivel de subtitulado es
+el efecto principal, seguido del grupo de preguntas y finalmente la
+secuencia. En este modelo el periodo no aparece por no estar asociado
+con la respuesta. Estos resultados son contradictorios con los que
+obtuvimos en el análisis con el OR (ver Sección~\ref{sec-or}) en el que
+el factor secuencia no era significativo pero sí lo era el factor
+periodo. Por otro lado, vemos que la asociación más fuerte es el nivel
+de respuesta 5 para subtitulado \(A\), grupos de preguntas 1 y 2 y
+secuencia \(AB\) y de las respuestas 4 y 5 cuando la secuencia es
+\(BA\). El tratamiento \(B\) está fuertemente asociado con el nivel de
+respuesta 1 para el grupo de preguntas 1. Por último, con este modelo no
+hay ninguna combinación de factores que prediga un nivel de respuesta 1.
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tree}\FloatTok{.1} \OtherTok{\textless{}{-}} \FunctionTok{ctree}\NormalTok{(Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{+}\NormalTok{ Cluster }\SpecialCharTok{+}\NormalTok{ Period }\SpecialCharTok{+}\NormalTok{ Seq, }\AttributeTok{data =}\NormalTok{ df\_clean)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+
+\begin{figure}[h]
+
+{\centering \includegraphics{42-Modelado_files/figure-pdf/fig-ctree-1.pdf}
+
+}
+
+\caption{\label{fig-ctree}Modelo con árboles de inferencia condicional
+(Response \textasciitilde{} Treat + Cluster + Period + Seq).}
+
+\end{figure}
+
+Podemos usar este modelo para hacer predicciones. La matriz de
+contingencia resultante es la siguiente:
+
+\scriptsize
+
+\begin{verbatim}
+         Prediction
+Reference   1   2   3   4   5
+        1   0 111  19  36   1
+        2   0 178  53 170  13
+        3   0  67  94 181  41
+        4   0  94  76 629 158
+        5   0  70  44 560 385
+\end{verbatim}
+
+\normalsize
+
+Como habíamos anticipado, nunca se predice el nivel de respuesta 1. Las
+categorías que más probablemente predice nuestro modelo son la 4 y la 5
+pero aún así hay mucha confusión entre ellas. La exactitud de predicción
+es 43\%.
+
+Un modelo alternativo sería usar las mismas variables explicativas pero
+cambiado \texttt{Response} por \texttt{Level} como variable de
+respuesta. Esta variable solo tiene tres niveles: positivo, negativo y
+neutro. De esta forma no se producen confusiones entre los niveles 1 y 2
+por un lado y 4 y 5 por otro:
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tree}\FloatTok{.2} \OtherTok{\textless{}{-}} \FunctionTok{ctree}\NormalTok{(Level }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{+}\NormalTok{ Cluster }\SpecialCharTok{+}\NormalTok{ Period }\SpecialCharTok{+}\NormalTok{ Seq, }\AttributeTok{data =}\NormalTok{ df\_clean)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+
+\begin{figure}[h]
+
+{\centering \includegraphics{42-Modelado_files/figure-pdf/fig-ctree2-1.pdf}
+
+}
+
+\caption{\label{fig-ctree2}Modelo con árboles de inferencia condicional
+(Level \textasciitilde{} Treat + Cluster + Period + Seq).}
+
+\end{figure}
+
+Vemos que el árbol (ver Figura~\ref{fig-ctree2}) es muy similar al otro
+(ver Figura~\ref{fig-ctree}) con la principal diferencia de que ahora la
+secuencia ha desaparecido como factor relevante. Por otro lado, el
+modelo siempre predice una respuesta positiva excepto para el
+subtitulado \(B\) y grupo de preguntas 1 que es negativa (el nivel
+neutro nunca se predice). La exactitud del modelo ha subido a 72\%. En
+cualquier caso no es una gran mejora ya que un modelo que predijera
+siempre la categoría mayoritaria,que es la positiva, habría obtenido una
+exactitud de 68\%. Se han hecho simulaciones consistentes en incluir
+como factor las preguntas o usar como modelo un árbol de decisión
+convencional con resultados similares.
 
 \bookmarksetup{startatroot}
 

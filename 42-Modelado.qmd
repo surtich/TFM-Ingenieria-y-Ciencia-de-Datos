@@ -1,0 +1,82 @@
+```{r}
+source("_setup.R")
+```
+
+# Modelado estadístico. {ref:sec-analisis}
+
+En esta sección vamos a proponer varios modelos que permitan hacer inferencia sobre los datos.
+
+## Árboles de inferencia condicional.
+
+Los arboles de inferencia condicional (CIT) son un tipo de árbol de decisión en el que la selección de variables y de los puntos de división no se basan en medidas de homogeneidad como el índice de Gini, sino en un contrastes de hipótesis no paramétricos. El algoritmo que se utiliza es el siguiente, ver @Levshina2020:
+
+El algoritmo consiste en contrastar la hipótesis nula de si la variable de respuesta $Y$ es independiente de alguna variable explicativa $Y \mid X$. Para probar la hipótesis, se utiliza un algoritmo de permutación de la variable respuesta y se mide la asociación con la variable explicativa antes y después de la permutación. Si la asociación no varía significativamente, podemos asumir que las variables de respuesta y explicativa son independientes. De esta forma se selecciona la variable explicativa que más influye en la respuesta y que se utilizará en el particionado. Para elegir el valor de la variable explicativa que dividirá el conjunto de datos, se procede de forma análoga midiendo el cambio en la diferencia de asociación. De acuerdo con @frienly2015-2, los CIT resuelven los problemas de sobreajuste de los árboles de decisión tradicionales.
+
+Para realizar el particionado basado en CIT, vamos a usar la función `ctree` del paquete `party` de R. Presentamos aquí únicamente el modelo final elegido que incluye como variables explicativas `Treat`, `Period`, `Seq` y `Cluster`
+^[Se han realizado simulaciones con otras combinaciones de variables explicativas que no se incluyen por no haber producido resultados relevantes.].
+
+En la @fig-ctree podemos ver que el nivel de subtitulado es el efecto principal, seguido del grupo de preguntas y finalmente la secuencia. En este modelo el periodo no aparece por no estar asociado con la respuesta. Estos resultados son contradictorios con los que obtuvimos en el análisis con el OR (ver @sec-or) en el que el factor secuencia no era significativo pero sí lo era el factor periodo. Por otro lado, 
+vemos que la asociación más fuerte es el nivel de respuesta 5 para subtitulado $A$, grupos de preguntas 1 y 2 y secuencia $AB$ y de las respuestas 4 y 5 cuando la secuencia es $BA$. El tratamiento $B$ está fuertemente asociado con el nivel de respuesta 1 para el grupo de preguntas 1. Por último, con este modelo no hay ninguna combinación de factores que prediga un nivel de respuesta 1.
+
+
+```{r}
+set.seed(973)
+```
+
+\scriptsize
+```{r}
+#| echo: true
+tree.1 <- ctree(Response ~ Treat + Cluster + Period + Seq, data = df_clean)
+```
+\normalsize
+
+```{r}
+#| label: fig-ctree
+#| fig-cap: "Modelo con árboles de inferencia condicional (Response ~ Treat + Cluster + Period + Seq)."
+#| fig-width: 10
+#| fig-height: 6
+plot(tree.1,
+    tp_args = list(fill = c("blue", "lightgray")),
+    ip_args = list(fill = c("lightgreen"))
+)
+```
+
+Podemos usar este modelo para hacer predicciones. La matriz de contingencia resultante es la siguiente:
+
+\scriptsize
+```{r}
+tree1.cm <- confusionMatrix(predict(tree.1, df_clean), df_clean$Response)
+tree1.cm$table %>% t
+```
+\normalsize
+
+Como habíamos anticipado, nunca se predice el nivel de respuesta 1. Las categorías que más probablemente predice nuestro modelo son la 4 y la 5 pero aún así hay mucha confusión entre ellas. La exactitud de predicción es `r paste(100*round(tree1.cm$overall["Accuracy"], 2), "%", sep="")`.
+
+Un modelo alternativo sería usar las mismas variables explicativas pero cambiado `Response` por `Level` como variable de respuesta. Esta variable solo tiene tres niveles: positivo, negativo y neutro. De esta forma no se producen confusiones entre los niveles 1 y 2 por un lado y 4 y 5 por otro:
+
+
+\scriptsize
+```{r}
+#| echo: true
+tree.2 <- ctree(Level ~ Treat + Cluster + Period + Seq, data = df_clean)
+```
+\normalsize
+
+
+```{r}
+#| label: fig-ctree2
+#| fig-cap: "Modelo con árboles de inferencia condicional (Level ~ Treat + Cluster + Period + Seq)."
+#| fig-width: 10
+#| fig-height: 6
+plot(tree.2,
+    tp_args = list(fill = c("blue", "lightgray")),
+    ip_args = list(fill = c("lightgreen"))
+)
+```
+
+```{r}
+tree2.cm <- confusionMatrix(predict(tree.2, df_clean), df_clean$Level)
+```
+
+
+El árbol obtenido con variable respuesta `Level` (ver @fig-ctree2) es muy similar al otro (ver @fig-ctree) con la principal diferencia de que ahora la secuencia ha desaparecido como factor relevante. Por otro lado, el modelo siempre predice una respuesta positiva excepto para el subtitulado $B$ y grupo de preguntas 1, que es negativa (el nivel neutro nunca se predice). La exactitud del modelo ha subido a `r paste(100*round(tree2.cm$overall["Accuracy"], 2), "%", sep="")`. En cualquier caso no es una gran mejora ya que un modelo que predijera siempre la categoría mayoritaria (positiva), habría obtenido una exactitud de `r paste(100*round(max(prop.table(table(df_clean$Level))), 2), "%", sep="")`. Se han hecho simulaciones consistentes en incluir como factor las preguntas o usar como modelo un árbol de decisión convencional con resultados similares.

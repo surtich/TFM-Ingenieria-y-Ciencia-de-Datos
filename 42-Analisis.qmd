@@ -3,7 +3,7 @@ source("_setup.R")
 ```
 
 
-# Análisis estadístico.
+# Análisis estadístico. {#sec-analisis}
 
 ## Agrupamientos de preguntas. {#sec-cluster}
 
@@ -153,7 +153,7 @@ df_all %>%
     )
 ```
 
-### Comparación con $Odds\ Ratio$.
+### Comparación con $Odds\ Ratio$. {#sec-or}
 
 Hasta este momento ha quedado claro que el nivel de subtitulado $A$ es preferido por los estudiantes y que las respuestas de ambos grupos son similares. Pero, ¿cuánto de similares son? Una forma de contestar esta pregunta es utilizar el `odds ratio` de tratamientos y grupos para cada nivel de respuesta.
 
