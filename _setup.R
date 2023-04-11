@@ -31,6 +31,8 @@ library(colorspace)
 library(vcd)
 library(party)
 library(caret)
+library(dunnr)
+library(VGAM)
 
 ## ggplot options
 theme_set(theme_bw())

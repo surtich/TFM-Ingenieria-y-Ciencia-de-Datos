@@ -529,7 +529,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada nulla aug
 
 Phasellus vitae magna nec mi sagittis luctus vitae eu augue. Donec scelerisque laoreet arcu, eget tempor mi ultricies vel. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum at blandit ex. Vestibulum eu sagittis mauris. In hac habitasse platea dictumst. Duis eget ante vel lacus sollicitudin convallis quis eu velit. Sed auctor sem non nisi hendrerit, vel tincidunt tortor bibendum.
 
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, enhanced, interior hidden, boxrule=0pt, breakable, frame hidden, sharp corners]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, frame hidden, borderline west={3pt}{0pt}{shadecolor}, sharp corners, boxrule=0pt, breakable, enhanced]}{\end{tcolorbox}}\fi
 
 % Contents
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -743,7 +743,7 @@ adecuado realizar operaciones aritméticas para calcular medias con este
 tipo de datos. Pero ellos los test estadísticos para analizar el efecto
 de un tratamiento con respuesta continua como son \(ANOVA\) y \(t\)-test
 no son adecuados con datos ordinales. Según la investigación de
-\textcite{kruschke20182018328} ajustar datos ordinales con modelos
+\textcite{kruschke2018} ajustar datos ordinales con modelos
 cuantitativos puede producir los siguientes problemas:
 
 \begin{itemize}
@@ -970,16 +970,16 @@ largo. }\tabularnewline
 \toprule
 Seq & Period & Treat & Subject & Question & Cluster & Response & Level \\ 
 \midrule
-BA & 2 & A & 229 & Q14 & 3 & 4 & Positive \\ 
-AB & 2 & B & 788 & Q15 & 3 & 5 & Positive \\ 
-BA & 1 & B & 33 & Q14 & 3 & 2 & Negative \\ 
-BA & 2 & A & 371 & Q04 & 2 & 3 & Neutral \\ 
-AB & 2 & B & 850 & Q12 & 2 & 2 & Negative \\ 
-AB & 1 & A & 850 & Q04 & 2 & 5 & Positive \\ 
-BA & 2 & A & 85 & Q07 & 1 & 4 & Positive \\ 
-AB & 1 & A & 75 & Q12 & 2 & 4 & Positive \\ 
-BA & 1 & B & 819 & Q16 & 3 & 3 & Neutral \\ 
-BA & 2 & A & 220 & Q05 & 1 & 4 & Positive \\ 
+BA & 2 & A & 212 & Q07 & 1 & 4 & Positive \\ 
+AB & 1 & A & 75 & Q11 & 2 & 4 & Positive \\ 
+AB & 2 & B & 288 & Q06 & 1 & 5 & Positive \\ 
+AB & 1 & A & 338 & Q04 & 2 & 5 & Positive \\ 
+BA & 1 & B & 901 & Q09 & 1 & 1 & Negative \\ 
+BA & 1 & B & 1040 & Q11 & 2 & 4 & Positive \\ 
+BA & 2 & A & 1167 & Q10 & 2 & 5 & Positive \\ 
+AB & 1 & A & 317 & Q04 & 2 & 5 & Positive \\ 
+AB & 1 & A & 1189 & Q18 & 1 & 5 & Positive \\ 
+AB & 2 & B & 196 & Q12 & 2 & 4 & Positive \\ 
 \bottomrule
 \end{longtable}
 
@@ -1317,8 +1317,26 @@ BA & -12 & 1.7 \\
 \end{longtable}
 
 En la Figura~\ref{fig-freqs} representamos la frecuencia relativa del
-valor de respuesta para cada grupo y test en todas la preguntas. Esta es
-otra forma de comparar los niveles de subtitulado.
+valor de respuesta para cada grupo y test en todas la preguntas
+\footnote{En el Tabla~\ref{tbl-resume} se presenta la misma información
+  con los valores absolutos.}. Esta es otra forma de comparar los
+niveles de subtitulado.
+
+\hypertarget{tbl-resume}{}
+\begin{longtable}{cccrrrrrr}
+\caption{\label{tbl-resume}Resumen de frecuencias de respuesta. }\tabularnewline
+
+\toprule
+ &  &  &  & \multicolumn{5}{c}{Response} \\ 
+\cmidrule(lr){5-9}
+Seq & Period & Treat & 0 & 1 & 2 & 3 & 4 & 5 \\ 
+\midrule
+AB & 1 & A & 39 & 2 & 25 & 71 & 203 & 434 \\ 
+AB & 2 & B & 43 & 87 & 185 & 121 & 172 & 166 \\ 
+BA & 1 & B & 40 & 76 & 174 & 127 & 237 & 138 \\ 
+BA & 2 & A & 30 & 2 & 30 & 64 & 345 & 321 \\ 
+\bottomrule
+\end{longtable}
 
 La Figura~\ref{fig-freqs} muestra algunas cuestiones interesantes:
 
@@ -1719,7 +1737,7 @@ Q17 & 29 & 4 & 15 & 44 & 49 & 33 \\
 
 Con la tabla de contingencia calculamos las distancias entre preguntas y
 realizamos el agrupamiento. En el dendograma se aprecian claramente tres
-agrupamientos. Es muy interesante constatar que los tres grupos están
+conglomerados. Es muy interesante constatar que los tres grupos están
 formados por preguntas que en su mayor parte son correlativas. Esto es
 consistente con que al elaborar un test normalmente se colocan las
 preguntas por unidades temáticas y con que el encuestado también suele
@@ -1755,13 +1773,13 @@ Podemos distinguir los siguientes grupos y subgrupos:
   \begin{itemize}
   \tightlist
   \item
-    Subgrupo 05, 06, 07, 08, 09: Preguntas sobre si la información que
+    Subgrupo 05, 06, 07, 08, 09: preguntas sobre si la información que
     presenta el subtítulo es correcta y está bien escrita.
   \item
-    Pregunta 18: Valoración general del subtitulado. El que esta
-    pregunta esté incluida en el grupo sobre corrección estaría
-    indicando que este es el apartado al que más importancia dan los
-    estudiantes a la hora de valorar la calidad del subtitulado.
+    Pregunta 18: valoración general del subtitulado. El que esta
+    pregunta esté incluida en este grupo estaría indicando que este es
+    el apartado al que más importancia dan los estudiantes a la hora de
+    valorar la calidad del subtitulado.
   \end{itemize}
 \item
   Grupo 2: Es el más numeroso. En general está formado por preguntas
@@ -1770,18 +1788,18 @@ Podemos distinguir los siguientes grupos y subgrupos:
   \begin{itemize}
   \tightlist
   \item
-    Subgrupo preguntas Q01, Q02, Q03: Colocación de los subtítulos.
+    Subgrupo preguntas Q01, Q02, Q03: colocación de los subtítulos.
   \item
-    Subgrupo preguntas Q10, Q11, Q12: Sincronización, velocidad y número
+    Subgrupo preguntas Q10, Q11, Q12: sincronización, velocidad y número
     de líneas.
   \item
-    Subgrupo preguntas Q04, Q13: Contraste y legibilidad.
+    Subgrupo preguntas Q04, Q13: contraste y legibilidad.
   \end{itemize}
 \item
-  Grupo 3: Son preguntas que tratan también sobre la corrección del
-  subtítulo, pero con la diferencia sobre el grupo uno de que se trata
-  de cuestiones más sutiles y presumiblemente más difíciles de valorar
-  por un novato. Está formado por las preguntas Q14, Q15, Q16 y Q17.
+  Grupo 3: son preguntas que tratan también sobre la corrección del
+  subtítulo pero con la diferencia sobre el grupo uno de que se trata de
+  cuestiones más sutiles y presumiblemente más difíciles de valorar para
+  un novato. Está formado por las preguntas Q14, Q15, Q16 y Q17.
 \end{itemize}
 
 \hypertarget{anuxe1lisis-de-tablas-de-contingencia.}{%
@@ -1793,6 +1811,62 @@ tablas de contingencia. Una descripción teórica de este tipo de técnicas
 se pueden encontrar en \textcite{agresti_2018}. Un tratamiento aplicado
 y basado en gráficos, que será el enfoque que seguiremos en este
 trabajo, es realizado en \textcite{frienly2015}.
+
+\hypertarget{asociaciuxf3n-de-variables-con-la-prueba-de-homogeneidad-chi2.}{%
+\subsection{\texorpdfstring{Asociación de variables con la prueba de
+homogeneidad
+\(\chi^2\).}{Asociación de variables con la prueba de homogeneidad \textbackslash chi\^{}2.}}\label{asociaciuxf3n-de-variables-con-la-prueba-de-homogeneidad-chi2.}}
+
+Podemos usar la prueba de homogeneidad \(\chi^2\) para saber si las
+respuestas al cuestionario son independientes del nivel de subtitulado,
+del periodo y de la secuencia. Constatamos que según esta prueba ninguna
+de estas variables es independiente de la respuesta.
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{chisq.test}\NormalTok{(df\_all}\SpecialCharTok{$}\NormalTok{Treat, df\_all}\SpecialCharTok{$}\NormalTok{Response)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+    Pearson's Chi-squared test
+
+data:  df_all$Treat and df_all$Response
+X-squared = 621.5, df = 5, p-value < 2.2e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{chisq.test}\NormalTok{(df\_all}\SpecialCharTok{$}\NormalTok{Period, df\_all}\SpecialCharTok{$}\NormalTok{Response)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+    Pearson's Chi-squared test
+
+data:  df_all$Period and df_all$Response
+X-squared = 15.039, df = 5, p-value = 0.0102
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{chisq.test}\NormalTok{(df\_all}\SpecialCharTok{$}\NormalTok{Seq, df\_all}\SpecialCharTok{$}\NormalTok{Response)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+    Pearson's Chi-squared test
+
+data:  df_all$Seq and df_all$Response
+X-squared = 64.904, df = 5, p-value = 1.173e-12
+\end{verbatim}
+
+\normalsize
 
 \hypertarget{comparaciuxf3n-mediante-mosaicos.}{%
 \subsection{Comparación mediante
@@ -1853,7 +1927,9 @@ OR_{(Treat, Seq \mid Response=r)}=\frac{
 
 Si los \(OR\) son similares en todos los niveles de respuesta, podemos
 afirmar que los grupos son homogéneos. Los resultados en R no producen
-significación estadística en ningún nivel de respuesta:
+significación estadística en ningún nivel de respuesta por lo que según
+esta prueba estadística la secuencia de subtitulado no influiría en la
+respuesta de los estudiantes (ver Figura~\ref{fig-or-1}).
 
 \scriptsize
 
@@ -1877,8 +1953,6 @@ Muy de acuerdo       0.11687    0.13671  0.8549   0.3926
 \end{verbatim}
 
 \normalsize
-
-La Figura~\ref{fig-or-1} presenta visualmente la misma información.
 
 \begin{figure}[h]
 
@@ -1938,8 +2012,8 @@ Sin embargo no podemos asumir que esta significación no se deba al azar
 ya que estamos realizando 18 contrastes de hipótesis diferentes y cada
 uno tiene un error tipo I asociado, con lo que la probabilidad de
 encontrar una significación estadística por puro azar aumenta. Se han
-propuesto correcciones del \(p\)-value como la de Bonferroni que no se
-aplican en este trabajo.
+propuesto correcciones del \(p\)-value como la de Bonferroni para
+abordar este problema que no se aplican en este trabajo.
 
 Otro \(OR\) que tiene interés calcular es el de tratamiento y periodo
 para evaluar si las respuestas son homogéneas. Mostramos tanto la tabla
@@ -1986,27 +2060,27 @@ Podemos constatar la existencia de un efecto periodo de signo contrario
 para las preguntas 4 y 5. La razón de que se produzca este efecto
 periodo es que algunas de las respuestas de valoración 5 en ambos
 niveles de subtitulado y grupos en el primer periodo se convierten en
-valoración 4 en el segundo periodo. Es decir, que esto nos está
-indicando que los estudiantes de ambos grupos prestaron más atención o
-fueron más exigentes en el segundo visionado y decidieron no otorgar la
-puntuación máxima incluso en algunos items al subtitulado correcto. Que
-el efecto periodo sea contrario en dos preguntas no debe sorprendernos
-en este diseño de experimento, ya que un test es un juego de suma cero:
-la valoraciones que se ganan o se pierden en un nivel de respuesta
-necesariamente provoca que el resto de niveles pierdan o ganen
-respectivamente la misma cantidad. En cualquier caso, vemos que el
-efecto periodo es cuantitativa y cualitativamente pequeño. Al afectar
-solo al intercambio de valoraciones entre los niveles 4 y 5, y ser las
-dos positivas, es simplemente una pequeña corrección en la valoración
-del subtitulado.
+valoración 4 en el segundo periodo. Esto indica que los estudiantes de
+ambos grupos prestaron más atención o fueron más exigentes en el segundo
+visionado y decidieron no otorgar la puntuación máxima incluso en
+algunos items al subtitulado correcto. Que el efecto periodo sea
+contrario en dos preguntas no debe sorprendernos en este diseño de
+experimento, ya que un test es un juego de suma cero: la valoraciones
+que se ganan o se pierden en un nivel de respuesta necesariamente
+provoca que el resto de niveles pierdan o ganen respectivamente la misma
+cantidad. En cualquier caso, vemos que el efecto periodo es cuantitativa
+y cualitativamente pequeño. Al afectar solo al intercambio de
+valoraciones entre los niveles 4 y 5, y ser las dos positivas, es
+simplemente una pequeña corrección en la valoración del subtitulado.
 
 \bookmarksetup{startatroot}
 
 \hypertarget{modelado-estaduxedstico.}{%
 \chapter{Modelado estadístico.}\label{modelado-estaduxedstico.}}
 
-En esta sección vamos a proponer varios modelos que permitan hacer
-inferencia sobre los datos.
+Vamos a construir diversos modelos para analizar la asociación de la
+variable respuesta sobre los dos niveles de subtitulado y la interacción
+con el periodo y la secuencia de tratamientos.
 
 \hypertarget{uxe1rboles-de-inferencia-condicional.}{%
 \section{Árboles de inferencia
@@ -2074,8 +2148,9 @@ hay ninguna combinación de factores que prediga un nivel de respuesta 1.
 
 \end{figure}
 
-Podemos usar este modelo para hacer predicciones. La matriz de
-contingencia resultante es la siguiente:
+Aunque no es el objetivo del trabajo, podemos usar este modelo para
+hacer predicciones. La matriz de contingencia resultante es la
+siguiente:
 
 \scriptsize
 
@@ -2123,17 +2198,730 @@ por un lado y 4 y 5 por otro:
 
 \end{figure}
 
-Vemos que el árbol (ver Figura~\ref{fig-ctree2}) es muy similar al otro
-(ver Figura~\ref{fig-ctree}) con la principal diferencia de que ahora la
+El árbol obtenido con variable respuesta \texttt{Level} (ver
+Figura~\ref{fig-ctree2}) es muy similar al otro (ver
+Figura~\ref{fig-ctree}) con la principal diferencia de que ahora la
 secuencia ha desaparecido como factor relevante. Por otro lado, el
 modelo siempre predice una respuesta positiva excepto para el
-subtitulado \(B\) y grupo de preguntas 1 que es negativa (el nivel
+subtitulado \(B\) y grupo de preguntas 1, que es negativa (el nivel
 neutro nunca se predice). La exactitud del modelo ha subido a 72\%. En
 cualquier caso no es una gran mejora ya que un modelo que predijera
-siempre la categoría mayoritaria,que es la positiva, habría obtenido una
+siempre la categoría mayoritaria (positiva), habría obtenido una
 exactitud de 68\%. Se han hecho simulaciones consistentes en incluir
 como factor las preguntas o usar como modelo un árbol de decisión
 convencional con resultados similares.
+
+\hypertarget{regresiuxf3n-ordinal.}{%
+\section{Regresión ordinal.}\label{regresiuxf3n-ordinal.}}
+
+El test de Likert es una escala ordinal. Los test estadísticos ANOVA o
+MANOVA presuponen que la variable de respuesta es cuantitativa y con
+distribución normal. Tratar las respuestas a un test de Likert como si
+fueran cuantitativas no es correcto por las siguientes razones:
+
+\begin{itemize}
+\item
+  Los niveles de respuesta no son necesariamente equidistantes: la
+  distancia entre un par de opciones de respuesta puede no ser la misma
+  para todos los pares de opciones de respuesta. Por ejemplo, la
+  diferencia entre \enquote{Muy en desacuerdo} y \enquote{En desacuerdo}
+  y la diferencia entre \enquote{De acuerdo} y \enquote{Muy de acuerdo}
+  es de un nivel, pero psicológicamente puede ser percibida de forma
+  diferente por cada sujeto.
+\item
+  La distribución de las respuestas ordinales puede ser no normal. En
+  particular esto sucederá si hay hay muchas respuestas en los extremos
+  del cuestionario.
+\item
+  Las varianzas de las variables no observadas que subyacen a las
+  variables ordinales observadas pueden diferir entre grupos,
+  tratamientos, periodos, etc.
+\end{itemize}
+
+En \textcite{kruschke2018} se han analizado los problemas potenciales de
+tratar datos ordinales como si fueran cuantitativos constatando que se
+pueden presentar las siguientes situaciones:
+
+\begin{itemize}
+\tightlist
+\item
+  Se pueden encontrar diferencias significativas entre grupos cuando no
+  las hay: error tipo I.
+\item
+  Se pueden obviar diferencias cuando en realidad sí existen: error tipo
+  II.
+\item
+  Incluso se pueden invertir los efectos de un tratamiento.
+\item
+  También puede malinterpretarse la interacción entre factores.
+\end{itemize}
+
+La regresión logística multinomial es una extensión de la regresión
+logística cuando la variable de respuesta es nominal. La regresión
+ordinal tiene en consideración que los valores nominales de la variable
+de respuesta están ordenados y por eso será el modelo que utilizaremos.
+
+\hypertarget{variantes-de-la-regresiuxf3n-ordinal.}{%
+\subsection{Variantes de la regresión
+ordinal.}\label{variantes-de-la-regresiuxf3n-ordinal.}}
+
+Según \textcite{burkner2019} hay tres clases de regresión ordinal:
+
+\begin{itemize}
+\tightlist
+\item
+  Regresión ordinal acumulativa.
+\item
+  Regresión ordinal secuencial.
+\item
+  Regresión ordinal adyacente.
+\end{itemize}
+
+Nos centraremos en la primera ya que es la más habitual y adecuada para
+nuestro caso. El modelo acumulativo, CM, presupone que la variable
+ordinal observada, \(Y\), proviene de la categorización de una variable
+latente (no observada) continua, \(\tilde{Y}\). Hay \(K\) umbrales
+\(\tau_k\) que particionan \(\tilde{Y}\) en \(K + 1\) categorías
+ordenadas observables (ver Figura~\ref{fig-cumulative}). Si asumimos que
+\(\tilde{Y}\) tiene una cierta distribución (por ejemplo, normal) con
+distribución acumulada \(F\), se puede calcular la probabilidad de que
+\(Y\) sea la categoría \(k\) de esta forma:
+
+\[Pr(Y = k) = F(\tau_k) - F(\tau_{k-1})\]
+
+\begin{figure}[h]
+
+{\centering \includegraphics{42-Modelado_files/figure-pdf/fig-cumulative-1.pdf}
+
+}
+
+\caption{\label{fig-cumulative}Función latente en una regresión ordinal
+acumulativa.}
+
+\end{figure}
+
+Por ejemplo en la Figura~\ref{fig-cumulative},
+
+\[Pr(Y = 2) = F(\tau_2) - F(\tau_{1})\]
+
+Si suponemos que \(\tilde{Y}\) tiene una relación lineal los
+predictores:
+
+\[\tilde{Y} = \eta + \epsilon = \beta_1 x_1 + \beta_2 x_2 + ... + \beta_p x_p + \epsilon\]
+
+Y que los errores son \(N(0,\sigma^2)\). Entonces la función de
+probabilidad acumulada de los errores tendrá la misma forma que la de
+\(\tilde{Y}\):
+
+\[\mathrm{Pr}(\epsilon \leq z) = F(z)\]
+
+Y podremos calcular la distribución de probabilidad acumulada de \(Y\):
+
+\[\mathrm{Pr}(Y \leq k \mid \eta) = \mathrm{Pr}(\tilde{Y} \leq \tau_k \mid \eta) = \mathrm{Pr}(\eta + \epsilon \leq \tau_k) = \mathrm{Pr}(\epsilon \leq \tau_k - \eta) = F(\tau_k - \eta)\]
+
+Por lo que asumiendo la normalidad de los errores:
+
+\[\mathrm{Pr}(Y = k) = \Phi(\tau_k - \eta) - \Phi(\tau_{k - 1} - \eta)\]
+
+Donde hay que estimar los umbrales y los coeficientes de regresión.
+
+Otra popular elección, que usaremos en este trabajo por ser más fácil su
+interpretación, es suponer que la función acumulada se comporta como una
+logística. En ese caso, la interpretación de los coeficientes varía y se
+asemeja a la de la regresión logística. Se parte del supuesto de que el
+\(logit\) de la función de probabilidad es lineal:
+
+\[logit [P(Y \le k)] = \tau_{k} - \eta = \tau_{k} - (\beta_1 x_1 + \beta_2 x_2 + ... + \beta_p x_p)\]
+
+Se puede demostrar fácilmente que, por ejemplo:
+
+\[\frac{\frac{\mathrm{Pr}(Y \leq k \mid \eta)}{\mathrm{Pr}(Y > k \mid \eta)}}{\frac{\mathrm{Pr}(Y \leq k+1 \mid \eta)}{\mathrm{Pr}(Y > k+1 \mid \eta)}} = \exp(\tau_{k} - \tau_{k+1})\]
+
+Y que \footnote{En el siguiente apartado se demuestra esta fórmula.}:
+
+\[\frac{\frac{\mathrm{Pr}(Y \leq k \mid x_i = 1)}{\mathrm{Pr}(Y > k \mid x_i = 1)}}{\frac{\mathrm{Pr}(Y \leq k \mid x_i=0)}{\mathrm{Pr}(Y > k \mid x_i = 0)}} = \exp(-\beta_{i})\]
+
+\[\frac{\frac{\mathrm{Pr}(Y > k \mid x_i = x + 1)}{\mathrm{Pr}(Y \leq k \mid x_i = x + 1)}}{\frac{\mathrm{Pr}(Y > k \mid x_i = x)}{\mathrm{Pr}(Y \leq k \mid x_i = x)}} = \exp(\beta_{i})\]
+
+Es decir, que \(\exp(\beta_{i})\) es el \(OR\) (cambio en \(odds\)) de
+que la variable respuesta esté por encima de una determinada categoría
+versus estar por debajo de ella para una unidad de incremento del
+predictor \(x_i\). Este modelo se denomina proporcional ya que cada
+predictor se asume que tiene los mismos efectos sobre todas las
+categorías de la variable de respuesta ordinal
+\autocite[ver][]{Liu2202}.
+
+Un valor del coeficiente \(\beta_i\) positivo indica que la relación
+entre el predictor \(x_i\) y la función de \(logit\) es positiva y, por
+lo tanto, se incrementa la posibilidad de un mayor valor de la variable
+respuesta.
+
+Esta suposición se puede relajar y permitir que los coeficientes de
+todos o de algunos de los predictores sean diferentes para cada pareja
+consecutiva de valores de respuesta. Tendríamos entonces más parámetros
+a estimar con una interpretación más compleja.
+
+\hypertarget{ajuste-del-modelo-ordinal-response-treat.}{%
+\subsection{Ajuste del modelo Ordinal Response \textasciitilde{}
+Treat.}\label{ajuste-del-modelo-ordinal-response-treat.}}
+
+Existen varios paquetes en R que permiten ajustar una regresión ordinal
+logística. El más popular es el paquete \texttt{Ordinal}
+\autocite{ordinalR}. El paquete \texttt{VGAM} \autocite{VGAMR} es más
+flexible y potente. Otra posibilidad es usar la función \texttt{polr}
+del paquete \texttt{MASS} \autocite{MASSR}. En este trabajo usaremos el
+paquete Ordinal por permitir también incluir efectos aleatorios que
+utilizaremos en un apartado posterior. Comenzamos con un modelo simple
+que tiene como único predictor el nivel de subtitulado por ser la
+variable objetivo de nuestro modelo:
+
+\[
+\text{logit}(p(y_i \leq k)) = \tau_k - \beta_2 \text{Treat}_i
+\]
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{clm\_treat }\OtherTok{\textless{}{-}}
+    \FunctionTok{clm}\NormalTok{(}
+\NormalTok{        Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat,}
+        \AttributeTok{data =}\NormalTok{ df\_clean, }\AttributeTok{link =} \StringTok{"logit"}
+\NormalTok{    )}
+\FunctionTok{summary}\NormalTok{(clm\_treat)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+formula: Response ~ Treat
+data:    df_clean
+
+ link  threshold nobs logLik   AIC     niter max.grad cond.H 
+ logit flexible  2980 -3966.11 7942.21 5(0)  1.64e-10 3.1e+01
+
+Coefficients:
+       Estimate Std. Error z value Pr(>|z|)    
+TreatB  -1.7206     0.0731  -23.54   <2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+    Estimate Std. Error z value
+1|2 -3.97230    0.09678 -41.045
+2|3 -2.45446    0.06812 -36.029
+3|4 -1.66453    0.05936 -28.042
+4|5 -0.10547    0.04946  -2.132
+\end{verbatim}
+
+\normalsize
+
+El método \texttt{summary} muestra la información resumen. Para su
+interpretación vamos a seguir \textcite{christensen2018CumulativeLM}. El
+número de condición Hessiano es inferior a \(10^4\) lo que es indicativo
+de que no hay problemas de optimización \footnote{El número de condición
+  de Hessiano es una medida de la curvatura de una función en un punto.
+  Si el número de condición de Hessiano es grande, la función es muy
+  sensible a pequeñas perturbaciones y puede ser difícil de optimizar.}.
+La sección de coeficientes es la más importante. Se muestra la
+estimación de parámetros, el error estándar y la significación
+estadística de acuerdo al test de Wald \footnote{El test de Wald es un
+  contraste de hipótesis estadístico en el que se evalúa si el valor
+  estimado es cero suponiendo que
+  \(W = \left(\frac{\hat{\theta} - \theta_0}{se(\hat{\theta})}\right)^2 \sim \chi^{2}\)
+  .}. Comprobamos que el valor es claramente significativo. Es decir,
+que los estudiantes han valorado de forma diferente la calidad del
+subtitulado en ambos vídeos. El estimador de maxima verosimilitud del
+coeficiente \texttt{TreatB} es -1.72. Siguiendo la deducción de
+\textcite{bruin2011} podemos, por ejemplo, hacer la siguiente
+interpretación del significado de este coeficiente referido a dos
+niveles consecutivos de respuesta:
+
+\[
+\begin{aligned}
+logit [P(Y \le 1)] & = & -3.97 - (-1.72 x_1) \\
+logit [P(Y \le 2)] & = & -2.45 - (-1.72 x_1)
+\end{aligned}
+\]
+
+Por lo tanto los \(odds\) serían:
+
+\[
+\begin{aligned}
+\frac{P(Y \le 1 \mid x_1 = B)}{P(Y > 1 \mid x_1 = B)} & = & exp(-3.97)/exp(-1.72) \\
+\frac{P(Y \le 1 \mid x_1 = A)}{P(Y > 1 \mid x_1 = A)} & = & exp(-3.97) \\
+\frac{P(Y \le 2 \mid x_1 = B)}{P(Y > 2 \mid x_1 = B)} & = & exp(-2.45)/exp(-1.72) \\
+\frac{P(Y \le 2 \mid x_1 = A)}{P(Y > 2 \mid x_1 = A)} & = & exp(-2.45)
+\end{aligned}
+\]
+
+Y los \(OR\):
+
+\[
+\begin{aligned}
+\frac{P(Y \le 1 | x_1=B)}{P(Y > 1 | x_1=B)} / \frac{P(Y \le 1 | x_1=A)}{P(Y > 1 | x_1=A)} & = & 1/exp(-1.72) & = & 5.59 \\
+\frac{P(Y \le 2 | x_1=B)}{P(Y > 2 | x_1=B)} / \frac{P(Y \le 2 | x_1=A)}{P(Y > 2 | x_1=A)} & = & 1/exp(-1.72) & = & 5.59 \\
+\end{aligned}
+\]
+
+Se comprueba que el \(OR\) es equivalente en todos los niveles de
+respuesta al cuestionario. Esta es una de las suposiciones de la
+regresión ordinal acumulativa. El \(odds\) de respuesta al cuestionario
+entre los niveles inferiores y superiores a uno dado, \(k\), es 5.59
+veces en el subtitulado \(B\) que en el \(A\). Esto indica que el
+subtitulado \(B\) es percibido por los estudiantes como de peor calidad
+que el subtitulado \(A\). Concretamente, el coeficiente \(\beta\) para
+\texttt{Treat} es el \texttt{log\ odds} de observar una mejor respuesta
+en una pregunta del test es 5.59 veces superior en el nivel de
+subtitulado \(A\) que en el \(B\). Aunque no suele ser de interés
+podemos usar los coeficientes de los umbrales
+(\texttt{Threshold\ coefficients}) para hacer una interpretación en base
+a probabilidades de respuesta. Por ejemplo, para el nivel de subtitulado
+\(B\) la:
+
+\[
+\begin{aligned}
+logit [P(Y \le 1)] & = & -3.97 - (-1.72) & = & -2.25 \\
+odds (P(Y \le 1)) & = & exp(logit [P(Y \le 1)]) & = & 0.11 \\
+P(Y \le 1) & = & \frac{exp(-2.25)}{1 + exp(-2.25)} & = & 0.10 \\
+P(Y \le 2) & = & \frac{exp(-0.73)}{1 + exp(-0.73)} & = & 0.32 \\
+P(Y = 2) & = & P(Y \le 2) - P(Y \le 1) & = &  0.23 
+\end{aligned}
+\]
+
+Para el subtitulado \(A\) no se tiene en cuenta el coeficiente
+\(TreatB\) ya que el valor \(x_1\) es cero:
+
+\[
+\begin{aligned}
+logit [P(Y \le 1)] & = & & & -3.97\\
+odds (P(Y \le 1)) & = & exp(logit [P(Y \le 1)]) & = & 0.02 \\
+P(Y \le 1) & = & \frac{exp(-3.97)}{1 + exp(-3.97)} & = & 0.02
+\end{aligned}
+\]
+
+En Tabla~\ref{tbl-probs-clm-treat} se muestran las probabilidades para
+ambos niveles de subtitulado y todos los posibles valores de respuesta.
+
+\hypertarget{tbl-probs-clm-treat}{}
+\begin{longtable}[]{@{}lrrrrr@{}}
+\caption{\label{tbl-probs-clm-treat}Probabilidades de respuesta para el
+modelo ordinal Response \textasciitilde{} Treat}\tabularnewline
+\toprule\noalign{}
+& 1 & 2 & 3 & 4 & 5 \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+& 1 & 2 & 3 & 4 & 5 \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+A & 0.018 & 0.061 & 0.08 & 0.315 & 0.526 \\
+B & 0.095 & 0.229 & 0.19 & 0.320 & 0.166 \\
+\end{longtable}
+
+\hypertarget{ajuste-del-modelo-ordinal-response-treat-period.}{%
+\subsection{Ajuste del modelo Ordinal Response \textasciitilde{} Treat +
+Period.}\label{ajuste-del-modelo-ordinal-response-treat-period.}}
+
+Para saber si existe un efecto periodo, añadimos como predictor la
+variable \texttt{Period}.
+
+\[
+\text{logit}(p(y_i \leq k)) = \tau_k - \beta_1 \text{Treat}_i - \beta_2 \text{Period}_i
+\]
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{clm\_treat\_period }\OtherTok{\textless{}{-}}
+    \FunctionTok{clm}\NormalTok{(}
+\NormalTok{        Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{+}\NormalTok{ Period,}
+        \AttributeTok{data =}\NormalTok{ df\_clean, }\AttributeTok{link =} \StringTok{"logit"}
+\NormalTok{    )}
+\FunctionTok{summary}\NormalTok{(clm\_treat\_period)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+formula: Response ~ Treat + Period
+data:    df_clean
+
+ link  threshold nobs logLik   AIC     niter max.grad cond.H 
+ logit flexible  2980 -3957.88 7927.76 5(0)  1.94e-10 4.1e+01
+
+Coefficients:
+        Estimate Std. Error z value Pr(>|z|)    
+TreatB  -1.74090    0.07339  -23.72  < 2e-16 ***
+Period2 -0.27560    0.06805   -4.05 5.12e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+    Estimate Std. Error z value
+1|2 -4.13085    0.10507 -39.314
+2|3 -2.60905    0.07872 -33.143
+3|4 -1.81652    0.07073 -25.681
+4|5 -0.25187    0.06153  -4.093
+\end{verbatim}
+
+\normalsize
+
+Vemos que ambos coeficientes son significativos y con signo negativo. Un
+signo negativo en el efecto periodo está asociado con que la valoración
+del subtitulado empeora en el segundo periodo independientemente de si
+se trata del subtitulado correcto o incorrecto. Aplicando el mismo
+razonamiento del apartado anterior, el \(OR\) del efecto periodo es
+\(1/exp(-0.28) = 1.32\). Lo que quiere decir que una vez controlado el
+efecto principal del tratamiento, el subtitulado en el segundo periodo
+es valorado como de inferior calidad que en el primero. Esto estaría
+indicando que los estudiantes son más exigentes con el subtitulado en la
+segunda actividad independientemente de su calidad real.
+
+\hypertarget{ajuste-del-modelo-ordinal-response-treat-period.-1}{%
+\subsection{Ajuste del modelo Ordinal Response \textasciitilde{} Treat *
+Period.}\label{ajuste-del-modelo-ordinal-response-treat-period.-1}}
+
+Añadimos al modelo la interacción entre subtitulado y periodo. Esta
+interacción corresponde al efecto secuencia. Se puede demostrar que los
+modelos \texttt{Response\ \textasciitilde{}\ Treat*Period} y
+\texttt{Response\ \textasciitilde{}\ Treat\ +\ Period\ +\ Seq} son
+equivalentes si se cambia el contraste por defecto utilizado en R, que
+es \texttt{treatment}, a \texttt{sum} \footnote{Ver
+  Apéndice~\ref{sec-contrasts} para una discusión sobre el significado y
+  la interpretación de los contrastes \texttt{treatment} y \texttt{sum}.}.
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{options}\NormalTok{(}\AttributeTok{contrasts =} \FunctionTok{rep}\NormalTok{(}\StringTok{"contr.sum"}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\NormalTok{clm\_treat\_period\_seq.sum }\OtherTok{\textless{}{-}}
+    \FunctionTok{clm}\NormalTok{(}
+\NormalTok{        Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{+}\NormalTok{ Period }\SpecialCharTok{+}\NormalTok{ Seq,}
+        \AttributeTok{data =}\NormalTok{ df\_clean, }\AttributeTok{link =} \StringTok{"logit"}
+\NormalTok{    )}
+\FunctionTok{coef}\NormalTok{(clm\_treat\_period\_seq.sum)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+       1|2        2|3        3|4        4|5     Treat1    Period1       Seq1 
+-3.1266457 -1.6083838 -0.8184857  0.7499332  0.8739547  0.1396182  0.1062749 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{options}\NormalTok{(}\AttributeTok{contrasts =} \FunctionTok{rep}\NormalTok{(}\StringTok{"contr.sum"}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\NormalTok{clm\_treat.period.sum }\OtherTok{\textless{}{-}}
+    \FunctionTok{clm}\NormalTok{(}
+\NormalTok{        Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{*}\NormalTok{ Period,}
+        \AttributeTok{data =}\NormalTok{ df\_clean, }\AttributeTok{link =} \StringTok{"logit"}
+\NormalTok{    )}
+\FunctionTok{coef}\NormalTok{(clm\_treat.period.sum)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+           1|2            2|3            3|4            4|5         Treat1 
+    -3.1266457     -1.6083838     -0.8184857      0.7499332      0.8739547 
+       Period1 Treat1:Period1 
+     0.1396182      0.1062749 
+\end{verbatim}
+
+\normalsize
+
+Sin embargo los coeficientes son diferentes si el contraste es
+\texttt{treatment} \footnote{Los interceptores sí son iguales.}:
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{options}\NormalTok{(}\AttributeTok{contrasts =} \FunctionTok{rep}\NormalTok{(}\StringTok{"contr.treatment"}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\NormalTok{clm\_treat\_period\_seq }\OtherTok{\textless{}{-}}
+    \FunctionTok{clm}\NormalTok{(}
+\NormalTok{        Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{+}\NormalTok{ Period }\SpecialCharTok{+}\NormalTok{ Seq,}
+        \AttributeTok{data =}\NormalTok{ df\_clean, }\AttributeTok{link =} \StringTok{"logit"}
+\NormalTok{    )}
+\FunctionTok{coef}\NormalTok{(clm\_treat\_period\_seq)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+       1|2        2|3        3|4        4|5     TreatB    Period2      SeqBA 
+-4.2464935 -2.7282315 -1.9383335 -0.3699146 -1.7479094 -0.2792363 -0.2125498 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{options}\NormalTok{(}\AttributeTok{contrasts =} \FunctionTok{rep}\NormalTok{(}\StringTok{"contr.treatment"}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\NormalTok{clm\_treat.period }\OtherTok{\textless{}{-}}
+    \FunctionTok{clm}\NormalTok{(}
+\NormalTok{        Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{*}\NormalTok{ Period,}
+        \AttributeTok{data =}\NormalTok{ df\_clean, }\AttributeTok{link =} \StringTok{"logit"}
+\NormalTok{    )}
+\FunctionTok{coef}\NormalTok{(clm\_treat.period)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+           1|2            2|3            3|4            4|5         TreatB 
+    -4.2464935     -2.7282315     -1.9383335     -0.3699146     -1.9604592 
+       Period2 TreatB:Period2 
+    -0.4917861      0.4250996 
+\end{verbatim}
+
+\normalsize
+
+En definitiva, los cuatro modelos anteriores son equivalentes y, como se
+demuestra en Apéndice~\ref{sec-contrasts}, se pueden obtener los
+coeficientes del modelo \texttt{clm\_treat.period} a partir de los
+coeficientes del modelo \texttt{clm\_treat.period.sum}. Por ejemplo, el
+coeficiente \(TreatB\) del modelo \texttt{clm\_treat.period}:
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{2} \SpecialCharTok{*}\NormalTok{ (}\FunctionTok{coef}\NormalTok{(clm\_treat.period.sum)[}\StringTok{"Treat1"}\NormalTok{] }\SpecialCharTok{+} \FunctionTok{coef}\NormalTok{(clm\_treat.period.sum)[}\StringTok{"Treat1:Period1"}\NormalTok{]))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+   Treat1 
+-1.960459 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{coef}\NormalTok{(clm\_treat.period)[}\StringTok{"TreatB"}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+   TreatB 
+-1.960459 
+\end{verbatim}
+
+\normalsize
+
+Sin embargo la interpretación de los coeficientes del segundo modelo,
+\texttt{clm\_treat.period}, es más sencilla ya que es la que estamos
+habituados a utilizar en R. Por ello, en este análisis se utilizará el
+modelo \texttt{clm\_treat.period}.
+
+El resumen del ajuste es:
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(clm\_treat.period)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+formula: Response ~ Treat * Period
+data:    df_clean
+
+ link  threshold nobs logLik   AIC     niter max.grad cond.H 
+ logit flexible  2980 -3953.01 7920.03 5(0)  2.14e-10 8.1e+01
+
+Coefficients:
+               Estimate Std. Error z value Pr(>|z|)    
+TreatB         -1.96046    0.10229 -19.166  < 2e-16 ***
+Period2        -0.49179    0.09744  -5.047 4.49e-07 ***
+TreatB:Period2  0.42510    0.13638   3.117  0.00183 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+    Estimate Std. Error z value
+1|2 -4.24649    0.11182 -37.977
+2|3 -2.72823    0.08821 -30.928
+3|4 -1.93833    0.08167 -23.732
+4|5 -0.36991    0.07308  -5.062
+\end{verbatim}
+
+\normalsize
+
+Vemos que los tres coeficientes son significativos. El principal efecto
+es el nivel de subtitulado obteniendo mejores puntuaciones el nievel
+\(A\); el efecto periodo es negativo por lo que el primer periodo
+obtiene mejores puntuaciones; por último, el efecto secuencia es
+positivo pero de menor valor absoluto que el efecto periodo. Esto quiere
+decir que el subtitulado de nivel \(B\) en el periodo 2 (secuencia
+\(AB\)), tiene un efecto periodo inferior que el subtitulado \(A\) en el
+mismo periodo. Matemáticamente:
+
+\[
+\begin{aligned}
+logit [P(Y \le 1 \mid Treat = A, Period = 1)] & = & -4.25 \\
+logit [P(Y \le 1 \mid Treat = B, Period = 1)] & = & -4.25 - (-1.96) \\
+logit [P(Y \le 1 \mid Treat = A, Period = 2)] & = & -4.25 - (-0.49) \\
+logit [P(Y \le 1 \mid Treat = B, Period = 2)] & = & -4.25 -(-1.96 -0.49 + 0.43)
+\end{aligned}
+\]
+
+En definitiva, en el nivel de subtitulado \(B\) apenas encontramos
+diferencias entre periodos, sin embargo, en el nivel de subtitulado
+\(A\) existe un efecto periodo cuyo valor en \texttt{logits} es -0.49.
+Es decir, que la valoración del subtitulado de nivel \(A\) es inferior
+en el segundo periodo que en el primero. En la
+Figura~\ref{fig-probs-clm-treat.period} podemos ver las predicciones del
+modelo.
+
+\begin{figure}[h]
+
+{\centering \includegraphics{42-Modelado_files/figure-pdf/fig-probs-clm-treat.period-1.pdf}
+
+}
+
+\caption{\label{fig-probs-clm-treat.period}Probabilidades de respuesta
+para el modelo ordinal Response \textasciitilde{} Treat * Period}
+
+\end{figure}
+
+\hypertarget{elecciuxf3n-del-modelo-ordinal-mediante-el-test-de-razuxf3n-de-verosimilitud.}{%
+\subsection{Elección del modelo ordinal mediante el test de razón de
+verosimilitud.}\label{elecciuxf3n-del-modelo-ordinal-mediante-el-test-de-razuxf3n-de-verosimilitud.}}
+
+Al ser los tres modelos anidados, podemos compararlos con la prueba de
+razón de verosimilitud. Comprobamos que el tercer modelo (el que tiene
+incorpora la interacción entre los subtítulos y el periodo) reduce
+significativamente el logaritmo de la función de verosimilitud y, por lo
+tanto, debe ser aceptado:
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{anova}\NormalTok{(clm\_treat, clm\_treat\_period, clm\_treat.period)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Likelihood ratio tests of cumulative link models:
+ 
+                 formula:                  link: threshold:
+clm_treat        Response ~ Treat          logit flexible  
+clm_treat_period Response ~ Treat + Period logit flexible  
+clm_treat.period Response ~ Treat * Period logit flexible  
+
+                 no.par    AIC  logLik LR.stat df Pr(>Chisq)    
+clm_treat             5 7942.2 -3966.1                          
+clm_treat_period      6 7927.8 -3957.9  16.448  1      5e-05 ***
+clm_treat.period      7 7920.0 -3953.0   9.738  1   0.001805 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\normalsize
+
+\hypertarget{comprobaciuxf3n-de-las-hipuxf3tesis-del-modelo.}{%
+\subsection{Comprobación de las hipótesis del
+modelo.}\label{comprobaciuxf3n-de-las-hipuxf3tesis-del-modelo.}}
+
+La principal hipótesis de un modelo de regresión logística ordinal
+proporcional acumulativa es que los coeficientes son iguales entre
+cualesquiera dos niveles de respuestas correlativos. Se han propuesto
+diversas fórmulas para comprobar esta hipótesis. El paquete
+\texttt{Ordinal} dispone de la función \texttt{nominal\_test()} que lo
+que hace es realizar un test para cada predictor ajustando un modelo en
+el que se ha relajado la condición de proporcionalidad y realiza el test
+de razón de verosimilitud de entre este modelo y el modelo que se quiere
+evaluar. Se constata que el test resulta significativo para
+\texttt{Treat} y para \texttt{Treat:Period}, por lo que para estas dos
+variables no se puede asumir que los coeficientes estimados se mantengas
+constantes en todos los niveles de respuesta.
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{nominal\_test}\NormalTok{(clm\_treat.period)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Tests of nominal effects
+
+formula: Response ~ Treat * Period
+             Df  logLik    AIC     LRT Pr(>Chi)    
+<none>          -3953.0 7920.0                     
+Treat         3 -3904.4 7828.9  97.172   <2e-16 ***
+Period        3 -3951.4 7922.7   3.307   0.3467    
+Treat:Period  9 -3884.8 7801.6 136.408   <2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\normalsize
+
+Lo que procede es ajustar el modelo relajando la constante de
+proporcionalidad de esas variables. Se ha realizado esto utilizando la
+función \texttt{vglm} del paquete \texttt{VGAM}. Vemos que ahora hay
+cuatro coeficientes para cada una de las variables \texttt{Treat} y
+\texttt{Treat:Period}.
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vglm\_treat.period }\OtherTok{\textless{}{-}} \FunctionTok{vglm}\NormalTok{(}
+\NormalTok{    Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{*}\NormalTok{ Period,}
+    \FunctionTok{cumulative}\NormalTok{(}\AttributeTok{parallel =}\NormalTok{ F }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{+}\NormalTok{ Treat}\SpecialCharTok{:}\NormalTok{Period, }\AttributeTok{reverse =}\NormalTok{ T),}
+    \AttributeTok{data =}\NormalTok{ df\_clean}
+\NormalTok{)}
+\FunctionTok{coef}\NormalTok{(vglm\_treat.period) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{data.frame}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+                          .
+(Intercept):1     6.2295614
+(Intercept):2     3.5001281
+(Intercept):3     2.2121438
+(Intercept):4     0.2998788
+TreatB:1         -4.0441016
+TreatB:2         -2.8029889
+TreatB:3         -2.2174630
+TreatB:4         -1.7926200
+Period2          -0.5345919
+TreatB:Period2:1  0.3509228
+TreatB:Period2:2  0.3607009
+TreatB:Period2:3  0.3891474
+TreatB:Period2:4  0.8024952
+\end{verbatim}
+
+\normalsize
+
+En la Figura~\ref{fig-probs-vglm-treat.period} se muestran las
+probabilidades de respuesta de este modelo.
+
+\begin{figure}[h]
+
+{\centering \includegraphics{42-Modelado_files/figure-pdf/fig-probs-vglm-treat.period-1.pdf}
+
+}
+
+\caption{\label{fig-probs-vglm-treat.period}Probabilidades de respuesta
+para el modelo ordinal no proporcional Response \textasciitilde{} Treat
+* Period}
+
+\end{figure}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{section}{%
+\chapter{}\label{section}}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{section-1}{%
+\chapter{}\label{section-1}}
 
 \bookmarksetup{startatroot}
 
@@ -2529,6 +3317,851 @@ el análisis estadístico.
 \NormalTok{df\_0 }\OtherTok{\textless{}{-}}\NormalTok{ df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(Response }\SpecialCharTok{==} \DecValTok{0}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+\normalsize
+
+\hypertarget{sec-contrasts}{%
+\chapter{Efecto secuencia e interacción tratamiento
+vs.~periodo.}\label{sec-contrasts}}
+
+Vamos a demostrar que el efecto secuencia es equivalente a la
+interacción de los factores tratamiento y periodo.
+
+\hypertarget{preparaciuxf3n.}{%
+\section{Preparación.}\label{preparaciuxf3n.}}
+
+Partimos del siguiente conjunto de datos generado aleatoriamente
+\footnote{Obsérvese que se la variable \texttt{Response} en esta
+  simulación es cuantitativa y no ordinal. Se ha realizado de esta forma
+  para poder usar un ajuste de mínimos cuadrados en lugar de una
+  regresión ordinal para facilitar el cálculo y su interpretación.}:
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{100}\NormalTok{)}
+\NormalTok{n }\OtherTok{\textless{}{-}} \DecValTok{1000}
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+    \AttributeTok{Response =} \FunctionTok{rnorm}\NormalTok{(n),}
+    \AttributeTok{Treat =} \FunctionTok{as.factor}\NormalTok{(}\FunctionTok{sample}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"B"}\NormalTok{), n, }\AttributeTok{replace =} \ConstantTok{TRUE}\NormalTok{)),}
+    \AttributeTok{Period =} \FunctionTok{as.factor}\NormalTok{(}\FunctionTok{sample}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{), n, }\AttributeTok{replace =} \ConstantTok{TRUE}\NormalTok{))}
+\NormalTok{)}
+
+\NormalTok{df}\SpecialCharTok{$}\NormalTok{Seq }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(}
+    \FunctionTok{ifelse}\NormalTok{(}
+\NormalTok{        df}\SpecialCharTok{$}\NormalTok{Period }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ df}\SpecialCharTok{$}\NormalTok{Treat }\SpecialCharTok{==} \StringTok{"A"} \SpecialCharTok{|}\NormalTok{ df}\SpecialCharTok{$}\NormalTok{Period }\SpecialCharTok{==} \DecValTok{2} \SpecialCharTok{\&}\NormalTok{ df}\SpecialCharTok{$}\NormalTok{Treat }\SpecialCharTok{==} \StringTok{"B"}\NormalTok{,}
+        \StringTok{"AB"}\NormalTok{,}
+        \StringTok{"BA"}
+\NormalTok{    )}
+\NormalTok{)}
+
+\FunctionTok{head}\NormalTok{(df, }\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+      Response Treat Period Seq
+1  -0.50219235     B      2  AB
+2   0.13153117     A      1  AB
+3  -0.07891709     A      2  BA
+4   0.88678481     A      2  BA
+5   0.11697127     A      1  AB
+6   0.31863009     A      2  BA
+7  -0.58179068     A      2  BA
+8   0.71453271     A      1  AB
+9  -0.82525943     B      2  AB
+10 -0.35986213     B      1  BA
+\end{verbatim}
+
+\normalsize
+
+Calculamos las medias por cada nivel de factor y combinaciones de
+niveles que utilizaremos luego en la interpretación de los coeficientes
+de los modelos
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{M }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{Response) }\CommentTok{\# 1 media de respuesta global}
+
+\CommentTok{\# 2 medias de respuesta para tratamientos A y B}
+\NormalTok{mTreat }\OtherTok{\textless{}{-}} \FunctionTok{with}\NormalTok{(df, }\FunctionTok{tapply}\NormalTok{(Response, Treat, mean))}
+
+\CommentTok{\# 2 medias de respuesta para periodos 1 y 2}
+\NormalTok{mPeriod }\OtherTok{\textless{}{-}} \FunctionTok{with}\NormalTok{(df, }\FunctionTok{tapply}\NormalTok{(Response, Period, mean))}
+
+\CommentTok{\# 2 medias de respuesta para secuencias AB y BA}
+\NormalTok{mSeq }\OtherTok{\textless{}{-}} \FunctionTok{with}\NormalTok{(df, }\FunctionTok{tapply}\NormalTok{(Response, Seq, mean))}
+
+\CommentTok{\# 4 medias de respuesta para las cuatro combinaciones de tratamiento y periodo}
+\NormalTok{m2 }\OtherTok{\textless{}{-}} \FunctionTok{with}\NormalTok{(df, }\FunctionTok{tapply}\NormalTok{(Response, }\FunctionTok{list}\NormalTok{(Treat, Period), mean))}
+
+\NormalTok{dTreat }\OtherTok{\textless{}{-}} \FunctionTok{diff}\NormalTok{(mTreat) }\CommentTok{\# diferencia de medias entre tratamientos A y B}
+
+\NormalTok{dPeriod }\OtherTok{\textless{}{-}} \FunctionTok{diff}\NormalTok{(mPeriod) }\CommentTok{\# diferencia de medias entre periodos 1 y 2}
+
+\NormalTok{d2 }\OtherTok{\textless{}{-}} \FunctionTok{diff}\NormalTok{(m2) }\CommentTok{\# diferencias entre niveles de tratamiento en cada nivel de periodo}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+
+\hypertarget{anuxe1lisis-con-un-solo-factor-tratamiento.}{%
+\section{Análisis con un solo factor
+(tratamiento).}\label{anuxe1lisis-con-un-solo-factor-tratamiento.}}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{l1 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat, df)}
+\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{t}\NormalTok{(}\FunctionTok{coef}\NormalTok{(l1))) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{gt}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{tbl-l1}{}
+\begin{longtable}{rr}
+\caption{\label{tbl-l1}Ajuste del modelo Response \textasciitilde{} Treat con contrasts
+treatment. }\tabularnewline
+
+\toprule
+X.Intercept. & TreatB \\ 
+\midrule
+0.03624217 & -0.03966751 \\ 
+\bottomrule
+\end{longtable}
+
+\normalsize
+
+Vemos que el intercepto es la media de la respuesta en el nivel de
+tratamiento \(A\):
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mTreat[}\DecValTok{1}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+         A 
+0.03624217 
+\end{verbatim}
+
+\normalsize
+
+Que la pendiente (parámetro \(TreatB\)) es la diferencia entre las
+medias tratamientos:
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dTreat}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+          B 
+-0.03966751 
+\end{verbatim}
+
+\normalsize
+
+Por ello, para conocer el efecto del tratamiento en el nivel \(B\) hay
+que sumar intercepto y pendiente:
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{coef}\NormalTok{(l1)[[}\DecValTok{1}\NormalTok{]] }\SpecialCharTok{+} \FunctionTok{coef}\NormalTok{(l1)[[}\DecValTok{2}\NormalTok{]] }\SpecialCharTok{{-}}\NormalTok{ mTreat[[}\DecValTok{2}\NormalTok{]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 1.214306e-16
+\end{verbatim}
+
+\normalsize
+
+Esto es así ya que por defecto R utiliza el contraste conocido como
+\texttt{codificación\ de\ tratamiento}:
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{contr.treatment}\NormalTok{(}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  2
+1 0
+2 1
+\end{verbatim}
+
+\normalsize
+
+Podemos ver la matriz ampliada añadiendo el intercepto, que siempre será
+una columna de 1's:
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{model.matrix}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{Treat, }\FunctionTok{expand.grid}\NormalTok{(}\AttributeTok{Treat =} \FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"B"}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  (Intercept) TreatB
+1           1      0
+2           1      1
+attr(,"assign")
+[1] 0 1
+attr(,"contrasts")
+attr(,"contrasts")$Treat
+[1] "contr.treatment"
+\end{verbatim}
+
+\normalsize
+
+Cada fila representa el nivel del tratamiento (fila 1 nivel \(A\) y fila
+2 nivel \(B\)) y las columnas representan los parámetros del modelo. Los
+valores son los niveles de tratamiento (0 ó 1). Para obtener el
+significado de cada parámetro, multiplicamos el valor del contraste por
+el parámetro. Así:
+
+\begin{itemize}
+\tightlist
+\item
+  De la primera fila obtenemos que el efecto del tratamiento \(A\) es el
+  intercepto: \(A = 1 \cdot Intercept + 0 \cdot TreatB\).
+\item
+  De la segunda fila obtenemos que el valor del parámetro \(TreatB\) es
+  la diferencia de los niveles de tratamiento.
+  \(B = 1 \cdot Intercept + 1 \cdot TreatB \Rightarrow TreatB = B - Intercept\).
+\end{itemize}
+
+Esto quiere decir que existe una variable para codificar el efecto
+tratamiento, y esta variable tiene el valor 0 para el nivel \(A\) por
+ser el de referencia y 1 para el nivel \(B\). La pendiente se codifica
+como la diferencia del efecto de los dos niveles (\(B - A\)).
+
+\hypertarget{anuxe1lisis-con-un-dos-factores-tratamiento-y-periodo.}{%
+\section{Análisis con un dos factores (tratamiento y
+periodo).}\label{anuxe1lisis-con-un-dos-factores-tratamiento-y-periodo.}}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{l2 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{*}\NormalTok{ Period, df)}
+\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{t}\NormalTok{(}\FunctionTok{coef}\NormalTok{(l2))) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{gt}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{tbl-l2}{}
+\begin{longtable}{rrrr}
+\caption{\label{tbl-l2}Ajuste del modelo Response \textasciitilde{} Treat * Period con
+contrasts treatment. }\tabularnewline
+
+\toprule
+X.Intercept. & TreatB & Period2 & TreatB.Period2 \\ 
+\midrule
+0.04138614 & -0.1076137 & -0.01125933 & 0.1343517 \\ 
+\bottomrule
+\end{longtable}
+
+\normalsize
+
+Vemos que el intercepto es la media del tratamiento \(A\) en el periodo
+\(1\) por ser estos los valores que R usa como referencia \footnote{R
+  utiliza como valor de referencia el nivel más bajo de factor.}:
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m2[}\StringTok{"A"}\NormalTok{, }\StringTok{"1"}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.04138614
+\end{verbatim}
+
+\normalsize
+
+El parámetro \(TreatB\) es la diferencia de medias entre los
+tratamientos en el periodo \(1\):
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m2[}\StringTok{"B"}\NormalTok{, }\StringTok{"1"}\NormalTok{] }\SpecialCharTok{{-}}\NormalTok{ m2[}\StringTok{"A"}\NormalTok{, }\StringTok{"1"}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] -0.1076137
+\end{verbatim}
+
+\normalsize
+
+El parámetro \(Period2\) es la diferencia de medias entre los periodos
+en el nivel de tratamiento \(A\):
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m2[}\StringTok{"A"}\NormalTok{, }\StringTok{"2"}\NormalTok{] }\SpecialCharTok{{-}}\NormalTok{ m2[}\StringTok{"A"}\NormalTok{, }\StringTok{"1"}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] -0.01125933
+\end{verbatim}
+
+\normalsize
+
+Finalmente, \(TreatB:Period2\) es la diferencia entre el segundo periodo
+y el primero del nivel de tratamiento \(B\) menos la diferencia entre
+periodos del nivel de tratamiento \(A\):
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m2[}\StringTok{"B"}\NormalTok{, }\StringTok{"2"}\NormalTok{] }\SpecialCharTok{{-}}\NormalTok{ m2[}\StringTok{"B"}\NormalTok{, }\StringTok{"1"}\NormalTok{] }\SpecialCharTok{{-}}\NormalTok{ (m2[}\StringTok{"A"}\NormalTok{, }\StringTok{"2"}\NormalTok{] }\SpecialCharTok{{-}}\NormalTok{ m2[}\StringTok{"A"}\NormalTok{, }\StringTok{"1"}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.1343517
+\end{verbatim}
+
+\normalsize
+
+La matriz de contraste nos permite razonar por qué esto es así:
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{model.matrix}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{*}\NormalTok{ Period, }\FunctionTok{expand.grid}\NormalTok{(}\AttributeTok{Treat =} \FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"B"}\NormalTok{), }\AttributeTok{Period =} \FunctionTok{c}\NormalTok{(}\StringTok{"1"}\NormalTok{, }\StringTok{"2"}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  (Intercept) TreatB Period2 TreatB:Period2
+1           1      0       0              0
+2           1      1       0              0
+3           1      0       1              0
+4           1      1       1              1
+attr(,"assign")
+[1] 0 1 2 3
+attr(,"contrasts")
+attr(,"contrasts")$Treat
+[1] "contr.treatment"
+
+attr(,"contrasts")$Period
+[1] "contr.treatment"
+\end{verbatim}
+
+\normalsize
+
+\begin{itemize}
+\tightlist
+\item
+  La primera fila es el intercepto y corresponde con el tratamiento
+  \(A\) y el periodo 1.
+\item
+  La segunda fila es el efecto del tratamiento \(B\) en el periodo 1 y
+  se calcula con la suma del intercepto y el parámetro \(TreatB\). Luego
+  \(TreatB\) es la diferencia del efecto de los tratamientos en el
+  periodo 1.
+\item
+  Análogamente con la tercera fila concluimos que \(Period2\) es la
+  deferencia entre periodos para el tratamiento \(A\).
+\item
+  Finalmente, la cuarta fila, es el tratamiento \(B\) en el periodo 2 y,
+  por lo tanto, \(Treat2:Period2\) es la diferencia el nivel \(B\) de
+  tratamiento y el periodo 2 y el nivel de tratamiento \(A\) en el
+  periodo 1, menos la diferencia de niveles de tratamiento para el
+  periodo 1 y menos la diferencia de periodos para el tratamiento \(A\).
+\end{itemize}
+
+Obsérvese que antes hemos calculado de forma diferente
+\(TreatB:Period2\). Podemos aplicar la fórmula anterior y comprobar que
+produce el mismo resultado:
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m2[}\StringTok{"B"}\NormalTok{, }\StringTok{"2"}\NormalTok{] }\SpecialCharTok{{-}}\NormalTok{ m2[}\StringTok{"A"}\NormalTok{, }\StringTok{"1"}\NormalTok{] }\SpecialCharTok{{-}}\NormalTok{ (m2[}\StringTok{"B"}\NormalTok{, }\StringTok{"1"}\NormalTok{] }\SpecialCharTok{{-}}\NormalTok{ m2[}\StringTok{"A"}\NormalTok{, }\StringTok{"1"}\NormalTok{]) }\SpecialCharTok{{-}}\NormalTok{ (m2[}\StringTok{"A"}\NormalTok{, }\StringTok{"2"}\NormalTok{] }\SpecialCharTok{{-}}\NormalTok{ m2[}\StringTok{"A"}\NormalTok{, }\StringTok{"1"}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.1343517
+\end{verbatim}
+
+\normalsize
+
+\hypertarget{factor-secuencia.}{%
+\section{Factor secuencia.}\label{factor-secuencia.}}
+
+Vamos a incorporar la secuencia como factor para ver si es equivalente a
+la interacción entre periodo y tratamiento. En caso de serlo los
+coeficientes del modelo ajustado deberían coincidir. Sin embargo vemos
+que los modelos l2 (Tabla~\ref{tbl-l2}) y l3 (Tabla~\ref{tbl-l3}) tienen
+distintos coeficientes.
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{l3 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{+}\NormalTok{ Period }\SpecialCharTok{+}\NormalTok{ Seq, df)}
+\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{t}\NormalTok{(}\FunctionTok{coef}\NormalTok{(l3))) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{gt}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{tbl-l3}{}
+\begin{longtable}{rrrr}
+\caption{\label{tbl-l3}Ajuste del modelo Response \textasciitilde{} Treat + Period + Seq con
+contrasts treatment. }\tabularnewline
+
+\toprule
+X.Intercept. & TreatB & Period2 & SeqBA \\ 
+\midrule
+0.04138614 & -0.04043786 & 0.05591654 & -0.06717587 \\ 
+\bottomrule
+\end{longtable}
+
+\normalsize
+
+Los coeficientes no coinciden debido a que estamos usando el contraste
+con \texttt{codificación\ de\ tratamientos}. Pero si cambiamos a
+\texttt{codificación\ de\ sumas}:
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{options}\NormalTok{(}\AttributeTok{contrasts =} \FunctionTok{rep}\NormalTok{(}\StringTok{"contr.sum"}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+
+Y volvemos a ajustar los modelos que ya usarán el
+\texttt{contraste\ suma}, podemos comprobar que ahora tienen los mismos
+coeficientes y el coeficiente \(Seq1\) del modelo que incorpora el
+efecto secuencia (Tabla~\ref{tbl-l4}) es igual que el coeficiente
+\(Treat1:Period1\) del modelo que incorpora la interacción entre
+tratamiento y periodo (Tabla~\ref{tbl-l5}). Obsérvese que los nombres de
+los coeficientes han cambiado respecto al
+\texttt{contraste\ de\ tratamiento}. Esto sucede porque la
+interpretación de los coeficientes varía como se explica a continuación.
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{l4 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{+}\NormalTok{ Period }\SpecialCharTok{+}\NormalTok{ Seq, df)}
+\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{t}\NormalTok{(}\FunctionTok{coef}\NormalTok{(l4))) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{gt}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{tbl-l4}{}
+\begin{longtable}{rrrr}
+\caption{\label{tbl-l4}Ajuste del modelo Response \textasciitilde{} Treat + Period + Seq con
+contrasts sum. }\tabularnewline
+
+\toprule
+X.Intercept. & Treat1 & Period1 & Seq1 \\ 
+\midrule
+0.01553755 & 0.02021893 & -0.02795827 & 0.03358794 \\ 
+\bottomrule
+\end{longtable}
+
+\normalsize
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{l5 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{*}\NormalTok{ Period, df)}
+\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{t}\NormalTok{(}\FunctionTok{coef}\NormalTok{(l5))) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{gt}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{tbl-l5}{}
+\begin{longtable}{rrrr}
+\caption{\label{tbl-l5}Ajuste del modelo Response \textasciitilde{} Treat * Period con
+contrasts sum. }\tabularnewline
+
+\toprule
+X.Intercept. & Treat1 & Period1 & Treat1.Period1 \\ 
+\midrule
+0.01553755 & 0.02021893 & -0.02795827 & 0.03358794 \\ 
+\bottomrule
+\end{longtable}
+
+\normalsize
+
+La interpretación de los contrastes es diferente. Para explicarlo,
+mostramos la matriz de contraste:
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{model.matrix}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{*}\NormalTok{ Period, }\FunctionTok{expand.grid}\NormalTok{(}\AttributeTok{Treat =} \FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"B"}\NormalTok{), }\AttributeTok{Period =} \FunctionTok{c}\NormalTok{(}\StringTok{"1"}\NormalTok{, }\StringTok{"2"}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  (Intercept) Treat1 Period1 Treat1:Period1
+1           1      1       1              1
+2           1     -1       1             -1
+3           1      1      -1             -1
+4           1     -1      -1              1
+attr(,"assign")
+[1] 0 1 2 3
+attr(,"contrasts")
+attr(,"contrasts")$Treat
+[1] "contr.sum"
+
+attr(,"contrasts")$Period
+[1] "contr.sum"
+\end{verbatim}
+
+\normalsize
+
+Vemos que ahora los niveles son 1 y -1 \footnote{El nivel de referencia
+  del factor tendrá valor 1 y el otro -1. Por ejemplo, en la variable
+  \texttt{Treat}, \(A\) tendrá +1 y \(B\) tendrá valor -1.} en vez de 0
+y 1 que se utilizan en el contraste de tratamiento. La interpretación es
+la siguiente:
+
+\begin{itemize}
+\tightlist
+\item
+  El interceptor es la media de la media de cada uno de los niveles de
+  factor. ¿Por qué?. El interceptor es el valor de la variable de
+  respuesta cuando cuando todas las variables explicativas valen 0. Esto
+  sucede en la media de la variable de respuesta ya que cero es el valor
+  que está en la mitad de +1 y -1. Podemos comprobar que la media global
+  coincide con el interceptor del modelo l4 (Tabla~\ref{tbl-l4}):
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(m2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.01553755
+\end{verbatim}
+
+\normalsize
+
+\begin{itemize}
+\tightlist
+\item
+  El coeficiente \(Treat1\) es la mitad la diferencia de la media entre
+  niveles de tratamiento (\(TreatA-TreatB\)). La media de cada
+  tratamiento se calcula como la media del tratamiento en cada periodo.
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialCharTok{{-}}\FunctionTok{diff}\NormalTok{(}\FunctionTok{apply}\NormalTok{(m2, }\DecValTok{1}\NormalTok{, mean)) }\SpecialCharTok{/} \DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+         B 
+0.02021893 
+\end{verbatim}
+
+\normalsize
+
+Otra forma de entender el coeficiente \(Treat1\) es como la cuarta parte
+de la diferencia de los efectos de los tratamientos en cada periodo.
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(m2[}\StringTok{"A"}\NormalTok{, }\StringTok{"1"}\NormalTok{] }\SpecialCharTok{+}\NormalTok{ m2[}\StringTok{"A"}\NormalTok{, }\StringTok{"2"}\NormalTok{] }\SpecialCharTok{{-}}\NormalTok{ (m2[}\StringTok{"B"}\NormalTok{, }\StringTok{"1"}\NormalTok{] }\SpecialCharTok{+}\NormalTok{ m2[}\StringTok{"B"}\NormalTok{, }\StringTok{"2"}\NormalTok{])) }\SpecialCharTok{/} \DecValTok{4}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.02021893
+\end{verbatim}
+
+\normalsize
+
+\begin{itemize}
+\tightlist
+\item
+  El coeficiente \(Period1\) es la mitad la diferencia de la media entre
+  periodos(\(Period1 - Period2\)). La media entre periodos se calcula
+  como la media del periodo para cada tratamiento.
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialCharTok{{-}}\FunctionTok{diff}\NormalTok{(}\FunctionTok{apply}\NormalTok{(m2, }\DecValTok{2}\NormalTok{, mean)) }\SpecialCharTok{/} \DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+          2 
+-0.02795827 
+\end{verbatim}
+
+\normalsize
+
+Otra forma de entender el coeficiente \(Period1\) es como la cuarta
+parte de la diferencia de los efectos del periodo en cada tratamiento.
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(m2[}\StringTok{"A"}\NormalTok{, }\StringTok{"1"}\NormalTok{] }\SpecialCharTok{+}\NormalTok{ m2[}\StringTok{"B"}\NormalTok{, }\StringTok{"1"}\NormalTok{] }\SpecialCharTok{{-}}\NormalTok{ (m2[}\StringTok{"A"}\NormalTok{, }\StringTok{"2"}\NormalTok{] }\SpecialCharTok{+}\NormalTok{ m2[}\StringTok{"B"}\NormalTok{, }\StringTok{"2"}\NormalTok{])) }\SpecialCharTok{/} \DecValTok{4}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] -0.02795827
+\end{verbatim}
+
+\normalsize
+
+\begin{itemize}
+\tightlist
+\item
+  El coeficiente \(Treat1:Period1\) es el coeficiente \(Treat1\) menos
+  la mitad de la diferencia de la media entre tratamientos para el
+  periodo 2 (\(TreatA-TreatB\)):
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialCharTok{{-}}\FunctionTok{diff}\NormalTok{(}\FunctionTok{apply}\NormalTok{(m2, }\DecValTok{1}\NormalTok{, mean)) }\SpecialCharTok{/} \DecValTok{2} \SpecialCharTok{+} \FunctionTok{diff}\NormalTok{(m2[, }\StringTok{"2"}\NormalTok{]) }\SpecialCharTok{/} \DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+         B 
+0.03358794 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{coef}\NormalTok{(l5)[}\DecValTok{2}\NormalTok{] }\SpecialCharTok{+} \FunctionTok{diff}\NormalTok{(m2[, }\StringTok{"2"}\NormalTok{]) }\SpecialCharTok{/} \DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+    Treat1 
+0.03358794 
+\end{verbatim}
+
+\normalsize
+
+El coeficiente \(Treat1:Period1\) también se puede calcular como
+\(Period1\) menos la mitad de la diferencia de la media entre periodos
+para el para el tratamiento \(B\) (\(Period1-Period2\)):
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialCharTok{{-}}\FunctionTok{diff}\NormalTok{(}\FunctionTok{apply}\NormalTok{(m2, }\DecValTok{2}\NormalTok{, mean)) }\SpecialCharTok{/} \DecValTok{2} \SpecialCharTok{+} \FunctionTok{diff}\NormalTok{(m2[}\StringTok{"B"}\NormalTok{, ]) }\SpecialCharTok{/} \DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+         2 
+0.03358794 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{coef}\NormalTok{(l5)[}\DecValTok{3}\NormalTok{] }\SpecialCharTok{+} \FunctionTok{diff}\NormalTok{(m2[}\StringTok{"B"}\NormalTok{, ]) }\SpecialCharTok{/} \DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+   Period1 
+0.03358794 
+\end{verbatim}
+
+\normalsize
+
+Un tercera forma de interpretar el coeficiente \(Treat1:Period1\) es
+como la cuarta parte de la suma de la diferencia cruzada del efecto de
+cada tratamiento en cada periodo:
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(m2[}\StringTok{"A"}\NormalTok{, }\StringTok{"1"}\NormalTok{] }\SpecialCharTok{{-}}\NormalTok{ m2[}\StringTok{"A"}\NormalTok{, }\StringTok{"2"}\NormalTok{] }\SpecialCharTok{+}\NormalTok{ m2[}\StringTok{"B"}\NormalTok{, }\StringTok{"2"}\NormalTok{] }\SpecialCharTok{{-}}\NormalTok{ m2[}\StringTok{"B"}\NormalTok{, }\StringTok{"1"}\NormalTok{]) }\SpecialCharTok{/} \DecValTok{4}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.03358794
+\end{verbatim}
+
+\normalsize
+
+O reorganizando los términos de otra forma, sería la cuarta parte de la
+suma de la diferencia cruzada del efecto de cada periodo en cada
+tratamiento:
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(m2[}\StringTok{"B"}\NormalTok{, }\StringTok{"2"}\NormalTok{] }\SpecialCharTok{{-}}\NormalTok{ m2[}\StringTok{"A"}\NormalTok{, }\StringTok{"2"}\NormalTok{] }\SpecialCharTok{+}\NormalTok{ m2[}\StringTok{"A"}\NormalTok{, }\StringTok{"1"}\NormalTok{] }\SpecialCharTok{{-}}\NormalTok{ m2[}\StringTok{"B"}\NormalTok{, }\StringTok{"1"}\NormalTok{]) }\SpecialCharTok{/} \DecValTok{4}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.03358794
+\end{verbatim}
+
+\normalsize
+
+\begin{itemize}
+\tightlist
+\item
+  Podemos obtener el coeficiente \(TreatB\) del modelo \(l2\)
+  (Tabla~\ref{tbl-l2}) como \(-2 \cdot (Treat1 + Treat1:Period1)\):
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialCharTok{{-}}\DecValTok{2} \SpecialCharTok{*}\NormalTok{ (}\FunctionTok{coef}\NormalTok{(l5)[}\StringTok{"Treat1"}\NormalTok{] }\SpecialCharTok{+} \FunctionTok{coef}\NormalTok{(l5)[}\StringTok{"Treat1:Period1"}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+    Treat1 
+-0.1076137 
+\end{verbatim}
+
+\normalsize
+
+\begin{itemize}
+\tightlist
+\item
+  Análogamente el coeficiente \(Period2\) del modelo \(l2\)
+  (Tabla~\ref{tbl-l2}) se obtiene
+  \(-2 \cdot (Period1 + Treat1:Period1)\):
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialCharTok{{-}}\DecValTok{2} \SpecialCharTok{*}\NormalTok{ (}\FunctionTok{coef}\NormalTok{(l5)[}\StringTok{"Period1"}\NormalTok{] }\SpecialCharTok{+} \FunctionTok{coef}\NormalTok{(l5)[}\StringTok{"Treat1:Period1"}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+    Period1 
+-0.01125933 
+\end{verbatim}
+
+\normalsize
+
+\begin{itemize}
+\tightlist
+\item
+  El coeficiente \(TreatB:Period2\) se obtiene como
+  \(4 \cdot Treat1:Period1\):
+\end{itemize}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{4} \SpecialCharTok{*}\NormalTok{ (}\FunctionTok{coef}\NormalTok{(l5)[}\StringTok{"Treat1:Period1"}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Treat1:Period1 
+     0.1343517 
+\end{verbatim}
+
+\normalsize
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{options}\NormalTok{(}\AttributeTok{contrasts =} \FunctionTok{rep}\NormalTok{(}\StringTok{"contr.treatment"}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\NormalTok{l6 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{+}\NormalTok{ Period, df)}
+\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{t}\NormalTok{(}\FunctionTok{coef}\NormalTok{(l6))) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{gt}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable*}{rrr}
+\toprule
+X.Intercept. & TreatB & Period2 \\ 
+\midrule
+0.01120158 & -0.04259114 & 0.05480989 \\ 
+\bottomrule
+\end{longtable*}
+
+\normalsize
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{options}\NormalTok{(}\AttributeTok{contrasts =} \FunctionTok{rep}\NormalTok{(}\StringTok{"contr.sum"}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\NormalTok{l7 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{+}\NormalTok{ Period, df)}
+\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{t}\NormalTok{(}\FunctionTok{coef}\NormalTok{(l7))) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{gt}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable*}{rrr}
+\toprule
+X.Intercept. & Treat1 & Period1 \\ 
+\midrule
+0.01731095 & 0.02129557 & -0.02740495 \\ 
+\bottomrule
+\end{longtable*}
 
 \normalsize
 

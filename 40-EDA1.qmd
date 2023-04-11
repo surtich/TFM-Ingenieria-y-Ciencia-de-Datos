@@ -385,7 +385,38 @@ get_freqs <- function(df = df_freqs, ...) {
 ```
 
 
-En la @fig-freqs representamos la frecuencia relativa del valor de respuesta para cada grupo y test en todas la preguntas. Esta es otra forma de comparar los niveles de subtitulado.
+En la @fig-freqs representamos la frecuencia relativa del valor de respuesta para cada grupo y test en todas la preguntas
+^[En el @tbl-resume se presenta la misma información con los valores absolutos.]. Esta es otra forma de comparar los niveles de subtitulado.
+
+
+```{r}
+df_resume <- df_all %>%
+    dplyr::select(Subject, Period, Seq, Treat, Response, Question) %>%
+    group_by(Seq, Period, Treat) %>%
+    count(Response) %>%
+    ungroup()
+
+min_freq_response <- min(df_resume$n)
+max_freq_response <- max(df_resume$n)
+wine_red <- "#58181F"
+
+```
+
+```{r}
+#| label: tbl-resume
+#| tbl-cap: Resumen de frecuencias de respuesta.
+df_resume %>%
+    pivot_wider(id_cols = c(Seq, Period, Treat), names_from = Response, values_from = n) %>%
+    gt() %>%
+    tab_spanner(columns = `1`:`5`, label = "Response") %>%
+    data_color(
+        columns = `1`:`5`,
+        colors = scales::col_numeric(
+            palette = c("white", wine_red), domain = c(min_freq_response, max_freq_response)
+        )
+    )
+```
+
 
 La @fig-freqs muestra algunas cuestiones interesantes:
 

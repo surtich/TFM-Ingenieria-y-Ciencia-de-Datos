@@ -30,6 +30,7 @@ vídeos"
   appendices:
     - 75-Preprocesado.qmd
     - 75-Setup.qmd
+    - 75-Contrasts.qmd
 
   cover-image: "images/logo-cover.png"
   favicon: "images/logo.png"

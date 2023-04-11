@@ -101,7 +101,7 @@ table %>%
 
 
 Con la tabla de contingencia calculamos las distancias entre preguntas y realizamos el agrupamiento. 
-En el dendograma se aprecian claramente tres agrupamientos. Es muy interesante constatar que los tres grupos están formados por preguntas que en su mayor parte son correlativas. Esto es consistente con que al elaborar un test normalmente se colocan las preguntas por unidades temáticas y con que el encuestado también suele hacerlo teniendo en cuenta esta estructura y tiende a responder de forma similar a las preguntas correlativas.
+En el dendograma se aprecian claramente tres conglomerados. Es muy interesante constatar que los tres grupos están formados por preguntas que en su mayor parte son correlativas. Esto es consistente con que al elaborar un test normalmente se colocan las preguntas por unidades temáticas y con que el encuestado también suele hacerlo teniendo en cuenta esta estructura y tiende a responder de forma similar a las preguntas correlativas.
 
 
 ```{r}
@@ -120,20 +120,34 @@ plot(cluster)
 Podemos distinguir los siguientes grupos y subgrupos:
 
 * Grupo 1: Trata sobre la corrección del subtítulo.
-    * Subgrupo 05, 06, 07, 08, 09: Preguntas sobre si la información que presenta el subtítulo es correcta y está bien escrita.
-    * Pregunta 18: Valoración general del subtitulado. El que esta pregunta esté incluida en el grupo sobre corrección estaría indicando que este es el apartado al que más importancia dan los estudiantes a la hora de valorar la calidad del subtitulado.
+    * Subgrupo 05, 06, 07, 08, 09: preguntas sobre si la información que presenta el subtítulo es correcta y está bien escrita.
+    * Pregunta 18: valoración general del subtitulado. El que esta pregunta esté incluida en este grupo estaría indicando que este es el apartado al que más importancia dan los estudiantes a la hora de valorar la calidad del subtitulado.
 
 * Grupo 2: Es el más numeroso. En general está formado por preguntas sobre el grado de dificultad que presenta la lectura del subtítulo.
-    * Subgrupo preguntas Q01, Q02, Q03: Colocación de los subtítulos.
-    * Subgrupo preguntas Q10, Q11, Q12: Sincronización, velocidad y número de líneas.
-    * Subgrupo preguntas Q04, Q13: Contraste y legibilidad.
+    * Subgrupo preguntas Q01, Q02, Q03: colocación de los subtítulos.
+    * Subgrupo preguntas Q10, Q11, Q12: sincronización, velocidad y número de líneas.
+    * Subgrupo preguntas Q04, Q13: contraste y legibilidad.
 
-* Grupo 3: Son preguntas que tratan también sobre la corrección del subtítulo, pero con la diferencia sobre el grupo uno de  que se trata de cuestiones más sutiles y presumiblemente más difíciles de valorar por un novato. Está formado por las preguntas Q14, Q15, Q16 y Q17.
+* Grupo 3: son preguntas que tratan también sobre la corrección del subtítulo pero con la diferencia sobre el grupo uno de  que se trata de cuestiones más sutiles y presumiblemente más difíciles de valorar para un novato. Está formado por las preguntas Q14, Q15, Q16 y Q17.
 
 
 ## Análisis de tablas de contingencia.
 
 En esta sección se aplicarán técnicas estadísticas que se basan en tablas de contingencia. Una descripción teórica de este tipo de técnicas se pueden encontrar en @agresti_2018. Un tratamiento aplicado y basado en gráficos, que será el enfoque que seguiremos en este trabajo, es realizado en @frienly2015.
+
+
+### Asociación de variables con la prueba de homogeneidad $\chi^2$.
+
+Podemos usar la prueba de homogeneidad $\chi^2$ para saber si las respuestas al cuestionario son independientes del nivel de subtitulado, del periodo y de la secuencia. Constatamos que según esta prueba ninguna de estas variables es independiente de la respuesta.
+
+\scriptsize
+```{r}
+#| echo: true
+chisq.test(df_all$Treat, df_all$Response)
+chisq.test(df_all$Period, df_all$Response)
+chisq.test(df_all$Seq, df_all$Response)
+```
+\normalsize
 
 ### Comparación mediante mosaicos.
 
@@ -145,6 +159,7 @@ La información mostrada es similar a la que presentamos en la @fig-freqs, aunqu
 #| label: fig-mosaic
 #| fig-cap: Mosaico de tratamientos y secuencias.
 #| fig-height: 7
+#| fig-pos: h
 df_all %>%
     dplyr::select(Seq, Response, Treat, Cluster) %>%
     mosaic(Response ~ Treat + Seq,
@@ -175,7 +190,7 @@ OR_{(Treat, Seq \mid Response=r)}=\frac{
 }
 \end{equation}
 
-Si los $OR$ son similares en todos los niveles de respuesta, podemos afirmar que los grupos son homogéneos. Los resultados en R no producen significación estadística en ningún nivel de respuesta:
+Si los $OR$ son similares en todos los niveles de respuesta, podemos afirmar que los grupos son homogéneos. Los resultados en R no producen significación estadística en ningún nivel de respuesta por lo que según esta prueba estadística la secuencia de subtitulado no influiría en la respuesta de los estudiantes (ver @fig-or-1).
 
 
 \scriptsize
@@ -185,8 +200,6 @@ Si los $OR$ son similares en todos los niveles de respuesta, podemos afirmar que
 summary(loddsratio(~ Treat + Seq + Response_l, data = df_all))
 ```
 \normalsize
-
-La @fig-or-1 presenta visualmente la misma información.
 
 ```{r}
 #| label: fig-or-1
@@ -205,7 +218,7 @@ summary(loddsratio(~ Treat + Seq + Cluster + Response_l, data = df_all))
 ```
 \normalsize
 
-Sin embargo no podemos asumir que esta significación no se deba al azar ya que estamos realizando 18 contrastes de hipótesis diferentes y cada uno tiene un error tipo I asociado, con lo que la probabilidad de encontrar una significación estadística por puro azar aumenta. Se han propuesto correcciones del $p$-value como la de Bonferroni que no se aplican en este trabajo.
+Sin embargo no podemos asumir que esta significación no se deba al azar ya que estamos realizando 18 contrastes de hipótesis diferentes y cada uno tiene un error tipo I asociado, con lo que la probabilidad de encontrar una significación estadística por puro azar aumenta. Se han propuesto correcciones del $p$-value como la de Bonferroni para abordar este problema que no se aplican en este trabajo.
 
 Otro $OR$ que tiene interés calcular es el de tratamiento y periodo para evaluar si las respuestas son homogéneas. Mostramos tanto la tabla de resultados en R y también su representación visual (ver @fig-or-2).
 
@@ -223,7 +236,7 @@ summary(loddsratio(~ Treat + Period + Response_l, data = df_all))
 fourfold(xtabs(~ Treat + Period + Response, data = df_all))
 ```
 
-Podemos constatar la existencia de un efecto periodo de signo contrario para las preguntas 4 y 5. La razón de que se produzca este efecto periodo es que algunas de las respuestas de valoración 5 en ambos niveles de subtitulado y grupos en el primer periodo se convierten en valoración 4 en el segundo periodo. Es decir, que esto nos está indicando que los estudiantes de ambos grupos prestaron más atención o fueron más exigentes en el segundo visionado y decidieron no otorgar la puntuación máxima incluso en algunos items al subtitulado correcto. Que el efecto periodo sea contrario en dos preguntas no debe sorprendernos en este diseño de experimento, ya que un test es un juego de suma cero: la valoraciones que se ganan o se pierden en un nivel de respuesta necesariamente provoca que el resto de niveles pierdan o ganen respectivamente la misma cantidad. En cualquier caso, vemos que el efecto periodo es cuantitativa y cualitativamente pequeño. Al afectar solo al intercambio de valoraciones entre los niveles 4 y 5, y ser las dos positivas, es simplemente una pequeña corrección en la valoración del subtitulado.
+Podemos constatar la existencia de un efecto periodo de signo contrario para las preguntas 4 y 5. La razón de que se produzca este efecto periodo es que algunas de las respuestas de valoración 5 en ambos niveles de subtitulado y grupos en el primer periodo se convierten en valoración 4 en el segundo periodo. Esto indica que los estudiantes de ambos grupos prestaron más atención o fueron más exigentes en el segundo visionado y decidieron no otorgar la puntuación máxima incluso en algunos items al subtitulado correcto. Que el efecto periodo sea contrario en dos preguntas no debe sorprendernos en este diseño de experimento, ya que un test es un juego de suma cero: la valoraciones que se ganan o se pierden en un nivel de respuesta necesariamente provoca que el resto de niveles pierdan o ganen respectivamente la misma cantidad. En cualquier caso, vemos que el efecto periodo es cuantitativa y cualitativamente pequeño. Al afectar solo al intercambio de valoraciones entre los niveles 4 y 5, y ser las dos positivas, es simplemente una pequeña corrección en la valoración del subtitulado.
 
 
 

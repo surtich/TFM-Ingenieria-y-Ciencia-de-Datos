@@ -4,7 +4,7 @@ source("_setup.R")
 
 # Modelado estadístico. {ref:sec-analisis}
 
-En esta sección vamos a proponer varios modelos que permitan hacer inferencia sobre los datos.
+Vamos a construir diversos modelos para analizar la asociación de la variable respuesta sobre los dos niveles de subtitulado y la interacción con el periodo y la secuencia de tratamientos.
 
 ## Árboles de inferencia condicional.
 
@@ -41,12 +41,12 @@ plot(tree.1,
 )
 ```
 
-Podemos usar este modelo para hacer predicciones. La matriz de contingencia resultante es la siguiente:
+Aunque no es el objetivo del trabajo, podemos usar este modelo para hacer predicciones. La matriz de contingencia resultante es la siguiente:
 
 \scriptsize
 ```{r}
 tree1.cm <- confusionMatrix(predict(tree.1, df_clean), df_clean$Response)
-tree1.cm$table %>% t
+tree1.cm$table %>% t()
 ```
 \normalsize
 
@@ -80,3 +80,461 @@ tree2.cm <- confusionMatrix(predict(tree.2, df_clean), df_clean$Level)
 
 
 El árbol obtenido con variable respuesta `Level` (ver @fig-ctree2) es muy similar al otro (ver @fig-ctree) con la principal diferencia de que ahora la secuencia ha desaparecido como factor relevante. Por otro lado, el modelo siempre predice una respuesta positiva excepto para el subtitulado $B$ y grupo de preguntas 1, que es negativa (el nivel neutro nunca se predice). La exactitud del modelo ha subido a `r paste(100*round(tree2.cm$overall["Accuracy"], 2), "%", sep="")`. En cualquier caso no es una gran mejora ya que un modelo que predijera siempre la categoría mayoritaria (positiva), habría obtenido una exactitud de `r paste(100*round(max(prop.table(table(df_clean$Level))), 2), "%", sep="")`. Se han hecho simulaciones consistentes en incluir como factor las preguntas o usar como modelo un árbol de decisión convencional con resultados similares.
+
+## Regresión ordinal.
+
+El test de Likert es una escala ordinal. Los test estadísticos ANOVA o MANOVA presuponen que la variable de respuesta es cuantitativa y con distribución normal. Tratar las respuestas a un test de Likert como si fueran cuantitativas no es correcto por las siguientes razones:
+
+* Los niveles de respuesta no son necesariamente equidistantes: la distancia entre un par de opciones de respuesta puede no ser la misma para todos los pares de opciones de respuesta. Por ejemplo, la diferencia entre "Muy en desacuerdo" y "En desacuerdo" y la diferencia entre "De acuerdo" y "Muy de acuerdo" es de un nivel, pero psicológicamente puede ser percibida de forma diferente por cada sujeto.
+
+* La distribución de las respuestas ordinales puede ser no normal. En particular esto sucederá si hay hay muchas respuestas en los extremos del cuestionario.
+
+* Las varianzas de las variables no observadas que subyacen a las variables ordinales observadas pueden diferir entre grupos, tratamientos, periodos, etc. 
+
+En @kruschke2018 se han analizado los problemas potenciales de tratar datos ordinales como si fueran cuantitativos constatando que se pueden presentar las siguientes situaciones:
+
+* Se pueden encontrar diferencias significativas entre grupos cuando no las hay: error tipo I.
+* Se pueden obviar diferencias cuando en realidad sí existen: error tipo II.
+* Incluso se pueden invertir los efectos de un tratamiento.
+* También puede malinterpretarse la interacción entre factores.
+
+La regresión logística multinomial es una extensión de la regresión logística cuando la variable de respuesta es nominal. La regresión ordinal tiene en consideración que los valores nominales de la variable de respuesta están ordenados y por eso será el modelo que utilizaremos.
+
+### Variantes de la regresión ordinal.
+
+```{r}
+#| freeze: true
+x <- seq(-4, 4, length.out = 500)
+y <- dnorm(x, 0, 1.5)
+
+x_cuts <- c(-2.5, -1.1, 1.8)
+x_labels <- c(expression(tau[1]), expression(tau[2]), expression(tau[3]))
+
+data <- tibble(x, y)
+
+g <- data %>% ggplot(aes(x = x, y = y)) +
+    geom_line() +
+    theme(
+        axis.line = element_line(color = "black", linewidth = 1),
+        panel.background = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.line.y = element_blank(),
+        axis.ticks.y = element_blank(),
+        axis.text.y = element_blank(),
+        axis.text.x = element_text(color = "black", size = 12, hjust = 0.5, vjust = -3)
+    ) +
+    ylab(NULL)
+
+cumulative <- g + geom_vline(xintercept = x_cuts) +
+    geom_label(size = 2, data = data.frame(x = x_cuts - 0.4, y = rep(0.22, 3), label = paste("Y = ", 1:3, sep = "")), aes(x = x, y = y, label = label)) +
+    geom_label(size = 2, x = 2.5, y = 0.22, label = "Y = 4") +
+    scale_x_continuous(breaks = x_cuts, labels = x_labels) +
+    xlab(expression(tilde(Y))) +
+    coord_fixed(ratio = 5)
+
+
+sequencial <- list()
+for (i in 1:3) {
+    p <- g + geom_vline(xintercept = x_cuts[i]) +
+        geom_label(size = 2, x = x_cuts[i] - 1, y = 0.22, label = paste("Y = ", i, sep = "")) +
+        geom_label(size = 2, x = x_cuts[i] + 1, y = 0.22, label = paste("Y > ", i, sep = "")) +
+        scale_x_continuous(breaks = x_cuts[i], labels = x_labels[i]) +
+        xlab(bquote(tilde(Y)[.(i)])) +
+        coord_fixed(ratio = 30)
+    sequencial[[i]] <- p
+}
+
+adjacent <- list()
+for (i in 1:3) {
+    p <- g + geom_vline(xintercept = x_cuts[i]) +
+        geom_label(size = 2, x = x_cuts[i] - 1, y = 0.22, label = paste("Y = ", i, sep = "")) +
+        geom_label(size = 2, x = x_cuts[i] + 1, y = 0.22, label = paste("Y = ", i + 1, sep = "")) +
+        scale_x_continuous(breaks = x_cuts[i], labels = x_labels[i]) +
+        xlab(bquote(tilde(Y)[.(i)])) +
+        coord_fixed(ratio = 30)
+    adjacent[[i]] <- p
+}
+```
+
+
+Según @burkner2019 hay tres clases de regresión ordinal:
+
+* Regresión ordinal acumulativa.
+* Regresión ordinal secuencial.
+* Regresión ordinal adyacente.
+
+Nos centraremos en la primera ya que es la más habitual y adecuada para nuestro caso. El modelo acumulativo, CM, presupone que la variable ordinal observada, $Y$, proviene de la categorización de una variable latente (no observada) continua, $\tilde{Y}$. Hay $K$ umbrales $\tau_k$ que particionan $\tilde{Y}$ en $K + 1$ categorías ordenadas observables (ver @fig-cumulative). Si asumimos que $\tilde{Y}$ tiene una cierta distribución (por ejemplo, normal) con distribución acumulada $F$, se puede calcular la probabilidad de que $Y$ sea la categoría $k$ de esta forma:
+
+$$Pr(Y = k) = F(\tau_k) - F(\tau_{k-1})$$
+
+
+
+```{r}
+#| label: fig-cumulative
+#| fig-cap: Función latente en una regresión ordinal acumulativa.
+#| freeze: true
+cumulative
+```
+
+
+Por ejemplo en la @fig-cumulative,
+
+$$Pr(Y = 2) = F(\tau_2) - F(\tau_{1})$$
+
+Si suponemos que $\tilde{Y}$ tiene una relación lineal los predictores:
+
+$$\tilde{Y} = \eta + \epsilon = \beta_1 x_1 + \beta_2 x_2 + ... + \beta_p x_p + \epsilon$$
+
+Y que los errores son $N(0,\sigma^2)$. Entonces la función de probabilidad acumulada de los errores tendrá la misma forma que la de $\tilde{Y}$:
+
+$$\mathrm{Pr}(\epsilon \leq z) = F(z)$$
+
+Y podremos calcular la distribución de probabilidad acumulada de $Y$:
+
+$$\mathrm{Pr}(Y \leq k \mid \eta) = \mathrm{Pr}(\tilde{Y} \leq \tau_k \mid \eta) = \mathrm{Pr}(\eta + \epsilon \leq \tau_k) = \mathrm{Pr}(\epsilon \leq \tau_k - \eta) = F(\tau_k - \eta)$$
+
+Por lo que asumiendo la normalidad de los errores:
+
+$$\mathrm{Pr}(Y = k) = \Phi(\tau_k - \eta) - \Phi(\tau_{k - 1} - \eta)$$
+
+Donde hay que estimar los umbrales y los coeficientes de regresión.
+
+Otra popular elección, que usaremos en este trabajo por ser más fácil su interpretación, es suponer que la función acumulada se comporta como una logística. En ese caso, la interpretación de los coeficientes varía y se asemeja a la de la regresión logística. Se parte del supuesto de que el $logit$ de la función de probabilidad es lineal:
+
+$$logit [P(Y \le k)] = \tau_{k} - \eta = \tau_{k} - (\beta_1 x_1 + \beta_2 x_2 + ... + \beta_p x_p)$$
+
+Se puede demostrar fácilmente que, por ejemplo:
+
+$$\frac{\frac{\mathrm{Pr}(Y \leq k \mid \eta)}{\mathrm{Pr}(Y > k \mid \eta)}}{\frac{\mathrm{Pr}(Y \leq k+1 \mid \eta)}{\mathrm{Pr}(Y > k+1 \mid \eta)}} = \exp(\tau_{k} - \tau_{k+1})$$
+
+Y que
+^[En el siguiente apartado se demuestra esta fórmula.]:
+
+$$\frac{\frac{\mathrm{Pr}(Y \leq k \mid x_i = 1)}{\mathrm{Pr}(Y > k \mid x_i = 1)}}{\frac{\mathrm{Pr}(Y \leq k \mid x_i=0)}{\mathrm{Pr}(Y > k \mid x_i = 0)}} = \exp(-\beta_{i})$$
+
+
+$$\frac{\frac{\mathrm{Pr}(Y > k \mid x_i = x + 1)}{\mathrm{Pr}(Y \leq k \mid x_i = x + 1)}}{\frac{\mathrm{Pr}(Y > k \mid x_i = x)}{\mathrm{Pr}(Y \leq k \mid x_i = x)}} = \exp(\beta_{i})$$
+
+Es decir, que $\exp(\beta_{i})$ es el $OR$ (cambio en $odds$) de que la variable respuesta esté por encima de una determinada categoría versus estar por debajo de ella para una unidad de incremento del predictor $x_i$. Este modelo se denomina proporcional ya que cada predictor se asume que tiene los mismos efectos sobre todas las categorías de la variable de respuesta ordinal [ver @Liu2202].
+
+Un valor del coeficiente $\beta_i$ positivo indica que la relación entre el predictor $x_i$ y la función de $logit$ es positiva y, por lo tanto, se incrementa la posibilidad de un mayor valor de la variable respuesta.
+
+Esta suposición se puede relajar y permitir que los coeficientes de todos o de algunos de los predictores sean diferentes para cada pareja consecutiva de valores de respuesta. Tendríamos entonces más parámetros a estimar con una interpretación más compleja.
+
+
+### Ajuste del modelo Ordinal Response ~ Treat.
+
+Existen varios paquetes en R que permiten ajustar una regresión ordinal logística. El más popular es el paquete `Ordinal` [@ordinalR]. El paquete `VGAM` [@VGAMR] es más flexible y potente. Otra posibilidad es usar la función `polr` del paquete `MASS` [@MASSR]. En este trabajo usaremos el paquete Ordinal por permitir también incluir efectos aleatorios que utilizaremos en un apartado posterior. Comenzamos con un modelo simple que tiene como único predictor el nivel de subtitulado por ser la variable objetivo de nuestro modelo:
+
+$$
+\text{logit}(p(y_i \leq k)) = \tau_k - \beta_2 \text{Treat}_i
+$$
+
+\scriptsize
+```{r}
+#| echo: true
+clm_treat <-
+    clm(
+        Response ~ Treat,
+        data = df_clean, link = "logit"
+    )
+summary(clm_treat)
+```
+\normalsize
+
+```{r}
+intercept.1.2.coef <- round(coef(clm_treat)["1|2"], 2)
+intercept.2.3.coef <- round(coef(clm_treat)["2|3"], 2)
+treatB.coef <- round(coef(clm_treat)["TreatB"], 2)
+logit.1 <- coef(clm_treat)["1|2"] - coef(clm_treat)["TreatB"]
+logit.2 <- coef(clm_treat)["2|3"] - coef(clm_treat)["TreatB"]
+```
+
+El método `summary` muestra la información resumen. Para su interpretación vamos a seguir @christensen2018CumulativeLM. El número de condición Hessiano es inferior a $10^4$ lo que es indicativo de que no hay problemas de optimización
+^[El número de condición de Hessiano es una medida de la curvatura de una función en un punto.
+Si el número de condición de Hessiano es grande, la función es muy sensible a pequeñas perturbaciones y puede ser difícil de optimizar.]. La sección de coeficientes es la más importante. Se muestra la estimación de parámetros, el error estándar y la significación estadística de acuerdo al test de Wald
+^[El test de Wald es un contraste de hipótesis estadístico en el que se evalúa si el valor estimado es cero suponiendo que $W = \left(\frac{\hat{\theta} - \theta_0}{se(\hat{\theta})}\right)^2 \sim \chi^{2}$
+.]. Comprobamos que el valor es claramente significativo. Es decir, que los estudiantes han valorado de forma diferente la calidad del subtitulado en ambos vídeos. El estimador de maxima verosimilitud del coeficiente `TreatB` es `r treatB.coef`. Siguiendo la deducción de @bruin2011 podemos, por ejemplo, hacer la siguiente interpretación del significado de este coeficiente referido a dos niveles consecutivos de respuesta:
+
+$$
+\begin{aligned}
+logit [P(Y \le 1)] & = & `r intercept.1.2.coef` - (`r treatB.coef` x_1) \\
+logit [P(Y \le 2)] & = & `r intercept.2.3.coef` - (`r treatB.coef` x_1)
+\end{aligned}
+$$
+
+Por lo tanto los $odds$ serían:
+
+$$
+\begin{aligned}
+\frac{P(Y \le 1 \mid x_1 = B)}{P(Y > 1 \mid x_1 = B)} & = & exp(`r intercept.1.2.coef`)/exp(`r treatB.coef`) \\
+\frac{P(Y \le 1 \mid x_1 = A)}{P(Y > 1 \mid x_1 = A)} & = & exp(`r intercept.1.2.coef`) \\
+\frac{P(Y \le 2 \mid x_1 = B)}{P(Y > 2 \mid x_1 = B)} & = & exp(`r intercept.2.3.coef`)/exp(`r treatB.coef`) \\
+\frac{P(Y \le 2 \mid x_1 = A)}{P(Y > 2 \mid x_1 = A)} & = & exp(`r intercept.2.3.coef`)
+\end{aligned}
+$$
+
+Y los $OR$:
+
+$$
+\begin{aligned}
+\frac{P(Y \le 1 | x_1=B)}{P(Y > 1 | x_1=B)} / \frac{P(Y \le 1 | x_1=A)}{P(Y > 1 | x_1=A)} & = & 1/exp(`r treatB.coef`) & = & `r round(1/exp(coef(clm_treat)["TreatB"]), 2)` \\
+\frac{P(Y \le 2 | x_1=B)}{P(Y > 2 | x_1=B)} / \frac{P(Y \le 2 | x_1=A)}{P(Y > 2 | x_1=A)} & = & 1/exp(`r treatB.coef`) & = & `r round(1/exp(coef(clm_treat)["TreatB"]), 2)` \\
+\end{aligned}
+$$
+
+Se comprueba que el $OR$ es equivalente en todos los niveles de respuesta al cuestionario. Esta es una de las suposiciones de la regresión ordinal acumulativa. El $odds$ de respuesta al cuestionario entre los niveles inferiores y superiores a uno dado, $k$, es `r round(1/exp(coef(clm_treat)["TreatB"]), 2)` veces en el subtitulado $B$ que en el $A$. Esto indica que el subtitulado $B$ es percibido por los estudiantes como de peor calidad que el subtitulado $A$. Concretamente, el coeficiente $\beta$ para `Treat` es el `log odds` de observar una mejor respuesta en una pregunta del test es `r round(1/exp(coef(clm_treat)["TreatB"]), 2)` veces superior en el nivel de subtitulado $A$ que en el $B$. Aunque no suele ser de interés podemos usar los coeficientes de los umbrales (`Threshold coefficients`) para hacer una interpretación en base a probabilidades de respuesta. Por ejemplo, para el nivel de subtitulado $B$ la:
+
+$$
+\begin{aligned}
+logit [P(Y \le 1)] & = & `r intercept.1.2.coef` - (`r treatB.coef`) & = & `r round(logit.1, 2)` \\
+odds (P(Y \le 1)) & = & exp(logit [P(Y \le 1)]) & = & `r round(exp(logit.1),2)` \\
+P(Y \le 1) & = & \frac{exp(`r round(logit.1, 2)`)}{1 + exp(`r round(logit.1, 2)`)} & = & `r sprintf("%.2f", exp(logit.1)/(1+ exp(logit.1)))` \\
+P(Y \le 2) & = & \frac{exp(`r round(logit.2, 2)`)}{1 + exp(`r round(logit.2, 2)`)} & = & `r sprintf("%.2f", exp(logit.2)/(1+ exp(logit.2)))` \\
+P(Y = 2) & = & P(Y \le 2) - P(Y \le 1) & = &  `r sprintf("%.2f", exp(logit.2)/(1+exp(logit.2)) - exp(logit.1)/(1+ exp(logit.1)))` 
+\end{aligned}
+$$
+
+Para el subtitulado $A$ no se tiene en cuenta el coeficiente $TreatB$ ya que el valor $x_1$ es cero:
+
+
+$$
+\begin{aligned}
+logit [P(Y \le 1)] & = & & & `r intercept.1.2.coef`\\
+odds (P(Y \le 1)) & = & exp(logit [P(Y \le 1)]) & = & `r round(exp(coef(clm_treat)["1|2"]),2)` \\
+P(Y \le 1) & = & \frac{exp(`r round(coef(clm_treat)["1|2"], 2)`)}{1 + exp(`r round(coef(clm_treat)["1|2"], 2)`)} & = & `r round(exp(coef(clm_treat)["1|2"])/(1+ exp(coef(clm_treat)["1|2"])), 2)`
+\end{aligned}
+$$
+
+En @tbl-probs-clm-treat se muestran las probabilidades para ambos niveles de subtitulado y todos los posibles valores de respuesta.
+```{r}
+#| label: tbl-probs-clm-treat
+#| tbl-cap: Probabilidades de respuesta para el modelo ordinal Response ~ Treat
+probs_clm_treat <- predict(clm_treat, newdata = data.frame(Treat = c("A", "B")), type = "prob")$fit
+rownames(probs_clm_treat) <- c("A", "B")
+
+round(probs_clm_treat, 3) %>% knitr::kable()
+```
+
+### Ajuste del modelo Ordinal Response ~ Treat + Period.
+
+Para saber si existe un efecto periodo, añadimos como predictor la variable `Period`.
+
+
+$$
+\text{logit}(p(y_i \leq k)) = \tau_k - \beta_1 \text{Treat}_i - \beta_2 \text{Period}_i
+$$
+
+
+\scriptsize
+```{r}
+#| echo: true
+clm_treat_period <-
+    clm(
+        Response ~ Treat + Period,
+        data = df_clean, link = "logit"
+    )
+summary(clm_treat_period)
+```
+\normalsize
+
+Vemos que ambos coeficientes son significativos y con signo negativo. Un signo negativo en el efecto periodo está asociado con que la valoración del subtitulado empeora en el segundo periodo independientemente de si se trata del subtitulado correcto o incorrecto. Aplicando el mismo razonamiento del apartado anterior, el $OR$ del efecto periodo es $1/exp(`r round(coef(clm_treat_period)["Period2"], 2)`) = `r round(1/exp(coef(clm_treat_period)["Period2"]),2)`$. Lo que quiere decir que una vez controlado el efecto principal del tratamiento, el subtitulado en el segundo periodo es valorado como de inferior calidad que en el primero. Esto estaría indicando que los estudiantes son más exigentes con el subtitulado en la segunda actividad independientemente de su calidad real.
+
+
+### Ajuste del modelo Ordinal Response ~ Treat * Period.
+
+Añadimos al modelo la interacción entre subtitulado y periodo. Esta interacción corresponde al efecto secuencia. Se puede demostrar que los modelos `Response ~ Treat*Period` y `Response ~ Treat + Period + Seq` son equivalentes si se cambia el contraste por defecto utilizado en R, que es `treatment`, a `sum`
+^[Ver @sec-contrasts para una discusión sobre el significado y la interpretación de los contrastes `treatment` y `sum`.].
+
+\scriptsize
+```{r}
+#| echo: true
+options(contrasts = rep("contr.sum", 2))
+clm_treat_period_seq.sum <-
+    clm(
+        Response ~ Treat + Period + Seq,
+        data = df_clean, link = "logit"
+    )
+coef(clm_treat_period_seq.sum)
+```
+
+```{r}
+#| echo: true
+options(contrasts = rep("contr.sum", 2))
+clm_treat.period.sum <-
+    clm(
+        Response ~ Treat * Period,
+        data = df_clean, link = "logit"
+    )
+coef(clm_treat.period.sum)
+```
+
+\normalsize
+
+Sin embargo los coeficientes son diferentes si el contraste es `treatment`
+^[Los interceptores sí son iguales.]:
+
+\scriptsize
+```{r}
+#| echo: true
+options(contrasts = rep("contr.treatment", 2))
+clm_treat_period_seq <-
+    clm(
+        Response ~ Treat + Period + Seq,
+        data = df_clean, link = "logit"
+    )
+coef(clm_treat_period_seq)
+```
+
+```{r}
+#| echo: true
+options(contrasts = rep("contr.treatment", 2))
+clm_treat.period <-
+    clm(
+        Response ~ Treat * Period,
+        data = df_clean, link = "logit"
+    )
+coef(clm_treat.period)
+```
+\normalsize
+
+
+En definitiva, los cuatro modelos anteriores son equivalentes y, como se demuestra en @sec-contrasts, se pueden obtener los coeficientes del modelo `clm_treat.period` a partir de los coeficientes del modelo `clm_treat.period.sum`. Por ejemplo, el coeficiente $TreatB$ del modelo `clm_treat.period`:
+
+\scriptsize
+```{r}
+#| echo: true
+(-2 * (coef(clm_treat.period.sum)["Treat1"] + coef(clm_treat.period.sum)["Treat1:Period1"]))
+coef(clm_treat.period)["TreatB"]
+```
+\normalsize
+
+Sin embargo la interpretación de los coeficientes del segundo modelo, `clm_treat.period`, es más sencilla ya que es la que estamos habituados a utilizar en R. Por ello, en este análisis se utilizará el modelo `clm_treat.period`.
+
+El resumen del ajuste es:
+
+\scriptsize
+```{r}
+#| echo: true
+summary(clm_treat.period)
+```
+\normalsize
+
+Vemos que los tres coeficientes son significativos. El principal efecto es el nivel de subtitulado obteniendo mejores puntuaciones el nievel $A$; el efecto periodo es negativo por lo que el primer periodo obtiene mejores puntuaciones; por último, el efecto secuencia es positivo pero de menor valor absoluto que el efecto periodo. Esto quiere decir que el subtitulado de nivel $B$ en el periodo 2 (secuencia $AB$), tiene un efecto periodo inferior que el subtitulado $A$ en el mismo periodo. Matemáticamente:
+
+```{r}
+intercept.1.2.coef <- round(coef(clm_treat.period)["1|2"], 2)
+treatB.coef <- round(coef(clm_treat.period)["TreatB"], 2)
+period2.coef <- round(coef(clm_treat.period)["Period2"], 2)
+treatB.period2.coef <- round(coef(clm_treat.period)["TreatB:Period2"], 2)
+```
+
+
+$$
+\begin{aligned}
+logit [P(Y \le 1 \mid Treat = A, Period = 1)] & = & `r intercept.1.2.coef` \\
+logit [P(Y \le 1 \mid Treat = B, Period = 1)] & = & `r intercept.1.2.coef` - (`r treatB.coef`) \\
+logit [P(Y \le 1 \mid Treat = A, Period = 2)] & = & `r intercept.1.2.coef` - (`r period2.coef`) \\
+logit [P(Y \le 1 \mid Treat = B, Period = 2)] & = & `r intercept.1.2.coef` -(`r treatB.coef` `r  period2.coef` + `r treatB.period2.coef`)
+\end{aligned}
+$$
+
+En definitiva, en el nivel de subtitulado $B$ apenas encontramos diferencias entre periodos, sin embargo, en el nivel de subtitulado $A$ existe un efecto periodo cuyo valor en `logits` es `r period2.coef`. Es decir, que la valoración del subtitulado de nivel $A$ es inferior en el segundo periodo que en el primero. En la @fig-probs-clm-treat.period podemos ver las predicciones del modelo.
+
+```{r}
+#| label: fig-probs-clm-treat.period
+#| fig-cap: Probabilidades de respuesta para el modelo ordinal Response ~ Treat * Period
+
+nd <-
+    crossing(
+        Period = factor(c(1, 2)),
+        Treat = factor(c("A", "B")),
+        Response = factor(1:5, ordered = T)
+    )
+
+nd %>%
+    bind_cols(predict(clm_treat.period, nd, type = "prob")) %>%
+    ggplot(aes(x = glue::glue("{Treat}-{Period}"), y = fit, fill = Response)) +
+    geom_col() +
+    scale_fill_td(palette = "div5") +
+    scale_y_continuous(expand = c(0, 0), labels = scales::percent) +
+    labs(x = "Treat-Period", y = "Predicted probability")
+```
+
+### Elección del modelo ordinal mediante el test de razón de verosimilitud.
+
+Al ser los tres modelos anidados, podemos compararlos con la prueba de razón de verosimilitud. Comprobamos que el tercer modelo (el que tiene incorpora la interacción entre los subtítulos y el periodo) reduce significativamente el logaritmo de la función de verosimilitud y, por lo tanto, debe ser aceptado:
+
+\scriptsize
+```{r}
+#| echo: true
+anova(clm_treat, clm_treat_period, clm_treat.period)
+```
+\normalsize
+
+### Comprobación de las hipótesis del modelo.
+
+La principal hipótesis de un modelo de regresión logística ordinal proporcional acumulativa es que los coeficientes son iguales entre cualesquiera dos niveles de respuestas correlativos. Se han propuesto diversas fórmulas para comprobar esta hipótesis. El paquete `Ordinal` dispone de la función `nominal_test()` que lo que hace es realizar un test para cada predictor ajustando un modelo en el que se ha relajado la condición de proporcionalidad y realiza el test de razón de verosimilitud de entre este modelo y el modelo que se quiere evaluar. Se constata que el test resulta significativo para `Treat` y para `Treat:Period`, por lo que para estas dos variables no se puede asumir que los coeficientes estimados se mantengas constantes en todos los niveles de respuesta.
+
+\scriptsize
+```{r}
+#| echo: true
+nominal_test(clm_treat.period)
+```
+\normalsize
+
+ Lo que procede es ajustar el modelo relajando la constante de proporcionalidad de esas variables. Se ha realizado esto utilizando la función `vglm` del paquete `VGAM`. Vemos que ahora hay cuatro coeficientes para cada una de las variables `Treat` y `Treat:Period`.
+
+
+\scriptsize
+```{r}
+#| echo: true
+vglm_treat.period <- vglm(
+    Response ~ Treat * Period,
+    cumulative(parallel = F ~ Treat + Treat:Period, reverse = T),
+    data = df_clean
+)
+coef(vglm_treat.period) %>% data.frame()
+```
+\normalsize
+
+```{r}
+accuracy.vglm_treat.period <- sum(apply(predict(vglm_treat.period, newdata = df_clean, type = "response"), 1, which.max) == df_clean$Response) / nrow(df_clean)
+``` 
+
+En la  @fig-probs-vglm-treat.period se muestran las probabilidades de respuesta de este modelo.
+
+```{r}
+#| label: fig-probs-vglm-treat.period
+#| fig-cap: Probabilidades de respuesta para el modelo ordinal no proporcional Response ~ Treat * Period
+
+nd <-
+    crossing(
+        Period = factor(c(1, 2)),
+        Treat = factor(c("A", "B"))
+    )
+
+nd %>%
+    bind_cols(predict(vglm_treat.period, nd, type = "response")) %>%
+    pivot_longer(
+        cols = c(`1`, `2`, `3`, `4`, `5`),
+        names_to = "Response",
+        values_to = "fit"
+    ) %>%
+    ggplot(aes(x = glue::glue("{Treat}-{Period}"), y = fit, fill = Response)) +
+    geom_col() +
+    scale_fill_td(palette = "div5") +
+    scale_y_continuous(expand = c(0, 0), labels = scales::percent) +
+    labs(x = "Treat-Period", y = "Predicted probability")
+```
+
+
+
+
+
+
+
+
+#
+#
