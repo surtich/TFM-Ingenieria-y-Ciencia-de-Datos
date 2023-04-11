@@ -529,7 +529,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada nulla aug
 
 Phasellus vitae magna nec mi sagittis luctus vitae eu augue. Donec scelerisque laoreet arcu, eget tempor mi ultricies vel. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum at blandit ex. Vestibulum eu sagittis mauris. In hac habitasse platea dictumst. Duis eget ante vel lacus sollicitudin convallis quis eu velit. Sed auctor sem non nisi hendrerit, vel tincidunt tortor bibendum.
 
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, frame hidden, borderline west={3pt}{0pt}{shadecolor}, sharp corners, boxrule=0pt, breakable, enhanced]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[breakable, interior hidden, borderline west={3pt}{0pt}{shadecolor}, frame hidden, enhanced, boxrule=0pt, sharp corners]}{\end{tcolorbox}}\fi
 
 % Contents
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2230,8 +2230,8 @@ fueran cuantitativas no es correcto por las siguientes razones:
   diferente por cada sujeto.
 \item
   La distribución de las respuestas ordinales puede ser no normal. En
-  particular esto sucederá si hay hay muchas respuestas en los extremos
-  del cuestionario.
+  particular esto sucederá si hay muchas respuestas en los extremos del
+  cuestionario.
 \item
   Las varianzas de las variables no observadas que subyacen a las
   variables ordinales observadas pueden diferir entre grupos,
@@ -2256,16 +2256,39 @@ pueden presentar las siguientes situaciones:
   También puede malinterpretarse la interacción entre factores.
 \end{itemize}
 
-La regresión logística multinomial es una extensión de la regresión
-logística cuando la variable de respuesta es nominal. La regresión
-ordinal tiene en consideración que los valores nominales de la variable
+La Regresión Logística Multinomial es una extensión de la Regresión
+Logística cuando la variable de respuesta es nominal. La Regresión
+Ordinal tiene en consideración que los valores nominales de la variable
 de respuesta están ordenados y por eso será el modelo que utilizaremos.
 
 \hypertarget{variantes-de-la-regresiuxf3n-ordinal.}{%
-\subsection{Variantes de la regresión
-ordinal.}\label{variantes-de-la-regresiuxf3n-ordinal.}}
+\subsection{Variantes de la Regresión
+Ordinal.}\label{variantes-de-la-regresiuxf3n-ordinal.}}
 
-Según \textcite{burkner2019} hay tres clases de regresión ordinal:
+Los modelos lineales generalizados (\(GLM\)) son modelos en los que la
+variable respuesta no es normal. Para especificar un \(GLM\) son
+necesarios tres componentes \autocite[ver][]{oconnell2006}:
+
+\begin{itemize}
+\tightlist
+\item
+  Un componente aleatorio: será una distribución de probabilidad de la
+  familia exponencial que se asume que sigue la variable respuesta (en
+  la regresión logística será la distribución Binomial o la distribución
+  de Bernoulli).
+\item
+  Un componente lineal y aditivo de predictores.
+\item
+  Una función de enlace que realiza transformación de los valores del
+  componente lineal a los que puede tomar la variable respuesta. Por
+  ejemplo en la función logística será la función \(logit^{-1}(x)\).
+  Esta función permite pasar de un rango de valores
+  \((-\infty, +\infty)\) a un rango \((0, 1)\).
+\end{itemize}
+
+La Regresión Ordinal es una extensión de la Regresión Logística y, por
+lo tanto de \(GLM\). Según \textcite{burkner2019} hay tres clases de
+Regresión Ordinal:
 
 \begin{itemize}
 \tightlist
@@ -2307,9 +2330,9 @@ Por ejemplo en la Figura~\ref{fig-cumulative},
 Si suponemos que \(\tilde{Y}\) tiene una relación lineal los
 predictores:
 
-\[\tilde{Y} = \eta + \epsilon = \beta_1 x_1 + \beta_2 x_2 + ... + \beta_p x_p + \epsilon\]
+\[\tilde{Y} = \eta + \epsilon = \beta_1 x_1 + \beta_2 x_2 + ... + \beta_p x_p + \epsilon\],
 
-Y que los errores son \(N(0,\sigma^2)\). Entonces la función de
+y que los errores son \(N(0,\sigma^2)\). Entonces la función de
 probabilidad acumulada de los errores tendrá la misma forma que la de
 \(\tilde{Y}\):
 
@@ -2323,23 +2346,28 @@ Por lo que asumiendo la normalidad de los errores:
 
 \[\mathrm{Pr}(Y = k) = \Phi(\tau_k - \eta) - \Phi(\tau_{k - 1} - \eta)\]
 
-Donde hay que estimar los umbrales y los coeficientes de regresión.
-
-Otra popular elección, que usaremos en este trabajo por ser más fácil su
-interpretación, es suponer que la función acumulada se comporta como una
-logística. En ese caso, la interpretación de los coeficientes varía y se
-asemeja a la de la regresión logística. Se parte del supuesto de que el
-\(logit\) de la función de probabilidad es lineal:
+Donde hay que estimar los umbrales y los coeficientes de regresión. La
+función anterior es la conocida como la función de enlace
+\texttt{probit}. Otra función de enlace popular es la función
+\texttt{logit}. Es la que usaremos en este trabajo por ser más fácil su
+interpretación \footnote{En la práctica los coeficientes estimados con
+  las funciones de enlace \texttt{probit} y \texttt{logit} suelen
+  similares.}. Con esta función de enlace la interpretación de los
+coeficientes es parecida a de los coeficientes de la regresión
+logística. Se parte del supuesto de que el \(logit\) de la función de
+probabilidad es lineal:
 
 \[logit [P(Y \le k)] = \tau_{k} - \eta = \tau_{k} - (\beta_1 x_1 + \beta_2 x_2 + ... + \beta_p x_p)\]
 
-Se puede demostrar fácilmente que, por ejemplo:
+En ese caso, se puede demostrar fácilmente que, por ejemplo:
 
 \[\frac{\frac{\mathrm{Pr}(Y \leq k \mid \eta)}{\mathrm{Pr}(Y > k \mid \eta)}}{\frac{\mathrm{Pr}(Y \leq k+1 \mid \eta)}{\mathrm{Pr}(Y > k+1 \mid \eta)}} = \exp(\tau_{k} - \tau_{k+1})\]
 
 Y que \footnote{En el siguiente apartado se demuestra esta fórmula.}:
 
 \[\frac{\frac{\mathrm{Pr}(Y \leq k \mid x_i = 1)}{\mathrm{Pr}(Y > k \mid x_i = 1)}}{\frac{\mathrm{Pr}(Y \leq k \mid x_i=0)}{\mathrm{Pr}(Y > k \mid x_i = 0)}} = \exp(-\beta_{i})\]
+
+o, equivalentemente:
 
 \[\frac{\frac{\mathrm{Pr}(Y > k \mid x_i = x + 1)}{\mathrm{Pr}(Y \leq k \mid x_i = x + 1)}}{\frac{\mathrm{Pr}(Y > k \mid x_i = x)}{\mathrm{Pr}(Y \leq k \mid x_i = x)}} = \exp(\beta_{i})\]
 
@@ -2349,34 +2377,33 @@ versus estar por debajo de ella para una unidad de incremento del
 predictor \(x_i\). Este modelo se denomina proporcional ya que cada
 predictor se asume que tiene los mismos efectos sobre todas las
 categorías de la variable de respuesta ordinal
-\autocite[ver][]{Liu2202}.
-
-Un valor del coeficiente \(\beta_i\) positivo indica que la relación
-entre el predictor \(x_i\) y la función de \(logit\) es positiva y, por
-lo tanto, se incrementa la posibilidad de un mayor valor de la variable
-respuesta.
-
-Esta suposición se puede relajar y permitir que los coeficientes de
-todos o de algunos de los predictores sean diferentes para cada pareja
-consecutiva de valores de respuesta. Tendríamos entonces más parámetros
-a estimar con una interpretación más compleja.
+\autocite[ver][]{Liu2202}. Un valor del coeficiente \(\beta_i\) positivo
+indica que la relación entre el predictor \(x_i\) y la función de
+\(logit\) es positiva y, por lo tanto, se incrementa la posibilidad de
+un mayor valor de la variable respuesta. Como veremos, esta suposición
+se puede relajar y permitir que los coeficientes de todos o de algunos
+de los predictores sean diferentes para cada pareja consecutiva de
+valores de respuesta. Tendríamos entonces más parámetros a estimar con
+una interpretación más compleja.
 
 \hypertarget{ajuste-del-modelo-ordinal-response-treat.}{%
-\subsection{Ajuste del modelo Ordinal Response \textasciitilde{}
-Treat.}\label{ajuste-del-modelo-ordinal-response-treat.}}
+\subsection{\texorpdfstring{Ajuste del modelo ordinal
+\texttt{Response\ \textasciitilde{}\ Treat}.}{Ajuste del modelo ordinal Response \textasciitilde{} Treat.}}\label{ajuste-del-modelo-ordinal-response-treat.}}
 
 Existen varios paquetes en R que permiten ajustar una regresión ordinal
 logística. El más popular es el paquete \texttt{Ordinal}
 \autocite{ordinalR}. El paquete \texttt{VGAM} \autocite{VGAMR} es más
 flexible y potente. Otra posibilidad es usar la función \texttt{polr}
-del paquete \texttt{MASS} \autocite{MASSR}. En este trabajo usaremos el
-paquete Ordinal por permitir también incluir efectos aleatorios que
+del paquete \texttt{MASS} \autocite{MASSR}. Finalmente la función
+\texttt{orm} del paquete \texttt{rms} también permite hacerlo
+\autocite[ver][]{harrell2015}. En este trabajo usaremos el paquete
+\texttt{Ordinal} por permitir también incluir efectos aleatorios que
 utilizaremos en un apartado posterior. Comenzamos con un modelo simple
 que tiene como único predictor el nivel de subtitulado por ser la
 variable objetivo de nuestro modelo:
 
 \[
-\text{logit}(p(y_i \leq k)) = \tau_k - \beta_2 \text{Treat}_i
+\text{logit}(p(y_i \leq k)) = \tau_k - \beta_1 \text{Treat}_i
 \]
 
 \scriptsize
@@ -2472,11 +2499,11 @@ subtitulado \(B\) es percibido por los estudiantes como de peor calidad
 que el subtitulado \(A\). Concretamente, el coeficiente \(\beta\) para
 \texttt{Treat} es el \texttt{log\ odds} de observar una mejor respuesta
 en una pregunta del test es 5.59 veces superior en el nivel de
-subtitulado \(A\) que en el \(B\). Aunque no suele ser de interés
-podemos usar los coeficientes de los umbrales
-(\texttt{Threshold\ coefficients}) para hacer una interpretación en base
-a probabilidades de respuesta. Por ejemplo, para el nivel de subtitulado
-\(B\) la:
+subtitulado \(A\) que en el \(B\). Aunque no suele ser de interés la
+interpretación de los coeficientes de los umbrales
+(\texttt{Threshold\ coefficients}), se pueden utilizar para estimar las
+probabilidades de respuesta. Por ejemplo, para el nivel de subtitulado
+\(B\):
 
 \[
 \begin{aligned}
@@ -2521,8 +2548,8 @@ B & 0.095 & 0.229 & 0.19 & 0.320 & 0.166 \\
 \end{longtable}
 
 \hypertarget{ajuste-del-modelo-ordinal-response-treat-period.}{%
-\subsection{Ajuste del modelo Ordinal Response \textasciitilde{} Treat +
-Period.}\label{ajuste-del-modelo-ordinal-response-treat-period.}}
+\subsection{\texorpdfstring{Ajuste del modelo ordinal
+\texttt{Response\ \textasciitilde{}\ Treat\ +\ Period}.}{Ajuste del modelo ordinal Response \textasciitilde{} Treat + Period.}}\label{ajuste-del-modelo-ordinal-response-treat-period.}}
 
 Para saber si existe un efecto periodo, añadimos como predictor la
 variable \texttt{Period}.
@@ -2580,8 +2607,8 @@ indicando que los estudiantes son más exigentes con el subtitulado en la
 segunda actividad independientemente de su calidad real.
 
 \hypertarget{ajuste-del-modelo-ordinal-response-treat-period.-1}{%
-\subsection{Ajuste del modelo Ordinal Response \textasciitilde{} Treat *
-Period.}\label{ajuste-del-modelo-ordinal-response-treat-period.-1}}
+\subsection{\texorpdfstring{Ajuste del modelo ordinal
+\texttt{Response\ \textasciitilde{}\ Treat\ *\ Period.}}{Ajuste del modelo ordinal Response \textasciitilde{} Treat * Period.}}\label{ajuste-del-modelo-ordinal-response-treat-period.-1}}
 
 Añadimos al modelo la interacción entre subtitulado y periodo. Esta
 interacción corresponde al efecto secuencia. Se puede demostrar que los
@@ -2632,8 +2659,11 @@ es \texttt{treatment}, a \texttt{sum} \footnote{Ver
 
 \normalsize
 
-Sin embargo los coeficientes son diferentes si el contraste es
-\texttt{treatment} \footnote{Los interceptores sí son iguales.}:
+Vemos que los coeficientes \texttt{Seq1} y \texttt{Treat1:Period1} son
+iguales y, por lo tanto, queda demostrado que la secuencia es la
+interacción entre periodo y tratamiento. Sin embargo los coeficientes
+son diferentes si el contraste es \texttt{treatment} \footnote{Los
+  interceptores sí son iguales.}:
 
 \scriptsize
 
@@ -2675,11 +2705,12 @@ Sin embargo los coeficientes son diferentes si el contraste es
 
 \normalsize
 
-En definitiva, los cuatro modelos anteriores son equivalentes y, como se
-demuestra en Apéndice~\ref{sec-contrasts}, se pueden obtener los
-coeficientes del modelo \texttt{clm\_treat.period} a partir de los
-coeficientes del modelo \texttt{clm\_treat.period.sum}. Por ejemplo, el
-coeficiente \(TreatB\) del modelo \texttt{clm\_treat.period}:
+En el Apéndice~\ref{sec-contrasts} se explica como se pueden obtener los
+coeficientes de un modelo a partir de los coeficientes de otro modelo.
+Es decir, que se pueden obtener los coeficientes del modelo
+\texttt{clm\_treat.period} a partir de los coeficientes del modelo
+\texttt{clm\_treat.period.sum}. Por ejemplo, el coeficiente \(TreatB\)
+del modelo \texttt{clm\_treat.period} se calcula:
 
 \scriptsize
 
@@ -2709,10 +2740,8 @@ coeficiente \(TreatB\) del modelo \texttt{clm\_treat.period}:
 
 Sin embargo la interpretación de los coeficientes del segundo modelo,
 \texttt{clm\_treat.period}, es más sencilla ya que es la que estamos
-habituados a utilizar en R. Por ello, en este análisis se utilizará el
-modelo \texttt{clm\_treat.period}.
-
-El resumen del ajuste es:
+habituados a utilizar en R. Por ello en este análisis se utilizará el
+modelo \texttt{clm\_treat.period}. El resumen del ajuste es:
 
 \scriptsize
 
@@ -2748,7 +2777,7 @@ Threshold coefficients:
 \normalsize
 
 Vemos que los tres coeficientes son significativos. El principal efecto
-es el nivel de subtitulado obteniendo mejores puntuaciones el nievel
+es el nivel de subtitulado obteniendo mejores puntuaciones el nivel
 \(A\); el efecto periodo es negativo por lo que el primer periodo
 obtiene mejores puntuaciones; por último, el efecto secuencia es
 positivo pero de menor valor absoluto que el efecto periodo. Esto quiere
@@ -2789,7 +2818,7 @@ para el modelo ordinal Response \textasciitilde{} Treat * Period}
 verosimilitud.}\label{elecciuxf3n-del-modelo-ordinal-mediante-el-test-de-razuxf3n-de-verosimilitud.}}
 
 Al ser los tres modelos anidados, podemos compararlos con la prueba de
-razón de verosimilitud. Comprobamos que el tercer modelo (el que tiene
+razón de verosimilitud. Comprobamos que el tercer modelo (el que
 incorpora la interacción entre los subtítulos y el periodo) reduce
 significativamente el logaritmo de la función de verosimilitud y, por lo
 tanto, debe ser aceptado:
@@ -2829,12 +2858,11 @@ proporcional acumulativa es que los coeficientes son iguales entre
 cualesquiera dos niveles de respuestas correlativos. Se han propuesto
 diversas fórmulas para comprobar esta hipótesis. El paquete
 \texttt{Ordinal} dispone de la función \texttt{nominal\_test()} que lo
-que hace es realizar un test para cada predictor ajustando un modelo en
-el que se ha relajado la condición de proporcionalidad y realiza el test
-de razón de verosimilitud de entre este modelo y el modelo que se quiere
-evaluar. Se constata que el test resulta significativo para
+que hace es realizar un test de razón de verosimilitud para cada
+predictor ajustando un modelo en el que se ha relajado la condición de
+proporcionalidad. Se constata que el test resulta significativo para
 \texttt{Treat} y para \texttt{Treat:Period}, por lo que para estas dos
-variables no se puede asumir que los coeficientes estimados se mantengas
+variables no se puede asumir que los coeficientes estimados se mantengan
 constantes en todos los niveles de respuesta.
 
 \scriptsize
@@ -2864,7 +2892,9 @@ Lo que procede es ajustar el modelo relajando la constante de
 proporcionalidad de esas variables. Se ha realizado esto utilizando la
 función \texttt{vglm} del paquete \texttt{VGAM}. Vemos que ahora hay
 cuatro coeficientes para cada una de las variables \texttt{Treat} y
-\texttt{Treat:Period}.
+\texttt{Treat:Period} \footnote{Los umbrales tienen los mismo valores
+  pero de signo contrario debido a diferencias en la parametrización del
+  modelo en cada función utilizada.}.
 
 \scriptsize
 
@@ -2913,15 +2943,630 @@ para el modelo ordinal no proporcional Response \textasciitilde{} Treat
 
 \end{figure}
 
-\bookmarksetup{startatroot}
+\hypertarget{introducciuxf3n-a-los-modelos-multinivel.}{%
+\subsection{Introducción a los modelos
+multinivel.}\label{introducciuxf3n-a-los-modelos-multinivel.}}
 
-\hypertarget{section}{%
-\chapter{}\label{section}}
+Un modelo multinivel, jerárquico o mixto es un modelo en el que tenemos
+datos de un nivel inferior anidados en estructuras de un nivel superior.
+Por ejemplo, si quisiéramos evaluar el rendimiento de varios métodos de
+enseñanza, poríamos seleccionar aleatoriamente varios colegios
+participantes y en cada uno de ellos elegir varias clases en las que se
+impartiría uno de los métodos de enseñanza. Los modelos multinivel se
+utilizan cuando se incumple la hipótesis de independencia de entre las
+observaciones. En el caso de los métodos de enseñanza, los alumnos de
+una clase no son independientes de los alumnos de otra clase del mismo
+colegio y tampoco lo son los alumnos de dos colegios diferentes. Otra
+situación en la que se viola la condición de independencia entre
+observaciones es cuando se toman varias medidas del mismo sujeto. Este
+tipo de experimentos se llaman de medidas repetidas o longitudinales. En
+este caso se consideran que las medidas están anidadas en el sujeto
+\autocite[ver][]{Liu2202}. En un modelo multinivel no es necesario que
+todas las variables tengan una estructura jerárquica. Distinguimos
+entonces dos tipos de variables. Las conocidas como de efectos fijos son
+aquellas variables que se consideran que tienen el mismo efecto en toda
+la población y, por lo tanto, estimamos un único coeficiente. Las que
+llamamos como variables de efectos aleatorios tienen un coeficiente
+diferente para cada elemento de la población y se supone que son una
+muestra de una población mucho mayor, como el caso de seleccionar
+aleatoriamente una muestra de colegios. Normalmente el coeficiente
+particular de cada elemento no es de interés para el investigador y se
+supone que tienen una media centrada en cero. El mayor interés de los
+efectos aleatorios es la estimación de su matriz de
+varianzas-covarianzas.
 
-\bookmarksetup{startatroot}
+La ecuación general de un modelo multinivel con dos niveles y un solo
+predictor con efectos aleatorios es \autocite[ver][pp.~40]{chen2021}:
 
-\hypertarget{section-1}{%
-\chapter{}\label{section-1}}
+\[
+\begin{aligned}
+Level\ 1: & y_{ij}     & = & \beta_{0j} + \beta_{1j}x_{1ij} + \epsilon_{ij} \\
+Level\ 2: & \beta_{0j} & = & \beta_{0} + U_{0j} & (intercepto\ aleatorio) \\
+          & \beta_{1j} & = & \beta_{0} + U_{1j} & (pendiente\ aleatoria) \\
+\end{aligned}
+\]
+
+Donde los errores del modelo se distribuyen,
+
+\[
+Error\ intra\ grupo:  \epsilon_{ij} \sim N(0, \sigma^2)
+\]
+
+\[
+Error\ entre\ grupos: 
+\begin{pmatrix}
+     U_{0j} \\
+     U_{1j} \\
+\end{pmatrix} 
+\sim
+N
+\begin{pmatrix}
+\begin{pmatrix}
+     0 \\
+     0 \\
+\end{pmatrix},
+\begin{pmatrix}
+     \tau_0^2 & \tau_0\tau_1\rho_{01} \\
+     \tau_0\tau_1\rho_{01} &  \tau_1^2 \\
+\end{pmatrix}
+\end{pmatrix} 
+\]
+
+donde \(j\) son los grupos que varían \(j = 1,...,J\) (\(J\) es el
+número de grupos); \(i\) es la observación \(i\) del grupo \(j\)
+(\(i = 1,...,n_j\), \(n_j\) es el número de observaciones del grupo
+\(j\)). El modelo se compone de una parte fija
+\(\beta_0 + \beta_1 x_{ij}\) y una aleatoria
+\(U_{0j} + U_{1j} x_{1ij} + \epsilon{ij}\). Los parámetros de este
+modelo son el intercepto y la pendiente de efectos fijos (\(\beta_0\) y
+\(\beta_1\)), la varianza intra-grupos (\(\sigma^2\)), la varianza
+inter-grupos del intercepto aleatoria (\(\tau_0\)) y de la pendiente
+aleatoria (\(\tau_1\)), y la correlación entre intercepto y pendiente
+aleatorias (\(\rho_{01}\)). Cuando se introduce una estructura
+multinivel se pueden omitir tanto el intercepto como la pendiente
+aleatoria.
+
+En \textcite{gelman2013} se evalúan tres posibilidades a la hora de
+definir un modelo:
+
+\begin{itemize}
+\tightlist
+\item
+  \(Complete\ pooloing\): Consiste en estimar un único parámetro para
+  todas las observaciones. Es equivalente a un modelo con efectos fijos.
+\item
+  \(No\ pooling\): Se estiman tantos paŕametros como grupos haya de
+  forma independiente.
+\item
+  \(Partial\ pooling\): Es el modelo jerárquico. Es una mezcla de ambos,
+  ya que aunque se estima un parámetro para cada grupo, esta estimación
+  no es independiente, sino que se supone que las observaciones de un
+  mismo grupo proceden de una misma distribución de probabilidad. Esto
+  se traduce en que se produce una contracción (\(shrinkage\)) en la
+  estimación de los parámetros. Al influir la estimación de unas
+  observaciones en otras, la estimación es de menor valor absoluto que
+  la que resultaría en un modelo de \(no\ pooling\). De esta forma
+  podemos ver el \(complete\ pooling\) y el \(no\ pooling\) como dos
+  casos particulares extremos del \(no\ pooling\). La contracción de
+  coeficientes en los modelos multinivel actúa como una regularización
+  que puede evitar el sobreajuste.
+\end{itemize}
+
+Los modelos multinivel requieren supuestos adicionales en el nivel
+segundo y superiores que son similares a los supuestos para los modelos
+de efectos fijos en el primer y único nivel
+\autocite[ver][pp.~43]{chen2021}. Para estimar los parámetros en un
+modelo multinivel se utiliza el método de máxima verosimilitud
+restringida (RMLE) que es una variante de la estimación por máxima
+verosimilitud (MLE) en la que se hacen ajustes en los grados de libertad
+del modelo con efectos aleatorios.
+
+\hypertarget{ajuste-del-modelo-multinivel-ordinal.}{%
+\subsection{Ajuste del modelo multinivel
+ordinal.}\label{ajuste-del-modelo-multinivel-ordinal.}}
+
+El modelo multinivel aleatorio más simple que podemos considerar es el
+que incorpora únicamente un interceptor aleatorio para los estudiantes
+del curso. Que los estudiantes sean considerados un efecto aleatorio
+está doblemente justificado. Por un lado, son una muestra de una
+población más amplia que estaría constituida por todos los estudiantes
+de todos los cursos de accesibilidad. Por otro, cada estudiante realiza
+el test de evaluación dos veces y, por lo tanto, las respuestas a estos
+cuestionarios no son independientes. Para ajustar el modelo, vamos a
+utilizar la función \texttt{clmm()} del paquete \texttt{Ordinal} ya que
+permite la inclusión de efectos aleatorios.
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{clmm\_subject }\OtherTok{\textless{}{-}} \FunctionTok{clmm}\NormalTok{(Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{|}\NormalTok{ Subject), }\AttributeTok{data =}\NormalTok{ df\_clean)}
+\FunctionTok{summary}\NormalTok{(clmm\_subject)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Cumulative Link Mixed Model fitted with the Laplace approximation
+
+formula: Response ~ (1 | Subject)
+data:    df_clean
+
+ link  threshold nobs logLik   AIC     niter     max.grad cond.H 
+ logit flexible  2980 -4053.61 8117.23 272(1093) 7.11e-04 8.3e+01
+
+Random effects:
+ Groups  Name        Variance Std.Dev.
+ Subject (Intercept) 0.8385   0.9157  
+Number of groups:  Subject 87 
+
+No Coefficients
+
+Threshold coefficients:
+    Estimate Std. Error z value
+1|2  -3.1597     0.1291 -24.481
+2|3  -1.6869     0.1109 -15.212
+3|4  -0.9383     0.1077  -8.713
+4|5   0.6354     0.1068   5.951
+\end{verbatim}
+
+\normalsize
+
+Vemos que el parámetro \(\widehat{\tau_0}\) tiene un valor 0.92 y que no
+hay coeficientes que estimar. El siguiente modelo en orden de
+complejidad es el que incorpora el predictor \texttt{Treat}:
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{clmm\_treat\_subject }\OtherTok{\textless{}{-}} \FunctionTok{clmm}\NormalTok{(Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{|}\NormalTok{ Subject), }\AttributeTok{data =}\NormalTok{ df\_clean)}
+\FunctionTok{summary}\NormalTok{(clmm\_treat\_subject)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Cumulative Link Mixed Model fitted with the Laplace approximation
+
+formula: Response ~ Treat + (1 | Subject)
+data:    df_clean
+
+ link  threshold nobs logLik   AIC     niter     max.grad cond.H 
+ logit flexible  2980 -3665.73 7343.47 395(1585) 4.97e-04 9.5e+01
+
+Random effects:
+ Groups  Name        Variance Std.Dev.
+ Subject (Intercept) 1.265    1.125   
+Number of groups:  Subject 87 
+
+Coefficients:
+       Estimate Std. Error z value Pr(>|z|)    
+TreatB  -2.0747     0.0793  -26.16   <2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+    Estimate Std. Error z value
+1|2  -4.7243     0.1638 -28.839
+2|3  -3.0518     0.1453 -21.008
+3|4  -2.1256     0.1392 -15.269
+4|5  -0.2068     0.1325  -1.561
+\end{verbatim}
+
+\normalsize
+
+En este modelo \(\widehat{\tau_0}\) vale 1.12 y la pendiente del
+tratamiento, \texttt{TreatB} es -2.07. Podemos considerar un modelo en
+la que la valoración de cada sujeto sea diferente para cada tratamiento:
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{clmm\_treat.subject }\OtherTok{\textless{}{-}} \FunctionTok{clmm}\NormalTok{(Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ Treat }\SpecialCharTok{|}\NormalTok{ Subject), }\AttributeTok{data =}\NormalTok{ df\_clean)}
+\FunctionTok{summary}\NormalTok{(clmm\_treat.subject)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Cumulative Link Mixed Model fitted with the Laplace approximation
+
+formula: Response ~ Treat + (1 + Treat | Subject)
+data:    df_clean
+
+ link  threshold nobs logLik   AIC     niter     max.grad cond.H 
+ logit flexible  2980 -3431.27 6878.53 535(3741) 2.43e-03 1.7e+02
+
+Random effects:
+ Groups  Name        Variance Std.Dev. Corr   
+ Subject (Intercept) 2.691    1.641           
+         TreatB      4.295    2.072    -0.598 
+Number of groups:  Subject 87 
+
+Coefficients:
+       Estimate Std. Error z value Pr(>|z|)    
+TreatB  -2.5864     0.2425  -10.67   <2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+    Estimate Std. Error z value
+1|2  -5.5561     0.2207 -25.173
+2|3  -3.6249     0.2024 -17.914
+3|4  -2.5581     0.1968 -12.999
+4|5  -0.3271     0.1900  -1.721
+\end{verbatim}
+
+\normalsize
+
+Ahora \(\widehat{\tau_0}\) vale 1.64 y \(\widehat{\tau_1}\) 2.07. La
+correlación, \(\rho_{01}\), es -0.6. Podemos añadir el factor
+\texttt{Period} al modelo:
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{clmm\_treat.period.subject }\OtherTok{\textless{}{-}} \FunctionTok{clmm}\NormalTok{(}
+\NormalTok{    Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{*}\NormalTok{ Period }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ Treat }\SpecialCharTok{|}\NormalTok{ Subject),}
+    \AttributeTok{data =}\NormalTok{ df\_clean}
+\NormalTok{)}
+\FunctionTok{summary}\NormalTok{(clmm\_treat.period.subject)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Cumulative Link Mixed Model fitted with the Laplace approximation
+
+formula: Response ~ Treat * Period + (1 + Treat | Subject)
+data:    df_clean
+
+ link  threshold nobs logLik   AIC     niter       max.grad cond.H 
+ logit flexible  2980 -3429.88 6879.76 1696(11676) 7.34e-05 6.4e+02
+
+Random effects:
+ Groups  Name        Variance Std.Dev. Corr   
+ Subject (Intercept) 2.588    1.609           
+         TreatB      4.168    2.042    -0.584 
+Number of groups:  Subject 87 
+
+Coefficients:
+               Estimate Std. Error z value Pr(>|z|)    
+TreatB          -2.8530     0.3795  -7.519 5.53e-14 ***
+Period2         -0.5893     0.3685  -1.599    0.110    
+TreatB:Period2   0.5307     0.5855   0.906    0.365    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+    Estimate Std. Error z value
+1|2  -5.8518     0.2892 -20.236
+2|3  -3.9206     0.2754 -14.234
+3|4  -2.8541     0.2714 -10.515
+4|5  -0.6226     0.2654  -2.345
+\end{verbatim}
+
+\normalsize
+
+Vemos que, a diferencia de lo que sucedía en el modelo de efectos fijos,
+el periodo y la interacción del periodo con el subtitulado son ahora no
+significativos. Queda, por último, discutir cómo añadir las preguntas al
+modelo. Consideramos que las respuestas a las preguntas no son
+independientes unas de otras y que, por lo tanto, deben ser consideradas
+efectos aleatorios. En \textcite[pp.~19-20]{burkner2019} podemos
+encontrar un ejemplo de esta solución. Las preguntas como efecto
+aleatorio se pueden añadir considerando únicamente el intercepto o el
+intercepto y la pendiente. Ajustamos ambos modelos:
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{clmm\_treat.period.subject\_question }\OtherTok{\textless{}{-}} \FunctionTok{clmm}\NormalTok{(}
+\NormalTok{    Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{*}\NormalTok{ Period }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ Treat }\SpecialCharTok{|}\NormalTok{ Subject) }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{|}\NormalTok{ Question),}
+    \AttributeTok{data =}\NormalTok{ df\_clean}
+\NormalTok{)}
+\FunctionTok{summary}\NormalTok{(clmm\_treat.period.subject\_question)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Cumulative Link Mixed Model fitted with the Laplace approximation
+
+formula: Response ~ Treat * Period + (1 + Treat | Subject) + (1 | Question)
+data:    df_clean
+
+ link  threshold nobs logLik   AIC     niter     max.grad cond.H 
+ logit flexible  2980 -3309.04 6640.07 960(7467) 3.85e-04 6.6e+02
+
+Random effects:
+ Groups   Name        Variance Std.Dev. Corr   
+ Subject  (Intercept) 3.0249   1.739           
+          TreatB      4.8228   2.196    -0.591 
+ Question (Intercept) 0.4651   0.682           
+Number of groups:  Subject 87,  Question 18 
+
+Coefficients:
+               Estimate Std. Error z value Pr(>|z|)    
+TreatB          -3.0562     0.4062  -7.525 5.29e-14 ***
+Period2         -0.6163     0.3966  -1.554    0.120    
+TreatB:Period2   0.5608     0.6266   0.895    0.371    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+    Estimate Std. Error z value
+1|2  -6.2609     0.3506 -17.858
+2|3  -4.1977     0.3375 -12.439
+3|4  -3.0366     0.3334  -9.108
+4|5  -0.6370     0.3276  -1.944
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{clmm\_treat.period.subject.question }\OtherTok{\textless{}{-}} \FunctionTok{clmm}\NormalTok{(}
+\NormalTok{    Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{*}\NormalTok{ Period }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ Treat }\SpecialCharTok{|}\NormalTok{ Subject) }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ Treat }\SpecialCharTok{|}\NormalTok{ Question),}
+    \AttributeTok{data =}\NormalTok{ df\_clean}
+\NormalTok{)}
+\FunctionTok{summary}\NormalTok{(clmm\_treat.period.subject.question)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Cumulative Link Mixed Model fitted with the Laplace approximation
+
+formula: Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat |  
+    Question)
+data:    df_clean
+
+ link  threshold nobs logLik   AIC     niter      max.grad cond.H 
+ logit flexible  2980 -3186.06 6398.11 1026(8128) 1.80e-04 6.1e+02
+
+Random effects:
+ Groups   Name        Variance Std.Dev. Corr   
+ Subject  (Intercept) 3.1372   1.7712          
+          TreatB      5.4601   2.3367   -0.552 
+ Question (Intercept) 0.4474   0.6689          
+          TreatB      1.8621   1.3646   -0.471 
+Number of groups:  Subject 87,  Question 18 
+
+Coefficients:
+               Estimate Std. Error z value Pr(>|z|)    
+TreatB          -3.1435     0.5358  -5.867 4.43e-09 ***
+Period2         -0.6255     0.4028  -1.553    0.120    
+TreatB:Period2   0.5590     0.6615   0.845    0.398    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+    Estimate Std. Error z value
+1|2  -6.7481     0.3585 -18.821
+2|3  -4.3947     0.3411 -12.884
+3|4  -3.1106     0.3362  -9.252
+4|5  -0.5610     0.3298  -1.701
+\end{verbatim}
+
+\normalsize
+
+Un modelo más simple que el anterior que podemos considerar es eliminar
+la pendiente del subtitulado en el efecto aleatorio \texttt{Subject}.
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{clmm\_treat.period\_subject\_question }\OtherTok{\textless{}{-}} \FunctionTok{clmm}\NormalTok{(}
+\NormalTok{    Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{*}\NormalTok{ Period }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{|}\NormalTok{ Subject) }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{|}\NormalTok{ Question),}
+    \AttributeTok{data =}\NormalTok{ df\_clean}
+\NormalTok{)}
+\FunctionTok{summary}\NormalTok{(clmm\_treat.period\_subject\_question)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Cumulative Link Mixed Model fitted with the Laplace approximation
+
+formula: Response ~ Treat * Period + (1 | Subject) + (1 | Question)
+data:    df_clean
+
+ link  threshold nobs logLik   AIC     niter     max.grad cond.H 
+ logit flexible  2980 -3559.48 7136.96 987(3952) 5.50e-04 5.9e+02
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ Subject  (Intercept) 1.4348   1.1978  
+ Question (Intercept) 0.3394   0.5826  
+Number of groups:  Subject 87,  Question 18 
+
+Coefficients:
+               Estimate Std. Error z value Pr(>|z|)    
+TreatB          -2.5366     0.2815  -9.012   <2e-16 ***
+Period2         -0.6203     0.2795  -2.219   0.0265 *  
+TreatB:Period2   0.5958     0.5353   1.113   0.2657    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+    Estimate Std. Error z value
+1|2  -5.3264     0.2655 -20.059
+2|3  -3.5644     0.2530 -14.089
+3|4  -2.5690     0.2488 -10.325
+4|5  -0.5243     0.2434  -2.154
+\end{verbatim}
+
+\normalsize
+
+E incluso eliminar completamente el efecto aleatorio \texttt{Subject} y
+mantener solo las preguntas como efecto aleatorio.
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{clmm\_treat.period\_question }\OtherTok{\textless{}{-}} \FunctionTok{clmm}\NormalTok{(}
+\NormalTok{    Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{*}\NormalTok{ Period }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{|}\NormalTok{ Question),}
+    \AttributeTok{data =}\NormalTok{ df\_clean}
+\NormalTok{)}
+\FunctionTok{summary}\NormalTok{(clmm\_treat.period\_question)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Cumulative Link Mixed Model fitted with the Laplace approximation
+
+formula: Response ~ Treat * Period + (1 | Question)
+data:    df_clean
+
+ link  threshold nobs logLik   AIC     niter     max.grad cond.H 
+ logit flexible  2980 -3883.04 7782.07 741(2226) 1.08e-04 1.3e+02
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ Question (Intercept) 0.2274   0.4769  
+Number of groups:  Question 18 
+
+Coefficients:
+               Estimate Std. Error z value Pr(>|z|)    
+TreatB         -2.04502    0.10378 -19.706  < 2e-16 ***
+Period2        -0.50200    0.09929  -5.056 4.29e-07 ***
+TreatB:Period2  0.43361    0.13747   3.154  0.00161 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+    Estimate Std. Error z value
+1|2  -4.4008     0.1610 -27.337
+2|3  -2.8298     0.1446 -19.575
+3|4  -1.9983     0.1401 -14.259
+4|5  -0.3609     0.1349  -2.675
+\end{verbatim}
+
+\normalsize
+
+Mediante el test de razón de verosimilitud podemos seleccionar el modelo
+con menor función de verosimilitud:
+
+\tiny
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{anova}\NormalTok{(}
+\NormalTok{    clmm\_subject,}
+\NormalTok{    clmm\_treat.subject,}
+\NormalTok{    clmm\_treat.period.subject,}
+\NormalTok{    clmm\_treat.period.subject\_question,}
+\NormalTok{    clmm\_treat.period.subject.question,}
+\NormalTok{    clmm\_treat.period\_subject\_question,}
+\NormalTok{    clmm\_treat.period\_question}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Likelihood ratio tests of cumulative link models:
+ 
+                                   formula:                                                                  
+clmm_subject                       Response ~ (1 | Subject)                                                  
+clmm_treat.subject                 Response ~ Treat + (1 + Treat | Subject)                                  
+clmm_treat.period_question         Response ~ Treat * Period + (1 | Question)                                
+clmm_treat.period_subject_question Response ~ Treat * Period + (1 | Subject) + (1 | Question)                
+clmm_treat.period.subject          Response ~ Treat * Period + (1 + Treat | Subject)                         
+clmm_treat.period.subject_question Response ~ Treat * Period + (1 + Treat | Subject) + (1 | Question)        
+clmm_treat.period.subject.question Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question)
+                                   link: threshold:
+clmm_subject                       logit flexible  
+clmm_treat.subject                 logit flexible  
+clmm_treat.period_question         logit flexible  
+clmm_treat.period_subject_question logit flexible  
+clmm_treat.period.subject          logit flexible  
+clmm_treat.period.subject_question logit flexible  
+clmm_treat.period.subject.question logit flexible  
+
+                                   no.par    AIC  logLik LR.stat df Pr(>Chisq)
+clmm_subject                            5 8117.2 -4053.6                      
+clmm_treat.subject                      8 6878.5 -3431.3 1244.69  3  < 2.2e-16
+clmm_treat.period_question              8 7782.1 -3883.0 -903.54  0           
+clmm_treat.period_subject_question      9 7137.0 -3559.5  647.12  1  < 2.2e-16
+clmm_treat.period.subject              10 6879.8 -3429.9  259.20  1  < 2.2e-16
+clmm_treat.period.subject_question     11 6640.1 -3309.0  241.69  1  < 2.2e-16
+clmm_treat.period.subject.question     13 6398.1 -3186.1  245.96  2  < 2.2e-16
+                                      
+clmm_subject                          
+clmm_treat.subject                 ***
+clmm_treat.period_question            
+clmm_treat.period_subject_question ***
+clmm_treat.period.subject          ***
+clmm_treat.period.subject_question ***
+clmm_treat.period.subject.question ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\normalsize
+
+Vemos que el modelo más completo
+\texttt{clmm\_treat.period.subject.question} presenta una menor funcion
+de verosimilitud. Este modelo tiene un \(AIC\) menor que los modelos
+ordinales ajustados en el apartado anterior incluso si a esos modelos se
+les añade como factor predictor \texttt{Question}. En el
+Tabla~\ref{tbl-question-intercepts} se muestran los interceptores y
+pendientes estimadas para el efecto aleatorio \texttt{Question}.
+
+\hypertarget{tbl-question-intercepts}{}
+\begin{longtable}[]{@{}lrr@{}}
+\caption{\label{tbl-question-intercepts}Intercepto de Question en el
+modelo Response \textasciitilde{} Treat * Period + (1 + Treat \textbar{}
+Subject) + (1 + Treat \textbar{} Question)}\tabularnewline
+\toprule\noalign{}
+& (Intercept) & TreatB \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+& (Intercept) & TreatB \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Q18 & 0.3933757 & -1.1021051 \\
+Q01 & 0.2726623 & 0.4752429 \\
+Q02 & 0.6197324 & -0.3813147 \\
+Q03 & 0.0640464 & 0.5063518 \\
+Q04 & 0.5020005 & 1.9203520 \\
+Q05 & 0.7498895 & -2.8118058 \\
+Q06 & 0.5528685 & -0.8949249 \\
+Q07 & -0.0106860 & -0.4533266 \\
+Q08 & -0.1980169 & -0.8402323 \\
+Q09 & 0.0184714 & -2.4698505 \\
+Q10 & 0.0228628 & 0.1615350 \\
+Q11 & 0.0782894 & 0.6223213 \\
+Q12 & -0.2003100 & 0.3403381 \\
+Q13 & 0.5516281 & 1.5330216 \\
+Q14 & -0.2392607 & -0.4339893 \\
+Q15 & -1.3380683 & 1.4804380 \\
+Q16 & -1.3655878 & 1.7228905 \\
+Q17 & -1.0044586 & 1.1760588 \\
+\end{longtable}
+
+Las preguntas Q16, Q15, Q17, Q05, Q02 son las 5 cuyo \texttt{log\ odds}
+del intercepto tiene un valor mayor valor absoluto y, por lo tanto, las
+que nuestro modelo considera más diferentes del resto. Por otro lado,
+las preguntas Q05, Q09, Q04, Q16, Q13 son las que mayor valor absoluto
+tienen en el coeficiente \texttt{TreatB} y, por ello, las que presentan
+mayor diferencia entre tratamientos. En la
+Figura~\ref{fig-probs-clmm_treat.period.subject.question} se muestran
+las predicciones del modelo.
+
+\begin{figure}[h]
+
+{\centering \includegraphics{42-Modelado_files/figure-pdf/fig-probs-clmm_treat.period.subject.question-1.pdf}
+
+}
+
+\caption{\label{fig-probs-clmm_treat.period.subject.question}Probabilidades
+de respuesta para el modelo ordinal Response \textasciitilde{} Treat *
+Period + (1 + Treat \textbar{} Subject) + (1 + Treat \textbar{}
+Question)}
+
+\end{figure}
 
 \bookmarksetup{startatroot}
 
