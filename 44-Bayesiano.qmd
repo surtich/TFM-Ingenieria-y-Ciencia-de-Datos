@@ -1,0 +1,148 @@
+### Modelado Bayesiano.
+
+```{r}
+brm_subject_formula <- Response ~ 1 + (1 | Subject)
+```
+
+```{r}
+#| cache: true
+brm_subject <-
+    brm(
+        brm_subject_formula,
+        data = df_clean,
+        family = cumulative("logit"),
+        sample_prior = TRUE,
+        file = "models/brm_subject",
+        file_refit = "on_change"
+    )
+```
+
+
+```{r}
+prior_draws(brm_subject) %>%
+pivot_longer(cols = everything(), names_to = "term", values_to = "value") %>%
+    ot(aes(x = value, y = term, fill = term)) +
+  ge_violin() +
+labs(y = NULL) +
+    t_wrap(~term, scales = "free_x") +
+   cd_cartesian(xlim = c(-15, 15)) +
+ thee(legend.position = "none") +
+  adfacet_borders()
+```
+
+```{r}
+tibble(theta = seq(-10, 10)) %>%
+ mut(p = inv_logit_scaled(theta)) %>%
+gplo(aes(x = theta, y = p)) +
+om_line(size = 1)
+```
+
+```{r}
+plot(brm_subject, ask = FALSE,
+     variable = "^b_|^sd_", regex = TRUE)
+``
+
+```{r}
+brm_subject
+```
+
+```{r}
+# label: tbl-comp-1
+# tbl-cap: Comparación de los coeficientes del modelo clmm y brm Response ~ 1 + (1 | Subject)
+clmm_subject$coef %>%  as_tibble %>% mutate(term = str_c("b_Intercept[", 1:4, "]")) %>%  
+    bind_rows(tibble(value=attr(VarCorr(clmm_subject)$Subject, "stddev"), term="sd_Subject__Intercept")) %>% 
+      janitor::clean_names() %>% 
+      left_join( 
+        broom.mixed::tidyMCMC(brm_subject), 
+        by = "term" 
+      ) %>% 
+      relocate(term) %>% 
+      rename(ordinal.clmm=value, brms.brm=estimate) %>% mutate(across(where(is.numeric), ~round(., 2))) %>% 
+       select(-std.error) %>% gt 
+```
+
+```{r}
+#| echo: true
+#| cache: true
+brm_treat.period_subject_question <- brm(
+    Response ~ Treat * Period + (1 | Subject) + (1 | Question),
+    data = df_clean,
+    family = cumulative("logit"),
+    sample_prior = TRUE,
+    file = "models/brm_treat.period_subject_question",
+    file_refit = "on_change"
+)
+summary(brm_treat.period_subject_question)
+```
+
+
+```{r}
+#| echo: true
+#| cache: true
+brm_treat.period.subject.question <- brm(
+    Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question),
+    data = df_clean,
+    family = cumulative("logit"),
+    sample_prior = TRUE,
+    file = "models/brm_treat.period.subject.question",
+    file_refit = "on_change"
+)
+summary(brm_treat.period.subject.question)
+```
+
+```{r}
+#| echo: true
+#| cache: true
+brm_cs.treat.subject.question <- brm(
+    Response ~ 1 + cs(Treat) + (1 | Subject) + (1 | Question),
+    data = df_clean,
+    family = cumulative("logit"),
+    sample_prior = TRUE,
+    file = "models/brm_cs.treat.subject.question",
+    file_refit = "on_change"
+)
+summary(brm_cs.treat.subject.question)
+```
+
+```{r}
+#| echo: true
+#| cache: true
+brm_treat_question_subject <- brm(
+    Response ~ 1 + Treat + (1 | Question) + (1|Subject),
+    data = df_clean,
+    family = cumulative("logit"),
+    sample_prior = TRUE,
+    file = "models/brm_treat_question_subject",
+    file_refit = "on_change"
+)
+summary(brm_treat_question_subject)
+```
+
+
+```{r}
+LOO(
+  brm_subject,
+  brm_treat.period_subject_question,
+  brm_treat.period.subject.question,
+  brm_cs.treat.subject.question
+)
+```
+
+```{r}
+conditions <- make_conditions(brm_treat.period_subject_question, vars = c("Treat", "Question"))
+conditional_effects(brm_treat.period_subject_question,  categorical=T, conditions=conditions, re_formula=NULL, ask=F, robust=T,  prob=0.5)
+```
+
+```{r}
+#| echo: true
+#| cache: true
+brm_treat_question_subject_question <- brm(
+    Response ~ 1 + Treat + (1 | Question) + (1|Subject:Question),
+    data = df_clean,
+    family = cumulative("logit"),
+    sample_prior = TRUE,
+    file = "models/brm_treat_question_subject_question",
+    file_refit = "on_change"
+)
+summary(brm_treat_question_subject_question)
+```

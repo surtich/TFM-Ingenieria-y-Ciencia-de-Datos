@@ -9,3 +9,5 @@
 index.*
 !index.qmd
 tfm.*
+*_cache
+models/

@@ -1,6 +1,0 @@
----
-execute:
-  echo: false
----
-
-## Tablas de contingencia

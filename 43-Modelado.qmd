@@ -169,7 +169,7 @@ La Regresión Ordinal es una extensión de la Regresión Logística y, por lo ta
 * Regresión ordinal secuencial.
 * Regresión ordinal adyacente.
 
-Nos centraremos en la primera ya que es la más habitual y adecuada para nuestro caso. El modelo acumulativo, CM, presupone que la variable ordinal observada, $Y$, proviene de la categorización de una variable latente (no observada) continua, $\tilde{Y}$. Hay $K$ umbrales $\tau_k$ que particionan $\tilde{Y}$ en $K + 1$ categorías ordenadas observables (ver @fig-cumulative). Si asumimos que $\tilde{Y}$ tiene una cierta distribución (por ejemplo, normal) con distribución acumulada $F$, se puede calcular la probabilidad de que $Y$ sea la categoría $k$ de esta forma:
+Nos centraremos en la primera ya que es la más habitual y adecuada para nuestro caso [ver @burkner2019, pp. 23-24]. El modelo acumulativo, CM, presupone que la variable ordinal observada, $Y$, proviene de la categorización de una variable latente (no observada) continua, $\tilde{Y}$. Hay $K$ umbrales $\tau_k$ que particionan $\tilde{Y}$ en $K + 1$ categorías ordenadas observables (ver @fig-cumulative). Si asumimos que $\tilde{Y}$ tiene una cierta distribución (por ejemplo, normal) con distribución acumulada $F$, se puede calcular la probabilidad de que $Y$ sea la categoría $k$ de esta forma:
 
 $$Pr(Y = k) = F(\tau_k) - F(\tau_{k-1})$$
 
@@ -229,8 +229,9 @@ Es decir, que $\exp(\beta_{i})$ es el $OR$ (cambio en $odds$) de que la variable
 Existen varios paquetes en R que permiten ajustar una regresión ordinal logística. El más popular es el paquete `Ordinal` [@ordinalR]. El paquete `VGAM` [@VGAMR] es más flexible y potente. Otra posibilidad es usar la función `polr` del paquete `MASS` [@MASSR]. Finalmente la función `orm` del paquete `rms` también permite hacerlo [ver @harrell2015]. En este trabajo usaremos el paquete `Ordinal` por permitir también incluir efectos aleatorios que utilizaremos en un apartado posterior. Comenzamos con un modelo simple que tiene como único predictor el nivel de subtitulado por ser la variable objetivo de nuestro modelo:
 
 $$
-\text{logit}(p(y_i \leq k)) = \tau_k - \beta_1 \text{Treat}_i
+\text{logit}(P(Response_i \leq k)) = \tau_k - \beta_1 \text{Treat}_i,
 $$
+
 
 \scriptsize
 ```{r}
@@ -252,7 +253,7 @@ logit.1 <- coef(clm_treat)["1|2"] - coef(clm_treat)["TreatB"]
 logit.2 <- coef(clm_treat)["2|3"] - coef(clm_treat)["TreatB"]
 ```
 
-El método `summary` muestra la información resumen. Para su interpretación vamos a seguir @christensen2018CumulativeLM. El número de condición Hessiano es inferior a $10^4$ lo que es indicativo de que no hay problemas de optimización
+El método `summary()` muestra la información resumen. Para su interpretación vamos a seguir @christensen2018CumulativeLM. El número de condición Hessiano es inferior a $10^4$ lo que es indicativo de que no hay problemas de optimización
 ^[El número de condición de Hessiano es una medida de la curvatura de una función en un punto.
 Si el número de condición de Hessiano es grande, la función es muy sensible a pequeñas perturbaciones y puede ser difícil de optimizar.]. La sección de coeficientes es la más importante. Se muestra la estimación de parámetros, el error estándar y la significación estadística de acuerdo al test de Wald
 ^[El test de Wald es un contraste de hipótesis estadístico en el que se evalúa si el valor estimado es cero suponiendo que $W = \left(\frac{\hat{\theta} - \theta_0}{se(\hat{\theta})}\right)^2 \sim \chi^{2}$
@@ -324,7 +325,7 @@ Para saber si existe un efecto periodo, añadimos como predictor la variable `Pe
 
 
 $$
-\text{logit}(p(y_i \leq k)) = \tau_k - \beta_1 \text{Treat}_i - \beta_2 \text{Period}_i
+\text{logit}(P(Response_i \leq k)) = \tau_k - \beta_1 \text{Treat}_i - \beta_2 \text{Period}_i
 $$
 
 
@@ -586,7 +587,17 @@ Los modelos multinivel requieren supuestos adicionales en el nivel segundo y sup
 
 ### Ajuste del modelo multinivel ordinal.
 
-El modelo multinivel aleatorio más simple que podemos considerar es el que incorpora únicamente un interceptor aleatorio para los estudiantes del curso. Que los estudiantes sean considerados un efecto aleatorio está doblemente justificado. Por un lado, son una muestra de una población más amplia que estaría constituida por todos los estudiantes de todos los cursos de accesibilidad. Por otro, cada estudiante realiza el test de evaluación dos veces y, por lo tanto, las respuestas a estos cuestionarios no son independientes. Para ajustar el modelo, vamos a utilizar la función `clmm()` del paquete `Ordinal` ya que permite la inclusión de efectos aleatorios.
+El modelo multinivel aleatorio más simple que podemos considerar es el que incorpora únicamente un interceptor aleatorio para los estudiantes del curso. Que los estudiantes sean considerados un efecto aleatorio está doblemente justificado. Por un lado, son una muestra de una población más amplia que estaría constituida por todos los estudiantes de todos los cursos de accesibilidad. Por otro, cada estudiante realiza el test de evaluación dos veces y, por lo tanto, las respuestas a estos cuestionarios no son independientes. La especificación del modelo será la siguiente:
+
+
+$$
+\text{logit}(P(Response_{ij} \leq k)) = \tau_k +\tau_{kj} - \beta_1 \text{Treat}_{ij},
+$$
+
+
+donde $Response_{ij}$ es la observación $i$ del usuario $j$, $\tau_k$ es el interceptor común a todos los usuarios y para el nivel de respuesta $k$ y $\tau_{kj}$ es el interceptor específico para el usuario $j$.
+
+ Para ajustar el modelo, vamos a utilizar la función `clmm()` del paquete `Ordinal` ya que permite la inclusión de efectos aleatorios.
 
 \scriptsize
 ```{r}
@@ -635,7 +646,7 @@ summary(clmm_treat.period.subject)
 \normalsize
 
 Vemos que, a diferencia de lo que sucedía en el modelo de efectos fijos, el periodo y la interacción del periodo con el subtitulado son ahora no significativos. 
-Queda, por último, discutir cómo añadir las preguntas al modelo. Consideramos que las respuestas a las preguntas no son independientes unas de otras y que, por lo tanto, deben ser consideradas efectos aleatorios. En @burkner2019 [pp. 19-20] podemos encontrar un ejemplo de esta solución. Las preguntas como efecto aleatorio se pueden añadir considerando únicamente el intercepto o el intercepto y la pendiente. Ajustamos ambos modelos:
+Queda, por último, discutir cómo añadir las preguntas al modelo. Consideramos que las respuestas a las preguntas no son independientes unas de otras y que, por lo tanto, deben ser consideradas efectos aleatorios. En @burkner2021 @burkner2019 [pp. 19-20] podemos encontrar un ejemplo de esta solución. Las preguntas como efecto aleatorio se pueden añadir considerando únicamente el intercepto o el intercepto y la pendiente. Ajustamos ambos modelos:
 
 \scriptsize
 ```{r}

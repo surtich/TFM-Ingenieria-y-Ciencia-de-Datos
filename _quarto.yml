@@ -23,14 +23,15 @@ vídeos"
     - 32-Modelo.qmd
     - 40-EDA1.qmd
     - 42-Analisis.qmd
-    - 42-Modelado.qmd
+    - 43-Modelado.qmd
+    - 44-Bayesiano.qmd
     - 50-Resultados.qmd
     - 60-Conclusiones.qmd
     - 99-Referencias.qmd
   appendices:
     - 75-Preprocesado.qmd
-    - 75-Setup.qmd
-    - 75-Contrasts.qmd
+    - 76-Setup.qmd
+    - 77-Contrasts.qmd
 
   cover-image: "images/logo-cover.png"
   favicon: "images/logo.png"
