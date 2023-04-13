@@ -529,7 +529,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada nulla aug
 
 Phasellus vitae magna nec mi sagittis luctus vitae eu augue. Donec scelerisque laoreet arcu, eget tempor mi ultricies vel. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum at blandit ex. Vestibulum eu sagittis mauris. In hac habitasse platea dictumst. Duis eget ante vel lacus sollicitudin convallis quis eu velit. Sed auctor sem non nisi hendrerit, vel tincidunt tortor bibendum.
 
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, interior hidden, borderline west={3pt}{0pt}{shadecolor}, breakable, enhanced, sharp corners, frame hidden]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, frame hidden, breakable, boxrule=0pt, enhanced, sharp corners, interior hidden]}{\end{tcolorbox}}\fi
 
 % Contents
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -970,16 +970,16 @@ largo. }\tabularnewline
 \toprule
 Seq & Period & Treat & Subject & Question & Cluster & Response & Level \\ 
 \midrule
-BA & 1 & B & 1037 & Q02 & 2 & 1 & Negative \\ 
-BA & 2 & A & 212 & Q01 & 2 & 1 & Negative \\ 
-BA & 1 & B & 85 & Q02 & 2 & 5 & Positive \\ 
-BA & 1 & B & 986 & Q11 & 2 & 2 & Negative \\ 
-AB & 1 & A & 802 & Q04 & 2 & 5 & Positive \\ 
-BA & 2 & A & 520 & Q05 & 1 & 4 & Positive \\ 
-AB & 2 & B & 893 & Q15 & 3 & 2 & Negative \\ 
-BA & 2 & A & 803 & Q01 & 2 & 4 & Positive \\ 
-AB & 1 & A & 362 & Q12 & 2 & 4 & Positive \\ 
-AB & 2 & B & 59 & Q09 & 1 & 2 & Negative \\ 
+BA & 1 & B & 229 & Q17 & 3 & 4 & Positive \\ 
+BA & 2 & A & 1023 & Q18 & 1 & 4 & Positive \\ 
+BA & 1 & B & 765 & Q15 & 3 & 2 & Negative \\ 
+BA & 2 & A & 229 & Q13 & 2 & 4 & Positive \\ 
+BA & 2 & A & 320 & Q11 & 2 & 4 & Positive \\ 
+AB & 1 & A & 75 & Q12 & 2 & 4 & Positive \\ 
+BA & 1 & B & 220 & Q03 & 2 & 3 & Neutral \\ 
+AB & 1 & A & 1153 & Q07 & 1 & 4 & Positive \\ 
+AB & 1 & A & 1011 & Q12 & 2 & 4 & Positive \\ 
+BA & 2 & A & 535 & Q01 & 2 & 4 & Positive \\ 
 \bottomrule
 \end{longtable}
 
@@ -2301,14 +2301,15 @@ Regresión Ordinal:
 \end{itemize}
 
 Nos centraremos en la primera ya que es la más habitual y adecuada para
-nuestro caso. El modelo acumulativo, CM, presupone que la variable
-ordinal observada, \(Y\), proviene de la categorización de una variable
-latente (no observada) continua, \(\tilde{Y}\). Hay \(K\) umbrales
-\(\tau_k\) que particionan \(\tilde{Y}\) en \(K + 1\) categorías
-ordenadas observables (ver Figura~\ref{fig-cumulative}). Si asumimos que
-\(\tilde{Y}\) tiene una cierta distribución (por ejemplo, normal) con
-distribución acumulada \(F\), se puede calcular la probabilidad de que
-\(Y\) sea la categoría \(k\) de esta forma:
+nuestro caso \autocite[ver][pp.~23-24]{burkner2019}. El modelo
+acumulativo, CM, presupone que la variable ordinal observada, \(Y\),
+proviene de la categorización de una variable latente (no observada)
+continua, \(\tilde{Y}\). Hay \(K\) umbrales \(\tau_k\) que particionan
+\(\tilde{Y}\) en \(K + 1\) categorías ordenadas observables (ver
+Figura~\ref{fig-cumulative}). Si asumimos que \(\tilde{Y}\) tiene una
+cierta distribución (por ejemplo, normal) con distribución acumulada
+\(F\), se puede calcular la probabilidad de que \(Y\) sea la categoría
+\(k\) de esta forma:
 
 \[Pr(Y = k) = F(\tau_k) - F(\tau_{k-1})\]
 
@@ -2403,7 +2404,7 @@ que tiene como único predictor el nivel de subtitulado por ser la
 variable objetivo de nuestro modelo:
 
 \[
-\text{logit}(p(y_i \leq k)) = \tau_k - \beta_1 \text{Treat}_i
+\text{logit}(P(Response_i \leq k)) = \tau_k - \beta_1 \text{Treat}_i,
 \]
 
 \scriptsize
@@ -2442,7 +2443,7 @@ Threshold coefficients:
 
 \normalsize
 
-El método \texttt{summary} muestra la información resumen. Para su
+El método \texttt{summary()} muestra la información resumen. Para su
 interpretación vamos a seguir \textcite{christensen2018CumulativeLM}. El
 número de condición Hessiano es inferior a \(10^4\) lo que es indicativo
 de que no hay problemas de optimización \footnote{El número de condición
@@ -2555,7 +2556,7 @@ Para saber si existe un efecto periodo, añadimos como predictor la
 variable \texttt{Period}.
 
 \[
-\text{logit}(p(y_i \leq k)) = \tau_k - \beta_1 \text{Treat}_i - \beta_2 \text{Period}_i
+\text{logit}(P(Response_i \leq k)) = \tau_k - \beta_1 \text{Treat}_i - \beta_2 \text{Period}_i
 \]
 
 \scriptsize
@@ -2902,7 +2903,7 @@ cuatro coeficientes para cada una de las variables \texttt{Treat} y
 \begin{Highlighting}[]
 \NormalTok{vglm\_treat.period }\OtherTok{\textless{}{-}} \FunctionTok{vglm}\NormalTok{(}
 \NormalTok{    Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{*}\NormalTok{ Period,}
-    \FunctionTok{cumulative}\NormalTok{(}\AttributeTok{parallel =}\NormalTok{ F }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{+}\NormalTok{ Treat}\SpecialCharTok{:}\NormalTok{Period, }\AttributeTok{reverse =}\NormalTok{ T),}
+\NormalTok{    VGAM}\SpecialCharTok{::}\FunctionTok{cumulative}\NormalTok{(}\AttributeTok{link =} \StringTok{"logit"}\NormalTok{, }\AttributeTok{parallel =}\NormalTok{ F }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{+}\NormalTok{ Treat}\SpecialCharTok{:}\NormalTok{Period, }\AttributeTok{reverse =}\NormalTok{ T),}
     \AttributeTok{data =}\NormalTok{ df\_clean}
 \NormalTok{)}
 \FunctionTok{coef}\NormalTok{(vglm\_treat.period) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{data.frame}\NormalTok{()}
@@ -3072,9 +3073,19 @@ está doblemente justificado. Por un lado, son una muestra de una
 población más amplia que estaría constituida por todos los estudiantes
 de todos los cursos de accesibilidad. Por otro, cada estudiante realiza
 el test de evaluación dos veces y, por lo tanto, las respuestas a estos
-cuestionarios no son independientes. Para ajustar el modelo, vamos a
-utilizar la función \texttt{clmm()} del paquete \texttt{Ordinal} ya que
-permite la inclusión de efectos aleatorios.
+cuestionarios no son independientes. La especificación del modelo será
+la siguiente:
+
+\[
+\text{logit}(P(Response_{ij} \leq k)) = \tau_k +\tau_{kj} - \beta_1 \text{Treat}_{ij},
+\]
+
+donde \(Response_{ij}\) es la observación \(i\) del usuario \(j\),
+\(\tau_k\) es el interceptor común a todos los usuarios para el nivel de
+respuesta \(k\) y \(\tau_{kj}\) es el interceptor específico para el
+usuario \(j\). Para ajustar el modelo, vamos a utilizar la función
+\texttt{clmm()} del paquete \texttt{Ordinal} ya que permite la inclusión
+de efectos aleatorios.
 
 \scriptsize
 
@@ -3252,10 +3263,11 @@ el periodo y la interacción del periodo con el subtitulado son ahora no
 significativos. Queda, por último, discutir cómo añadir las preguntas al
 modelo. Consideramos que las respuestas a las preguntas no son
 independientes unas de otras y que, por lo tanto, deben ser consideradas
-efectos aleatorios. En \textcite[pp.~19-20]{burkner2019} podemos
-encontrar un ejemplo de esta solución. Las preguntas como efecto
-aleatorio se pueden añadir considerando únicamente el intercepto o el
-intercepto y la pendiente. Ajustamos ambos modelos:
+efectos aleatorios. En \textcite{burkner2021}
+\textcite[pp.~19-20]{burkner2019} podemos encontrar un ejemplo de esta
+solución. Las preguntas como efecto aleatorio se pueden añadir
+considerando únicamente el intercepto o el intercepto y la pendiente.
+Ajustamos ambos modelos:
 
 \scriptsize
 
@@ -3569,10 +3581,227 @@ Question)}
 
 \end{figure}
 
-\bookmarksetup{startatroot}
-
 \hypertarget{modelado-bayesiano.}{%
-\chapter{Modelado Bayesiano.}\label{modelado-bayesiano.}}
+\section{Modelado Bayesiano.}\label{modelado-bayesiano.}}
+
+En el apéndice se comparan diversas parametrizaciones de modelado
+bayesiano utilizando la función \texttt{brm()} del paquete
+\texttt{brms}. Analizamos aquí la que mejor resultado resultado produjo
+en la aproximación bayesiana a validación cruzada
+\texttt{leave-one-out}:
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{brm\_treat.period.subject.question }\OtherTok{\textless{}{-}} \FunctionTok{brm}\NormalTok{(}
+\NormalTok{    Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{*}\NormalTok{ Period }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ Treat }\SpecialCharTok{|}\NormalTok{ Subject) }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ Treat }\SpecialCharTok{|}\NormalTok{ Question),}
+    \AttributeTok{data =}\NormalTok{ df\_clean,}
+    \AttributeTok{family =} \FunctionTok{cumulative}\NormalTok{(}\StringTok{"logit"}\NormalTok{),}
+    \AttributeTok{sample\_prior =} \ConstantTok{TRUE}\NormalTok{,}
+    \AttributeTok{file =} \StringTok{"models/brm\_treat.period.subject.question"}\NormalTok{,}
+    \AttributeTok{file\_refit =} \StringTok{"on\_change"}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+
+Esta parametrización coincide con la que elegimos en el apartado de
+Regresión Ordinal con efectos mixtos. El modelo utiliza como factores
+con efectos fijos (\texttt{complete\ pooling} en terminología bayesiana)
+el nivel de subtitulado y el periodo y la interacción entre ambos; y
+como efectos aleatorios (\texttt{partial\ pooling}) los sujetos y las
+preguntas del test. Cada uno de ellos con un intercepto y un nivel de
+subtitulado variable. El resumen del modelo es el siguiente:
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(brm\_treat.period.subject.question)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ Family: cumulative 
+  Links: mu = logit; disc = identity 
+Formula: Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question) 
+   Data: df_clean (Number of observations: 2980) 
+  Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
+         total post-warmup draws = 4000
+
+Group-Level Effects: 
+~Question (Number of levels: 18) 
+                      Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
+sd(Intercept)             0.74      0.16     0.50     1.11 1.00     1213
+sd(TreatB)                1.50      0.29     1.05     2.21 1.00     1194
+cor(Intercept,TreatB)    -0.41      0.21    -0.74     0.07 1.01      931
+                      Tail_ESS
+sd(Intercept)             2155
+sd(TreatB)                1803
+cor(Intercept,TreatB)     1691
+
+~Subject (Number of levels: 87) 
+                      Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
+sd(Intercept)             1.82      0.18     1.50     2.21 1.00      841
+sd(TreatB)                2.39      0.21     2.01     2.84 1.00      685
+cor(Intercept,TreatB)    -0.54      0.09    -0.70    -0.35 1.01      420
+                      Tail_ESS
+sd(Intercept)             1266
+sd(TreatB)                1487
+cor(Intercept,TreatB)      719
+
+Population-Level Effects: 
+               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+Intercept[1]      -6.70      0.37    -7.43    -5.98 1.00      701     1417
+Intercept[2]      -4.35      0.35    -5.03    -3.64 1.00      641     1231
+Intercept[3]      -3.06      0.34    -3.73    -2.37 1.00      626     1271
+Intercept[4]      -0.50      0.34    -1.17     0.18 1.00      623     1227
+TreatB            -3.15      0.57    -4.28    -2.04 1.01      483     1112
+Period2           -0.58      0.41    -1.41     0.21 1.01      492      943
+TreatB:Period2     0.50      0.68    -0.82     1.83 1.00      428      888
+
+Family Specific Parameters: 
+     Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+disc     1.00      0.00     1.00     1.00   NA       NA       NA
+
+Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).
+\end{verbatim}
+
+\normalsize
+
+En el Tabla~\ref{tbl-model-comp} se comparan las estimaciones puntuales
+que obtuvimos para este modelo con la función \texttt{clmm}. Se
+comprueba que son muy similares. También se añaden los intervalos de
+confianza. Vemos que los interceptores son claramente significativos y
+también el coeficiente de \texttt{TreatB}. Sin embargo los coeficientes
+correspondientes al efecto periodo, \texttt{Period2}, y al efecto
+secuencia, \texttt{TreatB:Period}, incluyen el cero y además tienen
+intervalos muy grandes por lo que hay mucha incertidumbre respecto a su
+verdadero valor.
+
+\tiny
+
+\hypertarget{tbl-model-comp}{}
+\begin{longtable}{lrrrrrrr}
+\caption{\label{tbl-model-comp}Comparación frecuentista/bayesiano de coeficientes estimados en el
+modelo Response \textasciitilde{} Treat * Period + (1 + Treat \textbar{}
+Subject) + (1 + Treat \textbar{} Question). }\tabularnewline
+
+\toprule
+ & \multicolumn{3}{c}{ordinal::clmm} & \multicolumn{4}{c}{brms::brm} \\ 
+\cmidrule(lr){2-4} \cmidrule(lr){5-8}
+Name & Estimation.clmm & 2.5\% & 97.5\% & Estimation.brm & std.error & conf.low & conf.high \\ 
+\midrule
+1|2 & -6.75 & -7.45 & -6.05 & -6.71 & 0.37 & -7.43 & -5.98 \\ 
+2|3 & -4.39 & -5.06 & -3.73 & -4.35 & 0.35 & -5.03 & -3.64 \\ 
+3|4 & -3.11 & -3.77 & -2.45 & -3.06 & 0.34 & -3.73 & -2.37 \\ 
+4|5 & -0.56 & -1.21 & 0.09 & -0.50 & 0.34 & -1.17 & 0.18 \\ 
+TreatB & -3.14 & -4.19 & -2.09 & -3.14 & 0.57 & -4.28 & -2.04 \\ 
+Period2 & -0.63 & -1.42 & 0.16 & -0.57 & 0.41 & -1.41 & 0.21 \\ 
+TreatB:Period2 & 0.56 & -0.74 & 1.86 & 0.52 & 0.68 & -0.82 & 1.83 \\ 
+Subject.sd(Intercept) & 0.67 &  &  & 0.72 & 0.16 & 0.50 & 1.11 \\ 
+Subject.sd(TreatB) & 1.36 &  &  & 1.47 & 0.29 & 1.05 & 2.21 \\ 
+Subject.cor(Intercept,TreatB) & 1.77 &  &  & 1.82 & 0.18 & 1.50 & 2.21 \\ 
+Question.sd(Intercept) & 2.34 &  &  & 2.38 & 0.21 & 2.01 & 2.84 \\ 
+Question.sd(TreatB) & -0.47 &  &  & -0.44 & 0.21 & -0.74 & 0.07 \\ 
+Question.cor(Intercept,TreatB) & -0.55 &  &  & -0.54 & 0.09 & -0.70 & -0.35 \\ 
+\bottomrule
+\end{longtable}
+
+\normalsize
+
+No hemos dado valor a las distribuciones de probabilidad a priori con
+fiando que los valores por defecto que asigna \texttt{brm} son
+adecuados. En el Tabla~\ref{tbl-priors} se muestran las distribuciones a
+priori de los parámetros aleatorios del modelo. En la
+Figura~\ref{fig-priors} se constata que toman valores razonables y no
+informativos.
+
+\hypertarget{tbl-priors}{}
+\begin{longtable}{llllrrrrrl}
+\caption{\label{tbl-priors}Distribuciones a priori del modelo Response \textasciitilde{} Treat *
+Period + (1 + Treat \textbar{} Subject) + (1 + Treat \textbar{}
+Question). }\tabularnewline
+
+\toprule
+prior & class & coef & group & resp & dpar & nlpar & lb & ub & source \\ 
+\midrule
+ & b &  &  &  &  &  &  &  & default \\ 
+ & b & Period2 &  &  &  &  &  &  & default \\ 
+ & b & TreatB &  &  &  &  &  &  & default \\ 
+ & b & TreatB:Period2 &  &  &  &  &  &  & default \\ 
+student\_t(3, 0, 2.5) & Intercept &  &  &  &  &  &  &  & default \\ 
+ & Intercept & 1 &  &  &  &  &  &  & default \\ 
+ & Intercept & 2 &  &  &  &  &  &  & default \\ 
+ & Intercept & 3 &  &  &  &  &  &  & default \\ 
+ & Intercept & 4 &  &  &  &  &  &  & default \\ 
+lkj\_corr\_cholesky(1) & L &  &  &  &  &  &  &  & default \\ 
+ & L &  & Question &  &  &  &  &  & default \\ 
+ & L &  & Subject &  &  &  &  &  & default \\ 
+student\_t(3, 0, 2.5) & sd &  &  &  &  &  & 0 &  & default \\ 
+ & sd &  & Question &  &  &  &  &  & default \\ 
+ & sd & Intercept & Question &  &  &  &  &  & default \\ 
+ & sd & TreatB & Question &  &  &  &  &  & default \\ 
+ & sd &  & Subject &  &  &  &  &  & default \\ 
+ & sd & Intercept & Subject &  &  &  &  &  & default \\ 
+ & sd & TreatB & Subject &  &  &  &  &  & default \\ 
+\bottomrule
+\end{longtable}
+
+\begin{figure}[h]
+
+{\centering \includegraphics{43-Modelado_files/figure-pdf/fig-priors-1.pdf}
+
+}
+
+\caption{\label{fig-priors}Distribuciones a priori del modelo Response
+\textasciitilde{} Treat * Period + (1 + Treat \textbar{} Subject) + (1 +
+Treat \textbar{} Question).}
+
+\end{figure}
+
+Es importante asegurar que el entrenamiento del a convergido a su
+distribución a posteriori. En la tabla de resumen constatamos que el
+valor de \texttt{Rhat} es inferior a 1.1 y el de \texttt{ESS} superior a
+400 en todos los parámetros, que son umbrales que no se deberían violar
+\autocite[ \textcite{burkner2019}]{ver}. En la Figura~\ref{fig-trace} se
+comprueba que las cadenas de muestrado se mezclan correctamente y no
+muestran autocorrelación en ninguno de las parámetros. Por último, en la
+Figura~\ref{fig-predictive} se muestra un a comparación de los
+histogramas obtenidos de modelo con los intervalos de confianza
+marginales de la función predictiva a posteriori del modelo. En la
+mayoría de las preguntas, el muestreo reproduce bastante bien el
+histograma en casi todas las preguntas excepto en algunas como la
+\texttt{Q16} o la \texttt{Q17}.
+
+\begin{figure}[h]
+
+{\centering \includegraphics{43-Modelado_files/figure-pdf/fig-trace-1.pdf}
+
+}
+
+\caption{\label{fig-trace}MCMC trazado del modelo Response
+\textasciitilde{} Treat * Period + (1 + Treat \textbar{} Subject) + (1 +
+Treat \textbar{} Question).}
+
+\end{figure}
+
+\begin{figure}[h]
+
+{\centering \includegraphics{43-Modelado_files/figure-pdf/fig-predictive-1.pdf}
+
+}
+
+\caption{\label{fig-predictive}Comparación de los valores reales con los
+obtenidos a partir de la función predictiva a posteriori del modelo
+Response \textasciitilde{} Treat * Period + (1 + Treat \textbar{}
+Subject) + (1 + Treat \textbar{} Question).}
+
+\end{figure}
 
 \bookmarksetup{startatroot}
 
