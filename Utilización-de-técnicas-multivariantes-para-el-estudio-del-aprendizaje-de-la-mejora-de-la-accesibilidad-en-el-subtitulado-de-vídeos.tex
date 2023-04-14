@@ -531,7 +531,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada nulla aug
 
 Phasellus vitae magna nec mi sagittis luctus vitae eu augue. Donec scelerisque laoreet arcu, eget tempor mi ultricies vel. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum at blandit ex. Vestibulum eu sagittis mauris. In hac habitasse platea dictumst. Duis eget ante vel lacus sollicitudin convallis quis eu velit. Sed auctor sem non nisi hendrerit, vel tincidunt tortor bibendum.
 
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, enhanced, interior hidden, sharp corners, borderline west={3pt}{0pt}{shadecolor}, frame hidden, breakable]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, breakable, sharp corners, frame hidden, borderline west={3pt}{0pt}{shadecolor}, boxrule=0pt, enhanced]}{\end{tcolorbox}}\fi
 
 % Contents
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -949,7 +949,7 @@ tibble [2,980 x 8] (S3: tbl_df/tbl/data.frame)
  $ Level   : Ord.factor w/ 3 levels "Negative"<"Neutral"<..: 2 2 2 2 2 2 2 2 2..
 \end{verbatim}
 
-En el Tabla~\ref{tbl-df_clean} se muestran algunos ejemplos datos.
+En la Tabla~\ref{tbl-df_clean} se muestran algunos ejemplos datos.
 
 \hypertarget{tbl-df_clean}{}
 \begin{longtable}{cccccccc}
@@ -959,16 +959,16 @@ largo. }\tabularnewline
 \toprule
 Seq & Period & Treat & Subject & Question & Cluster & Response & Level \\ 
 \midrule
-BA & 1 & B & 657 & Q12 & 2 & 2 & Negative \\ 
-AB & 1 & A & 380 & Q12 & 2 & 4 & Positive \\ 
-BA & 2 & A & 231 & Q09 & 1 & 4 & Positive \\ 
-BA & 2 & A & 229 & Q14 & 3 & 4 & Positive \\ 
-BA & 1 & B & 765 & Q16 & 3 & 2 & Negative \\ 
-BA & 2 & A & 1040 & Q15 & 3 & 3 & Neutral \\ 
-BA & 1 & B & 220 & Q16 & 3 & 4 & Positive \\ 
-AB & 2 & B & 1017 & Q06 & 1 & 3 & Neutral \\ 
-BA & 2 & A & 535 & Q06 & 1 & 4 & Positive \\ 
-AB & 1 & A & 802 & Q18 & 1 & 4 & Positive \\ 
+AB & 2 & B & 893 & Q05 & 1 & 2 & Negative \\ 
+AB & 2 & B & 624 & Q18 & 1 & 4 & Positive \\ 
+BA & 1 & B & 1118 & Q10 & 2 & 2 & Negative \\ 
+AB & 1 & A & 288 & Q06 & 1 & 5 & Positive \\ 
+AB & 2 & B & 281 & Q05 & 1 & 2 & Negative \\ 
+BA & 1 & B & 333 & Q09 & 1 & 1 & Negative \\ 
+BA & 2 & A & 320 & Q16 & 3 & 4 & Positive \\ 
+BA & 2 & A & 728 & Q14 & 3 & 4 & Positive \\ 
+AB & 1 & A & 298 & Q09 & 1 & 4 & Positive \\ 
+AB & 1 & A & 369 & Q18 & 1 & 5 & Positive \\ 
 \bottomrule
 \end{longtable}
 
@@ -3659,11 +3659,11 @@ scale reduction factor on split chains (at convergence, Rhat = 1).
 
 \normalsize
 
-En el Tabla~\ref{tbl-model-comp} se comparan las estimaciones puntuales
-que obtuvimos para este modelo con la función \texttt{clmm}. Se
-comprueba que son muy similares. También se añaden los intervalos de
-confianza. Vemos que los interceptores son claramente significativos y
-también el coeficiente de \texttt{TreatB}. Sin embargo los coeficientes
+En la Tabla~\ref{tbl-model-comp} se comparan las estimaciones puntuales
+que obtuvimos para este modelo con la función \texttt{clmm} para ajustar
+el modelo con efectos mixtos. Se comprueba que son muy similares. Vemos
+que los interceptores son claramente significativos y también el
+coeficiente de \texttt{TreatB}. Sin embargo los coeficientes
 correspondientes al efecto periodo, \texttt{Period2}, y al efecto
 secuencia, \texttt{TreatB:Period}, incluyen el cero y además tienen
 intervalos muy grandes por lo que hay mucha incertidumbre respecto a su
@@ -3701,9 +3701,9 @@ Question.cor(Intercept,TreatB) & -0.55 &  &  & -0.54 & -0.70 & -0.35 \\
 \normalsize
 
 Hemos mantenido las distribuciones de probabilidad a priori que por
-defecto utiliza \texttt{brm} confiando en que sus parámetros por defecto
-son adecuados. Sin embargo, conviene comprobar si realmente es así. En
-el Tabla~\ref{tbl-priors} se muestran las distribuciones a priori de los
+defecto utiliza \texttt{brm} confiando en que sus parámetros son
+adecuados. Sin embargo, conviene comprobar que realmente sea así. En la
+Tabla~\ref{tbl-priors} se muestran las distribuciones a priori de los
 parámetros aleatorios del modelo. En la Figura~\ref{fig-priors} se
 constata que toman valores razonables y no informativos.
 
@@ -3762,11 +3762,11 @@ valor de \texttt{Rhat} es inferior a 1.1 y el de \texttt{ESS} superior a
 que las cadenas MCMC de muestreo de la distribución a posteriori se
 mezclan correctamente y no se aprecia autocorrelación en ninguno de las
 parámetros. Por último, en la Figura~\ref{fig-predictive} se muestra una
-comparación entre los histogramas a partir de los datos con los
+comparación entre los histogramas construidos con los datos con los
 intervalos de confianza marginales de la función predictiva a posteriori
 del modelo. En la mayoría de las preguntas, el muestreo reproduce
-bastante bien el histograma en casi todas las preguntas excepto en
-algunas como la \texttt{Q16} o la \texttt{Q17}.
+bastante bien el histograma de respuestas. En algunas preguntas, como la
+\texttt{Q16} o la \texttt{Q17}, hay diferencias relevantes.
 
 \begin{figure}[h]
 
@@ -3799,14 +3799,15 @@ trabajo, los alumnos perciben claramente una diferencia entre los
 niveles de subtitulado \(A\) y \(B\), siendo preferido el \(A\). En la
 Figura~\ref{fig-predictive-2} se representan gráficamente los valores
 esperados de la probabilidad de respuesta a cada pregunta por
-tratamiento y periodo. Lo más interesante es confirmar (ver
-Figura~\ref{fig-or-2}) la existencia de sendos efectos periodo y
-secuencia de pequeña magnitud que se materializan en que, para el nivel
-de subtitulado \(A\), son ligeramente más probables las respuestas con
-valor 4 en el periodo 2 (secuencia \(BA\)) que en el 1 (secuencia
-\(AB\)). Con las respuestas de valor 5 ocurre lo contrario: en el
-subtitulado \(A\) son más probables en el periodo 1 (secuencia \(AB\))
-que el 2 (secuencia \(BA\)).
+tratamiento y periodo. Lo más interesante es confirmar la existencia de
+sendos efectos periodo y secuencia de pequeña magnitud que se
+materializan en que, para el nivel de subtitulado \(A\), son ligeramente
+más probables las respuestas con valor 4 en el periodo 2 (secuencia
+\(BA\)) que en el 1 (secuencia \(AB\)). Con las respuestas de valor 5
+ocurre lo contrario: en el subtitulado \(A\) son más probables en el
+periodo 1 (secuencia \(AB\)) que el 2 (secuencia \(BA\)). Esto ya lo
+habíamos constatado antes en el análisis del \(OR\) (ver
+Sección~\ref{sec-or}).
 
 \begin{figure}[h]
 
@@ -3821,7 +3822,7 @@ Subject) + (1 + Treat \textbar{} Question).}
 
 \end{figure}
 
-Analizados los efectos periodo y secuencia, y sabiendo que son de
+Constatados los efectos periodo y secuencia, y sabiendo que son de
 pequeña magnitud, pasamos ahora a hacer un análisis de las predicciones
 que realiza el modelo sobre la distribución de respuestas en cada
 pregunta. Para ello en la Figura~\ref{fig-pred-3} se representan 50
@@ -3830,7 +3831,7 @@ cada pregunta y nivel de subtitulado marginalizadas por periodo y
 estudiante. La primera conclusión que podemos extraer es que el modelo
 tiene bastante incertidumbre sobre los valores de respuesta a cada
 pregunta no superando casi nunca el 50\% de probabilidad para todas las
-preguntas y niveles de tratamiento. En general se observa en la mayoría
+preguntas y niveles de subtitulado. En general se observa en la mayoría
 de las preguntas del nivel de subtitulado \(A\) que los alumnos están
 bastante seguros de que la respuesta a las preguntas debe ser 4 ó 5,
 asignando una muy baja probabilidad a los valores 1, 2, ó 3, pero
@@ -3860,10 +3861,10 @@ podemos extraer las siguientes conclusiones:
   acusadamente en el subtitulado \(B\) y en este nivel aumenta
   ligeramente la probabilidad de respuesta 2 y 3.
 \item
-  Las Preguntas \(Q06\), \(Q07\), \(Q14\) y \(Q18\) no son muy
+  Las preguntas \(Q06\), \(Q07\), \(Q14\) y \(Q18\) no son muy
   diferentes de las anteriores. En general el modelo predice mayor
   probabilidad de respuesta para 5 en el subtitulado \(A\) pero este
-  valor es con alta probabilidad cercano cero en el subtitulado \(B\).
+  valor es con alta probabilidad cercano a cero en el subtitulado \(B\).
   En el subtitulado \(B\) la probabilidad de respuesta 2, 3 ó 4 es
   similar.
 \item

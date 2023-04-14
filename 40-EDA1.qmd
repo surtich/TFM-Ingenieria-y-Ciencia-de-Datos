@@ -39,10 +39,7 @@ test_all_df <- test_all_df %>%
 
 Como se explica en la @tbl-variables, al subtitulado le denominamos tratamiento y a sus niveles (correcto e incorrecto) los hemos llamado $A$ y $B$ sin hacer ninguna conjetura de cual de los dos es el subtitulado correcto. El grupo con secuencia $AB$ será el que primero vio el vídeo con subtitulado $A$ y luego el $B$. Análogamente, el grupo con secuencia $BA$ vio los vídeos en orden inverso. Recuérdese que el nivel 0 de respuesta se corresponde con "No sé / No contesto" (ver @tbl-likert-levels).
 
-Hay `r unique_tests_df %>% nrow()` estudiantes que no realizaron el segundo test. De ellos `r unique_count[[1,2]]` pertenecen al grupo `r unique_count[[1,1]]` y `r unique_count[[2,2]]` al grupo `r unique_count[[2,1]]`. Debido a que no son muchos y a que los grupos se mantienen balanceados, se ha decidido eliminar los test de estos estudiantes.
-
-Tras eliminar a los estudiantes que no realizaron uno de los test,
-constatamos (ver @fig-groups) que los grupos están balanceados en el número de estudiantes
+Hay `r unique_tests_df %>% nrow()` estudiantes que no realizaron el segundo test. De ellos `r unique_count[[1,2]]` pertenecen al grupo `r unique_count[[1,1]]` y `r unique_count[[2,2]]` al grupo `r unique_count[[2,1]]`. Debido a que no son muchos y a que los grupos se mantienen balanceados, se ha decidido eliminar los test de estos estudiantes. Tras eliminar estos datos, constatamos (ver @fig-groups) que los grupos están balanceados en el número de estudiantes
 y que disponemos de suficientes datos para realizar el análisis estadístico.
 
 ```{r}
@@ -229,9 +226,9 @@ No parece razonable realizar la actividad en menos de `r washout_cut_2` minutos.
 
 ### Valores nulos o erróneos.
 
-En los test no se ha detectado ningún valor nulo ni erróneo. Sin embargo tenemos algunos de estos valores en la información socioeconómica de los estudiantes (ver @tbl-contingencia). 
+En los test no se ha detectado ningún valor nulo ni erróneo. Sin embargo tenemos algunos de estos valores en la información socioeconómica de los estudiantes (ver @tbl-contingencia-eco). 
 
-::: {#tbl-contingencia layout-ncol=2}
+::: {#tbl-contingencia-eco layout-ncol=2}
 
 ```{r}
 #| tbl-cap: Estudiantes por sexo.
@@ -420,7 +417,7 @@ df_resume %>%
 
 La @fig-freqs muestra algunas cuestiones interesantes:
 
-* El tratamiento (subtitulado) con nivel $A$ presenta claramente mayores valores de respuesta que el $B$ como ya habíamos visto (ver @fig-diff). Si en este momento tuviéramos que decidir qué subtitulado es cada uno parece claro que sería el de nivel $A$. No obstante, ni en el análisis exploratorio ni en el modelado estadístico se hará ninguna suposición.
+* El tratamiento (subtitulado) con nivel $A$ presenta claramente mayores valores de respuesta que el $B$ como ya habíamos visto (ver @fig-diff). Si en este momento tuviéramos que decidir qué subtitulado es el correcto claro que sería el de nivel $A$. No obstante, ni en el análisis exploratorio ni en el modelado estadístico se hará ninguna suposición.
 
 * En general los dos grupos muestran bastante acuerdo en el subtitulado en ambos niveles: En el nivel de tratamiento $A$ los dos grupos tienen una frecuencia relativa similar de respuestas positivas (valores 4 y 5). El grupo $AB$ tiene un `r get_freqs(Seq="AB", Treat="A", Response=c(4,5))` de respuestas positivas frente a un `r get_freqs(Seq="BA", Treat="A", Response=c(4,5))` el grupo $BA$. No obstante, el grupo $AB$ tiene más respuestas con valor 5 que el grupo $BA$ (`r get_freqs(Seq="AB", Treat="A", Response=5)` frente a `r get_freqs(Seq="BA", Treat="A", Response=5)`). La valoración es también similar entre grupos en el nivel de tratamiento $B$: el grupo $AB$ tiene `r get_freqs(Seq="AB", Treat="B", Response=c(4,5))` de respuestas positivas y `r get_freqs(Seq="BA", Treat="B", Response=c(4,5))` el grupo $BA$. Las valoraciones negativas (1, 2), la neutra (3) y la 'No sé / No contesto' (0) son también muy similares.
 
@@ -480,7 +477,7 @@ El gráfico @fig-levels muestra la frecuencia relativa por grupo y por test de l
  * Los niveles 4 y 5 se consideran positivos.
  * El nivel 0 ("No sé / No contesto") se excluye en este análisis.
 
-Se muestra en primer lugar la pregunta 18 por ser una valoración global del subtitulado y que resume la opinión que sobre el mismo tiene el estudiante. Volvemos a constatar que el subtitulado $A$ es mejor valorado por los estudiantes, pero ahora vemos que en las 18 preguntas ambos grupos tienen mas puntuaciones positivas y menos negativas en el subtitulado $A$ que el $B$. También volvemos a encontrar que los dos grupos valoran de forma muy similar los dos niveles de subtitulado en todas la preguntas. En el nivel de subtitulado $A$ las preguntas $Q15$, $Q16$ y $Q17$ obtienen relativamente peores valoraciones (consultar la @tbl-likert-scale para ver los valores) y estas son similares en ambos subtitulados. Hay algunas preguntas que son valoradas de forma positiva incluso en el nivel de subtitulado $B$ (por ejemplo $Q04$ o $Q13$) y que, por lo tanto, su valoración es similar en ambos subtitulados. Por último, las preguntas $Q05$ y $Q09$ (también la $Q14$ pero solo para el grupo $BA$) tienen una valoración muy negativa en el nivel de subtitulado $B$.
+Se muestra en primer lugar la pregunta 18 por ser una valoración global del subtitulado y que resume la opinión que sobre el mismo tiene el estudiante. Volvemos a constatar que el subtitulado $A$ es mejor valorado por los estudiantes, pero ahora vemos que en las 18 preguntas ambos grupos tienen más puntuaciones positivas y menos negativas en el subtitulado $A$ que el $B$. También volvemos a encontrar que los dos grupos valoran de forma muy similar los dos niveles de subtitulado en todas la preguntas. En el nivel de subtitulado $A$ las preguntas $Q15$, $Q16$ y $Q17$ obtienen relativamente peores valoraciones (consultar la @tbl-likert-scale para ver los valores) y estas son similares en ambos subtitulados. Hay algunas preguntas que son valoradas de forma positiva incluso en el nivel de subtitulado $B$ (por ejemplo $Q04$ o $Q13$) y que, por lo tanto, su valoración es similar en ambos subtitulados. Por último, las preguntas $Q05$ y $Q09$ (también la $Q14$ pero solo para el grupo $BA$) tienen una valoración muy negativa en el nivel de subtitulado $B$.
 
 ```{r}
 #| label: fig-levels

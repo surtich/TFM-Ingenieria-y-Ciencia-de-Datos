@@ -77,8 +77,8 @@ Partiendo del `dataframe` que se construyó en el preprocesado (ver @sec-preproc
 * Transformar las variables que lo requieran en factores. La pregunta 18 se usará como referencia en el factor `Question`.
 * Rotar los valores de respuesta para que "No sé / No contesto" tenga valor 0 y el resto de 1 a 5 desde "Muy en desacuerdo", 1, hasta "Muy de acuerdo", 5.
 * Agrupar las preguntas por similitud de respuesta (ver @sec-cluster2).
-* Crear el factor `Level` con los niveles `positive`, `neutral` y `negative` dependiendo de si la respuesta es 4 ó 5, 3, 1 ó 2 respectivamente.
-* Transformar el `dataframe` de formato ancho a largo: los ficheros de respuestas se suministran en formato ancho. Es decir, que cada fila es un test que contiene 18 columnas para las respuestas a cada pregunta. Los nombres de las columnas son $Q01$, $Q02$, ..., $Q18$ y tendrán valores de 0 a 6 con las respuestas. La mayoría de los paquetes de R que vamos a usar requieren que los datos estén en formato largo. Esto que quiere decir que cada fila tendrá una única respuesta por lo que habrá únicamente dos columnas, $Question$ y $Response$. En la primera se almacenará el identificador de la pregunta ($Q01$, $Q02$, ..., $Q18$) y en la segunda el valor de la respuesta (de 0 a 6). De esta forma un test pasará de ocupar una fila y 18 columnas en el formato ancho a 18 filas y dos columnas en el largo.
+* Crear el factor `Level` con los niveles `negative`, `neutral` y `positive` dependiendo de si la respuesta es 1 ó 2, 3, 4 ó 5 respectivamente.
+* Transformar el `dataframe` de formato ancho a largo: los ficheros de respuestas se suministran en formato ancho. Es decir, que cada fila es un test que contiene 18 columnas para las respuestas a cada pregunta. Los nombres de las columnas son $Q01$, $Q02$, ..., $Q18$ y tendrán valores de 0 a 5 con las respuestas. La mayoría de los paquetes de R que vamos a usar requieren que los datos estén en formato largo. Esto que quiere decir que cada fila tendrá una única respuesta por lo que habrá únicamente dos columnas, $Question$ y $Response$. En la primera se almacenará el identificador de la pregunta ($Q01$, $Q02$, ..., $Q18$) y en la segunda el valor de la respuesta (de 0 a 5). De esta forma, un test pasará de ocupar una fila y 18 columnas en el formato ancho a 18 filas y dos columnas en el largo.
 
 En @sec-setup se puede consultar el código en R para realizar el proceso descrito anteriormente. Con estas transformaciones se crean los dos `dataframes` que se usarán en el análisis estadístico de los datos:
 
@@ -93,7 +93,7 @@ La estructura de estos `dataframes` es la siguiente:
 str(df_clean %>% dplyr::select(Seq, Period, Treat, Subject, Question, Cluster, Response, Level), strict.width = "cut")
 ``` 
 
-En el @tbl-df_clean se muestran algunos ejemplos de estos `dataframes`.
+En la @tbl-df_clean se muestran algunos ejemplos datos.
 
 ```{r}
 #| label: tbl-df_clean

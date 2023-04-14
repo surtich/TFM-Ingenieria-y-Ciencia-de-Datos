@@ -160,7 +160,7 @@ for (i in 1:3) {
 Los modelos lineales generalizados ($GLM$) son modelos en los que la variable respuesta no es normal. Para especificar un $GLM$ son necesarios tres componentes [ver @oconnell2006]:
 
 * Un componente aleatorio: será una distribución de probabilidad de la familia exponencial que se asume que sigue la variable respuesta (en la regresión logística será la distribución Binomial o la distribución de Bernoulli).
-* Un componente lineal y aditivo de predictores.
+* Un componente lineal de predictores.
 * Una función de enlace que realiza transformación de los valores del componente lineal a los que puede tomar la variable respuesta. Por ejemplo en la función logística será la función $logit^{-1}(x)$. Esta función permite pasar de un rango de valores $(-\infty, +\infty)$ a un rango $(0, 1)$.
   
 La Regresión Ordinal es una extensión de la Regresión Logística y, por lo tanto de $GLM$. Según @burkner2019 hay tres clases de Regresión Ordinal:
@@ -204,7 +204,7 @@ Por lo que asumiendo la normalidad de los errores:
 $$\mathrm{Pr}(Y = k) = \Phi(\tau_k - \eta) - \Phi(\tau_{k - 1} - \eta)$$
 
 Donde hay que estimar los umbrales y los coeficientes de regresión. La función anterior es la conocida como la función de enlace `probit`. Otra función de enlace popular es la función `logit`. Es la que usaremos en este trabajo por ser más fácil su interpretación
-^[En la práctica los coeficientes estimados con las funciones de enlace `probit` y `logit` suelen similares.]. Con esta función de enlace la interpretación de los coeficientes es parecida a de los coeficientes de la regresión logística. Se parte del supuesto de que el $logit$ de la función de probabilidad es lineal:
+^[En la práctica los coeficientes estimados con las funciones de enlace `probit` y `logit` suelen similares.]. Con esta función de enlace la interpretación de los coeficientes es parecida a la de los coeficientes de la regresión logística. Se parte del supuesto de que el $logit$ de la función de probabilidad es lineal:
 
 $$logit [P(Y \le k)] = \tau_{k} - \eta = \tau_{k} - (\beta_1 x_1 + \beta_2 x_2 + ... + \beta_p x_p)$$
 
@@ -486,7 +486,7 @@ nominal_test(clm_treat.period)
 \normalsize
 
  Lo que procede es ajustar el modelo relajando la constante de proporcionalidad de esas variables. Se ha realizado esto utilizando la función `vglm` del paquete `VGAM`. Vemos que ahora hay cuatro coeficientes para cada una de las variables `Treat` y `Treat:Period`
- ^[Los umbrales tienen los mismo valores pero de signo contrario debido a diferencias en la parametrización del modelo en cada función utilizada.].
+ ^[Los umbrales tienen los mismos valores pero de signo contrario debido a diferencias en la parametrización del modelo en cada función utilizada.].
 
 
 \scriptsize
@@ -534,7 +534,7 @@ nd %>%
 ### Introducción a los modelos multinivel.
 
 
-Un modelo multinivel, jerárquico o mixto es un modelo en el que tenemos datos de un nivel inferior anidados en estructuras de un nivel superior. Por ejemplo, si quisiéramos evaluar el rendimiento de varios métodos de enseñanza, poríamos seleccionar aleatoriamente varios colegios participantes y en cada uno de ellos elegir varias clases en las que se impartiría uno de los métodos de enseñanza. Los modelos multinivel se utilizan cuando se incumple la hipótesis de independencia de entre las observaciones. En el caso de los métodos de enseñanza, los alumnos de una clase no son independientes de los alumnos de otra clase del mismo colegio y tampoco lo son los alumnos de dos colegios diferentes. Otra situación en la que se viola la condición de independencia entre observaciones es cuando se toman varias medidas del mismo sujeto. Este tipo de experimentos se llaman de medidas repetidas o longitudinales. En este caso se consideran que las medidas están anidadas en el sujeto [ver @Liu2202]. En un modelo multinivel no es necesario que todas las variables tengan una estructura jerárquica. Distinguimos entonces dos tipos de variables. Las conocidas como de efectos fijos son aquellas variables que se consideran que tienen el mismo efecto en toda la población y, por lo tanto, estimamos un único coeficiente. Las que llamamos como variables de efectos aleatorios tienen un coeficiente diferente para cada elemento de la población y se supone que son una muestra de una población mucho mayor, como el caso de seleccionar aleatoriamente una muestra de colegios. Normalmente el coeficiente particular de cada elemento no es de interés para el investigador y se supone que tienen una media centrada en cero. El mayor interés de los efectos aleatorios es la estimación de su matriz de varianzas-covarianzas.
+Un modelo multinivel, jerárquico o mixto es un modelo en el que tenemos datos de un nivel inferior anidados en estructuras de un nivel superior. Por ejemplo, si quisiéramos evaluar el rendimiento de varios métodos de enseñanza, poríamos seleccionar aleatoriamente varios colegios participantes y en cada uno de ellos elegir varias clases en las que se impartiría uno de los métodos de enseñanza. Los modelos multinivel se utilizan cuando se incumple la hipótesis de independencia de entre las observaciones. En el caso de los métodos de enseñanza, los alumnos de una clase no son independientes de los alumnos de otra clase del mismo colegio y también es esperable que los alumnos de un mismo colegio sean más parecidos entre sí que los de otro colegio. Otra situación en la que se viola la condición de independencia entre observaciones es cuando se toman varias medidas del mismo sujeto. Este tipo de experimentos se llaman de medidas repetidas o longitudinales. En este caso se considera que las medidas están anidadas en el sujeto [ver @Liu2202]. En un modelo multinivel no es necesario que todas las variables tengan una estructura jerárquica. Distinguimos entonces dos tipos de variables. Las conocidas como de efectos fijos son aquellas variables que se consideran que tienen el mismo efecto en toda la población y, por lo tanto, estimamos un único coeficiente. Las que llamamos como variables de efectos aleatorios tienen un coeficiente diferente para cada elemento de la población y se supone que son una muestra de una población mucho mayor, como el caso de seleccionar aleatoriamente una muestra de colegios. Normalmente el coeficiente particular de cada elemento no es de interés para el investigador y se asuma que tienen una media centrada en cero. El mayor interés de los efectos aleatorios es la estimación de su matriz de varianzas-covarianzas.
 
 La ecuación general de un modelo multinivel con dos niveles y un solo predictor con efectos aleatorios es [ver @chen2021, pp. 40]:
 
@@ -578,12 +578,12 @@ donde $j$ son los grupos que varían $j = 1,...,J$ ($J$ es el número de grupos)
 
 En @gelman2013 se evalúan tres posibilidades a la hora de definir un modelo:
 
-* $Complete\ pooloing$: Consiste en estimar un único parámetro para todas las observaciones. Es equivalente a un modelo con efectos fijos.
+* $Complete\ pooloing$: Consiste en estimar un único parámetro para cada predictor. Es equivalente a un modelo con efectos fijos.
 * $No\ pooling$: Se estiman tantos paŕametros como grupos haya de forma independiente.
-* $Partial\ pooling$: Es el modelo jerárquico. Es una mezcla de ambos, ya que aunque se estima un parámetro para cada grupo, esta estimación no es independiente, sino que se supone que las observaciones de un mismo grupo proceden de una misma distribución de probabilidad. Esto se traduce en que se produce una contracción ($shrinkage$) en la estimación de los parámetros. Al influir la estimación de unas observaciones en otras, la estimación es de menor valor absoluto que la que resultaría en un modelo de $no\ pooling$. De esta forma podemos ver el $complete\ pooling$ y el $no\ pooling$ como dos casos particulares extremos del $no\ pooling$. La contracción de coeficientes en los modelos multinivel actúa como una regularización que puede evitar el sobreajuste.
+* $Partial\ pooling$: Es el modelo jerárquico. Es una mezcla de ambos, ya que aunque se estima un parámetro para cada grupo, esta estimación no es independiente, sino que se supone que las observaciones de un mismo grupo proceden de una misma distribución de probabilidad. Esto se traduce en que se produce una contracción ($shrinkage$) en la estimación de los parámetros. Al influir la estimación de unas observaciones en otras, la estimación es de menor valor absoluto que la que resultaría en un modelo de $no\ pooling$. De esta forma podemos ver el $complete\ pooling$ y el $no\ pooling$ como dos casos particulares y extremos del $no\ pooling$. La contracción de coeficientes en los modelos multinivel actúa como una regularización que puede evitar el sobreajuste.
 
 
-Los modelos multinivel requieren supuestos adicionales en el nivel segundo y superiores que son similares a los supuestos para los modelos de efectos fijos en el primer y único nivel [ver @chen2021, pp. 43]. Para estimar los parámetros en un modelo multinivel se utiliza el método de máxima verosimilitud restringida (RMLE) que es una variante de la estimación por máxima verosimilitud (MLE) en la que se hacen ajustes en los grados de libertad del modelo con efectos aleatorios.
+Los modelos multinivel requieren supuestos adicionales en el nivel segundo y superiores que son similares a los supuestos para los modelos de efectos fijos en el primer y único nivel [ver @chen2021, pp. 43]. Para estimar los parámetros en un modelo multinivel se suele utilizar el método de máxima verosimilitud restringida (RMLE), que es una variante de la estimación por máxima verosimilitud (MLE) en la que se hacen ajustes en los grados de libertad del modelo con efectos aleatorios.
 
 ### Ajuste del modelo multinivel ordinal.
 

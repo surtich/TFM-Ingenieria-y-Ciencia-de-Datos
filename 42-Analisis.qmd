@@ -11,7 +11,7 @@ source("_setup.R")
 
 Normalmente las preguntas de un cuestionario pretenden medir una variable que está oculta o latente. En nuestro caso es la calidad del subtitulado. Las respuestas a estas preguntas relacionadas deben ser consistentes internamente, es decir, las respuestas deben correlacionarse fuerte y positivamente.
 
-Un índice que se utiliza habitualmente para medir la consistencia interna de un cuestionario es el coeficiente `alfa de Cronbach`, ver @schweinberger2020survey. Se define de esta forma:
+Un índice que se utiliza habitualmente para medir la consistencia interna de un cuestionario es el coeficiente `alfa de Cronbach` [ver @schweinberger2020survey]. Se define de esta forma:
 
 \begin{equation}
 \alpha = \frac{N}{N-1} \left(1 - \frac{\sum_{i=1}^{N} s_{i}^{2}}{s^{2}} \right)
@@ -101,7 +101,7 @@ table %>%
 
 
 Con la tabla de contingencia calculamos las distancias entre preguntas y realizamos el agrupamiento. 
-En el dendograma (ver @fig-dendo) se aprecian claramente tres conglomerados. Es muy interesante constatar que los tres grupos están formados por preguntas que en su mayor parte son correlativas. Esto es consistente con que al elaborar un test normalmente se colocan las preguntas por unidades temáticas y con que el encuestado también suele hacerlo teniendo en cuenta esta estructura y tiende a responder de forma similar a las preguntas correlativas.
+En el dendograma (ver @fig-dendo) se aprecian claramente tres conglomerados. Es muy interesante constatar que los tres grupos están formados por preguntas que en su mayor parte son correlativas. Esto es consistente con que al elaborar un test normalmente se colocan las preguntas por unidades temáticas y con que el encuestado tiende a responder de forma similar a preguntas correlativas.
 
 
 ```{r}
@@ -128,7 +128,7 @@ Podemos distinguir los siguientes grupos y subgrupos:
     * Subgrupo preguntas Q10, Q11, Q12: sincronización, velocidad y número de líneas.
     * Subgrupo preguntas Q04, Q13: contraste y legibilidad.
 
-* Grupo 3: son preguntas que tratan también sobre la corrección del subtítulo pero con la diferencia sobre el grupo uno de  que se trata de cuestiones más sutiles y presumiblemente más difíciles de valorar para un novato. Está formado por las preguntas Q14, Q15, Q16 y Q17.
+* Grupo 3: son preguntas que tratan también sobre la corrección del subtítulo pero se diferencia del grupo uno ya que ahora se trata de cuestiones más sutiles y presumiblemente más difíciles de valorar para un novato. Está formado por las preguntas Q14, Q15, Q16 y Q17.
 
 
 ## Análisis de tablas de contingencia.
@@ -151,8 +151,8 @@ chisq.test(df_all$Seq, df_all$Response)
 
 ### Comparación mediante mosaicos.
 
-En el @fig-mosaic se representan en forma de mosaico las tablas de contingencia de las respuestas por tratamiento y secuencia.
-La información mostrada es similar a la que presentamos en la @fig-freqs, aunque el gráfico es más intuitivo ya que la anchura y altura de los rectángulos son proporcionales a la frecuencia marginal de la secuencia y el tratamiento respectivamente y el área es proporcional a la frecuencia conjunta. En esta ocasión hemos decidido emparejar los tratamientos en lugar de hacerlo con la secuencia, como hicimos anteriormente. Esto permite una mejor comparación de las diferencias entre grupos. Con ello podemos ver fácilmente que el tratamiento $A$ es mejor valorado por los estudiantes y que el grupo que realizó la secuencia $AB$ tiene más respuestas 5 pero menor número de respuestas positivas totales que el grupo de secuencia $BA$ en ambos niveles de tratamiento.
+En la @fig-mosaic se representan en forma de mosaico las tablas de contingencia de las respuestas por tratamiento y secuencia.
+La información mostrada es similar a la que presentamos en la @fig-freqs, aunque el gráfico es más intuitivo ya que la anchura y altura de los rectángulos son proporcionales a la frecuencia marginal de la secuencia y el tratamiento respectivamente y el área es proporcional a la frecuencia conjunta. En esta ocasión hemos decidido emparejar los tratamientos en lugar de hacerlo con la secuencia, como hicimos anteriormente. Esto permite una mejor comparación de las diferencias entre grupos. Con ello podemos ver fácilmente que el tratamiento $A$ es mejor valorado por los estudiantes y que el grupo que realizó la secuencia $AB$ tiene más respuestas 5 pero menor número de respuestas positivas totales (menos respuestas 4, por tanto) que el grupo de secuencia $BA$ en ambos niveles de tratamiento.
 
 
 ```{r}

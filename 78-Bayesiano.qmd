@@ -2,7 +2,7 @@
 source("_setup.R")
 ```
 
-## Modelado Bayesiano.
+## Modelado Bayesiano. {#sec-bayes-2}
 
 \tiny
 ```{r}
