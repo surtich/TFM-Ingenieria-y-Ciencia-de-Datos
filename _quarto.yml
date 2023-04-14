@@ -24,7 +24,6 @@ vídeos"
     - 40-EDA1.qmd
     - 42-Analisis.qmd
     - 43-Modelado.qmd
-    #- 44-Bayesiano.qmd
     - 50-Resultados.qmd
     - 60-Conclusiones.qmd
     - 99-Referencias.qmd
@@ -32,6 +31,7 @@ vídeos"
     - 75-Preprocesado.qmd
     - 76-Setup.qmd
     - 77-Contrasts.qmd
+    - 78-Bayesiano.qmd
 
   cover-image: "images/logo-cover.png"
   favicon: "images/logo.png"

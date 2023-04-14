@@ -529,7 +529,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada nulla aug
 
 Phasellus vitae magna nec mi sagittis luctus vitae eu augue. Donec scelerisque laoreet arcu, eget tempor mi ultricies vel. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum at blandit ex. Vestibulum eu sagittis mauris. In hac habitasse platea dictumst. Duis eget ante vel lacus sollicitudin convallis quis eu velit. Sed auctor sem non nisi hendrerit, vel tincidunt tortor bibendum.
 
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, frame hidden, breakable, boxrule=0pt, enhanced, sharp corners, interior hidden]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, borderline west={3pt}{0pt}{shadecolor}, interior hidden, breakable, enhanced, sharp corners, frame hidden]}{\end{tcolorbox}}\fi
 
 % Contents
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1736,13 +1736,14 @@ Q17 & 29 & 4 & 15 & 44 & 49 & 33 \\
 \normalsize
 
 Con la tabla de contingencia calculamos las distancias entre preguntas y
-realizamos el agrupamiento. En el dendograma se aprecian claramente tres
-conglomerados. Es muy interesante constatar que los tres grupos están
-formados por preguntas que en su mayor parte son correlativas. Esto es
-consistente con que al elaborar un test normalmente se colocan las
-preguntas por unidades temáticas y con que el encuestado también suele
-hacerlo teniendo en cuenta esta estructura y tiende a responder de forma
-similar a las preguntas correlativas.
+realizamos el agrupamiento. En el dendograma (ver
+Figura~\ref{fig-dendo}) se aprecian claramente tres conglomerados. Es
+muy interesante constatar que los tres grupos están formados por
+preguntas que en su mayor parte son correlativas. Esto es consistente
+con que al elaborar un test normalmente se colocan las preguntas por
+unidades temáticas y con que el encuestado también suele hacerlo
+teniendo en cuenta esta estructura y tiende a responder de forma similar
+a las preguntas correlativas.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1758,8 +1759,8 @@ similar a las preguntas correlativas.
 
 }
 
-\caption{Dendograma de aglomeramiento jerárquico de preguntas en función
-de la tabla de contingencia de respuestas.}
+\caption{\label{fig-dendo}Dendograma de aglomeramiento jerárquico de
+preguntas en función de la tabla de contingencia de respuestas.}
 
 \end{figure}
 
@@ -3587,8 +3588,7 @@ Question)}
 En el apéndice se comparan diversas parametrizaciones de modelado
 bayesiano utilizando la función \texttt{brm()} del paquete
 \texttt{brms}. Analizamos aquí la que mejor resultado resultado produjo
-en la aproximación bayesiana a validación cruzada
-\texttt{leave-one-out}:
+con la validación cruzada bayesiana \texttt{leave-one-out}:
 
 \scriptsize
 
@@ -3686,40 +3686,42 @@ verdadero valor.
 \tiny
 
 \hypertarget{tbl-model-comp}{}
-\begin{longtable}{lrrrrrrr}
+\begin{longtable}{lrrrrrr}
 \caption{\label{tbl-model-comp}Comparación frecuentista/bayesiano de coeficientes estimados en el
 modelo Response \textasciitilde{} Treat * Period + (1 + Treat \textbar{}
 Subject) + (1 + Treat \textbar{} Question). }\tabularnewline
 
 \toprule
- & \multicolumn{3}{c}{ordinal::clmm} & \multicolumn{4}{c}{brms::brm} \\ 
-\cmidrule(lr){2-4} \cmidrule(lr){5-8}
-Name & Estimation.clmm & 2.5\% & 97.5\% & Estimation.brm & std.error & conf.low & conf.high \\ 
+ & \multicolumn{3}{c}{ordinal::clmm} & \multicolumn{3}{c}{brms::brm} \\ 
+\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+Name & Estimation.clmm & conf.2.5\% & conf.97.5\% & Estimation.brm & cred.2.5\% & cred.97.5\% \\ 
 \midrule
-1|2 & -6.75 & -7.45 & -6.05 & -6.71 & 0.37 & -7.43 & -5.98 \\ 
-2|3 & -4.39 & -5.06 & -3.73 & -4.35 & 0.35 & -5.03 & -3.64 \\ 
-3|4 & -3.11 & -3.77 & -2.45 & -3.06 & 0.34 & -3.73 & -2.37 \\ 
-4|5 & -0.56 & -1.21 & 0.09 & -0.50 & 0.34 & -1.17 & 0.18 \\ 
-TreatB & -3.14 & -4.19 & -2.09 & -3.14 & 0.57 & -4.28 & -2.04 \\ 
-Period2 & -0.63 & -1.42 & 0.16 & -0.57 & 0.41 & -1.41 & 0.21 \\ 
-TreatB:Period2 & 0.56 & -0.74 & 1.86 & 0.52 & 0.68 & -0.82 & 1.83 \\ 
-Subject.sd(Intercept) & 0.67 &  &  & 0.72 & 0.16 & 0.50 & 1.11 \\ 
-Subject.sd(TreatB) & 1.36 &  &  & 1.47 & 0.29 & 1.05 & 2.21 \\ 
-Subject.cor(Intercept,TreatB) & 1.77 &  &  & 1.82 & 0.18 & 1.50 & 2.21 \\ 
-Question.sd(Intercept) & 2.34 &  &  & 2.38 & 0.21 & 2.01 & 2.84 \\ 
-Question.sd(TreatB) & -0.47 &  &  & -0.44 & 0.21 & -0.74 & 0.07 \\ 
-Question.cor(Intercept,TreatB) & -0.55 &  &  & -0.54 & 0.09 & -0.70 & -0.35 \\ 
+1|2 & -6.75 & -7.45 & -6.05 & -6.71 & -7.43 & -5.98 \\ 
+2|3 & -4.39 & -5.06 & -3.73 & -4.35 & -5.03 & -3.64 \\ 
+3|4 & -3.11 & -3.77 & -2.45 & -3.06 & -3.73 & -2.37 \\ 
+4|5 & -0.56 & -1.21 & 0.09 & -0.50 & -1.17 & 0.18 \\ 
+TreatB & -3.14 & -4.19 & -2.09 & -3.14 & -4.28 & -2.04 \\ 
+Period2 & -0.63 & -1.42 & 0.16 & -0.57 & -1.41 & 0.21 \\ 
+TreatB:Period2 & 0.56 & -0.74 & 1.86 & 0.52 & -0.82 & 1.83 \\ 
+Subject.sd(Intercept) & 0.67 &  &  & 0.72 & 0.50 & 1.11 \\ 
+Subject.sd(TreatB) & 1.36 &  &  & 1.47 & 1.05 & 2.21 \\ 
+Subject.cor(Intercept,TreatB) & 1.77 &  &  & 1.82 & 1.50 & 2.21 \\ 
+Question.sd(Intercept) & 2.34 &  &  & 2.38 & 2.01 & 2.84 \\ 
+Question.sd(TreatB) & -0.47 &  &  & -0.44 & -0.74 & 0.07 \\ 
+Question.cor(Intercept,TreatB) & -0.55 &  &  & -0.54 & -0.70 & -0.35 \\ 
 \bottomrule
 \end{longtable}
 
 \normalsize
 
-No hemos dado valor a las distribuciones de probabilidad a priori con
-fiando que los valores por defecto que asigna \texttt{brm} son
-adecuados. En el Tabla~\ref{tbl-priors} se muestran las distribuciones a
-priori de los parámetros aleatorios del modelo. En la
-Figura~\ref{fig-priors} se constata que toman valores razonables y no
-informativos.
+Hemos mantenido las distribuciones de probabilidad a priori que por
+defecto utiliza \texttt{brm} confiando en que sus parámetros por defecto
+son adecuados. Sin embargo, conviene comprobar si realmente es así. En
+el Tabla~\ref{tbl-priors} se muestran las distribuciones a priori de los
+parámetros aleatorios del modelo. En la Figura~\ref{fig-priors} se
+constata que toman valores razonables y no informativos.
+
+\tiny
 
 \hypertarget{tbl-priors}{}
 \begin{longtable}{llllrrrrrl}
@@ -3752,6 +3754,8 @@ student\_t(3, 0, 2.5) & sd &  &  &  &  &  & 0 &  & default \\
 \bottomrule
 \end{longtable}
 
+\normalsize
+
 \begin{figure}[h]
 
 {\centering \includegraphics{43-Modelado_files/figure-pdf/fig-priors-1.pdf}
@@ -3764,19 +3768,19 @@ Treat \textbar{} Question).}
 
 \end{figure}
 
-Es importante asegurar que el entrenamiento del a convergido a su
+Es importante asegurar que el entrenamiento ha convergido a su
 distribución a posteriori. En la tabla de resumen constatamos que el
 valor de \texttt{Rhat} es inferior a 1.1 y el de \texttt{ESS} superior a
 400 en todos los parámetros, que son umbrales que no se deberían violar
-\autocite[ \textcite{burkner2019}]{ver}. En la Figura~\ref{fig-trace} se
-comprueba que las cadenas de muestrado se mezclan correctamente y no
-muestran autocorrelación en ninguno de las parámetros. Por último, en la
-Figura~\ref{fig-predictive} se muestra un a comparación de los
-histogramas obtenidos de modelo con los intervalos de confianza
-marginales de la función predictiva a posteriori del modelo. En la
-mayoría de las preguntas, el muestreo reproduce bastante bien el
-histograma en casi todas las preguntas excepto en algunas como la
-\texttt{Q16} o la \texttt{Q17}.
+\autocite[ver][]{burkner2019}. En la Figura~\ref{fig-trace} se comprueba
+que las cadenas MCMC de muestreo de la distribución a posteriori se
+mezclan correctamente y no se aprecia autocorrelación en ninguno de las
+parámetros. Por último, en la Figura~\ref{fig-predictive} se muestra una
+comparación entre los histogramas a partir de los datos con los
+intervalos de confianza marginales de la función predictiva a posteriori
+del modelo. En la mayoría de las preguntas, el muestreo reproduce
+bastante bien el histograma en casi todas las preguntas excepto en
+algunas como la \texttt{Q16} o la \texttt{Q17}.
 
 \begin{figure}[h]
 
@@ -3784,7 +3788,7 @@ histograma en casi todas las preguntas excepto en algunas como la
 
 }
 
-\caption{\label{fig-trace}MCMC trazado del modelo Response
+\caption{\label{fig-trace}Cadenas MCMC del modelo Response
 \textasciitilde{} Treat * Period + (1 + Treat \textbar{} Subject) + (1 +
 Treat \textbar{} Question).}
 
@@ -3800,6 +3804,109 @@ Treat \textbar{} Question).}
 obtenidos a partir de la función predictiva a posteriori del modelo
 Response \textasciitilde{} Treat * Period + (1 + Treat \textbar{}
 Subject) + (1 + Treat \textbar{} Question).}
+
+\end{figure}
+
+En cuanto a las conclusiones que podemos extraer del modelo, la más
+importante es que, como hemos constatado desde el principio de este
+trabajo, los alumnos perciben claramente una diferencia entre los
+niveles de subtitulado \(A\) y \(B\), siendo preferido el \(A\). En la
+Figura~\ref{fig-predictive-2} se representa gráficamente los valores
+esperados de la probabilidad de respuesta a cada pregunta por
+tratamiento y periodo. Lo más interesante es confirmar (ver
+Figura~\ref{fig-or-2}) la existencia de pequeños efectos periodo y
+secuencia que se materializan en que, para el nivel de subtitulado
+\(A\), son ligeramente más probables las respuestas 4 en el periodo 2
+(secuencia \(BA\)) que en el 1 (secuencia \(AB\)). Con las respuestas de
+valor 5 ocurre lo contrario: En el subtitulado \(A\) son más probables
+en el periodo 1 (secuencia \(AB\)) que el 2 (secuencia \(BA\)).
+
+\begin{figure}[h]
+
+{\centering \includegraphics{43-Modelado_files/figure-pdf/fig-predictive-2-1.pdf}
+
+}
+
+\caption{\label{fig-predictive-2}Muestreo de la esperanza de la función
+predictiva a posteriori por tratamiento, periodo y pregunta del modelo
+Response \textasciitilde{} Treat * Period + (1 + Treat \textbar{}
+Subject) + (1 + Treat \textbar{} Question).}
+
+\end{figure}
+
+Analizados los efectos periodo y secuencia, y sabiendo que son de
+pequeña magnitud, pasamos ahora a hacer un análisis de las predicciones
+que realiza el modelo sobre la distribución de respuestas en cada
+pregunta. Para ello en la Figura~\ref{fig-pred-3} se representan 50
+muestras de la esperanza de la distribución predictiva a posteriori para
+cada pregunta y nivel de subtitulado marginalizadas por periodo y
+estudiante. La primera conclusión que podemos extraer es que el modelo
+tiene bastante incertidumbre sobre los valores de respuesta a cada
+pregunta no superando casi nunca el 50\% de probabilidad para todas las
+preguntas y niveles de tratamiento. En general se observa en la mayoría
+de las preguntas del nivel de subtitulado \(A\) que los alumnos están
+bastante seguros de que la respuesta a las preguntas debe ser 4 ó 5,
+asignando una muy baja probabilidad a los valores 1, 2, ó 3, pero
+habiendo bastante confusión respecto cuál de los dos valores (4 ó 5)
+asignar. Enel nivel de subtitulado \(B\) la situación es bastante más
+confusa. Aunque la opción de respuesta preferida es 4 y las menos
+preferidas son la 5 y la 1, hay bastante mezcla entre las opciones de
+respuesta 4, 2 y 3. En cuanto al análisis individualizado por pregunta
+podemos extraer las siguientes conclusiones:
+
+\begin{itemize}
+\item
+  En las preguntas \(Q04\) y \(Q13\) los estudiantes no aprecian
+  defectos en el subtitulado ni diferencias entre un nivel y otro. Son
+  valoradas en ambos niveles con puntuaciones de 4 y de 5.
+\item
+  En las preguntas \(Q15\), \(Q16\) y \(Q17\), la opción de respuesta
+  más probable es 4 en ambos subtitulados. El modelo asigna una baja
+  probabilidad de respuesta a la opción 1 y similares al resto. La
+  probabilidad de la opción 5 decrece ligeramente entre subtitulado
+  \(A\) y \(B\) y lo contrario ocurre con las opciones 2 y 3.
+\item
+  Las preguntas \(Q01\), \(Q02\), \(Q03\), \(Q10\), \(Q11\) y \(Q12\)
+  son similares a las anteriores. Particularmente en lo referente a que
+  la respuesta más probable en el subtitulado \(B\) es 4. En el
+  subtitulado \(A\) hay preferencia por 4 y 5. El nivel 5 cae
+  acusadamente en el subtitulado \(B\) y en este nivel aumenta
+  ligeramente la probabilidad de respuesta 2 y 3.
+\item
+  Las Preguntas \(Q06\), \(Q07\), \(Q14\) y \(Q18\) no son muy
+  diferentes de las anteriores. En general el modelo predice mayor
+  probabilidad de respuesta para 5 en el subtitulado \(A\) pero este
+  valor es con alta probabilidad cercano cero en el subtitulado \(B\).
+  En el subtitulado \(B\) la probabilidad de respuesta 2, 3 ó 4 es
+  similar.
+\item
+  Las preguntas \(Q05\), \(Q08\) y \(Q09\) son las que más diferencia
+  entre subtitulados presentan. La respuesta más probable en el
+  subtitulado \(A\) es 5 (en \(Q08\) y en \(Q09\) muy parecida a 4). Por
+  contra, en el subtitulado \(B\) las respuestas 4 y 5 tienden a cero,
+  siendo la más probable la respuesta 2. En \(Q05\) y en \(Q09\) la
+  segunda respuesta más probable al subtitulado \(B\) es 1 y 4 en la
+  \(Q08\).
+\end{itemize}
+
+En definitiva, nuestro modelo predice que los estudiantes están bastante
+de acuerdo en que en las preguntas \(Q05\) y \(Q09\) hay una diferencia
+de calidad en los subtitulados. También están de acuerdo en que en las
+preguntas \(Q04\) y \(Q13\) no hay apenas cambio entre los subtitulados.
+En las preguntas \(Q15\), \(Q16\) y \(Q17\) hay una gran confusión en
+ambos niveles de subtitulado y en el resto la confusión se circunscribe
+al nivel de subtitulado \(B\).
+
+\begin{figure}[h]
+
+{\centering \includegraphics[width=1\textwidth,height=\textheight]{images/bayes-preg.png}
+
+}
+
+\caption{\label{fig-pred-3}Muestreo de la función predictiva a
+posteriori por tratamiento y pregunta del modelo Response
+\textasciitilde{} Treat * Period + (1 + Treat \textbar{} Subject) + (1 +
+Treat \textbar{} Question).}
 
 \end{figure}
 
@@ -5042,6 +5149,1007 @@ X.Intercept. & Treat1 & Period1 \\
 0.01731095 & 0.02129557 & -0.02740495 \\ 
 \bottomrule
 \end{longtable*}
+
+\normalsize
+
+\hypertarget{modelado-bayesiano.-1}{%
+\chapter{Modelado Bayesiano.}\label{modelado-bayesiano.-1}}
+
+\tiny
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{brm\_subject\_formula }\OtherTok{\textless{}{-}}\NormalTok{ Response }\SpecialCharTok{\textasciitilde{}} \DecValTok{1} \SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{|}\NormalTok{ Subject)}
+\NormalTok{brm\_subject }\OtherTok{\textless{}{-}}
+    \FunctionTok{brm}\NormalTok{(}
+\NormalTok{        brm\_subject\_formula,}
+        \AttributeTok{data =}\NormalTok{ df\_clean,}
+        \AttributeTok{family =} \FunctionTok{cumulative}\NormalTok{(}\StringTok{"logit"}\NormalTok{),}
+        \AttributeTok{sample\_prior =} \ConstantTok{TRUE}\NormalTok{,}
+        \AttributeTok{file =} \StringTok{"models/brm\_subject"}\NormalTok{,}
+        \AttributeTok{file\_refit =} \StringTok{"on\_change"}
+\NormalTok{    )}
+\FunctionTok{summary}\NormalTok{(brm\_subject)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ Family: cumulative 
+  Links: mu = logit; disc = identity 
+Formula: Response ~ 1 + (1 | Subject) 
+   Data: df_clean (Number of observations: 2980) 
+  Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
+         total post-warmup draws = 4000
+
+Group-Level Effects: 
+~Subject (Number of levels: 87) 
+              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sd(Intercept)     0.93      0.09     0.78     1.12 1.00      748     1502
+
+Population-Level Effects: 
+             Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+Intercept[1]    -3.15      0.13    -3.41    -2.89 1.01      643     1130
+Intercept[2]    -1.68      0.11    -1.90    -1.46 1.01      489      823
+Intercept[3]    -0.93      0.11    -1.14    -0.71 1.01      472      750
+Intercept[4]     0.65      0.11     0.43     0.86 1.01      503      794
+
+Family Specific Parameters: 
+     Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+disc     1.00      0.00     1.00     1.00   NA       NA       NA
+
+Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{brm\_treat.period.subject.question }\OtherTok{\textless{}{-}} \FunctionTok{brm}\NormalTok{(}
+\NormalTok{    Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{*}\NormalTok{ Period }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ Treat }\SpecialCharTok{|}\NormalTok{ Subject) }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ Treat }\SpecialCharTok{|}\NormalTok{ Question),}
+    \AttributeTok{data =}\NormalTok{ df\_clean,}
+    \AttributeTok{family =} \FunctionTok{cumulative}\NormalTok{(}\StringTok{"logit"}\NormalTok{),}
+    \AttributeTok{sample\_prior =} \ConstantTok{TRUE}\NormalTok{,}
+    \AttributeTok{file =} \StringTok{"models/brm\_treat.period.subject.question"}\NormalTok{,}
+    \AttributeTok{file\_refit =} \StringTok{"on\_change"}
+\NormalTok{)}
+\FunctionTok{summary}\NormalTok{(brm\_treat.period.subject.question)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ Family: cumulative 
+  Links: mu = logit; disc = identity 
+Formula: Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question) 
+   Data: df_clean (Number of observations: 2980) 
+  Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
+         total post-warmup draws = 4000
+
+Group-Level Effects: 
+~Question (Number of levels: 18) 
+                      Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
+sd(Intercept)             0.74      0.16     0.50     1.11 1.00     1213
+sd(TreatB)                1.50      0.29     1.05     2.21 1.00     1194
+cor(Intercept,TreatB)    -0.41      0.21    -0.74     0.07 1.01      931
+                      Tail_ESS
+sd(Intercept)             2155
+sd(TreatB)                1803
+cor(Intercept,TreatB)     1691
+
+~Subject (Number of levels: 87) 
+                      Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
+sd(Intercept)             1.82      0.18     1.50     2.21 1.00      841
+sd(TreatB)                2.39      0.21     2.01     2.84 1.00      685
+cor(Intercept,TreatB)    -0.54      0.09    -0.70    -0.35 1.01      420
+                      Tail_ESS
+sd(Intercept)             1266
+sd(TreatB)                1487
+cor(Intercept,TreatB)      719
+
+Population-Level Effects: 
+               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+Intercept[1]      -6.70      0.37    -7.43    -5.98 1.00      701     1417
+Intercept[2]      -4.35      0.35    -5.03    -3.64 1.00      641     1231
+Intercept[3]      -3.06      0.34    -3.73    -2.37 1.00      626     1271
+Intercept[4]      -0.50      0.34    -1.17     0.18 1.00      623     1227
+TreatB            -3.15      0.57    -4.28    -2.04 1.01      483     1112
+Period2           -0.58      0.41    -1.41     0.21 1.01      492      943
+TreatB:Period2     0.50      0.68    -0.82     1.83 1.00      428      888
+
+Family Specific Parameters: 
+     Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+disc     1.00      0.00     1.00     1.00   NA       NA       NA
+
+Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{brm\_treat.period.subject\_question }\OtherTok{\textless{}{-}} \FunctionTok{brm}\NormalTok{(}
+\NormalTok{    Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{*}\NormalTok{ Period }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ Treat }\SpecialCharTok{|}\NormalTok{ Subject) }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{|}\NormalTok{ Question),}
+    \AttributeTok{data =}\NormalTok{ df\_clean,}
+    \AttributeTok{family =} \FunctionTok{cumulative}\NormalTok{(}\StringTok{"logit"}\NormalTok{),}
+    \AttributeTok{sample\_prior =} \ConstantTok{TRUE}\NormalTok{,}
+    \AttributeTok{file =} \StringTok{"models/brm\_treat.period.subject\_question"}\NormalTok{,}
+    \AttributeTok{file\_refit =} \StringTok{"on\_change"}
+\NormalTok{)}
+\FunctionTok{summary}\NormalTok{(brm\_treat.period.subject\_question)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ Family: cumulative 
+  Links: mu = logit; disc = identity 
+Formula: Response ~ Treat * Period + (1 + Treat | Subject) + (1 | Question) 
+   Data: df_clean (Number of observations: 2980) 
+  Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
+         total post-warmup draws = 4000
+
+Group-Level Effects: 
+~Question (Number of levels: 18) 
+              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sd(Intercept)     0.75      0.15     0.52     1.11 1.01      599     1261
+
+~Subject (Number of levels: 87) 
+                      Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
+sd(Intercept)             1.80      0.18     1.48     2.18 1.01      609
+sd(TreatB)                2.29      0.21     1.91     2.73 1.01      553
+cor(Intercept,TreatB)    -0.58      0.08    -0.73    -0.40 1.01      409
+                      Tail_ESS
+sd(Intercept)             1378
+sd(TreatB)                1002
+cor(Intercept,TreatB)      864
+
+Population-Level Effects: 
+               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+Intercept[1]      -6.27      0.36    -6.98    -5.58 1.01      403      700
+Intercept[2]      -4.20      0.35    -4.89    -3.54 1.01      383      791
+Intercept[3]      -3.04      0.34    -3.72    -2.38 1.01      377      730
+Intercept[4]      -0.63      0.33    -1.28     0.01 1.02      376      735
+TreatB            -3.09      0.42    -3.96    -2.27 1.01      323      532
+Period2           -0.64      0.41    -1.47     0.16 1.02      267      656
+TreatB:Period2     0.60      0.64    -0.61     1.87 1.01      291      765
+
+Family Specific Parameters: 
+     Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+disc     1.00      0.00     1.00     1.00   NA       NA       NA
+
+Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{brm\_cs.treat.subject.question }\OtherTok{\textless{}{-}} \FunctionTok{brm}\NormalTok{(}
+\NormalTok{    Response }\SpecialCharTok{\textasciitilde{}} \DecValTok{1} \SpecialCharTok{+} \FunctionTok{cs}\NormalTok{(Treat) }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{|}\NormalTok{ Subject) }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{|}\NormalTok{ Question),}
+    \AttributeTok{data =}\NormalTok{ df\_clean,}
+    \AttributeTok{family =} \FunctionTok{cumulative}\NormalTok{(}\StringTok{"logit"}\NormalTok{),}
+    \AttributeTok{sample\_prior =} \ConstantTok{TRUE}\NormalTok{,}
+    \AttributeTok{file =} \StringTok{"models/brm\_cs.treat.subject.question"}\NormalTok{,}
+    \AttributeTok{file\_refit =} \StringTok{"on\_change"}
+\NormalTok{)}
+\FunctionTok{summary}\NormalTok{(brm\_cs.treat.subject.question)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ Family: cumulative 
+  Links: mu = logit; disc = identity 
+Formula: Response ~ 1 + cs(Treat) + (1 | Subject) + (1 | Question) 
+   Data: df_clean (Number of observations: 2980) 
+  Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
+         total post-warmup draws = 4000
+
+Group-Level Effects: 
+~Question (Number of levels: 18) 
+              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sd(Intercept)     0.63      0.12     0.43     0.91 1.00      864     1618
+
+~Subject (Number of levels: 87) 
+              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sd(Intercept)     1.17      0.10     0.99     1.40 1.01      700     1373
+
+Population-Level Effects: 
+             Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+Intercept[1]    -6.53      0.54    -7.68    -5.56 1.00     1024     1666
+Intercept[2]    -3.75      0.24    -4.21    -3.30 1.01      721     1507
+Intercept[3]    -2.35      0.21    -2.77    -1.91 1.01      624     1253
+Intercept[4]    -0.02      0.20    -0.43     0.38 1.01      598     1189
+TreatB[1]       -3.95      0.50    -5.05    -3.08 1.00     1328     1728
+TreatB[2]       -2.91      0.15    -3.21    -2.63 1.00     1834     2438
+TreatB[3]       -2.41      0.10    -2.61    -2.21 1.00     2375     2819
+TreatB[4]       -1.82      0.10    -2.01    -1.62 1.00     3745     3037
+
+Family Specific Parameters: 
+     Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+disc     1.00      0.00     1.00     1.00   NA       NA       NA
+
+Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{brm\_treat\_question\_subject\_question }\OtherTok{\textless{}{-}} \FunctionTok{brm}\NormalTok{(}
+\NormalTok{    Response }\SpecialCharTok{\textasciitilde{}} \DecValTok{1} \SpecialCharTok{+}\NormalTok{ Treat }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{|}\NormalTok{ Question) }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{|}\NormalTok{ Subject}\SpecialCharTok{:}\NormalTok{Question),}
+    \AttributeTok{data =}\NormalTok{ df\_clean,}
+    \AttributeTok{family =} \FunctionTok{cumulative}\NormalTok{(}\StringTok{"logit"}\NormalTok{),}
+    \AttributeTok{sample\_prior =} \ConstantTok{TRUE}\NormalTok{,}
+    \AttributeTok{file =} \StringTok{"models/brm\_treat\_question\_subject\_question"}\NormalTok{,}
+    \AttributeTok{file\_refit =} \StringTok{"on\_change"}
+\NormalTok{)}
+\FunctionTok{summary}\NormalTok{(brm\_treat\_question\_subject\_question)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ Family: cumulative 
+  Links: mu = logit; disc = identity 
+Formula: Response ~ 1 + Treat + (1 | Question) + (1 | Subject:Question) 
+   Data: df_clean (Number of observations: 2980) 
+  Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
+         total post-warmup draws = 4000
+
+Group-Level Effects: 
+~Question (Number of levels: 18) 
+              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sd(Intercept)     0.58      0.12     0.39     0.88 1.00     1627     2121
+
+~Subject:Question (Number of levels: 1529) 
+              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sd(Intercept)     0.73      0.09     0.55     0.89 1.01      791     1229
+
+Population-Level Effects: 
+             Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+Intercept[1]    -4.48      0.18    -4.85    -4.13 1.01     1271     2352
+Intercept[2]    -2.81      0.16    -3.14    -2.49 1.01     1244     2546
+Intercept[3]    -1.90      0.16    -2.22    -1.59 1.01     1256     2228
+Intercept[4]    -0.10      0.15    -0.40     0.20 1.00     1312     2093
+TreatB          -1.97      0.08    -2.14    -1.81 1.00     2761     3019
+
+Family Specific Parameters: 
+     Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+disc     1.00      0.00     1.00     1.00   NA       NA       NA
+
+Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{brm\_treat\_question\_subject }\OtherTok{\textless{}{-}} \FunctionTok{brm}\NormalTok{(}
+\NormalTok{    Response }\SpecialCharTok{\textasciitilde{}} \DecValTok{1} \SpecialCharTok{+}\NormalTok{ Treat }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{|}\NormalTok{ Question) }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{|}\NormalTok{ Subject),}
+    \AttributeTok{data =}\NormalTok{ df\_clean,}
+    \AttributeTok{family =} \FunctionTok{cumulative}\NormalTok{(}\StringTok{"logit"}\NormalTok{),}
+    \AttributeTok{sample\_prior =} \ConstantTok{TRUE}\NormalTok{,}
+    \AttributeTok{file =} \StringTok{"models/brm\_treat\_question\_subject"}\NormalTok{,}
+    \AttributeTok{file\_refit =} \StringTok{"on\_change"}
+\NormalTok{)}
+\FunctionTok{summary}\NormalTok{(brm\_treat\_question\_subject)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ Family: cumulative 
+  Links: mu = logit; disc = identity 
+Formula: Response ~ 1 + Treat + (1 | Question) + (1 | Subject) 
+   Data: df_clean (Number of observations: 2980) 
+  Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
+         total post-warmup draws = 4000
+
+Group-Level Effects: 
+~Question (Number of levels: 18) 
+              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sd(Intercept)     0.64      0.12     0.44     0.91 1.00      924     1940
+
+~Subject (Number of levels: 87) 
+              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sd(Intercept)     1.21      0.10     1.02     1.43 1.00      843     1744
+
+Population-Level Effects: 
+             Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+Intercept[1]    -4.94      0.23    -5.40    -4.49 1.00      677     1423
+Intercept[2]    -3.17      0.22    -3.60    -2.76 1.00      614     1363
+Intercept[3]    -2.18      0.21    -2.60    -1.77 1.00      584     1330
+Intercept[4]    -0.15      0.21    -0.55     0.26 1.00      556     1142
+TreatB          -2.21      0.08    -2.37    -2.04 1.00     5832     3233
+
+Family Specific Parameters: 
+     Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+disc     1.00      0.00     1.00     1.00   NA       NA       NA
+
+Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).
+\end{verbatim}
+
+\_
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{brm\_period.treat.subject\_question }\OtherTok{\textless{}{-}} \FunctionTok{brm}\NormalTok{(}
+\NormalTok{    Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Period }\SpecialCharTok{*}\NormalTok{ Treat }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ Treat }\SpecialCharTok{|}\NormalTok{ Subject) }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{|}\NormalTok{ Question),}
+    \AttributeTok{data =}\NormalTok{ df\_clean,}
+    \AttributeTok{family =} \FunctionTok{cumulative}\NormalTok{(}\StringTok{"logit"}\NormalTok{),}
+    \AttributeTok{sample\_prior =} \ConstantTok{TRUE}\NormalTok{,}
+    \AttributeTok{file =} \StringTok{"models/brm\_period.treat.subject\_question"}\NormalTok{,}
+    \AttributeTok{file\_refit =} \StringTok{"on\_change"}
+\NormalTok{)}
+\FunctionTok{summary}\NormalTok{(brm\_period.treat.subject\_question)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ Family: cumulative 
+  Links: mu = logit; disc = identity 
+Formula: Response ~ Period * Treat + (1 + Treat | Subject) + (1 | Question) 
+   Data: df_clean (Number of observations: 2980) 
+  Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
+         total post-warmup draws = 4000
+
+Group-Level Effects: 
+~Question (Number of levels: 18) 
+              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sd(Intercept)     0.74      0.15     0.52     1.08 1.00      744     1544
+
+~Subject (Number of levels: 87) 
+                      Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
+sd(Intercept)             1.80      0.17     1.48     2.15 1.02      585
+sd(TreatB)                2.27      0.20     1.89     2.70 1.01      458
+cor(Intercept,TreatB)    -0.58      0.08    -0.72    -0.40 1.00      460
+                      Tail_ESS
+sd(Intercept)             1462
+sd(TreatB)                 811
+cor(Intercept,TreatB)      818
+
+Population-Level Effects: 
+               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+Intercept[1]      -6.22      0.35    -6.92    -5.55 1.00      502     1033
+Intercept[2]      -4.15      0.33    -4.82    -3.51 1.00      472      931
+Intercept[3]      -2.98      0.33    -3.65    -2.35 1.00      464      958
+Intercept[4]      -0.58      0.32    -1.24     0.03 1.00      451      834
+Period2           -0.59      0.39    -1.36     0.16 1.01      365      656
+TreatB            -3.06      0.42    -3.88    -2.24 1.01      327      713
+Period2:TreatB     0.53      0.63    -0.73     1.78 1.01      337      674
+
+Family Specific Parameters: 
+     Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+disc     1.00      0.00     1.00     1.00   NA       NA       NA
+
+Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{brm\_period.treat\_subject\_question }\OtherTok{\textless{}{-}} \FunctionTok{brm}\NormalTok{(}
+\NormalTok{    Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Period }\SpecialCharTok{*}\NormalTok{ Treat }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{|}\NormalTok{ Subject) }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{|}\NormalTok{ Question),}
+    \AttributeTok{data =}\NormalTok{ df\_clean,}
+    \AttributeTok{family =} \FunctionTok{cumulative}\NormalTok{(}\StringTok{"logit"}\NormalTok{),}
+    \AttributeTok{sample\_prior =} \ConstantTok{TRUE}\NormalTok{,}
+    \AttributeTok{file =} \StringTok{"models/brm\_period.treat\_subject\_question"}\NormalTok{,}
+    \AttributeTok{file\_refit =} \StringTok{"on\_change"}
+\NormalTok{)}
+\FunctionTok{summary}\NormalTok{(brm\_period.treat\_subject\_question)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ Family: cumulative 
+  Links: mu = logit; disc = identity 
+Formula: Response ~ Period * Treat + (1 | Subject) + (1 | Question) 
+   Data: df_clean (Number of observations: 2980) 
+  Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
+         total post-warmup draws = 4000
+
+Group-Level Effects: 
+~Question (Number of levels: 18) 
+              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sd(Intercept)     0.64      0.13     0.44     0.93 1.00     1169     2019
+
+~Subject (Number of levels: 87) 
+              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sd(Intercept)     1.23      0.11     1.04     1.47 1.00      962     1901
+
+Population-Level Effects: 
+               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+Intercept[1]      -5.32      0.28    -5.88    -4.80 1.00      752     1381
+Intercept[2]      -3.55      0.26    -4.10    -3.05 1.01      702     1231
+Intercept[3]      -2.56      0.26    -3.08    -2.06 1.01      681     1220
+Intercept[4]      -0.51      0.25    -1.03    -0.02 1.01      663     1167
+Period2           -0.63      0.29    -1.20    -0.06 1.01      464      919
+TreatB            -2.54      0.29    -3.12    -1.98 1.01      473      952
+Period2:TreatB     0.61      0.56    -0.50     1.68 1.01      447      803
+
+Family Specific Parameters: 
+     Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+disc     1.00      0.00     1.00     1.00   NA       NA       NA
+
+Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{brm\_period.treat.question\_subject }\OtherTok{\textless{}{-}} \FunctionTok{brm}\NormalTok{(}
+\NormalTok{    Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Period }\SpecialCharTok{*}\NormalTok{ Treat }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{|}\NormalTok{ Subject) }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ Treat }\SpecialCharTok{|}\NormalTok{ Question),}
+    \AttributeTok{data =}\NormalTok{ df\_clean,}
+    \AttributeTok{family =} \FunctionTok{cumulative}\NormalTok{(}\StringTok{"logit"}\NormalTok{),}
+    \AttributeTok{sample\_prior =} \ConstantTok{TRUE}\NormalTok{,}
+    \AttributeTok{file =} \StringTok{"models/brm\_period.treat.question\_subject"}\NormalTok{,}
+    \AttributeTok{file\_refit =} \StringTok{"on\_change"}
+\NormalTok{)}
+\FunctionTok{summary}\NormalTok{(brm\_period.treat.question\_subject)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ Family: cumulative 
+  Links: mu = logit; disc = identity 
+Formula: Response ~ Period * Treat + (1 | Subject) + (1 + Treat | Question) 
+   Data: df_clean (Number of observations: 2980) 
+  Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
+         total post-warmup draws = 4000
+
+Group-Level Effects: 
+~Question (Number of levels: 18) 
+                      Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
+sd(Intercept)             0.64      0.13     0.42     0.95 1.01     1086
+sd(TreatB)                1.30      0.26     0.89     1.90 1.01      852
+cor(Intercept,TreatB)    -0.42      0.21    -0.75     0.05 1.00      558
+                      Tail_ESS
+sd(Intercept)             2145
+sd(TreatB)                1540
+cor(Intercept,TreatB)     1102
+
+~Subject (Number of levels: 87) 
+              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sd(Intercept)     1.30      0.12     1.09     1.55 1.00      762     1292
+
+Population-Level Effects: 
+               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+Intercept[1]      -5.67      0.29    -6.27    -5.12 1.01      382     1094
+Intercept[2]      -3.72      0.28    -4.28    -3.20 1.01      341     1024
+Intercept[3]      -2.64      0.28    -3.20    -2.13 1.01      337      967
+Intercept[4]      -0.49      0.27    -1.04     0.02 1.01      319     1020
+Period2           -0.67      0.30    -1.25    -0.08 1.01      300      665
+TreatB            -2.70      0.45    -3.58    -1.83 1.01      312      805
+Period2:TreatB     0.67      0.58    -0.44     1.80 1.02      286      592
+
+Family Specific Parameters: 
+     Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+disc     1.00      0.00     1.00     1.00   NA       NA       NA
+
+Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{brm\_thres.question\_period.treat.subject }\OtherTok{\textless{}{-}} \FunctionTok{brm}\NormalTok{(}
+    \FunctionTok{bf}\NormalTok{(Response }\SpecialCharTok{|} \FunctionTok{thres}\NormalTok{(}\AttributeTok{gr =}\NormalTok{ Question) }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Period }\SpecialCharTok{*}\NormalTok{ Treat }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ Treat }\SpecialCharTok{|}\NormalTok{ Subject)),}
+    \AttributeTok{data =}\NormalTok{ df\_clean,}
+    \AttributeTok{family =} \FunctionTok{cumulative}\NormalTok{(}\StringTok{"logit"}\NormalTok{),}
+    \AttributeTok{sample\_prior =} \ConstantTok{TRUE}\NormalTok{,}
+    \AttributeTok{file =} \StringTok{"models/brm\_thres.question\_period.treat.subject"}\NormalTok{,}
+    \AttributeTok{file\_refit =} \StringTok{"on\_change"}
+\NormalTok{)}
+\FunctionTok{summary}\NormalTok{(brm\_thres.question\_period.treat.subject)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ Family: cumulative 
+  Links: mu = logit; disc = identity 
+Formula: Response | thres(gr = Question) ~ Period * Treat + (1 + Treat | Subject) 
+   Data: df_clean (Number of observations: 2980) 
+  Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
+         total post-warmup draws = 4000
+
+Group-Level Effects: 
+~Subject (Number of levels: 87) 
+                      Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
+sd(Intercept)             2.20      0.27     1.74     2.77 1.00      548
+sd(TreatB)                2.50      0.26     2.04     3.07 1.01      520
+cor(Intercept,TreatB)    -0.62      0.09    -0.77    -0.44 1.01      482
+                      Tail_ESS
+sd(Intercept)              900
+sd(TreatB)                1094
+cor(Intercept,TreatB)      980
+
+Population-Level Effects: 
+                 Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+Intercept[Q18,1]    -4.41      0.49    -5.40    -3.50 1.00      797     1843
+Intercept[Q18,2]    -2.02      0.38    -2.74    -1.28 1.00      555     1224
+Intercept[Q18,3]    -1.07      0.37    -1.80    -0.34 1.00      550     1001
+Intercept[Q18,4]     1.25      0.38     0.53     2.00 1.00      540     1217
+Intercept[Q01,1]    -4.40      0.49    -5.40    -3.44 1.00      805     1740
+Intercept[Q01,2]    -2.57      0.40    -3.36    -1.79 1.00      588     1440
+Intercept[Q01,3]    -1.96      0.38    -2.71    -1.20 1.00      542     1004
+Intercept[Q01,4]     0.50      0.37    -0.22     1.23 1.00      527     1110
+Intercept[Q02,1]    -5.41      0.63    -6.70    -4.22 1.00     1063     2056
+Intercept[Q02,2]    -2.55      0.39    -3.31    -1.78 1.00      580     1201
+Intercept[Q02,3]    -1.78      0.38    -2.51    -1.04 1.00      545     1330
+Intercept[Q02,4]     0.69      0.38    -0.05     1.43 1.00      529     1116
+Intercept[Q03,1]    -5.38      0.62    -6.65    -4.23 1.00     1228     2179
+Intercept[Q03,2]    -2.45      0.40    -3.23    -1.68 1.00      599     1486
+Intercept[Q03,3]    -1.79      0.39    -2.53    -1.04 1.00      569     1398
+Intercept[Q03,4]     0.84      0.38     0.08     1.58 1.00      570     1297
+Intercept[Q04,1]    -5.95      0.80    -7.65    -4.58 1.00     1381     2344
+Intercept[Q04,2]    -4.10      0.48    -5.08    -3.17 1.00      836     1893
+Intercept[Q04,3]    -3.10      0.42    -3.92    -2.27 1.00      646     1452
+Intercept[Q04,4]    -0.32      0.37    -1.03     0.43 1.00      528      925
+Intercept[Q05,1]    -2.82      0.39    -3.61    -2.06 1.00      582     1559
+Intercept[Q05,2]    -1.21      0.37    -1.91    -0.46 1.00      538     1186
+Intercept[Q05,3]    -0.61      0.37    -1.32     0.13 1.00      522     1156
+Intercept[Q05,4]     0.91      0.38     0.19     1.65 1.00      522     1207
+Intercept[Q06,1]    -5.21      0.57    -6.37    -4.13 1.00     1012     2125
+Intercept[Q06,2]    -2.39      0.39    -3.16    -1.63 1.00      593     1587
+Intercept[Q06,3]    -1.26      0.38    -1.99    -0.52 1.00      560     1300
+Intercept[Q06,4]     1.03      0.38     0.30     1.80 1.00      563     1302
+Intercept[Q07,1]    -4.07      0.46    -5.03    -3.21 1.00      702     1350
+Intercept[Q07,2]    -1.84      0.37    -2.57    -1.11 1.00      554     1362
+Intercept[Q07,3]    -1.14      0.37    -1.82    -0.43 1.00      527     1210
+Intercept[Q07,4]     1.17      0.38     0.45     1.92 1.00      533     1260
+Intercept[Q08,1]    -3.88      0.45    -4.76    -3.02 1.00      621     1612
+Intercept[Q08,2]    -1.38      0.37    -2.11    -0.64 1.00      533     1303
+Intercept[Q08,3]    -0.48      0.37    -1.19     0.25 1.00      506     1248
+Intercept[Q08,4]     1.36      0.39     0.61     2.10 1.00      518     1140
+Intercept[Q09,1]    -2.28      0.39    -3.02    -1.55 1.00      561     1146
+Intercept[Q09,2]    -0.93      0.37    -1.66    -0.22 1.00      524     1056
+Intercept[Q09,3]    -0.35      0.36    -1.07     0.36 1.00      525     1013
+Intercept[Q09,4]     1.58      0.38     0.85     2.35 1.00      557     1268
+Intercept[Q10,1]    -5.54      0.70    -7.07    -4.30 1.00     1369     2014
+Intercept[Q10,2]    -2.48      0.40    -3.24    -1.71 1.00      600     1466
+Intercept[Q10,3]    -1.42      0.38    -2.15    -0.68 1.00      559     1168
+Intercept[Q10,4]     1.12      0.38     0.38     1.87 1.00      561     1221
+Intercept[Q11,1]    -6.52      0.85    -8.37    -5.08 1.00     1441     2244
+Intercept[Q11,2]    -3.55      0.43    -4.39    -2.72 1.00      707     1422
+Intercept[Q11,3]    -2.02      0.38    -2.77    -1.28 1.00      558     1447
+Intercept[Q11,4]     1.28      0.39     0.53     2.04 1.00      536     1104
+Intercept[Q12,1]    -5.77      0.68    -7.19    -4.52 1.00     1236     2278
+Intercept[Q12,2]    -2.56      0.40    -3.33    -1.77 1.00      590     1765
+Intercept[Q12,3]    -1.48      0.38    -2.20    -0.73 1.00      532     1205
+Intercept[Q12,4]     1.56      0.39     0.82     2.35 1.00      536     1152
+Intercept[Q13,1]    -6.16      0.86    -8.02    -4.67 1.00     1547     1928
+Intercept[Q13,2]    -5.16      0.62    -6.44    -4.00 1.00     1119     1791
+Intercept[Q13,3]    -2.84      0.41    -3.65    -2.04 1.00      621     1215
+Intercept[Q13,4]    -0.05      0.37    -0.77     0.67 1.00      532     1188
+Intercept[Q14,1]    -4.56      0.52    -5.62    -3.57 1.00      860     1942
+Intercept[Q14,2]    -2.07      0.39    -2.84    -1.31 1.00      588     1223
+Intercept[Q14,3]    -0.62      0.38    -1.35     0.12 1.00      563     1135
+Intercept[Q14,4]     1.64      0.40     0.87     2.42 1.00      595     1503
+Intercept[Q15,1]    -5.08      0.64    -6.37    -3.87 1.00     1148     2531
+Intercept[Q15,2]    -2.18      0.41    -2.96    -1.41 1.00      621     1277
+Intercept[Q15,3]    -0.37      0.39    -1.12     0.38 1.00      548     1159
+Intercept[Q15,4]     2.01      0.41     1.21     2.80 1.00      629     1274
+Intercept[Q16,1]    -6.26      0.90    -8.16    -4.65 1.00     1593     2460
+Intercept[Q16,2]    -4.19      0.54    -5.32    -3.17 1.00     1018     2280
+Intercept[Q16,3]     0.00      0.38    -0.73     0.75 1.00      580     1148
+Intercept[Q16,4]     2.27      0.44     1.42     3.16 1.00      695     1305
+Intercept[Q17,1]    -5.28      0.66    -6.65    -4.06 1.00     1270     2323
+Intercept[Q17,2]    -2.92      0.42    -3.76    -2.09 1.00      692     1701
+Intercept[Q17,3]    -0.53      0.38    -1.25     0.20 1.00      567     1197
+Intercept[Q17,4]     1.86      0.40     1.10     2.69 1.00      637     1536
+Period2              1.21      0.52     0.29     2.30 1.01      337      889
+TreatB              -1.28      0.46    -2.15    -0.38 1.00      417      869
+Period2:TreatB      -1.75      0.82    -3.46    -0.29 1.00      388      657
+
+Family Specific Parameters: 
+     Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+disc     1.00      0.00     1.00     1.00   NA       NA       NA
+
+Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{brm\_period.treat.subject\_question.disc }\OtherTok{\textless{}{-}} \FunctionTok{brm}\NormalTok{(}
+    \FunctionTok{bf}\NormalTok{(}
+\NormalTok{        Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Period }\SpecialCharTok{*}\NormalTok{ Treat }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ Treat }\SpecialCharTok{|}\NormalTok{ Subject) }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{|}\NormalTok{ q }\SpecialCharTok{|}\NormalTok{ Question),}
+\NormalTok{        disc }\SpecialCharTok{\textasciitilde{}} \DecValTok{1} \SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{|}\NormalTok{ q }\SpecialCharTok{|}\NormalTok{ Question)}
+\NormalTok{    ),}
+    \AttributeTok{data =}\NormalTok{ df\_clean,}
+    \AttributeTok{family =} \FunctionTok{cumulative}\NormalTok{(}\StringTok{"logit"}\NormalTok{),}
+    \AttributeTok{sample\_prior =} \ConstantTok{TRUE}\NormalTok{,}
+    \AttributeTok{file =} \StringTok{"models/brm\_period.treat.subject\_question.disc"}\NormalTok{,}
+    \AttributeTok{file\_refit =} \StringTok{"on\_change"}\NormalTok{,}
+    \AttributeTok{prior =} \FunctionTok{prior}\NormalTok{(}\StringTok{"constant(1)"}\NormalTok{, }\AttributeTok{class =} \StringTok{"sd"}\NormalTok{, }\AttributeTok{group =} \StringTok{"Subject"}\NormalTok{) }\SpecialCharTok{+}
+        \FunctionTok{prior}\NormalTok{(}\StringTok{"normal(0, 3)"}\NormalTok{, }\AttributeTok{class =} \StringTok{"sd"}\NormalTok{, }\AttributeTok{group =} \StringTok{"Question"}\NormalTok{) }\SpecialCharTok{+}
+        \FunctionTok{prior}\NormalTok{(}\StringTok{"normal(0, 1)"}\NormalTok{, }\AttributeTok{class =} \StringTok{"sd"}\NormalTok{, }\AttributeTok{group =} \StringTok{"Question"}\NormalTok{, }\AttributeTok{dpar =} \StringTok{"disc"}\NormalTok{)}
+\NormalTok{)}
+\FunctionTok{summary}\NormalTok{(brm\_period.treat.subject\_question.disc)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ Family: cumulative 
+  Links: mu = logit; disc = log 
+Formula: Response ~ Period * Treat + (1 + Treat | Subject) + (1 | q | Question) 
+         disc ~ 1 + (1 | q | Question)
+   Data: df_clean (Number of observations: 2980) 
+  Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
+         total post-warmup draws = 4000
+
+Group-Level Effects: 
+~Question (Number of levels: 18) 
+                              Estimate Est.Error l-95% CI u-95% CI Rhat
+sd(Intercept)                     0.41      0.09     0.27     0.61 1.00
+sd(disc_Intercept)                0.21      0.05     0.13     0.33 1.00
+cor(Intercept,disc_Intercept)    -0.06      0.26    -0.56     0.46 1.00
+                              Bulk_ESS Tail_ESS
+sd(Intercept)                     1097     2219
+sd(disc_Intercept)                1780     2440
+cor(Intercept,disc_Intercept)     2013     2323
+
+~Subject (Number of levels: 87) 
+                      Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
+sd(Intercept)             1.00      0.00     1.00     1.00   NA       NA
+sd(TreatB)                1.00      0.00     1.00     1.00   NA       NA
+cor(Intercept,TreatB)    -0.55      0.08    -0.70    -0.37 1.00     1071
+                      Tail_ESS
+sd(Intercept)               NA
+sd(TreatB)                  NA
+cor(Intercept,TreatB)     1851
+
+Population-Level Effects: 
+               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+Intercept[1]      -3.23      0.30    -3.82    -2.66 1.01      726     1352
+Intercept[2]      -2.14      0.24    -2.62    -1.66 1.01      677     1266
+Intercept[3]      -1.55      0.21    -1.97    -1.12 1.01      658     1120
+Intercept[4]      -0.32      0.19    -0.68     0.07 1.01      638     1149
+disc_Intercept     0.67      0.09     0.49     0.86 1.00     1097     1383
+Period2           -0.31      0.22    -0.74     0.12 1.00      565      881
+TreatB            -1.57      0.24    -2.03    -1.12 1.00      662     1134
+Period2:TreatB     0.28      0.36    -0.42     1.00 1.00      614     1036
+
+Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{brm\_acat\_cs.treat.subject.question }\OtherTok{\textless{}{-}} \FunctionTok{brm}\NormalTok{(}
+\NormalTok{    Response }\SpecialCharTok{\textasciitilde{}} \DecValTok{1} \SpecialCharTok{+} \FunctionTok{cs}\NormalTok{(Treat) }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{|}\NormalTok{ Subject) }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{|}\NormalTok{ Question),}
+    \AttributeTok{data =}\NormalTok{ df\_clean,}
+    \AttributeTok{family =} \FunctionTok{acat}\NormalTok{(}\StringTok{"logit"}\NormalTok{),}
+    \AttributeTok{sample\_prior =} \ConstantTok{TRUE}\NormalTok{,}
+    \AttributeTok{file =} \StringTok{"models/brm\_acat\_cs.treat.subject.question"}\NormalTok{,}
+    \AttributeTok{file\_refit =} \StringTok{"on\_change"}
+\NormalTok{)}
+\FunctionTok{summary}\NormalTok{(brm\_acat\_cs.treat.subject.question)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ Family: acat 
+  Links: mu = logit; disc = identity 
+Formula: Response ~ 1 + cs(Treat) + (1 | Subject) + (1 | Question) 
+   Data: df_clean (Number of observations: 2980) 
+  Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
+         total post-warmup draws = 4000
+
+Group-Level Effects: 
+~Question (Number of levels: 18) 
+              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sd(Intercept)     0.40      0.08     0.27     0.59 1.00      793     1181
+
+~Subject (Number of levels: 87) 
+              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sd(Intercept)     0.69      0.07     0.57     0.83 1.00      655     1621
+
+Population-Level Effects: 
+             Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+Intercept[1]    -3.54      0.54    -4.69    -2.57 1.00     1679     2078
+Intercept[2]    -1.55      0.21    -1.97    -1.15 1.01      886     2036
+Intercept[3]    -1.75      0.16    -2.07    -1.45 1.01      566     1235
+Intercept[4]    -0.27      0.13    -0.53    -0.01 1.01      420     1200
+TreatB[1]       -2.21      0.53    -3.34    -1.27 1.00     2333     2245
+TreatB[2]       -1.65      0.19    -2.02    -1.29 1.00     2645     2810
+TreatB[3]       -1.29      0.13    -1.55    -1.03 1.00     3283     3268
+TreatB[4]       -1.03      0.10    -1.24    -0.83 1.00     4452     3192
+
+Family Specific Parameters: 
+     Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+disc     1.00      0.00     1.00     1.00   NA       NA       NA
+
+Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{brm\_treat.period.subject.question }\OtherTok{\textless{}{-}} \FunctionTok{brm}\NormalTok{(}
+\NormalTok{    Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{*}\NormalTok{ Period }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ Treat }\SpecialCharTok{|}\NormalTok{ Subject) }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ Treat }\SpecialCharTok{|}\NormalTok{ Question),}
+    \AttributeTok{data =}\NormalTok{ df\_clean,}
+    \AttributeTok{family =} \FunctionTok{cumulative}\NormalTok{(}\StringTok{"logit"}\NormalTok{),}
+    \AttributeTok{sample\_prior =} \ConstantTok{TRUE}\NormalTok{,}
+    \AttributeTok{file =} \StringTok{"models/brm\_treat.period.subject.question"}\NormalTok{,}
+    \AttributeTok{file\_refit =} \StringTok{"on\_change"}
+\NormalTok{)}
+\FunctionTok{summary}\NormalTok{(brm\_treat.period.subject.question)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ Family: cumulative 
+  Links: mu = logit; disc = identity 
+Formula: Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question) 
+   Data: df_clean (Number of observations: 2980) 
+  Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
+         total post-warmup draws = 4000
+
+Group-Level Effects: 
+~Question (Number of levels: 18) 
+                      Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
+sd(Intercept)             0.74      0.16     0.50     1.11 1.00     1213
+sd(TreatB)                1.50      0.29     1.05     2.21 1.00     1194
+cor(Intercept,TreatB)    -0.41      0.21    -0.74     0.07 1.01      931
+                      Tail_ESS
+sd(Intercept)             2155
+sd(TreatB)                1803
+cor(Intercept,TreatB)     1691
+
+~Subject (Number of levels: 87) 
+                      Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
+sd(Intercept)             1.82      0.18     1.50     2.21 1.00      841
+sd(TreatB)                2.39      0.21     2.01     2.84 1.00      685
+cor(Intercept,TreatB)    -0.54      0.09    -0.70    -0.35 1.01      420
+                      Tail_ESS
+sd(Intercept)             1266
+sd(TreatB)                1487
+cor(Intercept,TreatB)      719
+
+Population-Level Effects: 
+               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+Intercept[1]      -6.70      0.37    -7.43    -5.98 1.00      701     1417
+Intercept[2]      -4.35      0.35    -5.03    -3.64 1.00      641     1231
+Intercept[3]      -3.06      0.34    -3.73    -2.37 1.00      626     1271
+Intercept[4]      -0.50      0.34    -1.17     0.18 1.00      623     1227
+TreatB            -3.15      0.57    -4.28    -2.04 1.01      483     1112
+Period2           -0.58      0.41    -1.41     0.21 1.01      492      943
+TreatB:Period2     0.50      0.68    -0.82     1.83 1.00      428      888
+
+Family Specific Parameters: 
+     Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+disc     1.00      0.00     1.00     1.00   NA       NA       NA
+
+Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{LOO}\NormalTok{(}
+\NormalTok{    brm\_subject,}
+\NormalTok{    brm\_period.treat\_subject\_question,}
+\NormalTok{    brm\_treat.period.subject.question,}
+\NormalTok{    brm\_cs.treat.subject.question,}
+\NormalTok{    brm\_treat\_question\_subject,}
+\NormalTok{    brm\_treat\_question\_subject\_question,}
+\NormalTok{    brm\_period.treat.subject\_question,}
+\NormalTok{    brm\_thres.question\_period.treat.subject,}
+\NormalTok{    brm\_period.treat.subject\_question.disc,}
+\NormalTok{    brm\_acat\_cs.treat.subject.question,}
+\NormalTok{    brm\_period.treat.question\_subject}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Output of model 'brm_subject':
+
+Computed from 4000 by 2980 log-likelihood matrix
+
+         Estimate   SE
+elpd_loo  -4004.3 38.3
+p_loo        87.7  1.6
+looic      8008.6 76.6
+------
+Monte Carlo SE of elpd_loo is 0.1.
+
+All Pareto k estimates are good (k < 0.5).
+See help('pareto-k-diagnostic') for details.
+
+Output of model 'brm_period.treat_subject_question':
+
+Computed from 4000 by 2980 log-likelihood matrix
+
+         Estimate   SE
+elpd_loo  -3480.8 40.0
+p_loo       108.7  2.1
+looic      6961.5 80.0
+------
+Monte Carlo SE of elpd_loo is 0.1.
+
+All Pareto k estimates are good (k < 0.5).
+See help('pareto-k-diagnostic') for details.
+
+Output of model 'brm_treat.period.subject.question':
+
+Computed from 4000 by 2980 log-likelihood matrix
+
+         Estimate   SE
+elpd_loo  -3011.0 46.2
+p_loo       193.8  4.6
+looic      6022.0 92.4
+------
+Monte Carlo SE of elpd_loo is 0.2.
+
+Pareto k diagnostic values:
+                         Count Pct.    Min. n_eff
+(-Inf, 0.5]   (good)     2978  99.9%   983       
+ (0.5, 0.7]   (ok)          2   0.1%   1997      
+   (0.7, 1]   (bad)         0   0.0%   <NA>      
+   (1, Inf)   (very bad)    0   0.0%   <NA>      
+
+All Pareto k estimates are ok (k < 0.7).
+See help('pareto-k-diagnostic') for details.
+
+Output of model 'brm_cs.treat.subject.question':
+
+Computed from 4000 by 2980 log-likelihood matrix
+
+         Estimate   SE
+elpd_loo  -3464.7 40.1
+p_loo       107.1  2.1
+looic      6929.4 80.2
+------
+Monte Carlo SE of elpd_loo is 0.2.
+
+All Pareto k estimates are good (k < 0.5).
+See help('pareto-k-diagnostic') for details.
+
+Output of model 'brm_treat_question_subject':
+
+Computed from 4000 by 2980 log-likelihood matrix
+
+         Estimate   SE
+elpd_loo  -3490.1 39.8
+p_loo       106.9  2.0
+looic      6980.2 79.5
+------
+Monte Carlo SE of elpd_loo is 0.1.
+
+All Pareto k estimates are good (k < 0.5).
+See help('pareto-k-diagnostic') for details.
+
+Output of model 'brm_treat_question_subject_question':
+
+Computed from 4000 by 2980 log-likelihood matrix
+
+         Estimate   SE
+elpd_loo  -3869.0 33.0
+p_loo       357.0  5.5
+looic      7738.0 65.9
+------
+Monte Carlo SE of elpd_loo is 0.3.
+
+Pareto k diagnostic values:
+                         Count Pct.    Min. n_eff
+(-Inf, 0.5]   (good)     2978  99.9%   1264      
+ (0.5, 0.7]   (ok)          2   0.1%   6056      
+   (0.7, 1]   (bad)         0   0.0%   <NA>      
+   (1, Inf)   (very bad)    0   0.0%   <NA>      
+
+All Pareto k estimates are ok (k < 0.7).
+See help('pareto-k-diagnostic') for details.
+
+Output of model 'brm_period.treat.subject_question':
+
+Computed from 4000 by 2980 log-likelihood matrix
+
+         Estimate   SE
+elpd_loo  -3158.0 45.2
+p_loo       182.3  4.3
+looic      6316.1 90.5
+------
+Monte Carlo SE of elpd_loo is 0.2.
+
+Pareto k diagnostic values:
+                         Count Pct.    Min. n_eff
+(-Inf, 0.5]   (good)     2979  100.0%  1140      
+ (0.5, 0.7]   (ok)          1    0.0%  1411      
+   (0.7, 1]   (bad)         0    0.0%  <NA>      
+   (1, Inf)   (very bad)    0    0.0%  <NA>      
+
+All Pareto k estimates are ok (k < 0.7).
+See help('pareto-k-diagnostic') for details.
+
+Output of model 'brm_thres.question_period.treat.subject':
+
+Computed from 4000 by 2980 log-likelihood matrix
+
+         Estimate   SE
+elpd_loo  -3058.6 46.4
+p_loo       229.2  5.3
+looic      6117.3 92.8
+------
+Monte Carlo SE of elpd_loo is NA.
+
+Pareto k diagnostic values:
+                         Count Pct.    Min. n_eff
+(-Inf, 0.5]   (good)     2970  99.7%   1328      
+ (0.5, 0.7]   (ok)          8   0.3%   557       
+   (0.7, 1]   (bad)         2   0.1%   274       
+   (1, Inf)   (very bad)    0   0.0%   <NA>      
+See help('pareto-k-diagnostic') for details.
+
+Output of model 'brm_period.treat.subject_question.disc':
+
+Computed from 4000 by 2980 log-likelihood matrix
+
+         Estimate   SE
+elpd_loo  -3131.4 45.2
+p_loo       195.7  5.1
+looic      6262.8 90.4
+------
+Monte Carlo SE of elpd_loo is 0.2.
+
+Pareto k diagnostic values:
+                         Count Pct.    Min. n_eff
+(-Inf, 0.5]   (good)     2978  99.9%   1172      
+ (0.5, 0.7]   (ok)          2   0.1%   670       
+   (0.7, 1]   (bad)         0   0.0%   <NA>      
+   (1, Inf)   (very bad)    0   0.0%   <NA>      
+
+All Pareto k estimates are ok (k < 0.7).
+See help('pareto-k-diagnostic') for details.
+
+Output of model 'brm_acat_cs.treat.subject.question':
+
+Computed from 4000 by 2980 log-likelihood matrix
+
+         Estimate   SE
+elpd_loo  -3468.1 39.2
+p_loo       101.7  2.9
+looic      6936.2 78.5
+------
+Monte Carlo SE of elpd_loo is 0.1.
+
+All Pareto k estimates are good (k < 0.5).
+See help('pareto-k-diagnostic') for details.
+
+Output of model 'brm_period.treat.question_subject':
+
+Computed from 4000 by 2980 log-likelihood matrix
+
+         Estimate   SE
+elpd_loo  -3361.7 41.4
+p_loo       123.1  2.4
+looic      6723.4 82.9
+------
+Monte Carlo SE of elpd_loo is 0.1.
+
+All Pareto k estimates are good (k < 0.5).
+See help('pareto-k-diagnostic') for details.
+
+Model comparisons:
+                                        elpd_diff se_diff
+brm_treat.period.subject.question          0.0       0.0 
+brm_thres.question_period.treat.subject  -47.7      20.0 
+brm_period.treat.subject_question.disc  -120.4      17.2 
+brm_period.treat.subject_question       -147.0      16.9 
+brm_period.treat.question_subject       -350.7      28.0 
+brm_cs.treat.subject.question           -453.7      31.1 
+brm_acat_cs.treat.subject.question      -457.1      29.7 
+brm_period.treat_subject_question       -469.8      30.5 
+brm_treat_question_subject              -479.1      31.0 
+brm_treat_question_subject_question     -858.0      39.0 
+brm_subject                             -993.3      42.8 
+\end{verbatim}
 
 \normalsize
 

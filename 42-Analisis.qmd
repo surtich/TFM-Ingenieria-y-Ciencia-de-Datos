@@ -101,7 +101,7 @@ table %>%
 
 
 Con la tabla de contingencia calculamos las distancias entre preguntas y realizamos el agrupamiento. 
-En el dendograma se aprecian claramente tres conglomerados. Es muy interesante constatar que los tres grupos están formados por preguntas que en su mayor parte son correlativas. Esto es consistente con que al elaborar un test normalmente se colocan las preguntas por unidades temáticas y con que el encuestado también suele hacerlo teniendo en cuenta esta estructura y tiende a responder de forma similar a las preguntas correlativas.
+En el dendograma (ver @fig-dendo) se aprecian claramente tres conglomerados. Es muy interesante constatar que los tres grupos están formados por preguntas que en su mayor parte son correlativas. Esto es consistente con que al elaborar un test normalmente se colocan las preguntas por unidades temáticas y con que el encuestado también suele hacerlo teniendo en cuenta esta estructura y tiende a responder de forma similar a las preguntas correlativas.
 
 
 ```{r}
@@ -114,7 +114,7 @@ cluster <- hclust(dist, method = "complete")
 plot(cluster)
 ```
 
-![Dendograma de aglomeramiento jerárquico de preguntas en función de la tabla de contingencia de respuestas.](images/cluster.png){width=400}
+![Dendograma de aglomeramiento jerárquico de preguntas en función de la tabla de contingencia de respuestas.](images/cluster.png){#fig-dendo width=400}
 
 
 Podemos distinguir los siguientes grupos y subgrupos:

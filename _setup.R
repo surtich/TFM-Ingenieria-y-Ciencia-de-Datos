@@ -36,6 +36,12 @@ library(janitor)
 library(broom.mixed)
 library(bmmb)
 library(brms)
+library(tidybayes)
+library(viridisLite)
+library(hrbrthemes)
+library(ggrepel)
+library(modelr)
+library(ggtext)
 
 ## ggplot options
 theme_set(theme_bw())
