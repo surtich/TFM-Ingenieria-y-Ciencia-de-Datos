@@ -1,17 +1,6 @@
----
-execute:
-  echo: false
----
-
 ```{r}
 source("_setup.R")
 ```
-
-# Exploración inicial. {#sec-eda}
-
-## Análisis de la calidad de los datos.
-
-### Respuestas a los test. {#sec-eda-2}
 
 ```{r}
 # Leemos el tibble preprocesado
@@ -37,21 +26,24 @@ test_all_df <- test_all_df %>%
     ungroup()
 ```
 
-Como se explica en la @tbl-variables, al subtitulado le denominamos tratamiento y a sus niveles (correcto e incorrecto) los hemos llamado $A$ y $B$ sin hacer ninguna conjetura de cual de los dos es el subtitulado correcto. El grupo con secuencia $AB$ será el que primero vio el vídeo con subtitulado $A$ y luego el $B$. Análogamente, el grupo con secuencia $BA$ vio los vídeos en orden inverso. Recuérdese que el nivel 0 de respuesta se corresponde con "No sé / No contesto" (ver @tbl-likert-levels).
 
-Hay `r unique_tests_df %>% nrow()` estudiantes que no realizaron el segundo test. De ellos `r unique_count[[1,2]]` pertenecen al grupo `r unique_count[[1,1]]` y `r unique_count[[2,2]]` al grupo `r unique_count[[2,1]]`. Debido a que no son muchos y a que los grupos se mantienen balanceados, se ha decidido eliminar los test de estos estudiantes. Tras eliminar estos datos, constatamos (ver @fig-groups) que los grupos están balanceados en el número de estudiantes
-y que disponemos de suficientes datos para realizar el análisis estadístico.
+
+# Modelado estadístico {#sec-modelado}
+
+## Análisis inicial {#sec-eda}
+
+
+Como se explica en la @tbl-variables, al subtitulado le denominamos tratamiento y a sus niveles (correcto e incorrecto) los hemos llamado $A$ y $B$ sin hacer ninguna conjetura de cual de los dos es el subtitulado correcto. El grupo con secuencia $AB$ será el que primero vio el vídeo con subtitulado $A$ y luego el $B$. Análogamente, el grupo con secuencia $BA$ vio los vídeos en orden inverso. Recuérdese que el nivel 0 de respuesta se corresponde con "No sé / No contesto" (ver @tbl-likert-levels). Tras eliminar los test de los usuarios que no dieron su consentimiento para participar en el estudio y los de los que no realizaron el segundo test, las dos cohortes están equilibradas (ver @fig-groups).
 
 ```{r}
 #| label: fig-groups
 #| fig-cap: Estudiantes asignados a cada grupo.
 #| fig-height: 2
 
-test_all_df %>%
-    group_by(Seq, Test) %>%
-    count() %>%
+df_all %>%
+    distinct(Seq, Subject) %>%
     group_by(Seq) %>%
-    slice_head(n = 1) %>%
+    count() %>%
     ggplot(aes(x = Seq, y = n, fill = Seq)) +
     geom_bar(stat = "identity") +
     geom_text(aes(label = n, y = n / 2), size = 6) +
@@ -61,6 +53,11 @@ test_all_df %>%
         legend.position = "none", plot.title = element_text(hjust = 0.6)
     )
 ```
+
+### Análisis de la calidad de los datos
+
+En esta sección buscamos si hay test que tienen valores de respuesta que puedan resultar anómalos. 
+En los test no se ha observado ningún valor nulo ni erróneo.
 
 ```{r}
 # Calculamos el tiempo transcurrido entre la realización de los test
@@ -77,9 +74,9 @@ washout_cut_1 <- 5
 washout_cut_2 <- 2
 ```
 
-El campo `LastTry` contiene la fecha y hora de realización del test. Con esta información podemos conocer el tiempo que empleó cada estudiante entre subtitulados. 
+El campo `LastTry` contiene la fecha y hora de realización del test. Con esta información podemos conocer el tiempo que empleó cada estudiante entre actividades. 
 La @tbl-washout muestra que hay algunos test que se hicieron demasiado rápido
-^[Hay que tener en cuenta que la duración de vídeo es de algo más de 40 segundos y que los estudiantes tienen que contestar un test de 18 preguntas.].
+^[Hay que tener en cuenta que la duración de vídeo es de algo más de 40 segundos y que los estudiantes tienen que contestar un test de 18 ítems.].
 
 ```{r}
 #| label: tbl-washout
@@ -151,9 +148,7 @@ distinct_response__summary_df %>%
 
 ```
 
-\clearpage
-
-La tabla @tbl-distinct2 muestra la respuesta utilizada, el grupo y el periodo de los test con respuesta única.
+La tabla @tbl-distinct2 muestra los test de respuesta única y el valor de esa respuesta.
 
 ```{r}
 #| label: tbl-distinct2
@@ -200,8 +195,6 @@ compare_test_df %>%
     scale_x_discrete(drop = FALSE)
 ```
 
-\clearpage
-
 
 Tan solo `r compare_test_df %>% filter(Total == 0) %>% nrow()` estudiante respondió a todas las preguntas con el mismo valor en los dos test. Por otro lado, no hay test que tengan un número excesivo de contestaciones "No sé/No contesto" (ver @tbl-noanswer).
 
@@ -220,51 +213,11 @@ test_lg_df %>%
     gt()
 ```
 
-#### Conclusiones.
+Vemos que algunos test tienen valores que no parecen muy razonables. Por ejemplo, no parece razonable realizar la actividad en menos de `r washout_cut_2` minutos. Se observa que en algunos test hay poca variabilidad. Sin embargo, no son muchos los test con estas características así que se ha decidido mantener estos datos a pesar de que se pueda dudar de si en ellos los estudiantes contestaron con la debida atención y diligencia.
 
-No parece razonable realizar la actividad en menos de `r washout_cut_2` minutos. Se observa que en algunos test hay poca variabilidad. Sin embargo, no son muchos los test con estas características así que se ha decidido mantener estos datos a pesar de que se pueda dubar de si en ellos los estudiantes contestaron con la debida atención y diligencia.
+### Comparación de los tratamientos $A$ y $B$ entre grupos. {#sec-eda-3}
 
-### Valores nulos o erróneos.
-
-En los test no se ha detectado ningún valor nulo ni erróneo. Sin embargo tenemos algunos de estos valores en la información socioeconómica de los estudiantes (ver @tbl-contingencia-eco). 
-
-::: {#tbl-contingencia-eco layout-ncol=2}
-
-```{r}
-#| tbl-cap: Estudiantes por sexo.
-xtabs(~gender, data = test_all_df, addNA = T) %>%
-    data.frame() %>%
-    gt()
-```
-
-```{r}
-#| tbl-cap: Estudiantes con valor nulo en el campo año de nacimiento.
-xtabs(~year_of_birth, addNA = T, data = test_all_df %>% filter(is.na(year_of_birth) | year_of_birth == "None")) %>%
-    data.frame() %>%
-    gt()
-```
-
-```{r}
-#| tbl-cap: Estudiantes por nivel educativo.
-xtabs(~level_of_education, data = test_all_df, addNA = T) %>%
-    data.frame() %>%
-    gt()
-```
-
-```{r}
-#| tbl-cap: Estudiantes en función del número de preguntas acertadas en el test de conocimiento.
-xtabs(~level_of_knowledge, data = test_all_df, addNA = T) %>%
-    data.frame() %>%
-    gt()
-```
-
-
-Tablas de contingencia de la información socioeconómica de los estudiantes.
-:::
-
-## Comparación de los tratamientos $A$ y $B$ entre grupos. {#sec-eda-3}
-
-La @fig-diff presenta una forma de comparar los dos test que realizados por los estudiantes. Para cada estudiante se comparó pregunta a pregunta sus dos test y se contabilizó la diferencia entre el número de preguntas en que la puntuación en el segundo vídeo fue superior y en las que lo fue inferior (las que no variaron de puntuación no se consideraron). En el eje $x$ se muestra la diferencia entre preguntas. Cantidades negativas indican que hay más respuestas en el segundo de los test que han empeorado respecto al primero de las que han mejorado. En el eje $y$ se representa el número de estudiantes para cada diferencia. Esta frecuencia se representa en negativo cuando la diferencia es negativa ^[En la comparación se han omitido aquellas preguntas en las que el estudiante contestó "No sé/No contesto" en la pregunta correspondiente de uno de los test.]. Esto es una forma de evaluar si el estudiante valoró mejor o no el segundo vídeo que el primero. 
+La @fig-diff presenta una forma de comparar los dos test realizados por los estudiantes. Para cada estudiante se comparó pregunta a pregunta sus dos test y se contabilizó la diferencia entre el número de preguntas en que la puntuación en el segundo vídeo fue superior y en las que lo fue inferior (las que no variaron de puntuación no se consideraron). En el eje $x$ se muestra la diferencia entre preguntas. Cantidades negativas indican que hay más respuestas en el segundo de los test que han empeorado respecto al primero de las que han mejorado. En el eje $y$ se representa el número de estudiantes para cada diferencia. Esta frecuencia se representa en negativo cuando la diferencia es negativa ^[En la comparación se han omitido aquellas respuestas en las que el estudiante contestó "No sé/No contesto" en la pregunta correspondiente de uno de los test.]. Esto es una forma de evaluar si el estudiante valoró mejor o no el segundo vídeo que el primero. 
 
 
 ```{r}
@@ -309,7 +262,7 @@ compare_test_df %>% ggplot(aes(x = Total, y = n, fill = Total >= 0)) +
     labs(y = "Cantidad de test (en negativo cuando la diferencia es negativa)", x = "Diferencias entre test de un estudiante (negativo cuando el segundo test es valorado peor)")
 ```
 
-Vemos que en el grupo $AB$ las diferencias tienden a ser negativas y en el $BA$ positivas. Esto estaría indicando que los estudiantes valoran mejor el subtitulado de nivel $A$. Por ello es esperable que las respuestas de los estudiantes del grupo $AB$ hayan empeorado y que las diferencias sean negativas y que lo contrario haya sucedido con las del grupo $BA$. La diferencia más frecuente en el grupo $AB$ es `r -((compare_test_df %>% arrange(n)) %>% head(1))$Total` y en el grupo $BA$ este valor es `r ((compare_test_df %>% arrange(n)) %>% tail(1))$Total`.
+Vemos que en el grupo $AB$ las diferencias tienden a ser negativas y en el $BA$ positivas. Esto estaría indicando que los estudiantes valoran mejor el subtitulado de nivel $A$ en ambas secuencias. Por ello es esperable que las respuestas de los estudiantes del grupo $AB$ hayan empeorado y que las diferencias sean negativas y que lo contrario haya sucedido con las del grupo $BA$. La diferencia más frecuente en el grupo $AB$ es `r -((compare_test_df %>% arrange(n)) %>% head(1))$Total` y en el grupo $BA$ este valor es `r ((compare_test_df %>% arrange(n)) %>% tail(1))$Total`.
 
 Resulta llamativo que haya estudiantes cuyas contestaciones estén tan alejadas de la tendencia de su grupo. En la @tbl-diff se muestran los tiempos que han transcurrido entre la realización de los test de aquellos estudiantes cuyas respuestas difieren de forma importante de su grupo. Se observa que casi todos son tiempos entre actividades muy cortos. En cualquier caso y, como no son muchos, se ha decidido no eliminarlos y realizar el análisis con ellos.
 
@@ -326,7 +279,6 @@ left_join(compare_test_user_df %>% filter(Seq == "AB" & Total >= 0 | Seq == "BA"
     dplyr::select(-c(User, Row_01, Row_02, LastTry_01, LastTry_02)) %>%
     gt()
 ```
-
 
 ```{r}
 df_freqs <- df_all %>%
@@ -417,7 +369,7 @@ df_resume %>%
 
 La @fig-freqs muestra algunas cuestiones interesantes:
 
-* El tratamiento (subtitulado) con nivel $A$ presenta claramente mayores valores de respuesta que el $B$ como ya habíamos visto (ver @fig-diff). Si en este momento tuviéramos que decidir qué subtitulado es el correcto claro que sería el de nivel $A$. No obstante, ni en el análisis exploratorio ni en el modelado estadístico se hará ninguna suposición.
+* El tratamiento (subtitulado) con nivel $A$ presenta claramente mayores valores de respuesta que el $B$ como ya habíamos visto (ver @fig-diff).
 
 * En general los dos grupos muestran bastante acuerdo en el subtitulado en ambos niveles: En el nivel de tratamiento $A$ los dos grupos tienen una frecuencia relativa similar de respuestas positivas (valores 4 y 5). El grupo $AB$ tiene un `r get_freqs(Seq="AB", Treat="A", Response=c(4,5))` de respuestas positivas frente a un `r get_freqs(Seq="BA", Treat="A", Response=c(4,5))` el grupo $BA$. No obstante, el grupo $AB$ tiene más respuestas con valor 5 que el grupo $BA$ (`r get_freqs(Seq="AB", Treat="A", Response=5)` frente a `r get_freqs(Seq="BA", Treat="A", Response=5)`). La valoración es también similar entre grupos en el nivel de tratamiento $B$: el grupo $AB$ tiene `r get_freqs(Seq="AB", Treat="B", Response=c(4,5))` de respuestas positivas y `r get_freqs(Seq="BA", Treat="B", Response=c(4,5))` el grupo $BA$. Las valoraciones negativas (1, 2), la neutra (3) y la 'No sé / No contesto' (0) son también muy similares.
 
@@ -462,9 +414,10 @@ El análisis marginalizado de tratamiento, secuencia y periodo tiene estos resul
 * El periodo 1 tiene un `r get_freqs(df_freqs_period, Period=1, Response=c(4,5))` marginalizado de respuestas positivas frente al `r get_freqs(df_freqs_period, Period=2, Response=c(4,5))` del periodo 2.
 
 * Finalmente, la secuencia $AB$ tiene un `r get_freqs(df_freqs_seq, Seq="AB", Response=c(4,5))`
-de respuestas positivas frente `r get_freqs(df_freqs_seq, Seq="BA", Response=c(4,5))` de la secuencia $BA$. Analizado por respuestas individuales, la respuesta 4 pasa de `r get_freqs(df_freqs_seq, Seq="AB", Response=4)` en la secuencia $AB$ a `r get_freqs(df_freqs_seq, Seq="BA", Response=4)` en la $BA$ y, de forma contraria, en la respuesta 5 pasa de `r get_freqs(df_freqs_seq, Seq="AB", Response=5)` en $AB$ a `r get_freqs(df_freqs_seq, Seq="BA", Response=5)` en $BA$. En las respuestas negativas y no contestadas y neutra no se aprecian estas variaciones.
+de respuestas positivas frente `r get_freqs(df_freqs_seq, Seq="BA", Response=c(4,5))` de la secuencia $BA$.
 
-## Análisis de las preguntas.
+
+### Análisis de las preguntas.
 
 ```{r}
 likert_df <- df_clean %>% pivot_wider(names_from = Question, values_from = Response_l, id_cols = c(Seq, Period, Subject, Treat))
@@ -540,3 +493,19 @@ likert_df %>%
     likert() %>%
     plot()
 ```
+
+ 
+{{< include 4.1.qmd >}}
+
+
+
+
+
+
+
+
+
+
+
+
+

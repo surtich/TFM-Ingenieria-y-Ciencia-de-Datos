@@ -353,21 +353,4 @@ O reorganizando los términos de otra forma, sería la cuarta parte de la suma d
 ```
 \normalsize
 
-\scriptsize
-```{r}
-options(contrasts = rep("contr.treatment", 2))
-l6 <- lm(Response ~ Treat + Period, df)
-data.frame(t(coef(l6))) %>% gt()
-```
-\normalsize
-
-\scriptsize
-```{r}
-options(contrasts = rep("contr.sum", 2))
-l7 <- lm(Response ~ Treat + Period, df)
-data.frame(t(coef(l7))) %>% gt()
-```
-\normalsize
-
-
 

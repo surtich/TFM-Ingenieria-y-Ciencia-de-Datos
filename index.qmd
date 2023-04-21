@@ -67,13 +67,8 @@ set.seed(973)
 
 # Introducción {#intro}
 
-
-
-## Motivación
-
-## Propuesta y objetivo
-
-## Estructura del documento
+ 
+{{< include 1.qmd >}}
 
 
 

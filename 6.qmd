@@ -1,0 +1,5 @@
+# Discusión y conclusiones {#sec-conclusiones}
+
+## Comparación con $Odds\ Ratio$ {#sec-or-4}
+
+En la @sec-or-3 se constató que hay más proporción de respuestas 5 en el primer periodo que en el segundo en ambos niveles de subtitulado. Esto estaría indicando que los estudiantes de ambos grupos prestaron más atención o fueron más exigentes en el segundo visionado y decidieron no otorgar la puntuación máxima incluso en algunos ítems al subtitulado correcto. Que el efecto periodo sea contrario en dos preguntas (ver @@fig-or2) no debe sorprendernos en este diseño de experimento, ya que un test es un juego de suma cero: la valoraciones que se ganan o se pierden en un nivel de respuesta necesariamente provocan que el resto de niveles pierdan o ganen respectivamente la misma cantidad. En cualquier caso, vemos que el efecto periodo es cuantitativa y cualitativamente pequeño. Al afectar solo al intercambio de valoraciones entre los niveles 4 y 5, y ser las dos positivas, es simplemente una pequeña corrección en la valoración del subtitulado.

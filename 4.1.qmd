@@ -1,0 +1,26 @@
+## Modelos utilizados {#sec-modelos}
+
+En esta sección se propondrán los modelos que se van a evaluar con las técnicas estadísticas presentadas en el marco teórico (ver @sec-tecnicas).
+
+### Comparación con $Odds\ Ratio$ {#sec-or-2}
+
+Se contrastará la hipótesis de que el $OR$ entre subtítulos y grupos para cada nivel de respuesta presenta diferencias significativas entre los dos grupos. Este $OR$ se define:
+
+\begin{equation}
+OR_{(Treat, Seq \mid Response=r)}=\frac{
+    \frac{
+            P(Treat=A \mid Seq=AB, Response=r)
+        }{
+            P(Treat=B \mid Seq=AB, Response=r)
+        }
+    }
+    {\frac{
+        P(Treat=A \mid Seq=BA, Response=r)
+        }{
+        P(Treat=B \mid Seq=BA, Response=r)
+    }
+}
+\end{equation}
+
+Si los $odds$ son similares en cada nivel de respuesta, podemos aceptar que la hipótesis nula de que los grupos responden de forma similar a cada nivel de subtitulado. Se hará un test similar pero entre subtitulado y periodos.
+

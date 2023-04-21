@@ -88,7 +88,7 @@ table <- df_all %>%
     xtabs(~ Question + Response, data = .)
 ```
 
-\scriptsize
+\tiny
 ```{r}
 #| label: tbl-contingencia
 #| tbl-cap: Tabla de contingencia de preguntas y respuestas.

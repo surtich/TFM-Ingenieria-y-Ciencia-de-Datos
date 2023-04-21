@@ -17,21 +17,17 @@ vídeos"
   description: "TFM UNED Máster en Ingeniería y Ciencia de Datos"
   chapters:    
     - index.qmd
-    - 20-Arte.qmd
-    - 30-Metodos.qmd
-    - 31-Preprocesamiento.qmd
-    - 32-Modelo.qmd
-    - 40-EDA1.qmd
-    - 42-Analisis.qmd
-    - 43-Modelado.qmd
-    - 50-Resultados.qmd
-    - 60-Conclusiones.qmd
-    - 99-Referencias.qmd
+    - 2.qmd
+    - 3.qmd
+    - 4.qmd
+    - 5.qmd
+    - 6.qmd
+    - 7.qmd
   appendices:
-    - 75-Preprocesado.qmd
-    - 76-Setup.qmd
+    #- 75-Preprocesado.qmd
+    #- 76-Setup.qmd
     - 77-Contrasts.qmd
-    - 78-Bayesiano.qmd
+    #- 78-Bayesiano.qmd
 
   cover-image: "images/logo-cover.png"
   favicon: "images/logo.png"
@@ -87,19 +83,6 @@ format:
     lof: true
     # Chapter summary text
     chaptersummary: In a Nutshell
-    # Back Cover
-    backcover:
-      - language: spanish
-        abstract: |
-          English abstract, on the last page.
-
-          This is a bookdown template based on LaTeX memoir class.
-        keywords:
-          - Keyword in English
-          - As a list
-        abstractlabel: Abstract
-        keywordlabel: Keywords
-    backcoverfontsize: normalsize
     # Figure cropping may be set to false if ghostscript is not installed
     fig_crop: true
     # URL color

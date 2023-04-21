@@ -1,0 +1,106 @@
+# Marco teórico  y estado del arte {#sec-arte}
+
+## Características del diseño del experimento
+
+El objetivo del estudio es responder a la pregunta de investigación:
+
+::: {.callout-note}
+## Pregunta de investigación
+
+¿Son los estudiantes de un curso de creación de materiales accesibles capaces de encontrar diferencias en la calidad del subtitulado de un vídeo?
+:::
+
+El diseño del experimento es completamente aleatorizado, de respuesta ordinal, cruzado $AB/BA$ y doble ciego. Es decir, que la asignación de los estudiantes a cada grupo fue aleatoria; cada grupo vio los vídeos en orden inverso; los estudiantes no conocían a priori qué vídeo estaban viendo en cada momento y tampoco se disponía de esta información en el momento de realizar el modelado estadístico.
+
+Un diseño **completamente aleatorizado** [@lawson2015, pp. 18] "garantiza la validez del experimento contra sesgos causados por otras variables ocultas. Cuando las unidades experimentales se asignan aleatoriamente a los niveles de factor de tratamiento, se puede realizar una prueba exacta de la hipótesis de que el efecto del tratamiento es cero utilizando una prueba de aleatorización".
+
+En este trabajo se estudiarán las diferencias existentes entre los dos niveles de subtitulado a través de las respuestas de los alumnos a las escalas de Likert de cada uno de los vídeos. Para ello se propondrán modelos estadísticos adecuados al diseño del experimento. La primera cuestión que debemos abordar es que el diseño sea cruzado.
+Siguiendo a @senn2022, para que el ensayo sea de tipo cruzado no sería suficiente intercambiar las secuencias sino que debe ser objeto del ensayo el estudio de las diferencias entre los tratamientos individuales que componen las secuencias. Los principales problemas de un diseño cruzado son el abandono, `drop-out`, de alguno de los participantes y la interacción entre el tratamiento y el periodo o `carry-over`. Además, el análisis estadístico es más complicado y particularmente cuando la respuesta es ordinal y hay más de dos tratamientos. En la misma línea, @lui2016 afirma que "el objetivo principal de un diseño cruzado es estudiar la diferencia entre tratamientos individuales (en lugar de la diferencia entre secuencias de tratamiento). Debido a que cada paciente sirve como su propio control, el diseño cruzado es una alternativa útil al diseño de grupos paralelos para aumentar la potencia".
+
+En un diseño cruzado debemos preocuparnos de la existencia de los efectos periodo y secuencia (o `carry-over`). El **efecto periodo** aplicado al experimento del subtitulado, se producirá si las respuestas del segundo periodo están influidas por haber realizado la primera actividad de subtitulado. El **efecto secuencia** se producirá si las respuestas fueran diferentes cuando se realizan en un orden que cuando se realizan en el otro.
+
+La segunda cuestión de relevancia es que las respuestas a los ítems de una escala de Likert son de **tipo ordinal**. Los test estadísticos ANOVA o MANOVA presuponen que la variable de respuesta es cuantitativa y con distribución normal. Tratar las respuestas a una escala de Likert como si fueran cuantitativas no es correcto por las siguientes razones:
+
+* Los niveles de respuesta no son necesariamente equidistantes: la distancia entre un par de opciones de respuesta puede no ser la misma para todos los pares de opciones de respuesta. Por ejemplo, la diferencia entre "Muy en desacuerdo" y "En desacuerdo" y la diferencia entre "De acuerdo" y "Muy de acuerdo" es de un nivel, pero psicológicamente puede ser percibida de forma diferente por cada sujeto.
+
+* La distribución de las respuestas ordinales puede ser no normal. En particular esto sucederá si hay muchas respuestas en los extremos del cuestionario.
+
+* Las varianzas de las variables no observadas que subyacen a las variables ordinales observadas pueden diferir entre grupos, tratamientos, periodos, etc. 
+
+En @kruschke2018 se han analizado los problemas potenciales de tratar datos ordinales como si fueran cuantitativos constatando que se pueden presentar las siguientes situaciones:
+
+* Se pueden encontrar diferencias significativas entre grupos cuando no las hay: error tipo I.
+* Se pueden obviar diferencias cuando en realidad sí existen: error tipo II.
+* Incluso se pueden invertir los efectos de un tratamiento.
+* También puede malinterpretarse la interacción entre factores.
+
+Otro factor que hay que tener en cuenta es que, al tratarse de un diseño cruzado, es de **medidas repetidas** ya que cada sujeto realiza dos veces el test, uno con cada vídeo y que, por lo tanto, las respuestas a cada test de un mismo sujeto no son independientes. Además, tampoco podemos considerar independientes los ítems que componen el test ya que los ítems pretenden medir la misma variable latente: la calidad del subtitulado.
+
+## Técnicas estadísticas utilizadas {#sec-tecnicas}
+
+En los siguientes apartados se proponen distintas técnicas que pretenden responder al objetivo del trabajo teniendo en cuenta las peculiaridades del diseño del experimento comentadas en el apartado anterior.
+
+### Correlación entre preguntas con el alfa de Cronbach {#sec-cronbach}
+
+Normalmente las preguntas de un cuestionario pretenden medir una variable que está oculta o latente. En nuestro caso es la calidad del subtitulado. Las respuestas a estas preguntas relacionadas deben ser consistentes internamente, es decir, las respuestas deben correlacionarse fuerte y positivamente.
+
+Un índice que se utiliza habitualmente para medir la consistencia interna de un cuestionario es el coeficiente `alfa de Cronbach` [ver @schweinberger2020survey]. Se define de esta forma:
+
+\begin{equation}
+\alpha = \frac{N}{N-1} \left(1 - \frac{\sum_{i=1}^{N} s_{i}^{2}}{s^{2}} \right)
+\end{equation}
+
+Donde:
+
+* $\alpha$ es el coeficiente `alfa de Cronbach`.
+* $N$ es el número de items de la escala de Likert.
+* $s_{i}^{2}$ es la varianza de la puntuación del item $i$.
+* $s^{2}$ es la varianza total de las puntuaciones de todos los items.
+
+Valores cercanos 1 indican una fuerte correlación en las respuestas y se admite que las preguntas del cuestionario están midiendo la misma variable latente.
+
+## Métodos exploratorios
+
+En esta sección se aplicarán técnicas estadísticas que se basan en tablas de contingencia. Una descripción teórica de este tipo de técnicas se pueden encontrar en @agresti_2018. Un tratamiento aplicado y basado en gráficos, que será el enfoque que seguiremos en este trabajo, es realizado en @frienly2015.
+
+
+### Asociación de variables con la prueba de homogeneidad $\chi^2$ {#sec-chi2}
+
+La prueba de homogeneidad $\chi^2$ [ver @leton2021] está enmarcarda en el esquema $Nominal \leftarrow Nominal$ y contrasta la hipótesis $H_0$ de que no hay diferencias entre grupos frente a $H_1$ de que existen diferencias. Dada una tabla de contingencia (ver @tbl-contingencia). El valor del estadístico se calcula:
+
+
+$$
+\chi^2 = \sum_{i=1}^r\sum_{j=1}^c\frac{(n_{ij}-c{ij})^2}{c{ij}}
+$$
+
+que sigue una $\chi^2_{(r-1)(c-1)}$, donde $c_{ij}$ son las frecuencias esperadas bajo $H_0$ y que se calculan:
+
+$$
+c{ij}=\frac{r_ic_j}{n}
+$$
+
+
+|       | X = 1    | X = 2    | X =3     |       |
+|-------|---------:|---------:|---------:|------:|
+| Y = 1 | $n_{11}$ | $n_{12}$ | $n_{13}$ | $r_1$ |
+| Y = 2 | $n_{21}$ | $n_{22}$ | $n_{23}$ | $r_2$ |
+|       | $c_1$    | $c_2$    | $c_3$    | $n$   | 
+: Tabla de contingencia {#tbl-contingencia}
+
+
+### Comparación con $Odds\ Ratio$ {#sec-or}
+
+Dada una tabla de contingencia $2\ X\ 2$ (ver @tbl-contingencia-3), el $odds ratio$ poblacional ($OR$) se define como el cociente de las probabilidades complementarias (ver @leton2021). Dado que los factores $Treat$, $Period$ y $Seq$ tienen todos 2 niveles, podemos contrastar si hay interacción entre ellos para cada nivel de respuesta. Para ello contrastamos $H_0$ de que $OR=1$ frente a $H_1$ ($OR\neq1$)
+^[Ver @leton2021 para el procedimiento del contraste de hipótesis mediante $log\ OR$.].
+
+
+
+|       | X = 1    | X = 0    |
+|-------|---------:|---------:|
+| Y = 1 | $n_{11}$ | $n_{12}$ |
+| Y = 0 | $n_{21}$ | $n_{22}$ |
+
+: Tabla de contingencia {#tbl-contingencia-3}
+
+
+

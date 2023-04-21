@@ -82,7 +82,7 @@ df <- test_df %>%
     ) %>%
     dplyr::select(
         Seq, Period, Treat, Subject,
-        gender, year_of_birth, level_of_education, starts_with("Q")
+        gender, year_of_birth, level_of_education, level_of_knowledge, starts_with("Q")
     ) %>%
     mutate_at(
         vars(starts_with("Q")), ~ (. + 1) %% 6
