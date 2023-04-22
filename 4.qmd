@@ -494,6 +494,69 @@ likert_df %>%
     plot()
 ```
 
+
+En la @fig-improve se muestra para cada pregunta la proporción de estudiantes que han valorado mejor el subtitulado $A$ que el $B$
+^[Se han eleminado las preguntas en las que una de las dos respuestas del usuario ha sido "No sé / No contesto". La comparación realizada es respuesta en $A > B$ frente a $A >= B$.]. Se comprueba que la mayoría de las preguntas superan el 50%, lo que indica que los estudiantes valoran mejor el subtitulado $A$.
+
+```{r}
+#| label: fig-improve
+#| fig-cap: Frecuencia de preguntas que mejoran por estudiante entre subtitulados (A > B)
+df_improve_resume <- df_improve %>%
+    group_by(Question) %>%
+    summarize(Improve = sum(Improve) / n()) %>%
+    arrange(Improve)
+
+df_improve_resume %>% ggplot(aes(y = Improve)) +
+    geom_rect(aes(xmin = -Inf, xmax = Inf, ymin = 0.5, ymax = Inf), fill = "#5AB4AC", alpha = 0.2) +
+    geom_rect(aes(
+        xmin = -Inf, xmax = Inf, ymin = -Inf,
+        ymax = 0.5
+    ), fill = "#D8B365", alpha = 0.2) +
+    geom_hline(yintercept = seq(0.2, 0.8, by = 0.1), linetype = "dashed", color = "gray80", size = 0.25) +
+    geom_hline(yintercept = 0.5, linetype = "dashed", size = 2) +
+    geom_label_repel(sedd=100, size = 4, position = position_jitter(height = 0), aes(x = 0, label = Question, y = Improve)) +
+    labs(y = "Frequency of improve", x = NULL) +
+    theme(
+        axis.line.x = element_blank(),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank()
+    ) +
+    scale_y_continuous(limits = c(0, 1), breaks = seq(0, 1, by = 0.1), expand = c(0.005, 0.005))
+```
+
+
+
+
+```{r}
+#| label: fig-improve-2
+#| fig-cap: Frecuencia de preguntas que mejoran por estudiante entre subtitulados (positive A vs negative B)
+df_improve_resume <- df_improve %>%
+    group_by(Question) %>%
+    summarize(Improve = sum(Improve_level) / n()) %>%
+    arrange(Improve)
+
+df_improve_resume %>% ggplot(aes(y = Improve)) +
+    geom_rect(aes(xmin = -Inf, xmax = Inf, ymin = 0.5, ymax = Inf), fill = "#5AB4AC", alpha = 0.2) +
+    geom_rect(aes(
+        xmin = -Inf, xmax = Inf, ymin = -Inf,
+        ymax = 0.5
+    ), fill = "#D8B365", alpha = 0.2) +
+    geom_hline(yintercept = seq(0.2, 0.8, by = 0.1), linetype = "dashed", color = "gray80", size = 0.25) +
+    geom_hline(yintercept = 0.5, linetype = "dashed", size = 2) +
+    geom_label_repel(seed=100,size = 4, position = position_jitter(height = 0), aes(x = 0, label = Question, y = Improve)) +
+    labs(y = "Frequency of improve", x = NULL) +
+    theme(
+        axis.line.x = element_blank(),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank()
+    ) +
+    scale_y_continuous(limits = c(0, 1), breaks = seq(0, 1, by = 0.1), expand = c(0.005, 0.005))
+```
+
+
+En la @fig-improve-2 se hace una comparación más exigente ya que ahora se muestra la frecuencia con la que los estudiantes cambian el nivel del subtitulado: de haber valorado el subtitulado positivamente (4 ó 5) en $A$ a hacerlo de forma negativa en $B$ (1 ó 2). En esta ocasión solo las preguntas `r paste((df_improve_resume %>% filter(df_improve_resume$Improve > 0.5) %>% arrange(Question))$Question, collapse=", ")` superan el 50%.
+
+
  
 {{< include 4.1.qmd >}}
 

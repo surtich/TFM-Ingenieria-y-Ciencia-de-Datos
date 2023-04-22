@@ -547,7 +547,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada nulla aug
 
 Phasellus vitae magna nec mi sagittis luctus vitae eu augue. Donec scelerisque laoreet arcu, eget tempor mi ultricies vel. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum at blandit ex. Vestibulum eu sagittis mauris. In hac habitasse platea dictumst. Duis eget ante vel lacus sollicitudin convallis quis eu velit. Sed auctor sem non nisi hendrerit, vel tincidunt tortor bibendum.
 
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[breakable, borderline west={3pt}{0pt}{shadecolor}, enhanced, frame hidden, boxrule=0pt, interior hidden, sharp corners]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[enhanced, boxrule=0pt, borderline west={3pt}{0pt}{shadecolor}, frame hidden, interior hidden, breakable, sharp corners]}{\end{tcolorbox}}\fi
 
 % Contents
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -593,7 +593,7 @@ experimento}\label{caracteruxedsticas-del-diseuxf1o-del-experimento}}
 
 El objetivo del estudio es responder a la pregunta de investigación:
 
-\begin{tcolorbox}[enhanced jigsaw, opacityback=0, bottomrule=.15mm, opacitybacktitle=0.6, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Pregunta de investigación}, arc=.35mm, coltitle=black, bottomtitle=1mm, breakable, toptitle=1mm, titlerule=0mm, rightrule=.15mm, toprule=.15mm, colback=white, leftrule=.75mm, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, left=2mm, arc=.35mm, coltitle=black, opacityback=0, colframe=quarto-callout-note-color-frame, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Pregunta de investigación}, bottomrule=.15mm, colbacktitle=quarto-callout-note-color!10!white, rightrule=.15mm, breakable, bottomtitle=1mm, opacitybacktitle=0.6, titlerule=0mm, toprule=.15mm, leftrule=.75mm, colback=white, toptitle=1mm]
 
 ¿Son los estudiantes de un curso de creación de materiales accesibles
 capaces de encontrar diferencias en la calidad del subtitulado de un
@@ -817,6 +817,242 @@ de que \(OR=1\) frente a \(H_1\) (\(OR\neq1\)) \footnote{Ver
 Y = 1 & \(n_{11}\) & \(n_{12}\) \\
 Y = 0 & \(n_{21}\) & \(n_{22}\) \\
 \end{longtable}
+
+\hypertarget{sec-glm}{%
+\section{Modelos lineales generalizados}\label{sec-glm}}
+
+Los modelos lineales generalizados (\(GLM\)) son modelos en los que la
+variable respuesta no es normal. Para especificar un \(GLM\) son
+necesarios tres componentes \autocite[ver][pp.~66-67]{agresti_2018}:
+
+\begin{itemize}
+\tightlist
+\item
+  Un componente aleatorio: será una distribución de probabilidad de la
+  familia exponencial que se asume que sigue la variable respuesta,
+  \(Y\).
+\item
+  Un componente lineal de predictores.
+\end{itemize}
+
+\[
+\alpha+\beta_1x_1+...+\beta_px_p
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  Una función de enlace \(g\) que relaciona \(\mu=E(Y)\) con los
+  predictores, de tal forma que:
+\end{itemize}
+
+\[
+g(\mu)=\alpha+\beta_1x_1+...+\beta_px_p
+\]
+
+En GLM se realiza maximizando la función de verosimilitud (\(MLE\)). Es
+decir, que los coeficientes del modelo son aquellos que maximizan la
+probabilidad de los datos.
+
+\hypertarget{sec-logistica}{%
+\subsection{Regresión Logística}\label{sec-logistica}}
+
+La regresión logística \autocite[ver][pp.~68-69]{agresti_2018} es un
+caso particular de \(GLM\) donde la variable respuesta, \(Y\), es
+Benoulli o Binomial. Es decir, que \(Y\) toma valores 0 ó 1. En una
+función de Bernoulli de parámetro \(\pi\), \(E[Y] = P(Y=1) = \pi\).
+Necesitamos una función que \enquote{mapee} los valores que puede tomar
+el componente lineal de rango \((-\infty, +\infty)\) a los valores que
+puede tomar \(\pi\) en el rango \((0, 1)\). Una función que puede hacer
+esto es la función \(logit\):
+
+\[
+logit(Y=1) = log \left[\frac{P(Y=1)}{1-P(Y=1)} \right] = \alpha+\beta_1x_1+...+\beta_px_p
+\]
+
+por lo que:
+
+\[
+P(Y=1) = \frac{exp^{\alpha + \beta x}}{1 + exp^{\alpha + \beta x}}
+\]
+
+Para interpretar los coeficientes, podemos reescribir la ecuación
+\autocite[ver][p.~260]{frienly2015}:
+
+\[
+\frac{P(Y=1 \mid X = x)}{1-P(Y=1 \mid X = x)} = e^{\alpha}e^{\beta x}
+\]
+
+Para una unidad de incremento de \(x\):
+
+\[
+\frac{P(Y=1 \mid X = x + 1)}{1-P(Y=1 \mid X = x + 1)} = e^{\alpha}e^{\beta(x + 1)}
+\]
+
+Dividiendo la segunda ecuación entre la primera:
+
+\[
+\frac{\frac{P(Y=1 \mid X = x + 1)}{1-P(Y=1 \mid X = x + 1)}}{\frac{P(Y=1 \mid X = x)}{1-P(Y=1 \mid X = x)}} = \frac{e^{\alpha}e^{\beta(x + 1)}}{e^{\alpha}e^{\beta(x)}} = e^\beta
+\]
+
+Es decir:
+
+\begin{itemize}
+\tightlist
+\item
+  \(\beta\) es el \(log\ OR\) asociado a una unidad de incremento de
+  \(x\).
+\item
+  \(\alpha\) es el \(log\ odds\) cuando \(x=0\).
+\end{itemize}
+
+El contraste de hipótesis para los coeficientes \(\beta\):
+
+\[
+\begin{aligned}
+H_0: \beta_j =  0 \\
+H_1: \beta_j \ne  0
+\end{aligned}
+\]
+
+se puede realizar con el test de Wald:
+
+\[
+\begin{aligned}
+W & = \frac{\hat\beta_j - 0}{se(\hat\beta_j)} \sim N(0,1)
+\end{aligned}
+\]
+
+o con el test de razón de verosimilitudes (LRT):
+
+\[
+\begin{aligned}
+\Lambda &= -2 \log \frac{L(\widehat{reduced})}{L(\widehat{full})}\\
+&= -2 \log L(\widehat{reduced}) + 2 \log L(\widehat{full}) \sim \chi^2_r\ (\text{donde r es el número de betas } = 0)
+\end{aligned}
+\]
+
+Para comparar modelos no anidados, se puede usar el Criterio de
+Información de Akaike (AIC) o el Criterio de Información Bayesiano
+(BIC), que se definen:
+
+\[
+\begin{aligned}
+AIC &: -2 \log L + 2p \\
+BIC &: -2 \log L + p \log(n)
+\end{aligned}
+\]
+
+, donde \(L\) es el valor de maxima verosimilitud.
+
+\hypertarget{sec-ordinal}{%
+\subsection{Regresión Ordinal}\label{sec-ordinal}}
+
+Las respuestas a los ítems de una escala de Likert son ordinales. La
+Regresión Ordinal es clase de \(GLM\) que comparte muchas similitudes
+con la regresión logística (ver Sección~\ref{sec-logistica}). Según
+\textcite{burkner2019} hay tres clases de Regresión Ordinal:
+
+\begin{itemize}
+\tightlist
+\item
+  Regresión Ordinal Acumulativa.
+\item
+  Regresión Ordinal Secuencial.
+\item
+  Regresión Ordinal Adyacente.
+\end{itemize}
+
+Nos centraremos en la primera ya que es la más habitual y adecuada para
+nuestro caso \autocite[ver][pp.~23-24]{burkner2019} \footnote{Las
+  regresiones ordinales secuencial y adyacente presuponen que para
+  alcanzar un nivel se ha tenido que pasar previamente por los
+  anteriores, que no es nuestro caso.}. El modelo acumulativo, CM,
+presupone que la variable ordinal observada, \(Y\), proviene de la
+categorización de una variable latente (no observada) continua,
+\(\tilde{Y}\). Hay \(K\) umbrales \(\tau_k\) que particionan
+\(\tilde{Y}\) en \(K + 1\) categorías ordenadas observables (ver
+Figura~\ref{fig-cumulative}). Si asumimos que \(\tilde{Y}\) tiene una
+cierta distribución (por ejemplo, normal) con distribución acumulada
+\(F\), se puede calcular la probabilidad de que \(Y\) sea la categoría
+\(k\) de esta forma:
+
+\[Pr(Y = k) = F(\tau_k) - F(\tau_{k-1})\]
+
+\begin{figure}[h]
+
+{\centering \includegraphics{2_files/figure-pdf/fig-cumulative-1.pdf}
+
+}
+
+\caption{\label{fig-cumulative}Función latente en una regresión ordinal
+acumulativa.}
+
+\end{figure}
+
+Por ejemplo en la Figura~\ref{fig-cumulative},
+
+\[Pr(Y = 2) = F(\tau_2) - F(\tau_{1})\]
+
+Si suponemos que \(\tilde{Y}\) tiene una relación lineal los
+predictores:
+
+\[\tilde{Y} = \eta + \epsilon = \beta_1 x_1 + \beta_2 x_2 + ... + \beta_p x_p + \epsilon\],
+
+y que los errores son \(N(0,\sigma^2)\). Entonces la función de
+probabilidad acumulada de los errores tendrá la misma forma que la de
+\(\tilde{Y}\):
+
+\[\mathrm{Pr}(\epsilon \leq z) = F(z)\]
+
+Y podremos calcular la distribución de probabilidad acumulada de \(Y\):
+
+\[\mathrm{Pr}(Y \leq k \mid \eta) = \mathrm{Pr}(\tilde{Y} \leq \tau_k \mid \eta) = \mathrm{Pr}(\eta + \epsilon \leq \tau_k) = \mathrm{Pr}(\epsilon \leq \tau_k - \eta) = F(\tau_k - \eta)\]
+
+Por lo que asumiendo la normalidad de los errores:
+
+\[\mathrm{Pr}(Y = k) = \Phi(\tau_k - \eta) - \Phi(\tau_{k - 1} - \eta)\]
+
+Donde hay que estimar los umbrales y los coeficientes de regresión. La
+función anterior es la conocida como la función de enlace
+\texttt{probit}. Otra función de enlace popular es la función
+\texttt{logit}. Es la que usaremos en este trabajo por ser más fácil su
+interpretación \footnote{En la práctica los coeficientes estimados con
+  las funciones de enlace \texttt{probit} y \texttt{logit} suelen
+  similares.}. Con esta función de enlace la interpretación de los
+coeficientes es parecida a la de los coeficientes de la regresión
+logística. Se parte del supuesto de que el \(logit\) de la función de
+probabilidad es lineal:
+
+\[logit [P(Y \le k)] = \tau_{k} - \eta = \tau_{k} - (\beta_1 x_1 + \beta_2 x_2 + ... + \beta_p x_p)\]
+
+En ese caso, se puede demostrar fácilmente que, por ejemplo:
+
+\[\frac{\frac{\mathrm{Pr}(Y \leq k \mid \eta)}{\mathrm{Pr}(Y > k \mid \eta)}}{\frac{\mathrm{Pr}(Y \leq k+1 \mid \eta)}{\mathrm{Pr}(Y > k+1 \mid \eta)}} = \exp(\tau_{k} - \tau_{k+1})\]
+
+Y que \footnote{En la Sección~\ref{sec-ordinal-2} se demuestra esta
+  fórmula.}:
+
+\[\frac{\frac{\mathrm{Pr}(Y \leq k \mid x_i = 1)}{\mathrm{Pr}(Y > k \mid x_i = 1)}}{\frac{\mathrm{Pr}(Y \leq k \mid x_i=0)}{\mathrm{Pr}(Y > k \mid x_i = 0)}} = \exp(-\beta_{i})\]
+
+o, equivalentemente:
+
+\[\frac{\frac{\mathrm{Pr}(Y > k \mid x_i = x + 1)}{\mathrm{Pr}(Y \leq k \mid x_i = x + 1)}}{\frac{\mathrm{Pr}(Y > k \mid x_i = x)}{\mathrm{Pr}(Y \leq k \mid x_i = x)}} = \exp(\beta_{i})\]
+
+Es decir, que \(\exp(\beta_{i})\) es el \(OR\) (cambio en \(odds\)) de
+que la variable respuesta esté por encima de una determinada categoría
+versus estar por debajo de ella para una unidad de incremento del
+predictor \(x_i\). Este modelo se denomina proporcional ya que cada
+predictor se asume que tiene los mismos efectos sobre todas las
+categorías de la variable de respuesta ordinal
+\autocite[ver][]{Liu2202}. Un valor del coeficiente \(\beta_i\) positivo
+indica que la relación entre el predictor \(x_i\) y la función de
+\(logit\) es positiva y, por lo tanto, se incrementa la posibilidad de
+un mayor valor de la variable respuesta. Como veremos, esta suposición
+se puede relajar y permitir que los coeficientes de todos o de algunos
+de los predictores sean diferentes para cada pareja consecutiva de
+valores de respuesta. Tendríamos entonces más parámetros a estimar con
+una interpretación más compleja.
 
 \bookmarksetup{startatroot}
 
@@ -1298,16 +1534,16 @@ largo. }\tabularnewline
 \toprule
 Seq & Period & Treat & Subject & Question & Response & Level \\ 
 \midrule
-BA & 2 & A & 1037 & Q13 & 5 & Positive \\ 
-BA & 1 & B & 1118 & Q11 & 4 & Positive \\ 
-BA & 1 & B & 871 & Q02 & 5 & Positive \\ 
-AB & 1 & A & 362 & Q06 & 5 & Positive \\ 
-BA & 1 & B & 520 & Q05 & 2 & Negative \\ 
-BA & 1 & B & 436 & Q08 & 4 & Positive \\ 
-AB & 2 & B & 291 & Q11 & 5 & Positive \\ 
-BA & 2 & A & 1217 & Q11 & 4 & Positive \\ 
-BA & 2 & A & 803 & Q08 & 4 & Positive \\ 
-BA & 2 & A & 1023 & Q12 & 4 & Positive \\ 
+BA & 1 & B & 871 & Q05 & 5 & Positive \\ 
+BA & 1 & B & 371 & Q03 & 2 & Negative \\ 
+BA & 1 & B & 749 & Q02 & 4 & Positive \\ 
+BA & 1 & B & 749 & Q13 & 4 & Positive \\ 
+AB & 1 & A & 380 & Q07 & 4 & Positive \\ 
+BA & 2 & A & 901 & Q04 & 5 & Positive \\ 
+BA & 1 & B & 110 & Q06 & 5 & Positive \\ 
+AB & 1 & A & 339 & Q02 & 5 & Positive \\ 
+AB & 1 & A & 893 & Q08 & 2 & Negative \\ 
+BA & 1 & B & 220 & Q03 & 3 & Neutral \\ 
 \bottomrule
 \end{longtable}
 
@@ -1713,20 +1949,54 @@ mayor comodidad.
 
 \end{figure}
 
-\hypertarget{sec-modelos}{%
-\section{Modelos utilizados}\label{sec-modelos}}
+En la Figura~\ref{fig-improve} se muestra para cada pregunta la
+proporción de estudiantes que han valorado mejor el subtitulado \(A\)
+que el \(B\) \footnote{Se han eleminado las preguntas en las que una de
+  las dos respuestas del usuario ha sido \enquote{No sé / No contesto}.
+  La comparación realizada es respuesta en \(A > B\) frente a
+  \(A >= B\).}. Se comprueba que la mayoría de las preguntas superan el
+50\%, lo que indica que los estudiantes valoran mejor el subtitulado
+\(A\).
 
-En esta sección se propondrán los modelos que se van a evaluar con las
-técnicas estadísticas presentadas en el marco teórico (ver
-Sección~\ref{sec-tecnicas}).
+\begin{figure}[h]
+
+{\centering \includegraphics{4_files/figure-pdf/fig-improve-1.pdf}
+
+}
+
+\caption{\label{fig-improve}Frecuencia de preguntas que mejoran por
+estudiante entre subtitulados (A \textgreater{} B)}
+
+\end{figure}
+
+\begin{figure}[h]
+
+{\centering \includegraphics{4_files/figure-pdf/fig-improve-2-1.pdf}
+
+}
+
+\caption{\label{fig-improve-2}Frecuencia de preguntas que mejoran por
+estudiante entre subtitulados (positive A vs negative B)}
+
+\end{figure}
+
+En la Figura~\ref{fig-improve-2} se hace una comparación más exigente ya
+que ahora se muestra la frecuencia con la que los estudiantes cambian el
+nivel del subtitulado: de haber valorado el subtitulado positivamente (4
+ó 5) en \(A\) a hacerlo de forma negativa en \(B\) (1 ó 2). En esta
+ocasión solo las preguntas Q05, Q09 superan el 50\%.
 
 \hypertarget{sec-or-2}{%
-\subsection{\texorpdfstring{Comparación con
+\section{\texorpdfstring{Comparación con
 \(Odds\ Ratio\)}{Comparación con Odds\textbackslash{} Ratio}}\label{sec-or-2}}
 
-Se contrastará la hipótesis de que el \(OR\) entre subtítulos y grupos
-para cada nivel de respuesta presenta diferencias significativas entre
-los dos grupos. Este \(OR\) se define:
+En la sección Sección~\ref{sec-or} se explicó el fundamento teórico de
+esta técnica. Aquí se expone como se puede aplicar al diseño de
+experimento que se está analizando. En la sección de resultados se
+comentarán e interpretarán los valores producidos por este test. Podemos
+contrastar la hipótesis de que el \(OR\) entre subtítulos y grupos para
+cada nivel de respuesta presenta diferencias significativas entre los
+dos grupos. Este \(OR\) se define:
 
 \begin{equation}
 OR_{(Treat, Seq \mid Response=r)}=\frac{
@@ -1749,6 +2019,474 @@ aceptar que la hipótesis nula de que los grupos responden de forma
 similar a cada nivel de subtitulado. Se hará un test similar pero entre
 subtitulado y periodos.
 
+\hypertarget{sec-logistica-2}{%
+\section{Regresión Logística}\label{sec-logistica-2}}
+
+En la Sección~\ref{sec-logistica} se presentó el fundamento teórico de
+la Regresión Ordinal Acumulativa. En esta sección se justifica el uso de
+esta técnica y se ajustan y comparan varios modelos. La variable
+respuesta se compone de 5 valores ordenados. Esto impide usar
+directamente la Regresión Logística. No obstante, podemos comparar la
+respuesta que cada estudiante dio a cada uno de los subtitulados y
+comprobar si ha mejorado o no. Esto producirá una variable de respuesta
+binaria que permitirá el uso de la regresión logística. Por el contrario
+reducirá la cantidad de datos disponibles a la mitad e impedirá analizar
+el efecto periodo. Se ha transformado el \texttt{dataframe} de tal forma
+que si un usuario valoró una pregunta mejor en el subtitulado \(A\) que
+en el \(B\), se consigna 1 en la variable respuesta, si empeoró o puntuó
+igual se consigna 0. Si en un0 de los test valora una pregunta con
+\enquote{No sé / No contesto}, se elimina esa pregunta.
+
+Se ajusta el modelo con la secuencia como predictor. Se constata que el
+coeficiente del intercepto es positivo y significativo. El intercepto es
+el \(log\ odds\) de mejorar la valoración en \(A\) sobre \(B\) respecto
+a empeorar la valoración. Sin embargo, la secuencia no resulta
+significativa y además añadirla apenas reduce la \enquote{deviance}, por
+lo que el modelo nulo sin predictores resulta más parsimonioso. Se
+podrían añadir como predictores las preguntas y los estudiantes. No se
+hace aquí y se pospone la discusión de esto hasta el uso de modelos
+mixtos.
+
+\begin{verbatim}
+
+Call:
+glm(formula = Improve ~ 1 + Seq, data = df_improve)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-0.5935  -0.5811   0.4065   0.4189   0.4189  
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  0.59353    0.01848  32.125   <2e-16 ***
+SeqBA       -0.01245    0.02587  -0.481     0.63    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for gaussian family taken to be 0.2426952)
+
+    Null deviance: 351.72  on 1450  degrees of freedom
+Residual deviance: 351.67  on 1449  degrees of freedom
+AIC: 2067.2
+
+Number of Fisher Scoring iterations: 2
+\end{verbatim}
+
+\hypertarget{sec-ordinal-2}{%
+\section{Regresión Ordinal}\label{sec-ordinal-2}}
+
+En la Sección~\ref{sec-ordinal} se presentó el fundamento teórico de la
+Regresión Ordinal Acumulativa. En esta sección se ajustan algunos
+modelos y se interpretan los resultados.
+
+\hypertarget{ajuste-del-modelo-ordinal-response-treat}{%
+\subsection{\texorpdfstring{Ajuste del modelo ordinal
+\texttt{Response\ \textasciitilde{}\ Treat}}{Ajuste del modelo ordinal Response \textasciitilde{} Treat}}\label{ajuste-del-modelo-ordinal-response-treat}}
+
+Existen varios paquetes en R que permiten ajustar una regresión ordinal
+logística. El más popular es el paquete \texttt{Ordinal}
+\autocite{ordinalR}. El paquete \texttt{VGAM} \autocite{VGAMR} es más
+flexible y potente. Otra posibilidad es usar la función \texttt{polr}
+del paquete \texttt{MASS} \autocite{MASSR}. Finalmente la función
+\texttt{orm} del paquete \texttt{rms} también permite hacerlo
+\autocite[ver][]{harrell2015}. En este trabajo usaremos el paquete
+\texttt{Ordinal} por permitir también incluir efectos aleatorios que
+utilizaremos en un apartado posterior. Comenzamos con un modelo simple
+que tiene como único predictor el nivel de subtitulado por ser la
+variable objetivo de nuestro modelo:
+
+\[
+\text{logit}(P(Response_i \leq k)) = \tau_k - \beta_1 \text{Treat}_i,
+\]
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{clm\_treat }\OtherTok{\textless{}{-}}
+    \FunctionTok{clm}\NormalTok{(}
+\NormalTok{        Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat,}
+        \AttributeTok{data =}\NormalTok{ df\_clean, }\AttributeTok{link =} \StringTok{"logit"}
+\NormalTok{    )}
+\FunctionTok{summary}\NormalTok{(clm\_treat)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+formula: Response ~ Treat
+data:    df_clean
+
+ link  threshold nobs logLik   AIC     niter max.grad cond.H 
+ logit flexible  2980 -3966.11 7942.21 5(0)  1.64e-10 3.1e+01
+
+Coefficients:
+       Estimate Std. Error z value Pr(>|z|)    
+TreatB  -1.7206     0.0731  -23.54   <2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+    Estimate Std. Error z value
+1|2 -3.97230    0.09678 -41.045
+2|3 -2.45446    0.06812 -36.029
+3|4 -1.66453    0.05936 -28.042
+4|5 -0.10547    0.04946  -2.132
+\end{verbatim}
+
+\normalsize
+
+El método \texttt{summary()} muestra la información resumen. Para su
+interpretación vamos a seguir \textcite{christensen2018CumulativeLM}. El
+número de condición Hessiano es inferior a \(10^4\) lo que es indicativo
+de que no hay problemas de optimización \footnote{El número de condición
+  de Hessiano es una medida de la curvatura de una función en un punto.
+  Si el número de condición de Hessiano es grande, la función es muy
+  sensible a pequeñas perturbaciones y puede ser difícil de optimizar.}.
+La sección de coeficientes es la más importante. Se muestra la
+estimación de parámetros, el error estándar y la significación
+estadística de acuerdo al test de Wald \footnote{El test de Wald es un
+  contraste de hipótesis estadístico en el que se evalúa si el valor
+  estimado es cero suponiendo que
+  \(W = \left(\frac{\hat{\theta} - \theta_0}{se(\hat{\theta})}\right)^2 \sim \chi^{2}\)
+  .}. Comprobamos que el valor es claramente significativo. Es decir,
+que los estudiantes han valorado de forma diferente la calidad del
+subtitulado en ambos vídeos. El estimador de maxima verosimilitud del
+coeficiente \texttt{TreatB} es -1.72. Siguiendo la deducción de
+\textcite{bruin2011} podemos, por ejemplo, hacer la siguiente
+interpretación del significado de este coeficiente referido a dos
+niveles consecutivos de respuesta:
+
+\[
+\begin{aligned}
+logit [P(Y \le 1)] & = & -3.97 - (-1.72 x_1) \\
+logit [P(Y \le 2)] & = & -2.45 - (-1.72 x_1)
+\end{aligned}
+\]
+
+Por lo tanto los \(odds\) serían:
+
+\[
+\begin{aligned}
+\frac{P(Y \le 1 \mid x_1 = B)}{P(Y > 1 \mid x_1 = B)} & = & exp(-3.97)/exp(-1.72) \\
+\frac{P(Y \le 1 \mid x_1 = A)}{P(Y > 1 \mid x_1 = A)} & = & exp(-3.97) \\
+\frac{P(Y \le 2 \mid x_1 = B)}{P(Y > 2 \mid x_1 = B)} & = & exp(-2.45)/exp(-1.72) \\
+\frac{P(Y \le 2 \mid x_1 = A)}{P(Y > 2 \mid x_1 = A)} & = & exp(-2.45)
+\end{aligned}
+\]
+
+Y los \(OR\):
+
+\[
+\begin{aligned}
+\frac{P(Y \le 1 | x_1=B)}{P(Y > 1 | x_1=B)} / \frac{P(Y \le 1 | x_1=A)}{P(Y > 1 | x_1=A)} & = & 1/exp(-1.72) & = & 5.59 \\
+\frac{P(Y \le 2 | x_1=B)}{P(Y > 2 | x_1=B)} / \frac{P(Y \le 2 | x_1=A)}{P(Y > 2 | x_1=A)} & = & 1/exp(-1.72) & = & 5.59 \\
+\end{aligned}
+\]
+
+Se comprueba que el \(OR\) es equivalente en todos los niveles de
+respuesta al cuestionario. Esta es una de las suposiciones de la
+regresión ordinal acumulativa. El \(odds\) de respuesta al cuestionario
+entre los niveles inferiores y superiores a uno dado, \(k\), es 5.59
+veces en el subtitulado \(B\) que en el \(A\). Esto indica que el
+subtitulado \(B\) es percibido por los estudiantes como de peor calidad
+que el subtitulado \(A\). Concretamente, el coeficiente \(\beta\) para
+\texttt{Treat} es el \texttt{log\ odds} de observar una mejor respuesta
+en una pregunta del test es 5.59 veces superior en el nivel de
+subtitulado \(A\) que en el \(B\). Aunque no suele ser de interés la
+interpretación de los coeficientes de los umbrales
+(\texttt{Threshold\ coefficients}), se pueden utilizar para estimar las
+probabilidades de respuesta. Por ejemplo, para el nivel de subtitulado
+\(B\):
+
+\[
+\begin{aligned}
+logit [P(Y \le 1)] & = & -3.97 - (-1.72) & = & -2.25 \\
+odds (P(Y \le 1)) & = & exp(logit [P(Y \le 1)]) & = & 0.11 \\
+P(Y \le 1) & = & \frac{exp(-2.25)}{1 + exp(-2.25)} & = & 0.10 \\
+P(Y \le 2) & = & \frac{exp(-0.73)}{1 + exp(-0.73)} & = & 0.32 \\
+P(Y = 2) & = & P(Y \le 2) - P(Y \le 1) & = &  0.23 
+\end{aligned}
+\]
+
+Para el subtitulado \(A\) no se tiene en cuenta el coeficiente
+\(TreatB\) ya que el valor \(x_1\) es cero:
+
+\[
+\begin{aligned}
+logit [P(Y \le 1)] & = & & & -3.97\\
+odds (P(Y \le 1)) & = & exp(logit [P(Y \le 1)]) & = & 0.02 \\
+P(Y \le 1) & = & \frac{exp(-3.97)}{1 + exp(-3.97)} & = & 0.02
+\end{aligned}
+\]
+
+En Tabla~\ref{tbl-probs-clm-treat} se muestran las probabilidades para
+ambos niveles de subtitulado y todos los posibles valores de respuesta.
+
+\hypertarget{tbl-probs-clm-treat}{}
+\begin{longtable}[]{@{}lrrrrr@{}}
+\caption{\label{tbl-probs-clm-treat}Probabilidades de respuesta para el
+modelo ordinal Response \textasciitilde{} Treat}\tabularnewline
+\toprule\noalign{}
+& 1 & 2 & 3 & 4 & 5 \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+& 1 & 2 & 3 & 4 & 5 \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+A & 0.018 & 0.061 & 0.08 & 0.315 & 0.526 \\
+B & 0.095 & 0.229 & 0.19 & 0.320 & 0.166 \\
+\end{longtable}
+
+\hypertarget{ajuste-del-modelo-ordinal-response-treat-period}{%
+\subsection{\texorpdfstring{Ajuste del modelo ordinal
+\texttt{Response\ \textasciitilde{}\ Treat\ +\ Period}}{Ajuste del modelo ordinal Response \textasciitilde{} Treat + Period}}\label{ajuste-del-modelo-ordinal-response-treat-period}}
+
+Para saber si existe un efecto periodo, añadimos como predictor la
+variable \texttt{Period}.
+
+\[
+\text{logit}(P(Response_i \leq k)) = \tau_k - \beta_1 \text{Treat}_i - \beta_2 \text{Period}_i
+\]
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{clm\_treat\_period }\OtherTok{\textless{}{-}}
+    \FunctionTok{clm}\NormalTok{(}
+\NormalTok{        Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{+}\NormalTok{ Period,}
+        \AttributeTok{data =}\NormalTok{ df\_clean, }\AttributeTok{link =} \StringTok{"logit"}
+\NormalTok{    )}
+\FunctionTok{summary}\NormalTok{(clm\_treat\_period)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+formula: Response ~ Treat + Period
+data:    df_clean
+
+ link  threshold nobs logLik   AIC     niter max.grad cond.H 
+ logit flexible  2980 -3957.88 7927.76 5(0)  1.94e-10 4.1e+01
+
+Coefficients:
+        Estimate Std. Error z value Pr(>|z|)    
+TreatB  -1.74090    0.07339  -23.72  < 2e-16 ***
+Period2 -0.27560    0.06805   -4.05 5.12e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+    Estimate Std. Error z value
+1|2 -4.13085    0.10507 -39.314
+2|3 -2.60905    0.07872 -33.143
+3|4 -1.81652    0.07073 -25.681
+4|5 -0.25187    0.06153  -4.093
+\end{verbatim}
+
+\normalsize
+
+Vemos que ambos coeficientes son significativos y con signo negativo. Un
+signo negativo en el efecto periodo está asociado con que la valoración
+del subtitulado empeora en el segundo periodo independientemente de si
+se trata del subtitulado correcto o incorrecto. Aplicando el mismo
+razonamiento del apartado anterior, el \(OR\) del efecto periodo es
+\(1/exp(-0.28) = 1.32\). Lo que quiere decir que una vez controlado el
+efecto principal del tratamiento, el subtitulado en el segundo periodo
+es valorado como de inferior calidad que en el primero. Esto estaría
+indicando que los estudiantes son más exigentes con el subtitulado en la
+segunda actividad independientemente de su calidad real.
+
+\hypertarget{ajuste-del-modelo-ordinal-response-treat-period-1}{%
+\subsection{\texorpdfstring{Ajuste del modelo ordinal
+\texttt{Response\ \textasciitilde{}\ Treat\ *\ Period}}{Ajuste del modelo ordinal Response \textasciitilde{} Treat * Period}}\label{ajuste-del-modelo-ordinal-response-treat-period-1}}
+
+Añadimos al modelo la interacción entre subtitulado y periodo. Esta
+interacción corresponde al efecto secuencia. Se puede demostrar que los
+modelos \texttt{Response\ \textasciitilde{}\ Treat*Period} y
+\texttt{Response\ \textasciitilde{}\ Treat\ +\ Period\ +\ Seq}
+ver~\ref{sec-contrasts}.
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{options}\NormalTok{(}\AttributeTok{contrasts =} \FunctionTok{rep}\NormalTok{(}\StringTok{"contr.treatment"}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\NormalTok{clm\_treat.period }\OtherTok{\textless{}{-}}
+    \FunctionTok{clm}\NormalTok{(}
+\NormalTok{        Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{*}\NormalTok{ Period,}
+        \AttributeTok{data =}\NormalTok{ df\_clean, }\AttributeTok{link =} \StringTok{"logit"}
+\NormalTok{    )}
+\FunctionTok{summary}\NormalTok{(clm\_treat.period)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+formula: Response ~ Treat * Period
+data:    df_clean
+
+ link  threshold nobs logLik   AIC     niter max.grad cond.H 
+ logit flexible  2980 -3953.01 7920.03 5(0)  2.14e-10 8.1e+01
+
+Coefficients:
+               Estimate Std. Error z value Pr(>|z|)    
+TreatB         -1.96046    0.10229 -19.166  < 2e-16 ***
+Period2        -0.49179    0.09744  -5.047 4.49e-07 ***
+TreatB:Period2  0.42510    0.13638   3.117  0.00183 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Threshold coefficients:
+    Estimate Std. Error z value
+1|2 -4.24649    0.11182 -37.977
+2|3 -2.72823    0.08821 -30.928
+3|4 -1.93833    0.08167 -23.732
+4|5 -0.36991    0.07308  -5.062
+\end{verbatim}
+
+\normalsize
+
+Vemos que los tres coeficientes son significativos. El principal efecto
+es el nivel de subtitulado obteniendo mejores puntuaciones el nivel
+\(A\); el efecto periodo es negativo por lo que el primer periodo
+obtiene mejores puntuaciones; por último, el efecto secuencia es
+positivo pero de menor valor absoluto que el efecto periodo. Esto quiere
+decir que el subtitulado de nivel \(B\) en el periodo 2 (secuencia
+\(AB\)), tiene un efecto periodo inferior que el subtitulado \(A\) en el
+mismo periodo. Matemáticamente:
+
+\[
+\begin{aligned}
+logit [P(Y \le 1 \mid Treat = A, Period = 1)] & = & -4.25 \\
+logit [P(Y \le 1 \mid Treat = B, Period = 1)] & = & -4.25 - (-1.96) \\
+logit [P(Y \le 1 \mid Treat = A, Period = 2)] & = & -4.25 - (-0.49) \\
+logit [P(Y \le 1 \mid Treat = B, Period = 2)] & = & -4.25 -(-1.96 -0.49 + 0.43)
+\end{aligned}
+\]
+
+En definitiva, en el nivel de subtitulado \(B\) apenas encontramos
+diferencias entre periodos, sin embargo, en el nivel de subtitulado
+\(A\) existe un efecto periodo cuyo valor en \texttt{logits} es -0.49.
+Es decir, que la valoración del subtitulado de nivel \(A\) es inferior
+en el segundo periodo que en el primero.
+
+\hypertarget{elecciuxf3n-del-modelo-ordinal-mediante-el-test-de-razuxf3n-de-verosimilitud}{%
+\subsection{Elección del modelo ordinal mediante el test de razón de
+verosimilitud}\label{elecciuxf3n-del-modelo-ordinal-mediante-el-test-de-razuxf3n-de-verosimilitud}}
+
+Al ser los tres modelos anidados, podemos compararlos con la prueba de
+razón de verosimilitud. Comprobamos que el tercer modelo (el que
+incorpora la interacción entre los subtítulos y el periodo) reduce
+significativamente el logaritmo de la función de verosimilitud y, por lo
+tanto, debe ser aceptado:
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{anova}\NormalTok{(clm\_treat, clm\_treat\_period, clm\_treat.period)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Likelihood ratio tests of cumulative link models:
+ 
+                 formula:                  link: threshold:
+clm_treat        Response ~ Treat          logit flexible  
+clm_treat_period Response ~ Treat + Period logit flexible  
+clm_treat.period Response ~ Treat * Period logit flexible  
+
+                 no.par    AIC  logLik LR.stat df Pr(>Chisq)    
+clm_treat             5 7942.2 -3966.1                          
+clm_treat_period      6 7927.8 -3957.9  16.448  1      5e-05 ***
+clm_treat.period      7 7920.0 -3953.0   9.738  1   0.001805 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\normalsize
+
+\hypertarget{comprobaciuxf3n-de-las-hipuxf3tesis-del-modelo}{%
+\subsection{Comprobación de las hipótesis del
+modelo}\label{comprobaciuxf3n-de-las-hipuxf3tesis-del-modelo}}
+
+La principal hipótesis de un modelo de regresión logística ordinal
+proporcional acumulativa es que los coeficientes son iguales entre
+cualesquiera dos niveles de respuestas correlativos. Se han propuesto
+diversas fórmulas para comprobar esta hipótesis. El paquete
+\texttt{Ordinal} dispone de la función \texttt{nominal\_test()} que lo
+que hace es realizar un test de razón de verosimilitud para cada
+predictor ajustando un modelo en el que se ha relajado la condición de
+proporcionalidad. Se constata que el test resulta significativo para
+\texttt{Treat} y para \texttt{Treat:Period}, por lo que para estas dos
+variables no se puede asumir que los coeficientes estimados se mantengan
+constantes en todos los niveles de respuesta.
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{nominal\_test}\NormalTok{(clm\_treat.period)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Tests of nominal effects
+
+formula: Response ~ Treat * Period
+             Df  logLik    AIC     LRT Pr(>Chi)    
+<none>          -3953.0 7920.0                     
+Treat         3 -3904.4 7828.9  97.172   <2e-16 ***
+Period        3 -3951.4 7922.7   3.307   0.3467    
+Treat:Period  9 -3884.8 7801.6 136.408   <2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\normalsize
+
+Lo que procede es ajustar el modelo relajando la constante de
+proporcionalidad de esas variables. Se ha realizado esto utilizando la
+función \texttt{vglm} del paquete \texttt{VGAM}. Vemos que ahora hay
+cuatro coeficientes para cada una de las variables \texttt{Treat} y
+\texttt{Treat:Period} \footnote{Los umbrales tienen los mismos valores
+  pero de signo contrario debido a diferencias en la parametrización del
+  modelo en cada función utilizada.}.
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vglm\_treat.period }\OtherTok{\textless{}{-}} \FunctionTok{vglm}\NormalTok{(}
+\NormalTok{    Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{*}\NormalTok{ Period,}
+\NormalTok{    VGAM}\SpecialCharTok{::}\FunctionTok{cumulative}\NormalTok{(}\AttributeTok{link =} \StringTok{"logit"}\NormalTok{, }\AttributeTok{parallel =}\NormalTok{ F }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{+}\NormalTok{ Treat}\SpecialCharTok{:}\NormalTok{Period, }\AttributeTok{reverse =}\NormalTok{ T),}
+    \AttributeTok{data =}\NormalTok{ df\_clean}
+\NormalTok{)}
+\FunctionTok{coef}\NormalTok{(vglm\_treat.period) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{data.frame}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+                          .
+(Intercept):1     6.2295614
+(Intercept):2     3.5001281
+(Intercept):3     2.2121438
+(Intercept):4     0.2998788
+TreatB:1         -4.0441016
+TreatB:2         -2.8029889
+TreatB:3         -2.2174630
+TreatB:4         -1.7926200
+Period2          -0.5345919
+TreatB:Period2:1  0.3509228
+TreatB:Period2:2  0.3607009
+TreatB:Period2:3  0.3891474
+TreatB:Period2:4  0.8024952
+\end{verbatim}
+
+\normalsize
+
 \bookmarksetup{startatroot}
 
 \hypertarget{sec-resultados}{%
@@ -1756,7 +2494,7 @@ subtitulado y periodos.
 
 En esté capítulo se comentarán los resultados de las técnicas
 estadísticas (ver Sección~\ref{sec-tecnicas}) y de los modelos
-propuestos (ver Sección~\ref{sec-modelos}).
+propuestos (ver \textbf{?@sec-modelos}).
 
 \hypertarget{sec-cronbach-2}{%
 \subsection{Correlación entre preguntas con el alfa de
@@ -1955,7 +2693,7 @@ AB & BA\\
 
 En Sección~\ref{sec-or} y en Sección~\ref{sec-or-2} se exponen el marco
 teórico y la fundamentación de los contrastes de hipótesis realizados
-respectivamente. El contraste de hipótesis del \(log OR\) del
+respectivamente. El contraste de hipótesis del \(log\ OR\) del
 subtitulado para cada grupo no produce significación estadística en
 ningún nivel de respuesta, por lo que según esta prueba estadística la
 secuencia de subtitulado no influiría en la respuesta de los estudiantes

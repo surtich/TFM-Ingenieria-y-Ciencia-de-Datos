@@ -1,3 +1,7 @@
+```{r}
+source("_setup.R")
+```
+
 # Marco teórico  y estado del arte {#sec-arte}
 
 ## Características del diseño del experimento
@@ -101,6 +105,224 @@ Dada una tabla de contingencia $2\ X\ 2$ (ver @tbl-contingencia-3), el $odds rat
 | Y = 0 | $n_{21}$ | $n_{22}$ |
 
 : Tabla de contingencia {#tbl-contingencia-3}
+
+## Modelos lineales generalizados {#sec-glm}
+
+Los modelos lineales generalizados ($GLM$) son modelos en los que la variable respuesta no es normal. Para especificar un $GLM$ son necesarios tres componentes [ver @agresti_2018, pp. 66-67]:
+
+* Un componente aleatorio: será una distribución de probabilidad de la familia exponencial que se asume que sigue la variable respuesta, $Y$.
+* Un componente lineal de predictores.
+
+$$
+\alpha+\beta_1x_1+...+\beta_px_p
+$$
+
+* Una función de enlace $g$ que relaciona $\mu=E(Y)$ con los predictores, de tal forma que:
+
+$$
+g(\mu)=\alpha+\beta_1x_1+...+\beta_px_p
+$$
+
+
+En GLM se realiza maximizando la función de verosimilitud ($MLE$). Es decir, que los coeficientes del modelo son aquellos que maximizan la probabilidad de los datos.
+
+### Regresión Logística {#sec-logistica}
+
+La regresión logística [ver @agresti_2018, pp. 68-69] es un caso particular de $GLM$ donde la variable respuesta, $Y$, es Benoulli o Binomial. Es decir, que $Y$ toma valores 0 ó 1. En una función de Bernoulli de parámetro $\pi$, $E[Y] = P(Y=1) = \pi$. Necesitamos una función que "mapee" los valores que puede tomar el componente lineal de rango $(-\infty, +\infty)$ a los valores que puede tomar $\pi$ en el rango $(0, 1)$. Una función que puede hacer esto es la función $logit$:
+
+$$
+logit(Y=1) = log \left[\frac{P(Y=1)}{1-P(Y=1)} \right] = \alpha+\beta_1x_1+...+\beta_px_p
+$$
+
+por lo que:
+
+$$
+P(Y=1) = \frac{exp^{\alpha + \beta x}}{1 + exp^{\alpha + \beta x}}
+$$
+
+Para interpretar los coeficientes, podemos reescribir la ecuación [ver @frienly2015, p. 260]:
+
+$$
+\frac{P(Y=1 \mid X = x)}{1-P(Y=1 \mid X = x)} = e^{\alpha}e^{\beta x}
+$$
+
+Para una unidad de incremento de $x$:
+
+$$
+\frac{P(Y=1 \mid X = x + 1)}{1-P(Y=1 \mid X = x + 1)} = e^{\alpha}e^{\beta(x + 1)}
+$$
+
+Dividiendo la segunda ecuación entre la primera:
+
+$$
+\frac{\frac{P(Y=1 \mid X = x + 1)}{1-P(Y=1 \mid X = x + 1)}}{\frac{P(Y=1 \mid X = x)}{1-P(Y=1 \mid X = x)}} = \frac{e^{\alpha}e^{\beta(x + 1)}}{e^{\alpha}e^{\beta(x)}} = e^\beta
+$$
+
+Es decir:
+
+* $\beta$ es el $log\ OR$ asociado a una unidad de incremento de $x$.
+* $\alpha$ es el $log\ odds$ cuando $x=0$.
+
+El contraste de hipótesis para los coeficientes $\beta$:
+
+$$
+\begin{aligned}
+H_0: \beta_j =  0 \\
+H_1: \beta_j \ne  0
+\end{aligned}
+$$
+
+se puede realizar con el test de Wald:
+
+$$
+\begin{aligned}
+W & = \frac{\hat\beta_j - 0}{se(\hat\beta_j)} \sim N(0,1)
+\end{aligned}
+$$
+
+
+o con el test de razón de verosimilitudes (LRT):
+
+$$
+\begin{aligned}
+\Lambda &= -2 \log \frac{L(\widehat{reduced})}{L(\widehat{full})}\\
+&= -2 \log L(\widehat{reduced}) + 2 \log L(\widehat{full}) \sim \chi^2_r\ (\text{donde r es el número de betas } = 0)
+\end{aligned}
+$$
+
+Para comparar modelos no anidados, se puede usar el Criterio de Información de Akaike (AIC) o el Criterio de Información Bayesiano (BIC), que se definen:
+
+$$
+\begin{aligned}
+AIC &: -2 \log L + 2p \\
+BIC &: -2 \log L + p \log(n)
+\end{aligned}
+$$
+
+, donde $L$ es el valor de maxima verosimilitud.
+
+
+### Regresión Ordinal {#sec-ordinal}
+
+
+```{r}
+#| freeze: true
+x <- seq(-4, 4, length.out = 500)
+y <- dnorm(x, 0, 1.5)
+
+x_cuts <- c(-2.5, -1.1, 1.8)
+x_labels <- c(expression(tau[1]), expression(tau[2]), expression(tau[3]))
+
+data <- tibble(x, y)
+
+g <- data %>% ggplot(aes(x = x, y = y)) +
+    geom_line() +
+    theme(
+        axis.line = element_line(color = "black", linewidth = 1),
+        panel.background = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.line.y = element_blank(),
+        axis.ticks.y = element_blank(),
+        axis.text.y = element_blank(),
+        axis.text.x = element_text(color = "black", size = 12, hjust = 0.5, vjust = -3)
+    ) +
+    ylab(NULL)
+
+cumulative <- g + geom_vline(xintercept = x_cuts) +
+    geom_label(size = 2, data = data.frame(x = x_cuts - 0.4, y = rep(0.22, 3), label = paste("Y = ", 1:3, sep = "")), aes(x = x, y = y, label = label)) +
+    geom_label(size = 2, x = 2.5, y = 0.22, label = "Y = 4") +
+    scale_x_continuous(breaks = x_cuts, labels = x_labels) +
+    xlab(expression(tilde(Y))) +
+    coord_fixed(ratio = 5)
+
+
+sequencial <- list()
+for (i in 1:3) {
+    p <- g + geom_vline(xintercept = x_cuts[i]) +
+        geom_label(size = 2, x = x_cuts[i] - 1, y = 0.22, label = paste("Y = ", i, sep = "")) +
+        geom_label(size = 2, x = x_cuts[i] + 1, y = 0.22, label = paste("Y > ", i, sep = "")) +
+        scale_x_continuous(breaks = x_cuts[i], labels = x_labels[i]) +
+        xlab(bquote(tilde(Y)[.(i)])) +
+        coord_fixed(ratio = 30)
+    sequencial[[i]] <- p
+}
+
+adjacent <- list()
+for (i in 1:3) {
+    p <- g + geom_vline(xintercept = x_cuts[i]) +
+        geom_label(size = 2, x = x_cuts[i] - 1, y = 0.22, label = paste("Y = ", i, sep = "")) +
+        geom_label(size = 2, x = x_cuts[i] + 1, y = 0.22, label = paste("Y = ", i + 1, sep = "")) +
+        scale_x_continuous(breaks = x_cuts[i], labels = x_labels[i]) +
+        xlab(bquote(tilde(Y)[.(i)])) +
+        coord_fixed(ratio = 30)
+    adjacent[[i]] <- p
+}
+```
+  
+Las respuestas a los ítems de una escala de Likert son ordinales. La Regresión Ordinal es clase de $GLM$ que comparte muchas similitudes con la regresión logística (ver @sec-logistica). Según @burkner2019 hay tres clases de Regresión Ordinal:
+
+* Regresión Ordinal Acumulativa.
+* Regresión Ordinal Secuencial.
+* Regresión Ordinal Adyacente.
+
+Nos centraremos en la primera ya que es la más habitual y adecuada para nuestro caso [ver @burkner2019, pp. 23-24]
+^[Las regresiones ordinales secuencial y adyacente presuponen que para alcanzar un nivel se ha tenido que pasar previamente por los anteriores, que no es nuestro caso.].
+El modelo acumulativo, CM, presupone que la variable ordinal observada, $Y$, proviene de la categorización de una variable latente (no observada) continua, $\tilde{Y}$. Hay $K$ umbrales $\tau_k$ que particionan $\tilde{Y}$ en $K + 1$ categorías ordenadas observables (ver @fig-cumulative). Si asumimos que $\tilde{Y}$ tiene una cierta distribución (por ejemplo, normal) con distribución acumulada $F$, se puede calcular la probabilidad de que $Y$ sea la categoría $k$ de esta forma:
+
+$$Pr(Y = k) = F(\tau_k) - F(\tau_{k-1})$$
+
+
+
+```{r}
+#| label: fig-cumulative
+#| fig-cap: Función latente en una regresión ordinal acumulativa.
+#| freeze: true
+cumulative
+```
+
+
+Por ejemplo en la @fig-cumulative,
+
+$$Pr(Y = 2) = F(\tau_2) - F(\tau_{1})$$
+
+Si suponemos que $\tilde{Y}$ tiene una relación lineal los predictores:
+
+$$\tilde{Y} = \eta + \epsilon = \beta_1 x_1 + \beta_2 x_2 + ... + \beta_p x_p + \epsilon$$,
+
+y que los errores son $N(0,\sigma^2)$. Entonces la función de probabilidad acumulada de los errores tendrá la misma forma que la de $\tilde{Y}$:
+
+$$\mathrm{Pr}(\epsilon \leq z) = F(z)$$
+
+Y podremos calcular la distribución de probabilidad acumulada de $Y$:
+
+$$\mathrm{Pr}(Y \leq k \mid \eta) = \mathrm{Pr}(\tilde{Y} \leq \tau_k \mid \eta) = \mathrm{Pr}(\eta + \epsilon \leq \tau_k) = \mathrm{Pr}(\epsilon \leq \tau_k - \eta) = F(\tau_k - \eta)$$
+
+Por lo que asumiendo la normalidad de los errores:
+
+$$\mathrm{Pr}(Y = k) = \Phi(\tau_k - \eta) - \Phi(\tau_{k - 1} - \eta)$$
+
+Donde hay que estimar los umbrales y los coeficientes de regresión. La función anterior es la conocida como la función de enlace `probit`. Otra función de enlace popular es la función `logit`. Es la que usaremos en este trabajo por ser más fácil su interpretación
+^[En la práctica los coeficientes estimados con las funciones de enlace `probit` y `logit` suelen similares.]. Con esta función de enlace la interpretación de los coeficientes es parecida a la de los coeficientes de la regresión logística. Se parte del supuesto de que el $logit$ de la función de probabilidad es lineal:
+
+$$logit [P(Y \le k)] = \tau_{k} - \eta = \tau_{k} - (\beta_1 x_1 + \beta_2 x_2 + ... + \beta_p x_p)$$
+
+En ese caso, se puede demostrar fácilmente que, por ejemplo:
+
+$$\frac{\frac{\mathrm{Pr}(Y \leq k \mid \eta)}{\mathrm{Pr}(Y > k \mid \eta)}}{\frac{\mathrm{Pr}(Y \leq k+1 \mid \eta)}{\mathrm{Pr}(Y > k+1 \mid \eta)}} = \exp(\tau_{k} - \tau_{k+1})$$
+
+Y que
+^[En la @sec-ordinal-2 se demuestra esta fórmula.]:
+
+$$\frac{\frac{\mathrm{Pr}(Y \leq k \mid x_i = 1)}{\mathrm{Pr}(Y > k \mid x_i = 1)}}{\frac{\mathrm{Pr}(Y \leq k \mid x_i=0)}{\mathrm{Pr}(Y > k \mid x_i = 0)}} = \exp(-\beta_{i})$$
+
+o, equivalentemente:
+
+$$\frac{\frac{\mathrm{Pr}(Y > k \mid x_i = x + 1)}{\mathrm{Pr}(Y \leq k \mid x_i = x + 1)}}{\frac{\mathrm{Pr}(Y > k \mid x_i = x)}{\mathrm{Pr}(Y \leq k \mid x_i = x)}} = \exp(\beta_{i})$$
+
+Es decir, que $\exp(\beta_{i})$ es el $OR$ (cambio en $odds$) de que la variable respuesta esté por encima de una determinada categoría versus estar por debajo de ella para una unidad de incremento del predictor $x_i$. Este modelo se denomina proporcional ya que cada predictor se asume que tiene los mismos efectos sobre todas las categorías de la variable de respuesta ordinal [ver @Liu2202]. Un valor del coeficiente $\beta_i$ positivo indica que la relación entre el predictor $x_i$ y la función de $logit$ es positiva y, por lo tanto, se incrementa la posibilidad de un mayor valor de la variable respuesta. Como veremos, esta suposición se puede relajar y permitir que los coeficientes de todos o de algunos de los predictores sean diferentes para cada pareja consecutiva de valores de respuesta. Tendríamos entonces más parámetros a estimar con una interpretación más compleja.
+
+
 
 
 

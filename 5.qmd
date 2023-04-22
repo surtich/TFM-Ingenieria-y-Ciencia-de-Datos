@@ -4,7 +4,7 @@ source("_setup.R")
 
 # Resultados {#sec-resultados}
 
-En esté capítulo se comentarán los resultados de las técnicas estadísticas (ver @sec-tecnicas) y de los modelos propuestos (ver @sec-modelos).
+En esté capítulo se comentarán los resultados de las técnicas estadísticas (ver @sec-tecnicas) y de los modelos propuestos (ver @sec-modelado).
 
 
 ### Correlación entre preguntas con el alfa de Cronbach. {#sec-cronbach-2}
@@ -83,7 +83,7 @@ chi3 <- chisq.test(df_all$Seq, df_all$Response)
 
 ### Comparación con $Odds\ Ratio$ {#sec-or-3}
 
-En @sec-or y en @sec-or-2 se exponen el marco teórico y la fundamentación de los contrastes de hipótesis realizados respectivamente. El contraste de hipótesis del $log OR$ del subtitulado para cada grupo no produce significación estadística en ningún nivel de respuesta, por lo que según esta prueba estadística la secuencia de subtitulado no influiría en la respuesta de los estudiantes (ver @tbl-logor1). Es decir, de acuerdo a este la secuencia no influye en la valoración de los subtítulos.
+En @sec-or y en @sec-or-2 se exponen el marco teórico y la fundamentación de los contrastes de hipótesis realizados respectivamente. El contraste de hipótesis del $log\ OR$ del subtitulado para cada grupo no produce significación estadística en ningún nivel de respuesta, por lo que según esta prueba estadística la secuencia de subtitulado no influiría en la respuesta de los estudiantes (ver @tbl-logor1). Es decir, de acuerdo a este la secuencia no influye en la valoración de los subtítulos.
 
 ```{r}
 #| label: tbl-logor1

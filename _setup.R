@@ -199,3 +199,8 @@ df_clean <- df_clean %>% mutate(
     )
 )
 df_0 <- df %>% filter(Response == 0)
+
+df_improve <- df_clean %>%
+    pivot_wider(id_cols = c(Subject, Question, Seq), names_from = Treat, values_from = Response) %>%
+    filter(A != 0 & B != 0) %>%
+    mutate(Improve = A > B, Improve_level = (A %in% c(4, 5)) & (B %in% c(1, 2)))
