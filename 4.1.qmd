@@ -1,8 +1,10 @@
 ## Comparación con $Odds\ Ratio$ {#sec-or-2}
 
-En la sección @sec-or se explicó el fundamento teórico de esta técnica. Aquí se expone como se puede aplicar al diseño de experimento que se está analizando. En la sección de resultados se comentarán e interpretarán los valores producidos por este test. Podemos contrastar la hipótesis nula de que el $OR$ entre subtítulos y grupos para cada nivel de respuestas es similar y, por lo tanto, con valor próximo a 1. Este $OR$ se define:
+En la sección @sec-or se explicó el fundamento teórico de esta técnica. Aquí se expone como se puede aplicar al diseño de experimento que se está analizando. En la sección de resultados se comentarán e interpretarán los valores producidos por este test. 
 
-\begin{equation}
+Dado que los factores $Treat$, $Period$ y $Seq$ tienen todos 2 niveles, podemos contrastar si hay interacción entre ellos para cada nivel de respuesta. Es decir, se contrasta la hipótesis $H_0: OR=1$ de ausencia de interacción frente a $H_1: $OR \neq 1$ de existencia de interacción en algún nivel de respuesta. Por ejemplo, el $OR$ para el nivel respuesta $r$ entre subtítulos y secuencias se define de la siguiente forma:
+
+$$
 OR_{(Treat, Seq \mid Response=r)}=\frac{
     \frac{
             P(Treat=A \mid Seq=AB, Response=r)
@@ -16,19 +18,19 @@ OR_{(Treat, Seq \mid Response=r)}=\frac{
         P(Treat=B \mid Seq=BA, Response=r)
     }
 }
-\end{equation}
+$$
 
 Si los $odds$ son similares en cada nivel de respuesta, podemos aceptar que la hipótesis nula de que los grupos responden de forma similar a cada nivel de subtitulado. Se hará un test similar pero entre subtitulado y periodos.
 
 
 ## Regresión Logística {#sec-logistica-2}
 
-En la @sec-logistica se presentó el fundamento teórico de la Regresión Ordinal Acumulativa. En esta sección se justifica el uso de esta técnica y se ajustan y comparan varios modelos. La variable respuesta se compone de 5 valores ordenados. Esto imposibilita usar directamente la Regresión Logística. No obstante, podemos comparar la respuesta que cada estudiante dio a cada uno de los subtitulados y comprobar si ha mejorado o no. Esto producirá una variable de respuesta binaria que permitirá el uso de la regresión logística. No obstante, reducirá la cantidad de datos disponibles a la mitad e impedirá analizar el efecto periodo ya que al comparar los subtitulados, desaparece el periodo. Se ha transformado el `dataframe` de tal forma que si un usuario valoró una pregunta mejor en el subtitulado $A$ que en el $B$, se consigna 1 en la variable respuesta, si empeoró o puntuó igual se consigna 0. Si en uno de los test valora una pregunta con "No sé / No contesto", se elimina esa pregunta.
+En la @sec-logistica se presentó el fundamento teórico de la Regresión Logística. En esta sección se justifica el uso de este modelo y se ajustan y comparan varios modelos. La variable respuesta se compone de 5 valores ordenados. Esto imposibilita usar directamente la Regresión Logística. No obstante, podemos comparar la respuesta que cada estudiante dio a cada uno de los subtitulados y comprobar si ha mejorado. Esto producirá una variable de respuesta binaria que permitirá el uso de la Regresión Logística. No obstante, esta transformación reducirá la cantidad de datos disponibles a la mitad e impedirá analizar el efecto periodo ya que al comparar los subtitulados, desaparece el periodo. Se ha transformado el `dataframe` de tal forma que si un usuario valoró una pregunta mejor en el subtitulado $A$ que en el $B$, se consigna 1 en la variable respuesta, si empeoró o puntuó igual se consigna 0. Si en uno de los test valora una pregunta con "No sé / No contesto", se elimina esa pregunta.
 
 Se ajusta el modelo con la secuencia como predictor. Se constata que el coeficiente del intercepto es positivo y significativo. El intercepto es el $log\ odds$ de mejorar la valoración en $A$ sobre $B$ respecto a empeorar la valoración. Sin embargo, la secuencia no resulta significativa y además añadirla apenas reduce la "deviance", por lo que el modelo nulo sin predictores resulta más parsimonioso. Se podrían añadir como predictores las preguntas y los estudiantes. No se hace aquí y se pospone la discusión hasta el uso de modelos mixtos.
 
 ```{r}
-glm_improve_seq <- glm(Improve ~ 1 + Seq, data = df_improve)
+glm_improve_seq <- glm(Improve ~ 1 + Seq, family = "binomial", data = df_improve)
 summary(glm_improve_seq)
 ```
 

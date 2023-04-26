@@ -7,7 +7,7 @@ source("_setup.R")
 En esté capítulo se comentarán los resultados de las técnicas estadísticas (ver @sec-tecnicas) y de los modelos propuestos (ver @sec-modelado).
 
 
-### Correlación entre preguntas con el alfa de Cronbach. {#sec-cronbach-2}
+### Correlación entre preguntas con el alfa de Cronbach {#sec-cronbach-2}
 
 \scriptsize
 ```{r}

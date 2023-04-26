@@ -18,7 +18,7 @@ m7 <- glmer(Improve ~ 1 + Seq + (1 + Seq | Question) + (1 + Seq | Subject), data
 m8 <- glmer(Improve ~ 1 + (1 | Question) + (1 | Subject), data = df_improve)
 
 
-m9 <- glmer(Improve ~ 1 + Question + (1 | Subject), data = df_improve)
+m9 <- glmer(Improve ~ 1 + (1|Question) + (1 | Subject), family=binomial(link="logit"), data = df_improve)
 anova(m2, m3, m4, m5, m6, m7)
 anova(m4, m8)
 
@@ -64,3 +64,14 @@ df_improve_resume %>% ggplot(aes(y= Improve)) + geom_rect(aes(xmin = -Inf, xmax 
 
 paste((df_improve_resume %>% head(2))$Question, collapse = ", ")
 paste((df_improve_resume %>% tail(2))$Question, collapse=", ")
+
+summary(m9)
+
+mutate(df_improve, residuals=residuals(m9), linpred=predict(m9)) %>% group_by(breaks=cut(linpred,unique(quantile(linpred,(1:100)/101)))) %>% summarize(residuals=mean(residuals), linpred=mean(linpred)) %>% plot(residuals ~ linpred, data=.) 
+
+qqnorm(residuals(m9))
+
+
+#pag 41
+df_improve %>% mutate(predprob=predict(m9, type='response'), linpred=predict(m9)) %>% group_by(cut(linpred, breaks=unique(quantile(linpred, (1:100)/101)))) %>% summarize(Improve=sum(Improve), ppred=mean(predprob), count=n()) %>% mutate(se.fit=sqrt(ppred*(1-ppred)/count)) %>% ggplot(aes(x=ppred, y=Improve/count,ymin=Improve/count-2*se.fit,ymax=Improve/count+2*se.fit)) + geom_point()+geom_linerange(color=grey(0.75))+geom_abline(intercept=0,slope=1)+xlab("Predicted Probability")+ylab("Observed Proportion")    
+
