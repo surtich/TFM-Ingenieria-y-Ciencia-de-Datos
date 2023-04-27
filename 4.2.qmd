@@ -1,0 +1,140 @@
+### Regresión Ordinal Multinivel {#sec-multinivel-2}
+
+En la @sec-multinivel se expuso el fundamento teórico de estos modelos. Aquí se justificará el interés de este tipo de modelos aplicado al caso del subtitulado de vídeos. Hay dos variables susceptibles de ser incorporadas al modelo como efectos aleatorios. En primer lugar tenemos a los estudiantes. Es evidente que ellos representan una muestra de una población más amplia que estaría constituida por todos los estudiantes de todos los cursos de accesibilidad. Pero es que además cada estudiante responde a cada ítem dos veces y, por lo tanto, sus observaciones no son independientes. Por otro lado, las preguntas no son independientes unas de otras ya que pretenden medir la misma variable subyacente. Además el interés no es conocer el valor concreto de sus coeficientes sino su valor en relación a los coeficientes de las otras preguntas. En @burkner2021 [pp. 14-16] @burkner2019 [pp. 19-20] podemos encontrar un ejemplo con esta parametrización.
+
+#### Modelo Response ~ Treat * Period + (1 | Subject)
+
+El primer modelo que se propone es uno en el que únicamente se incorpora a los estudiantes con interceptos variables:
+
+\small
+
+
+$$
+\begin{aligned}
+Level\ 1: & \text{logit}(P(Response_{ij} \leq k)) = \tau_{kj} - \beta_1 \text{Treat}_{ij} - \beta_2 \text{Period}_{ij} - \beta_3 \text{Treat}_{ij} * \text{Period}_{ij} \\
+Level\ 2: & \tau_{kj}  =  \tau_{k} + U_{0j}
+\end{aligned}
+$$
+
+\normalsize
+
+donde $ij$ es la observación $i$ del estudiante $j$. Observe que ahora los interceptos $\tau_{kj}$ se descomponen en una parte fija y común para todos los estudiantes $\tau_{k}$ y una parte variable específica para cada estudiante $U_{0j}$. Para ajustar el modelo se va a utilizar la función `clmm()` del paquete `Ordinal` ya que permite la inclusión de efectos aleatorios. 
+
+\scriptsize
+```{r}
+#| echo: true
+#| cache: true
+clmm_treat.period_subject <- clmm(
+    Response ~ Treat * Period + (1 | Subject), data = df_clean
+)
+summary(clmm_treat.period_subject)
+```
+\normalsize
+
+En la parte de efectos fijos: los interceptos tienen valores similares al modelo de efectos fijos (ver @sec-response-treat.period) y los coeficientes incrementan ligeramente su valor. Esto indica una mayor diferencia entre las respuestas de los subtitulados $A$ y $B$. En este modelo el efecto secuencia no es significativo. En cuanto a los efectos aleatorios: la varianza del intercepto aleatorio de los estudiantes es `r round(VarCorr(clmm_treat.period_subject)$Subject[1], 2)`. En la @fig-random-subject-var se muestran los valores de los interceptos estimados de los estudiantes. La media de estos interceptos como se espera es cercana a cero (`r round(ranef(clmm_treat.period_subject)$Subject %>% unlist() %>% mean(),3)`).
+
+
+```{r}
+#| label: fig-random-subject-var
+#| fig-cap: Distribución de interceptos aleatorios en el modelo Response ~ Treat * Period + (1 | Subject)
+ranef(clmm_treat.period_subject) %>%
+    data.frame() %>%
+    ggplot(aes(y = X.Intercept.)) +
+    geom_boxplot() +
+    ylab("U0j") +
+    theme(
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.title.x = element_blank()
+    )
+```
+
+#### Modelo Response ~ Treat * Period + (1 + Treat | Subject)
+
+Es posible que cada estudiante valore con diferente criterio cada subtitulado. Para estimarlo, se propone el siguiente modelo:
+
+
+\small
+
+
+$$
+\begin{aligned}
+Level\ 1: & \text{logit}(P(Response_{ij} \leq k)) = \tau_{kj} - \beta_{1j} \text{Treat}_{ij} - \beta_{2} \text{Period}_{ij} - \beta_{3} \text{Treat}_{ij} * \text{Period}_{ij} \\
+Level\ 2: & \tau_{kj}  =  \tau_{k} + U_{0j} \\
+          & \beta_{1j}  =  \beta_{1} + U_{1j}
+\end{aligned}
+$$
+
+\normalsize
+
+
+Ahora el parámetro $\beta_{1j}$ del subtitulado tiene dos componentes: Uno común a todos los estudiantes $\beta_{1}$ y otro particular de cada estudiante $U_{1j}$. El modelo ajustado ocasiona que solo `Treat1` sea significativo, ya que ni el periodo ni la secuencia lo son. En los efectos aleatorios la correlación entre intercepto y pendiente es prácticamente nula.
+
+\scriptsize
+```{r}
+#| echo: true
+#| cache: true
+clmm_treat.period_treat.subject <- clmm(
+    Response ~ Treat * Period + (1 + Treat | Subject),
+    data = df_clean
+)
+summary(clmm_treat.period_treat.subject)
+```
+\normalsize
+
+#### Comparación de modelos
+
+Se pueden comparar los modelos con el test de razón de verosimilitud que se realiza con la función `anova` del paquete `ordinal`. Se comprueba que en este test resulta significativamente mejor el último modelo:
+
+\scriptsize
+```{r}
+#| echo: true
+anova(clmm_treat.period_subject, clmm_treat.period_treat.subject)
+```
+\normalsize
+
+#### Elección del mejor modelo
+
+Se han comparado distintos modelos:
+
+* Response ~ (1 | Subject)
+* Response ~ (1 + Treat | Subject)
+* Response ~ (1 + Treat | Question)
+* Response ~ Treat + (1 + Treat | Subject)
+* Response ~ Treat + (1 + Treat | Question)
+* Response ~ Treat*Period + (1 + Treat  | Subject)
+* Response ~ Treat*Period + (1 + Treat  | Question)
+* Response ~ Treat*Period + (1 + Period | Subject) + (1 + Treat | Question)
+* Response ~ Treat + (1 + Treat | Subject) + (1 + Treat | Question)
+* Response ~ Treat*Period + (1 + Treat  | Subject) + (1 + Treat | Question)
+
+El último de ellos produce un resultado significativo en el test de razón de verosimilitud con todos los demás. Sin embargo los parámetros de todos los modelos tienen valores similares por lo que no cambia la interpretación que se haga de ellos en cada modelo. Este modelo tiene un $AIC$ menor que los modelos ordinales ajustados en el apartado anterior (ver @sec-ordinal-2) incluso si a esos modelos se les añade como factor predictor `Question`. 
+En la @fig-probs-clmm_treat.period.subject.question se muestran las predicciones del modelo. El resumen de parámetros del modelo es el siguiente:
+
+\scriptsize
+```{r}
+#| echo: true
+#| cache: true
+clmm_treat.period.subject.question <- clmm(
+    Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question),
+    data = df_clean
+)
+summary(clmm_treat.period.subject.question)
+```
+\normalsize
+
+```{r}
+#| label: fig-probs-clmm_treat.period.subject.question
+#| fig-cap: Probabilidades de respuesta para el modelo ordinal Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question)
+
+emmeans(clmm_treat.period.subject.question, ~ Response + Treat + Period, mode = "prob") %>%
+    data.frame() %>%
+    ggplot(aes(x = glue::glue("{Treat}-{Period}"), y = prob, fill = Response)) +
+    geom_col() +
+    scale_fill_td(palette = "div5") +
+    scale_y_continuous(expand = c(0, 0), labels = scales::percent) +
+    labs(x = "Treat-Period", y = "Predicted probability")
+```
+
+ 
+

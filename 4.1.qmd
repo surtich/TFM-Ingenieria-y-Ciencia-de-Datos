@@ -1,8 +1,10 @@
-## Comparación con $Odds\ Ratio$ {#sec-or-2}
+## Modelos utilizados {#sec-modelos-utilizados}
 
-En la sección @sec-or se explicó el fundamento teórico de esta técnica. Aquí se expone como se puede aplicar al diseño de experimento que se está analizando. En la sección de resultados se comentarán e interpretarán los valores producidos por este test. 
+Algunas de las técnicas de análisis y modelado estadístico propuesto en la @sec-modelos-utilizados requieren concreción y adaptación para poder ser utilizadas en el diseño de experimento de subtitulado. En esta sección se explica la forma concreta de aplicarlas y los paquetes y configuración en R utilizados. También se justifican las variables incluidas en cada modelo. La presentación de los resultados se pospone a el @sec-resultados.
 
-Dado que los factores $Treat$, $Period$ y $Seq$ tienen todos 2 niveles, podemos contrastar si hay interacción entre ellos para cada nivel de respuesta. Es decir, se contrasta la hipótesis $H_0: OR=1$ de ausencia de interacción frente a $H_1: $OR \neq 1$ de existencia de interacción en algún nivel de respuesta. Por ejemplo, el $OR$ para el nivel respuesta $r$ entre subtítulos y secuencias se define de la siguiente forma:
+### Comparación con $Odds\ Ratio$ {#sec-or-2}
+
+En la sección @sec-or se explicó el fundamento teórico de esta técnica. Aquí se expone como se puede aplicar al diseño de experimento que se está analizando. Dado que los factores $Treat$, $Period$ y $Seq$ tienen todos 2 niveles, podemos contrastar si hay interacción entre ellos para cada nivel de respuesta. Es decir, se contrasta la hipótesis $H_0: OR=1$ de ausencia de interacción frente a $H_1: OR \neq 1$ de existencia de interacción en algún nivel de respuesta. Por ejemplo, el $OR$ para el nivel respuesta $r$ entre subtítulos y secuencias se define de la siguiente forma:
 
 $$
 OR_{(Treat, Seq \mid Response=r)}=\frac{
@@ -20,27 +22,27 @@ OR_{(Treat, Seq \mid Response=r)}=\frac{
 }
 $$
 
-Si los $odds$ son similares en cada nivel de respuesta, podemos aceptar que la hipótesis nula de que los grupos responden de forma similar a cada nivel de subtitulado. Se hará un test similar pero entre subtitulado y periodos.
+Si los $odds$ son similares en cada nivel de respuesta, podemos aceptar que la hipótesis nula de que los grupos responden de forma similar a cada nivel de subtitulado. Se hará un test similar pero entre subtitulado y periodos. Para realizar el contraste de hipótesis se utilizará la función $loddsratio$ del paquete $vcd$.
 
 
-## Regresión Logística {#sec-logistica-2}
+### Regresión Logística {#sec-logistica-2}
 
-En la @sec-logistica se presentó el fundamento teórico de la Regresión Logística. En esta sección se justifica el uso de este modelo y se ajustan y comparan varios modelos. La variable respuesta se compone de 5 valores ordenados. Esto imposibilita usar directamente la Regresión Logística. No obstante, podemos comparar la respuesta que cada estudiante dio a cada uno de los subtitulados y comprobar si ha mejorado. Esto producirá una variable de respuesta binaria que permitirá el uso de la Regresión Logística. No obstante, esta transformación reducirá la cantidad de datos disponibles a la mitad e impedirá analizar el efecto periodo ya que al comparar los subtitulados, desaparece el periodo. Se ha transformado el `dataframe` de tal forma que si un usuario valoró una pregunta mejor en el subtitulado $A$ que en el $B$, se consigna 1 en la variable respuesta, si empeoró o puntuó igual se consigna 0. Si en uno de los test valora una pregunta con "No sé / No contesto", se elimina esa pregunta.
+En la @sec-logistica se presentó el fundamento teórico de la Regresión Logística. En esta sección se justifica el uso de este modelo y se ajustan y comparan varios modelos. La variable respuesta se compone de 5 valores ordenados. Esto imposibilita usar directamente la Regresión Logística ya que requiere que la variable de respuesta sea dicotómica. No obstante, se puede comparar la respuesta que cada estudiante dio a cada uno de los subtitulados y comprobar si ha mejorado. Esto producirá una variable de respuesta binaria que permitirá el uso de la Regresión Logística. No obstante, esta transformación reducirá la cantidad de datos disponibles a la mitad e impedirá analizar el efecto periodo ya que al comparar los subtitulados, desaparece el periodo. Se ha transformado el `dataframe` de tal forma que si un usuario valoró una pregunta mejor en el subtitulado $A$ que en el $B$, se consigna 1 en la variable respuesta, si empeoró o puntuó igual se consigna 0. Si en uno de los test valora una pregunta con "No sé / No contesto", se elimina esa pregunta.
 
-Se ajusta el modelo con la secuencia como predictor. Se constata que el coeficiente del intercepto es positivo y significativo. El intercepto es el $log\ odds$ de mejorar la valoración en $A$ sobre $B$ respecto a empeorar la valoración. Sin embargo, la secuencia no resulta significativa y además añadirla apenas reduce la "deviance", por lo que el modelo nulo sin predictores resulta más parsimonioso. Se podrían añadir como predictores las preguntas y los estudiantes. No se hace aquí y se pospone la discusión hasta el uso de modelos mixtos.
+Se ajusta el modelo con la secuencia como predictor. Se constata que el coeficiente del intercepto es positivo y significativo. El intercepto es el $log\ odds$ de mejorar la valoración en $A$ sobre $B$ respecto a empeorar la valoración. Sin embargo, la secuencia no resulta significativa y además añadirla apenas reduce la "deviance", por lo que el modelo nulo sin predictores resulta más parsimonioso. Se podrían añadir como predictores las preguntas y los estudiantes. No se hace aquí y se pospone la discusión hasta el uso de modelos mixtos con la regresión ordinal.
 
 ```{r}
 glm_improve_seq <- glm(Improve ~ 1 + Seq, family = "binomial", data = df_improve)
 summary(glm_improve_seq)
 ```
 
-## Regresión Ordinal {#sec-ordinal-2}
+### Regresión Ordinal {#sec-ordinal-2}
 
 En la @sec-ordinal se presentó el fundamento teórico de la Regresión Ordinal Acumulativa. En esta sección se ajustan algunos modelos y se interpretan los resultados.
 
-### Ajuste del modelo ordinal `Response ~ Treat`
+#### Ajuste del modelo ordinal `Response ~ Treat`
 
-Existen varios paquetes en R que permiten ajustar una regresión ordinal logística. El más popular es el paquete `Ordinal` [@ordinalR]. El paquete `VGAM` [@VGAMR] es más flexible y potente. Otra posibilidad es usar la función `polr` del paquete `MASS` [@MASSR]. Finalmente la función `orm` del paquete `rms` también permite hacerlo [ver @harrell2015]. En este trabajo usaremos el paquete `Ordinal` por permitir también incluir efectos aleatorios que utilizaremos en un apartado posterior. Comenzamos con un modelo simple que tiene como único predictor el nivel de subtitulado por ser la variable objetivo de nuestro modelo:
+Existen varios paquetes en R que permiten ajustar una Regresión Ordinal con función de enlace logística. El más popular es el paquete `Ordinal` [@ordinalR]. El paquete `VGAM` [@VGAMR] es más flexible y potente. Otra posibilidad es usar la función `polr` del paquete `MASS` [@MASSR]. Finalmente la función `orm` del paquete `rms` también permite hacerlo [ver @harrell2015]. En este trabajo usaremos el paquete `Ordinal` por permitir también incluir efectos aleatorios que utilizaremos en un apartado posterior. Comenzamos con un modelo simple que tiene como único predictor el nivel de subtitulado por ser la variable objetivo de nuestro modelo:
 
 $$
 \text{logit}(P(Response_i \leq k)) = \tau_k - \beta_1 \text{Treat}_i,
@@ -49,10 +51,11 @@ $$
 
 \scriptsize
 ```{r}
-#| echo: true
+#| echo: false
+options(contrasts = rep("contr.treatment", 2))
 clm_treat <-
     clm(
-        Response ~ Treat,
+        Response ~ 1 + Treat,
         data = df_clean, link = "logit"
     )
 summary(clm_treat)
@@ -71,7 +74,7 @@ El método `summary()` muestra la información resumen. Para su interpretación 
 ^[El número de condición de Hessiano es una medida de la curvatura de una función en un punto.
 Si el número de condición de Hessiano es grande, la función es muy sensible a pequeñas perturbaciones y puede ser difícil de optimizar.]. La sección de coeficientes es la más importante. Se muestra la estimación de parámetros, el error estándar y la significación estadística de acuerdo al test de Wald
 ^[El test de Wald es un contraste de hipótesis estadístico en el que se evalúa si el valor estimado es cero suponiendo que $W = \left(\frac{\hat{\theta} - \theta_0}{se(\hat{\theta})}\right)^2 \sim \chi^{2}$
-.]. Comprobamos que el valor es claramente significativo. Es decir, que los estudiantes han valorado de forma diferente la calidad del subtitulado en ambos vídeos. El estimador de maxima verosimilitud del coeficiente `TreatB` es `r treatB.coef`. Siguiendo la deducción de @bruin2011 podemos, por ejemplo, hacer la siguiente interpretación del significado de este coeficiente referido a dos niveles consecutivos de respuesta:
+.]. Se comprueba que el valor es claramente significativo. Es decir, que los estudiantes han valorado de forma diferente la calidad del subtitulado en ambos vídeos. El estimador de maxima verosimilitud del coeficiente `TreatB` es `r treatB.coef`. Siguiendo la deducción de @bruin2011 podemos, por ejemplo, hacer la siguiente interpretación del significado de este coeficiente referido a dos niveles consecutivos de respuesta:
 
 $$
 \begin{aligned}
@@ -80,7 +83,7 @@ logit [P(Y \le 2)] & = & `r intercept.2.3.coef` - (`r treatB.coef` x_1)
 \end{aligned}
 $$
 
-Por lo tanto los $odds$ serían:
+Por lo tanto y teniendo en cuenta que $x_1 = 1$ cuando $Treat = B$ y $x_1 = 0$ cuando $Treat = A$, se pueden calcular los $odds$ de $A$ y de $B$:
 
 $$
 \begin{aligned}
@@ -100,13 +103,13 @@ $$
 \end{aligned}
 $$
 
-Se comprueba que el $OR$ es equivalente en todos los niveles de respuesta al cuestionario. Esta es una de las suposiciones de la regresión ordinal acumulativa. El $odds$ de respuesta al cuestionario entre los niveles inferiores y superiores a uno dado, $k$, es `r round(1/exp(coef(clm_treat)["TreatB"]), 2)` veces en el subtitulado $B$ que en el $A$. Esto indica que el subtitulado $B$ es percibido por los estudiantes como de peor calidad que el subtitulado $A$. Concretamente, el coeficiente $\beta$ para `Treat` es el `log odds` de observar una mejor respuesta en una pregunta del test es `r round(1/exp(coef(clm_treat)["TreatB"]), 2)` veces superior en el nivel de subtitulado $A$ que en el $B$. Aunque no suele ser de interés la interpretación de los coeficientes de los umbrales (`Threshold coefficients`), se pueden utilizar para estimar las probabilidades de respuesta. Por ejemplo, para el nivel de subtitulado $B$:
+Se comprueba que el $OR$ es equivalente en todos los niveles de respuesta al cuestionario. Esta es una de las suposiciones de la regresión ordinal acumulativa. El $odds$ de respuesta al cuestionario entre los niveles inferiores y superiores a uno dado, $k$, es `r round(1/exp(coef(clm_treat)["TreatB"]), 2)` veces en el subtitulado $B$ que en el $A$. Esto indica que el subtitulado $B$ es percibido por los estudiantes como de peor calidad que el subtitulado $A$. Concretamente, el coeficiente $\beta$ para `Treat` es el `log OR` de observar una mejor respuesta en una pregunta del test es `r round(1/exp(coef(clm_treat)["TreatB"]), 2)` veces superior en el nivel de subtitulado $A$ que en el $B$. Aunque no suele ser de interés la interpretación de los coeficientes de los umbrales (`Threshold coefficients`), se pueden utilizar para estimar las probabilidades de respuesta. Por ejemplo, para el nivel de subtitulado $B$ y nivel de respuesta 2:
 
 $$
 \begin{aligned}
 logit [P(Y \le 1)] & = & `r intercept.1.2.coef` - (`r treatB.coef`) & = & `r round(logit.1, 2)` \\
-odds (P(Y \le 1)) & = & exp(logit [P(Y \le 1)]) & = & `r round(exp(logit.1),2)` \\
 P(Y \le 1) & = & \frac{exp(`r round(logit.1, 2)`)}{1 + exp(`r round(logit.1, 2)`)} & = & `r sprintf("%.2f", exp(logit.1)/(1+ exp(logit.1)))` \\
+logit [P(Y \le 2)] & = & `r intercept.2.3.coef` - (`r treatB.coef`) & = & `r round(logit.2, 2)` \\
 P(Y \le 2) & = & \frac{exp(`r round(logit.2, 2)`)}{1 + exp(`r round(logit.2, 2)`)} & = & `r sprintf("%.2f", exp(logit.2)/(1+ exp(logit.2)))` \\
 P(Y = 2) & = & P(Y \le 2) - P(Y \le 1) & = &  `r sprintf("%.2f", exp(logit.2)/(1+exp(logit.2)) - exp(logit.1)/(1+ exp(logit.1)))` 
 \end{aligned}
@@ -114,12 +117,13 @@ $$
 
 Para el subtitulado $A$ no se tiene en cuenta el coeficiente $TreatB$ ya que el valor $x_1$ es cero:
 
-
 $$
 \begin{aligned}
-logit [P(Y \le 1)] & = & & & `r intercept.1.2.coef`\\
-odds (P(Y \le 1)) & = & exp(logit [P(Y \le 1)]) & = & `r round(exp(coef(clm_treat)["1|2"]),2)` \\
-P(Y \le 1) & = & \frac{exp(`r round(coef(clm_treat)["1|2"], 2)`)}{1 + exp(`r round(coef(clm_treat)["1|2"], 2)`)} & = & `r round(exp(coef(clm_treat)["1|2"])/(1+ exp(coef(clm_treat)["1|2"])), 2)`
+logit [P(Y \le 1)] & = & & & `r intercept.1.2.coef` \\
+P(Y \le 1) & = & \frac{exp(`r round(coef(clm_treat)["1|2"], 2)`)}{1 + exp(`r round(coef(clm_treat)["1|2"], 2)`)} & = & `r round(exp(coef(clm_treat)["1|2"])/(1+ exp(coef(clm_treat)["1|2"])), 2)` \\
+logit [P(Y \le 2)] & = & & & `r intercept.2.3.coef` \\
+P(Y \le 2) & = & \frac{exp(`r round(coef(clm_treat)["2|3"], 2)`)}{1 + exp(`r round(coef(clm_treat)["2|3"], 2)`)} & = & `r round(exp(coef(clm_treat)["2|3"])/(1+ exp(coef(clm_treat)["2|3"])), 2)` \\
+P(Y = 2) & = & P(Y \le 2) - P(Y \le 1) & = &  `r sprintf("%.2f", exp(coef(clm_treat)["2|3"])/(1+ exp(coef(clm_treat)["2|3"])) - exp(coef(clm_treat)["1|2"])/(1+ exp(coef(clm_treat)["1|2"])))` 
 \end{aligned}
 $$
 
@@ -133,108 +137,162 @@ rownames(probs_clm_treat) <- c("A", "B")
 round(probs_clm_treat, 3) %>% knitr::kable()
 ```
 
-### Ajuste del modelo ordinal `Response ~ Treat + Period`
+#### Ajuste del modelo ordinal `Response ~ Treat * Period` {#sec-response-treat.period}
 
-Para saber si existe un efecto periodo, añadimos como predictor la variable `Period`.
+Para saber si existe un efecto periodo, añadimos como predictor la variable `Period`. También se añade la interacción entre subtitulado y periodo:
 
+
+\small
 
 $$
-\text{logit}(P(Response_i \leq k)) = \tau_k - \beta_1 \text{Treat}_i - \beta_2 \text{Period}_i
-$$
+\text{logit}(P(Response_i \leq k)) = \tau_k - \beta_1 \text{Treat}_i - \beta_2 \text{Period}_i - \beta_3 \text{Treat}_i * \text{Period}_i
+$$ {#eq-ordinal}
 
-
-\scriptsize
-```{r}
-#| echo: true
-clm_treat_period <-
-    clm(
-        Response ~ Treat + Period,
-        data = df_clean, link = "logit"
-    )
-summary(clm_treat_period)
-```
 \normalsize
 
-Vemos que ambos coeficientes son significativos y con signo negativo. Un signo negativo en el efecto periodo está asociado con que la valoración del subtitulado empeora en el segundo periodo independientemente de si se trata del subtitulado correcto o incorrecto. Aplicando el mismo razonamiento del apartado anterior, el $OR$ del efecto periodo es $1/exp(`r round(coef(clm_treat_period)["Period2"], 2)`) = `r round(1/exp(coef(clm_treat_period)["Period2"]),2)`$. Lo que quiere decir que una vez controlado el efecto principal del tratamiento, el subtitulado en el segundo periodo es valorado como de inferior calidad que en el primero. Esto estaría indicando que los estudiantes son más exigentes con el subtitulado en la segunda actividad independientemente de su calidad real.
+En el @sec-contrasts se demuestra que cuando el contraste es $sum$ la interacción entre periodo y subtitulado es equivalente al efecto secuencia. Es decir, que los modelos `Response ~ Treat*Period` y `Response ~ Treat + Period + Seq` son equivalentes. Esto no sucede cuando el contraste es $treatment$, que es el utilizado por defecto en R. En la @tbl-contrast se comparan los coeficientes de los cuatro modelos que se listan a continuación:
+
+* `Response ~ Treat * Period` con contraste `treatment`.
+* `Response ~ Treat + Period + Seq` con contraste `treatment`.
+* `Response ~ Treat * Period` con contraste `sum`.
+* `Response ~ Treat + Period + Seq` con contraste `sum`.
 
 
-### Ajuste del modelo ordinal `Response ~ Treat * Period`
-
-Añadimos al modelo la interacción entre subtitulado y periodo. Esta interacción corresponde al efecto secuencia. Se puede demostrar que los modelos `Response ~ Treat*Period` y `Response ~ Treat + Period + Seq` [ver @sec-contrasts].
-
-\scriptsize
 ```{r}
-#| echo: true
 options(contrasts = rep("contr.treatment", 2))
 clm_treat.period <-
     clm(
         Response ~ Treat * Period,
         data = df_clean, link = "logit"
     )
-summary(clm_treat.period)
+
+clm_treat_period_seq <-
+    clm(
+        Response ~ Treat + Period + Seq,
+        data = df_clean, link = "logit"
+    )
+
+options(contrasts = rep("contr.sum", 2))
+clm_sum_treat.period <-
+    clm(
+        Response ~ Treat * Period,
+        data = df_clean, link = "logit"
+    )
+
+clm_sum_treat_period_seq <-
+    clm(
+        Response ~ Treat + Period + Seq,
+        data = df_clean, link = "logit"
+    )
+
+df_contrast <- cbind(names(coef(clm_treat.period)), coef(clm_treat.period), names(coef(clm_treat_period_seq)), coef(clm_treat_period_seq), names(coef(clm_sum_treat.period)), coef(clm_sum_treat.period), names(coef(clm_sum_treat_period_seq)), coef(clm_sum_treat_period_seq)) %>%
+    data.frame(row.names = NULL) %>%
+    tibble() %>%
+    mutate_at(vars(c(2, 4, 6, 8)), as.numeric)
+
+colnames(df_contrast) <- 1:8
+
 ```
+
+
+
+\tiny
+```{r}
+#| label: tbl-contrast
+#| tbl-cap: Comparación de los coeficientes con contraste "treatment" y "sum".
+#| tbl-width: 8
+df_contrast %>%
+    gt() %>%
+    # tab_style(style=list(cell_text(size = "small"))) %>%
+    tab_spanner(label = "contr.treatment", columns = 1:4, level = 2) %>%
+    tab_spanner(label = "contr.sum", columns = 5:8, level = 2) %>%
+    tab_spanner(id = "_1", label = "Response ~ Treat*Period", level = 1, columns = 1:2) %>%
+    tab_spanner(id = "_2", label = "Response ~ Treat+Period+Seq", level = 1, columns = 3:4) %>%
+    tab_spanner(id = "_3", label = "Response ~ Treat*Period", level = 1, columns = 5:6) %>%
+    tab_spanner(id = "_4", label = "Response ~ Treat+Period+Seq", level = 1, columns = 7:8) %>%
+    fmt_number(c(2, 4, 6, 8), decimals = 3) %>%
+    cols_label("1" = "coef", "3" = "coef", "5" = "coef", "7" = "coef", "2" = "value", "4" = "value", "6" = "value", "8" = "value")
+``` 
+\normalsize
+
+Comprobamos que coinciden los coeficientes de los dos modelos con contraste `sum` y que el efecto secuencia es equivalente a la interacción de periodo y subtitulado con este contraste. Sin embargo, en el contraste `treatment` coinciden los coeficientes de los interceptores pero no así los de los factores. Además, estos tres últimos coeficientes tienen nombres diferentes en los dos contrastes. La diferencia en el nombre se corresponde con la diferente interpretación del significado de los coeficientes. En el contraste `treatment` los valores de los interceptos se refieren a los valores de los factores en el nivel de referencia de cada factor (en este caso $Treat = A$ y $Period = 1$) y los valores de los otros coeficientes ($TreatB$ y $Period2$) son la diferencia con el de referencia. Así, por ejemplo, $TreatB$ es la diferencia con $TreatA$ en el periodo 1. Con este tipo de contraste es más difícil aislar el efecto que produce un nivel de un factor independiente del otro factor. En el contraste `sum` los valores de los interceptos son el efecto medio y los coeficientes $Treat1$ y $Period1$ son los efectos que sobre ese valor medio produce el nivel de factor de referencia, que en este caso es el primero ($Treat = A$ y $Period = 1$ respectivamente). Así por ejemplo en el contraste `sum`:
+
+* El coeficiente $`r names(coef(clm_sum_treat.period))[1]`$ tiene un valor `r round(coef(clm_sum_treat.period)[1], 3)` y es el `logit` medio de que la respuesta sea menor que 1 frente a que sea mayor que 1.
+* El coeficiente $`r names(coef(clm_sum_treat.period))[5]`$ tiene un valor de `r round(coef(clm_sum_treat.period)[5], 3)` y es la diferencia en `logits` que se añade en el nivel de subtitulado $A$ sin tener en cuenta el periodo. Es decir, que es el efecto del subtitulado $A$. Su valor es positivo, como en la @eq-ordinal aparece restando, el subtitulado $A$ hace más pequeño el `logit` y, por lo tanto, disminuye la probabilidad de una respuesta inferior frente a una superior. 
+* El efecto del subtitulado $B$ es de signo contrario `r round(-coef(clm_sum_treat.period)[5], 3)`. Por ello aumenta la probabilidad de menor valor de respuesta.
+* La diferencia en `logits` de los efectos totales del subtitulado es el doble de `r round(abs(coef(clm_sum_treat.period))[5], 3)`.
+* El coeficiente $`r names(coef(clm_sum_treat.period))[6]`$ tiene un valor `r round(coef(clm_sum_treat.period)[6], 3)` y es la diferencia en `logits` que produce el periodo $1$ sin tener en cuenta el subtitulado. 
+* El efecto del periodo $2$ se obtiene cambiado el signo al efecto del periodo 1: `r round(-coef(clm_sum_treat.period)[6], 3)`.
+* El efecto total del periodo es `r round(abs(2*coef(clm_sum_treat.period))[6], 3)` `logits`.
+* El coeficiente $`r names(coef(clm_sum_treat.period))[7]`$ tiene un valor de `r round(coef(clm_sum_treat.period)[7], 3)` y es la interacción entre el subtitulado $A$ y el periodo $1$. 
+* Por lo tanto el efecto total en `logits` del subtitulado $A$ en el periodo 1 será $`r names(coef(clm_sum_treat.period))[1]` - `r names(coef(clm_sum_treat.period))[5]` - `r names(coef(clm_sum_treat.period))[6]` - `r names(coef(clm_sum_treat.period))[7]` = `r round(coef(clm_sum_treat.period)[1], 3)` - `r round(coef(clm_sum_treat.period)[5], 3)` - `r round(coef(clm_sum_treat.period)[6], 3)` - `r round(coef(clm_sum_treat.period)[7], 3)` = `r round(coef(clm_sum_treat.period)[1] - sum(coef(clm_sum_treat.period)[c(5,6,7)]), 3)`$. Obsérvese que este valor corresponde con el parámetro $`r names(coef(clm_sum_treat.period))[1]`$ de los modelos con contraste `treatment`.
+* El efecto total en `logits` del subtitulado $B$ en el periodo 1 será $`r names(coef(clm_sum_treat.period))[1]` + `r names(coef(clm_sum_treat.period))[5]` - `r names(coef(clm_sum_treat.period))[6]` + `r names(coef(clm_sum_treat.period))[7]` = `r round(coef(clm_sum_treat.period)[1], 3)` + `r round(coef(clm_sum_treat.period)[5], 3)` - `r round(coef(clm_sum_treat.period)[6], 3)` + `r round(coef(clm_sum_treat.period)[7], 3)`$.
+* El efecto total en `logits` del subtitulado $A$ en el periodo 2 será $`r names(coef(clm_sum_treat.period))[1]` - `r names(coef(clm_sum_treat.period))[5]` + `r names(coef(clm_sum_treat.period))[6]` + `r names(coef(clm_sum_treat.period))[7]` = `r round(coef(clm_sum_treat.period)[1], 3)` - `r round(coef(clm_sum_treat.period)[5], 3)` + `r round(coef(clm_sum_treat.period)[6], 3)` + `r round(coef(clm_sum_treat.period)[7], 3)`$.
+* El efecto total en `logits` del subtitulado $B$ en el periodo 2 será $`r names(coef(clm_sum_treat.period))[1]` + `r names(coef(clm_sum_treat.period))[5]` + `r names(coef(clm_sum_treat.period))[6]` - `r names(coef(clm_sum_treat.period))[7]` = `r round(coef(clm_sum_treat.period)[1], 3)` + `r round(coef(clm_sum_treat.period)[5], 3)` + `r round(coef(clm_sum_treat.period)[6], 3)` - `r round(coef(clm_sum_treat.period)[7], 3)`$.
+
+En la @tbl-contrat2 se muestra la equivalencia de los coeficientes entre los modelos ajustados con cada contraste. La conclusión que se obtiene de todo esto es que cuando se usan dos o más factores, la interpretación con contraste `sum` resulta más intuitiva y sencilla.
+
+\small
+
+| contr.treatment | contr.sum                               | value   |
+|-----------------|-----------------------------------------|---------|
+| 1\|2            | 1\|2 - Treat1 - Period1 - Treat1:Period1 | `r round(coef(clm_sum_treat.period)[1]-coef(clm_sum_treat.period)[5]-coef(clm_sum_treat.period)[6]-coef(clm_sum_treat.period)[7],3)` |
+| 2\|3            | 2\|3 - Treat1 - Period1 - Treat1:Period1 | `r round(coef(clm_sum_treat.period)[2]-coef(clm_sum_treat.period)[5]-coef(clm_sum_treat.period)[6]-coef(clm_sum_treat.period)[7],3)` |
+| 3\|4            | 3\|4 - Treat1 - Period1 - Treat1:Period1 | `r round(coef(clm_sum_treat.period)[3]-coef(clm_sum_treat.period)[5]-coef(clm_sum_treat.period)[6]-coef(clm_sum_treat.period)[7],3)` |
+| 4\|5            | 4\|5 - Treat1 - Period1 - Treat1:Period1 | `r round(coef(clm_sum_treat.period)[4]-coef(clm_sum_treat.period)[5]-coef(clm_sum_treat.period)[6]-coef(clm_sum_treat.period)[7],3)` |
+| TreatB          | -2(Treat1 + Treat1:Period1)             | `r round(-2*(coef(clm_sum_treat.period)[5]+coef(clm_sum_treat.period)[7]),3)` |
+| Period2          | -2(Period1 + Treat1:Period1)             | `r round(-2*(coef(clm_sum_treat.period)[6]+coef(clm_sum_treat.period)[7]),3)` |
+| TreatB:Period2          | 4(Treat1:Period1)             | `r round(4*coef(clm_sum_treat.period)[7],3)` |
+
+: Equivalencia entre los coeficientes calculados con `contr.treatment` y `contr.sum` en el modelo Response ~ Treat*Period.  {#tbl-contrat2}
+
 \normalsize
 
 
-Vemos que los tres coeficientes son significativos. El principal efecto es el nivel de subtitulado obteniendo mejores puntuaciones el nivel $A$; el efecto periodo es negativo por lo que el primer periodo obtiene mejores puntuaciones; por último, el efecto secuencia es positivo pero de menor valor absoluto que el efecto periodo. Esto quiere decir que el subtitulado de nivel $B$ en el periodo 2 (secuencia $AB$), tiene un efecto periodo inferior que el subtitulado $A$ en el mismo periodo. Matemáticamente:
+Se muestra el resumen del modelo para constatar que los tres coeficientes son significativos:
 
 ```{r}
-intercept.1.2.coef <- round(coef(clm_treat.period)["1|2"], 2)
-treatB.coef <- round(coef(clm_treat.period)["TreatB"], 2)
-period2.coef <- round(coef(clm_treat.period)["Period2"], 2)
-treatB.period2.coef <- round(coef(clm_treat.period)["TreatB:Period2"], 2)
+summary(clm_sum_treat.period)
 ```
 
+#### Elección del modelo ordinal mediante el test de razón de verosimilitud {#sec-mejor-modelo-efectos-fijos}
 
-$$
-\begin{aligned}
-logit [P(Y \le 1 \mid Treat = A, Period = 1)] & = & `r intercept.1.2.coef` \\
-logit [P(Y \le 1 \mid Treat = B, Period = 1)] & = & `r intercept.1.2.coef` - (`r treatB.coef`) \\
-logit [P(Y \le 1 \mid Treat = A, Period = 2)] & = & `r intercept.1.2.coef` - (`r period2.coef`) \\
-logit [P(Y \le 1 \mid Treat = B, Period = 2)] & = & `r intercept.1.2.coef` -(`r treatB.coef` `r  period2.coef` + `r treatB.period2.coef`)
-\end{aligned}
-$$
-
-En definitiva, en el nivel de subtitulado $B$ apenas encontramos diferencias entre periodos, sin embargo, en el nivel de subtitulado $A$ existe un efecto periodo cuyo valor en `logits` es `r period2.coef`. Es decir, que la valoración del subtitulado de nivel $A$ es inferior en el segundo periodo que en el primero.
-
-### Elección del modelo ordinal mediante el test de razón de verosimilitud
-
-Al ser los tres modelos anidados, podemos compararlos con la prueba de razón de verosimilitud. Comprobamos que el tercer modelo (el que incorpora la interacción entre los subtítulos y el periodo) reduce significativamente el logaritmo de la función de verosimilitud y, por lo tanto, debe ser aceptado:
+Al ser los dos modelos anidados, se pueden comparar con la prueba de razón de verosimilitud. Se comprueba que el segundo modelo reduce significativamente el logaritmo de la función de verosimilitud y, por lo tanto, debe ser aceptado:
 
 \scriptsize
 ```{r}
-#| echo: true
-anova(clm_treat, clm_treat_period, clm_treat.period)
+anova(clm_treat, clm_sum_treat.period)
 ```
 \normalsize
 
-### Comprobación de las hipótesis del modelo
+#### Comprobación de las hipótesis del modelo
 
-La principal hipótesis de un modelo de regresión logística ordinal proporcional acumulativa es que los coeficientes son iguales entre cualesquiera dos niveles de respuestas correlativos. Se han propuesto diversas fórmulas para comprobar esta hipótesis. El paquete `Ordinal` dispone de la función `nominal_test()` que lo que hace es realizar un test de razón de verosimilitud para cada predictor ajustando un modelo en el que se ha relajado la condición de proporcionalidad. Se constata que el test resulta significativo para `Treat` y para `Treat:Period`, por lo que para estas dos variables no se puede asumir que los coeficientes estimados se mantengan constantes en todos los niveles de respuesta.
+La principal hipótesis de un modelo de Regresión Logística Ordinal Acumulativa es que los coeficientes son iguales entre cualesquiera dos niveles de respuestas correlativos. Se han propuesto diversas fórmulas para comprobar esta hipótesis. El paquete `Ordinal` dispone de la función `nominal_test()` que lo que hace es realizar un test de razón de verosimilitud para cada predictor ajustando un modelo en el que se ha relajado la condición de proporcionalidad. Se constata que el test resulta significativo para `Treat` y para `Treat:Period`, por lo que para estas dos variables no se puede asumir que los coeficientes estimados se mantengan constantes en todos los niveles de respuesta:
 
 \scriptsize
 ```{r}
-#| echo: true
-nominal_test(clm_treat.period)
+nominal_test(clm_sum_treat.period)
 ```
 \normalsize
 
- Lo que procede es ajustar el modelo relajando la constante de proporcionalidad de esas variables. Se ha realizado esto utilizando la función `vglm` del paquete `VGAM`. Vemos que ahora hay cuatro coeficientes para cada una de las variables `Treat` y `Treat:Period`
- ^[Los umbrales tienen los mismos valores pero de signo contrario debido a diferencias en la parametrización del modelo en cada función utilizada.].
+ Lo que procede es ajustar el modelo relajando la constante de proporcionalidad de esas variables. Se ha realizado esto utilizando la función `vglm` del paquete `VGAM`. Vemos que ahora hay cuatro coeficientes para cada una de las variables `Treat` y `Treat:Period`:
 
 
 \scriptsize
 ```{r}
-#| echo: true
-vglm_treat.period <- vglm(
+options(contrasts = rep("contr.sum", 2))
+vglm_sum_treat.period <- vglm(
     Response ~ Treat * Period,
     VGAM::cumulative(link = "logit", parallel = F ~ Treat + Treat:Period, reverse = T),
     data = df_clean
 )
-coef(vglm_treat.period) %>% data.frame()
+coef(vglm_sum_treat.period) %>% data.frame()
 ```
 \normalsize
 
-```{r}
-accuracy.vglm_treat.period <- sum(apply(predict(vglm_treat.period, newdata = df_clean, type = "response"), 1, which.max) == df_clean$Response) / nrow(df_clean)
-``` 
+El incremento del número de coeficientes complica mucho su interpretación. Algunos autores (ver @sec-ordinal) consideran que la Regresión Lineal Acumulativa resulta útil incluso aunque no se cumpla la constante de proporcionalidad.
+
+
+ 
+{{< include 4.2.qmd >}}
+

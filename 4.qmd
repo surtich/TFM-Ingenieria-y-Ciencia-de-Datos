@@ -30,6 +30,8 @@ test_all_df <- test_all_df %>%
 
 # Modelado estadístico {#sec-modelado}
 
+En este capítulo se realizará un análisis inicial para describir los datos y descubrir las relaciones que se han encontrado utilizando técnicas de estadística descriptiva. En la @sec-modelos-utilizados se concreta y detalla cómo se aplicarán las técnicas estadísticas propuestas en el @sec-arte al diseño de experimento. Se pospone la presentación de resultados al @sec-resultados.
+
 ## Análisis inicial {#sec-eda}
 
 
@@ -56,7 +58,7 @@ df_all %>%
 
 ### Análisis de la calidad de los datos
 
-En esta sección buscamos si hay test que tienen valores de respuesta que puedan resultar anómalos. 
+En esta sección se analiza si hay test que tienen valores de respuesta que puedan resultar anómalos. 
 En los test no se ha observado ningún valor nulo ni erróneo.
 
 ```{r}
@@ -74,7 +76,7 @@ washout_cut_1 <- 5
 washout_cut_2 <- 2
 ```
 
-El campo `LastTry` contiene la fecha y hora de realización del test. Con esta información podemos conocer el tiempo que empleó cada estudiante entre actividades. 
+El campo `LastTry` contiene la fecha y hora de realización del test. Con esta información se puede conocer el tiempo que empleó cada estudiante entre actividades. 
 La @tbl-washout muestra que hay algunos test que se hicieron demasiado rápido
 ^[Hay que tener en cuenta que la duración de vídeo es de algo más de 40 segundos y que los estudiantes tienen que contestar un test de 18 ítems.].
 
@@ -120,10 +122,10 @@ distinct_response__summary_df <- distinct_response_df %>%
 
 La @fig-distinct muestra que hay `r (distinct_response__summary_df %>%
     filter(n == distinct_cut_1))$nn`
-test en los que el estudiante contestó a todas las preguntas usando únicamente `r distinct_cut_1` respuestas diferentes.
+test en los que el estudiante contestó a todas los ítems usando únicamente `r distinct_cut_1` respuestas diferentes.
 Además hay `r (distinct_response__summary_df %>%
     filter(n == distinct_cut_2))$nn` 
-    test en los que se contestaron todas las preguntas con `r distinct_cut_2` respuesta.
+    test en los que se contestaron todas los ítems con `r distinct_cut_2` respuesta.
 
 ```{r}
 #| label: fig-distinct
@@ -373,9 +375,6 @@ La @fig-freqs muestra algunas cuestiones interesantes:
 
 * En general los dos grupos muestran bastante acuerdo en el subtitulado en ambos niveles: En el nivel de tratamiento $A$ los dos grupos tienen una frecuencia relativa similar de respuestas positivas (valores 4 y 5). El grupo $AB$ tiene un `r get_freqs(Seq="AB", Treat="A", Response=c(4,5))` de respuestas positivas frente a un `r get_freqs(Seq="BA", Treat="A", Response=c(4,5))` el grupo $BA$. No obstante, el grupo $AB$ tiene más respuestas con valor 5 que el grupo $BA$ (`r get_freqs(Seq="AB", Treat="A", Response=5)` frente a `r get_freqs(Seq="BA", Treat="A", Response=5)`). La valoración es también similar entre grupos en el nivel de tratamiento $B$: el grupo $AB$ tiene `r get_freqs(Seq="AB", Treat="B", Response=c(4,5))` de respuestas positivas y `r get_freqs(Seq="BA", Treat="B", Response=c(4,5))` el grupo $BA$. Las valoraciones negativas (1, 2), la neutra (3) y la 'No sé / No contesto' (0) son también muy similares.
 
-* Las respuestas son similares entre periodos aunque ligeramente más negativas en el segundo. Así un `r get_freqs(df_freqs_period, Period=1, Response=c(4,5))` de las respuestas son positivas en el primer periodo frente a un `r get_freqs(df_freqs_period, Period=2, Response=c(4,5))` en el segundo.
-
-
 ```{r}
 #| label: fig-freqs
 #| fig-cap: Frecuencias relativas de las respuestas al test.
@@ -430,7 +429,7 @@ El gráfico @fig-levels muestra la frecuencia relativa por grupo y por test de l
  * Los niveles 4 y 5 se consideran positivos.
  * El nivel 0 ("No sé / No contesto") se excluye en este análisis.
 
-Se muestra en primer lugar la pregunta 18 por ser una valoración global del subtitulado y que resume la opinión que sobre el mismo tiene el estudiante. Volvemos a constatar que el subtitulado $A$ es mejor valorado por los estudiantes, pero ahora vemos que en las 18 preguntas ambos grupos tienen más puntuaciones positivas y menos negativas en el subtitulado $A$ que el $B$. También volvemos a encontrar que los dos grupos valoran de forma muy similar los dos niveles de subtitulado en todas la preguntas. En el nivel de subtitulado $A$ las preguntas $Q15$, $Q16$ y $Q17$ obtienen relativamente peores valoraciones (consultar la @tbl-likert-scale para ver los valores) y estas son similares en ambos subtitulados. Hay algunas preguntas que son valoradas de forma positiva incluso en el nivel de subtitulado $B$ (por ejemplo $Q04$ o $Q13$) y que, por lo tanto, su valoración es similar en ambos subtitulados. Por último, las preguntas $Q05$ y $Q09$ (también la $Q14$ pero solo para el grupo $BA$) tienen una valoración muy negativa en el nivel de subtitulado $B$.
+Se muestra en primer lugar la pregunta 18 por ser una valoración global del subtitulado y que resume la opinión que sobre el mismo tiene el estudiante. Volvemos a constatar que el subtitulado $A$ es mejor valorado por los estudiantes, pero ahora vemos que en las 18 preguntas ambos grupos tienen más puntuaciones positivas y menos negativas en el subtitulado $A$ que el $B$. También volvemos a encontrar que los dos grupos valoran de forma muy similar los dos niveles de subtitulado en todas la preguntas. En el nivel de subtitulado $A$ las preguntas $Q15$, $Q16$ y $Q17$ obtienen relativamente peores valoraciones (consultar la @tbl-likert-scale para ver el texto de las preguntas) y estas son similares en ambos subtitulados. Hay algunas preguntas que son valoradas de forma positiva incluso en el nivel de subtitulado $B$ (por ejemplo $Q04$ o $Q13$) y que, por lo tanto, su valoración es similar en ambos subtitulados. Por último, las preguntas $Q05$ y $Q09$ (también la $Q14$ pero solo para el grupo $BA$) tienen una valoración muy negativa en el nivel de subtitulado $B$.
 
 ```{r}
 #| label: fig-levels
@@ -496,7 +495,7 @@ likert_df %>%
 
 
 En la @fig-improve se muestra para cada pregunta la proporción de estudiantes que han valorado mejor el subtitulado $A$ que el $B$
-^[Se han eleminado las preguntas en las que una de las dos respuestas del usuario ha sido "No sé / No contesto". La comparación realizada es respuesta en $A > B$ frente a $A >= B$.]. Se comprueba que la mayoría de las preguntas superan el 50%, lo que indica que los estudiantes valoran mejor el subtitulado $A$.
+^[Se han eliminado las preguntas en las que una de las dos respuestas del usuario ha sido "No sé / No contesto". La comparación realizada es respuesta en $A > B$ frente a $A <= B$.]. Se comprueba que la mayoría de las preguntas superan el 50%, lo que indica que los estudiantes valoran mejor el subtitulado $A$.
 
 ```{r}
 #| label: fig-improve
@@ -514,7 +513,7 @@ df_improve_resume %>% ggplot(aes(y = Improve)) +
     ), fill = "#D8B365", alpha = 0.2) +
     geom_hline(yintercept = seq(0.2, 0.8, by = 0.1), linetype = "dashed", color = "gray80", size = 0.25) +
     geom_hline(yintercept = 0.5, linetype = "dashed", size = 2) +
-    geom_label_repel(sedd=100, size = 4, position = position_jitter(height = 0), aes(x = 0, label = Question, y = Improve)) +
+    geom_label_repel(sedd = 100, size = 4, position = position_jitter(height = 0), aes(x = 0, label = Question, y = Improve)) +
     labs(y = "Frequency of improve", x = NULL) +
     theme(
         axis.line.x = element_blank(),
@@ -543,7 +542,7 @@ df_improve_resume %>% ggplot(aes(y = Improve)) +
     ), fill = "#D8B365", alpha = 0.2) +
     geom_hline(yintercept = seq(0.2, 0.8, by = 0.1), linetype = "dashed", color = "gray80", size = 0.25) +
     geom_hline(yintercept = 0.5, linetype = "dashed", size = 2) +
-    geom_label_repel(seed=100,size = 4, position = position_jitter(height = 0), aes(x = 0, label = Question, y = Improve)) +
+    geom_label_repel(seed = 100, size = 4, position = position_jitter(height = 0), aes(x = 0, label = Question, y = Improve)) +
     labs(y = "Frequency of improve", x = NULL) +
     theme(
         axis.line.x = element_blank(),

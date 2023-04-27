@@ -9,10 +9,10 @@ AB,1,A,4,f,1976,p,NA,Q06,3,3,Neutral,La literalidad.,Literalidad,1
 AB,1,A,4,f,1976,p,NA,Q07,3,3,Neutral,La identificación de los personajes.,Identificación personajes,1
 AB,1,A,4,f,1976,p,NA,Q08,3,3,Neutral,La asignación de líneas a los personajes en los diálogos.,Líneas/personajes,1
 AB,1,A,4,f,1976,p,NA,Q09,3,3,Neutral,La descripción de efectos sonoros.,Efectos sonoros,1
-AB,1,A,4,f,1976,p,NA,Q10,3,3,Neutral,La sincronización de las entradas y salidas de los subtítulos.,Caracteres x línea,2
+AB,1,A,4,f,1976,p,NA,Q10,3,3,Neutral,La sincronización de las entradas y salidas de los subtítulos.,Sincronización,2
 AB,1,A,4,f,1976,p,NA,Q11,3,3,Neutral,La velocidad de exposición de los subtítulos.,Velocidad,2
 AB,1,A,4,f,1976,p,NA,Q12,3,3,Neutral,El máximo número de caracteres por línea.,Caracteres x línea,2
-AB,1,A,4,f,1976,p,NA,Q13,3,3,Neutral,La velocidad de exposición de los subtítulos.,Tipografía,2
+AB,1,A,4,f,1976,p,NA,Q13,3,3,Neutral,La legibilidad de la tipografía.,Tipografía,2
 AB,1,A,4,f,1976,p,NA,Q14,3,3,Neutral,"La separación en líneas diferentes de sintagmas nominales, verbales y preposicionales.",Separación sintagmas,3
 AB,1,A,4,f,1976,p,NA,Q15,3,3,Neutral,La utilización de puntos suspensivos.,Puntos suspensivos,3
 AB,1,A,4,f,1976,p,NA,Q16,3,3,Neutral,La escritura de los números.,Escritura números,3
@@ -97,7 +97,7 @@ AB,2,B,35,m,1972,p,8,Q04,5,5,Muy de acuerdo,El contraste entre los caracteres y 
 AB,2,B,35,m,1972,p,8,Q05,4,4,De acuerdo,La corrección ortográfica y gramatical.,Corrección,1
 AB,2,B,35,m,1972,p,8,Q06,4,4,De acuerdo,La literalidad.,Literalidad,1
 AB,2,B,35,m,1972,p,8,Q07,5,5,Muy de acuerdo,La identificación de los personajes.,Identificación personajes,1
-AB,2,B,35,m,1972,p,8,Q08,5,5,Muy de acuerdo,La asignación de líneas a los personajes en los diálogos.,Separación sintag,1
+AB,2,B,35,m,1972,p,8,Q08,5,5,Muy de acuerdo,La asignación de líneas a los personajes en los diálogos.,Líneas/personajes,1
 AB,2,B,35,m,1972,p,8,Q09,4,4,De acuerdo,La descripción de efectos sonoros.,Efectos sonoros,1
 AB,2,B,35,m,1972,p,8,Q10,5,5,Muy de acuerdo,La sincronización de las entradas y salidas de los subtítulos.,Sincronización,2
 AB,2,B,35,m,1972,p,8,Q11,5,5,Muy de acuerdo,La velocidad de exposición de los subtítulos.,Velocidad,2
@@ -137,7 +137,7 @@ AB,2,B,38,f,1987,a,8,Q08,1,1,Muy en desacuerdo,La asignación de líneas a los p
 AB,2,B,38,f,1987,a,8,Q09,1,1,Muy en desacuerdo,La descripción de efectos sonoros.,Efectos sonoros,1
 AB,2,B,38,f,1987,a,8,Q10,1,1,Muy en desacuerdo,La sincronización de las entradas y salidas de los subtítulos.,Sincronización,2
 AB,2,B,38,f,1987,a,8,Q11,3,3,Neutral,La velocidad de exposición de los subtítulos.,Velocidad,2
-AB,2,B,38,f,1987,a,8,Q12,2,2,En desacuerdo,El máximo número de caracteres por línea.,Caracteres x línea,2
+AB,2,B,38,f,1987,a,8,Q12,2,2,En desacuerdo,La corrección ortográfica y gramatical.,Caracteres x línea,2
 AB,2,B,38,f,1987,a,8,Q13,5,5,Muy de acuerdo,La legibilidad de la tipografía.,Tipografía,2
 AB,2,B,38,f,1987,a,8,Q14,4,4,De acuerdo,"La separación en líneas diferentes de sintagmas nominales, verbales y preposicionales.",Separación sintagmas,3
 AB,2,B,38,f,1987,a,8,Q15,5,5,Muy de acuerdo,La utilización de puntos suspensivos.,Puntos suspensivos,3
@@ -181,7 +181,7 @@ AB,2,B,59,NA,None,NA,NA,Q16,3,3,Neutral,La escritura de los números.,Escritura 
 AB,2,B,59,NA,None,NA,NA,Q17,4,4,De acuerdo,Las incorrecciones en el habla.,Incorrecciones habla,3
 AB,1,A,73,NA,None,NA,10,Q18,4,4,De acuerdo,Los subtítulos del vídeo cumplen en general con los requisitos de accesibilidad.,Valoración general,1
 AB,1,A,73,NA,None,NA,10,Q01,5,5,Muy de acuerdo,La posición de los subtítulos.,Posición,2
-AB,1,A,73,NA,None,NA,10,Q02,5,5,Muy de acuerdo,El número de líneas por subtítulo.,Número líneas,2
+AB,1,A,73,NA,None,NA,10,Q02,5,5,Muy de acuerdo,La velocidad de exposición de los subtítulos.,Número líneas,2
 AB,1,A,73,NA,None,NA,10,Q03,5,5,Muy de acuerdo,La disposición del texto respecto a la caja donde se muestran los subtítulos.,Texto dentro caja,2
 AB,1,A,73,NA,None,NA,10,Q04,4,4,De acuerdo,El contraste entre los caracteres y el fondo.,Contraste,2
 AB,1,A,73,NA,None,NA,10,Q05,3,3,Neutral,La corrección ortográfica y gramatical.,Corrección,1
@@ -204,7 +204,7 @@ AB,2,B,73,NA,None,NA,10,Q03,4,4,De acuerdo,La disposición del texto respecto a 
 AB,2,B,73,NA,None,NA,10,Q04,3,3,Neutral,El contraste entre los caracteres y el fondo.,Contraste,2
 AB,2,B,73,NA,None,NA,10,Q05,2,2,En desacuerdo,La corrección ortográfica y gramatical.,Corrección,1
 AB,2,B,73,NA,None,NA,10,Q06,3,3,Neutral,La literalidad.,Literalidad,1
-AB,2,B,73,NA,None,NA,10,Q07,4,4,De acuerdo,La descripción de efectos sonoros.,Identificación personajes,1
+AB,2,B,73,NA,None,NA,10,Q07,4,4,De acuerdo,La identificación de los personajes.,Identificación personajes,1
 AB,2,B,73,NA,None,NA,10,Q08,2,2,En desacuerdo,La asignación de líneas a los personajes en los diálogos.,Líneas/personajes,1
 AB,2,B,73,NA,None,NA,10,Q09,2,2,En desacuerdo,La descripción de efectos sonoros.,Efectos sonoros,1
 AB,2,B,73,NA,None,NA,10,Q10,4,4,De acuerdo,La sincronización de las entradas y salidas de los subtítulos.,Sincronización,2
@@ -222,7 +222,7 @@ BA,1,B,74,f,1966,m,6,Q03,3,3,Neutral,La disposición del texto respecto a la caj
 BA,1,B,74,f,1966,m,6,Q04,4,4,De acuerdo,El contraste entre los caracteres y el fondo.,Contraste,2
 BA,1,B,74,f,1966,m,6,Q05,1,1,Muy en desacuerdo,La corrección ortográfica y gramatical.,Corrección,1
 BA,1,B,74,f,1966,m,6,Q06,4,4,De acuerdo,La literalidad.,Literalidad,1
-BA,1,B,74,f,1966,m,6,Q07,2,2,En desacuerdo,La descripción de efectos sonoros.,Identificación personajes,1
+BA,1,B,74,f,1966,m,6,Q07,2,2,En desacuerdo,La identificación de los personajes.,Identificación personajes,1
 BA,1,B,74,f,1966,m,6,Q08,2,2,En desacuerdo,La asignación de líneas a los personajes en los diálogos.,Líneas/personajes,1
 BA,1,B,74,f,1966,m,6,Q09,2,2,En desacuerdo,La descripción de efectos sonoros.,Efectos sonoros,1
 BA,1,B,74,f,1966,m,6,Q10,4,4,De acuerdo,La sincronización de las entradas y salidas de los subtítulos.,Sincronización,2
@@ -249,7 +249,7 @@ BA,2,A,74,f,1966,m,6,Q12,4,4,De acuerdo,El máximo número de caracteres por lí
 BA,2,A,74,f,1966,m,6,Q13,4,4,De acuerdo,La legibilidad de la tipografía.,Tipografía,2
 BA,2,A,74,f,1966,m,6,Q14,0,0,No sé / No contesto,"La separación en líneas diferentes de sintagmas nominales, verbales y preposicionales.",Separación sintagmas,3
 BA,2,A,74,f,1966,m,6,Q15,3,3,Neutral,La utilización de puntos suspensivos.,Puntos suspensivos,3
-BA,2,A,74,f,1966,m,6,Q16,0,0,No sé / No contesto,La escritura de los números.,Escritura números,3
+BA,2,A,74,f,1966,m,6,Q16,0,0,No sé / No contesto,La escritura de los números.,Identificación pe,3
 BA,2,A,74,f,1966,m,6,Q17,0,0,No sé / No contesto,Las incorrecciones en el habla.,Incorrecciones habla,3
 AB,1,A,75,m,1981,a,7,Q18,4,4,De acuerdo,Los subtítulos del vídeo cumplen en general con los requisitos de accesibilidad.,Valoración general,1
 AB,1,A,75,m,1981,a,7,Q01,5,5,Muy de acuerdo,La posición de los subtítulos.,Posición,2
@@ -259,7 +259,7 @@ AB,1,A,75,m,1981,a,7,Q04,5,5,Muy de acuerdo,El contraste entre los caracteres y 
 AB,1,A,75,m,1981,a,7,Q05,4,4,De acuerdo,La corrección ortográfica y gramatical.,Corrección,1
 AB,1,A,75,m,1981,a,7,Q06,4,4,De acuerdo,La literalidad.,Literalidad,1
 AB,1,A,75,m,1981,a,7,Q07,4,4,De acuerdo,La identificación de los personajes.,Identificación personajes,1
-AB,1,A,75,m,1981,a,7,Q08,4,4,De acuerdo,La asignación de líneas a los personajes en los diálogos.,Líneas/personajes,1
+AB,1,A,75,m,1981,a,7,Q08,4,4,De acuerdo,La velocidad de exposición de los subtítulos.,Líneas/personajes,1
 AB,1,A,75,m,1981,a,7,Q09,4,4,De acuerdo,La descripción de efectos sonoros.,Efectos sonoros,1
 AB,1,A,75,m,1981,a,7,Q10,4,4,De acuerdo,La sincronización de las entradas y salidas de los subtítulos.,Sincronización,2
 AB,1,A,75,m,1981,a,7,Q11,4,4,De acuerdo,La velocidad de exposición de los subtítulos.,Velocidad,2
@@ -337,7 +337,7 @@ BA,1,B,85,m,1966,a,9,Q10,5,5,Muy de acuerdo,La sincronización de las entradas y
 BA,1,B,85,m,1966,a,9,Q11,5,5,Muy de acuerdo,La velocidad de exposición de los subtítulos.,Velocidad,2
 BA,1,B,85,m,1966,a,9,Q12,5,5,Muy de acuerdo,El máximo número de caracteres por línea.,Caracteres x línea,2
 BA,1,B,85,m,1966,a,9,Q13,5,5,Muy de acuerdo,La legibilidad de la tipografía.,Tipografía,2
-BA,1,B,85,m,1966,a,9,Q14,5,5,Muy de acuerdo,"La separación en líneas diferentes de sintagmas nominales, verbales y preposicionales.",Separación sintagmas,3
+BA,1,B,85,m,1966,a,9,Q14,5,5,Muy de acuerdo,"La separación en líneas diferentes de sintagmas nominales, verbales y preposicionales.",Escritura números as,3
 BA,1,B,85,m,1966,a,9,Q15,5,5,Muy de acuerdo,La utilización de puntos suspensivos.,Puntos suspensivos,3
 BA,1,B,85,m,1966,a,9,Q16,5,5,Muy de acuerdo,La escritura de los números.,Escritura números,3
 BA,1,B,85,m,1966,a,9,Q17,5,5,Muy de acuerdo,Las incorrecciones en el habla.,Incorrecciones habla,3
@@ -479,7 +479,7 @@ AB,1,A,196,NA,None,NA,8,Q08,4,4,De acuerdo,La asignación de líneas a los perso
 AB,1,A,196,NA,None,NA,8,Q09,5,5,Muy de acuerdo,La descripción de efectos sonoros.,Efectos sonoros,1
 AB,1,A,196,NA,None,NA,8,Q10,5,5,Muy de acuerdo,La sincronización de las entradas y salidas de los subtítulos.,Sincronización,2
 AB,1,A,196,NA,None,NA,8,Q11,5,5,Muy de acuerdo,La velocidad de exposición de los subtítulos.,Velocidad,2
-AB,1,A,196,NA,None,NA,8,Q12,4,4,De acuerdo,El máximo número de caracteres por línea.,Caracteres x línea,2
+AB,1,A,196,NA,None,NA,8,Q12,4,4,De acuerdo,La utilización de puntos suspensivos.,Caracteres x línea,2
 AB,1,A,196,NA,None,NA,8,Q13,5,5,Muy de acuerdo,La legibilidad de la tipografía.,Tipografía,2
 AB,1,A,196,NA,None,NA,8,Q14,4,4,De acuerdo,"La separación en líneas diferentes de sintagmas nominales, verbales y preposicionales.",Separación sintagmas,3
 AB,1,A,196,NA,None,NA,8,Q15,4,4,De acuerdo,La utilización de puntos suspensivos.,Puntos suspensivos,3
@@ -551,7 +551,7 @@ BA,1,B,212,NA,None,NA,7,Q08,1,1,Muy en desacuerdo,La asignación de líneas a lo
 BA,1,B,212,NA,None,NA,7,Q09,1,1,Muy en desacuerdo,La descripción de efectos sonoros.,Efectos sonoros,1
 BA,1,B,212,NA,None,NA,7,Q10,1,1,Muy en desacuerdo,La sincronización de las entradas y salidas de los subtítulos.,Sincronización,2
 BA,1,B,212,NA,None,NA,7,Q11,1,1,Muy en desacuerdo,La velocidad de exposición de los subtítulos.,Velocidad,2
-BA,1,B,212,NA,None,NA,7,Q12,1,1,Muy en desacuerdo,El máximo número de caracteres por línea.,Escritura números,2
+BA,1,B,212,NA,None,NA,7,Q12,1,1,Muy en desacuerdo,El máximo número de caracteres por línea.,Caracteres x línea,2
 BA,1,B,212,NA,None,NA,7,Q13,3,3,Neutral,La legibilidad de la tipografía.,Tipografía,2
 BA,1,B,212,NA,None,NA,7,Q14,1,1,Muy en desacuerdo,"La separación en líneas diferentes de sintagmas nominales, verbales y preposicionales.",Separación sintagmas,3
 BA,1,B,212,NA,None,NA,7,Q15,1,1,Muy en desacuerdo,La utilización de puntos suspensivos.,Puntos suspensivos,3
@@ -588,7 +588,7 @@ BA,1,B,220,f,1984,m,8,Q09,2,2,En desacuerdo,La descripción de efectos sonoros.,
 BA,1,B,220,f,1984,m,8,Q10,3,3,Neutral,La sincronización de las entradas y salidas de los subtítulos.,Sincronización,2
 BA,1,B,220,f,1984,m,8,Q11,3,3,Neutral,La velocidad de exposición de los subtítulos.,Velocidad,2
 BA,1,B,220,f,1984,m,8,Q12,3,3,Neutral,El máximo número de caracteres por línea.,Caracteres x línea,2
-BA,1,B,220,f,1984,m,8,Q13,4,4,De acuerdo,La legibilidad de la tipografía.,Tipografía,2
+BA,1,B,220,f,1984,m,8,Q13,4,4,De acuerdo,La velocidad de exposición de lo,Tipografía,2
 BA,1,B,220,f,1984,m,8,Q14,3,3,Neutral,"La separación en líneas diferentes de sintagmas nominales, verbales y preposicionales.",Separación sintagmas,3
 BA,1,B,220,f,1984,m,8,Q15,2,2,En desacuerdo,La utilización de puntos suspensivos.,Puntos suspensivos,3
 BA,1,B,220,f,1984,m,8,Q16,4,4,De acuerdo,La escritura de los números.,Escritura números,3
@@ -602,7 +602,7 @@ BA,2,A,220,f,1984,m,8,Q05,4,4,De acuerdo,La corrección ortográfica y gramatica
 BA,2,A,220,f,1984,m,8,Q06,4,4,De acuerdo,La literalidad.,Literalidad,1
 BA,2,A,220,f,1984,m,8,Q07,4,4,De acuerdo,La identificación de los personajes.,Identificación personajes,1
 BA,2,A,220,f,1984,m,8,Q08,4,4,De acuerdo,La asignación de líneas a los personajes en los diálogos.,Líneas/personajes,1
-BA,2,A,220,f,1984,m,8,Q09,4,4,De acuerdo,El máximo número de caracteres po,Efectos sonoros,1
+BA,2,A,220,f,1984,m,8,Q09,4,4,De acuerdo,La descripción de efectos sonoros.,Efectos sonoros,1
 BA,2,A,220,f,1984,m,8,Q10,4,4,De acuerdo,La sincronización de las entradas y salidas de los subtítulos.,Sincronización,2
 BA,2,A,220,f,1984,m,8,Q11,4,4,De acuerdo,La velocidad de exposición de los subtítulos.,Velocidad,2
 BA,2,A,220,f,1984,m,8,Q12,4,4,De acuerdo,El máximo número de caracteres por línea.,Caracteres x línea,2
@@ -690,7 +690,7 @@ BA,1,B,233,f,1978,a,NA,Q03,3,3,Neutral,La disposición del texto respecto a la c
 BA,1,B,233,f,1978,a,NA,Q04,5,5,Muy de acuerdo,El contraste entre los caracteres y el fondo.,Contraste,2
 BA,1,B,233,f,1978,a,NA,Q05,4,4,De acuerdo,La corrección ortográfica y gramatical.,Corrección,1
 BA,1,B,233,f,1978,a,NA,Q06,5,5,Muy de acuerdo,La literalidad.,Literalidad,1
-BA,1,B,233,f,1978,a,NA,Q07,5,5,Muy de acuerdo,La identificación de los personajes.,Identificación personajes,1
+BA,1,B,233,f,1978,a,NA,Q07,5,5,Muy de acuerdo,La identificación de los personajes.,Número líneas,1
 BA,1,B,233,f,1978,a,NA,Q08,4,4,De acuerdo,La asignación de líneas a los personajes en los diálogos.,Líneas/personajes,1
 BA,1,B,233,f,1978,a,NA,Q09,5,5,Muy de acuerdo,La descripción de efectos sonoros.,Efectos sonoros,1
 BA,1,B,233,f,1978,a,NA,Q10,5,5,Muy de acuerdo,La sincronización de las entradas y salidas de los subtítulos.,Sincronización,2
@@ -734,7 +734,7 @@ BA,1,B,264,m,1965,a,8,Q11,5,5,Muy de acuerdo,La velocidad de exposición de los 
 BA,1,B,264,m,1965,a,8,Q12,5,5,Muy de acuerdo,El máximo número de caracteres por línea.,Caracteres x línea,2
 BA,1,B,264,m,1965,a,8,Q13,5,5,Muy de acuerdo,La legibilidad de la tipografía.,Tipografía,2
 BA,1,B,264,m,1965,a,8,Q14,2,2,En desacuerdo,"La separación en líneas diferentes de sintagmas nominales, verbales y preposicionales.",Separación sintagmas,3
-BA,1,B,264,m,1965,a,8,Q15,5,5,Muy de acuerdo,La velocidad de exposición de los sub,Puntos suspensivos,3
+BA,1,B,264,m,1965,a,8,Q15,5,5,Muy de acuerdo,La utilización de puntos suspensivos.,Puntos suspensivos,3
 BA,1,B,264,m,1965,a,8,Q16,3,3,Neutral,La escritura de los números.,Escritura números,3
 BA,1,B,264,m,1965,a,8,Q17,5,5,Muy de acuerdo,Las incorrecciones en el habla.,Incorrecciones habla,3
 BA,2,A,264,m,1965,a,8,Q18,5,5,Muy de acuerdo,Los subtítulos del vídeo cumplen en general con los requisitos de accesibilidad.,Valoración general,1
@@ -778,7 +778,7 @@ AB,2,B,281,m,1980,p,9,Q01,4,4,De acuerdo,La posición de los subtítulos.,Posici
 AB,2,B,281,m,1980,p,9,Q02,2,2,En desacuerdo,El número de líneas por subtítulo.,Número líneas,2
 AB,2,B,281,m,1980,p,9,Q03,4,4,De acuerdo,La disposición del texto respecto a la caja donde se muestran los subtítulos.,Texto dentro caja,2
 AB,2,B,281,m,1980,p,9,Q04,4,4,De acuerdo,El contraste entre los caracteres y el fondo.,Contraste,2
-AB,2,B,281,m,1980,p,9,Q05,2,2,En desacuerdo,La corrección ortográfica y gramatical.,Corrección,1
+AB,2,B,281,m,1980,p,9,Q05,2,2,En desacuerdo,La identificación de los personajes.,Corrección,1
 AB,2,B,281,m,1980,p,9,Q06,3,3,Neutral,La literalidad.,Literalidad,1
 AB,2,B,281,m,1980,p,9,Q07,5,5,Muy de acuerdo,La identificación de los personajes.,Identificación personajes,1
 AB,2,B,281,m,1980,p,9,Q08,3,3,Neutral,La asignación de líneas a los personajes en los diálogos.,Líneas/personajes,1
@@ -816,13 +816,13 @@ AB,2,B,288,f,1985,a,9,Q03,5,5,Muy de acuerdo,La disposición del texto respecto 
 AB,2,B,288,f,1985,a,9,Q04,5,5,Muy de acuerdo,El contraste entre los caracteres y el fondo.,Contraste,2
 AB,2,B,288,f,1985,a,9,Q05,1,1,Muy en desacuerdo,La corrección ortográfica y gramatical.,Corrección,1
 AB,2,B,288,f,1985,a,9,Q06,5,5,Muy de acuerdo,La literalidad.,Literalidad,1
-AB,2,B,288,f,1985,a,9,Q07,2,2,En desacuerdo,La identificación de los personajes.,Identificación personajes,1
+AB,2,B,288,f,1985,a,9,Q07,2,2,En desacuerdo,La identificación de los personajes.,La escritura de los números.,1
 AB,2,B,288,f,1985,a,9,Q08,2,2,En desacuerdo,La asignación de líneas a los personajes en los diálogos.,Líneas/personajes,1
 AB,2,B,288,f,1985,a,9,Q09,1,1,Muy en desacuerdo,La descripción de efectos sonoros.,Efectos sonoros,1
 AB,2,B,288,f,1985,a,9,Q10,2,2,En desacuerdo,La sincronización de las entradas y salidas de los subtítulos.,Sincronización,2
 AB,2,B,288,f,1985,a,9,Q11,3,3,Neutral,La velocidad de exposición de los subtítulos.,Velocidad,2
 AB,2,B,288,f,1985,a,9,Q12,2,2,En desacuerdo,El máximo número de caracteres por línea.,Caracteres x línea,2
-AB,2,B,288,f,1985,a,9,Q13,3,3,Neutral,La asignación de líneas a los personajes en los diálogos.,Tipografía,2
+AB,2,B,288,f,1985,a,9,Q13,3,3,Neutral,La legibilidad de la tipografía.,Tipografía,2
 AB,2,B,288,f,1985,a,9,Q14,2,2,En desacuerdo,"La separación en líneas diferentes de sintagmas nominales, verbales y preposicionales.",Separación sintagmas,3
 AB,2,B,288,f,1985,a,9,Q15,3,3,Neutral,La utilización de puntos suspensivos.,Puntos suspensivos,3
 AB,2,B,288,f,1985,a,9,Q16,3,3,Neutral,La escritura de los números.,Escritura números,3
@@ -850,7 +850,7 @@ AB,2,B,291,f,None,b,NA,Q01,5,5,Muy de acuerdo,La posición de los subtítulos.,P
 AB,2,B,291,f,None,b,NA,Q02,4,4,De acuerdo,El número de líneas por subtítulo.,Número líneas,2
 AB,2,B,291,f,None,b,NA,Q03,4,4,De acuerdo,La disposición del texto respecto a la caja donde se muestran los subtítulos.,Texto dentro caja,2
 AB,2,B,291,f,None,b,NA,Q04,5,5,Muy de acuerdo,El contraste entre los caracteres y el fondo.,Contraste,2
-AB,2,B,291,f,None,b,NA,Q05,5,5,Muy de acuerdo,La posición de los subtítulos. matical.,Corrección,1
+AB,2,B,291,f,None,b,NA,Q05,5,5,Muy de acuerdo,La corrección ortográfica y gramatical.,Corrección,1
 AB,2,B,291,f,None,b,NA,Q06,4,4,De acuerdo,La literalidad.,Literalidad,1
 AB,2,B,291,f,None,b,NA,Q07,5,5,Muy de acuerdo,La identificación de los personajes.,Identificación personajes,1
 AB,2,B,291,f,None,b,NA,Q08,5,5,Muy de acuerdo,La asignación de líneas a los personajes en los diálogos.,Líneas/personajes,1
@@ -1109,7 +1109,7 @@ BA,2,A,346,f,2000,b,8,Q08,3,3,Neutral,La asignación de líneas a los personajes
 BA,2,A,346,f,2000,b,8,Q09,5,5,Muy de acuerdo,La descripción de efectos sonoros.,Efectos sonoros,1
 BA,2,A,346,f,2000,b,8,Q10,5,5,Muy de acuerdo,La sincronización de las entradas y salidas de los subtítulos.,Sincronización,2
 BA,2,A,346,f,2000,b,8,Q11,4,4,De acuerdo,La velocidad de exposición de los subtítulos.,Velocidad,2
-BA,2,A,346,f,2000,b,8,Q12,5,5,Muy de acuerdo,El máximo número de caracteres por línea.,Caracteres x línea,2
+BA,2,A,346,f,2000,b,8,Q12,5,5,Muy de acuerdo,La utilización de puntos suspensivos.,Caracteres x línea,2
 BA,2,A,346,f,2000,b,8,Q13,5,5,Muy de acuerdo,La legibilidad de la tipografía.,Tipografía,2
 BA,2,A,346,f,2000,b,8,Q14,5,5,Muy de acuerdo,"La separación en líneas diferentes de sintagmas nominales, verbales y preposicionales.",Separación sintagmas,3
 BA,2,A,346,f,2000,b,8,Q15,0,0,No sé / No contesto,La utilización de puntos suspensivos.,Puntos suspensivos,3
@@ -1242,7 +1242,7 @@ AB,1,A,380,NA,None,NA,8,Q15,4,4,De acuerdo,La utilización de puntos suspensivos
 AB,1,A,380,NA,None,NA,8,Q16,5,5,Muy de acuerdo,La escritura de los números.,Escritura números,3
 AB,1,A,380,NA,None,NA,8,Q17,4,4,De acuerdo,Las incorrecciones en el habla.,Incorrecciones habla,3
 AB,2,B,380,NA,None,NA,8,Q18,4,4,De acuerdo,Los subtítulos del vídeo cumplen en general con los requisitos de accesibilidad.,Valoración general,1
-AB,2,B,380,NA,None,NA,8,Q01,5,5,Muy de acuerdo,La posición de los subtítulos.,Corrección,2
+AB,2,B,380,NA,None,NA,8,Q01,5,5,Muy de acuerdo,La posición de los subtítulos.,Posición,2
 AB,2,B,380,NA,None,NA,8,Q02,5,5,Muy de acuerdo,El número de líneas por subtítulo.,Número líneas,2
 AB,2,B,380,NA,None,NA,8,Q03,5,5,Muy de acuerdo,La disposición del texto respecto a la caja donde se muestran los subtítulos.,Texto dentro caja,2
 AB,2,B,380,NA,None,NA,8,Q04,5,5,Muy de acuerdo,El contraste entre los caracteres y el fondo.,Contraste,2
@@ -1354,7 +1354,7 @@ BA,2,A,436,f,1995,a,NA,Q01,5,5,Muy de acuerdo,La posición de los subtítulos.,P
 BA,2,A,436,f,1995,a,NA,Q02,5,5,Muy de acuerdo,El número de líneas por subtítulo.,Número líneas,2
 BA,2,A,436,f,1995,a,NA,Q03,4,4,De acuerdo,La disposición del texto respecto a la caja donde se muestran los subtítulos.,Texto dentro caja,2
 BA,2,A,436,f,1995,a,NA,Q04,5,5,Muy de acuerdo,El contraste entre los caracteres y el fondo.,Contraste,2
-BA,2,A,436,f,1995,a,NA,Q05,5,5,Muy de acuerdo,El máximo número de caracteres por línea.,Corrección,1
+BA,2,A,436,f,1995,a,NA,Q05,5,5,Muy de acuerdo,La corrección ortográfica y gramatical.,Corrección,1
 BA,2,A,436,f,1995,a,NA,Q06,4,4,De acuerdo,La literalidad.,Literalidad,1
 BA,2,A,436,f,1995,a,NA,Q07,3,3,Neutral,La identificación de los personajes.,Identificación personajes,1
 BA,2,A,436,f,1995,a,NA,Q08,0,0,No sé / No contesto,La asignación de líneas a los personajes en los diálogos.,Líneas/personajes,1
@@ -1372,14 +1372,14 @@ BA,1,B,440,f,1977,a,10,Q01,5,5,Muy de acuerdo,La posición de los subtítulos.,P
 BA,1,B,440,f,1977,a,10,Q02,5,5,Muy de acuerdo,El número de líneas por subtítulo.,Número líneas,2
 BA,1,B,440,f,1977,a,10,Q03,0,0,No sé / No contesto,La disposición del texto respecto a la caja donde se muestran los subtítulos.,Texto dentro caja,2
 BA,1,B,440,f,1977,a,10,Q04,5,5,Muy de acuerdo,El contraste entre los caracteres y el fondo.,Contraste,2
-BA,1,B,440,f,1977,a,10,Q05,1,1,Muy en desacuerdo,El número de líneas por subtítulo.,Corrección,1
+BA,1,B,440,f,1977,a,10,Q05,1,1,Muy en desacuerdo,La corrección ortográfica y gramatical.,Corrección,1
 BA,1,B,440,f,1977,a,10,Q06,2,2,En desacuerdo,La literalidad.,Literalidad,1
 BA,1,B,440,f,1977,a,10,Q07,1,1,Muy en desacuerdo,La identificación de los personajes.,Identificación personajes,1
 BA,1,B,440,f,1977,a,10,Q08,4,4,De acuerdo,La asignación de líneas a los personajes en los diálogos.,Líneas/personajes,1
 BA,1,B,440,f,1977,a,10,Q09,1,1,Muy en desacuerdo,La descripción de efectos sonoros.,Efectos sonoros,1
 BA,1,B,440,f,1977,a,10,Q10,4,4,De acuerdo,La sincronización de las entradas y salidas de los subtítulos.,Sincronización,2
 BA,1,B,440,f,1977,a,10,Q11,4,4,De acuerdo,La velocidad de exposición de los subtítulos.,Velocidad,2
-BA,1,B,440,f,1977,a,10,Q12,4,4,De acuerdo,El máximo número de caracteres por línea.,Sincronización,2
+BA,1,B,440,f,1977,a,10,Q12,4,4,De acuerdo,El máximo número de caracteres por línea.,Caracteres x línea,2
 BA,1,B,440,f,1977,a,10,Q13,4,4,De acuerdo,La legibilidad de la tipografía.,Tipografía,2
 BA,1,B,440,f,1977,a,10,Q14,3,3,Neutral,"La separación en líneas diferentes de sintagmas nominales, verbales y preposicionales.",Separación sintagmas,3
 BA,1,B,440,f,1977,a,10,Q15,4,4,De acuerdo,La utilización de puntos suspensivos.,Puntos suspensivos,3
@@ -1462,7 +1462,7 @@ AB,2,B,509,f,1978,a,9,Q01,1,1,Muy en desacuerdo,La posición de los subtítulos.
 AB,2,B,509,f,1978,a,9,Q02,1,1,Muy en desacuerdo,El número de líneas por subtítulo.,Número líneas,2
 AB,2,B,509,f,1978,a,9,Q03,2,2,En desacuerdo,La disposición del texto respecto a la caja donde se muestran los subtítulos.,Texto dentro caja,2
 AB,2,B,509,f,1978,a,9,Q04,5,5,Muy de acuerdo,El contraste entre los caracteres y el fondo.,Contraste,2
-AB,2,B,509,f,1978,a,9,Q05,1,1,Muy en desacuerdo,El número de líneas por subtítulo. al.,Corrección,1
+AB,2,B,509,f,1978,a,9,Q05,1,1,Muy en desacuerdo,La corrección ortográfica y gramatical.,Corrección,1
 AB,2,B,509,f,1978,a,9,Q06,1,1,Muy en desacuerdo,La literalidad.,Literalidad,1
 AB,2,B,509,f,1978,a,9,Q07,2,2,En desacuerdo,La identificación de los personajes.,Identificación personajes,1
 AB,2,B,509,f,1978,a,9,Q08,2,2,En desacuerdo,La asignación de líneas a los personajes en los diálogos.,Líneas/personajes,1
@@ -1523,7 +1523,7 @@ AB,1,A,523,NA,1984,NA,8,Q08,5,5,Muy de acuerdo,La asignación de líneas a los p
 AB,1,A,523,NA,1984,NA,8,Q09,5,5,Muy de acuerdo,La descripción de efectos sonoros.,Efectos sonoros,1
 AB,1,A,523,NA,1984,NA,8,Q10,5,5,Muy de acuerdo,La sincronización de las entradas y salidas de los subtítulos.,Sincronización,2
 AB,1,A,523,NA,1984,NA,8,Q11,5,5,Muy de acuerdo,La velocidad de exposición de los subtítulos.,Velocidad,2
-AB,1,A,523,NA,1984,NA,8,Q12,5,5,Muy de acuerdo,El máximo número de caracteres por línea.,Caracteres x línea,2
+AB,1,A,523,NA,1984,NA,8,Q12,5,5,Muy de acuerdo,La utilización de puntos suspensivos. �nea.,Caracteres x línea,2
 AB,1,A,523,NA,1984,NA,8,Q13,5,5,Muy de acuerdo,La legibilidad de la tipografía.,Tipografía,2
 AB,1,A,523,NA,1984,NA,8,Q14,5,5,Muy de acuerdo,"La separación en líneas diferentes de sintagmas nominales, verbales y preposicionales.",Separación sintagmas,3
 AB,1,A,523,NA,1984,NA,8,Q15,5,5,Muy de acuerdo,La utilización de puntos suspensivos.,Puntos suspensivos,3
@@ -1614,7 +1614,7 @@ AB,2,B,536,f,1983,hs,7,Q09,2,2,En desacuerdo,La descripción de efectos sonoros.
 AB,2,B,536,f,1983,hs,7,Q10,0,0,No sé / No contesto,La sincronización de las entradas y salidas de los subtítulos.,Sincronización,2
 AB,2,B,536,f,1983,hs,7,Q11,2,2,En desacuerdo,La velocidad de exposición de los subtítulos.,Velocidad,2
 AB,2,B,536,f,1983,hs,7,Q12,2,2,En desacuerdo,El máximo número de caracteres por línea.,Caracteres x línea,2
-AB,2,B,536,f,1983,hs,7,Q13,1,1,Muy en desacuerdo,La legibilidad de la tipografía.,Tipografía,2
+AB,2,B,536,f,1983,hs,7,Q13,1,1,Muy en desacuerdo,La velocidad de exposición de lo,Tipografía,2
 AB,2,B,536,f,1983,hs,7,Q14,0,0,No sé / No contesto,"La separación en líneas diferentes de sintagmas nominales, verbales y preposicionales.",Separación sintagmas,3
 AB,2,B,536,f,1983,hs,7,Q15,2,2,En desacuerdo,La utilización de puntos suspensivos.,Puntos suspensivos,3
 AB,2,B,536,f,1983,hs,7,Q16,4,4,De acuerdo,La escritura de los números.,Escritura números,3
@@ -1676,7 +1676,7 @@ AB,1,A,624,f,1985,m,9,Q17,3,3,Neutral,Las incorrecciones en el habla.,Incorrecci
 AB,2,B,624,f,1985,m,9,Q18,4,4,De acuerdo,Los subtítulos del vídeo cumplen en general con los requisitos de accesibilidad.,Valoración general,1
 AB,2,B,624,f,1985,m,9,Q01,4,4,De acuerdo,La posición de los subtítulos.,Posición,2
 AB,2,B,624,f,1985,m,9,Q02,4,4,De acuerdo,El número de líneas por subtítulo.,Número líneas,2
-AB,2,B,624,f,1985,m,9,Q03,2,2,En desacuerdo,La disposición del texto respecto a la caja donde se muestran los subtítulos.,Texto dentro caja,2
+AB,2,B,624,f,1985,m,9,Q03,2,2,En desacuerdo,La sincronización de las entradas y salidas de los subtítulos.,Texto dentro caja,2
 AB,2,B,624,f,1985,m,9,Q04,4,4,De acuerdo,El contraste entre los caracteres y el fondo.,Contraste,2
 AB,2,B,624,f,1985,m,9,Q05,2,2,En desacuerdo,La corrección ortográfica y gramatical.,Corrección,1
 AB,2,B,624,f,1985,m,9,Q06,2,2,En desacuerdo,La literalidad.,Literalidad,1
@@ -1735,7 +1735,7 @@ BA,1,B,657,NA,None,NA,10,Q04,1,1,Muy en desacuerdo,El contraste entre los caract
 BA,1,B,657,NA,None,NA,10,Q05,1,1,Muy en desacuerdo,La corrección ortográfica y gramatical.,Corrección,1
 BA,1,B,657,NA,None,NA,10,Q06,3,3,Neutral,La literalidad.,Literalidad,1
 BA,1,B,657,NA,None,NA,10,Q07,2,2,En desacuerdo,La identificación de los personajes.,Identificación personajes,1
-BA,1,B,657,NA,None,NA,10,Q08,2,2,En desacuerdo,La corrección ortográfica y gramatical.  en los diálogos.,Líneas/personajes,1
+BA,1,B,657,NA,None,NA,10,Q08,2,2,En desacuerdo,La asignación de líneas a los personajes en los diálogos.,Líneas/personajes,1
 BA,1,B,657,NA,None,NA,10,Q09,1,1,Muy en desacuerdo,La descripción de efectos sonoros.,Efectos sonoros,1
 BA,1,B,657,NA,None,NA,10,Q10,4,4,De acuerdo,La sincronización de las entradas y salidas de los subtítulos.,Sincronización,2
 BA,1,B,657,NA,None,NA,10,Q11,3,3,Neutral,La velocidad de exposición de los subtítulos.,Velocidad,2
@@ -1811,7 +1811,7 @@ BA,1,B,728,f,1975,m,9,Q08,2,2,En desacuerdo,La asignación de líneas a los pers
 BA,1,B,728,f,1975,m,9,Q09,2,2,En desacuerdo,La descripción de efectos sonoros.,Efectos sonoros,1
 BA,1,B,728,f,1975,m,9,Q10,2,2,En desacuerdo,La sincronización de las entradas y salidas de los subtítulos.,Sincronización,2
 BA,1,B,728,f,1975,m,9,Q11,3,3,Neutral,La velocidad de exposición de los subtítulos.,Velocidad,2
-BA,1,B,728,f,1975,m,9,Q12,3,3,Neutral,El máximo número de caracteres por línea.,Sincronización nea,2
+BA,1,B,728,f,1975,m,9,Q12,3,3,Neutral,El máximo número de caracteres por línea.,Caracteres x línea,2
 BA,1,B,728,f,1975,m,9,Q13,4,4,De acuerdo,La legibilidad de la tipografía.,Tipografía,2
 BA,1,B,728,f,1975,m,9,Q14,2,2,En desacuerdo,"La separación en líneas diferentes de sintagmas nominales, verbales y preposicionales.",Separación sintagmas,3
 BA,1,B,728,f,1975,m,9,Q15,3,3,Neutral,La utilización de puntos suspensivos.,Puntos suspensivos,3
@@ -1883,7 +1883,7 @@ BA,1,B,749,f,1991,a,7,Q08,2,2,En desacuerdo,La asignación de líneas a los pers
 BA,1,B,749,f,1991,a,7,Q09,1,1,Muy en desacuerdo,La descripción de efectos sonoros.,Efectos sonoros,1
 BA,1,B,749,f,1991,a,7,Q10,2,2,En desacuerdo,La sincronización de las entradas y salidas de los subtítulos.,Sincronización,2
 BA,1,B,749,f,1991,a,7,Q11,3,3,Neutral,La velocidad de exposición de los subtítulos.,Velocidad,2
-BA,1,B,749,f,1991,a,7,Q12,4,4,De acuerdo,El máximo número de caracteres por línea.,Caracteres x línea,2
+BA,1,B,749,f,1991,a,7,Q12,4,4,De acuerdo,La velocidad de exposición de los subtítulos.,Caracteres x línea,2
 BA,1,B,749,f,1991,a,7,Q13,4,4,De acuerdo,La legibilidad de la tipografía.,Tipografía,2
 BA,1,B,749,f,1991,a,7,Q14,3,3,Neutral,"La separación en líneas diferentes de sintagmas nominales, verbales y preposicionales.",Separación sintagmas,3
 BA,1,B,749,f,1991,a,7,Q15,4,4,De acuerdo,La utilización de puntos suspensivos.,Puntos suspensivos,3
@@ -1935,7 +1935,7 @@ BA,2,A,765,NA,None,NA,9,Q06,4,4,De acuerdo,La literalidad.,Literalidad,1
 BA,2,A,765,NA,None,NA,9,Q07,4,4,De acuerdo,La identificación de los personajes.,Identificación personajes,1
 BA,2,A,765,NA,None,NA,9,Q08,3,3,Neutral,La asignación de líneas a los personajes en los diálogos.,Líneas/personajes,1
 BA,2,A,765,NA,None,NA,9,Q09,4,4,De acuerdo,La descripción de efectos sonoros.,Efectos sonoros,1
-BA,2,A,765,NA,None,NA,9,Q10,4,4,De acuerdo,La sincronización de las entradas y salidas de los subtítulos.,Sincronización,2
+BA,2,A,765,NA,None,NA,9,Q10,4,4,De acuerdo,La sincronización de las entradas y salidas de los subtítulos.,Caracteres x línea,2
 BA,2,A,765,NA,None,NA,9,Q11,4,4,De acuerdo,La velocidad de exposición de los subtítulos.,Velocidad,2
 BA,2,A,765,NA,None,NA,9,Q12,3,3,Neutral,El máximo número de caracteres por línea.,Caracteres x línea,2
 BA,2,A,765,NA,None,NA,9,Q13,4,4,De acuerdo,La legibilidad de la tipografía.,Tipografía,2
@@ -1955,7 +1955,7 @@ AB,1,A,788,NA,None,NA,NA,Q08,5,5,Muy de acuerdo,La asignación de líneas a los 
 AB,1,A,788,NA,None,NA,NA,Q09,5,5,Muy de acuerdo,La descripción de efectos sonoros.,Efectos sonoros,1
 AB,1,A,788,NA,None,NA,NA,Q10,5,5,Muy de acuerdo,La sincronización de las entradas y salidas de los subtítulos.,Sincronización,2
 AB,1,A,788,NA,None,NA,NA,Q11,5,5,Muy de acuerdo,La velocidad de exposición de los subtítulos.,Velocidad,2
-AB,1,A,788,NA,None,NA,NA,Q12,5,5,Muy de acuerdo,El máximo número de caracteres por línea.,Caracteres x línea,2
+AB,1,A,788,NA,None,NA,NA,Q12,5,5,Muy de acuerdo,La posición de los subtítulos.,Caracteres x línea,2
 AB,1,A,788,NA,None,NA,NA,Q13,5,5,Muy de acuerdo,La legibilidad de la tipografía.,Tipografía,2
 AB,1,A,788,NA,None,NA,NA,Q14,5,5,Muy de acuerdo,"La separación en líneas diferentes de sintagmas nominales, verbales y preposicionales.",Separación sintagmas,3
 AB,1,A,788,NA,None,NA,NA,Q15,5,5,Muy de acuerdo,La utilización de puntos suspensivos.,Puntos suspensivos,3
@@ -2076,7 +2076,7 @@ BA,2,A,808,NA,None,NA,9,Q03,5,5,Muy de acuerdo,La disposición del texto respect
 BA,2,A,808,NA,None,NA,9,Q04,5,5,Muy de acuerdo,El contraste entre los caracteres y el fondo.,Contraste,2
 BA,2,A,808,NA,None,NA,9,Q05,5,5,Muy de acuerdo,La corrección ortográfica y gramatical.,Corrección,1
 BA,2,A,808,NA,None,NA,9,Q06,5,5,Muy de acuerdo,La literalidad.,Literalidad,1
-BA,2,A,808,NA,None,NA,9,Q07,5,5,Muy de acuerdo,La identificación de los personajes.,Identificación personajes,1
+BA,2,A,808,NA,None,NA,9,Q07,5,5,Muy de acuerdo,La corrección ortográfica y gramatical.,Identificación personajes,1
 BA,2,A,808,NA,None,NA,9,Q08,5,5,Muy de acuerdo,La asignación de líneas a los personajes en los diálogos.,Líneas/personajes,1
 BA,2,A,808,NA,None,NA,9,Q09,5,5,Muy de acuerdo,La descripción de efectos sonoros.,Efectos sonoros,1
 BA,2,A,808,NA,None,NA,9,Q10,5,5,Muy de acuerdo,La sincronización de las entradas y salidas de los subtítulos.,Sincronización,2
@@ -2282,7 +2282,7 @@ AB,1,A,893,m,1994,m,10,Q11,4,4,De acuerdo,La velocidad de exposición de los sub
 AB,1,A,893,m,1994,m,10,Q12,4,4,De acuerdo,El máximo número de caracteres por línea.,Caracteres x línea,2
 AB,1,A,893,m,1994,m,10,Q13,4,4,De acuerdo,La legibilidad de la tipografía.,Tipografía,2
 AB,1,A,893,m,1994,m,10,Q14,4,4,De acuerdo,"La separación en líneas diferentes de sintagmas nominales, verbales y preposicionales.",Separación sintagmas,3
-AB,1,A,893,m,1994,m,10,Q15,4,4,De acuerdo,La utilización de puntos suspensivos.,Puntos suspensivos,3
+AB,1,A,893,m,1994,m,10,Q15,4,4,De acuerdo,La utiición de los subtítulos. ivos.,Puntos suspensivos,3
 AB,1,A,893,m,1994,m,10,Q16,3,3,Neutral,La escritura de los números.,Escritura números,3
 AB,1,A,893,m,1994,m,10,Q17,5,5,Muy de acuerdo,Las incorrecciones en el habla.,Incorrecciones habla,3
 AB,2,B,893,m,1994,m,10,Q18,2,2,En desacuerdo,Los subtítulos del vídeo cumplen en general con los requisitos de accesibilidad.,Valoración general,1
@@ -2306,7 +2306,7 @@ AB,2,B,893,m,1994,m,10,Q17,2,2,En desacuerdo,Las incorrecciones en el habla.,Inc
 BA,1,B,901,f,1989,a,10,Q18,3,3,Neutral,Los subtítulos del vídeo cumplen en general con los requisitos de accesibilidad.,Valoración general,1
 BA,1,B,901,f,1989,a,10,Q01,4,4,De acuerdo,La posición de los subtítulos.,Posición,2
 BA,1,B,901,f,1989,a,10,Q02,4,4,De acuerdo,El número de líneas por subtítulo.,Número líneas,2
-BA,1,B,901,f,1989,a,10,Q03,4,4,De acuerdo,Los subtítulos del vídeo cumplen en general con los requisitos de accesibilidad.,Texto dentro caja,2
+BA,1,B,901,f,1989,a,10,Q03,4,4,De acuerdo,La disposición del texto respecto a la caja donde se muestran los subtítulos.,Texto dentro caja,2
 BA,1,B,901,f,1989,a,10,Q04,5,5,Muy de acuerdo,El contraste entre los caracteres y el fondo.,Contraste,2
 BA,1,B,901,f,1989,a,10,Q05,3,3,Neutral,La corrección ortográfica y gramatical.,Corrección,1
 BA,1,B,901,f,1989,a,10,Q06,4,4,De acuerdo,La literalidad.,Literalidad,1
@@ -2443,7 +2443,7 @@ BA,2,A,986,f,1981,m,9,Q10,4,4,De acuerdo,La sincronización de las entradas y sa
 BA,2,A,986,f,1981,m,9,Q11,4,4,De acuerdo,La velocidad de exposición de los subtítulos.,Velocidad,2
 BA,2,A,986,f,1981,m,9,Q12,4,4,De acuerdo,El máximo número de caracteres por línea.,Caracteres x línea,2
 BA,2,A,986,f,1981,m,9,Q13,5,5,Muy de acuerdo,La legibilidad de la tipografía.,Tipografía,2
-BA,2,A,986,f,1981,m,9,Q14,5,5,Muy de acuerdo,La sincronización de las entradas y salidas de los subtítulos.,Separación sintagmas,3
+BA,2,A,986,f,1981,m,9,Q14,5,5,Muy de acuerdo,"La separación en líneas diferentes de sintagmas nominales, verbales y preposicionales.",Separación sintagmas,3
 BA,2,A,986,f,1981,m,9,Q15,4,4,De acuerdo,La utilización de puntos suspensivos.,Puntos suspensivos,3
 BA,2,A,986,f,1981,m,9,Q16,0,0,No sé / No contesto,La escritura de los números.,Escritura números,3
 BA,2,A,986,f,1981,m,9,Q17,3,3,Neutral,Las incorrecciones en el habla.,Incorrecciones habla,3
@@ -2524,13 +2524,13 @@ AB,1,A,1017,f,1974,a,9,Q01,5,5,Muy de acuerdo,La posición de los subtítulos.,P
 AB,1,A,1017,f,1974,a,9,Q02,5,5,Muy de acuerdo,El número de líneas por subtítulo.,Número líneas,2
 AB,1,A,1017,f,1974,a,9,Q03,5,5,Muy de acuerdo,La disposición del texto respecto a la caja donde se muestran los subtítulos.,Texto dentro caja,2
 AB,1,A,1017,f,1974,a,9,Q04,5,5,Muy de acuerdo,El contraste entre los caracteres y el fondo.,Contraste,2
-AB,1,A,1017,f,1974,a,9,Q05,5,5,Muy de acuerdo,La velocidad de exposición de los subt�.,Corrección,1
+AB,1,A,1017,f,1974,a,9,Q05,5,5,Muy de acuerdo,La corrección ortográfica y gramatical.,Corrección,1
 AB,1,A,1017,f,1974,a,9,Q06,5,5,Muy de acuerdo,La literalidad.,Literalidad,1
-AB,1,A,1017,f,1974,a,9,Q07,5,5,Muy de acuerdo,La posición de los subtítulos.,Identificación personajes,1
+AB,1,A,1017,f,1974,a,9,Q07,5,5,Muy de acuerdo,La identificación de los personajes.,Identificación personajes,1
 AB,1,A,1017,f,1974,a,9,Q08,4,4,De acuerdo,La asignación de líneas a los personajes en los diálogos.,Líneas/personajes,1
 AB,1,A,1017,f,1974,a,9,Q09,5,5,Muy de acuerdo,La descripción de efectos sonoros.,Efectos sonoros,1
 AB,1,A,1017,f,1974,a,9,Q10,4,4,De acuerdo,La sincronización de las entradas y salidas de los subtítulos.,Sincronización,2
-AB,1,A,1017,f,1974,a,9,Q11,5,5,Muy de acuerdo,La velocidad de exposición de los subt�.,Velocidad,2
+AB,1,A,1017,f,1974,a,9,Q11,5,5,Muy de acuerdo,La velocidad de exposición de los subtítulos.,Velocidad,2
 AB,1,A,1017,f,1974,a,9,Q12,4,4,De acuerdo,El máximo número de caracteres por línea.,Caracteres x línea,2
 AB,1,A,1017,f,1974,a,9,Q13,5,5,Muy de acuerdo,La legibilidad de la tipografía.,Tipografía,2
 AB,1,A,1017,f,1974,a,9,Q14,4,4,De acuerdo,"La separación en líneas diferentes de sintagmas nominales, verbales y preposicionales.",Separación sintagmas,3
@@ -2600,7 +2600,7 @@ AB,1,A,1020,f,1994,m,4,Q05,3,3,Neutral,La corrección ortográfica y gramatical.
 AB,1,A,1020,f,1994,m,4,Q06,3,3,Neutral,La literalidad.,Literalidad,1
 AB,1,A,1020,f,1994,m,4,Q07,3,3,Neutral,La identificación de los personajes.,Identificación personajes,1
 AB,1,A,1020,f,1994,m,4,Q08,3,3,Neutral,La asignación de líneas a los personajes en los diálogos.,Líneas/personajes,1
-AB,1,A,1020,f,1994,m,4,Q09,3,3,Neutral,La legibilidad de la tipografía.,Efectos sonoros,1
+AB,1,A,1020,f,1994,m,4,Q09,3,3,Neutral,La descripción de efectos sonoros.,Efectos sonoros,1
 AB,1,A,1020,f,1994,m,4,Q10,3,3,Neutral,La sincronización de las entradas y salidas de los subtítulos.,Sincronización,2
 AB,1,A,1020,f,1994,m,4,Q11,2,2,En desacuerdo,La velocidad de exposición de los subtítulos.,Velocidad,2
 AB,1,A,1020,f,1994,m,4,Q12,2,2,En desacuerdo,El máximo número de caracteres por línea.,Caracteres x línea,2
@@ -2620,7 +2620,7 @@ AB,2,B,1020,f,1994,m,4,Q07,4,4,De acuerdo,La identificación de los personajes.,
 AB,2,B,1020,f,1994,m,4,Q08,4,4,De acuerdo,La asignación de líneas a los personajes en los diálogos.,Líneas/personajes,1
 AB,2,B,1020,f,1994,m,4,Q09,5,5,Muy de acuerdo,La descripción de efectos sonoros.,Efectos sonoros,1
 AB,2,B,1020,f,1994,m,4,Q10,3,3,Neutral,La sincronización de las entradas y salidas de los subtítulos.,Sincronización,2
-AB,2,B,1020,f,1994,m,4,Q11,4,4,De acuerdo,El máximo número de caracteres por línea.,Velocidad,2
+AB,2,B,1020,f,1994,m,4,Q11,4,4,De acuerdo,La velocidad de exposición de los subtítulos.,Velocidad,2
 AB,2,B,1020,f,1994,m,4,Q12,4,4,De acuerdo,El máximo número de caracteres por línea.,Caracteres x línea,2
 AB,2,B,1020,f,1994,m,4,Q13,4,4,De acuerdo,La legibilidad de la tipografía.,Tipografía,2
 AB,2,B,1020,f,1994,m,4,Q14,5,5,Muy de acuerdo,"La separación en líneas diferentes de sintagmas nominales, verbales y preposicionales.",Separación sintagmas,3
@@ -2677,7 +2677,7 @@ BA,1,B,1034,m,1979,a,7,Q10,2,2,En desacuerdo,La sincronización de las entradas 
 BA,1,B,1034,m,1979,a,7,Q11,4,4,De acuerdo,La velocidad de exposición de los subtítulos.,Velocidad,2
 BA,1,B,1034,m,1979,a,7,Q12,3,3,Neutral,El máximo número de caracteres por línea.,Caracteres x línea,2
 BA,1,B,1034,m,1979,a,7,Q13,3,3,Neutral,La legibilidad de la tipografía.,Tipografía,2
-BA,1,B,1034,m,1979,a,7,Q14,5,5,Muy de acuerdo,"La separación en líneas diferentes de sintagmas nominales, verbales y preposicionales.",Separación sintagmas,3
+BA,1,B,1034,m,1979,a,7,Q14,5,5,Muy de acuerdo,Los subtítulos del vídeo cumplen en general con los requisitos de accesibilidad.,Separación sintagmas,3
 BA,1,B,1034,m,1979,a,7,Q15,2,2,En desacuerdo,La utilización de puntos suspensivos.,Puntos suspensivos,3
 BA,1,B,1034,m,1979,a,7,Q16,4,4,De acuerdo,La escritura de los números.,Escritura números,3
 BA,1,B,1034,m,1979,a,7,Q17,2,2,En desacuerdo,Las incorrecciones en el habla.,Incorrecciones habla,3
@@ -2704,7 +2704,7 @@ BA,1,B,1037,f,1969,a,10,Q01,1,1,Muy en desacuerdo,La posición de los subtítulo
 BA,1,B,1037,f,1969,a,10,Q02,1,1,Muy en desacuerdo,El número de líneas por subtítulo.,Número líneas,2
 BA,1,B,1037,f,1969,a,10,Q03,4,4,De acuerdo,La disposición del texto respecto a la caja donde se muestran los subtítulos.,Texto dentro caja,2
 BA,1,B,1037,f,1969,a,10,Q04,4,4,De acuerdo,El contraste entre los caracteres y el fondo.,Contraste,2
-BA,1,B,1037,f,1969,a,10,Q05,1,1,Muy en desacuerdo,La corrección ortográfica y gramatical.,Corrección,1
+BA,1,B,1037,f,1969,a,10,Q05,1,1,Muy en desacuerdo,La posición de los subtítulos. matical.,Corrección,1
 BA,1,B,1037,f,1969,a,10,Q06,2,2,En desacuerdo,La literalidad.,Literalidad,1
 BA,1,B,1037,f,1969,a,10,Q07,2,2,En desacuerdo,La identificación de los personajes.,Identificación personajes,1
 BA,1,B,1037,f,1969,a,10,Q08,1,1,Muy en desacuerdo,La asignación de líneas a los personajes en los diálogos.,Líneas/personajes,1
@@ -2812,7 +2812,7 @@ AB,1,A,1117,m,1966,NA,7,Q01,4,4,De acuerdo,La posición de los subtítulos.,Posi
 AB,1,A,1117,m,1966,NA,7,Q02,4,4,De acuerdo,El número de líneas por subtítulo.,Número líneas,2
 AB,1,A,1117,m,1966,NA,7,Q03,4,4,De acuerdo,La disposición del texto respecto a la caja donde se muestran los subtítulos.,Texto dentro caja,2
 AB,1,A,1117,m,1966,NA,7,Q04,4,4,De acuerdo,El contraste entre los caracteres y el fondo.,Contraste,2
-AB,1,A,1117,m,1966,NA,7,Q05,3,3,Neutral,El número de líneas por subtítulo.,Corrección,1
+AB,1,A,1117,m,1966,NA,7,Q05,3,3,Neutral,La corrección ortográfica y gramatical.,Corrección,1
 AB,1,A,1117,m,1966,NA,7,Q06,4,4,De acuerdo,La literalidad.,Literalidad,1
 AB,1,A,1117,m,1966,NA,7,Q07,3,3,Neutral,La identificación de los personajes.,Identificación personajes,1
 AB,1,A,1117,m,1966,NA,7,Q08,4,4,De acuerdo,La asignación de líneas a los personajes en los diálogos.,Líneas/personajes,1
@@ -2890,7 +2890,7 @@ AB,1,A,1126,f,1990,m,9,Q07,4,4,De acuerdo,La identificación de los personajes.,
 AB,1,A,1126,f,1990,m,9,Q08,3,3,Neutral,La asignación de líneas a los personajes en los diálogos.,Líneas/personajes,1
 AB,1,A,1126,f,1990,m,9,Q09,2,2,En desacuerdo,La descripción de efectos sonoros.,Efectos sonoros,1
 AB,1,A,1126,f,1990,m,9,Q10,5,5,Muy de acuerdo,La sincronización de las entradas y salidas de los subtítulos.,Sincronización,2
-AB,1,A,1126,f,1990,m,9,Q11,5,5,Muy de acuerdo,La velocidad de exposición de los subtítulos.,Velocidad,2
+AB,1,A,1126,f,1990,m,9,Q11,5,5,Muy de acuerdo,El máximo número de caracteres por línea.,Velocidad,2
 AB,1,A,1126,f,1990,m,9,Q12,4,4,De acuerdo,El máximo número de caracteres por línea.,Caracteres x línea,2
 AB,1,A,1126,f,1990,m,9,Q13,5,5,Muy de acuerdo,La legibilidad de la tipografía.,Tipografía,2
 AB,1,A,1126,f,1990,m,9,Q14,5,5,Muy de acuerdo,"La separación en líneas diferentes de sintagmas nominales, verbales y preposicionales.",Separación sintagmas,3
@@ -3060,8 +3060,8 @@ BA,2,A,1187,m,1989,NA,9,Q15,0,0,No sé / No contesto,La utilización de puntos s
 BA,2,A,1187,m,1989,NA,9,Q16,0,0,No sé / No contesto,La escritura de los números.,Escritura números,3
 BA,2,A,1187,m,1989,NA,9,Q17,0,0,No sé / No contesto,Las incorrecciones en el habla.,Incorrecciones habla,3
 AB,1,A,1189,NA,None,NA,10,Q18,5,5,Muy de acuerdo,Los subtítulos del vídeo cumplen en general con los requisitos de accesibilidad.,Valoración general,1
-AB,1,A,1189,NA,None,NA,10,Q01,4,4,De acuerdo,La corrección ortográfica y gr,Posición,2
-AB,1,A,1189,NA,None,NA,10,Q02,5,5,Muy de acuerdo,El número de líneas por subtítulo.,Número líneas,2
+AB,1,A,1189,NA,None,NA,10,Q01,4,4,De acuerdo,La posición de los subtítulos.,Posición,2
+AB,1,A,1189,NA,None,NA,10,Q02,5,5,Muy de acuerdo,El número de líneas por subtítulo.,Valoración general,2
 AB,1,A,1189,NA,None,NA,10,Q03,5,5,Muy de acuerdo,La disposición del texto respecto a la caja donde se muestran los subtítulos.,Texto dentro caja,2
 AB,1,A,1189,NA,None,NA,10,Q04,5,5,Muy de acuerdo,El contraste entre los caracteres y el fondo.,Contraste,2
 AB,1,A,1189,NA,None,NA,10,Q05,5,5,Muy de acuerdo,La corrección ortográfica y gramatical.,Corrección,1

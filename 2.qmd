@@ -2,7 +2,7 @@
 source("_setup.R")
 ```
 
-# Marco teórico  y estado del arte {#sec-arte}
+# Marco teórico y estado del arte {#sec-arte}
 
 ## Características del diseño del experimento
 
@@ -342,7 +342,7 @@ Este modelo se denomina proporcional ya que se asume que cada predictor tiene lo
 > "Ningún modelo se ajusta perfectamente a los datos, ..., la aproximación ofrecida por el modelo PO sigue siendo bastante útil. Y un análisis unificado del modelo PO es decididamente mejor que recurrir a análisis ineficientes y arbitrarios de valores dicotomizados de Y."
 
  
-## Modelos multinivel
+## Modelos multinivel {#sec-multinivel}
 
 Un modelo multinivel, jerárquico o mixto es un modelo en el que los datos están anidados en una estructura jerárquica. Por ejemplo, si se quisiera evaluar el rendimiento de varios métodos de enseñanza, se podría seleccionar aleatoriamente varios colegios participantes y en cada uno de ellos elegir varias clases en las que se impartiría uno de los métodos de enseñanza. Los modelos multinivel se utilizan cuando se incumple la hipótesis de independencia entre las observaciones. En el caso de los métodos de enseñanza, los alumnos de una clase no son independientes de los alumnos de otra clase del mismo colegio y también es esperable que los alumnos de un mismo colegio sean más parecidos entre sí que los de otro colegio. Otra situación en la que se viola la condición de independencia entre observaciones es cuando se toman varias medidas del mismo sujeto. Este tipo de experimentos se llaman de medidas repetidas o longitudinales
 ^[Hay una diferencia conceptual entre medidas repetidas y longitudinales. Una variable se dice que es longitudinal cuando se toman varias medidas de los sujetos objeto del estudio en diferentes momentos del tiempo. Para que sea considerada de medidas repetidas, las medidas de cada sujeto se toman con distintos niveles de factor. En la práctica la distinción es poco relevante ya que ambas situaciones se parametrizan de la misma forma.]. Cuando se da este supuesto, se considera que las medidas están anidadas en el sujeto [ver @Liu2202]. En un modelo multinivel no es necesario que todas las variables tengan una estructura jerárquica. Distinguimos entonces dos tipos de variables: Las conocidas como de efectos fijos son aquellas que se considera que tienen el mismo efecto en toda la población y, por lo tanto, se debe estimar un único coeficiente. Las variables de efectos aleatorios tienen un coeficiente diferente para cada elemento de la población y se supone que son una muestra de una población mucho mayor, como el caso de seleccionar aleatoriamente una muestra de colegios. Normalmente el coeficiente particular de cada elemento no es de interés para el investigador y se asume que tienen una media centrada en cero. El mayor interés de los efectos aleatorios es la estimación de su matriz de varianzas-covarianzas.
@@ -387,7 +387,7 @@ donde $j$ son los grupos que varían $j = 1,...,J$ ($J$ es el número de grupos)
 
 En @gelman2013 se evalúan tres posibilidades a la hora de definir un modelo:
 
-* $Complete\ pooloing$: Consiste en estimar un único parámetro para cada predictor. Es equivalente a un modelo con efectos fijos.
+* $Complete\ pooling$: Consiste en estimar un único parámetro para cada predictor. Es equivalente a un modelo con efectos fijos.
 * $No\ pooling$: Se estiman tantos parámetros como grupos haya de forma independiente.
 * $Partial\ pooling$: Es el modelo jerárquico. Es una mezcla de ambos, ya que aunque se estima un parámetro para cada grupo (como en $no\ pooling$), esta estimación no es independiente, sino que se supone que las observaciones de un mismo grupo proceden de una misma distribución de probabilidad. Esto se traduce en que se produce una contracción ($shrinkage$) en la estimación de los parámetros hacia la media. Al influir la estimación de unas observaciones en otras, la estimación es de menor valor absoluto que la que resultaría en un modelo de $no\ pooling$. De esta forma podemos ver el $complete\ pooling$ y el $no\ pooling$ como dos casos particulares y extremos del $no\ pooling$. La contracción de coeficientes en los modelos multinivel actúa como una regularización que puede evitar el sobreajuste.
 
