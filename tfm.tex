@@ -547,7 +547,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada nulla aug
 
 Phasellus vitae magna nec mi sagittis luctus vitae eu augue. Donec scelerisque laoreet arcu, eget tempor mi ultricies vel. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum at blandit ex. Vestibulum eu sagittis mauris. In hac habitasse platea dictumst. Duis eget ante vel lacus sollicitudin convallis quis eu velit. Sed auctor sem non nisi hendrerit, vel tincidunt tortor bibendum.
 
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, enhanced, sharp corners, frame hidden, interior hidden, borderline west={3pt}{0pt}{shadecolor}, breakable]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, frame hidden, borderline west={3pt}{0pt}{shadecolor}, enhanced, breakable, sharp corners, boxrule=0pt]}{\end{tcolorbox}}\fi
 
 % Contents
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -593,7 +593,7 @@ experimento}\label{caracteruxedsticas-del-diseuxf1o-del-experimento}}
 
 El objetivo del estudio es responder a la pregunta de investigación:
 
-\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, colbacktitle=quarto-callout-note-color!10!white, toptitle=1mm, arc=.35mm, colback=white, breakable, toprule=.15mm, leftrule=.75mm, colframe=quarto-callout-note-color-frame, coltitle=black, opacityback=0, bottomtitle=1mm, rightrule=.15mm, titlerule=0mm, opacitybacktitle=0.6, left=2mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Pregunta de investigación}]
+\begin{tcolorbox}[enhanced jigsaw, colbacktitle=quarto-callout-note-color!10!white, leftrule=.75mm, bottomtitle=1mm, arc=.35mm, colback=white, titlerule=0mm, coltitle=black, colframe=quarto-callout-note-color-frame, toprule=.15mm, breakable, opacityback=0, opacitybacktitle=0.6, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Pregunta de investigación}, rightrule=.15mm, bottomrule=.15mm, left=2mm]
 
 ¿Son los estudiantes de un curso de creación de materiales accesibles
 capaces de encontrar diferencias en la calidad del subtitulado de un
@@ -1217,8 +1217,8 @@ por máxima verosimilitud (MLE) en la que se hacen ajustes en los grados
 de libertad del modelo con efectos aleatorios para corregir el sesgo que
 se produce al usar MLE.
 
-\hypertarget{modelado-bayesiano}{%
-\section{Modelado bayesiano}\label{modelado-bayesiano}}
+\hypertarget{sec-bayesiano}{%
+\section{Modelado bayesiano}\label{sec-bayesiano}}
 
 El paradigma frecuentista parte de la suposición de que los datos son
 generados a partir de una variable aleatoria \(Y\) y para estimar los
@@ -2377,8 +2377,7 @@ a empeorar la valoración. Sin embargo, la secuencia no resulta
 significativa y además añadirla apenas reduce la \enquote{deviance}, por
 lo que el modelo nulo sin predictores resulta más parsimonioso. Se
 podrían añadir como predictores las preguntas y los estudiantes. No se
-hace aquí y se pospone la discusión hasta el uso de modelos mixtos con
-la regresión ordinal.
+hace aquí y se pospone la sección de resultados.
 
 \begin{verbatim}
 
@@ -2861,16 +2860,16 @@ aunque no se cumpla la constante de proporcionalidad.
 \subsection{Regresión Ordinal Multinivel}\label{sec-multinivel-2}}
 
 En la Sección~\ref{sec-multinivel} se expuso el fundamento teórico de
-estos modelos. Aquí se justificará el interés de este tipo de modelos
-aplicado al caso del subtitulado de vídeos. Hay dos variables
-susceptibles de ser incorporadas al modelo como efectos aleatorios. En
-primer lugar tenemos a los estudiantes. Es evidente que ellos
+estos modelos. Aquí se justificará su interés aplicado al caso del
+subtitulado de vídeos. Hay dos variables susceptibles de ser
+incorporadas al modelo como efectos aleatorios. Una primera variable
+candidata es el factor \texttt{Subject}. Es evidente que los estudiantes
 representan una muestra de una población más amplia que estaría
 constituida por todos los estudiantes de todos los cursos de
 accesibilidad. Pero es que además cada estudiante responde a cada ítem
 dos veces y, por lo tanto, sus observaciones no son independientes. Por
 otro lado, las preguntas no son independientes unas de otras ya que
-pretenden medir la misma variable subyacente. Además el interés no es
+pretenden medir la misma variable subyacente. Además, el interés no es
 conocer el valor concreto de sus coeficientes sino su valor en relación
 a los coeficientes de las otras preguntas. En
 \textcite[pp.~14-16]{burkner2021} \textcite[pp.~19-20]{burkner2019}
@@ -2881,7 +2880,7 @@ podemos encontrar un ejemplo con esta parametrización.
 \textbar{} Subject)}\label{modelo-response-treat-period-1-subject}}
 
 El primer modelo que se propone es uno en el que únicamente se incorpora
-a los estudiantes como efecto aleatorio:
+a los estudiantes con interceptos variables:
 
 \small
 
@@ -2897,15 +2896,19 @@ Level\ 2: & \tau_{kj}  =  \tau_{k} + U_{0j}
 donde \(ij\) es la observación \(i\) del estudiante \(j\). Observe que
 ahora los interceptos \(\tau_{kj}\) se descomponen en una parte fija y
 común para todos los estudiantes \(\tau_{k}\) y una parte variable
-específica para cada estudiante \(U_{0j}\). Para ajustar el modelo, se
-va a utilizar la función \texttt{clmm()} del paquete \texttt{Ordinal} ya
+específica para cada estudiante \(U_{0j}\). Para ajustar el modelo se va
+a utilizar la función \texttt{clmm()} del paquete \texttt{Ordinal} ya
 que permite la inclusión de efectos aleatorios.
 
 \scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{clmm\_treat.period\_subject }\OtherTok{\textless{}{-}} \FunctionTok{clmm}\NormalTok{(Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{*}\NormalTok{ Period }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{|}\NormalTok{ Subject), }\AttributeTok{data =}\NormalTok{ df\_clean)}
+\FunctionTok{options}\NormalTok{(}\AttributeTok{contrasts =} \FunctionTok{rep}\NormalTok{(}\StringTok{"contr.sum"}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\NormalTok{clmm\_treat.period\_subject }\OtherTok{\textless{}{-}} \FunctionTok{clmm}\NormalTok{(}
+\NormalTok{    Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{*}\NormalTok{ Period }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{|}\NormalTok{ Subject),}
+    \AttributeTok{data =}\NormalTok{ df\_clean}
+\NormalTok{)}
 \FunctionTok{summary}\NormalTok{(clmm\_treat.period\_subject)}
 \end{Highlighting}
 \end{Shaded}
@@ -2945,12 +2948,12 @@ Threshold coefficients:
 En la parte de efectos fijos: los interceptos tienen valores similares
 al modelo de efectos fijos (ver Sección~\ref{sec-response-treat.period})
 y los coeficientes incrementan ligeramente su valor. Esto indica una
-mayor diferencia entre las respuestas de los subtitulados \(A\) y \(B\).
+mayor distancia entre las respuestas de los subtitulados \(A\) y \(B\).
 En este modelo el efecto secuencia no es significativo. En cuanto a los
 efectos aleatorios: la varianza del intercepto aleatorio de los
 estudiantes es 1.28. En la Figura~\ref{fig-random-subject-var} se
-muestran los valores de los interceptos aleatorios de los estudiantes.
-La media de estos interceptos como se espera es cercana a cero (-0.008).
+muestran los valores de los interceptos estimados de los estudiantes. La
+media de estos interceptos como se espera es cercana a cero (-0.008).
 
 \begin{figure}[h]
 
@@ -2976,17 +2979,17 @@ subtitulado. Para estimarlo, se propone el siguiente modelo:
 
 \[
 \begin{aligned}
-Level\ 1: & \text{logit}(P(Response_{ij} \leq k)) = \tau_{kj} - \beta_1 \text{Treat}_{ij} - \beta_{2j} \text{Period}_{ij} - \beta_{3} \text{Treat}_{ij} * \text{Period}_{ij} \\
+Level\ 1: & \text{logit}(P(Response_{ij} \leq k)) = \tau_{kj} - \beta_{1j} \text{Treat}_{ij} - \beta_{2} \text{Period}_{ij} - \beta_{3} \text{Treat}_{ij} * \text{Period}_{ij} \\
 Level\ 2: & \tau_{kj}  =  \tau_{k} + U_{0j} \\
-          & \beta_{2j}  =  \beta_{2} + U_{1j}
+          & \beta_{1j}  =  \beta_{1} + U_{1j}
 \end{aligned}
 \]
 
 \normalsize
 
-Ahora el parámetro \(\beta_{2j}\) del subtitulado tiene dos componentes:
-Uno común a todos los estudiantes, \(\beta_{2}\) y otro particular de
-cada estudiante, \(U_{1j}\). El modelo ajustado ocasiona que ahora sólo
+Ahora el parámetro \(\beta_{1j}\) del subtitulado tiene dos componentes:
+Uno común a todos los estudiantes \(\beta_{1}\) y otro particular de
+cada estudiante \(U_{1j}\). El modelo ajustado ocasiona que solo
 \texttt{Treat1} sea significativo, ya que ni el periodo ni la secuencia
 lo son. En los efectos aleatorios la correlación entre intercepto y
 pendiente es prácticamente nula.
@@ -2995,6 +2998,7 @@ pendiente es prácticamente nula.
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\FunctionTok{options}\NormalTok{(}\AttributeTok{contrasts =} \FunctionTok{rep}\NormalTok{(}\StringTok{"contr.sum"}\NormalTok{, }\DecValTok{2}\NormalTok{))}
 \NormalTok{clmm\_treat.period\_treat.subject }\OtherTok{\textless{}{-}} \FunctionTok{clmm}\NormalTok{(}
 \NormalTok{    Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{*}\NormalTok{ Period }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ Treat }\SpecialCharTok{|}\NormalTok{ Subject),}
     \AttributeTok{data =}\NormalTok{ df\_clean}
@@ -3041,7 +3045,8 @@ Threshold coefficients:
 
 Se pueden comparar los modelos con el test de razón de verosimilitud que
 se realiza con la función \texttt{anova} del paquete \texttt{ordinal}.
-Se comprueba que en este test resulta el último modelo:
+Se comprueba que en este test resulta significativamente mejor el último
+modelo:
 
 \scriptsize
 
@@ -3120,6 +3125,7 @@ siguiente:
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\FunctionTok{options}\NormalTok{(}\AttributeTok{contrasts =} \FunctionTok{rep}\NormalTok{(}\StringTok{"contr.sum"}\NormalTok{, }\DecValTok{2}\NormalTok{))}
 \NormalTok{clmm\_treat.period.subject.question }\OtherTok{\textless{}{-}} \FunctionTok{clmm}\NormalTok{(}
 \NormalTok{    Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{*}\NormalTok{ Period }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ Treat }\SpecialCharTok{|}\NormalTok{ Subject) }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ Treat }\SpecialCharTok{|}\NormalTok{ Question),}
     \AttributeTok{data =}\NormalTok{ df\_clean}
@@ -3164,6 +3170,26 @@ Threshold coefficients:
 
 \normalsize
 
+Las ecuaciones del modelo están en Ecuación~\ref{eq-mejor-modelo}.
+
+\small
+
+\begin{equation}\protect\hypertarget{eq-mejor-modelo}{}{
+\begin{aligned}
+Level\ 1: & \text{logit}(P(Response_{ijl} \leq k)) = \tau_{kjl} - \beta_{1jl} \text{Treat}_{ijl} - \beta_{2} \text{Period}_{ijl} - \beta_{3} \text{Treat}_{ijl} * \text{Period}_{ijl} \\
+Level\ 2: & \tau_{kjl}  =  \tau_{k} + U_{0j} + V_{0l} \\
+          & \beta_{1jl}  =  \beta_{1} + U_{1j} + V_{1l}
+\end{aligned}
+}\label{eq-mejor-modelo}\end{equation}
+
+\normalsize
+
+donde \(ijk\) se corresponde con la observación \(i\)-ésima del
+estudiante \(j\) y nivel de subtitulado \(k\). Ahora los interceptos y
+el coeficiente del subtitulado se componen de tres sumandos: una parte
+fija, una parte que depende del estudiante y una parte que depende del
+nivel de subtitulado.
+
 \begin{figure}[h]
 
 {\centering \includegraphics{4_files/figure-pdf/fig-probs-clmm_treat.period.subject.question-1.pdf}
@@ -3177,14 +3203,230 @@ Question)}
 
 \end{figure}
 
+\hypertarget{sec-bayesiano-2}{%
+\subsection{Modelado bayesiano}\label{sec-bayesiano-2}}
+
+Existen muchos paquetes en R para hacer inferencia bayesiana. Algunos de
+ellos son:
+
+\begin{itemize}
+\tightlist
+\item
+  OpenBUGS y WinBUGS: basado en el muestreo de Gibbs.
+\item
+  JAGGS: también utiliza el muestreo de Gibbs.
+\item
+  Stan: Más moderna que las anteriores. Utiliza muestreo HMC
+  (Hamiltonian Monte Carlo) y NUTS (no U-turn sampler). Se pueden
+  definir modelos directamente con el lenguaje de modelado de Stan. Hay
+  muchos paquetes basados en Stan que facilitan la especificación de
+  modelos con una sintaxis más sencilla. En este trabajo se utilizará
+  uno de ellos, \(brms\).
+\item
+  INLA: Evita la simulación MCMC haciendo más rápida la convergencia. Es
+  menos flexible ya que solo se pueden especificar modelos de la familia
+  exponencial.
+\end{itemize}
+
+Se han comparado múltiples modelos usando la función \texttt{LOO} que
+realiza una validación cruzada bayesiana \texttt{leave-one-out} similar
+a la que se explicó en la Sección~\ref{sec-bayesiano}. El mejor modelo
+ha resultado ser el mismo que se seleccionó en modelos mixtos (ver
+Ecuación~\ref{eq-mejor-modelo}). Es decir:
+
+\small
+
+\begin{quote}
+Response \textasciitilde{} Treat*Period + (1 + Treat \textbar{} Subject)
++ (1 + Treat \textbar{} Question) \normalsize
+\end{quote}
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{options}\NormalTok{(}\AttributeTok{contrasts =} \FunctionTok{rep}\NormalTok{(}\StringTok{"contr.sum"}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\NormalTok{brm\_treat.period.subject.question }\OtherTok{\textless{}{-}} \FunctionTok{brm}\NormalTok{(}
+\NormalTok{    Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{*}\NormalTok{ Period }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ Treat }\SpecialCharTok{|}\NormalTok{ Subject) }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ Treat }\SpecialCharTok{|}\NormalTok{ Question),}
+    \AttributeTok{data =}\NormalTok{ df\_clean,}
+    \AttributeTok{family =} \FunctionTok{cumulative}\NormalTok{(}\StringTok{"logit"}\NormalTok{),}
+    \AttributeTok{iter =} \DecValTok{4000}\NormalTok{,}
+    \AttributeTok{sample\_prior =} \ConstantTok{TRUE}\NormalTok{,}
+    \AttributeTok{file =} \StringTok{"models/brm\_treat.period.subject.question"}\NormalTok{,}
+    \AttributeTok{file\_refit =} \StringTok{"on\_change"}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+
+El modelo utiliza como factores con efectos fijos
+(\texttt{complete\ pooling} en terminología bayesiana) el nivel de
+subtitulado y el periodo y la interacción entre ambos; y como efectos
+aleatorios (\texttt{partial\ pooling}) los sujetos y las preguntas del
+test, cada uno de ellos con un intercepto y un nivel de subtitulado
+variable. El resumen del modelo es el siguiente:
+
+\tiny
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(brm\_treat.period.subject.question)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ Family: cumulative 
+  Links: mu = logit; disc = identity 
+Formula: Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question) 
+   Data: df_clean (Number of observations: 2980) 
+  Draws: 4 chains, each with iter = 4000; warmup = 2000; thin = 1;
+         total post-warmup draws = 8000
+
+Group-Level Effects: 
+~Question (Number of levels: 18) 
+                      Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
+sd(Intercept)             0.78      0.15     0.54     1.13 1.00     1873
+sd(Treat1)                0.76      0.15     0.53     1.12 1.01     1708
+cor(Intercept,Treat1)    -0.46      0.20    -0.79    -0.00 1.00     1738
+                      Tail_ESS
+sd(Intercept)             3754
+sd(Treat1)                3645
+cor(Intercept,Treat1)     2863
+
+~Subject (Number of levels: 87) 
+                      Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
+sd(Intercept)             1.54      0.14     1.30     1.83 1.00     1339
+sd(Treat1)                1.21      0.11     1.02     1.45 1.00     1644
+cor(Intercept,Treat1)    -0.11      0.13    -0.36     0.13 1.00     1213
+                      Tail_ESS
+sd(Intercept)             3047
+sd(Treat1)                3421
+cor(Intercept,Treat1)     2301
+
+Population-Level Effects: 
+               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+Intercept[1]      -4.96      0.27    -5.50    -4.42 1.00      985     1681
+Intercept[2]      -2.60      0.26    -3.09    -2.11 1.00      899     1788
+Intercept[3]      -1.32      0.25    -1.80    -0.82 1.00      876     1748
+Intercept[4]       1.24      0.25     0.76     1.74 1.00      872     1775
+Treat1             1.45      0.23     1.01     1.93 1.00     1229     2318
+Period1            0.17      0.14    -0.10     0.43 1.00     1004     2236
+Treat1:Period1     0.14      0.17    -0.19     0.47 1.01      698     1414
+
+Family Specific Parameters: 
+     Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+disc     1.00      0.00     1.00     1.00   NA       NA       NA
+
+Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).
+\end{verbatim}
+
+\normalsize
+
+Se han mantenido las distribuciones de probabilidad a priori que por
+defecto utiliza \texttt{brm} confiando en que sus parámetros son
+adecuados. Sin embargo, conviene comprobar que realmente sea así. En la
+Tabla~\ref{tbl-priors} se muestran las distribuciones a priori de los
+parámetros aleatorios del modelo. En la Figura~\ref{fig-priors} se
+constata que toman valores razonables y no informativos.
+
+\tiny
+
+\hypertarget{tbl-priors}{}
+\begin{longtable}{llllrrrrrl}
+\caption{\label{tbl-priors}Distribuciones a priori del modelo Response \textasciitilde{} Treat *
+Period + (1 + Treat \textbar{} Subject) + (1 + Treat \textbar{}
+Question). }\tabularnewline
+
+\toprule
+prior & class & coef & group & resp & dpar & nlpar & lb & ub & source \\ 
+\midrule
+ & b &  &  &  &  &  &  &  & default \\ 
+ & b & Period1 &  &  &  &  &  &  & default \\ 
+ & b & Treat1 &  &  &  &  &  &  & default \\ 
+ & b & Treat1:Period1 &  &  &  &  &  &  & default \\ 
+student\_t(3, 0, 2.5) & Intercept &  &  &  &  &  &  &  & default \\ 
+ & Intercept & 1 &  &  &  &  &  &  & default \\ 
+ & Intercept & 2 &  &  &  &  &  &  & default \\ 
+ & Intercept & 3 &  &  &  &  &  &  & default \\ 
+ & Intercept & 4 &  &  &  &  &  &  & default \\ 
+lkj\_corr\_cholesky(1) & L &  &  &  &  &  &  &  & default \\ 
+ & L &  & Question &  &  &  &  &  & default \\ 
+ & L &  & Subject &  &  &  &  &  & default \\ 
+student\_t(3, 0, 2.5) & sd &  &  &  &  &  & 0 &  & default \\ 
+ & sd &  & Question &  &  &  &  &  & default \\ 
+ & sd & Intercept & Question &  &  &  &  &  & default \\ 
+ & sd & Treat1 & Question &  &  &  &  &  & default \\ 
+ & sd &  & Subject &  &  &  &  &  & default \\ 
+ & sd & Intercept & Subject &  &  &  &  &  & default \\ 
+ & sd & Treat1 & Subject &  &  &  &  &  & default \\ 
+\bottomrule
+\end{longtable}
+
+\normalsize
+
+\begin{figure}[h]
+
+{\centering \includegraphics{4_files/figure-pdf/fig-priors-1.pdf}
+
+}
+
+\caption{\label{fig-priors}Distribuciones a priori del modelo Response
+\textasciitilde{} Treat * Period + (1 + Treat \textbar{} Subject) + (1 +
+Treat \textbar{} Question).}
+
+\end{figure}
+
+Es importante asegurar que el entrenamiento ha convergido a su
+distribución a posteriori. En la tabla de resumen constatamos que el
+valor de \texttt{Rhat} es inferior a 1.1 y el de \texttt{ESS} superior a
+400 en todos los parámetros, que son umbrales que no se deberían violar
+\autocite[ver][]{burkner2019}. En la Figura~\ref{fig-trace} se comprueba
+que las cadenas MCMC de muestreo de la distribución a posteriori se
+mezclan correctamente y no se aprecia autocorrelación en ninguno de las
+parámetros. Por último, en la Figura~\ref{fig-predictive} se muestra una
+comparación entre los histogramas construidos con los datos con los
+intervalos de confianza marginales de la función predictiva a posteriori
+del modelo. En la mayoría de las preguntas, el muestreo reproduce
+bastante bien el histograma de respuestas, aunque en algunas preguntas,
+como la \texttt{Q16} o la \texttt{Q17}, se aprecian diferencias
+relevantes.
+
+\begin{figure}[h]
+
+{\centering \includegraphics{4_files/figure-pdf/fig-trace-1.pdf}
+
+}
+
+\caption{\label{fig-trace}Cadenas MCMC del modelo Response
+\textasciitilde{} Treat * Period + (1 + Treat \textbar{} Subject) + (1 +
+Treat \textbar{} Question).}
+
+\end{figure}
+
+\begin{figure}[h]
+
+{\centering \includegraphics{4_files/figure-pdf/fig-predictive-1.pdf}
+
+}
+
+\caption{\label{fig-predictive}Comparación de los valores reales con los
+obtenidos a partir de la función predictiva a posteriori del modelo
+Response \textasciitilde{} Treat * Period + (1 + Treat \textbar{}
+Subject) + (1 + Treat \textbar{} Question).}
+
+\end{figure}
+
 \bookmarksetup{startatroot}
 
 \hypertarget{sec-resultados}{%
 \chapter{Resultados}\label{sec-resultados}}
 
 En esté capítulo se comentarán los resultados de las técnicas
-estadísticas (ver \textbf{?@sec-tecnicas}) y de los modelos propuestos
-(ver Capítulo~\ref{sec-modelado}).
+estadísticas y de los modelos propuestos (ver
+Capítulo~\ref{sec-modelado}).
 
 \hypertarget{sec-cronbach-2}{%
 \subsection{Correlación entre preguntas con el alfa de
@@ -3195,16 +3437,15 @@ Cronbach}\label{sec-cronbach-2}}
 \normalsize
 
 El coeficiente \texttt{alfa\ de\ Cronbach} (ver
-Sección~\ref{sec-cronbach}) de la escala de Likert es 0.921 que indica
-una muy buena correlación entre las respuestas a todas las preguntas.
-Este valor apenas se ve alterado si se elimina una de las preguntas.
-Esto nos permite concluir que todos los ítems pertenecen a la misma
-escala de Likert.
-
-En la Tabla~\ref{tbl-item-alpha} mostramos las preguntas que más
-contribuyen al índice \texttt{alpha\ de\ Cronbach}. Es interesante que
-la pregunta \(Q18\), que es la valoración general del cuestionario, sea
-la que mejor contribución tiene al índice.
+Sección~\ref{sec-cronbach}) de la escala de Likert es 0.921 lo que
+indica una muy buena correlación entre las respuestas a todas las
+preguntas. Este valor apenas se ve alterado si se elimina una de las
+preguntas. Esto nos permite concluir que todos los ítems pertenecen a la
+misma escala de Likert. En la Tabla~\ref{tbl-item-alpha} mostramos las
+preguntas que más contribuyen al índice \texttt{alpha\ de\ Cronbach}. Un
+resultado interesante es constatar que la pregunta \(Q18\), que es la
+valoración general del cuestionario, es la que mejor contribución tiene
+al índice.
 
 \tiny
 
@@ -3263,7 +3504,7 @@ no paramétrica. Se ha contrastado la existencia de asociación entre la
 variable respuesta \(Response\) y cada una de las tres variables más
 importantes de nuestro modelo (\(Treat\), \(Period\) y \(Seq\)). En la
 Tabla~\ref{tbl-contingencia-2} se muestran las tablas de contingencia.
-En la Tabla~\ref{tbl-chi2} se muestra que todos los contrastes son
+La Tabla~\ref{tbl-chi2} permite comprobar que todos los contrastes son
 significativos, con lo que se rechaza la hipótesis nula de homogeneidad.
 Todas las variables explicativas tienen influencia en la variable
 respuesta.
@@ -3387,8 +3628,8 @@ respectivamente. El contraste de hipótesis del \(log\ OR\) del
 subtitulado para cada grupo no produce significación estadística en
 ningún nivel de respuesta, por lo que según esta prueba estadística la
 secuencia de subtitulado no influiría en la respuesta de los estudiantes
-(ver Tabla~\ref{tbl-logor1}). Es decir, de acuerdo a este la secuencia
-no influye en la valoración de los subtítulos.
+(ver Tabla~\ref{tbl-logor1}). Es decir, de acuerdo a este test la
+secuencia no influye en la valoración de los subtítulos.
 
 \hypertarget{tbl-logor1}{}
 \begin{longtable}{lrrrr}
@@ -3408,15 +3649,11 @@ Muy de acuerdo & 0.117 & 0.137 & 0.855 & 0.393 \\
 
 Sin embargo, si realizamos este contraste entre subtítulos y periodos
 podemos constatar la existencia de un efecto periodo de signo contrario
-para las preguntas 4 y 5 (ver Tabla~\ref{tbl-logor2}). La razón de que
-se produzca este efecto periodo es que algunas de las respuestas de
-valoración 5 en ambos niveles de subtitulado y grupos en el primer
-periodo se convierten en valoración 4 en el segundo periodo. Esto se
-puede ver más claramente en la Figura~\ref{fig-or2}.
+para las preguntas 4 y 5 (ver Tabla~\ref{tbl-logor2}).
 
 \hypertarget{tbl-logor2}{}
 \begin{longtable}{lrrrr}
-\caption{\label{tbl-logor2}\(Log OR\) \textasciitilde{} Treat + Period + Response\_l }\tabularnewline
+\caption{\label{tbl-logor2}Log OR \textasciitilde{} Treat + Period + Response\_l }\tabularnewline
 
 \toprule
 Response & Estimate & Std. Error & z value & Pr(>|z|) \\ 
@@ -3430,15 +3667,105 @@ Muy de acuerdo & 0.486 & 0.137 & 3.557 & 0.000 \\
 \bottomrule
 \end{longtable}
 
-\begin{figure}[h]
+\hypertarget{modelado}{%
+\subsection{Modelado}\label{modelado}}
 
-{\centering \includegraphics{5_files/figure-pdf/fig-or2-1.pdf}
+El modelo de efectos mixtos ajustado con Regresión Logística:
 
-}
+\begin{quote}
+Improve \textasciitilde{} 1 + (1 \textbar{} Subject) + (1 \textbar{}
+Question)
+\end{quote}
 
-\caption{\label{fig-or2}OR \textasciitilde{} Treat + Period + Response}
+estima la probabilidad de que la respuesta a un ítem en el subtitulado
+\(A\) sea mejor que en el subtitulado \(B\) frente a que sea igual o
+peor. El intercepto del modelo ajustado es 0.404. Por ello, la
+probabilidad de que se otorgue una mayor puntuación en \(A\) que en
+\(B\) es del 59.95\%. En la Tabla~\ref{tbl-improve-question} se muestra
+la probabilidad de que la respuesta sea mejor en \(A\) que en \(B\) por
+ítem.
 
-\end{figure}
+\scriptsize
+
+\hypertarget{tbl-improve-question}{}
+\begin{longtable}{lr}
+\caption{\label{tbl-improve-question}Probabilidad de que la respuesta a un ítem sea A \textgreater{} B frente
+a A \textless= B }\tabularnewline
+
+\toprule
+Question & Prob \\ 
+\midrule
+Q18 & $0.70$ \\ 
+Q01 & $0.36$ \\ 
+Q02 & $0.57$ \\ 
+Q03 & $0.38$ \\ 
+Q04 & $0.16$ \\ 
+Q05 & $0.81$ \\ 
+Q06 & $0.68$ \\ 
+Q07 & $0.58$ \\ 
+Q08 & $0.68$ \\ 
+Q09 & $0.86$ \\ 
+Q10 & $0.45$ \\ 
+Q11 & $0.40$ \\ 
+Q12 & $0.50$ \\ 
+Q13 & $0.24$ \\ 
+Q14 & $0.64$ \\ 
+Q15 & $0.30$ \\ 
+Q16 & $0.24$ \\ 
+Q17 & $0.33$ \\ 
+\bottomrule
+\end{longtable}
+
+\normalsize
+
+En la Sección~\ref{sec-ordinal-2} se evaluaron distintas
+parametrizaciones de la Regresión Ordinal Acumulativa tanto desde el
+punto de vista frecuentista como bayesiano y considerando únicamente
+efectos fijos y también efectos aleatorios. Finalmente, tanto en el
+análisis frecuentista como en el bayesiano, el modelo que resultó ser
+más parsimonioso es el de la Ecuación~\ref{eq-mejor-modelo}, que se
+reproduce aquí en sintaxis R:
+
+\small
+
+\begin{quote}
+Response \textasciitilde{} Treat*Period + (1 + Treat \textbar{} Subject)
++ (1 + Treat \textbar{} Question) \normalsize
+\end{quote}
+
+Este modelo produce en los dos paradigmas unas estimaciones similares,
+como se puede comprobar en la Tabla~\ref{tbl-model-comp}.
+
+\tiny
+
+\hypertarget{tbl-model-comp}{}
+\begin{longtable}{lrrrrrr}
+\caption{\label{tbl-model-comp}Comparación frecuentista/bayesiano de coeficientes estimados en el
+modelo Response \textasciitilde{} Treat * Period + (1 + Treat \textbar{}
+Subject) + (1 + Treat \textbar{} Question). }\tabularnewline
+
+\toprule
+ & \multicolumn{3}{c}{ordinal::clmm} & \multicolumn{3}{c}{brms::brm} \\ 
+\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+Name & Estimation.clmm & conf.2.5\% & conf.97.5\% & Estimation.brm & cred.2.5\% & cred.97.5\% \\ 
+\midrule
+1|2 & -5.00 & -5.52 & -4.49 & -4.96 & -5.50 & -4.42 \\ 
+2|3 & -2.65 & -3.12 & -2.18 & -2.60 & -3.09 & -2.11 \\ 
+3|4 & -1.37 & -1.83 & -0.90 & -1.32 & -1.80 & -0.82 \\ 
+4|5 & 1.18 & 0.72 & 1.65 & 1.24 & 0.76 & 1.74 \\ 
+Treat1 & 1.43 & 1.02 & 1.84 & 1.45 & 1.01 & 1.93 \\ 
+Period1 & 0.17 & -0.09 & 0.43 & 0.17 & -0.10 & 0.43 \\ 
+Treat1:Period1 & 0.14 & -0.18 & 0.46 & 0.14 & -0.19 & 0.47 \\ 
+Question.sd(Intercept) & 0.70 &  &  & 0.76 & 0.54 & 1.13 \\ 
+Question.sd(Treat1) & 0.68 &  &  & 0.74 & 0.53 & 1.12 \\ 
+Subject.sd(Intercept) & 1.49 &  &  & 1.53 & 1.30 & 1.83 \\ 
+Subject.sd(Treat1) & 1.17 &  &  & 1.21 & 1.02 & 1.45 \\ 
+Question.cor(Intercept,Treat1) & -0.53 &  &  & -0.48 & -0.79 & 0.00 \\ 
+Subject.cor(Intercept,Treat1) & -0.13 &  &  & -0.11 & -0.36 & 0.13 \\ 
+\bottomrule
+\end{longtable}
+
+\normalsize
 
 \bookmarksetup{startatroot}
 
@@ -3449,21 +3776,129 @@ Muy de acuerdo & 0.486 & 0.137 & 3.557 & 0.000 \\
 \section{\texorpdfstring{Comparación con
 \(Odds\ Ratio\)}{Comparación con Odds\textbackslash{} Ratio}}\label{sec-or-4}}
 
-En la Sección~\ref{sec-or-3} se constató que hay más proporción de
-respuestas 5 en el primer periodo que en el segundo en ambos niveles de
-subtitulado. Esto estaría indicando que los estudiantes de ambos grupos
-prestaron más atención o fueron más exigentes en el segundo visionado y
-decidieron no otorgar la puntuación máxima incluso en algunos ítems al
-subtitulado correcto. Que el efecto periodo sea contrario en dos
-preguntas (ver @Figura~\ref{fig-or2}) no debe sorprendernos en este
-diseño de experimento, ya que un test es un juego de suma cero: la
+En la Sección~\ref{sec-or-3} se constató la existencia de un efecto
+periodo en las respuestas 4 y 5. El test es significativo porque el
+ratio entre subtítulos de respuestas con valor 4 es diferente en cada
+periodo habiendo mayor respuestas 4 en el segundo periodo que en el
+primero. Con las respuestas 5 ocurre lo contrario: la proporción es
+mayor en el primer periodo. La Figura~\ref{fig-or2} permite una
+comprobación visual. Esto estaría indicando que los estudiantes de ambos
+grupos prestaron más atención o fueron más exigentes en el segundo
+visionado y decidieron no otorgar la puntuación máxima. Que el efecto
+periodo sea de signo contrario en dos respuestas no debe sorprender en
+este diseño de experimento, ya que un test es un juego de suma cero: la
 valoraciones que se ganan o se pierden en un nivel de respuesta
 necesariamente provocan que el resto de niveles pierdan o ganen
 respectivamente la misma cantidad. En cualquier caso, vemos que el
 efecto periodo es cuantitativa y cualitativamente pequeño. Al afectar
-solo al intercambio de valoraciones entre los niveles 4 y 5, y ser las
-dos positivas, es simplemente una pequeña corrección en la valoración
-del subtitulado.
+solo al intercambio de valoraciones entre los niveles 4 y 5, es
+simplemente una pequeña corrección en la valoración del subtitulado y
+que cualitativamente es poco importante ya que las respuestas 4 y 5 son
+ambas valoraciones positivas.
+
+\begin{figure}[h]
+
+{\centering \includegraphics{5_files/figure-pdf/fig-or2-1.pdf}
+
+}
+
+\caption{\label{fig-or2}OR \textasciitilde{} Treat + Period + Response}
+
+\end{figure}
+
+\hypertarget{modelado-1}{%
+\section{Modelado}\label{modelado-1}}
+
+La probabilidad de que los alumnos puntúen mejor el subtitulado \(A\)
+que el \(B\) frente a que lo puntúen igual o peor se estima que es del
+59.95\%. Sin embargo, la distribución por ítems no es uniforme (ver
+Tabla~\ref{tbl-improve-question}). Así, hay ítems en que esta
+probabilidad sobrepasa el 80\% (Q09, Q05). Sin embargo hay otros en que
+no supera el 25\% (Q04, Q16, Q13). La respuesta al ítem Q18 está por
+encima de la media (69.82\%). Parece claro que los ítems en los que la
+respuesta de los estudiantes es diferente en los dos subtitulados es
+porque aprecian diferencias reales entre ellos. Quedaría por dilucidar
+si en los ítems en los que no hay diferencia en las respuestas, se debe
+a que realmente no las hay o si es que los estudiantes no son capaces de
+detectarlas.
+
+La magnitud del efecto del subtitulado sobre las valoraciones es muy
+superior a la de los efectos periodo y secuencia (ver
+Tabla~\ref{tbl-model-comp}), por lo que podemos realizar
+interpretaciones del modelo sin que nos debe preocupar su existencia. En
+la Figura~\ref{fig-pred-3} se representan 50 muestras de la esperanza de
+la distribución predictiva a posteriori para cada pregunta y nivel de
+subtitulado marginalizadas por periodo y estudiante. La primera
+conclusión que podemos extraer es que el modelo tiene bastante
+incertidumbre sobre los valores de respuesta a cada pregunta no
+superando casi nunca el 50\% de probabilidad para todas las preguntas y
+niveles de subtitulado. En general se observa en la mayoría de las
+preguntas del nivel de subtitulado \(A\) que los alumnos están bastante
+seguros de que la respuesta a las preguntas debe ser 4 ó 5, asignando
+una muy baja probabilidad a los valores 1, 2, ó 3, pero habiendo
+bastante confusión respecto cuál de los dos valores (4 ó 5) asignar. En
+el nivel de subtitulado \(B\) la situación es bastante más confusa.
+Aunque la opción de respuesta preferida es 4 y las menos preferidas son
+la 5 y la 1, hay bastante mezcla entre las opciones de respuesta 2, 3 y
+4. En cuanto al análisis individualizado por pregunta podemos extraer
+las siguientes conclusiones:
+
+\begin{itemize}
+\item
+  En las preguntas \(Q04\) y \(Q13\) los estudiantes no aprecian
+  defectos en el subtitulado ni diferencias entre un nivel y otro. Son
+  valoradas en ambos niveles con puntuaciones de 4 y de 5.
+\item
+  En las preguntas \(Q15\), \(Q16\) y \(Q17\), la opción de respuesta
+  más probable es 4 en ambos subtitulados. El modelo asigna una baja
+  probabilidad de respuesta a la opción 1 y similares al resto. La
+  probabilidad de la opción 5 decrece ligeramente entre subtitulado
+  \(A\) y \(B\) y lo contrario ocurre con las opciones 2 y 3.
+\item
+  Las preguntas \(Q01\), \(Q02\), \(Q03\), \(Q10\), \(Q11\) y \(Q12\)
+  son similares a las anteriores. Particularmente en lo referente a que
+  la respuesta más probable en el subtitulado \(B\) es 4. En el
+  subtitulado \(A\) hay preferencia por 4 y 5. El nivel 5 cae
+  acusadamente en el subtitulado \(B\) y en este nivel aumenta
+  ligeramente la probabilidad de respuesta 2 y 3.
+\item
+  Las preguntas \(Q06\), \(Q07\), \(Q14\) y \(Q18\) no son muy
+  diferentes de las anteriores. En general el modelo predice mayor
+  probabilidad de respuesta para 5 en el subtitulado \(A\) pero este
+  valor es con alta probabilidad cercano a cero en el subtitulado \(B\).
+  En el subtitulado \(B\) la probabilidad de respuesta 2, 3 ó 4 es
+  similar.
+\item
+  Las preguntas \(Q05\), \(Q08\) y \(Q09\) son las que más diferencias
+  entre subtitulados presentan. La respuesta más probable en el
+  subtitulado \(A\) es 5 (en \(Q08\) y en \(Q09\) muy parecida a 4). Por
+  contra, en el subtitulado \(B\) las respuestas 4 y 5 tienden a cero,
+  siendo la más probable la respuesta 2. En \(Q05\) y en \(Q09\) la
+  segunda respuesta más probable al subtitulado \(B\) es 1 y 4 en la
+  \(Q08\).
+\end{itemize}
+
+En definitiva, nuestro modelo predice que los estudiantes están bastante
+de acuerdo en que en las preguntas \(Q05\) y \(Q09\) hay una diferencia
+de calidad importante entre subtitulados. También están de acuerdo en
+que en las preguntas \(Q04\) y \(Q13\) no hay apenas cambio entre los
+subtitulados. En las preguntas \(Q15\), \(Q16\) y \(Q17\) hay una gran
+confusión en ambos niveles de subtitulado y en el resto la confusión se
+circunscribe al nivel de subtitulado \(B\), ya que en el nivel \(A\) las
+opciones 4 y 5 predominan.
+
+\begin{figure}[h]
+
+{\centering \includegraphics[width=1\textwidth,height=\textheight]{images/bayes-preg.png}
+
+}
+
+\caption{\label{fig-pred-3}Muestreo de la función predictiva a
+posteriori por tratamiento y pregunta del modelo Response
+\textasciitilde{} Treat * Period + (1 + Treat \textbar{} Subject) + (1 +
+Treat \textbar{} Question).}
+
+\end{figure}
 
 \bookmarksetup{startatroot}
 

@@ -1,6 +1,6 @@
 ### Regresión Ordinal Multinivel {#sec-multinivel-2}
 
-En la @sec-multinivel se expuso el fundamento teórico de estos modelos. Aquí se justificará el interés de este tipo de modelos aplicado al caso del subtitulado de vídeos. Hay dos variables susceptibles de ser incorporadas al modelo como efectos aleatorios. En primer lugar tenemos a los estudiantes. Es evidente que ellos representan una muestra de una población más amplia que estaría constituida por todos los estudiantes de todos los cursos de accesibilidad. Pero es que además cada estudiante responde a cada ítem dos veces y, por lo tanto, sus observaciones no son independientes. Por otro lado, las preguntas no son independientes unas de otras ya que pretenden medir la misma variable subyacente. Además el interés no es conocer el valor concreto de sus coeficientes sino su valor en relación a los coeficientes de las otras preguntas. En @burkner2021 [pp. 14-16] @burkner2019 [pp. 19-20] podemos encontrar un ejemplo con esta parametrización.
+En la @sec-multinivel se expuso el fundamento teórico de estos modelos. Aquí se justificará su interés aplicado al caso del subtitulado de vídeos. Hay dos variables susceptibles de ser incorporadas al modelo como efectos aleatorios. Una primera variable candidata es el factor `Subject`. Es evidente que los estudiantes representan una muestra de una población más amplia que estaría constituida por todos los estudiantes de todos los cursos de accesibilidad. Pero es que además cada estudiante responde a cada ítem dos veces y, por lo tanto, sus observaciones no son independientes. Por otro lado, las preguntas no son independientes unas de otras ya que pretenden medir la misma variable subyacente. Además, el interés no es conocer el valor concreto de sus coeficientes sino su valor en relación a los coeficientes de las otras preguntas. En @burkner2021 [pp. 14-16] @burkner2019 [pp. 19-20] podemos encontrar un ejemplo con esta parametrización.
 
 #### Modelo Response ~ Treat * Period + (1 | Subject)
 
@@ -24,14 +24,16 @@ donde $ij$ es la observación $i$ del estudiante $j$. Observe que ahora los inte
 ```{r}
 #| echo: true
 #| cache: true
+options(contrasts = rep("contr.sum", 2))
 clmm_treat.period_subject <- clmm(
-    Response ~ Treat * Period + (1 | Subject), data = df_clean
+    Response ~ Treat * Period + (1 | Subject),
+    data = df_clean
 )
 summary(clmm_treat.period_subject)
 ```
 \normalsize
 
-En la parte de efectos fijos: los interceptos tienen valores similares al modelo de efectos fijos (ver @sec-response-treat.period) y los coeficientes incrementan ligeramente su valor. Esto indica una mayor diferencia entre las respuestas de los subtitulados $A$ y $B$. En este modelo el efecto secuencia no es significativo. En cuanto a los efectos aleatorios: la varianza del intercepto aleatorio de los estudiantes es `r round(VarCorr(clmm_treat.period_subject)$Subject[1], 2)`. En la @fig-random-subject-var se muestran los valores de los interceptos estimados de los estudiantes. La media de estos interceptos como se espera es cercana a cero (`r round(ranef(clmm_treat.period_subject)$Subject %>% unlist() %>% mean(),3)`).
+En la parte de efectos fijos: los interceptos tienen valores similares al modelo de efectos fijos (ver @sec-response-treat.period) y los coeficientes incrementan ligeramente su valor. Esto indica una mayor distancia entre las respuestas de los subtitulados $A$ y $B$. En este modelo el efecto secuencia no es significativo. En cuanto a los efectos aleatorios: la varianza del intercepto aleatorio de los estudiantes es `r round(VarCorr(clmm_treat.period_subject)$Subject[1], 2)`. En la @fig-random-subject-var se muestran los valores de los interceptos estimados de los estudiantes. La media de estos interceptos como se espera es cercana a cero (`r round(ranef(clmm_treat.period_subject)$Subject %>% unlist() %>% mean(),3)`).
 
 
 ```{r}
@@ -74,6 +76,7 @@ Ahora el parámetro $\beta_{1j}$ del subtitulado tiene dos componentes: Uno com�
 ```{r}
 #| echo: true
 #| cache: true
+options(contrasts = rep("contr.sum", 2))
 clmm_treat.period_treat.subject <- clmm(
     Response ~ Treat * Period + (1 + Treat | Subject),
     data = df_clean
@@ -108,13 +111,13 @@ Se han comparado distintos modelos:
 * Response ~ Treat + (1 + Treat | Subject) + (1 + Treat | Question)
 * Response ~ Treat*Period + (1 + Treat  | Subject) + (1 + Treat | Question)
 
-El último de ellos produce un resultado significativo en el test de razón de verosimilitud con todos los demás. Sin embargo los parámetros de todos los modelos tienen valores similares por lo que no cambia la interpretación que se haga de ellos en cada modelo. Este modelo tiene un $AIC$ menor que los modelos ordinales ajustados en el apartado anterior (ver @sec-ordinal-2) incluso si a esos modelos se les añade como factor predictor `Question`. 
-En la @fig-probs-clmm_treat.period.subject.question se muestran las predicciones del modelo. El resumen de parámetros del modelo es el siguiente:
+El último de ellos produce un resultado significativo en el test de razón de verosimilitud con todos los demás. Sin embargo los parámetros de todos los modelos tienen valores similares por lo que no cambia la interpretación que se haga de ellos en cada modelo. Este modelo tiene un $AIC$ menor que los modelos ordinales ajustados en el apartado anterior (ver @sec-ordinal-2) incluso si a esos modelos se les añade como factor predictor `Question`.  En la @fig-probs-clmm_treat.period.subject.question se muestran las predicciones del modelo. El resumen de parámetros del modelo es el siguiente:
 
 \scriptsize
 ```{r}
 #| echo: true
 #| cache: true
+options(contrasts = rep("contr.sum", 2))
 clmm_treat.period.subject.question <- clmm(
     Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question),
     data = df_clean
@@ -122,6 +125,25 @@ clmm_treat.period.subject.question <- clmm(
 summary(clmm_treat.period.subject.question)
 ```
 \normalsize
+
+
+Las ecuaciones del modelo están en @eq-mejor-modelo.
+
+\small
+
+
+$$
+\begin{aligned}
+Level\ 1: & \text{logit}(P(Response_{ijl} \leq k)) = \tau_{kjl} - \beta_{1jl} \text{Treat}_{ijl} - \beta_{2} \text{Period}_{ijl} - \beta_{3} \text{Treat}_{ijl} * \text{Period}_{ijl} \\
+Level\ 2: & \tau_{kjl}  =  \tau_{k} + U_{0j} + V_{0l} \\
+          & \beta_{1jl}  =  \beta_{1} + U_{1j} + V_{1l}
+\end{aligned}
+$$ {#eq-mejor-modelo}
+
+\normalsize
+
+donde $ijk$ se corresponde con la observación $i$-ésima del estudiante $j$ y nivel de subtitulado $k$. Ahora los interceptos y el coeficiente del subtitulado se componen de tres sumandos: una parte fija, una parte que depende del estudiante y una parte que depende del nivel de subtitulado. 
+
 
 ```{r}
 #| label: fig-probs-clmm_treat.period.subject.question
@@ -137,4 +159,7 @@ emmeans(clmm_treat.period.subject.question, ~ Response + Treat + Period, mode = 
 ```
 
  
+{{< include 4.3.qmd >}}
+
+
 

@@ -393,7 +393,7 @@ En @gelman2013 se evalúan tres posibilidades a la hora de definir un modelo:
 
 Los modelos multinivel requieren supuestos adicionales en el nivel segundo y superiores que son similares a los supuestos para los modelos de efectos fijos [ver @chen2021, pp. 43]. Para estimar los parámetros en un modelo multinivel se suele utilizar el método de máxima verosimilitud restringida (RMLE), que es una variante de la estimación por máxima verosimilitud (MLE) en la que se hacen ajustes en los grados de libertad del modelo con efectos aleatorios para corregir el sesgo que se produce al usar MLE.
 
-## Modelado bayesiano
+## Modelado bayesiano {#sec-bayesiano}
 
 El paradigma frecuentista parte de la suposición de que los datos son generados a partir de una variable aleatoria $Y$ y para estimar los coeficientes se maximiza la función de verosimilitud $p(y \mid \theta)$ que depende del parámetro desconocido $\theta$. En el análisis bayesiano se considera que $\theta$ es una variable aleatoria ya que tenemos incertidumbre respecto a su valor. Esto se traduce en que debemos asignar una distribución de probabilidad $p(\theta)$ conocida como distribución a priori que expresa nuestra creencia sobre los valores que puede tomar $\theta$. En la inferencia bayesiana se usa la distribución de probabilidad a posteriori $p(\theta \mid y)$ que es proporcional al producto de la función de verosimilitud y de la distribución de probabilidad a priori [ver @nicenboim2023]:
 

@@ -4,7 +4,7 @@ source("_setup.R")
 
 # Resultados {#sec-resultados}
 
-En esté capítulo se comentarán los resultados de las técnicas estadísticas (ver @sec-tecnicas) y de los modelos propuestos (ver @sec-modelado).
+En esté capítulo se comentarán los resultados de las técnicas estadísticas y de los modelos propuestos (ver @sec-modelado).
 
 
 ### Correlación entre preguntas con el alfa de Cronbach {#sec-cronbach-2}
@@ -23,9 +23,7 @@ alpha <- df_all %>%
 \normalsize
 
 
-El coeficiente `alfa de Cronbach` (ver @sec-cronbach) de la escala de Likert es `r formatC(alpha$total[[1]], 3)` que indica una muy buena correlación entre las respuestas a todas las preguntas. Este valor apenas se ve alterado si se elimina una de las preguntas. Esto nos permite concluir que todos los ítems pertenecen a la misma escala de Likert.
-
-En la @tbl-item-alpha mostramos las preguntas que más contribuyen al índice `alpha de Cronbach`. Es interesante que la pregunta $Q18$, que es la valoración general del cuestionario, sea la que mejor contribución tiene al índice.
+El coeficiente `alfa de Cronbach` (ver @sec-cronbach) de la escala de Likert es `r formatC(alpha$total[[1]], 3)` lo que indica una muy buena correlación entre las respuestas a todas las preguntas. Este valor apenas se ve alterado si se elimina una de las preguntas. Esto nos permite concluir que todos los ítems pertenecen a la misma escala de Likert. En la @tbl-item-alpha mostramos las preguntas que más contribuyen al índice `alpha de Cronbach`. Un resultado interesante es constatar que la pregunta $Q18$, que es la valoración general del cuestionario, es la que mejor contribución tiene al índice.
 
 \tiny
 ```{r}
@@ -39,15 +37,19 @@ alpha.item <- alpha$item.stats[2] %>%
     t() %>%
     data.frame() %>%
     round(2)
-alpha.item[1:9] %>% gt()
-alpha.item[10:18] %>% gt()
+alpha.item[1:9] %>%
+    gt() %>%
+    tab_options(table.font.size = 6)
+alpha.item[10:18] %>%
+    gt() %>%
+    tab_options(table.font.size = 6)
 ```
 \normalsize
 
 
 ### Asociación de variables con la prueba de homogeneidad $\chi^2$ {#sec-chi2-2}
 
-En la @sec-chi2 se describe el marco teórico de esta prueba no paramétrica. Se ha contrastado la existencia de asociación entre la variable respuesta $Response$ y cada una de las tres variables más importantes de nuestro modelo ($Treat$, $Period$ y $Seq$). En la @tbl-contingencia-2 se muestran las tablas de contingencia. En la @tbl-chi2 se muestra que todos los contrastes son significativos, con lo que se rechaza la hipótesis nula de homogeneidad. Todas las variables explicativas tienen influencia en la variable respuesta.
+En la @sec-chi2 se describe el marco teórico de esta prueba no paramétrica. Se ha contrastado la existencia de asociación entre la variable respuesta $Response$ y cada una de las tres variables más importantes de nuestro modelo ($Treat$, $Period$ y $Seq$). En la @tbl-contingencia-2 se muestran las tablas de contingencia. La @tbl-chi2 permite comprobar que todos los contrastes son significativos, con lo que se rechaza la hipótesis nula de homogeneidad. Todas las variables explicativas tienen influencia en la variable respuesta.
 
 ```{r}
 #| label: tbl-contingencia-2
@@ -83,7 +85,7 @@ chi3 <- chisq.test(df_all$Seq, df_all$Response)
 
 ### Comparación con $Odds\ Ratio$ {#sec-or-3}
 
-En @sec-or y en @sec-or-2 se exponen el marco teórico y la fundamentación de los contrastes de hipótesis realizados respectivamente. El contraste de hipótesis del $log\ OR$ del subtitulado para cada grupo no produce significación estadística en ningún nivel de respuesta, por lo que según esta prueba estadística la secuencia de subtitulado no influiría en la respuesta de los estudiantes (ver @tbl-logor1). Es decir, de acuerdo a este la secuencia no influye en la valoración de los subtítulos.
+En @sec-or y en @sec-or-2 se exponen el marco teórico y la fundamentación de los contrastes de hipótesis realizados respectivamente. El contraste de hipótesis del $log\ OR$ del subtitulado para cada grupo no produce significación estadística en ningún nivel de respuesta, por lo que según esta prueba estadística la secuencia de subtitulado no influiría en la respuesta de los estudiantes (ver @tbl-logor1). Es decir, de acuerdo a este test la secuencia no influye en la valoración de los subtítulos.
 
 ```{r}
 #| label: tbl-logor1
@@ -94,22 +96,130 @@ data.frame(summary(loddsratio(~ Treat + Seq + Response_l, data = df_all)) %>% un
     gt()
 ```
 
-Sin embargo, si realizamos este contraste entre subtítulos y periodos podemos constatar la existencia de un efecto periodo de signo contrario para las preguntas 4 y 5 (ver @tbl-logor2). La razón de que se produzca este efecto periodo es que algunas de las respuestas de valoración 5 en ambos niveles de subtitulado y grupos en el primer periodo se convierten en valoración 4 en el segundo periodo. Esto se puede ver más claramente en la @fig-or2.
+Sin embargo, si realizamos este contraste entre subtítulos y periodos podemos constatar la existencia de un efecto periodo de signo contrario para las preguntas 4 y 5 (ver @tbl-logor2). 
 
 ```{r}
 #| label: tbl-logor2
-#| tbl-cap: $Log\ OR$ ~ Treat + Period + Response_l
+#| tbl-cap: Log OR ~ Treat + Period + Response_l
 data.frame(summary(loddsratio(~ Treat + Period + Response_l, data = df_all)) %>% unclass(), check.names = F) %>%
     rownames_to_column("Response") %>%
     mutate_if(is.numeric, round, 3) %>%
     gt()
 ```
 
+### Modelado
 
 ```{r}
-#| label: fig-or2
-#| fig-cap: OR ~ Treat + Period + Response
-#| fig-height: 4
-fourfold(xtabs(~ Treat + Period + Response, data = df_all))
+options(contrasts = rep("contr.sum", 2))
+glmer_improve_subject_question <- glmer(Improve ~ 1 + (1 | Subject) + (1 | Question), family = "binomial", data = df_improve)
+
+improve_question <- 1 / (1 + exp(-coef(glmer_improve_subject_question)$Question + fixef(glmer_improve_subject_question)))
+
+improve_question <- cbind(rownames(improve_question), improve_question)
+colnames(improve_question) <- c("Question", "Prob")
+
+# summary(glmer_improve_subject_question)
 ```
+
+El modelo de efectos mixtos ajustado con Regresión Logística:
+
+> Improve ~ 1 + (1 | Subject) + (1 | Question)
+
+estima la probabilidad de que la respuesta a un ítem en el subtitulado $A$ sea mejor que en el subtitulado $B$ frente a que sea igual o peor.
+El intercepto del modelo ajustado es `r round(fixef(glmer_improve_subject_question)[[1]],3)`. Por ello, la probabilidad de que se otorgue una mayor puntuación en $A$ que en $B$ es del `r paste(round(100/(1+exp(-fixef(glmer_improve_subject_question)[[1]])),2),"%", sep="")`. En la @tbl-improve-question se muestra la probabilidad de que la respuesta sea mejor en $A$ que en $B$ por ítem.
+
+\scriptsize
+```{r}
+#| label: tbl-improve-question
+#| tbl-cap: Probabilidad de que la respuesta a un ítem sea A > B frente a A <= B
+improve_question %>%
+    gt() %>%
+    fmt_number(Prob, decimals = 2)
+```
+
+\normalsize
+
+En la @sec-ordinal-2 se evaluaron distintas parametrizaciones de la Regresión Ordinal Acumulativa tanto desde el punto de vista frecuentista como bayesiano y considerando únicamente efectos fijos y también efectos aleatorios. Finalmente, tanto en el análisis frecuentista como en el bayesiano, el modelo que resultó ser más parsimonioso es el de la @eq-mejor-modelo, que se reproduce aquí en sintaxis R:
+
+\small
+> Response ~ Treat*Period + (1 + Treat  | Subject) + (1 + Treat | Question)
+\normalsize
+
+
+Este modelo produce en los dos paradigmas unas estimaciones similares, como se puede comprobar en la @tbl-model-comp.
+
+
+```{r}
+#| cache: true
+options(contrasts = rep("contr.sum", 2))
+
+clmm_treat.period.subject.question <- clmm(
+    Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question),
+    data = df_clean
+)
+
+brm_treat.period.subject.question <- brm(
+    Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question),
+    data = df_clean,
+    family = cumulative("logit"),
+    iter = 4000,
+    sample_prior = TRUE,
+    file = "models/brm_treat.period.subject.question",
+    file_refit = "on_change"
+)
+```
+
+
+\tiny
+```{r}
+#| label: tbl-model-comp
+#| tbl-cap: Comparación frecuentista/bayesiano de coeficientes estimados en el modelo Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question).
+#| cache: true
+df_clmm <- coef(clmm_treat.period.subject.question) %>% data.frame()
+colnames(df_clmm) <- c("Estimation.clmm")
+
+df_clmm <- bind_cols(df_clmm, confint(clmm_treat.period.subject.question))
+
+df_clmm_ranef_coefs <- c(
+    attr(VarCorr(clmm_treat.period.subject.question)$Question, "stddev")[1],
+    attr(VarCorr(clmm_treat.period.subject.question)$Question, "stddev")[2],
+    attr(VarCorr(clmm_treat.period.subject.question)$Subject, "stddev")[1],
+    attr(VarCorr(clmm_treat.period.subject.question)$Subject, "stddev")[2],
+    attr(VarCorr(clmm_treat.period.subject.question)$Question, "correlation")[2, 1],
+    attr(VarCorr(clmm_treat.period.subject.question)$Subject, "correlation")[2, 1]
+) %>% data.frame()
+
+rownames(df_clmm_ranef_coefs) <- c("Question.sd(Intercept)", "Question.sd(Treat1)", "Subject.sd(Intercept)", "Subject.sd(Treat1)", "Question.cor(Intercept,Treat1)", "Subject.cor(Intercept,Treat1)")
+colnames(df_clmm_ranef_coefs) <- c("Estimation.clmm")
+
+df_clmm <- bind_rows(df_clmm, df_clmm_ranef_coefs)
+df_brm <- (broom.mixed::tidyMCMC(brm_treat.period.subject.question, conf.int = T))[1:13, ]
+
+colnames(df_clmm) <- c("Estimation.clmm", "conf.2.5%", "conf.97.5%")
+colnames(df_brm) <- c("Name", "Estimation.brm", "std.error", "cred.2.5%", "cred.97.5%")
+df_brm$Name <- rownames(df_clmm)
+df_clmm$Name <- df_brm$Name
+df_clmm <- df_clmm %>% tibble()
+
+left_join(df_clmm, df_brm) %>%
+    relocate(Name) %>%
+    mutate(across(where(is.numeric), ~ round(., 2))) %>%
+    select(-c("std.error")) %>%
+    gt() %>%
+    tab_spanner(
+        label = "ordinal::clmm",
+        columns = c(Estimation.clmm, `conf.2.5%`, `conf.97.5%`)
+    ) %>%
+    tab_spanner(
+        label = "brms::brm",
+        columns = c(Estimation.brm, `cred.2.5%`, `cred.97.5%`)
+    ) %>%
+    sub_missing(columns = everything(), missing_text = "") %>%
+    tab_options(table.font.size = 6)
+```
+\normalsize
+
+
+
+{{< include 6.qmd >}}
 
