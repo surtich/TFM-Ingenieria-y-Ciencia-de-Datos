@@ -1,8 +1,8 @@
 ## Modelos utilizados {#sec-modelos-utilizados}
 
-Algunas de las técnicas de análisis y modelado estadístico propuesto en la @sec-modelos-utilizados requieren concreción y adaptación para poder ser utilizadas en el diseño de experimento de subtitulado. En esta sección se explica la forma concreta de aplicarlas y los paquetes y configuración en R utilizados. También se justifican las variables incluidas en cada modelo. La presentación de los resultados se pospone a el @sec-resultados.
+Algunas de las técnicas de análisis y modelado estadístico propuesto en la @sec-modelos-utilizados requieren concreción y adaptación para poder ser utilizadas en el diseño de experimento de subtitulado. En esta sección se explica la forma concreta de aplicarlas y los paquetes y configuración en R utilizados. También se justifican las variables incluidas en cada modelo. La presentación de los resultados se pospone al @sec-resultados.
 
-### Comparación con $Odds\ Ratio$ {#sec-or-2}
+### Comparación con *Odds Ratio* {#sec-or-2}
 
 En la sección @sec-or se explicó el fundamento teórico de esta técnica. Aquí se expone como se puede aplicar al diseño de experimento que se está analizando. Dado que los factores $Treat$, $Period$ y $Seq$ tienen todos 2 niveles, podemos contrastar si hay interacción entre ellos para cada nivel de respuesta. Es decir, se contrasta la hipótesis $H_0: OR=1$ de ausencia de interacción frente a $H_1: OR \neq 1$ de existencia de interacción en algún nivel de respuesta. Por ejemplo, el $OR$ para el nivel respuesta $r$ entre subtítulos y secuencias se define de la siguiente forma:
 
@@ -220,7 +220,7 @@ Comprobamos que coinciden los coeficientes de los dos modelos con contraste `sum
 
 * El coeficiente $`r names(coef(clm_sum_treat.period))[1]`$ tiene un valor `r round(coef(clm_sum_treat.period)[1], 3)` y es el `logit` medio de que la respuesta sea menor que 1 frente a que sea mayor que 1.
 * El coeficiente $`r names(coef(clm_sum_treat.period))[5]`$ tiene un valor de `r round(coef(clm_sum_treat.period)[5], 3)` y es la diferencia en `logits` que se añade en el nivel de subtitulado $A$ sin tener en cuenta el periodo. Es decir, que es el efecto del subtitulado $A$. Su valor es positivo, como en la @eq-ordinal aparece restando, el subtitulado $A$ hace más pequeño el `logit` y, por lo tanto, disminuye la probabilidad de una respuesta inferior frente a una superior. 
-* El efecto del subtitulado $B$ es de signo contrario `r round(-coef(clm_sum_treat.period)[5], 3)`. Por ello aumenta la probabilidad de menor valor de respuesta.
+* Para obtener el efecto del subtitulado $B$ se cambia el signo a $Treat1$: `r round(-coef(clm_sum_treat.period)[5], 3)`. Por ello aumenta la probabilidad de menor valor de respuesta.
 * La diferencia en `logits` de los efectos totales del subtitulado es el doble de `r round(abs(coef(clm_sum_treat.period))[5], 3)`.
 * El coeficiente $`r names(coef(clm_sum_treat.period))[6]`$ tiene un valor `r round(coef(clm_sum_treat.period)[6], 3)` y es la diferencia en `logits` que produce el periodo $1$ sin tener en cuenta el subtitulado. 
 * El efecto del periodo $2$ se obtiene cambiado el signo al efecto del periodo 1: `r round(-coef(clm_sum_treat.period)[6], 3)`.
@@ -250,7 +250,7 @@ En la @tbl-contrat2 se muestra la equivalencia de los coeficientes entre los mod
 \normalsize
 
 
-Se muestra el resumen del modelo para constatar que los tres coeficientes son significativos:
+A continuación se muestra el resumen del modelo con contra  ste `sum` para constatar que los tres coeficientes son significativos:
 
 ```{r}
 summary(clm_sum_treat.period)

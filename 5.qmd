@@ -23,12 +23,12 @@ alpha <- df_all %>%
 \normalsize
 
 
-El coeficiente `alfa de Cronbach` (ver @sec-cronbach) de la escala de Likert es `r formatC(alpha$total[[1]], 3)` lo que indica una muy buena correlación entre las respuestas a todas las preguntas. Este valor apenas se ve alterado si se elimina una de las preguntas. Esto nos permite concluir que todos los ítems pertenecen a la misma escala de Likert. En la @tbl-item-alpha mostramos las preguntas que más contribuyen al índice `alpha de Cronbach`. Un resultado interesante es constatar que la pregunta $Q18$, que es la valoración general del cuestionario, es la que mejor contribución tiene al índice.
+El coeficiente `alfa de Cronbach` (ver @sec-cronbach) de la escala de Likert es `r formatC(alpha$total[[1]], 3)` lo que indica una muy buena correlación entre las respuestas a todas los ítems. Este valor apenas se ve alterado si se elimina una de ellos. Esto nos permite concluir que todos los ítems pertenecen a la misma escala de Likert. En la @tbl-item-alpha mostramos los ítems que más contribuyen al índice `alpha de Cronbach`. Un resultado interesante es constatar que el ítem $Q18$, que es la valoración general del cuestionario, es el que mejor contribución tiene al índice.
 
 \tiny
 ```{r}
 #| label: tbl-item-alpha
-#| tbl-cap: Relación de cada pregunta con el índice alpha de Cronbach.
+#| tbl-cap: Relación de cada ítem con el índice alpha de Cronbach.
 #| tbl-subcap:
 #|   - "Variables con mayor asociación."
 #|   - "Variables con menor asociación."
@@ -47,7 +47,7 @@ alpha.item[10:18] %>%
 \normalsize
 
 
-### Asociación de variables con la prueba de homogeneidad $\chi^2$ {#sec-chi2-2}
+### Asociación de variables con la prueba de homogeneidad *X²* {#sec-chi2-2}
 
 En la @sec-chi2 se describe el marco teórico de esta prueba no paramétrica. Se ha contrastado la existencia de asociación entre la variable respuesta $Response$ y cada una de las tres variables más importantes de nuestro modelo ($Treat$, $Period$ y $Seq$). En la @tbl-contingencia-2 se muestran las tablas de contingencia. La @tbl-chi2 permite comprobar que todos los contrastes son significativos, con lo que se rechaza la hipótesis nula de homogeneidad. Todas las variables explicativas tienen influencia en la variable respuesta.
 
@@ -83,13 +83,13 @@ chi3 <- chisq.test(df_all$Seq, df_all$Response)
 
 : Valores del contraste de hipótesis $\chi^2$ {#tbl-chi2}
 
-### Comparación con $Odds\ Ratio$ {#sec-or-3}
+### Comparación con *Odds Ratio* {#sec-or-3}
 
 En @sec-or y en @sec-or-2 se exponen el marco teórico y la fundamentación de los contrastes de hipótesis realizados respectivamente. El contraste de hipótesis del $log\ OR$ del subtitulado para cada grupo no produce significación estadística en ningún nivel de respuesta, por lo que según esta prueba estadística la secuencia de subtitulado no influiría en la respuesta de los estudiantes (ver @tbl-logor1). Es decir, de acuerdo a este test la secuencia no influye en la valoración de los subtítulos.
 
 ```{r}
 #| label: tbl-logor1
-#| tbl-cap: $Log\ OR$ ~ Treat + Seq + Response_l
+#| tbl-cap: $Log OR$ ~ Treat + Seq + Response_l
 data.frame(summary(loddsratio(~ Treat + Seq + Response_l, data = df_all)) %>% unclass(), check.names = F) %>%
     rownames_to_column("Response") %>%
     mutate_if(is.numeric, round, 3) %>%

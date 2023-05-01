@@ -68,7 +68,7 @@ Valores cercanos 1 indican una fuerte correlación en las respuestas y se admite
 En esta sección se aplicarán técnicas estadísticas que se basan en tablas de contingencia. Una descripción teórica de este tipo de técnicas se puede encontrar en @agresti_2018. Un tratamiento aplicado y basado en gráficos, que será el enfoque que seguiremos en este trabajo, es realizado en @frienly2015.
 
 
-### Asociación de variables con la prueba de homogeneidad $\chi^2$ {#sec-chi2}
+### Asociación de variables con la prueba de homogeneidad *X²* {#sec-chi2}
 
 La prueba de homogeneidad $\chi^2$ [ver @leton2021] está enmarcarda en el esquema $Nominal \leftarrow Nominal$ y contrasta la hipótesis $H_0$ de que no hay diferencias entre grupos frente a $H_1$ de que existen diferencias. Dada una tabla de contingencia (ver @tbl-contingencia). El valor del estadístico se calcula:
 
@@ -77,7 +77,7 @@ $$
 \chi^2 = \sum_{i=1}^r\sum_{j=1}^c\frac{(n_{ij}-c{ij})^2}{c{ij}}
 $$
 
-y sigue una $\chi^2_{(r-1)(c-1)}$, donde $c_{ij}$ son las frecuencias esperadas bajo $H_0$ y que se calculan:
+y sigue una $\chi^2_{(r-1)(c-1)}$, donde $c_{ij}$ son las frecuencias esperadas bajo $H_0$ que se calculan:
 
 $$
 c{ij}=\frac{r_ic_j}{n}
@@ -92,7 +92,7 @@ $$
 : Tabla de contingencia {#tbl-contingencia}
 
 
-### Comparación con $Odds\ Ratio$ {#sec-or}
+### Comparación con *Odds Ratio* {#sec-or}
 
 Dada una tabla de contingencia $2\ x\ 2$ (ver @tbl-contingencia-3), el $odds$ se define como el cociente de las probabilidades complementarias y el $odds\ ratio$ como el cociente de $odds$:
 
@@ -115,9 +115,9 @@ El $OR$ es un índice de asociación relativo entre variables dicotómicas. Ver 
 
 ## Modelos lineales generalizados {#sec-glm}
 
-Los modelos lineales generalizados ($GLM$) son modelos en los que la variable respuesta no es normal. Para especificar un $GLM$ son necesarios tres componentes [ver @agresti_2018, pp. 66-67]:
+Los modelos lineales generalizados ($GLM$) son modelos en los que la variable respuesta no sigue una distribución normal. Para especificar un $GLM$ son necesarios tres componentes [ver @agresti_2018, pp. 66-67]:
 
-* Un componente aleatorio: será una distribución de probabilidad de la familia exponencial que se asume que sigue la variable respuesta, $Y$.
+* Un componente aleatorio: será una distribución de probabilidad de la familia exponencial que se asume que sigue la variable respuesta $Y$.
 * Un componente lineal de predictores.
 
 $$
@@ -131,7 +131,7 @@ g(\mu)=\alpha+\beta_1x_1+...+\beta_px_p
 $$
 
 
-La estimación de coeficientes GLM se realiza maximizando la función de verosimilitud ($MLE$). Es decir, que los coeficientes del modelo son aquellos que maximizan la probabilidad de los datos.
+La estimación de coeficientes *GLM* se realiza maximizando la función de verosimilitud ($MLE$). Es decir, que los coeficientes del modelo son aquellos que maximizan la probabilidad de los datos.
 
 ### Regresión Logística {#sec-logistica}
 
@@ -213,7 +213,7 @@ BIC &: -2 \log L + p \log(n)
 \end{aligned}
 $$ {#eq-aic}
 
-, donde $L$ es el valor de maxima verosimilitud y el segundo sumando es una penalización que será mayor cuanto más complejo sea el modelo.   
+donde $L$ es el valor de maxima verosimilitud y el segundo sumando es una penalización que será mayor cuanto más complejo sea el modelo.   
 
 
 ### Regresión Ordinal {#sec-ordinal}
@@ -276,15 +276,15 @@ for (i in 1:3) {
   
 Las respuestas a los ítems de una escala de Likert son ordinales. Ninguna de las técnicas anteriormente expuestas tiene en cuenta esta circunstancia. La Regresión Ordinal es una clase de $GLM$ que comparte muchas similitudes con la Regresión Logística (ver @sec-logistica) pero que tiene en consideración que los valores de la variable de respuesta están ordenados.
 Otras variantes de la Regresión Logística son la Regresión Categórica y la Regresión Multinomial. En estos tipos de GLM la variable respuesta puede adoptar varios valores pero no se asume que estén ordenados
-^[La Regresión Categórica y la Regresión Multinomial están relacionadas en el mismo sentido que en lo están la Regresión Logística con función de enlace Bernoulli y con función de enlace Binomial. Es decir, que la Regresión Categórica se usa cuando las observaciones no están agrupadas y la Multinomial cuando sí lo están.]. Según @burkner2019 hay tres clases de Regresión Ordinal:
+^[La Regresión Categórica y la Regresión Multinomial están relacionadas en el mismo sentido en que lo están la Regresión Logística con función de enlace Bernoulli y con función de enlace Binomial. Es decir, que la Regresión Categórica se usa cuando las observaciones no están agrupadas y la Multinomial cuando sí lo están.]. Según @burkner2019 hay tres clases de Regresión Ordinal:
 
 * Regresión Ordinal Acumulativa.
 * Regresión Ordinal Secuencial.
 * Regresión Ordinal Adyacente.
 
 La primera es la más habitual y además la más adecuada para el diseño de experimento realizado [ver @burkner2019, pp. 23-24]
-^[Las regresiones ordinales secuencial y adyacente presuponen que para alcanzar un nivel se ha tenido que pasar previamente por los anteriores. En una ítem de Likert esto carece de sentido y, por lo tanto, se descartan estos modelos.].
-El modelo acumulativo, PO, presupone que la variable ordinal observada, $Y$, proviene de la categorización de una variable latente (no observada) continua, $\tilde{Y}$. Hay $K$ umbrales $\tau_k$ que particionan $\tilde{Y}$ en $K + 1$ categorías ordenadas observables (ver @fig-cumulative). Si asumimos que $\tilde{Y}$ tiene una cierta distribución (por ejemplo, normal) con distribución acumulada $F$, se puede calcular la probabilidad de que $Y$ sea la categoría $k$ de esta forma:
+^[Las regresiones ordinales secuencial y adyacente presuponen que para alcanzar un nivel se ha tenido que pasar previamente por los anteriores. En un ítem de Likert esto carece de sentido y, por lo tanto, se descartan estos modelos.].
+El modelo acumulativo, $CM$, presupone que la variable ordinal observada, $Y$, proviene de la categorización de una variable latente (no observada) continua, $\tilde{Y}$. Hay $K$ umbrales $\tau_k$ que particionan $\tilde{Y}$ en $K + 1$ categorías ordenadas observables (ver @fig-cumulative). Si asumimos que $\tilde{Y}$ tiene una cierta distribución (por ejemplo, normal) con distribución acumulada $F$, se puede calcular la probabilidad de que $Y$ sea la categoría $k$ de esta forma:
 
 $$Pr(Y = k) = F(\tau_k) - F(\tau_{k-1})$$
 
@@ -306,7 +306,7 @@ Si suponemos que $\tilde{Y}$ tiene una relación lineal los predictores:
 
 $$\tilde{Y} = \eta + \epsilon = \beta_1 x_1 + \beta_2 x_2 + ... + \beta_p x_p + \epsilon$$
 
-y que los errores son $N(0,\sigma^2)$. Entonces la función de probabilidad acumulada de los errores tendrá la misma forma que la de $\tilde{Y}$:
+entonces la función de probabilidad acumulada de los errores tendrá la misma forma que la de $\tilde{Y}$:
 
 $$\mathrm{Pr}(\epsilon \leq z) = F(z)$$
 
@@ -319,7 +319,7 @@ Por lo que asumiendo la normalidad de los errores:
 $$\mathrm{Pr}(Y = k) = \Phi(\tau_k - \eta) - \Phi(\tau_{k - 1} - \eta)$$
 
 Donde hay que estimar los umbrales y los coeficientes de regresión. La función anterior es la conocida como la función de enlace `probit`. Otra función de enlace popular es la función `logit`. Es la que usaremos en este trabajo por ser más fácil su interpretación
-^[En la práctica los coeficientes estimados con las funciones de enlace `probit` y `logit` suelen similares.]. Con esta función de enlace la interpretación de los coeficientes es parecida a la de los coeficientes de la regresión logística. Se parte del supuesto de que el $logit$ de la función de probabilidad es lineal:
+^[En la práctica los coeficientes estimados con las funciones de enlace `probit` y `logit` suelen similares.]. Con esta función de enlace la interpretación de los coeficientes es parecida a la de los coeficientes de la regresión logística. Para entender como se deben interpretar los coeficientes del modelo $CM$. se parte del supuesto de que el $logit$ de la función de probabilidad es lineal:
 
 $$logit [P(Y \le k)] = \tau_{k} - \eta = \tau_{k} - (\beta_1 x_1 + \beta_2 x_2 + ... + \beta_p x_p)$$
 
@@ -336,15 +336,15 @@ o, equivalentemente:
 
 $$\frac{\frac{\mathrm{Pr}(Y > k \mid x_i = x + 1)}{\mathrm{Pr}(Y \leq k \mid x_i = x + 1)}}{\frac{\mathrm{Pr}(Y > k \mid x_i = x)}{\mathrm{Pr}(Y \leq k \mid x_i = x)}} = \exp(\beta_{i})$$
 
-Es decir, que $\exp(\beta_{i})$ es el $OR$ (cambio en $odds$) de que la variable respuesta esté por encima de una determinada categoría versus estar por debajo de ella para una unidad de incremento del predictor $x_i$. Un valor del coeficiente $\beta_i$ positivo indica que la relación entre el predictor $x_i$ y la función de $logit$ es positiva y, por lo tanto, se incrementa la probabilidad de un mayor valor de la variable respuesta.
+Es decir, que $\exp(\beta_{i})$ es el $OR$ (cambio relativo entre $odds$) de que la variable respuesta esté por encima de una determinada categoría versus estar por debajo de ella para una unidad de incremento del predictor $x_i$. Un valor del coeficiente $\beta_i$ positivo indica que la relación entre el predictor $x_i$ y la función de $logit$ es positiva y, por lo tanto, se incrementa la probabilidad de un mayor valor de la variable respuesta.
 Este modelo se denomina proporcional ya que se asume que cada predictor tiene los mismos efectos sobre todos los niveles de la variable de respuesta ordinal [ver @Liu2202]. Esta suposición frecuentemente no es realista y se puede relajar permitiendo estimar un coeficiente diferente para cada nivel de la variable respuesta. Sin embargo, el incremento del número de coeficientes dificulta la interpretabilidad del modelo. @harrell2020 aboga por usar este modelo incluso aunque la suposición de proporcionalidad no se cumpla:
 
-> "Ningún modelo se ajusta perfectamente a los datos, ..., la aproximación ofrecida por el modelo PO sigue siendo bastante útil. Y un análisis unificado del modelo PO es decididamente mejor que recurrir a análisis ineficientes y arbitrarios de valores dicotomizados de Y."
+> "Ningún modelo se ajusta perfectamente a los datos, ..., la aproximación ofrecida por el modelo $CM$ sigue siendo bastante útil. Y un análisis unificado del modelo $CM$ es decididamente mejor que recurrir a análisis ineficientes y arbitrarios de valores dicotomizados de Y."
 
  
 ## Modelos multinivel {#sec-multinivel}
 
-Un modelo multinivel, jerárquico o mixto es un modelo en el que los datos están anidados en una estructura jerárquica. Por ejemplo, si se quisiera evaluar el rendimiento de varios métodos de enseñanza, se podría seleccionar aleatoriamente varios colegios participantes y en cada uno de ellos elegir varias clases en las que se impartiría uno de los métodos de enseñanza. Los modelos multinivel se utilizan cuando se incumple la hipótesis de independencia entre las observaciones. En el caso de los métodos de enseñanza, los alumnos de una clase no son independientes de los alumnos de otra clase del mismo colegio y también es esperable que los alumnos de un mismo colegio sean más parecidos entre sí que los de otro colegio. Otra situación en la que se viola la condición de independencia entre observaciones es cuando se toman varias medidas del mismo sujeto. Este tipo de experimentos se llaman de medidas repetidas o longitudinales
+Un modelo multinivel, jerárquico o mixto es un modelo en el que los datos están anidados en una estructura jerárquica. Por ejemplo, si se quisiera evaluar el rendimiento de varios métodos de enseñanza, se podrían seleccionar aleatoriamente varios colegios participantes y en cada uno de ellos elegir varias clases en las que se impartiría uno de los métodos de enseñanza. Los modelos multinivel se utilizan cuando se incumple la hipótesis de independencia entre las observaciones. En el caso de los métodos de enseñanza, los alumnos de una clase no son independientes de los alumnos de otra clase del mismo colegio y también es esperable que los alumnos de un mismo colegio sean más parecidos entre sí que los de otro colegio. Otra situación en la que se viola la condición de independencia entre observaciones es cuando se toman varias medidas del mismo sujeto. Este tipo de experimentos se llaman de medidas repetidas o longitudinales
 ^[Hay una diferencia conceptual entre medidas repetidas y longitudinales. Una variable se dice que es longitudinal cuando se toman varias medidas de los sujetos objeto del estudio en diferentes momentos del tiempo. Para que sea considerada de medidas repetidas, las medidas de cada sujeto se toman con distintos niveles de factor. En la práctica la distinción es poco relevante ya que ambas situaciones se parametrizan de la misma forma.]. Cuando se da este supuesto, se considera que las medidas están anidadas en el sujeto [ver @Liu2202]. En un modelo multinivel no es necesario que todas las variables tengan una estructura jerárquica. Distinguimos entonces dos tipos de variables: Las conocidas como de efectos fijos son aquellas que se considera que tienen el mismo efecto en toda la población y, por lo tanto, se debe estimar un único coeficiente. Las variables de efectos aleatorios tienen un coeficiente diferente para cada elemento de la población y se supone que son una muestra de una población mucho mayor, como el caso de seleccionar aleatoriamente una muestra de colegios. Normalmente el coeficiente particular de cada elemento no es de interés para el investigador y se asume que tienen una media centrada en cero. El mayor interés de los efectos aleatorios es la estimación de su matriz de varianzas-covarianzas.
 
 La ecuación general de un modelo multinivel con dos niveles y un solo predictor con efectos aleatorios es [ver @chen2021, pp. 40]:
@@ -389,9 +389,9 @@ En @gelman2013 se evalúan tres posibilidades a la hora de definir un modelo:
 
 * $Complete\ pooling$: Consiste en estimar un único parámetro para cada predictor. Es equivalente a un modelo con efectos fijos.
 * $No\ pooling$: Se estiman tantos parámetros como grupos haya de forma independiente.
-* $Partial\ pooling$: Es el modelo jerárquico. Es una mezcla de ambos, ya que aunque se estima un parámetro para cada grupo (como en $no\ pooling$), esta estimación no es independiente, sino que se supone que las observaciones de un mismo grupo proceden de una misma distribución de probabilidad. Esto se traduce en que se produce una contracción ($shrinkage$) en la estimación de los parámetros hacia la media. Al influir la estimación de unas observaciones en otras, la estimación es de menor valor absoluto que la que resultaría en un modelo de $no\ pooling$. De esta forma podemos ver el $complete\ pooling$ y el $no\ pooling$ como dos casos particulares y extremos del $no\ pooling$. La contracción de coeficientes en los modelos multinivel actúa como una regularización que puede evitar el sobreajuste.
+* $Partial\ pooling$: Es el modelo jerárquico. Es una mezcla de ambos, ya que aunque se estima un parámetro para cada grupo (como en $no\ pooling$), esta estimación no es independiente, sino que se supone que las observaciones de un mismo grupo proceden de una misma distribución de probabilidad. Esto se traduce en que se produce una contracción ($shrinkage$) en la estimación de los parámetros hacia la media. Al influir la estimación de unas observaciones en otras, la estimación es de menor valor absoluto que la que resultaría en un modelo de $no\ pooling$. De esta forma podemos ver el $complete\ pooling$ y el $no\ pooling$ como dos casos particulares y extremos del $partial\ pooling$. La contracción de coeficientes en los modelos multinivel actúa como una regularización que puede evitar el sobreajuste.
 
-Los modelos multinivel requieren supuestos adicionales en el nivel segundo y superiores que son similares a los supuestos para los modelos de efectos fijos [ver @chen2021, pp. 43]. Para estimar los parámetros en un modelo multinivel se suele utilizar el método de máxima verosimilitud restringida (RMLE), que es una variante de la estimación por máxima verosimilitud (MLE) en la que se hacen ajustes en los grados de libertad del modelo con efectos aleatorios para corregir el sesgo que se produce al usar MLE.
+Los modelos multinivel requieren supuestos adicionales en el nivel segundo y superiores que son similares a los supuestos para los modelos de efectos fijos [ver @chen2021, pp. 43]. Para estimar los parámetros en un modelo multinivel se suele utilizar el método de máxima verosimilitud restringida (RMLE), que es una variante de la estimación por máxima verosimilitud (MLE) en la que se hacen ajustes en los grados de libertad del modelo con efectos aleatorios para corregir el sesgo que se produce al usar MLE en estos modelos.
 
 ## Modelado bayesiano {#sec-bayesiano}
 
@@ -413,7 +413,7 @@ p(y_{pred}\mid \theta,y)p(\theta \mid y)\, d\theta \\
 \end{aligned}
 $$ {#eq-ypred}
 
-donde la última igualdad resulta de la independencia condicional de $y_{pred}$ e $y$ dado $\theta$ ($y_{pred} \perp\!\!\!\perp y \mid \theta$). Una crítica habitual a la inferencia bayesiana es que la elección de la distribución de probabilidad a priori es subjetiva. Aunque es cierto que hay un grado de subjetividad en esta elección, en realidad en el modelado frecuentista hay que tomar ciertas decisiones que también lo son, como por ejemplo la elección del nivel de significación o de la forma que adopta la función de verosimilitud. En la práctica, si las observaciones son suficientemente informativas, la distribución de probabilidad a priori tendrá poca o nula influencia en la distribución a posteriori ya que estará dominada por la función de verosimilitud y los coeficientes estimados serán muy parecidos en ambos paradigmas. Sin embargo, en lo que diferirán es en la interpretación ya que, por ejemplo, en un modelo bayesiano se pueden interpretar los intervalos de confianza como la probabilidad de que el parámetro esté dentro del intervalo
+donde la última igualdad resulta de la independencia condicional de $y_{pred}$ e $y$ dado $\theta$ ($y_{pred} \perp\!\!\!\perp y \mid \theta$). Una crítica habitual a la inferencia bayesiana es que la elección de la distribución de probabilidad a priori es subjetiva. Aunque es cierto que hay un grado de subjetividad en esta elección, en realidad en el modelado frecuentista hay que tomar ciertas decisiones que también lo son, como por ejemplo la elección del nivel de significación o la forma que adopta la función de verosimilitud. En la práctica, si las observaciones son suficientemente informativas y la distribución a priori es poco informativa, la distribución de probabilidad a priori tendrá poca o nula influencia en la distribución a posteriori ya que estará dominada por la función de verosimilitud y los coeficientes estimados serán muy parecidos en ambos paradigmas. Sin embargo, en lo que diferirán es en la interpretación ya que, por ejemplo, en un modelo bayesiano se pueden interpretar los intervalos de confianza como la probabilidad de que el parámetro esté dentro del intervalo
 ^[Por eso a estos intervalos se les conoce como intervalos de credibilidad.]. Esa interpretación en un modelo frecuentista carecería de sentido ya que los parámetros del modelo no se consideran variables aleatorias y, por lo tanto, tendrán probabilidad 1 si el verdadero valor del parámetro cae dentro del intervalo y 0 si no lo hace. Para obtener la distribución de probabilidad a posteriori normalmente se recurre a métodos del simulación MCMC (Métodos de Montcarlo basados en Cadenas de Márkov)
 ^[En ocasiones se puede obtener una forma análitica de la distribución a posteriori si se elige una adecuada combinación de función de verosimilitud y distribución a priori conocidas como distribuciones conjugadas. Aunque esto evita la utilización de métodos de simulación, restringe las formas posibles de las distribuciones. En la actualidad, con el aumento de la capacidad de cálculo de los ordenadores, normalmente no es necesaria la utilización de distribuciones conjugadas.].
 
@@ -434,7 +434,7 @@ $$
 \widehat{\mathrm{elpd}} = \widehat{\mathrm{lpd}} - \mathrm{p}
 $$
  
-El problema es que en modelos multinivel conocer el número de parámetros no es sencillo ya que no se pueden considerar completamente independientes los parámetros asociados a efectos aleatorios. El número efectivo de parámetros va a depender de la importancia de la regresión hacia la media que sufra cada parámetro. Además, en lugar de usar una estimación puntual, se puede utilizar toda la distribución de valores de la simulación. La métrica *widely available information criterion* o "criterio de información ampliamente disponible" ($WAIC$) es una forma de estimar $lpd$ que usa toda la distribución de probabilidad a posteriori:
+El problema es que en modelos multinivel conocer el número de parámetros no es sencillo ya que los parámetros asociados a efectos aleatorios no se pueden considerar que sean completamente independientes. El número efectivo de parámetros va a depender de la importancia de la regresión hacia la media que sufra cada parámetro. Además, en lugar de usar una estimación puntual, se puede utilizar toda la distribución de valores de la simulación. La métrica *widely available information criterion* o "criterio de información ampliamente disponible" ($WAIC$) es una forma de estimar $lpd$ que usa toda la distribución de probabilidad a posteriori:
 
 $$
 \widehat{\mathrm{lpd}} = \sum_{i=1}^{n} \mathrm{log} (\frac{1}{S} \sum_{s=1}^{S} p(y_{i} | \theta^s))

@@ -1,0 +1,2613 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.4.21)  1 MAY 2023 19:28
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**/home/surtich/projects/TFMQ/tmf.tex
+(/home/surtich/projects/TFMQ/tmf.tex
+LaTeX2e <2022-11-01> patch level 1
+L3 programming layer <2023-04-20> (/home/surtich/.TinyTeX/texmf-dist/tex/latex/memoir/memoir.cls
+Document Class: memoir 2022/11/17 v3.7.19 configurable book, report, article document class
+(/home/surtich/.TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count185
+)
+\onelineskip=\skip48
+\lxvchars=\skip49
+\xlvchars=\skip50
+\@memcnta=\count186
+\c@@memmarkcntra=\count187
+ (/home/surtich/.TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2022/02/03 v1.0f TeX engine tests
+)
+\stockheight=\dimen140
+\stockwidth=\dimen141
+\trimtop=\skip51
+\trimedge=\skip52
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 707.
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/lm/t1lmr.fd
+File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/memoir/mem12.clo
+File: mem12.clo 2022/07/29 v0.5 memoir class 12pt size option
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/lm/lmodern.sty
+Package: lmodern 2015/05/01 v1.6.1 Latin Modern Fonts
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/lmr/m/n on input line 22.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/lmm/m/it on input line 23.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> OMS/lmsy/m/n on input line 24.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 25.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 26.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> OML/lmm/b/it on input line 27.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> OMS/lmsy/b/n on input line 28.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 29.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 31.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 32.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> OT1/lmr/m/it on input line 33.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 34.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 35.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> OT1/lmss/bx/n on input line 36.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> OT1/lmr/bx/it on input line 37.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+)
+\binding=\skip53
+\spinemargin=\skip54
+\foremargin=\skip55
+\uppermargin=\skip56
+\lowermargin=\skip57
+\headdrop=\skip58
+\normalrulethickness=\skip59
+\mem@maxheadheight=\skip60
+\mem@maxfootheight=\skip61
+\headwidth=\skip62
+\c@storedpagenumber=\count188
+\memPD=\dimen142
+\m@mabparskip=\skip63
+\thanksmarkwidth=\skip64
+\thanksmarksep=\skip65
+\droptitle=\skip66
+\c@book=\count189
+\c@part=\count190
+\c@chapter=\count191
+\c@section=\count192
+\c@subsection=\count193
+\c@subsubsection=\count194
+\c@paragraph=\count195
+\c@subparagraph=\count196
+\beforechapskip=\skip67
+\midchapskip=\skip68
+\afterchapskip=\skip69
+\chapindent=\skip70
+\bottomsectionskip=\skip71
+\secindent=\skip72
+\beforesecskip=\skip73
+\aftersecskip=\skip74
+\subsecindent=\skip75
+\beforesubsecskip=\skip76
+\aftersubsecskip=\skip77
+\subsubsecindent=\skip78
+\beforesubsubsecskip=\skip79
+\aftersubsubsecskip=\skip80
+\paraindent=\skip81
+\beforeparaskip=\skip82
+\afterparaskip=\skip83
+\subparaindent=\skip84
+\beforesubparaskip=\skip85
+\aftersubparaskip=\skip86
+\pfbreakskip=\skip87
+\c@@ppsavesec=\count197
+\c@@ppsaveapp=\count198
+\ragrparindent=\dimen143
+\everylistparindent=\dimen144
+\parsepi=\skip88
+\topsepi=\skip89
+\itemsepi=\skip90
+\parsepii=\skip91
+\topsepii=\skip92
+\topsepiii=\skip93
+\itemsepii=\skip94
+\itemsepiii=\skip95
+\partopsepii=\skip96
+\partopsepiii=\skip97
+\m@msavetopsep=\skip98
+\m@msavepartopsep=\skip99
+\@enLab=\toks16
+\abstitleskip=\skip100
+\absleftindent=\skip101
+\abs@leftindent=\dimen145
+\absrightindent=\skip102
+\absparindent=\skip103
+\absparsep=\skip104
+\c@vslineno=\count199
+\c@poemline=\count266
+\c@modulo@vs=\count267
+\c@memfvsline=\count268
+\vleftskip=\skip105
+\vrightskip=\skip106
+\stanzaskip=\skip107
+\versewidth=\skip108
+\vgap=\skip109
+\vindent=\skip110
+\vleftmargin=\dimen146
+\c@verse=\count269
+\c@chrsinstr=\count270
+\beforepoemtitleskip=\skip111
+\afterpoemtitleskip=\skip112
+\c@poem=\count271
+\beforePoemTitleskip=\skip113
+\midPoemTitleskip=\skip114
+\afterPoemTitleskip=\skip115
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/tools/array.sty
+Package: array 2022/09/04 v2.5g Tabular extension package (FMi)
+\col@sep=\dimen147
+\ar@mcellbox=\box51
+\extrarowheight=\dimen148
+\NC@list=\toks17
+\extratabsurround=\skip116
+\backup@length=\skip117
+\ar@cellbox=\box52
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/tools/dcolumn.sty
+Package: dcolumn 2014/10/28 v1.06 decimal alignment package (DPC)
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/tools/delarray.sty
+Package: delarray 2014/10/28 v1.01 array delimiter package (DPC)
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/tools/tabularx.sty
+Package: tabularx 2020/01/15 v2.11c `tabularx' package (DPC)
+\TX@col@width=\dimen149
+\TX@old@table=\dimen150
+\TX@old@col=\dimen151
+\TX@target=\dimen152
+\TX@delta=\dimen153
+\TX@cols=\count272
+\TX@ftn=\toks18
+)
+\heavyrulewidth=\dimen154
+\lightrulewidth=\dimen155
+\cmidrulewidth=\dimen156
+\belowrulesep=\dimen157
+\belowbottomsep=\dimen158
+\aboverulesep=\dimen159
+\abovetopsep=\dimen160
+\cmidrulesep=\dimen161
+\cmidrulekern=\dimen162
+\defaultaddspace=\dimen163
+\@cmidla=\count273
+\@cmidlb=\count274
+\@aboverulesep=\dimen164
+\@belowrulesep=\dimen165
+\@thisruleclass=\count275
+\@lastruleclass=\count276
+\@thisrulewidth=\dimen166
+\ctableftskip=\skip118
+\ctabrightskip=\skip119
+\abovecolumnspenalty=\count277
+\@linestogo=\count278
+\@cellstogo=\count279
+\@cellsincolumn=\count280
+\crtok=\toks19
+\@mincolumnwidth=\dimen167
+\c@newflo@tctr=\count281
+\mem@margin@floatbox=\box53
+\@contcwidth=\skip120
+\@contindw=\skip121
+\abovecaptionskip=\skip122
+\belowcaptionskip=\skip123
+\subfloattopskip=\skip124
+\subfloatcapskip=\skip125
+\subfloatcaptopadj=\skip126
+\subfloatbottomskip=\skip127
+\subfloatlabelskip=\skip128
+\subfloatcapmargin=\dimen168
+\c@@contsubnum=\count282
+\m@mscap@capbox=\box54
+\m@mscap@fbox=\box55
+\sidecapsep=\dimen169
+\sidecapwidth=\dimen170
+\m@m@tempdima=\dimen171
+\m@mscapraise=\dimen172
+\sidecapraise=\dimen173
+\m@mscapmainwidth=\dimen174
+\m@mscaplkern=\dimen175
+\beforeepigraphskip=\skip129
+\afterepigraphskip=\skip130
+\epigraphwidth=\skip131
+\epigraphrule=\skip132
+LaTeX Info: Redefining \em on input line 7655.
+LaTeX Info: Redefining \emph on input line 7663.
+\tocentryskip=\skip133
+\tocbaseline=\skip134
+\cftparskip=\skip135
+\cftbeforebookskip=\skip136
+\cftbookindent=\dimen176
+\cftbooknumwidth=\dimen177
+\cftbeforepartskip=\skip137
+\cftpartindent=\skip138
+\cftpartnumwidth=\skip139
+\cftbeforechapterskip=\skip140
+\cftchapterindent=\skip141
+\cftchapternumwidth=\skip142
+\cftbeforesectionskip=\skip143
+\cftsectionindent=\skip144
+\cftsectionnumwidth=\skip145
+\cftbeforesubsectionskip=\skip146
+\cftsubsectionindent=\skip147
+\cftsubsectionnumwidth=\skip148
+\cftbeforesubsubsectionskip=\skip149
+\cftsubsubsectionindent=\skip150
+\cftsubsubsectionnumwidth=\skip151
+\cftbeforeparagraphskip=\skip152
+\cftparagraphindent=\skip153
+\cftparagraphnumwidth=\skip154
+\cftbeforesubparagraphskip=\skip155
+\cftsubparagraphindent=\skip156
+\cftsubparagraphnumwidth=\skip157
+\prechapterprecisshift=\dimen178
+\c@maxsecnumdepth=\count283
+\bibindent=\dimen179
+\bibitemsep=\skip158
+\indexcolsep=\skip159
+\indexrule=\skip160
+\indexmarkstyle=\toks20
+\@indexbox=\insert252
+\glossarycolsep=\dimen180
+\glossaryrule=\dimen181
+\sideparvshift=\skip161
+\sideins=\insert251
+\sidebartopsep=\skip162
+\sidebarhsep=\skip163
+\sidebarvsep=\skip164
+\sidebarwidth=\skip165
+\footmarkwidth=\skip166
+\footmarksep=\skip167
+\footparindent=\skip168
+\footinsdim=\skip169
+\footinsv@r=\insert250
+\@mpfootinsv@r=\insert249
+\m@m@k=\count284
+\m@m@h=\dimen182
+\m@mipn@skip=\skip170
+\sidefootins=\insert248
+\sidefootadjust=\skip171
+\sidefootheight=\skip172
+\sidefoothsep=\skip173
+\sidefootvsep=\skip174
+\sidefootwidth=\skip175
+\m@mdownsf=\skip176
+\c@sidefootnote=\count285
+\sidefootmarkwidth=\skip177
+\sidefootmarksep=\skip178
+\sidefootparindent=\skip179
+\c@pagenote=\count286
+\c@pagenoteshadow=\count287
+\mem@pn@lastkern=\skip180
+\every@verbatim=\toks21
+\afterevery@verbatim=\toks22
+\verbatim@line=\toks23
+\tab@position=\count288
+\verbatim@in@stream=\read2
+\verbatimindent=\skip181
+\verbatim@out=\write3
+\bvboxsep=\skip182
+\c@memfbvline=\count289
+\c@bvlinectr=\count290
+\bvnumlength=\skip183
+\fb@frw=\dimen183
+\fb@frh=\dimen184
+\FrameRule=\dimen185
+\FrameSep=\dimen186
+\c@cp@cntr=\count291
+\c@ism@mctr=\count292
+\c@xsm@mctr=\count293
+\c@csm@mctr=\count294
+\c@ksm@mctr=\count295
+\c@xksm@mctr=\count296
+\c@cksm@mctr=\count297
+\c@msm@mctr=\count298
+\c@xmsm@mctr=\count299
+\c@cmsm@mctr=\count300
+\c@bsm@mctr=\count301
+\c@workm@mctr=\count302
+\c@sheetsequence=\count303
+\c@lastsheet=\count304
+\c@lastpage=\count305
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/textcase/textcase.sty
+Package: textcase 2022/07/10 v1.03 Text only upper/lower case changing (DPC)
+Package textcase Info: Defining Legacy names on input line 20.
+)
+\c@figure=\count306
+\c@lofdepth=\count307
+\cftbeforefigureskip=\skip184
+\cftfigureindent=\skip185
+\cftfigurenumwidth=\skip186
+\c@table=\count308
+\c@lotdepth=\count309
+\cftbeforetableskip=\skip187
+\cfttableindent=\skip188
+\cfttablenumwidth=\skip189
+Package abstract [2008/07/23] emulated by memoir.
+Package appendix [2008/07/23] emulated by memoir.
+Package booktabs [2016/05/16] emulated by memoir.
+Package ccaption [2008/07/23] emulated by memoir.
+Package changepage [2008/07/23] emulated by memoir.
+Package chngcntr [2008/07/23] emulated by memoir.
+Package chngpage [2008/07/23] emulated by memoir.
+Package crop emulated by memoir.
+Package enumerate [2008/07/23] emulated by memoir.
+Package epigraph [2008/07/23] emulated by memoir.
+Package ifmtarg [2008/07/23] emulated by memoir.
+Package index [2008/07/23] emulated by memoir.
+Package makeidx [2008/07/23] emulated by memoir.
+Package moreverb [2008/07/23] emulated by memoir.
+Package needspace [2008/07/23] emulated by memoir.
+Package newfile [2008/07/23] emulated by memoir.
+Package nextpage [2008/07/23] emulated by memoir.
+Package pagenote [2008/07/23] emulated by memoir.
+Package parskip [2008/07/23] emulated by memoir.
+Package patchcmd [2008/07/23] emulated by memoir.
+Package setspace [2008/07/23] emulated by memoir.
+Package shortvrb [2008/07/23] emulated by memoir.
+Package showidx [2008/07/23] emulated by memoir.
+Package titleref [2008/07/23] emulated by memoir.
+Package titling [2008/07/23] emulated by memoir.
+Package tocbibind [2008/07/23] emulated by memoir.
+Package tocloft [2008/07/23] emulated by memoir.
+Package tocvsec2 [2008/07/23] emulated by memoir.
+Package verbatim [2008/07/23] emulated by memoir.
+Package verse [2008/07/23] emulated by memoir.
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2022/04/08 v2.17n AMS math features
+\@mathmargin=\skip190
+
+For additional information on amsmath, use the `?' option.
+(/home/surtich/.TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2021/08/26 v2.01 AMS text
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks24
+\ex@=\dimen187
+)) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen188
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2022/04/08 v2.04 operator names
+)
+\inf@bad=\count310
+LaTeX Info: Redefining \frac on input line 234.
+\uproot@=\count311
+\leftroot@=\count312
+LaTeX Info: Redefining \overline on input line 399.
+LaTeX Info: Redefining \colon on input line 410.
+\classnum@=\count313
+\DOTSCASE@=\count314
+LaTeX Info: Redefining \ldots on input line 496.
+LaTeX Info: Redefining \dots on input line 499.
+LaTeX Info: Redefining \cdots on input line 620.
+\Mathstrutbox@=\box56
+\strutbox@=\box57
+LaTeX Info: Redefining \big on input line 722.
+LaTeX Info: Redefining \Big on input line 723.
+LaTeX Info: Redefining \bigg on input line 724.
+LaTeX Info: Redefining \Bigg on input line 725.
+\big@size=\dimen189
+LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
+\macc@depth=\count315
+LaTeX Info: Redefining \bmod on input line 905.
+LaTeX Info: Redefining \pmod on input line 910.
+LaTeX Info: Redefining \smash on input line 940.
+LaTeX Info: Redefining \relbar on input line 970.
+LaTeX Info: Redefining \Relbar on input line 971.
+\c@MaxMatrixCols=\count316
+\dotsspace@=\muskip16
+\c@parentequation=\count317
+\dspbrk@lvl=\count318
+\tag@help=\toks25
+\row@=\count319
+\column@=\count320
+\maxfields@=\count321
+\andhelp@=\toks26
+\eqnshift@=\dimen190
+\alignsep@=\dimen191
+\tagshift@=\dimen192
+\tagwidth@=\dimen193
+\totwidth@=\dimen194
+\lineht@=\dimen195
+\@envbody=\toks27
+\multlinegap=\skip191
+\multlinetaggap=\skip192
+\mathdisplay@stack=\toks28
+LaTeX Info: Redefining \[ on input line 2953.
+LaTeX Info: Redefining \] on input line 2954.
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2021/02/14 v1.3d Input encoding file
+\inpenc@prehook=\toks29
+\inpenc@posthook=\toks30
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/base/textcomp.sty
+Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/upquote/upquote.sty
+Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verbatim
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/microtype/microtype.sty
+Package: microtype 2023/03/06 v3.1 Micro-typographical refinements (RS)
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks31
+)
+\MT@toks=\toks32
+\MT@tempbox=\box58
+\MT@count=\count322
+LaTeX Info: Redefining \noprotrusionifhmode on input line 1060.
+LaTeX Info: Redefining \leftprotrusion on input line 1061.
+\MT@prot@toks=\toks33
+LaTeX Info: Redefining \rightprotrusion on input line 1079.
+LaTeX Info: Redefining \textls on input line 1355.
+\MT@outer@kern=\dimen196
+LaTeX Info: Redefining \textmicrotypecontext on input line 1975.
+\MT@listname@count=\count323
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/microtype/microtype-pdftex.def
+File: microtype-pdftex.def 2023/03/06 v3.1 Definitions specific to pdftex (RS)
+LaTeX Info: Redefining \lsstyle on input line 903.
+LaTeX Info: Redefining \lslig on input line 903.
+\MT@outer@space=\skip193
+)
+Package microtype Info: Loading configuration file microtype.cfg.
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/microtype/microtype.cfg
+File: microtype.cfg 2023/03/06 v3.1 microtype main configuration file (RS)
+)) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2022/06/12 v2.14 LaTeX color extensions (UK)
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 227.
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/graphics/mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1353.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1357.
+Package xcolor Info: Model `RGB' extended on input line 1369.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1371.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1372.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1373.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1374.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1375.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1376.
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/graphics/dvipsnam.def
+File: dvipsnam.def 2016/06/17 v3.0m Driver-dependent file (DPC,SPQR)
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/xcolor/svgnam.def
+File: svgnam.def 2022/06/12 v2.14 Predefined colors according to SVG 1.1 (UK)
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/xcolor/x11nam.def
+File: x11nam.def 2022/06/12 v2.14 Predefined colors according to Unix/X11 (UK)
+)) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
+Package: fancyvrb 2023/01/19 4.5a verbatim text (tvz,hv)
+\FV@CodeLineNo=\count324
+\FV@InFile=\read3
+\FV@TabBox=\box59
+\c@FancyVerbLine=\count325
+\FV@StepNumber=\count326
+\FV@OutFile=\write4
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/framed/framed.sty
+Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
+\OuterFrameSep=\skip194
+\fb@frw=\dimen197
+\fb@frh=\dimen198
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2021-09-01 v4.17 Multi-page Table package (DPC)
+\LTleft=\skip195
+\LTright=\skip196
+\LTpre=\skip197
+\LTpost=\skip198
+\LTchunksize=\count327
+\LTcapwidth=\dimen199
+\LT@head=\box60
+\LT@firsthead=\box61
+\LT@foot=\box62
+\LT@lastfoot=\box63
+\LT@gbox=\box64
+\LT@cols=\count328
+\LT@rows=\count329
+\c@LT@tables=\count330
+\c@LT@chunks=\count331
+\LT@p@ftn=\toks34
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count332
+\calc@Bcount=\count333
+\calc@Adimen=\dimen256
+\calc@Bdimen=\dimen257
+\calc@Askip=\skip199
+\calc@Bskip=\skip256
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count334
+\calc@Cskip=\skip257
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/mdwtools/footnote.sty
+Package: footnote 1997/01/28 1.13 Save footnotes around boxes
+\fn@notes=\box65
+\fn@width=\dimen258
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 107.
+)
+\Gin@req@height=\dimen259
+\Gin@req@width=\dimen260
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/bclogo/bclogo.sty
+Package: bclogo 2016/01/10 v3.1
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
+ (/home/surtich/.TinyTeX/texmf-dist/tex/generic/xkeyval/xkeyval.tex (/home/surtich/.TinyTeX/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+\XKV@toks=\toks35
+\XKV@tempa@toks=\toks36
+)
+\XKV@depth=\count335
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+)) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2022/04/13 v1.1d Standard LaTeX ifthen package (DPC)
+)
+\bc@invboxh=\skip258
+\bc@invboxd=\skip259
+\bc@titleLength=\skip260
+\logowidth=\skip261
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty (/home/surtich/.TinyTeX/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty (/home/surtich/.TinyTeX/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
+\pgfutil@everybye=\toks37
+\pgfutil@tempdima=\dimen261
+\pgfutil@tempdimb=\dimen262
+) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
+\pgfutil@abb=\box66
+) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/pgf.revision.tex)
+Package: pgfrcs 2023-01-15 v3.1.10 (3.1.10)
+))
+Package: pgf 2023-01-15 v3.1.10 (3.1.10)
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty (/home/surtich/.TinyTeX/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
+Package: pgfsys 2023-01-15 v3.1.10 (3.1.10)
+ (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks38
+\pgfkeys@temptoks=\toks39
+ (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfkeyslibraryfiltered.code.tex
+\pgfkeys@tmptoks=\toks40
+))
+\pgf@x=\dimen263
+\pgf@y=\dimen264
+\pgf@xa=\dimen265
+\pgf@ya=\dimen266
+\pgf@xb=\dimen267
+\pgf@yb=\dimen268
+\pgf@xc=\dimen269
+\pgf@yc=\dimen270
+\pgf@xd=\dimen271
+\pgf@yd=\dimen272
+\w@pgf@writea=\write5
+\r@pgf@reada=\read4
+\c@pgf@counta=\count336
+\c@pgf@countb=\count337
+\c@pgf@countc=\count338
+\c@pgf@countd=\count339
+\t@pgf@toka=\toks41
+\t@pgf@tokb=\toks42
+\t@pgf@tokc=\toks43
+\pgf@sys@id@count=\count340
+ (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
+File: pgf.cfg 2023-01-15 v3.1.10 (3.1.10)
+)
+Driver file for pgf: pgfsys-pdftex.def
+ (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.def
+File: pgfsys-pdftex.def 2023-01-15 v3.1.10 (3.1.10)
+ (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-pdf.def
+File: pgfsys-common-pdf.def 2023-01-15 v3.1.10 (3.1.10)
+))) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.tex
+File: pgfsyssoftpath.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfsyssoftpath@smallbuffer@items=\count341
+\pgfsyssoftpath@bigbuffer@items=\count342
+) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.tex
+File: pgfsysprotocol.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex
+Package: pgfcore 2023-01-15 v3.1.10 (3.1.10)
+ (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
+\pgfmath@dimen=\dimen273
+\pgfmath@count=\count343
+\pgfmath@box=\box67
+\pgfmath@toks=\toks44
+\pgfmath@stack@operand=\toks45
+\pgfmath@stack@operation=\toks46
+) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code.tex) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonometric.code.tex) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.code.tex) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison.code.tex) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.tex) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code.tex) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.tex) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerarithmetics.code.tex) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count344
+)) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfint.code.tex) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex
+File: pgfcorepoints.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@picminx=\dimen274
+\pgf@picmaxx=\dimen275
+\pgf@picminy=\dimen276
+\pgf@picmaxy=\dimen277
+\pgf@pathminx=\dimen278
+\pgf@pathmaxx=\dimen279
+\pgf@pathminy=\dimen280
+\pgf@pathmaxy=\dimen281
+\pgf@xx=\dimen282
+\pgf@xy=\dimen283
+\pgf@yx=\dimen284
+\pgf@yy=\dimen285
+\pgf@zx=\dimen286
+\pgf@zy=\dimen287
+) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.code.tex
+File: pgfcorepathconstruct.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@path@lastx=\dimen288
+\pgf@path@lasty=\dimen289
+) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code.tex
+File: pgfcorepathusage.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@shorten@end@additional=\dimen290
+\pgf@shorten@start@additional=\dimen291
+) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.tex
+File: pgfcorescopes.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfpic=\box68
+\pgf@hbox=\box69
+\pgf@layerbox@main=\box70
+\pgf@picture@serial@count=\count345
+) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.code.tex
+File: pgfcoregraphicstate.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgflinewidth=\dimen292
+) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformations.code.tex
+File: pgfcoretransformations.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@pt@x=\dimen293
+\pgf@pt@y=\dimen294
+\pgf@pt@temp=\dimen295
+) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
+File: pgfcorequick.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.code.tex
+File: pgfcoreobjects.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathprocessing.code.tex
+File: pgfcorepathprocessing.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.tex
+File: pgfcorearrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfarrowsep=\dimen296
+) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
+File: pgfcoreshade.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@max=\dimen297
+\pgf@sys@shading@range@num=\count346
+\pgf@shadingcount=\count347
+) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
+File: pgfcoreimage.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.tex
+File: pgfcoreexternal.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfexternal@startupbox=\box71
+) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.tex
+File: pgfcorelayers.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransparency.code.tex
+File: pgfcoretransparency.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatterns.code.tex
+File: pgfcorepatterns.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorerdf.code.tex
+File: pgfcorerdf.code.tex 2023-01-15 v3.1.10 (3.1.10)
+))) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
+File: pgfmoduleshapes.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfnodeparttextbox=\box72
+) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex
+File: pgfmoduleplot.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65.sty
+Package: pgfcomp-version-0-65 2023-01-15 v3.1.10 (3.1.10)
+\pgf@nodesepstart=\dimen298
+\pgf@nodesepend=\dimen299
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18.sty
+Package: pgfcomp-version-1-18 2023-01-15 v3.1.10 (3.1.10)
+)) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/pgf/utilities/pgffor.sty (/home/surtich/.TinyTeX/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex)) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/pgf/math/pgfmath.sty (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
+Package: pgffor 2023-01-15 v3.1.10 (3.1.10)
+\pgffor@iter=\dimen300
+\pgffor@skip=\dimen301
+\pgffor@stack=\toks47
+\pgffor@toks=\toks48
+)) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
+Package: tikz 2023-01-15 v3.1.10 (3.1.10)
+ (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers.code.tex
+File: pgflibraryplothandlers.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@plot@mark@count=\count348
+\pgfplotmarksize=\dimen302
+)
+\tikz@lastx=\dimen303
+\tikz@lasty=\dimen304
+\tikz@lastxsaved=\dimen305
+\tikz@lastysaved=\dimen306
+\tikz@lastmovetox=\dimen307
+\tikz@lastmovetoy=\dimen308
+\tikzleveldistance=\dimen309
+\tikzsiblingdistance=\dimen310
+\tikz@figbox=\box73
+\tikz@figbox@bg=\box74
+\tikz@tempbox=\box75
+\tikz@tempbox@bg=\box76
+\tikztreelevel=\count349
+\tikznumberofchildren=\count350
+\tikznumberofcurrentchild=\count351
+\tikz@fig@count=\count352
+ (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
+File: pgfmodulematrix.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfmatrixcurrentrow=\count353
+\pgfmatrixcurrentcolumn=\count354
+\pgf@matrix@numberofcolumns=\count355
+)
+\tikz@expandcount=\count356
+ (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2023-01-15 v3.1.10 (3.1.10)
+))) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/mdframed/mdframed.sty
+Package: mdframed 2013/07/01 1.9b: mdframed
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
+ (/home/surtich/.TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
+Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
+)) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/l3packages/xparse/xparse.sty (/home/surtich/.TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty
+Package: expl3 2023-04-20 L3 programming layer (loader) 
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2023-04-19 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count357
+\l__pdf_internal_box=\box77
+))
+Package: xparse 2023-02-02 L3 Experimental document command parser
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/zref/zref-abspage.sty
+Package: zref-abspage 2022-04-07 v2.34 Module abspage for zref (HO)
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/zref/zref-base.sty
+Package: zref-base 2022-04-07 v2.34 Module base for zref (HO)
+ (/home/surtich/.TinyTeX/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/etexcmds/etexcmds.sty
+Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/auxhook/auxhook.sty
+Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
+)
+Package zref Info: New property list: main on input line 767.
+Package zref Info: New property: default on input line 768.
+Package zref Info: New property: page on input line 769.
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/base/atbegshi-ltx.sty
+Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
+package with kernel methods
+)
+\c@abspage=\count358
+Package zref Info: New property: abspage on input line 65.
+)
+\mdf@templength=\skip262
+\c@mdf@globalstyle@cnt=\count359
+\mdf@skipabove@length=\skip263
+\mdf@skipbelow@length=\skip264
+\mdf@leftmargin@length=\skip265
+\mdf@rightmargin@length=\skip266
+\mdf@innerleftmargin@length=\skip267
+\mdf@innerrightmargin@length=\skip268
+\mdf@innertopmargin@length=\skip269
+\mdf@innerbottommargin@length=\skip270
+\mdf@splittopskip@length=\skip271
+\mdf@splitbottomskip@length=\skip272
+\mdf@outermargin@length=\skip273
+\mdf@innermargin@length=\skip274
+\mdf@linewidth@length=\skip275
+\mdf@innerlinewidth@length=\skip276
+\mdf@middlelinewidth@length=\skip277
+\mdf@outerlinewidth@length=\skip278
+\mdf@roundcorner@length=\skip279
+\mdf@footenotedistance@length=\skip280
+\mdf@userdefinedwidth@length=\skip281
+\mdf@needspace@length=\skip282
+\mdf@frametitleaboveskip@length=\skip283
+\mdf@frametitlebelowskip@length=\skip284
+\mdf@frametitlerulewidth@length=\skip285
+\mdf@frametitleleftmargin@length=\skip286
+\mdf@frametitlerightmargin@length=\skip287
+\mdf@shadowsize@length=\skip288
+\mdf@extratopheight@length=\skip289
+\mdf@subtitleabovelinewidth@length=\skip290
+\mdf@subtitlebelowlinewidth@length=\skip291
+\mdf@subtitleaboveskip@length=\skip292
+\mdf@subtitlebelowskip@length=\skip293
+\mdf@subtitleinneraboveskip@length=\skip294
+\mdf@subtitleinnerbelowskip@length=\skip295
+\mdf@subsubtitleabovelinewidth@length=\skip296
+\mdf@subsubtitlebelowlinewidth@length=\skip297
+\mdf@subsubtitleaboveskip@length=\skip298
+\mdf@subsubtitlebelowskip@length=\skip299
+\mdf@subsubtitleinneraboveskip@length=\skip300
+\mdf@subsubtitleinnerbelowskip@length=\skip301
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/mdframed/md-frame-1.mdf
+File: md-frame-1.mdf 2013/07/01\ 1.9b: md-frame-1
+)
+\mdf@frametitlebox=\box78
+\mdf@footnotebox=\box79
+\mdf@splitbox@one=\box80
+\mdf@splitbox@two=\box81
+\mdf@splitbox@save=\box82
+\mdfsplitboxwidth=\skip302
+\mdfsplitboxtotalwidth=\skip303
+\mdfsplitboxheight=\skip304
+\mdfsplitboxdepth=\skip305
+\mdfsplitboxtotalheight=\skip306
+\mdfframetitleboxwidth=\skip307
+\mdfframetitleboxtotalwidth=\skip308
+\mdfframetitleboxheight=\skip309
+\mdfframetitleboxdepth=\skip310
+\mdfframetitleboxtotalheight=\skip311
+\mdffootnoteboxwidth=\skip312
+\mdffootnoteboxtotalwidth=\skip313
+\mdffootnoteboxheight=\skip314
+\mdffootnoteboxdepth=\skip315
+\mdffootnoteboxtotalheight=\skip316
+\mdftotallinewidth=\skip317
+\mdfboundingboxwidth=\skip318
+\mdfboundingboxtotalwidth=\skip319
+\mdfboundingboxheight=\skip320
+\mdfboundingboxdepth=\skip321
+\mdfboundingboxtotalheight=\skip322
+\mdf@freevspace@length=\skip323
+\mdf@horizontalwidthofbox@length=\skip324
+\mdf@verticalmarginwhole@length=\skip325
+\mdf@horizontalspaceofbox=\skip326
+\mdfsubtitleheight=\skip327
+\mdfsubsubtitleheight=\skip328
+\c@mdfcountframes=\count360
+
+****** mdframed patching \endmdf@trivlist
+
+****** -- success******
+
+\mdf@envdepth=\count361
+\c@mdf@env@i=\count362
+\c@mdf@env@ii=\count363
+\c@mdf@zref@counter=\count364
+Package zref Info: New property: mdf@pagevalue on input line 895.
+) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshadows.code.tex
+File: tikzlibraryshadows.code.tex 2023-01-15 v3.1.10 (3.1.10)
+ (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryfadings.code.tex
+File: tikzlibraryfadings.code.tex 2023-01-15 v3.1.10 (3.1.10)
+ (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/libraries/pgflibraryfadings.code.tex
+File: pgflibraryfadings.code.tex 2023-01-15 v3.1.10 (3.1.10)
+))) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.pathmorphing.code.tex (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.code.tex (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/modules/pgfmoduledecorations.code.tex
+\pgfdecoratedcompleteddistance=\dimen311
+\pgfdecoratedremainingdistance=\dimen312
+\pgfdecoratedinputsegmentcompleteddistance=\dimen313
+\pgfdecoratedinputsegmentremainingdistance=\dimen314
+\pgf@decorate@distancetomove=\dimen315
+\pgf@decorate@repeatstate=\count365
+\pgfdecorationsegmentamplitude=\dimen316
+\pgfdecorationsegmentlength=\dimen317
+)
+\tikz@lib@dec@box=\box83
+) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.pathmorphing.code.tex)) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/iftex/ifpdf.sty
+Package: ifpdf 2019/10/25 v3.4 ifpdf legacy package. Use iftex instead.
+)
+\c@bclogocompteur=\count366
+\bcval@epBarre=\skip329
+\bcval@framesep=\skip330
+\bcval@tailleOndu=\skip331
+\bcval@borderWidth=\skip332
+\bcval@margeG=\skip333
+\bcval@margeD=\skip334
+\bc@envbox=\box84
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/glossaries-extra/glossaries-extra.sty
+Package: glossaries-extra 2022/11/08 v1.50 (NLCT)
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/glossaries/base/glossaries.sty
+Package: glossaries 2022/11/03 v4.52 (NLCT)
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/mfirstuc/mfirstuc.sty
+Package: mfirstuc 2022/10/14 v2.08 (NLCT)
+\@glsmfirst=\toks49
+\@glsmrest=\toks50
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/xfor/xfor.sty
+Package: xfor 2009/02/05 v1.05 (NLCT)
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/datatool/datatool-base.sty
+Package: datatool-base 2019/09/27 v2.32 (NLCT)
+
+(/home/surtich/.TinyTeX/texmf-dist/tex/latex/substr/substr.sty
+Package: substr 2009/10/20 v1.2 Handle substrings
+\c@su@anzahl=\count367
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/datatool/datatool-fp.sty
+Package: datatool-fp 2019/09/27 v2.32 (NLCT)
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/fp/fp.sty
+Package: fp 1995/04/02
+ `Fixed Point Package', Version 0.8, April 2, 1995 (C) Michael Mehlich (/home/surtich/.TinyTeX/texmf-dist/tex/latex/fp/defpattern.sty
+Package: defpattern 1994/10/12
+\actioncount=\count368
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/fp/fp-basic.sty
+Package: fp-basic 1996/05/13
+\FP@xs=\count369
+\FP@xia=\count370
+\FP@xib=\count371
+\FP@xfa=\count372
+\FP@xfb=\count373
+\FP@rega=\count374
+\FP@regb=\count375
+\FP@regs=\count376
+\FP@times=\count377
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/fp/fp-addons.sty
+Package: fp-addons 1995/03/15
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/fp/fp-snap.sty
+Package: fp-snap 1995/04/05
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/fp/fp-exp.sty
+Package: fp-exp 1995/04/03
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/fp/fp-trigo.sty
+Package: fp-trigo 1995/04/14
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/fp/fp-pas.sty
+Package: fp-pas 1994/08/29
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/fp/fp-random.sty
+Package: fp-random 1995/02/23
+\FPseed=\count378
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/fp/fp-eqn.sty
+Package: fp-eqn 1995/04/03
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/fp/fp-upn.sty
+Package: fp-upn 1996/10/21
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/fp/fp-eval.sty
+Package: fp-eval 1995/04/03
+)))
+\@dtl@toks=\toks51
+\@dtl@tmpcount=\count379
+\dtl@tmplength=\skip335
+\dtl@sortresult=\count380
+\@dtl@numgrpsepcount=\count381
+\@dtl@datatype=\count382
+\dtl@codeA=\count383
+\dtl@codeB=\count384
+\@dtl@foreach@level=\count385
+)
+\gls@level=\count386
+\@gls@tmpb=\toks52
+\gls@tmplen=\skip336
+\glskeylisttok=\toks53
+\glslabeltok=\toks54
+\glsshorttok=\toks55
+\glslongtok=\toks56
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/glossaries/styles/glossary-hypernav.sty
+Package: glossary-hypernav 2022/11/03 v4.52 (NLCT)
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/glossaries/styles/glossary-list.sty
+Package: glossary-list 2022/11/03 v4.52 (NLCT)
+\glslistdottedwidth=\skip337
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/glossaries/styles/glossary-long.sty
+Package: glossary-long 2022/11/03 v4.52 (NLCT)
+\glsdescwidth=\skip338
+\glspagelistwidth=\skip339
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/glossaries/styles/glossary-tree.sty
+Package: glossary-tree 2022/11/03 v4.52 (NLCT)
+\glstreeindent=\skip340
+))
+\@glsxtr@leveloffset=\count387
+\glsxtrresourcecount=\count388
+\@glsxtrnewgls@inner=\count389
+\glsshortpltok=\toks57
+\glslongpltok=\toks58
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/glossaries-extra/glossaries-extra-abbrstyles.def
+File: glossaries-extra-abbrstyles.def 2022/06/16 v1.48b (NLCT)
+)
+\mglselementindex=\count390
+)
+
+Package glossaries Warning: can't automake `main': tmf.glo doesn't exist. Rerun may be required on input line 143.
+
+\glswrite=\write6
+\glo@main@file=\write7
+\openout7 = `tmf.glo'.
+
+Package glossaries Info: Writing glossary file tmf.glo on input line 143.
+(/home/surtich/.TinyTeX/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2022/03/01 v3.6b Customizing captions (AR)
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2022/03/17 v2.3b caption3 kernel (AR)
+\caption@tempdima=\dimen318
+\captionmargin=\dimen319
+\caption@leftmargin=\dimen320
+\caption@rightmargin=\dimen321
+\caption@width=\dimen322
+\caption@indent=\dimen323
+\caption@parindent=\dimen324
+\caption@hangindent=\dimen325
+Package caption Info: memoir document class detected.
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/caption/caption-memoir.sto
+File: caption-memoir.sto 2022/03/02 v2.2b Adaption of the caption package to the memoir document class (AR)
+))
+\c@caption@flags=\count391
+\c@continuedfloat=\count392
+Package caption Info: changepage package is loaded.
+\caption@adjustwidth@hsize=\dimen326
+\caption@adjustwidth@linewidth=\dimen327
+Package caption Info: longtable package is loaded.
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/caption/ltcaption.sty
+Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
+)) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/tcolorbox/tcolorbox.sty
+Package: tcolorbox 2023/02/12 version 6.0.1 text color boxes
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/environ/environ.sty
+Package: environ 2014/05/04 v0.3 A new way to define environments
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/trimspaces/trimspaces.sty
+Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
+))
+\tcb@titlebox=\box85
+\tcb@upperbox=\box86
+\tcb@lowerbox=\box87
+\tcb@phantombox=\box88
+\c@tcbbreakpart=\count393
+\c@tcblayer=\count394
+\c@tcolorbox@number=\count395
+\tcb@temp=\box89
+\tcb@temp=\box90
+\tcb@temp=\box91
+\tcb@temp=\box92
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/tcolorbox/tcbskins.code.tex
+Library (tcolorbox): 'tcbskins.code.tex' version '6.0.1'
+(/home/surtich/.TinyTeX/texmf-dist/tex/latex/tikzfill/tikzfill.image.sty
+Package: tikzfill.image 2022/07/20 v1.0.0 Image filling library for TikZ
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/tikzfill/tikzfill-common.sty
+Package: tikzfill-common 2022/07/20 v1.0.0 Auxiliary code for tikzfill
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/tikzfill/tikzlibraryfill.image.code.tex
+File: tikzlibraryfill.image.code.tex 2022/07/20 v1.0.0 Image filling library
+\l__tikzfill_img_box=\box93
+)) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/tcolorbox/tcbskinsjigsaw.code.tex
+Library (tcolorbox): 'tcbskinsjigsaw.code.tex' version '6.0.1'
+)) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/tcolorbox/tcbbreakable.code.tex
+Library (tcolorbox): 'tcbbreakable.code.tex' version '6.0.1'
+(/home/surtich/.TinyTeX/texmf-dist/tex/latex/pdfcol/pdfcol.sty
+Package: pdfcol 2022-09-21 v1.7 Handle new color stacks for pdfTeX (HO)
+)
+Package pdfcol Info: New color stack `tcb@breakable' = 1 on input line 23.
+\tcb@testbox=\box94
+\tcb@totalupperbox=\box95
+\tcb@totallowerbox=\box96
+)) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/fontawesome5/fontawesome5.sty
+Package: fontawesome5 2022/05/02 v5.15.4 Font Awesome 5
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
+Package: l3keys2e 2023-02-02 LaTeX2e option processing using LaTeX3 keys
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/fontawesome5/fontawesome5-generic-helper.sty
+Package: fontawesome5-generic-helper 2022/05/02 v5.15.4 non-uTeX helper for fontawesome5
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/fontawesome5/fontawesome5-mapping.def))) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/bookmark/bookmark.sty
+Package: bookmark 2020-11-06 v1.29 PDF bookmarks (HO)
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2023-04-22 v7.00x Hypertext links for LaTeX
+ (/home/surtich/.TinyTeX/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/hycolor/hycolor.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/letltxmacro/letltxmacro.sty
+Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2022-05-17 v2.50 Cross-referencing by name of section
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+)
+\c@section@level=\count396
+)
+\@linkdim=\dimen328
+\Hy@linkcounter=\count397
+\Hy@pagecounter=\count398
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2023-04-22 v7.00x Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
+) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+)
+\Hy@SavedSpaceFactor=\count399
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
+File: puenc.def 2023-04-22 v7.00x Hyperref: PDF Unicode definition (HO)
+Now handling font encoding PU ...
+... no UTF-8 mapping file for font encoding PU
+)
+Package hyperref Info: Option `unicode' set `true' on input line 4065.
+Package hyperref Info: Hyper figures OFF on input line 4182.
+Package hyperref Info: Link nesting OFF on input line 4187.
+Package hyperref Info: Hyper index ON on input line 4190.
+Package hyperref Info: Plain pages OFF on input line 4197.
+Package hyperref Info: Backreferencing OFF on input line 4202.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4449.
+\c@Hy@tempcnt=\count400
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip17
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 4787.
+\XeTeXLinkMargin=\dimen329
+ (/home/surtich/.TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+ (/home/surtich/.TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
+))
+\Fld@menulength=\count401
+\Field@Width=\dimen330
+\Fld@charsize=\dimen331
+Package hyperref Info: Hyper figures OFF on input line 6066.
+Package hyperref Info: Link nesting OFF on input line 6071.
+Package hyperref Info: Hyper index ON on input line 6074.
+Package hyperref Info: backreferencing OFF on input line 6081.
+Package hyperref Info: Link coloring OFF on input line 6086.
+Package hyperref Info: Link coloring with OCG OFF on input line 6091.
+Package hyperref Info: PDF/A mode OFF on input line 6096.
+\Hy@abspage=\count402
+\c@Item=\count403
+\c@Hfootnote=\count404
+)
+Package hyperref Info: Driver (autodetected): hpdftex.
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2023-04-22 v7.00x Hyperref driver for pdfTeX
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/base/atveryend-ltx.sty
+Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend package
+with kernel methods
+)
+\HyAnn@Count=\count405
+\Fld@listcount=\count406
+\c@bookmark@seq@number=\count407
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
+ (/home/surtich/.TinyTeX/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 285.
+)
+\Hy@SectionHShift=\skip341
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/memoir/memhfixc.sty
+Package: memhfixc 2022/11/17 v1.20 nameref/hyperref package fixes for memoir class
+
+Redoing nameref's sectioning
+Redoing nameref's label
+LaTeX Info: Redefining \nameref on input line 106.
+\c@memhycontfloat=\count408
+\c@Hpagenote=\count409
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/bookmark/bkm-pdftex.def
+File: bkm-pdftex.def 2020-11-06 v1.29 bookmark driver for pdfTeX (HO)
+\BKM@id=\count410
+)) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count411
+\float@exts=\toks59
+\float@box=\box97
+\@float@everytoks=\toks60
+\@floatcapt=\box98
+)
+\@float@every@codelisting=\toks61
+\c@codelisting=\count412
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2022/01/07 v1.5 Sub-captions (AR)
+\c@subfigure=\count413
+\c@subtable=\count414
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/titlesec/titletoc.sty
+Package: titletoc 2021/07/05 v2.14 TOC entries
+\ttl@leftsep=\dimen332
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/marginfix/marginfix.sty
+Package: marginfix 2020/05/06 v1.2 Fix Margin Paragraphs
+\Mfx@inject@insert=\insert247
+\Mfx@marginbox=\box99
+\Mfx@marginpos@min=\dimen333
+\Mfx@marginpos@max=\dimen334
+\Mfx@marginspace=\dimen335
+\Mfx@marginheight=\dimen336
+\Mfx@piece@content=\box100
+\Mfx@piece@count=\count415
+\Mfx@mparshift=\dimen337
+\marginheightadjustment=\dimen338
+\marginposadjustment=\dimen339
+\Mfx@strutheight=\dimen340
+)
+\widthw=\skip342
+\rf=\skip343
+ (/home/surtich/.TinyTeX/texmf-dist/tex/generic/soul/soul.sty
+Package: soul 2023-02-18 v3.0 Permit use of UTF-8 characters in soul (HO)
+ (/home/surtich/.TinyTeX/texmf-dist/tex/generic/soul/soul-ori.sty
+Package: soul-ori 2023-02-18 v3.0 letterspacing/underlining (mf)
+\SOUL@word=\toks62
+\SOUL@lasttoken=\toks63
+\SOUL@syllable=\toks64
+\SOUL@cmds=\toks65
+\SOUL@buffer=\toks66
+\SOUL@token=\toks67
+\SOUL@syllgoal=\dimen341
+\SOUL@syllwidth=\dimen342
+\SOUL@charkern=\dimen343
+\SOUL@hyphkern=\dimen344
+\SOUL@dimen=\dimen345
+\SOUL@dimeni=\dimen346
+\SOUL@minus=\count416
+\SOUL@comma=\count417
+\SOUL@apo=\count418
+\SOUL@grave=\count419
+\SOUL@spaceskip=\skip344
+\SOUL@ttwidth=\dimen347
+\SOUL@uldp=\dimen348
+\SOUL@ulht=\dimen349
+))
+\dlf@normtxtw=\skip345
+\feline@chapter=\box101
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/csquotes/csquotes.sty
+Package: csquotes 2022-09-14 v5.2n context-sensitive quotations (JAW)
+\csq@reset=\count420
+\csq@gtype=\count421
+\csq@glevel=\count422
+\csq@qlevel=\count423
+\csq@maxlvl=\count424
+\csq@tshold=\count425
+\csq@ltx@everypar=\toks68
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/csquotes/csquotes.def
+File: csquotes.def 2022-09-14 v5.2n csquotes generic definitions (JAW)
+)
+Package csquotes Info: Trying to load configuration file 'csquotes.cfg'...
+Package csquotes Info: ... configuration file loaded successfully.
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/csquotes/csquotes.cfg
+File: csquotes.cfg 
+)
+Package csquotes Info: Enabling strict warnings.
+Package csquotes Info: Enabling multilingual quotes.
+) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2023/04/18 3.88 The Babel package
+\babel@savecnt=\count426
+\U@D=\dimen350
+\l@unhyphenated=\language4
+ (/home/surtich/.TinyTeX/texmf-dist/tex/generic/babel/txtbabel.def)
+\bbl@readstream=\read5
+\bbl@dirlevel=\count427
+Package babel Info: You haven't specified a language as a class or package
+(babel)             option. I'll load 'nil'. Reported on input line 4444.
+ (/home/surtich/.TinyTeX/texmf-dist/tex/generic/babel/nil.ldf
+Language: nil 2023/04/18 3.88 Nil language
+\l@nil=\language5
+))
+\everypar=\toks69
+ (/home/surtich/.TinyTeX/texmf-dist/tex/generic/babel/locale/es/babel-spanish.tex)
+Package babel Info: Importing data for spanish
+(babel)             from babel-es.ini. Reported on input line 401.
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/biblatex/biblatex.sty
+Package: biblatex 2023/03/05 v3.19 programmable bibliographies (PK/MW)
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/logreq/logreq.sty
+Package: logreq 2010/08/04 v1.0 xml request logger
+\lrq@indent=\count428
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/logreq/logreq.def
+File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
+))
+\c@tabx@nest=\count429
+\c@listtotal=\count430
+\c@listcount=\count431
+\c@liststart=\count432
+\c@liststop=\count433
+\c@citecount=\count434
+\c@citetotal=\count435
+\c@multicitecount=\count436
+\c@multicitetotal=\count437
+\c@instcount=\count438
+\c@maxnames=\count439
+\c@minnames=\count440
+\c@maxitems=\count441
+\c@minitems=\count442
+\c@citecounter=\count443
+\c@maxcitecounter=\count444
+\c@savedcitecounter=\count445
+\c@uniquelist=\count446
+\c@uniquename=\count447
+\c@refsection=\count448
+\c@refsegment=\count449
+\c@maxextratitle=\count450
+\c@maxextratitleyear=\count451
+\c@maxextraname=\count452
+\c@maxextradate=\count453
+\c@maxextraalpha=\count454
+\c@abbrvpenalty=\count455
+\c@highnamepenalty=\count456
+\c@lownamepenalty=\count457
+\c@maxparens=\count458
+\c@parenlevel=\count459
+\blx@tempcnta=\count460
+\blx@tempcntb=\count461
+\blx@tempcntc=\count462
+\c@blx@maxsection=\count463
+\blx@maxsegment@0=\count464
+\blx@notetype=\count465
+\blx@parenlevel@text=\count466
+\blx@parenlevel@foot=\count467
+\blx@sectionciteorder@0=\count468
+\blx@sectionciteorderinternal@0=\count469
+\blx@entrysetcounter=\count470
+\blx@biblioinstance=\count471
+\labelnumberwidth=\skip346
+\labelalphawidth=\skip347
+\biblabelsep=\skip348
+\bibnamesep=\skip349
+\bibinitsep=\skip350
+\bibparsep=\skip351
+\bibhang=\skip352
+\blx@bcfin=\read6
+\blx@bcfout=\write8
+\blx@langwohyphens=\language6
+\c@mincomprange=\count472
+\c@maxcomprange=\count473
+\c@mincompwidth=\count474
+Package biblatex Info: Trying to load biblatex default data model...
+Package biblatex Info: ... file 'blx-dm.def' found.
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/biblatex/blx-dm.def
+File: blx-dm.def 2023/03/05 v3.19 biblatex localization (PK/MW)
+)
+Package biblatex Info: Trying to load biblatex style data model...
+Package biblatex Info: ... file 'authoryear-ibid.dbx' not found.
+Package biblatex Info: Trying to load biblatex custom data model...
+Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
+\c@afterword=\count475
+\c@savedafterword=\count476
+\c@annotator=\count477
+\c@savedannotator=\count478
+\c@author=\count479
+\c@savedauthor=\count480
+\c@bookauthor=\count481
+\c@savedbookauthor=\count482
+\c@commentator=\count483
+\c@savedcommentator=\count484
+\c@editor=\count485
+\c@savededitor=\count486
+\c@editora=\count487
+\c@savededitora=\count488
+\c@editorb=\count489
+\c@savededitorb=\count490
+\c@editorc=\count491
+\c@savededitorc=\count492
+\c@foreword=\count493
+\c@savedforeword=\count494
+\c@holder=\count495
+\c@savedholder=\count496
+\c@introduction=\count497
+\c@savedintroduction=\count498
+\c@namea=\count499
+\c@savednamea=\count500
+\c@nameb=\count501
+\c@savednameb=\count502
+\c@namec=\count503
+\c@savednamec=\count504
+\c@translator=\count505
+\c@savedtranslator=\count506
+\c@shortauthor=\count507
+\c@savedshortauthor=\count508
+\c@shorteditor=\count509
+\c@savedshorteditor=\count510
+\c@labelname=\count511
+\c@savedlabelname=\count512
+\c@institution=\count513
+\c@savedinstitution=\count514
+\c@lista=\count515
+\c@savedlista=\count516
+\c@listb=\count517
+\c@savedlistb=\count518
+\c@listc=\count519
+\c@savedlistc=\count520
+\c@listd=\count521
+\c@savedlistd=\count522
+\c@liste=\count523
+\c@savedliste=\count524
+\c@listf=\count525
+\c@savedlistf=\count526
+\c@location=\count527
+\c@savedlocation=\count528
+\c@organization=\count529
+\c@savedorganization=\count530
+\c@origlocation=\count531
+\c@savedoriglocation=\count532
+\c@origpublisher=\count533
+\c@savedorigpublisher=\count534
+\c@publisher=\count535
+\c@savedpublisher=\count536
+\c@language=\count537
+\c@savedlanguage=\count538
+\c@origlanguage=\count539
+\c@savedoriglanguage=\count540
+\c@pageref=\count541
+\c@savedpageref=\count542
+\shorthandwidth=\skip353
+\shortjournalwidth=\skip354
+\shortserieswidth=\skip355
+\shorttitlewidth=\skip356
+\shortauthorwidth=\skip357
+\shorteditorwidth=\skip358
+\locallabelnumberwidth=\skip359
+\locallabelalphawidth=\skip360
+\localshorthandwidth=\skip361
+\localshortjournalwidth=\skip362
+\localshortserieswidth=\skip363
+\localshorttitlewidth=\skip364
+\localshortauthorwidth=\skip365
+\localshorteditorwidth=\skip366
+Package biblatex Info: Trying to load compatibility code...
+Package biblatex Info: ... file 'blx-compat.def' found.
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/biblatex/blx-compat.def
+File: blx-compat.def 2023/03/05 v3.19 biblatex compatibility (PK/MW)
+)
+Package biblatex Info: Trying to load generic definitions...
+Package biblatex Info: ... file 'biblatex.def' found.
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/biblatex/biblatex.def
+File: biblatex.def 2023/03/05 v3.19 biblatex compatibility (PK/MW)
+\c@textcitecount=\count543
+\c@textcitetotal=\count544
+\c@textcitemaxnames=\count545
+\c@biburlbigbreakpenalty=\count546
+\c@biburlbreakpenalty=\count547
+\c@biburlnumpenalty=\count548
+\c@biburlucpenalty=\count549
+\c@biburllcpenalty=\count550
+\biburlbigskip=\muskip18
+\biburlnumskip=\muskip19
+\biburlucskip=\muskip20
+\biburllcskip=\muskip21
+\c@smartand=\count551
+)
+Package biblatex Info: Trying to load bibliography style 'authoryear-ibid'...
+Package biblatex Info: ... file 'authoryear-ibid.bbx' found.
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/biblatex/bbx/authoryear-ibid.bbx
+File: authoryear-ibid.bbx 2023/03/05 v3.19 biblatex bibliography style (PK/MW)
+Package biblatex Info: Trying to load bibliography style 'authoryear'...
+Package biblatex Info: ... file 'authoryear.bbx' found.
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/biblatex/bbx/authoryear.bbx
+File: authoryear.bbx 2023/03/05 v3.19 biblatex bibliography style (PK/MW)
+Package biblatex Info: Trying to load bibliography style 'standard'...
+Package biblatex Info: ... file 'standard.bbx' found.
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
+File: standard.bbx 2023/03/05 v3.19 biblatex bibliography style (PK/MW)
+\c@bbx:relatedcount=\count552
+\c@bbx:relatedtotal=\count553
+)))
+Package biblatex Info: Trying to load citation style 'authoryear-ibid'...
+Package biblatex Info: ... file 'authoryear-ibid.cbx' found.
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/biblatex/cbx/authoryear-ibid.cbx
+File: authoryear-ibid.cbx 2023/03/05 v3.19 biblatex citation style (PK/MW)
+Package biblatex Info: Redefining '\cite'.
+Package biblatex Info: Redefining '\parencite'.
+Package biblatex Info: Redefining '\footcite'.
+Package biblatex Info: Redefining '\footcitetext'.
+Package biblatex Info: Redefining '\smartcite'.
+Package biblatex Info: Redefining '\textcite'.
+Package biblatex Info: Redefining '\textcites'.
+)
+Package biblatex Info: Trying to load configuration file...
+Package biblatex Info: ... file 'biblatex.cfg' found.
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/biblatex/biblatex.cfg
+File: biblatex.cfg 
+)
+Package biblatex Info: Input encoding 'utf8' detected.
+Package biblatex Info: Document encoding is UTF8 ....
+Package biblatex Info: ... and expl3
+(biblatex)             2023-04-20 L3 programming layer (loader) 
+(biblatex)             is new enough (at least 2020/04/06),
+(biblatex)             setting 'casechanger=expl3'.
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/biblatex/blx-case-expl3.sty
+Package: blx-case-expl3 2023/03/05 v3.19 expl3 case changing code for biblatex
+))
+Package hyperref Info: Option `colorlinks' set `true' on input line 423.
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/textpos/textpos.sty
+Package: textpos 2022/07/23 v1.10.1
+Package textpos Info: choosing support for LaTeX3 on input line 60.
+\TP@textbox=\box102
+\TP@holdbox=\box103
+\TPHorizModule=\dimen351
+\TPVertModule=\dimen352
+\TP@margin=\dimen353
+\TP@absmargin=\dimen354
+
+Grid set 16 x 16 = 37.34424pt x 52.81541pt
+\TPboxrulesize=\dimen355
+\TP@ox=\dimen356
+\TP@oy=\dimen357
+\TP@tbargs=\toks70
+TextBlockOrigin set to 0pt x 0pt
+)
+Package csquotes Info: Checking for multilingual support...
+Package csquotes Info: ... found 'babel' package.
+ (./tmf.aux)
+\openout1 = `tmf.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 510.
+LaTeX Font Info:    ... okay on input line 510.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 510.
+LaTeX Font Info:    ... okay on input line 510.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 510.
+LaTeX Font Info:    ... okay on input line 510.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 510.
+LaTeX Font Info:    ... okay on input line 510.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 510.
+LaTeX Font Info:    ... okay on input line 510.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 510.
+LaTeX Font Info:    ... okay on input line 510.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 510.
+LaTeX Font Info:    ... okay on input line 510.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 510.
+LaTeX Font Info:    ... okay on input line 510.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 510.
+LaTeX Font Info:    ... okay on input line 510.
+LaTeX Info: Redefining \microtypecontext on input line 510.
+Package microtype Info: Applying patch `item' on input line 510.
+Package microtype Info: Applying patch `toc' on input line 510.
+Package microtype Info: Applying patch `eqnum' on input line 510.
+Package microtype Info: Applying patch `footnote' on input line 510.
+Package microtype Info: Applying patch `verbatim' on input line 510.
+Package microtype Info: Generating PDF output.
+Package microtype Info: Character protrusion enabled (level 2).
+Package microtype Info: Using protrusion set `basicmath'.
+Package microtype Info: Automatic font expansion enabled (level 2),
+(microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
+Package microtype Info: Using default expansion set `alltext-nott'.
+LaTeX Info: Redefining \showhyphens on input line 510.
+Package microtype Info: No adjustment of tracking.
+Package microtype Info: No adjustment of interword spacing.
+Package microtype Info: No adjustment of character kerning.
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/microtype/mt-cmr.cfg
+File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman (RS)
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/grfext/grfext.sty
+Package: grfext 2019/12/03 v1.3 Manage graphics extensions (HO)
+)
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.mps,.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 504.
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
+))
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: float package is loaded.
+Package caption Info: hyperref package is loaded.
+Package caption Info: End \AtBeginDocument code.
+Package hyperref Info: Link coloring ON on input line 510.
+Package biblatex Info: Trying to load language 'spanish'...
+Package biblatex Info: ... file 'spanish.lbx' found.
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/biblatex/lbx/spanish.lbx
+File: spanish.lbx 2023/03/05 v3.19 biblatex localization (PK/MW)
+)
+Package biblatex Info: Input encoding 'utf8' detected.
+Package biblatex Info: Automatic encoding selection.
+(biblatex)             Assuming data encoding 'utf8'.
+\openout8 = `tmf.bcf'.
+
+Package biblatex Info: Trying to load bibliographic data...
+Package biblatex Info: ... file 'tmf.bbl' not found.
+
+No file tmf.bbl.
+Package biblatex Info: Reference section=0 on input line 510.
+Package biblatex Info: Reference segment=0 on input line 510.
+<images/logo.png, id=31, 371.3875pt x 177.66376pt>
+File: images/logo.png Graphic file (type png)
+<use images/logo.png>
+Package pdftex.def Info: images/logo.png  used on input line 527.
+(pdftex.def)             Requested size: 284.53552pt x 136.11565pt.
+
+Overfull \hbox (11.63481pt too wide) in paragraph at lines 527--527
+ [] 
+ []
+
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 527.
+(/home/surtich/.TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
+File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 527.
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
+File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 527.
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
+File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 527.
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
+File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <20.74> on input line 527.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <14.4> on input line 527.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <12> on input line 527.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 527.
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/microtype/mt-msa.cfg
+File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 527.
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/microtype/mt-msb.cfg
+File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
+)
+
+******************************************************
+Stock height and width: 845.04684pt by 597.50787pt
+Top and edge trims: 0pt and 0pt
+Page height and width: 845.04684pt by 597.50787pt
+Text height and width: 664.5pt by 380pt
+Spine and edge margins: 108.405pt and 108.405pt
+Upper and lower margins: 108.405pt and 72.14185pt
+Headheight and headsep: 14.5pt and 19.8738pt
+Footskip: 30pt
+Columnsep and columnseprule: 10pt and 0pt
+Marginparsep and marginparwidth: 7.22743pt and 7.22743pt
+Sidecapsep and sidecapwidth: 7pt and 92pt
+Sidebarhsep and sidebarwidth: 7pt and 92pt
+Sidebarvsep and sidebartopsep: 14.5pt and 0pt
+Sidebarheight: 590.14995pt
+Sidefoothsep and sidefootwidth: 7pt and 92pt
+Sidefootvsep and sidefootheight: 14.5pt and 590.14995pt
+******************************************************
+
+[1
+
+\openout6 = `tmf.ist'.
+
+
+{/home/surtich/.TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/home/surtich/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc} <./images/logo.png>]
+TextBlockOrigin set to \trimedge  x \trimtop 
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 527.
+(/home/surtich/.TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
+File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <8> on input line 527.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <6> on input line 527.
+<images//logo.png, id=45, 371.3875pt x 177.66376pt>
+File: images//logo.png Graphic file (type png)
+<use images//logo.png>
+Package pdftex.def Info: images//logo.png  used on input line 527.
+(pdftex.def)             Requested size: 149.37973pt x 71.46002pt.
+Package microtype Info: Character `029' is missing
+(microtype)             in font `T1/lmr/m/sc/12'.
+(microtype)             Ignoring protrusion settings for this character.
+ [2
+
+{/home/surtich/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc} <./images//logo.png>]
+
+LaTeX Font Warning: Font shape `T1/lmr/bx/sc' undefined
+(Font)              using `T1/lmr/bx/n' instead on input line 534.
+
+[3
+
+] [4
+
+]
+
+******************************************************
+Stock height and width: 845.04684pt by 597.50787pt
+Top and edge trims: 0pt and 0pt
+Page height and width: 845.04684pt by 597.50787pt
+Text height and width: 664.5pt by 380pt
+Spine and edge margins: 108.405pt and 108.405pt
+Upper and lower margins: 108.405pt and 72.14185pt
+Headheight and headsep: 14.5pt and 19.8738pt
+Footskip: 30pt
+Columnsep and columnseprule: 10pt and 0pt
+Marginparsep and marginparwidth: 7.22743pt and 7.22743pt
+Sidecapsep and sidecapwidth: 7pt and 92pt
+Sidebarhsep and sidebarwidth: 7pt and 92pt
+Sidebarvsep and sidebartopsep: 14.5pt and 0pt
+Sidebarheight: 590.14995pt
+Sidefoothsep and sidefootwidth: 7pt and 92pt
+Sidefootvsep and sidefootheight: 14.5pt and 590.14995pt
+******************************************************
+
+[5]
+No file tmf.toc.
+[6
+
+]
+
+******************************************************
+Stock height and width: 845.04684pt by 597.50787pt
+Top and edge trims: 0pt and 0pt
+Page height and width: 845.04684pt by 597.50787pt
+Text height and width: 664.5pt by 380pt
+Spine and edge margins: 108.405pt and 108.405pt
+Upper and lower margins: 108.405pt and 72.14185pt
+Headheight and headsep: 14.5pt and 19.8738pt
+Footskip: 30pt
+Columnsep and columnseprule: 10pt and 0pt
+Marginparsep and marginparwidth: 7.22743pt and 7.22743pt
+Sidecapsep and sidecapwidth: 7pt and 92pt
+Sidebarhsep and sidebarwidth: 7pt and 92pt
+Sidebarvsep and sidebartopsep: 14.5pt and 0pt
+Sidebarheight: 590.14995pt
+Sidefoothsep and sidefootwidth: 7pt and 92pt
+Sidefootvsep and sidefootheight: 14.5pt and 590.14995pt
+******************************************************
+
+No file tmf.lot.
+[7
+
+
+] [8
+
+]
+
+******************************************************
+Stock height and width: 845.04684pt by 597.50787pt
+Top and edge trims: 0pt and 0pt
+Page height and width: 845.04684pt by 597.50787pt
+Text height and width: 664.5pt by 380pt
+Spine and edge margins: 108.405pt and 108.405pt
+Upper and lower margins: 108.405pt and 72.14185pt
+Headheight and headsep: 14.5pt and 19.8738pt
+Footskip: 30pt
+Columnsep and columnseprule: 10pt and 0pt
+Marginparsep and marginparwidth: 7.22743pt and 7.22743pt
+Sidecapsep and sidecapwidth: 7pt and 92pt
+Sidebarhsep and sidebarwidth: 7pt and 92pt
+Sidebarvsep and sidebartopsep: 14.5pt and 0pt
+Sidebarheight: 590.14995pt
+Sidefoothsep and sidefootwidth: 7pt and 92pt
+Sidefootvsep and sidefootheight: 14.5pt and 590.14995pt
+******************************************************
+
+No file tmf.lof.
+(./latex/glossary.tex [9
+
+] [10
+
+]
+No file tmf.gls.
+
+Package glossaries-extra Warning: Glossary `main' is missing on input line 10.
+
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 10.
+(/home/surtich/.TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+Underfull \hbox (badness 2547) in paragraph at lines 10--10
+[]\T1/lmr/m/n/12 (+20) Add \T1/lmtt/m/n/12 automake \T1/lmr/m/n/12 (+20) to your pac-ka-ge op-tion list when you load
+ []
+
+) [11
+
+
+] [12
+
+]
+LaTeX Font Info:    Trying to load font information for T1+lmss on input line 583.
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/lm/t1lmss.fd
+File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+) [1
+
+] [2
+
+]
+LaTeX Font Info:    Trying to load font information for U+fontawesomefree1 on input line 596.
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/fontawesome5/ufontawesomefree1.fd)
+
+LaTeX Warning: Citation 'lawson2015' on page 3 undefined on input line 617.
+
+
+LaTeX Warning: Citation 'senn2022' on page 3 undefined on input line 629.
+
+
+LaTeX Warning: Citation 'lui2016' on page 3 undefined on input line 637.
+
+
+Underfull \vbox (badness 1681) has occurred while \output is active []
+
+ [3{/home/surtich/.TinyTeX/texmf-dist/fonts/enc/dvips/fontawesome5/fa5free1.enc}{/home/surtich/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}]
+
+LaTeX Warning: Citation 'kruschke2018' on page 4 undefined on input line 677.
+
+[4]
+
+LaTeX Warning: Citation 'schweinberger2020survey' on page 5 undefined on input line 720.
+
+
+Underfull \hbox (badness 6893) in paragraph at lines 718--721
+\T1/lmr/m/n/12 (+20) in-ter-na de un cues-tio-na-rio es el co-efi-cien-te \T1/lmtt/m/n/12 alfa de Cronbach
+ []
+
+
+LaTeX Warning: Citation 'agresti_2018' on page 5 undefined on input line 749.
+
+
+LaTeX Warning: Citation 'frienly2015' on page 5 undefined on input line 751.
+
+[5{/home/surtich/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/home/surtich/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/home/surtich/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}]
+
+LaTeX Warning: Citation 'leton2021' on page 6 undefined on input line 758.
+
+
+LaTeX Warning: Reference `tbl-contingencia' on page 6 undefined on input line 762.
+
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 2.1 on input line 791.
+
+
+LaTeX Warning: Reference `tbl-contingencia-3' on page 6 undefined on input line 798.
+
+
+LaTeX Warning: Citation 'leton2021' on page 6 undefined on input line 811.
+
+[6]
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 2.2 on input line 830.
+
+
+LaTeX Warning: Citation 'agresti_2018' on page 7 undefined on input line 838.
+
+
+LaTeX Warning: Citation 'agresti_2018' on page 7 undefined on input line 872.
+
+
+LaTeX Warning: Command \' invalid in math mode on input line 885.
+
+[7]
+
+LaTeX Warning: Citation 'frienly2015' on page 8 undefined on input line 893.
+
+
+Underfull \hbox (badness 3098) in paragraph at lines 892--894
+[]\T1/lmr/m/n/12 (+20) Para in-ter-pre-tar los co-efi-cien-tes, se pue-de re-es-cri-bir la ecua-ción
+ []
+
+
+LaTeX Warning: Reference `eq-logistic' on page 8 undefined on input line 911.
+
+
+Overfull \hbox (64.6772pt too wide) detected at line 954
+[][]
+ []
+
+[8]
+
+LaTeX Warning: Reference `sec-logistica' on page 9 undefined on input line 977.
+
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 986.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 986.
+
+LaTeX Warning: Citation 'burkner2019' on page 9 undefined on input line 987.
+
+
+LaTeX Warning: Citation 'burkner2019' on page 9 undefined on input line 1000.
+
+
+LaTeX Warning: Reference `fig-cumulative' on page 9 undefined on input line 1009.
+
+
+LaTeX Warning: File `2_files/figure-pdf/fig-cumulative-1.pdf' not found on input line 1018.
+
+
+/home/surtich/projects/TFMQ/tmf.tex:1018: Package pdftex.def Error: File `2_files/figure-pdf/fig-cumulative-1.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1018 ...2_files/figure-pdf/fig-cumulative-1.pdf}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Reference `fig-cumulative' on page 9 undefined on input line 1027.
+
+[9]
+Overfull \hbox (7.17906pt too wide) detected at line 1043
+[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 Y \OMS/lmsy/m/n/12 ^^T \OML/lmm/m/it/12 k \OMS/lmsy/m/n/12 j \OML/lmm/m/it/12 ^^Q\OT1/lmr/m/n/12 ) = []([] \OMS/lmsy/m/n/12 ^^T \OML/lmm/m/it/12 ^^\[] \OMS/lmsy/m/n/12 j \OML/lmm/m/it/12 ^^Q\OT1/lmr/m/n/12 ) = [](\OML/lmm/m/it/12 ^^Q \OT1/lmr/m/n/12 + \OML/lmm/m/it/12 ^^O \OMS/lmsy/m/n/12 ^^T \OML/lmm/m/it/12 ^^\[]\OT1/lmr/m/n/12 ) = [](\OML/lmm/m/it/12 ^^O \OMS/lmsy/m/n/12 ^^T \OML/lmm/m/it/12 ^^\[] \OMS/lmsy/m/n/12 ^^@ \OML/lmm/m/it/12 ^^Q\OT1/lmr/m/n/12 ) = \OML/lmm/m/it/12 F\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 ^^\[] \OMS/lmsy/m/n/12 ^^@ \OML/lmm/m/it/12 ^^Q\OT1/lmr/m/n/12 )
+ []
+
+
+LaTeX Warning: Reference `sec-ordinal-2' on page 10 undefined on input line 1068.
+
+[10]
+
+LaTeX Warning: Citation 'Liu2202' on page 11 undefined on input line 1085.
+
+
+LaTeX Warning: Citation 'harrell2020' on page 11 undefined on input line 1089.
+
+
+LaTeX Warning: Citation 'Liu2202' on page 11 undefined on input line 1124.
+
+[11]
+
+LaTeX Warning: Citation 'chen2021' on page 12 undefined on input line 1139.
+
+
+LaTeX Warning: Command \' invalid in math mode on input line 1175.
+
+
+LaTeX Warning: Citation 'gelman2013' on page 12 undefined on input line 1186.
+
+[12]
+
+LaTeX Warning: Citation 'chen2021' on page 13 undefined on input line 1215.
+
+
+LaTeX Warning: Citation 'nicenboim2023' on page 13 undefined on input line 1237.
+
+
+LaTeX Warning: Reference `eq-ypred' on page 13 undefined on input line 1250.
+
+[13]
+
+LaTeX Warning: Citation 'barreda2023' on page 14 undefined on input line 1293.
+
+
+Underfull \hbox (badness 2547) in paragraph at lines 1292--1295
+[]\T1/lmr/m/n/12 (+20) Para com-pa-rar mo-de-los en-tre sí se pue-den usar va-rias me-di-das
+ []
+
+[14]
+
+LaTeX Warning: Reference `eq-aic' on page 15 undefined on input line 1320.
+
+[15] [16] [17
+
+]
+
+LaTeX Warning: Citation 'jperez1' on page 18 undefined on input line 1450.
+
+
+LaTeX Warning: Citation 'jperez2' on page 18 undefined on input line 1450.
+
+
+LaTeX Warning: Citation 'aenor2012' on page 18 undefined on input line 1460.
+
+
+LaTeX Warning: Reference `tbl-likert-levels' on page 18 undefined on input line 1470.
+
+
+LaTeX Warning: Reference `tbl-likert-scale' on page 18 undefined on input line 1477.
+
+[18]
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 3.1 on input line 1501.
+
+
+Overfull \hbox (107.56375pt too wide) in alignment at lines 1504--1529
+ [] [] 
+ []
+
+
+LaTeX Warning: Reference `tbl-contingencia-eco' on page 19 undefined on input line 1542.
+
+
+Underfull \vbox (badness 2088) has occurred while \output is active []
+
+ [19] [20]
+Underfull \hbox (badness 4156) in paragraph at lines 1647--1650
+[]\T1/lmr/m/n/12 (+20) El fi-che-ro \T1/lmtt/m/n/12 acc \T1/lmr/m/n/12 (+20) con-tie-ne la in-for-ma-ción so-bre las ne-ce-si-da-
+ []
+
+[21]
+
+LaTeX Warning: Reference `tbl-variables' on page 22 undefined on input line 1713.
+
+
+Overfull \hbox (94.12593pt too wide) in alignment at lines 1721--1735
+ [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1737--1742
+
+ []
+
+
+LaTeX Warning: Reference `sec-preprocesado' on page 22 undefined on input line 1747.
+
+
+LaTeX Warning: Reference `tbl-variables' on page 22 undefined on input line 1754.
+
+[22]
+
+LaTeX Warning: Reference `tbl-df_clean' on page 23 undefined on input line 1815.
+
+[23] [24]
+
+LaTeX Warning: Reference `sec-modelos-utilizados' on page 25 undefined on input line 1846.
+
+
+LaTeX Warning: Reference `sec-arte' on page 25 undefined on input line 1848.
+
+
+LaTeX Warning: Reference `sec-resultados' on page 25 undefined on input line 1849.
+
+
+LaTeX Warning: Reference `tbl-variables' on page 25 undefined on input line 1854.
+
+
+LaTeX Warning: Reference `tbl-likert-levels' on page 25 undefined on input line 1861.
+
+
+LaTeX Warning: Reference `fig-groups' on page 25 undefined on input line 1864.
+
+<4_files/figure-pdf/fig-groups-1.pdf, id=328, 437.635pt x 138.5175pt>
+File: 4_files/figure-pdf/fig-groups-1.pdf Graphic file (type pdf)
+<use 4_files/figure-pdf/fig-groups-1.pdf>
+Package pdftex.def Info: 4_files/figure-pdf/fig-groups-1.pdf  used on input line 1868.
+(pdftex.def)             Requested size: 380.00482pt x 120.27673pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Reference `tbl-washout' on page 25 undefined on input line 1886.
+
+
+Underfull \vbox (badness 1112) has occurred while \output is active []
+
+ [25
+
+]
+
+LaTeX Warning: Reference `fig-distinct' on page 26 undefined on input line 1908.
+
+<4_files/figure-pdf/fig-distinct-1.pdf, id=340, 484.81125pt x 247.92625pt>
+File: 4_files/figure-pdf/fig-distinct-1.pdf Graphic file (type pdf)
+<use 4_files/figure-pdf/fig-distinct-1.pdf>
+Package pdftex.def Info: 4_files/figure-pdf/fig-distinct-1.pdf  used on input line 1915.
+(pdftex.def)             Requested size: 380.01544pt x 194.33502pt.
+
+LaTeX Warning: Reference `tbl-distinct2' on page 26 undefined on input line 1924.
+
+[26 <./4_files/figure-pdf/fig-groups-1.pdf> <./4_files/figure-pdf/fig-distinct-1.pdf>]
+
+LaTeX Warning: Reference `fig-compare' on page 27 undefined on input line 1951.
+
+<4_files/figure-pdf/fig-compare-1.pdf, id=366, 502.87875pt x 247.92625pt>
+File: 4_files/figure-pdf/fig-compare-1.pdf Graphic file (type pdf)
+<use 4_files/figure-pdf/fig-compare-1.pdf>
+Package pdftex.def Info: 4_files/figure-pdf/fig-compare-1.pdf  used on input line 1957.
+(pdftex.def)             Requested size: 379.99725pt x 187.34395pt.
+
+LaTeX Warning: Reference `tbl-noanswer' on page 27 undefined on input line 1969.
+
+[27 <./4_files/figure-pdf/fig-compare-1.pdf>]
+
+LaTeX Warning: Reference `fig-diff' on page 28 undefined on input line 1998.
+
+<4_files/figure-pdf/fig-diff-1.pdf, id=382, 857.2025pt x 562.1pt>
+File: 4_files/figure-pdf/fig-diff-1.pdf Graphic file (type pdf)
+<use 4_files/figure-pdf/fig-diff-1.pdf>
+Package pdftex.def Info: 4_files/figure-pdf/fig-diff-1.pdf  used on input line 2016.
+(pdftex.def)             Requested size: 379.99551pt x 249.17738pt.
+
+LaTeX Warning: Reference `tbl-diff' on page 28 undefined on input line 2033.
+
+[28 <./4_files/figure-pdf/fig-diff-1.pdf>]
+
+LaTeX Warning: Reference `fig-freqs' on page 29 undefined on input line 2056.
+
+
+LaTeX Warning: Reference `tbl-resume' on page 29 undefined on input line 2059.
+
+
+LaTeX Warning: Reference `fig-freqs' on page 29 undefined on input line 2078.
+
+
+LaTeX Warning: Reference `fig-diff' on page 29 undefined on input line 2084.
+
+<4_files/figure-pdf/fig-freqs-1.pdf, id=399, 499.8675pt x 418.56375pt>
+File: 4_files/figure-pdf/fig-freqs-1.pdf Graphic file (type pdf)
+<use 4_files/figure-pdf/fig-freqs-1.pdf>
+Package pdftex.def Info: 4_files/figure-pdf/fig-freqs-1.pdf  used on input line 2100.
+(pdftex.def)             Requested size: 380.01003pt x 318.20116pt.
+[29]
+
+LaTeX Warning: Reference `fig-levels' on page 30 undefined on input line 2129.
+
+
+LaTeX Warning: Reference `tbl-likert-scale' on page 30 undefined on input line 2155.
+
+[30 <./4_files/figure-pdf/fig-freqs-1.pdf>]
+<4_files/figure-pdf/fig-levels-1.pdf, id=423, 495.8525pt x 417.56pt>
+File: 4_files/figure-pdf/fig-levels-1.pdf Graphic file (type pdf)
+<use 4_files/figure-pdf/fig-levels-1.pdf>
+Package pdftex.def Info: 4_files/figure-pdf/fig-levels-1.pdf  used on input line 2166.
+(pdftex.def)             Requested size: 379.99931pt x 319.9994pt.
+
+
+LaTeX Warning: Reference `fig-likert' on page 31 undefined on input line 2175.
+
+<4_files/figure-pdf/fig-likert-1.pdf, id=424, 487.8225pt x 706.64pt>
+File: 4_files/figure-pdf/fig-likert-1.pdf Graphic file (type pdf)
+<use 4_files/figure-pdf/fig-likert-1.pdf>
+Package pdftex.def Info: 4_files/figure-pdf/fig-likert-1.pdf  used on input line 2189.
+(pdftex.def)             Requested size: 189.99692pt x 275.22188pt.
+
+Overfull \hbox (7.83014pt too wide) in paragraph at lines 2185--2190
+ [][] 
+ []
+
+<4_files/figure-pdf/fig-likert-2.pdf, id=425, 487.8225pt x 706.64pt>
+File: 4_files/figure-pdf/fig-likert-2.pdf Graphic file (type pdf)
+<use 4_files/figure-pdf/fig-likert-2.pdf>
+Package pdftex.def Info: 4_files/figure-pdf/fig-likert-2.pdf  used on input line 2204.
+(pdftex.def)             Requested size: 189.99692pt x 275.22188pt.
+
+Overfull \hbox (7.83014pt too wide) in paragraph at lines 2200--2205
+ [][] 
+ []
+
+<4_files/figure-pdf/fig-likert-3.pdf, id=426, 487.8225pt x 706.64pt>
+File: 4_files/figure-pdf/fig-likert-3.pdf Graphic file (type pdf)
+<use 4_files/figure-pdf/fig-likert-3.pdf>
+Package pdftex.def Info: 4_files/figure-pdf/fig-likert-3.pdf  used on input line 2219.
+(pdftex.def)             Requested size: 189.99692pt x 275.22188pt.
+
+Overfull \hbox (7.83014pt too wide) in paragraph at lines 2215--2220
+ [][] 
+ []
+
+<4_files/figure-pdf/fig-likert-4.pdf, id=427, 487.8225pt x 706.64pt>
+File: 4_files/figure-pdf/fig-likert-4.pdf Graphic file (type pdf)
+<use 4_files/figure-pdf/fig-likert-4.pdf>
+Package pdftex.def Info: 4_files/figure-pdf/fig-likert-4.pdf  used on input line 2234.
+(pdftex.def)             Requested size: 189.99692pt x 275.22188pt.
+
+Overfull \hbox (7.83014pt too wide) in paragraph at lines 2230--2235
+ [][] 
+ []
+
+
+LaTeX Warning: Reference `fig-improve' on page 31 undefined on input line 2245.
+
+[31 <./4_files/figure-pdf/fig-levels-1.pdf>] [32 <./4_files/figure-pdf/fig-likert-1.pdf> <./4_files/figure-pdf/fig-likert-2.pdf> <./4_files/figure-pdf/fig-likert-3.pdf> <./4_files/figure-pdf/fig-likert-4.pdf>]
+<4_files/figure-pdf/fig-improve-1.pdf, id=477, 499.8675pt x 241.90375pt>
+File: 4_files/figure-pdf/fig-improve-1.pdf Graphic file (type pdf)
+<use 4_files/figure-pdf/fig-improve-1.pdf>
+Package pdftex.def Info: 4_files/figure-pdf/fig-improve-1.pdf  used on input line 2256.
+(pdftex.def)             Requested size: 380.01003pt x 183.90042pt.
+<4_files/figure-pdf/fig-improve-2-1.pdf, id=478, 499.8675pt x 241.90375pt>
+File: 4_files/figure-pdf/fig-improve-2-1.pdf Graphic file (type pdf)
+<use 4_files/figure-pdf/fig-improve-2-1.pdf>
+Package pdftex.def Info: 4_files/figure-pdf/fig-improve-2-1.pdf  used on input line 2267.
+(pdftex.def)             Requested size: 380.01003pt x 183.90042pt.
+
+
+LaTeX Warning: Reference `fig-improve-2' on page 33 undefined on input line 2276.
+
+
+LaTeX Warning: Reference `sec-modelos-utilizados' on page 33 undefined on input line 2286.
+
+
+LaTeX Warning: Reference `sec-resultados' on page 33 undefined on input line 2291.
+
+[33 <./4_files/figure-pdf/fig-improve-1.pdf> <./4_files/figure-pdf/fig-improve-2-1.pdf>]
+
+LaTeX Warning: Reference `sec-or' on page 34 undefined on input line 2297.
+
+
+LaTeX Warning: Reference `sec-logistica' on page 34 undefined on input line 2332.
+
+[34]
+LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 2372.
+ (/home/surtich/.TinyTeX/texmf-dist/tex/latex/lm/ts1lmtt.fd
+File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+
+LaTeX Warning: Reference `sec-ordinal' on page 35 undefined on input line 2386.
+
+LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 2392.
+
+LaTeX Warning: Citation 'ordinalR' on page 35 undefined on input line 2396.
+
+
+LaTeX Warning: Citation 'VGAMR' on page 35 undefined on input line 2397.
+
+
+LaTeX Warning: Citation 'MASSR' on page 35 undefined on input line 2398.
+
+
+LaTeX Warning: Citation 'harrell2015' on page 35 undefined on input line 2400.
+
+[35]
+
+LaTeX Warning: Citation 'christensen2018CumulativeLM' on page 36 undefined on input line 2436.
+
+
+LaTeX Warning: Citation 'bruin2011' on page 36 undefined on input line 2452.
+
+[36]
+
+LaTeX Warning: Reference `tbl-probs-clm-treat' on page 37 undefined on input line 2522.
+
+[37]
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 4.6 on input line 2541.
+
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10.95> on input line 2553.
+
+LaTeX Warning: Reference `sec-contrasts' on page 38 undefined on input line 2559.
+
+
+LaTeX Warning: Reference `tbl-contrast' on page 38 undefined on input line 2565.
+
+
+Overfull \hbox (86.09012pt too wide) in alignment at lines 2588--2606
+ [] [] [] [] [] [] [] [] 
+ []
+
+[38]
+
+LaTeX Warning: Reference `eq-ordinal' on page 39 undefined on input line 2641.
+
+
+LaTeX Warning: Reference `tbl-contrat2' on page 39 undefined on input line 2684.
+
+
+Underfull \hbox (badness 7925) in paragraph at lines 2696--2696
+[][]\T1/lmr/m/n/12 (+20) Cuadro[] 4.8: |[]Equi-va-len-cia en-tre los co-efi-cien-tes cal-cu-la-dos con
+ []
+
+[39]
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 4.8 on input line 2714.
+
+[40]
+
+LaTeX Warning: Reference `sec-ordinal' on page 41 undefined on input line 2833.
+
+
+LaTeX Warning: Reference `sec-multinivel' on page 41 undefined on input line 2840.
+
+
+LaTeX Warning: Citation 'burkner2021' on page 41 undefined on input line 2853.
+
+
+LaTeX Warning: Citation 'burkner2019' on page 41 undefined on input line 2853.
+
+[41]
+Overfull \hbox (38.20668pt too wide) detected at line 2871
+[][]
+ []
+
+[42]
+
+LaTeX Warning: Reference `sec-response-treat.period' on page 43 undefined on input line 2928.
+
+
+LaTeX Warning: Reference `fig-random-subject-var' on page 43 undefined on input line 2933.
+
+<4_files/figure-pdf/fig-random-subject-var-1.pdf, id=581, 495.8525pt x 239.89626pt>
+File: 4_files/figure-pdf/fig-random-subject-var-1.pdf Graphic file (type pdf)
+<use 4_files/figure-pdf/fig-random-subject-var-1.pdf>
+Package pdftex.def Info: 4_files/figure-pdf/fig-random-subject-var-1.pdf  used on input line 2939.
+(pdftex.def)             Requested size: 379.99931pt x 183.84581pt.
+
+Overfull \hbox (42.10527pt too wide) detected at line 2965
+[][]
+ []
+
+[43 <./4_files/figure-pdf/fig-random-subject-var-1.pdf>]
+Overfull \hbox (2.72426pt too wide) in paragraph at lines 3043--3043
+[]\T1/lmtt/m/n/9 clmm_treat.period_treat.subject Response ~ Treat * Period + (1 + Treat | Subject)[] 
+ []
+
+[44]
+
+LaTeX Warning: Reference `sec-ordinal-2' on page 45 undefined on input line 3097.
+
+
+LaTeX Warning: Reference `fig-probs-clmm_treat.period.subject.question' on page 45 undefined on input line 3099.
+
+[45]
+
+LaTeX Warning: Reference `eq-mejor-modelo' on page 46 undefined on input line 3152.
+
+
+Overfull \hbox (60.52898pt too wide) detected at line 3162
+[][][][][]
+ []
+
+<4_files/figure-pdf/fig-probs-clmm_treat.period.subject.question-1.pdf, id=609, 493.845pt x 243.91125pt>
+File: 4_files/figure-pdf/fig-probs-clmm_treat.period.subject.question-1.pdf Graphic file (type pdf)
+<use 4_files/figure-pdf/fig-probs-clmm_treat.period.subject.question-1.pdf>
+Package pdftex.def Info: 4_files/figure-pdf/fig-probs-clmm_treat.period.subject.question-1.pdf  used on input line 3174.
+(pdftex.def)             Requested size: 379.99808pt x 187.68196pt.
+[46 <./4_files/figure-pdf/fig-probs-clmm_treat.period.subject.question-1.pdf>]
+
+LaTeX Warning: Reference `sec-bayesiano' on page 47 undefined on input line 3212.
+
+
+LaTeX Warning: Reference `eq-mejor-modelo' on page 47 undefined on input line 3214.
+
+
+Overfull \hbox (12.17424pt too wide) in paragraph at lines 3260--3260
+[]\T1/lmtt/m/n/9 Formula: Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question)[] 
+ []
+
+[47]
+
+LaTeX Warning: Reference `tbl-priors' on page 48 undefined on input line 3310.
+
+
+LaTeX Warning: Reference `fig-priors' on page 48 undefined on input line 3311.
+
+
+Overfull \hbox (34.25085pt too wide) in alignment at lines 3317--3345
+ [] [] [] [] [] [] [] [] [] [] 
+ []
+
+<4_files/figure-pdf/fig-priors-1.pdf, id=631, 495.8525pt x 240.9pt>
+File: 4_files/figure-pdf/fig-priors-1.pdf Graphic file (type pdf)
+<use 4_files/figure-pdf/fig-priors-1.pdf>
+Package pdftex.def Info: 4_files/figure-pdf/fig-priors-1.pdf  used on input line 3351.
+(pdftex.def)             Requested size: 379.99931pt x 184.61504pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Citation 'burkner2019' on page 48 undefined on input line 3365.
+
+
+LaTeX Warning: Reference `fig-trace' on page 48 undefined on input line 3365.
+
+
+LaTeX Warning: Reference `fig-predictive' on page 48 undefined on input line 3368.
+
+[48]
+<4_files/figure-pdf/fig-trace-1.pdf, id=638, 489.83pt x 710.655pt>
+File: 4_files/figure-pdf/fig-trace-1.pdf Graphic file (type pdf)
+<use 4_files/figure-pdf/fig-trace-1.pdf>
+Package pdftex.def Info: 4_files/figure-pdf/fig-trace-1.pdf  used on input line 3378.
+(pdftex.def)             Requested size: 380.01045pt x 551.32664pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<4_files/figure-pdf/fig-predictive-1.pdf, id=639, 489.83pt x 710.655pt>
+File: 4_files/figure-pdf/fig-predictive-1.pdf Graphic file (type pdf)
+<use 4_files/figure-pdf/fig-predictive-1.pdf>
+Package pdftex.def Info: 4_files/figure-pdf/fig-predictive-1.pdf  used on input line 3390.
+(pdftex.def)             Requested size: 380.01045pt x 551.32664pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[49 <./4_files/figure-pdf/fig-priors-1.pdf>] [50 <./4_files/figure-pdf/fig-trace-1.pdf>] [51 <./4_files/figure-pdf/fig-predictive-1.pdf>] [52
+
+]
+
+LaTeX Warning: Reference `sec-modelado' on page 53 undefined on input line 3408.
+
+
+LaTeX Warning: Reference `sec-cronbach' on page 53 undefined on input line 3419.
+
+
+LaTeX Warning: Reference `tbl-item-alpha' on page 53 undefined on input line 3423.
+
+
+LaTeX Warning: Reference `sec-chi2' on page 53 undefined on input line 3480.
+
+
+LaTeX Warning: Reference `tbl-contingencia-2' on page 53 undefined on input line 3484.
+
+
+LaTeX Warning: Reference `tbl-chi2' on page 53 undefined on input line 3485.
+
+[53]
+
+LaTeX Warning: Reference `sec-or' on page 54 undefined on input line 3603.
+
+
+LaTeX Warning: Reference `sec-or-2' on page 54 undefined on input line 3603.
+
+
+LaTeX Warning: Reference `tbl-logor1' on page 54 undefined on input line 3609.
+
+[54]
+
+LaTeX Warning: Reference `tbl-logor2' on page 55 undefined on input line 3630.
+
+
+LaTeX Warning: Reference `tbl-improve-question' on page 55 undefined on input line 3662.
+
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <9> on input line 3676.
+[55]
+
+LaTeX Warning: Reference `sec-ordinal-2' on page 56 undefined on input line 3699.
+
+
+LaTeX Warning: Reference `eq-mejor-modelo' on page 56 undefined on input line 3704.
+
+
+LaTeX Warning: Reference `tbl-model-comp' on page 56 undefined on input line 3715.
+
+
+Overfull \hbox (90.92482pt too wide) in alignment at lines 3720--3744
+ [] [] [] [] [] [] [] 
+ []
+
+[56]
+
+LaTeX Warning: Reference `sec-or-3' on page 57 undefined on input line 3757.
+
+
+LaTeX Warning: Reference `fig-or2' on page 57 undefined on input line 3762.
+
+<5_files/figure-pdf/fig-or2-1.pdf, id=728, 288.07625pt x 207.77625pt>
+File: 5_files/figure-pdf/fig-or2-1.pdf Graphic file (type pdf)
+<use 5_files/figure-pdf/fig-or2-1.pdf>
+Package pdftex.def Info: 5_files/figure-pdf/fig-or2-1.pdf  used on input line 3779.
+(pdftex.def)             Requested size: 288.08432pt x 207.78206pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Reference `tbl-improve-question' on page 57 undefined on input line 3793.
+
+[57
+
+]
+
+LaTeX Warning: Reference `tbl-model-comp' on page 58 undefined on input line 3805.
+
+
+LaTeX Warning: Reference `fig-pred-3' on page 58 undefined on input line 3807.
+
+[58 <./5_files/figure-pdf/fig-or2-1.pdf>]
+<images/bayes-preg.png, id=750, 803.0pt x 1204.5pt>
+File: images/bayes-preg.png Graphic file (type png)
+<use images/bayes-preg.png>
+Package pdftex.def Info: images/bayes-preg.png  used on input line 3871.
+(pdftex.def)             Requested size: 380.00764pt x 570.01147pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[59] [60 <./images/bayes-preg.png (PNG copy)>]
+
+LaTeX Warning: Empty bibliography on input line 3890.
+
+[61
+
+] [62
+
+] [63
+
+] [64] [65] [66]
+
+LaTeX Warning: Reference `tbl-l2' on page 67 undefined on input line 4299.
+
+
+LaTeX Warning: Reference `tbl-l3' on page 67 undefined on input line 4299.
+
+[67]
+
+LaTeX Warning: Reference `tbl-l4' on page 68 undefined on input line 4342.
+
+
+LaTeX Warning: Reference `tbl-l5' on page 68 undefined on input line 4344.
+
+[68]
+
+LaTeX Warning: Reference `tbl-l4' on page 69 undefined on input line 4438.
+
+[69]
+
+LaTeX Warning: Reference `tbl-l2' on page 70 undefined on input line 4639.
+
+[70]
+
+LaTeX Warning: Reference `tbl-l2' on page 71 undefined on input line 4661.
+
+[71] [72
+
+]
+
+******************************************************
+Stock height and width: 845.04684pt by 597.50787pt
+Top and edge trims: 0pt and 0pt
+Page height and width: 845.04684pt by 597.50787pt
+Text height and width: 664.5pt by 380pt
+Spine and edge margins: 108.405pt and 108.405pt
+Upper and lower margins: 108.405pt and 72.14185pt
+Headheight and headsep: 14.5pt and 19.8738pt
+Footskip: 30pt
+Columnsep and columnseprule: 10pt and 0pt
+Marginparsep and marginparwidth: 7.22743pt and 7.22743pt
+Sidecapsep and sidecapwidth: 7pt and 92pt
+Sidebarhsep and sidebarwidth: 7pt and 92pt
+Sidebarvsep and sidebartopsep: 14.5pt and 0pt
+Sidebarheight: 590.14995pt
+Sidefoothsep and sidefootwidth: 7pt and 92pt
+Sidefootvsep and sidefootheight: 14.5pt and 590.14995pt
+******************************************************
+
+
+******************************************************
+Stock height and width: 845.04684pt by 597.50787pt
+Top and edge trims: 0pt and 0pt
+Page height and width: 845.04684pt by 597.50787pt
+Text height and width: 664.5pt by 380pt
+Spine and edge margins: 108.405pt and 108.405pt
+Upper and lower margins: 108.405pt and 72.14185pt
+Headheight and headsep: 14.5pt and 19.8738pt
+Footskip: 30pt
+Columnsep and columnseprule: 10pt and 0pt
+Marginparsep and marginparwidth: 7.22743pt and 7.22743pt
+Sidecapsep and sidecapwidth: 7pt and 92pt
+Sidebarhsep and sidebarwidth: 7pt and 92pt
+Sidebarvsep and sidebartopsep: 14.5pt and 0pt
+Sidebarheight: 590.14995pt
+Sidefoothsep and sidefootwidth: 7pt and 92pt
+Sidefootvsep and sidefootheight: 14.5pt and 590.14995pt
+******************************************************
+
+\tf@toc=\write9
+\openout9 = `tmf.toc'.
+
+\tf@lot=\write10
+\openout10 = `tmf.lot'.
+
+\tf@lof=\write11
+\openout11 = `tmf.lof'.
+
+
+Package longtable Warning: Table widths have changed. Rerun LaTeX.
+
+(./tmf.aux)
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package biblatex Warning: Please (re)run Biber on the file:
+(biblatex)                tmf
+(biblatex)                and rerun LaTeX afterwards.
+
+Package logreq Info: Writing requests to 'tmf.run.xml'.
+\openout1 = `tmf.run.xml'.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 53951 strings out of 477943
+ 1051092 string characters out of 5837443
+ 2007775 words of memory out of 5000000
+ 72737 multiletter control sequences out of 15000+600000
+ 644557 words of font info for 260 fonts, out of 8000000 for 9000
+ 16 hyphenation exceptions out of 8191
+ 109i,19n,117p,2305b,1967s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/fontawesome5/FontAwesome5Free-Solid.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi5.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi9.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr5.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr9.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy5.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt8.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt9.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on tmf.pdf (84 pages, 2199235 bytes).
+PDF statistics:
+ 1230 PDF objects out of 1440 (max. 8388607)
+ 983 compressed objects within 10 object streams
+ 311 named destinations out of 1000 (max. 500000)
+ 74358 words of extra memory for PDF output out of 89155 (max. 10000000)
+

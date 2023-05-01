@@ -1,6 +1,6 @@
 ### Regresión Ordinal Multinivel {#sec-multinivel-2}
 
-En la @sec-multinivel se expuso el fundamento teórico de estos modelos. Aquí se justificará su interés aplicado al caso del subtitulado de vídeos. Hay dos variables susceptibles de ser incorporadas al modelo como efectos aleatorios. Una primera variable candidata es el factor `Subject`. Es evidente que los estudiantes representan una muestra de una población más amplia que estaría constituida por todos los estudiantes de todos los cursos de accesibilidad. Pero es que además cada estudiante responde a cada ítem dos veces y, por lo tanto, sus observaciones no son independientes. Por otro lado, las preguntas no son independientes unas de otras ya que pretenden medir la misma variable subyacente. Además, el interés no es conocer el valor concreto de sus coeficientes sino su valor en relación a los coeficientes de las otras preguntas. En @burkner2021 [pp. 14-16] @burkner2019 [pp. 19-20] podemos encontrar un ejemplo con esta parametrización.
+En la @sec-multinivel se expuso el fundamento teórico de estos modelos. Aquí se justificará su interés aplicado al caso del subtitulado de vídeos. Hay dos variables susceptibles de ser incorporadas al modelo como efectos aleatorios. Una primera variable candidata es el factor `Subject`. Es evidente que los estudiantes representan una muestra de una población más amplia que estaría constituida por todos los estudiantes de todos los cursos de accesibilidad. Pero es que además cada estudiante responde a cada ítem dos veces y, por lo tanto, sus observaciones no son independientes. Por otro lado, las preguntas no son independientes unas de otras ya que pretenden medir la misma variable subyacente. Además, el interés no es conocer el valor concreto de sus coeficientes sino su valor en relación a los coeficientes de las otras preguntas. En @burkner2021 [pp. 14-16] @burkner2019 [pp. 19-20] podemos encontrar un ejemplo con esta parametrización aplicada a una escala de Likert.
 
 #### Modelo Response ~ Treat * Period + (1 | Subject)
 
@@ -18,7 +18,7 @@ $$
 
 \normalsize
 
-donde $ij$ es la observación $i$ del estudiante $j$. Observe que ahora los interceptos $\tau_{kj}$ se descomponen en una parte fija y común para todos los estudiantes $\tau_{k}$ y una parte variable específica para cada estudiante $U_{0j}$. Para ajustar el modelo se va a utilizar la función `clmm()` del paquete `Ordinal` ya que permite la inclusión de efectos aleatorios. 
+donde $ij$ es la observación $i$ del estudiante $j$. Obsérvese que ahora los interceptos $\tau_{kj}$ se descomponen en una parte fija y común para todos los estudiantes $\tau_{k}$ y una parte variable específica para cada estudiante $U_{0j}$. Para ajustar el modelo se va a utilizar la función `clmm()` del paquete `Ordinal` ya que permite la inclusión de efectos aleatorios. 
 
 \scriptsize
 ```{r}

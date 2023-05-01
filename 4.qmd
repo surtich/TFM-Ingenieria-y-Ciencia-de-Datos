@@ -35,7 +35,7 @@ En este capítulo se realizará un análisis inicial para describir los datos y 
 ## Análisis inicial {#sec-eda}
 
 
-Como se explica en la @tbl-variables, al subtitulado le denominamos tratamiento y a sus niveles (correcto e incorrecto) los hemos llamado $A$ y $B$ sin hacer ninguna conjetura de cual de los dos es el subtitulado correcto. El grupo con secuencia $AB$ será el que primero vio el vídeo con subtitulado $A$ y luego el $B$. Análogamente, el grupo con secuencia $BA$ vio los vídeos en orden inverso. Recuérdese que el nivel 0 de respuesta se corresponde con "No sé / No contesto" (ver @tbl-likert-levels). Tras eliminar los test de los usuarios que no dieron su consentimiento para participar en el estudio y los de los que no realizaron el segundo test, las dos cohortes están equilibradas (ver @fig-groups).
+Como se explica en la @tbl-variables, al subtitulado le denominamos tratamiento y a sus niveles (correcto e incorrecto) se les ha llamado $A$ y $B$ sin hacer ninguna conjetura de cual de los dos es el subtitulado correcto. El grupo con secuencia $AB$ será el que primero vio el vídeo con subtitulado $A$ y luego el $B$. Análogamente, el grupo con secuencia $BA$ vio los vídeos en orden inverso. Recuérdese que el nivel 0 de respuesta se corresponde con "No sé / No contesto" (ver @tbl-likert-levels). Tras eliminar los test de los usuarios que no dieron su consentimiento para participar en el estudio y los de los que no realizaron el segundo test, las dos cohortes están equilibradas (ver @fig-groups).
 
 ```{r}
 #| label: fig-groups
@@ -122,7 +122,7 @@ distinct_response__summary_df <- distinct_response_df %>%
 
 La @fig-distinct muestra que hay `r (distinct_response__summary_df %>%
     filter(n == distinct_cut_1))$nn`
-test en los que el estudiante contestó a todas los ítems usando únicamente `r distinct_cut_1` respuestas diferentes.
+test en los que el estudiante contestó a todos los ítems usando únicamente `r distinct_cut_1` respuestas diferentes.
 Además hay `r (distinct_response__summary_df %>%
     filter(n == distinct_cut_2))$nn` 
     test en los que se contestaron todas los ítems con `r distinct_cut_2` respuesta.
@@ -265,8 +265,8 @@ compare_test_df %>% ggplot(aes(x = Total, y = n, fill = Total >= 0)) +
 ```
 
 Vemos que en el grupo $AB$ las diferencias tienden a ser negativas y en el $BA$ positivas. Esto estaría indicando que los estudiantes valoran mejor el subtitulado de nivel $A$ en ambas secuencias. Por ello es esperable que las respuestas de los estudiantes del grupo $AB$ hayan empeorado y que las diferencias sean negativas y que lo contrario haya sucedido con las del grupo $BA$. La diferencia más frecuente en el grupo $AB$ es `r -((compare_test_df %>% arrange(n)) %>% head(1))$Total` y en el grupo $BA$ este valor es `r ((compare_test_df %>% arrange(n)) %>% tail(1))$Total`.
-
-Resulta llamativo que haya estudiantes cuyas contestaciones estén tan alejadas de la tendencia de su grupo. En la @tbl-diff se muestran los tiempos que han transcurrido entre la realización de los test de aquellos estudiantes cuyas respuestas difieren de forma importante de su grupo. Se observa que casi todos son tiempos entre actividades muy cortos. En cualquier caso y, como no son muchos, se ha decidido no eliminarlos y realizar el análisis con ellos.
+f
+Resulta llamativo que haya estudiantes cuyas contestaciones estén tan alejadas de la tendencia de su grupo. En la @tbl-diff se muestran los tiempos que han transcurrido entre la realización de los test de aquellos estudiantes cuyas respuestas difieren de forma importante de su grupo. Son aquellos que aparecen en azul en la secuencia $AB$ y en rojo en la secuencia $BA$. Se observa que casi todos son tiempos entre actividades muy cortos. En cualquier caso y, como no son muchos, se ha decidido no eliminarlos y realizar el análisis con ellos.
 
 ```{r}
 #| label: tbl-diff
@@ -336,7 +336,7 @@ get_freqs <- function(df = df_freqs, ...) {
 ```
 
 
-En la @fig-freqs representamos la frecuencia relativa del valor de respuesta para cada grupo y test en todas la preguntas
+En la @fig-freqs se muestra la frecuencia relativa del valor de respuesta para cada grupo y test en todas la preguntas
 ^[En el @tbl-resume se presenta la misma información con los valores absolutos.]. Esta es otra forma de comparar los niveles de subtitulado.
 
 
@@ -429,7 +429,7 @@ El gráfico @fig-levels muestra la frecuencia relativa por grupo y por test de l
  * Los niveles 4 y 5 se consideran positivos.
  * El nivel 0 ("No sé / No contesto") se excluye en este análisis.
 
-Se muestra en primer lugar la pregunta 18 por ser una valoración global del subtitulado y que resume la opinión que sobre el mismo tiene el estudiante. Volvemos a constatar que el subtitulado $A$ es mejor valorado por los estudiantes, pero ahora vemos que en las 18 preguntas ambos grupos tienen más puntuaciones positivas y menos negativas en el subtitulado $A$ que el $B$. También volvemos a encontrar que los dos grupos valoran de forma muy similar los dos niveles de subtitulado en todas la preguntas. En el nivel de subtitulado $A$ las preguntas $Q15$, $Q16$ y $Q17$ obtienen relativamente peores valoraciones (consultar la @tbl-likert-scale para ver el texto de las preguntas) y estas son similares en ambos subtitulados. Hay algunas preguntas que son valoradas de forma positiva incluso en el nivel de subtitulado $B$ (por ejemplo $Q04$ o $Q13$) y que, por lo tanto, su valoración es similar en ambos subtitulados. Por último, las preguntas $Q05$ y $Q09$ (también la $Q14$ pero solo para el grupo $BA$) tienen una valoración muy negativa en el nivel de subtitulado $B$.
+Se muestra en primer lugar la pregunta 18 por ser una valoración global del subtitulado y que resume la opinión que sobre el mismo tiene el estudiante. Volvemos a constatar que el subtitulado $A$ es mejor valorado por los estudiantes, pero ahora vemos que en las 18 preguntas ambos grupos tienen más puntuaciones positivas y menos negativas en el subtitulado $A$ que el $B$. También volvemos a encontrar que los dos grupos valoran de forma muy similar los dos niveles de subtitulado en todas las preguntas. En el nivel de subtitulado $A$ las preguntas $Q15$, $Q16$ y $Q17$ obtienen relativamente peores valoraciones (consultar la @tbl-likert-scale para ver el texto de las preguntas) y estas son similares en ambos subtitulados. Hay algunas preguntas que son valoradas de forma positiva incluso en el nivel de subtitulado $B$ (por ejemplo $Q04$ o $Q13$) y que, por lo tanto, su valoración es similar en ambos subtitulados. Por último, las preguntas $Q05$ y $Q09$ (también la $Q14$ pero solo para el grupo $BA$) tienen una valoración muy negativa en el nivel de subtitulado $B$.
 
 ```{r}
 #| label: fig-levels
@@ -453,7 +453,7 @@ df_clean %>%
     labs(x = "Question", y = "Percentage", fill = "Response")
 ```
 
-La figura @fig-likert clasifica la preguntas por valoración y permite constatar lo que ya habíamos visto en el párrafo anterior con mayor comodidad.
+La figura @fig-likert clasifica las preguntas por valoración y permite constatar lo que ya habíamos visto en el párrafo anterior con mayor comodidad.
 
 ```{r}
 #| label: fig-likert

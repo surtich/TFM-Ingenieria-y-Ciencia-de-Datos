@@ -41,6 +41,8 @@ profile_df <- map_dfr(
     profile_files, ~ read_delim(.x, delim = ";", show_col_types = FALSE)
 )
 
+profile_df <- profile_df %>% mutate(gender = if_else(gender == "f", "femenino", if_else(gender == "m", "masculino", gender)))
+
 grade_df <- left_join(grade_df, profile_df %>% dplyr::select(-cohort), by = join_by(Username == username))
 
 
