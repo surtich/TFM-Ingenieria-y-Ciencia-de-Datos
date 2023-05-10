@@ -334,7 +334,7 @@ $$\frac{\frac{\mathrm{Pr}(Y \leq k \mid x_i = 1)}{\mathrm{Pr}(Y > k \mid x_i = 1
 
 o, equivalentemente:
 
-$$\frac{\frac{\mathrm{Pr}(Y > k \mid x_i = x + 1)}{\mathrm{Pr}(Y \leq k \mid x_i = x + 1)}}{\frac{\mathrm{Pr}(Y > k \mid x_i = x)}{\mathrm{Pr}(Y \leq k \mid x_i = x)}} = \exp(\beta_{i})$$
+$$\frac{\frac{\mathrm{Pr}(Y > k \mid x_i = x + 1)}{\mathrm{Pr}(Y \leq k \mid x_i = x + 1)}}{\frac{\mathrm{Pr}(Y > k \mid x_i = x)}{\mathrm{Pr}(Y \leq k \mid x_i = x)}} = exp(\beta_{i})$$
 
 Es decir, que $\exp(\beta_{i})$ es el $OR$ (cambio relativo entre $odds$) de que la variable respuesta esté por encima de una determinada categoría versus estar por debajo de ella para una unidad de incremento del predictor $x_i$. Un valor del coeficiente $\beta_i$ positivo indica que la relación entre el predictor $x_i$ y la función de $logit$ es positiva y, por lo tanto, se incrementa la probabilidad de un mayor valor de la variable respuesta.
 Este modelo se denomina proporcional ya que se asume que cada predictor tiene los mismos efectos sobre todos los niveles de la variable de respuesta ordinal [ver @Liu2202]. Esta suposición frecuentemente no es realista y se puede relajar permitiendo estimar un coeficiente diferente para cada nivel de la variable respuesta. Sin embargo, el incremento del número de coeficientes dificulta la interpretabilidad del modelo. @harrell2020 aboga por usar este modelo incluso aunque la suposición de proporcionalidad no se cumpla:

@@ -13,8 +13,9 @@ format:
         controls: true
         width: 1920
         height: 1080
-        css: [assets/syntax-highlight.css, assets/custom.css, assets/pacman.css]
-        header-includes: |
+        css: [assets/custom.css, assets/pacman.css, assets/tachyons-addon.css]
+        include-after: |
+            <link rel="stylesheet" href="assets/syntax-highlight.css">
             <link rel="stylesheet" href="/assets/fontawesome-free-6.1.1-web/css/font-awesome.min.css">
             <script defer src="/assets/fontawesome-free-6.1.1-web/js/all.min.js"></script>
 execute:
@@ -106,7 +107,7 @@ fig1.1 <- add_trace(fig1.1,
 
 
 
-## Distribución acumulada 
+## Regresión Ordinal 
 
 
 ```{r}
@@ -115,7 +116,7 @@ fig1
 ```
 
 
-## Distribución acumulada {auto-animate=true}
+## Regresión Ordinal {auto-animate=true}
 
 
 
@@ -130,7 +131,7 @@ fig1.1
 :::
 
 
-## Distribución acumulada {auto-animate=true}
+## Regresión Ordinal {auto-animate=true}
 
 
 :::::: {.columns}
@@ -255,7 +256,8 @@ fig4
 ::::::
 
 
-## Distribución acumulada {auto-animate=true}
+## Regresión Ordinal {auto-animate=true}
+
 
 
 :::::: {.columns}
@@ -263,10 +265,90 @@ fig4
 :::::: {.column width="40%"}
 
 
+
+::: {.r-stack}
+::: {.fragment .fade-left fragment-index=4}
+
+
+
+
+```{r}
+#| fig.width: 7
+fig5 <- data[[1]]$fit %>%
+    arrange(x, y) %>%
+    mutate(prob = cum.prob - lag(cum.prob)) %>%
+    filter(y != 0) %>%
+    group_by(y) %>%
+    plot_ly(x = ~x, y = ~prob, split = ~y, type = "scatter", mode = "lines")
+fig5
+```
+
+:::
+
+::: {.fragment .fade-in fragment-index=5}
+::: box
+[Cálculo de probabilidad de respuesta]{.story}
+<br>
+$$
+P(Y = k) =  P(Y \le k) - P(Y \le k-1)
+$$
+:::
+
+:::
+
+
+:::
+
+::: {.r-stack}
+::: {.fragment .fade-left fragment-index=6}
+
+```{r}
+#| fig.width: 7
+fig6 <- data[[1]]$fit %>%
+    arrange(x, y) %>%
+    filter(y != 5 & y != 0) %>%
+    group_by(y) %>%
+    plot_ly(x = ~x, y = ~cum.log.odds, split = ~y, type = "scatter", mode = "lines")
+fig6
+```
+
+:::
+::: {.fragment .fade-left fragment-index=7}
+
+::: {.fragment .fade-left fragment-index=8}
+::: {.absolute left="0" top="-200px" width="600px" .f4 .cite}
+["The proportional hazards assumption is frequently violated, just as the
+assumptions of normality of residuals with equal variance in ordinary regression
+are frequently violated, but the PO model can still be useful and powerful in
+this situation"]{.speech .monash-blue2}
+<span>Frank E. Harrel</span>
+:::
+
+:::
+
+
+::: box
+[Proporcionalidad de odds]{.story}
+<br>
+
+$$
+\frac{P(Y \le k)}{1-P(Y \le k)} = c \frac{P(Y \le l)}{1-P(Y \le l)}
+$$
+:::
+
+
+:::
+
+:::
+
+
+
 ::::::
 
 :::::: {.column width="60%"}
 
+
+::: {.r-stack}
 
 ::: {data-id="box2"}
 
@@ -276,6 +358,32 @@ fig4
 fig2
 ```
 :::
+
+::: {.fragment .fade-in-then-out fragment-index=1}
+::: box
+[Ecuación Regresión Logística]{.story}
+<br>
+$$
+logit(Y=1) = log \left[\frac{P(Y=1)}{1-P(Y=1)} \right] = \tau+\beta_1x_1+...+\beta_px_p
+$$
+:::
+
+:::
+
+::: {.fragment .fade-in fragment-index=2}
+::: box
+[Ecuación Regresión Ordinal]{.story}
+<br>
+$$logit [P(Y \color{red}{\le k})] = log \left[\frac{P(Y \color{red}{\le k})}{1-P(Y \color{red}{\le k})} \right] = \tau_{\color{red}{k}} \color{red}{-} \beta_1 x_1 \color{red}{-} \beta_2 x_2 \color{red}{-} ... \color{red}{-} \beta_p x_p$$
+:::
+
+:::
+
+
+:::
+
+
+::: {.r-stack}
 
 ::: {data-id="box1"}
 
@@ -287,6 +395,23 @@ fig1.1
 
 :::
 
+::: {.fragment fragment-index=3}
+::: box
+[Interpretación de los coeficientes]{.story}
+<br>
+$$
+\begin{aligned}
+exp(\tau_k) &= \frac{P(Y \le k)}{1-P(Y \le k)} \forall x_i = 0 \\
+exp(\beta_{i}) &= \frac{\frac{\mathrm{Pr}(Y > k \mid x_i = x + 1)}{\mathrm{Pr}(Y \leq k \mid x_i = x + 1)}}{\frac{\mathrm{Pr}(Y > k \mid x_i = x)}{\mathrm{Pr}(Y \leq k \mid x_i = x)}}
+\end{aligned}
+$$
+:::
+
+:::
+
+
+
+:::
 
 ::::::
 

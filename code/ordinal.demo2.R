@@ -33,6 +33,7 @@ for (step in 1:nsteps) {
     colnames(yfreq) <- c("y", "n")
     yfreq$cum <- cumsum(yfreq$n)
     fit <- ord_fit(x, y)
+
     data[[step]] <- list(
         visible = F,
         name = paste0("v = ", step),
@@ -99,13 +100,11 @@ fig2 <- plot_ly(data[[1]]$fit, x = ~cum.log.odds, y = ~cum.prob) %>%
     animation_opts(frame = 50, redraw = T, easing = "linear") %>%
     animation_slider(value = "10")
 
+fig3 <- plot_ly(data[[1]]$fit, x = ~cum.log.odds, y = ~cum.prob)
 
-
-fig <- subplot(fig1, fig2) %>%
-    layout(
-        # sliders = list(list(
-        #    active = 0,
-        #    currentvalue = list(prefix = "Simulation: "),
-        #    steps = steps
-        # ))
-    )
+data[[1]]$fit %>%
+    arrange(x, y) %>%
+    mutate(prob = cum.prob - lag(cum.prob)) %>%
+    filter(y != 0) %>%
+    group_by(y) %>%
+    plot_ly(x = ~x, y = ~prob, split = ~y, type = "scatter", mode = "lines")
