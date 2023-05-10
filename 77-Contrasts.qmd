@@ -8,14 +8,14 @@ execute:
 source("_setup.R")
 ```
 
-# Efecto secuencia e interacción tratamiento vs. periodo. {#sec-contrasts}
+# Efecto secuencia e interacción tratamiento vs. periodo {#sec-contrasts}
 
 Vamos a demostrar que el efecto secuencia es equivalente a la interacción de los factores tratamiento y periodo.
 
-## Preparación.
+## Preparación
 
 Partimos del siguiente conjunto de datos generado aleatoriamente
-^[Obsérvese que se la variable `Response` en esta simulación es cuantitativa y no ordinal. Se ha realizado de esta forma para poder usar un ajuste de mínimos cuadrados en lugar de una regresión ordinal para facilitar el cálculo y su interpretación.]:
+^[Obsérvese que la variable `Response` en esta simulación es cuantitativa y no ordinal. Se ha realizado de esta forma para poder usar un ajuste de mínimos cuadrados en lugar de una regresión ordinal para facilitar el cálculo y su interpretación.]:
 \scriptsize
 ```{r}
 set.seed(100)
@@ -69,7 +69,7 @@ d2 <- diff(m2) # diferencias entre niveles de tratamiento en cada nivel de perio
 ```
 \normalsize
 
-## Análisis con un solo factor (tratamiento).
+## Análisis con un solo factor (tratamiento)
 
 \scriptsize
 ```{r}
@@ -129,7 +129,7 @@ Cada fila representa el nivel del tratamiento (fila 1 nivel $A$ y fila 2 nivel $
 
 Esto quiere decir que existe una variable para codificar el efecto tratamiento, y esta variable tiene el valor 0 para el nivel $A$ por ser el de referencia y 1 para el nivel $B$. La pendiente se codifica como la diferencia del efecto de los dos niveles ($B - A$).
 
-## Análisis con un dos factores (tratamiento y periodo).
+## Análisis con un dos factores (tratamiento y periodo)
 
 \scriptsize
 ```{r}
@@ -195,7 +195,7 @@ m2["B", "2"] - m2["A", "1"] - (m2["B", "1"] - m2["A", "1"]) - (m2["A", "2"] - m2
 ```
 \normalsize
 
-## Factor secuencia.
+## Factor secuencia
 
 Vamos a incorporar la secuencia como factor para ver si es equivalente a la interacción entre periodo y tratamiento. En caso de serlo los coeficientes del modelo ajustado deberían coincidir. Sin embargo vemos que los modelos l2 (@tbl-l2) y l3 (@tbl-l3) tienen distintos coeficientes.
 
@@ -207,6 +207,7 @@ l3 <- lm(Response ~ Treat + Period + Seq, df)
 data.frame(t(coef(l3))) %>% gt()
 ```
 \normalsize
+
 
 Los coeficientes no coinciden debido a que estamos usando el contraste con `codificación de tratamientos`. Pero si cambiamos a `codificación de sumas`:
 
@@ -240,7 +241,7 @@ data.frame(t(coef(l5))) %>% gt()
 ```
 \normalsize
 
-La interpretación de los contrastes es diferente. Para explicarlo, mostramos la matriz de contraste:
+La interpretación de los coeficientes es diferente. Para explicarlo, mostramos la matriz de contraste:
 
 \scriptsize
 ```{r}
@@ -353,4 +354,58 @@ O reorganizando los términos de otra forma, sería la cuarta parte de la suma d
 ```
 \normalsize
 
+## Resumen de modelos y equivalencias de parámetros
+
+En la Tabla \ref{tbl-contrasts-compare} se muestran las equivalencias de los coeficientes de cada modelo. Todas las filas de la misma columna corresponden a un determinado nivel para cada factor y la fórmula mostrada es el modelo resultante teniendo en cuenta que:
+
+* En el contraste `treatment` se utiliza como referencia el primer nivel de cada factor, que corresponderá con el intercepto; los coeficientes se denominan $(Intercept)$, $TreatB$, $Period2$ y $SeqBA$ y son la diferencia del nivel que representa cada coeficiente con el intercepto; y los valores de cada nivel de factor son: $TreatA = 0$, $TreatB = 1$, $Period1 = 0$, $Period2 = 1$, $SeqAB = 0$, $SeqBA = 1$.
+
+* En el contraste `sum`, el intercepto es el valor medio y se excluye elcoeficiente del último nivel que se calcula como la suma del resto de niveles con signo opuesto
+^[Como en este caso solo hay dos niveles en cada factor, el valor del segundo nivel será simplemente el opuesto del primer nivel.]; los coeficientes se denominan $(Intercept)$, $Treat1$, $Period1$ y $Seq1$; y los valores de cada nivel de factor son:$TreatA = 1$, $TreatB = -1$, $Period1 = 1$, $Period2 = -1$, $SeqAB = 1$, $SeqBA = -1$.
+
+
+\begin{table}[H]
+\caption{\label{tbl-contrasts-compare}Equivalencia entre coeficientes y modelos.}\tabularnewline
+\tiny
+\begin{adjustwidth}{-3.5cm}{}
+% Please add the following required packages to your document preamble:
+\begin{tabular}{@{}|c|l|llll|@{}}
+\toprule
+\multicolumn{1}{|l|}{} &
+  \multicolumn{1}{c|}{} &
+  \multicolumn{4}{c|}{\textbf{Factor Levels}} \\ \cmidrule(l){3-6} 
+\multicolumn{1}{|l|}{\multirow{-2}{*}{\textbf{Contrast}}} &
+  \multicolumn{1}{c|}{\multirow{-2}{*}{\textbf{Model}}} &
+  \multicolumn{1}{c|}{{\color[HTML]{9A0000} \textbf{\begin{tabular}[c]{@{}c@{}}TreatA\\ Period1\\ SeqAB\end{tabular}}}} &
+  \multicolumn{1}{c|}{{\color[HTML]{3531FF} \textbf{\begin{tabular}[c]{@{}c@{}}TreatA\\ Period2\\ SeqBA\end{tabular}}}} &
+  \multicolumn{1}{c|}{{\color[HTML]{646809} \textbf{\begin{tabular}[c]{@{}c@{}}TreatB\\ Period1\\ SeqBA\end{tabular}}}} &
+  \multicolumn{1}{c|}{{\color[HTML]{986536} \textbf{\begin{tabular}[c]{@{}c@{}}TreatB\\ Period2\\ SeqAB\end{tabular}}}} \\ \midrule
+ &
+  $R \! = \! \beta_0 \! +\!  \beta_1Treat \! +\!  \beta_2Period \! +\!  \beta_3Treat\!:\!Period$ &
+  \multicolumn{1}{l|}{{\color[HTML]{9A0000} $R \! = \! \beta_0$}} &
+  \multicolumn{1}{l|}{{\color[HTML]{3531FF} $R \! = \! \beta_0 \! +\!  \beta_2$}} &
+  \multicolumn{1}{l|}{{\color[HTML]{646809} $R \! = \! \beta_0 \! +\!  \beta_1$}} &
+  {\color[HTML]{986536} $R \! = \! \beta_0 \! +\!  \beta_1 \! +\!  \beta_2 \! +\!  \beta_3$} \\ \cmidrule(l){2-6} 
+\multirow{-2}{*}{\textbf{Treatment}} &
+  $R \! = \! \beta_0 \! +\!  \beta_1Treat \! +\!  \beta_2Period \! +\!  \beta_3Seq$ &
+  \multicolumn{1}{l|}{{\color[HTML]{9A0000} $R \! = \! \beta_0$}} &
+  \multicolumn{1}{l|}{{\color[HTML]{3531FF} $R \! = \! \beta_0 \! +\!  \beta_2 \! +\!  \beta_3$}} &
+  \multicolumn{1}{l|}{{\color[HTML]{646809} $R \! = \! \beta_0 \! +\!  \beta_1 \! +\!  \beta_3$}} &
+  {\color[HTML]{986536} $R \! = \! \beta_0 \! +\!  \beta_1 \! +\!  \beta_2$} \\ \midrule
+ &
+  $R \! = \! \beta_0 \! +\!  \beta_1Treat \! +\!  \beta_2Period \! +\!  \beta_3Treat\!:\!Period$ &
+  \multicolumn{1}{l|}{{\color[HTML]{9A0000} $R \! = \! \beta_0 \! +\!  \beta_1 \! +\!  \beta_2 \! +\!  \beta_3$}} &
+  \multicolumn{1}{l|}{{\color[HTML]{3531FF} $R \! = \! \beta_0 \! +\!  \beta_1 \! -\! \beta_2 \! -\! \beta_3$}} &
+  \multicolumn{1}{l|}{{\color[HTML]{646809} $R \! = \! \beta_0 \! -\! \beta_1 \! +\!  \beta_2 \! -\! \beta_3$}} &
+  {\color[HTML]{986536} $R \! = \! \beta_0 \! -\! \beta_1 \! -\! \beta_2 \! +\!  \beta_3$} \\ \cmidrule(l){2-6} 
+\multirow{-2}{*}{\textbf{Sum}} &
+  $R \! = \! \beta_0 \! +\!  \beta_1Treat \! +\!  \beta_2Period \! +\!  \beta_3Seq$ &
+  \multicolumn{1}{l|}{{\color[HTML]{9A0000} $R \! = \! \beta_0 \! +\!  \beta_1 \! +\!  \beta_2 \! +\!  \beta_3$}} &
+  \multicolumn{1}{l|}{{\color[HTML]{3531FF} $R \! = \! \beta_0 \! +\!  \beta_1 \! -\! \beta_2 \! -\! \beta_3$}} &
+  \multicolumn{1}{l|}{{\color[HTML]{646809} $R \! = \! \beta_0 \! -\! \beta_1 \! +\!  \beta_2 \! -\! \beta_3$}} &
+  {\color[HTML]{986536} $R \! = \! \beta_0 \! -\!\beta_1 \! -\! \beta_2 \! +\!  \beta_3$} \\ \bottomrule
+\end{tabular}
+\end{adjustwidth}
+\normalsize
+\end{table}
 

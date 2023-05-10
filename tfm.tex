@@ -8,7 +8,8 @@
   a4paper,
   extrafontsizes,
   onecolumn,
-  openright]{memoir}
+  openright,
+  table]{memoir}
 
 \usepackage{amsmath,amssymb}
 \usepackage{iftex}
@@ -141,11 +142,12 @@
 \usepackage[automake]{glossaries-extra}
 \makeglossaries
 
-
-\usepackage{amsmath}
+\usepackage{multirow}
+\usepackage{booktabs}
 \usepackage{booktabs}
 \usepackage{caption}
 \usepackage{longtable}
+\usepackage{amsmath}
 \makeatletter
 \@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
 \@ifpackageloaded{fontawesome5}{}{\usepackage{fontawesome5}}
@@ -547,7 +549,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada nulla aug
 
 Phasellus vitae magna nec mi sagittis luctus vitae eu augue. Donec scelerisque laoreet arcu, eget tempor mi ultricies vel. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum at blandit ex. Vestibulum eu sagittis mauris. In hac habitasse platea dictumst. Duis eget ante vel lacus sollicitudin convallis quis eu velit. Sed auctor sem non nisi hendrerit, vel tincidunt tortor bibendum.
 
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, frame hidden, borderline west={3pt}{0pt}{shadecolor}, enhanced, breakable, sharp corners, boxrule=0pt]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, sharp corners, interior hidden, enhanced, frame hidden, breakable, boxrule=0pt]}{\end{tcolorbox}}\fi
 
 % Contents
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -593,7 +595,7 @@ experimento}\label{caracteruxedsticas-del-diseuxf1o-del-experimento}}
 
 El objetivo del estudio es responder a la pregunta de investigación:
 
-\begin{tcolorbox}[enhanced jigsaw, colbacktitle=quarto-callout-note-color!10!white, leftrule=.75mm, bottomtitle=1mm, arc=.35mm, colback=white, titlerule=0mm, coltitle=black, colframe=quarto-callout-note-color-frame, toprule=.15mm, breakable, opacityback=0, opacitybacktitle=0.6, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Pregunta de investigación}, rightrule=.15mm, bottomrule=.15mm, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, left=2mm, breakable, coltitle=black, colframe=quarto-callout-note-color-frame, colback=white, rightrule=.15mm, toprule=.15mm, opacitybacktitle=0.6, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, arc=.35mm, bottomtitle=1mm, leftrule=.75mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Pregunta de investigación}, bottomrule=.15mm, opacityback=0]
 
 ¿Son los estudiantes de un curso de creación de materiales accesibles
 capaces de encontrar diferencias en la calidad del subtitulado de un
@@ -753,7 +755,7 @@ es realizado en \textcite{frienly2015}.
 \hypertarget{sec-chi2}{%
 \subsection{\texorpdfstring{Asociación de variables con la prueba de
 homogeneidad
-\(\chi^2\)}{Asociación de variables con la prueba de homogeneidad \textbackslash chi\^{}2}}\label{sec-chi2}}
+\emph{X²}}{Asociación de variables con la prueba de homogeneidad X²}}\label{sec-chi2}}
 
 La prueba de homogeneidad \(\chi^2\) \autocite[ver][]{leton2021} está
 enmarcarda en el esquema \(Nominal \leftarrow Nominal\) y contrasta la
@@ -766,7 +768,7 @@ Tabla~\ref{tbl-contingencia}). El valor del estadístico se calcula:
 \]
 
 y sigue una \(\chi^2_{(r-1)(c-1)}\), donde \(c_{ij}\) son las
-frecuencias esperadas bajo \(H_0\) y que se calculan:
+frecuencias esperadas bajo \(H_0\) que se calculan:
 
 \[
 c{ij}=\frac{r_ic_j}{n}
@@ -791,8 +793,8 @@ Y = 2 & \(n_{21}\) & \(n_{22}\) & \(n_{23}\) & \(r_2\) \\
 \end{longtable}
 
 \hypertarget{sec-or}{%
-\subsection{\texorpdfstring{Comparación con
-\(Odds\ Ratio\)}{Comparación con Odds\textbackslash{} Ratio}}\label{sec-or}}
+\subsection{\texorpdfstring{Comparación con \emph{Odds
+Ratio}}{Comparación con Odds Ratio}}\label{sec-or}}
 
 Dada una tabla de contingencia \(2\ x\ 2\) (ver
 Tabla~\ref{tbl-contingencia-3}), el \(odds\) se define como el cociente
@@ -833,14 +835,15 @@ Y = 0 & \(n_{21}\) & \(n_{22}\) \\
 \section{Modelos lineales generalizados}\label{sec-glm}}
 
 Los modelos lineales generalizados (\(GLM\)) son modelos en los que la
-variable respuesta no es normal. Para especificar un \(GLM\) son
-necesarios tres componentes \autocite[ver][pp.~66-67]{agresti_2018}:
+variable respuesta no sigue una distribución normal. Para especificar un
+\(GLM\) son necesarios tres componentes
+\autocite[ver][pp.~66-67]{agresti_2018}:
 
 \begin{itemize}
 \tightlist
 \item
   Un componente aleatorio: será una distribución de probabilidad de la
-  familia exponencial que se asume que sigue la variable respuesta,
+  familia exponencial que se asume que sigue la variable respuesta
   \(Y\).
 \item
   Un componente lineal de predictores.
@@ -861,9 +864,9 @@ necesarios tres componentes \autocite[ver][pp.~66-67]{agresti_2018}:
 g(\mu)=\alpha+\beta_1x_1+...+\beta_px_p
 \]
 
-La estimación de coeficientes GLM se realiza maximizando la función de
-verosimilitud (\(MLE\)). Es decir, que los coeficientes del modelo son
-aquellos que maximizan la probabilidad de los datos.
+La estimación de coeficientes \emph{GLM} se realiza maximizando la
+función de verosimilitud (\(MLE\)). Es decir, que los coeficientes del
+modelo son aquellos que maximizan la probabilidad de los datos.
 
 \hypertarget{sec-logistica}{%
 \subsection{Regresión Logística}\label{sec-logistica}}
@@ -963,8 +966,8 @@ BIC &: -2 \log L + p \log(n)
 \end{aligned}
 }\label{eq-aic}\end{equation}
 
-, donde \(L\) es el valor de maxima verosimilitud y el segundo sumando
-es una penalización que será mayor cuanto más complejo sea el modelo.
+donde \(L\) es el valor de maxima verosimilitud y el segundo sumando es
+una penalización que será mayor cuanto más complejo sea el modelo.
 
 \hypertarget{sec-ordinal}{%
 \subsection{Regresión Ordinal}\label{sec-ordinal}}
@@ -979,7 +982,7 @@ la Regresión Logística son la Regresión Categórica y la Regresión
 Multinomial. En estos tipos de GLM la variable respuesta puede adoptar
 varios valores pero no se asume que estén ordenados \footnote{La
   Regresión Categórica y la Regresión Multinomial están relacionadas en
-  el mismo sentido que en lo están la Regresión Logística con función de
+  el mismo sentido en que lo están la Regresión Logística con función de
   enlace Bernoulli y con función de enlace Binomial. Es decir, que la
   Regresión Categórica se usa cuando las observaciones no están
   agrupadas y la Multinomial cuando sí lo están.}. Según
@@ -999,8 +1002,8 @@ La primera es la más habitual y además la más adecuada para el diseño de
 experimento realizado \autocite[ver][pp.~23-24]{burkner2019}
 \footnote{Las regresiones ordinales secuencial y adyacente presuponen
   que para alcanzar un nivel se ha tenido que pasar previamente por los
-  anteriores. En una ítem de Likert esto carece de sentido y, por lo
-  tanto, se descartan estos modelos.}. El modelo acumulativo, PO,
+  anteriores. En un ítem de Likert esto carece de sentido y, por lo
+  tanto, se descartan estos modelos.}. El modelo acumulativo, \(CM\),
 presupone que la variable ordinal observada, \(Y\), proviene de la
 categorización de una variable latente (no observada) continua,
 \(\tilde{Y}\). Hay \(K\) umbrales \(\tau_k\) que particionan
@@ -1032,9 +1035,8 @@ predictores:
 
 \[\tilde{Y} = \eta + \epsilon = \beta_1 x_1 + \beta_2 x_2 + ... + \beta_p x_p + \epsilon\]
 
-y que los errores son \(N(0,\sigma^2)\). Entonces la función de
-probabilidad acumulada de los errores tendrá la misma forma que la de
-\(\tilde{Y}\):
+entonces la función de probabilidad acumulada de los errores tendrá la
+misma forma que la de \(\tilde{Y}\):
 
 \[\mathrm{Pr}(\epsilon \leq z) = F(z)\]
 
@@ -1054,8 +1056,9 @@ interpretación \footnote{En la práctica los coeficientes estimados con
   las funciones de enlace \texttt{probit} y \texttt{logit} suelen
   similares.}. Con esta función de enlace la interpretación de los
 coeficientes es parecida a la de los coeficientes de la regresión
-logística. Se parte del supuesto de que el \(logit\) de la función de
-probabilidad es lineal:
+logística. Para entender como se deben interpretar los coeficientes del
+modelo \(CM\). se parte del supuesto de que el \(logit\) de la función
+de probabilidad es lineal:
 
 \[logit [P(Y \le k)] = \tau_{k} - \eta = \tau_{k} - (\beta_1 x_1 + \beta_2 x_2 + ... + \beta_p x_p)\]
 
@@ -1072,27 +1075,28 @@ o, equivalentemente:
 
 \[\frac{\frac{\mathrm{Pr}(Y > k \mid x_i = x + 1)}{\mathrm{Pr}(Y \leq k \mid x_i = x + 1)}}{\frac{\mathrm{Pr}(Y > k \mid x_i = x)}{\mathrm{Pr}(Y \leq k \mid x_i = x)}} = \exp(\beta_{i})\]
 
-Es decir, que \(\exp(\beta_{i})\) es el \(OR\) (cambio en \(odds\)) de
-que la variable respuesta esté por encima de una determinada categoría
-versus estar por debajo de ella para una unidad de incremento del
-predictor \(x_i\). Un valor del coeficiente \(\beta_i\) positivo indica
-que la relación entre el predictor \(x_i\) y la función de \(logit\) es
-positiva y, por lo tanto, se incrementa la probabilidad de un mayor
-valor de la variable respuesta. Este modelo se denomina proporcional ya
-que se asume que cada predictor tiene los mismos efectos sobre todos los
-niveles de la variable de respuesta ordinal \autocite[ver][]{Liu2202}.
-Esta suposición frecuentemente no es realista y se puede relajar
-permitiendo estimar un coeficiente diferente para cada nivel de la
-variable respuesta. Sin embargo, el incremento del número de
-coeficientes dificulta la interpretabilidad del modelo.
+Es decir, que \(\exp(\beta_{i})\) es el \(OR\) (cambio relativo entre
+\(odds\)) de que la variable respuesta esté por encima de una
+determinada categoría versus estar por debajo de ella para una unidad de
+incremento del predictor \(x_i\). Un valor del coeficiente \(\beta_i\)
+positivo indica que la relación entre el predictor \(x_i\) y la función
+de \(logit\) es positiva y, por lo tanto, se incrementa la probabilidad
+de un mayor valor de la variable respuesta. Este modelo se denomina
+proporcional ya que se asume que cada predictor tiene los mismos efectos
+sobre todos los niveles de la variable de respuesta ordinal
+\autocite[ver][]{Liu2202}. Esta suposición frecuentemente no es realista
+y se puede relajar permitiendo estimar un coeficiente diferente para
+cada nivel de la variable respuesta. Sin embargo, el incremento del
+número de coeficientes dificulta la interpretabilidad del modelo.
 \textcite{harrell2020} aboga por usar este modelo incluso aunque la
 suposición de proporcionalidad no se cumpla:
 
 \begin{quote}
 \enquote{Ningún modelo se ajusta perfectamente a los datos, \ldots, la
-aproximación ofrecida por el modelo PO sigue siendo bastante útil. Y un
-análisis unificado del modelo PO es decididamente mejor que recurrir a
-análisis ineficientes y arbitrarios de valores dicotomizados de Y.}
+aproximación ofrecida por el modelo \(CM\) sigue siendo bastante útil. Y
+un análisis unificado del modelo \(CM\) es decididamente mejor que
+recurrir a análisis ineficientes y arbitrarios de valores dicotomizados
+de Y.}
 \end{quote}
 
 \hypertarget{sec-multinivel}{%
@@ -1101,7 +1105,7 @@ análisis ineficientes y arbitrarios de valores dicotomizados de Y.}
 Un modelo multinivel, jerárquico o mixto es un modelo en el que los
 datos están anidados en una estructura jerárquica. Por ejemplo, si se
 quisiera evaluar el rendimiento de varios métodos de enseñanza, se
-podría seleccionar aleatoriamente varios colegios participantes y en
+podrían seleccionar aleatoriamente varios colegios participantes y en
 cada uno de ellos elegir varias clases en las que se impartiría uno de
 los métodos de enseñanza. Los modelos multinivel se utilizan cuando se
 incumple la hipótesis de independencia entre las observaciones. En el
@@ -1203,9 +1207,9 @@ definir un modelo:
   estimación es de menor valor absoluto que la que resultaría en un
   modelo de \(no\ pooling\). De esta forma podemos ver el
   \(complete\ pooling\) y el \(no\ pooling\) como dos casos particulares
-  y extremos del \(no\ pooling\). La contracción de coeficientes en los
-  modelos multinivel actúa como una regularización que puede evitar el
-  sobreajuste.
+  y extremos del \(partial\ pooling\). La contracción de coeficientes en
+  los modelos multinivel actúa como una regularización que puede evitar
+  el sobreajuste.
 \end{itemize}
 
 Los modelos multinivel requieren supuestos adicionales en el nivel
@@ -1215,7 +1219,7 @@ parámetros en un modelo multinivel se suele utilizar el método de máxima
 verosimilitud restringida (RMLE), que es una variante de la estimación
 por máxima verosimilitud (MLE) en la que se hacen ajustes en los grados
 de libertad del modelo con efectos aleatorios para corregir el sesgo que
-se produce al usar MLE.
+se produce al usar MLE en estos modelos.
 
 \hypertarget{sec-bayesiano}{%
 \section{Modelado bayesiano}\label{sec-bayesiano}}
@@ -1262,30 +1266,30 @@ inferencia bayesiana es que la elección de la distribución de
 probabilidad a priori es subjetiva. Aunque es cierto que hay un grado de
 subjetividad en esta elección, en realidad en el modelado frecuentista
 hay que tomar ciertas decisiones que también lo son, como por ejemplo la
-elección del nivel de significación o de la forma que adopta la función
-de verosimilitud. En la práctica, si las observaciones son
-suficientemente informativas, la distribución de probabilidad a priori
-tendrá poca o nula influencia en la distribución a posteriori ya que
-estará dominada por la función de verosimilitud y los coeficientes
-estimados serán muy parecidos en ambos paradigmas. Sin embargo, en lo
-que diferirán es en la interpretación ya que, por ejemplo, en un modelo
-bayesiano se pueden interpretar los intervalos de confianza como la
-probabilidad de que el parámetro esté dentro del intervalo \footnote{Por
-  eso a estos intervalos se les conoce como intervalos de credibilidad.}.
-Esa interpretación en un modelo frecuentista carecería de sentido ya que
-los parámetros del modelo no se consideran variables aleatorias y, por
-lo tanto, tendrán probabilidad 1 si el verdadero valor del parámetro cae
-dentro del intervalo y 0 si no lo hace. Para obtener la distribución de
-probabilidad a posteriori normalmente se recurre a métodos del
-simulación MCMC (Métodos de Montcarlo basados en Cadenas de Márkov)
-\footnote{En ocasiones se puede obtener una forma análitica de la
-  distribución a posteriori si se elige una adecuada combinación de
-  función de verosimilitud y distribución a priori conocidas como
-  distribuciones conjugadas. Aunque esto evita la utilización de métodos
-  de simulación, restringe las formas posibles de las distribuciones. En
-  la actualidad, con el aumento de la capacidad de cálculo de los
-  ordenadores, normalmente no es necesaria la utilización de
-  distribuciones conjugadas.}.
+elección del nivel de significación o la forma que adopta la función de
+verosimilitud. En la práctica, si las observaciones son suficientemente
+informativas y la distribución a priori es poco informativa, la
+distribución de probabilidad a priori tendrá poca o nula influencia en
+la distribución a posteriori ya que estará dominada por la función de
+verosimilitud y los coeficientes estimados serán muy parecidos en ambos
+paradigmas. Sin embargo, en lo que diferirán es en la interpretación ya
+que, por ejemplo, en un modelo bayesiano se pueden interpretar los
+intervalos de confianza como la probabilidad de que el parámetro esté
+dentro del intervalo \footnote{Por eso a estos intervalos se les conoce
+  como intervalos de credibilidad.}. Esa interpretación en un modelo
+frecuentista carecería de sentido ya que los parámetros del modelo no se
+consideran variables aleatorias y, por lo tanto, tendrán probabilidad 1
+si el verdadero valor del parámetro cae dentro del intervalo y 0 si no
+lo hace. Para obtener la distribución de probabilidad a posteriori
+normalmente se recurre a métodos del simulación MCMC (Métodos de
+Montcarlo basados en Cadenas de Márkov) \footnote{En ocasiones se puede
+  obtener una forma análitica de la distribución a posteriori si se
+  elige una adecuada combinación de función de verosimilitud y
+  distribución a priori conocidas como distribuciones conjugadas. Aunque
+  esto evita la utilización de métodos de simulación, restringe las
+  formas posibles de las distribuciones. En la actualidad, con el
+  aumento de la capacidad de cálculo de los ordenadores, normalmente no
+  es necesaria la utilización de distribuciones conjugadas.}.
 
 Para comparar modelos entre sí se pueden usar varias medidas
 \autocite[ver][]{barreda2023}. Por ejmplo, la conocida como \emph{log
@@ -1322,8 +1326,8 @@ hace en \(AIC\) (ver Ecuación~\ref{eq-aic}):
 \]
 
 El problema es que en modelos multinivel conocer el número de parámetros
-no es sencillo ya que no se pueden considerar completamente
-independientes los parámetros asociados a efectos aleatorios. El número
+no es sencillo ya que los parámetros asociados a efectos aleatorios no
+se pueden considerar que sean completamente independientes. El número
 efectivo de parámetros va a depender de la importancia de la regresión
 hacia la media que sufra cada parámetro. Además, en lugar de usar una
 estimación puntual, se puede utilizar toda la distribución de valores de
@@ -1381,8 +1385,9 @@ experiencia}\label{descripciuxf3n-de-la-experiencia}}
 Los datos se recogieron de una actividad de subtitulado que se propuso a
 los estudiantes de la edición 2022 del curso MOOC Materiales digitales
 accesibles de la UNED Abierta. Este curso pertenece al Canal Fundación
-ONCE y según se recoge en la propia página Web del curso sus objetivos
-son:
+ONCE (IEDRA) está dirigido por los profesores Emilio Letón Molina y
+Alejandro Rodríguez Ascaso y según se recoge en la propia página Web del
+curso sus objetivos son:
 
 \begin{itemize}
 \item
@@ -1433,13 +1438,13 @@ El curso tiene cuatro módulos:
 \subsection{Actividad de subtitulado}\label{actividad-de-subtitulado}}
 
 La actividad de subtitulado es voluntaria y sin influencia en la
-calificación final del alumno ni el material al que el tiene acceso. Se
+calificación final del alumno ni el material al que se tiene acceso. Se
 realiza en el módulo \enquote{Accesibilidad del material multimedia}. En
 este mismo módulo, y antes de proponerles la actividad de subtitulado,
-los alumnos previamente completaron las secciones \enquote{Accesibilidad
-de la información sonora} y \enquote{Accesibilidad de la información
-visual}, con lo cual ya tienen conocimiento sobre creación de vídeos y
-subtítulos accesibles.
+los alumnos completaron las secciones \enquote{Accesibilidad de la
+información sonora} y \enquote{Accesibilidad de la información visual},
+con lo cual ya tienen conocimiento sobre creación de vídeos y subtítulos
+accesibles.
 
 La actividad consistió en ver dos vídeos idénticos y que solo se
 diferencian en la calidad del subtitulado de 43 segundos de duración.
@@ -1454,7 +1459,7 @@ primero el vídeo bien subtitulado y luego el mal subtitulado y la otra
 lo hizo al revés. Después de ver cada uno de los vídeos, los alumnos
 respondieron a una escala de Likert de 5 niveles y 18 ítems. Los 18
 items de Likert responden a los criterios de la norma UNE 153010
-\autocite[ver][]{aenor2012}. Es diseño de experimento es doble ciego: es
+\autocite[ver][]{aenor2012}. El diseño de experimento es doble ciego: es
 decir, a los alumnos no se les informó de si estaban viendo el vídeo con
 mejor o con peor calidad de subtitulado. Esta información tampoco se
 conoce en el momento de realizar este trabajo ya que los vídeos tienen
@@ -1544,8 +1549,8 @@ curso.
 \begin{table}
 
 \caption{\label{tbl-contingencia-eco}Tablas de contingencia de la
-información socioeconómica de los
-estudiantes.}\begin{minipage}[t]{0.50\linewidth}
+información del sexo, edad y nivel de conocimientos
+previos.}\begin{minipage}[t]{0.50\linewidth}
 
 {\centering 
 
@@ -1556,8 +1561,8 @@ estudiantes.}\begin{minipage}[t]{0.50\linewidth}
 \toprule
 gender & Freq \\ 
 \midrule
-f & 46 \\ 
-m & 19 \\ 
+femenino & 46 \\ 
+masculino & 19 \\ 
 NA & 22 \\ 
 \bottomrule
 \end{longtable}
@@ -1595,33 +1600,6 @@ Estudiantes con valor nulo en el campo año de nacimiento.
 {\centering 
 
 \hypertarget{tbl-contingencia-eco-3}{}
-\begin{longtable}{cr}
-\tabularnewline
-
-\toprule
-level\_of\_education & Freq \\ 
-\midrule
-a & 25 \\ 
-b & 8 \\ 
-hs & 2 \\ 
-m & 15 \\ 
-other & 2 \\ 
-p & 10 \\ 
-NA & 25 \\ 
-\bottomrule
-\end{longtable}
-
-Estudiantes por nivel educativo.
-
-}
-
-\end{minipage}%
-%
-\begin{minipage}[t]{0.50\linewidth}
-
-{\centering 
-
-\hypertarget{tbl-contingencia-eco-4}{}
 \begin{longtable}{cr}
 \tabularnewline
 
@@ -1671,9 +1649,9 @@ Se dispuso de los siguientes ficheros \texttt{csv}:
   El fichero \texttt{acc} contiene la información sobre las
   necesidades/preferencias de accesibilidad que tiene el estudiante.
 \item
-  Los ficheros \texttt{test1} y \texttt{test2} son las repuestas al test
-  de Likert sobre la calidad del subtitulado del primer y del segundo
-  vídeo realizado por cada grupo respectivamente.
+  Los ficheros \texttt{test1} y \texttt{test2} son las repuestas a las
+  escalas de Likert sobre la calidad del subtitulado del primer y del
+  segundo vídeo realizado por cada grupo respectivamente.
 \end{itemize}
 
 \hypertarget{sec-preprocesado}{%
@@ -1689,8 +1667,8 @@ ficheros suministrados:
   usuario para mantener la trazabilidad y comprobar que las
   transformaciones realizadas son correctas.
 \item
-  Se eliminan los datos de los estudiantes que aún habiendo realizado la
-  actividad, no han dado su consentimiento para participar en el
+  Se eliminan los datos de los estudiantes que, aun habiendo realizado
+  la actividad, no han dado su consentimiento para participar en el
   estudio.
 \item
   El valor del campo \texttt{cohort} se sustituye por una letra, \(A\) o
@@ -1698,7 +1676,7 @@ ficheros suministrados:
   proceso se desconoce qué vídeo vio primero cada cohorte.
 \item
   Se lee el fichero \texttt{profile} y se añade información sobre el
-  sexo, el año de nacimiento y el nivel de estudios.
+  sexo y el año de nacimiento.
 \item
   Se lee el fichero \texttt{conoc} y se calcula cuántas preguntas acertó
   cada usuario en el test de evaluación de conocimientos previos. Se
@@ -1714,7 +1692,7 @@ ficheros suministrados:
   Se seleccionan las preguntas que contienen las respuestas y se
   renombran para que sea más fácil saber de qué pregunta se trata
   \footnote{En los ficheros suministrados la respuesta a cada pregunta
-    ocupa varios campos. e selecciona en cada pregunta el que contiene
+    ocupa varios campos. Se selecciona en cada pregunta el que contiene
     el valor de la respuesta y se convierte a numérico.}. Se convierte
   el campo \texttt{LastTry}, que contiene la fecha y hora de realización
   del test, a formato fecha y hora.
@@ -1735,7 +1713,7 @@ ficheros suministrados:
 \section{Variables del modelo.}\label{variables}}
 
 En la Tabla~\ref{tbl-variables} se describen las características más
-relevantes de las principales variables que se utilizarán en en modelado
+relevantes de las principales variables que se utilizarán en el modelado
 y en el análisis estadístico.
 
 \footnotesize
@@ -1748,21 +1726,21 @@ y en el análisis estadístico.
 \toprule
 Nombre & Descripción & Tipo & Valores \\ 
 \midrule
-Response & Respuesta a las preguntas del test. & Factor ordenado & De 0 a 5\textsuperscript{1} \\ 
-Level & Valoración de la respuesta. & Factor ordenado & Negative, Neutral, Positive\textsuperscript{2} \\ 
-Treat & Subtítulos & Factor & A o B\textsuperscript{3} \\ 
-Period & Periodo & Factor & 1 ó 2\textsuperscript{4} \\ 
+Response & Respuesta a las preguntas del test. & Factor ordenado & De 0 a 5\textsuperscript{\textit{1}} \\ 
+Level & Valoración de la respuesta. & Factor ordenado & Negative, Neutral, Positive\textsuperscript{\textit{2}} \\ 
+Treat & Subtítulos & Factor & A o B\textsuperscript{\textit{3}} \\ 
+Period & Periodo & Factor & 1 ó 2\textsuperscript{\textit{4}} \\ 
 Seq & Secuencia de aplicación de los tratamientos. & Factor & AB o BA \\ 
 Subject & Identificación del estudiante & Factor & Numérico \\ 
-Question & Número de la pregunta & Factor & Q01, Q02, ..., Q18\textsuperscript{5} \\ 
+Question & Número de la pregunta & Factor & Q01, Q02, ..., Q18\textsuperscript{\textit{5}} \\ 
 \bottomrule
 \end{longtable}
 \begin{minipage}{\linewidth}
-\textsuperscript{1}Se ha hecho una rotación sobre los valores originales. 0 = No sé, 1 = Muy en desacuerdo, ..., 5 Muy de acuerdo.\\
-\textsuperscript{2}Positive cuando Response sea 4 ó 5, Negative cuando sea 1 ó 2 y Neutral para 3.\\
-\textsuperscript{3}No se conoce si el tratamiento A es el subtitulado bueno o lo es el B.\\
-\textsuperscript{4}1 para el primer vídeo visto y 2 el segundo.\\
-\textsuperscript{5}Se ha reorganizado de tal forma que Q18, que es la pregunta resumen, sea el valor primero y de referencia.\\
+\textsuperscript{\textit{1}}Se ha hecho una rotación sobre los valores originales. 0 = No sé, 1 = Muy en desacuerdo, ..., 5 Muy de acuerdo.\\
+\textsuperscript{\textit{2}}Positive cuando Response sea 4 ó 5, Negative cuando sea 1 ó 2 y Neutral para 3.\\
+\textsuperscript{\textit{3}}No se conoce si el tratamiento A es el subtitulado bueno o lo es el B.\\
+\textsuperscript{\textit{4}}1 para el primer vídeo visto y 2 el segundo.\\
+\textsuperscript{\textit{5}}Se ha reorganizado de tal forma que Q18, que es la pregunta resumen, sea el valor primero y de referencia.\\
 \end{minipage}
 
 \normalsize
@@ -1846,16 +1824,16 @@ largo. }\tabularnewline
 \toprule
 Seq & Period & Treat & Subject & Question & Response & Level \\ 
 \midrule
-BA & 1 & B & 871 & Q05 & 5 & Positive \\ 
-BA & 1 & B & 371 & Q03 & 2 & Negative \\ 
-BA & 1 & B & 749 & Q02 & 4 & Positive \\ 
-BA & 1 & B & 749 & Q13 & 4 & Positive \\ 
-AB & 1 & A & 380 & Q07 & 4 & Positive \\ 
-BA & 2 & A & 901 & Q04 & 5 & Positive \\ 
-BA & 1 & B & 110 & Q06 & 5 & Positive \\ 
-AB & 1 & A & 339 & Q02 & 5 & Positive \\ 
-AB & 1 & A & 893 & Q08 & 2 & Negative \\ 
-BA & 1 & B & 220 & Q03 & 3 & Neutral \\ 
+BA & 2 & A & 803 & Q04 & 4 & Positive \\ 
+BA & 1 & B & 765 & Q07 & 1 & Negative \\ 
+AB & 1 & A & 1126 & Q10 & 5 & Positive \\ 
+BA & 1 & B & 1002 & Q06 & 3 & Neutral \\ 
+AB & 1 & A & 498 & Q05 & 5 & Positive \\ 
+AB & 1 & A & 1011 & Q04 & 5 & Positive \\ 
+BA & 1 & B & 1217 & Q06 & 4 & Positive \\ 
+BA & 2 & A & 901 & Q14 & 5 & Positive \\ 
+BA & 2 & A & 440 & Q12 & 5 & Positive \\ 
+BA & 2 & A & 1040 & Q04 & 5 & Positive \\ 
 \bottomrule
 \end{longtable}
 
@@ -1876,10 +1854,10 @@ presentación de resultados al Capítulo~\ref{sec-resultados}.
 \section{Análisis inicial}\label{sec-eda}}
 
 Como se explica en la Tabla~\ref{tbl-variables}, al subtitulado le
-denominamos tratamiento y a sus niveles (correcto e incorrecto) los
-hemos llamado \(A\) y \(B\) sin hacer ninguna conjetura de cual de los
-dos es el subtitulado correcto. El grupo con secuencia \(AB\) será el
-que primero vio el vídeo con subtitulado \(A\) y luego el \(B\).
+denominamos tratamiento y a sus niveles (correcto e incorrecto) se les
+ha llamado \(A\) y \(B\) sin hacer ninguna conjetura de cual de los dos
+es el subtitulado correcto. El grupo con secuencia \(AB\) será el que
+primero vio el vídeo con subtitulado \(A\) y luego el \(B\).
 Análogamente, el grupo con secuencia \(BA\) vio los vídeos en orden
 inverso. Recuérdese que el nivel 0 de respuesta se corresponde con
 \enquote{No sé / No contesto} (ver Tabla~\ref{tbl-likert-levels}). Tras
@@ -1930,7 +1908,7 @@ Minutes \\
 \end{longtable}
 
 La Figura~\ref{fig-distinct} muestra que hay 28 test en los que el
-estudiante contestó a todas los ítems usando únicamente 2 respuestas
+estudiante contestó a todos los ítems usando únicamente 2 respuestas
 diferentes. Además hay 13 test en los que se contestaron todas los ítems
 con 1 respuesta.
 
@@ -2052,13 +2030,13 @@ valoran mejor el subtitulado de nivel \(A\) en ambas secuencias. Por
 ello es esperable que las respuestas de los estudiantes del grupo \(AB\)
 hayan empeorado y que las diferencias sean negativas y que lo contrario
 haya sucedido con las del grupo \(BA\). La diferencia más frecuente en
-el grupo \(AB\) es 12 y en el grupo \(BA\) este valor es 11.
-
-Resulta llamativo que haya estudiantes cuyas contestaciones estén tan
-alejadas de la tendencia de su grupo. En la Tabla~\ref{tbl-diff} se
-muestran los tiempos que han transcurrido entre la realización de los
-test de aquellos estudiantes cuyas respuestas difieren de forma
-importante de su grupo. Se observa que casi todos son tiempos entre
+el grupo \(AB\) es 12 y en el grupo \(BA\) este valor es 11. f Resulta
+llamativo que haya estudiantes cuyas contestaciones estén tan alejadas
+de la tendencia de su grupo. En la Tabla~\ref{tbl-diff} se muestran los
+tiempos que han transcurrido entre la realización de los test de
+aquellos estudiantes cuyas respuestas difieren de forma importante de su
+grupo. Son aquellos que aparecen en azul en la secuencia \(AB\) y en
+rojo en la secuencia \(BA\). Se observa que casi todos son tiempos entre
 actividades muy cortos. En cualquier caso y, como no son muchos, se ha
 decidido no eliminarlos y realizar el análisis con ellos.
 
@@ -2077,11 +2055,11 @@ BA & -12 & 1.7 \\
 \bottomrule
 \end{longtable}
 
-En la Figura~\ref{fig-freqs} representamos la frecuencia relativa del
-valor de respuesta para cada grupo y test en todas la preguntas
-\footnote{En el Tabla~\ref{tbl-resume} se presenta la misma información
-  con los valores absolutos.}. Esta es otra forma de comparar los
-niveles de subtitulado.
+En la Figura~\ref{fig-freqs} se muestra la frecuencia relativa del valor
+de respuesta para cada grupo y test en todas la preguntas \footnote{En
+  el Tabla~\ref{tbl-resume} se presenta la misma información con los
+  valores absolutos.}. Esta es otra forma de comparar los niveles de
+subtitulado.
 
 \hypertarget{tbl-resume}{}
 \begin{longtable}{cccrrrrrr}
@@ -2174,7 +2152,7 @@ valorado por los estudiantes, pero ahora vemos que en las 18 preguntas
 ambos grupos tienen más puntuaciones positivas y menos negativas en el
 subtitulado \(A\) que el \(B\). También volvemos a encontrar que los dos
 grupos valoran de forma muy similar los dos niveles de subtitulado en
-todas la preguntas. En el nivel de subtitulado \(A\) las preguntas
+todas las preguntas. En el nivel de subtitulado \(A\) las preguntas
 \(Q15\), \(Q16\) y \(Q17\) obtienen relativamente peores valoraciones
 (consultar la Tabla~\ref{tbl-likert-scale} para ver el texto de las
 preguntas) y estas son similares en ambos subtitulados. Hay algunas
@@ -2196,7 +2174,7 @@ pregunta.}
 
 \end{figure}
 
-La figura Figura~\ref{fig-likert} clasifica la preguntas por valoración
+La figura Figura~\ref{fig-likert} clasifica las preguntas por valoración
 y permite constatar lo que ya habíamos visto en el párrafo anterior con
 mayor comodidad.
 
@@ -2312,11 +2290,11 @@ adaptación para poder ser utilizadas en el diseño de experimento de
 subtitulado. En esta sección se explica la forma concreta de aplicarlas
 y los paquetes y configuración en R utilizados. También se justifican
 las variables incluidas en cada modelo. La presentación de los
-resultados se pospone a el Capítulo~\ref{sec-resultados}.
+resultados se pospone al Capítulo~\ref{sec-resultados}.
 
 \hypertarget{sec-or-2}{%
-\subsection{\texorpdfstring{Comparación con
-\(Odds\ Ratio\)}{Comparación con Odds\textbackslash{} Ratio}}\label{sec-or-2}}
+\subsection{\texorpdfstring{Comparación con \emph{Odds
+Ratio}}{Comparación con Odds Ratio}}\label{sec-or-2}}
 
 En la sección Sección~\ref{sec-or} se explicó el fundamento teórico de
 esta técnica. Aquí se expone como se puede aplicar al diseño de
@@ -2383,10 +2361,6 @@ hace aquí y se pospone la sección de resultados.
 
 Call:
 glm(formula = Improve ~ 1 + Seq, family = "binomial", data = df_improve)
-
-Deviance Residuals: 
-   Min      1Q  Median      3Q     Max  
--1.336  -1.257   1.027   1.100   1.100  
 
 Coefficients:
             Estimate Std. Error z value Pr(>|z|)    
@@ -2667,8 +2641,9 @@ contraste \texttt{sum}:
   \texttt{logit} y, por lo tanto, disminuye la probabilidad de una
   respuesta inferior frente a una superior.
 \item
-  El efecto del subtitulado \(B\) es de signo contrario -0.874. Por ello
-  aumenta la probabilidad de menor valor de respuesta.
+  Para obtener el efecto del subtitulado \(B\) se cambia el signo a
+  \(Treat1\): -0.874. Por ello aumenta la probabilidad de menor valor de
+  respuesta.
 \item
   La diferencia en \texttt{logits} de los efectos totales del
   subtitulado es el doble de 0.874.
@@ -2738,8 +2713,9 @@ TreatB:Period2 & 4(Treat1:Period1) & 0.425 \\
 
 \normalsize
 
-Se muestra el resumen del modelo para constatar que los tres
-coeficientes son significativos:
+A continuación se muestra el resumen del modelo con contra ste
+\texttt{sum} para constatar que los tres coeficientes son
+significativos:
 
 \begin{verbatim}
 formula: Response ~ Treat * Period
@@ -2873,7 +2849,8 @@ pretenden medir la misma variable subyacente. Además, el interés no es
 conocer el valor concreto de sus coeficientes sino su valor en relación
 a los coeficientes de las otras preguntas. En
 \textcite[pp.~14-16]{burkner2021} \textcite[pp.~19-20]{burkner2019}
-podemos encontrar un ejemplo con esta parametrización.
+podemos encontrar un ejemplo con esta parametrización aplicada a una
+escala de Likert.
 
 \hypertarget{modelo-response-treat-period-1-subject}{%
 \subsubsection{Modelo Response \textasciitilde{} Treat * Period + (1
@@ -2893,7 +2870,7 @@ Level\ 2: & \tau_{kj}  =  \tau_{k} + U_{0j}
 
 \normalsize
 
-donde \(ij\) es la observación \(i\) del estudiante \(j\). Observe que
+donde \(ij\) es la observación \(i\) del estudiante \(j\). Obsérvese que
 ahora los interceptos \(\tau_{kj}\) se descomponen en una parte fija y
 común para todos los estudiantes \(\tau_{k}\) y una parte variable
 específica para cada estudiante \(U_{0j}\). Para ajustar el modelo se va
@@ -3214,14 +3191,14 @@ ellos son:
 \item
   OpenBUGS y WinBUGS: basado en el muestreo de Gibbs.
 \item
-  JAGGS: también utiliza el muestreo de Gibbs.
+  JAGS: también utiliza el muestreo de Gibbs.
 \item
-  Stan: Más moderna que las anteriores. Utiliza muestreo HMC
-  (Hamiltonian Monte Carlo) y NUTS (no U-turn sampler). Se pueden
-  definir modelos directamente con el lenguaje de modelado de Stan. Hay
-  muchos paquetes basados en Stan que facilitan la especificación de
-  modelos con una sintaxis más sencilla. En este trabajo se utilizará
-  uno de ellos, \(brms\).
+  Stan: Más moderna y con una comunidad de desarrollo más activa que los
+  anteriores. Utiliza muestreo HMC (Hamiltonian Monte Carlo) y NUTS (no
+  U-turn sampler). Se pueden definir modelos directamente con el
+  lenguaje de modelado de Stan. Hay muchos paquetes basados en Stan que
+  facilitan la especificación de modelos con una sintaxis más sencilla.
+  En este trabajo se utilizará uno de ellos, \(brms\).
 \item
   INLA: Evita la simulación MCMC haciendo más rápida la convergencia. Es
   menos flexible ya que solo se pueden especificar modelos de la familia
@@ -3438,21 +3415,20 @@ Cronbach}\label{sec-cronbach-2}}
 
 El coeficiente \texttt{alfa\ de\ Cronbach} (ver
 Sección~\ref{sec-cronbach}) de la escala de Likert es 0.921 lo que
-indica una muy buena correlación entre las respuestas a todas las
-preguntas. Este valor apenas se ve alterado si se elimina una de las
-preguntas. Esto nos permite concluir que todos los ítems pertenecen a la
-misma escala de Likert. En la Tabla~\ref{tbl-item-alpha} mostramos las
-preguntas que más contribuyen al índice \texttt{alpha\ de\ Cronbach}. Un
-resultado interesante es constatar que la pregunta \(Q18\), que es la
-valoración general del cuestionario, es la que mejor contribución tiene
-al índice.
+indica una muy buena correlación entre las respuestas a todas los ítems.
+Este valor apenas se ve alterado si se elimina una de ellos. Esto nos
+permite concluir que todos los ítems pertenecen a la misma escala de
+Likert. En la Tabla~\ref{tbl-item-alpha} mostramos los ítems que más
+contribuyen al índice \texttt{alpha\ de\ Cronbach}. Un resultado
+interesante es constatar que el ítem \(Q18\), que es la valoración
+general del cuestionario, es el que mejor contribución tiene al índice.
 
 \tiny
 
 \begin{table}
 
-\caption{\label{tbl-item-alpha}Relación de cada pregunta con el índice
-alpha de Cronbach.}\begin{minipage}[t]{\linewidth}
+\caption{\label{tbl-item-alpha}Relación de cada ítem con el índice alpha
+de Cronbach.}\begin{minipage}[t]{\linewidth}
 \subcaption{\label{tbl-item-alpha-1}Variables con mayor asociación. }
 
 {\centering 
@@ -3497,7 +3473,7 @@ Q03 & Q14 & Q01 & Q11 & Q15 & Q13 & Q04 & Q16 & Q17 \\
 \hypertarget{sec-chi2-2}{%
 \subsection{\texorpdfstring{Asociación de variables con la prueba de
 homogeneidad
-\(\chi^2\)}{Asociación de variables con la prueba de homogeneidad \textbackslash chi\^{}2}}\label{sec-chi2-2}}
+\emph{X²}}{Asociación de variables con la prueba de homogeneidad X²}}\label{sec-chi2-2}}
 
 En la Sección~\ref{sec-chi2} se describe el marco teórico de esta prueba
 no paramétrica. Se ha contrastado la existencia de asociación entre la
@@ -3619,8 +3595,8 @@ AB & BA\\
 \end{longtable}
 
 \hypertarget{sec-or-3}{%
-\subsection{\texorpdfstring{Comparación con
-\(Odds\ Ratio\)}{Comparación con Odds\textbackslash{} Ratio}}\label{sec-or-3}}
+\subsection{\texorpdfstring{Comparación con \emph{Odds
+Ratio}}{Comparación con Odds Ratio}}\label{sec-or-3}}
 
 En Sección~\ref{sec-or} y en Sección~\ref{sec-or-2} se exponen el marco
 teórico y la fundamentación de los contrastes de hipótesis realizados
@@ -3773,8 +3749,8 @@ Subject.cor(Intercept,Treat1) & -0.13 &  &  & -0.11 & -0.36 & 0.13 \\
 \chapter{Discusión y conclusiones}\label{sec-conclusiones}}
 
 \hypertarget{sec-or-4}{%
-\section{\texorpdfstring{Comparación con
-\(Odds\ Ratio\)}{Comparación con Odds\textbackslash{} Ratio}}\label{sec-or-4}}
+\section{\texorpdfstring{Comparación con \emph{Odds
+Ratio}}{Comparación con Odds Ratio}}\label{sec-or-4}}
 
 En la Sección~\ref{sec-or-3} se constató la existencia de un efecto
 periodo en las respuestas 4 y 5. El test es significativo porque el
@@ -3825,7 +3801,7 @@ detectarlas.
 La magnitud del efecto del subtitulado sobre las valoraciones es muy
 superior a la de los efectos periodo y secuencia (ver
 Tabla~\ref{tbl-model-comp}), por lo que podemos realizar
-interpretaciones del modelo sin que nos debe preocupar su existencia. En
+interpretaciones del modelo sin que nos deba preocupar su existencia. En
 la Figura~\ref{fig-pred-3} se representan 50 muestras de la esperanza de
 la distribución predictiva a posteriori para cada pregunta y nivel de
 subtitulado marginalizadas por periodo y estudiante. La primera
@@ -3836,8 +3812,8 @@ niveles de subtitulado. En general se observa en la mayoría de las
 preguntas del nivel de subtitulado \(A\) que los alumnos están bastante
 seguros de que la respuesta a las preguntas debe ser 4 ó 5, asignando
 una muy baja probabilidad a los valores 1, 2, ó 3, pero habiendo
-bastante confusión respecto cuál de los dos valores (4 ó 5) asignar. En
-el nivel de subtitulado \(B\) la situación es bastante más confusa.
+bastante incertidumbre respecto cuál de los dos valores (4 ó 5) asignar.
+En el nivel de subtitulado \(B\) la situación es bastante más confusa.
 Aunque la opción de respuesta preferida es 4 y las menos preferidas son
 la 5 y la 1, hay bastante mezcla entre las opciones de respuesta 2, 3 y
 4. En cuanto al análisis individualizado por pregunta podemos extraer
@@ -3847,7 +3823,7 @@ las siguientes conclusiones:
 \item
   En las preguntas \(Q04\) y \(Q13\) los estudiantes no aprecian
   defectos en el subtitulado ni diferencias entre un nivel y otro. Son
-  valoradas en ambos niveles con puntuaciones de 4 y de 5.
+  valoradas en ambos subtitulados con puntuaciones de 4 y de 5.
 \item
   En las preguntas \(Q15\), \(Q16\) y \(Q17\), la opción de respuesta
   más probable es 4 en ambos subtitulados. El modelo asigna una baja
@@ -3883,9 +3859,10 @@ de acuerdo en que en las preguntas \(Q05\) y \(Q09\) hay una diferencia
 de calidad importante entre subtitulados. También están de acuerdo en
 que en las preguntas \(Q04\) y \(Q13\) no hay apenas cambio entre los
 subtitulados. En las preguntas \(Q15\), \(Q16\) y \(Q17\) hay una gran
-confusión en ambos niveles de subtitulado y en el resto la confusión se
-circunscribe al nivel de subtitulado \(B\), ya que en el nivel \(A\) las
-opciones 4 y 5 predominan.
+confusión en ambos niveles de subtitulado predominando la respuesta 4 y
+siendo muy parecidas las respuestas en ambos niveles. En el resto la
+confusión se circunscribe al nivel de subtitulado \(B\), ya que en el
+nivel \(A\) las opciones 4 y 5 predominan.
 
 \begin{figure}[h]
 
@@ -3917,20 +3894,19 @@ Treat \textbar{} Question).}
 
 \hypertarget{sec-contrasts}{%
 \chapter{Efecto secuencia e interacción tratamiento
-vs.~periodo.}\label{sec-contrasts}}
+vs.~periodo}\label{sec-contrasts}}
 
 Vamos a demostrar que el efecto secuencia es equivalente a la
 interacción de los factores tratamiento y periodo.
 
-\hypertarget{preparaciuxf3n.}{%
-\section{Preparación.}\label{preparaciuxf3n.}}
+\hypertarget{preparaciuxf3n}{%
+\section{Preparación}\label{preparaciuxf3n}}
 
 Partimos del siguiente conjunto de datos generado aleatoriamente
-\footnote{Obsérvese que se la variable \texttt{Response} en esta
-  simulación es cuantitativa y no ordinal. Se ha realizado de esta forma
-  para poder usar un ajuste de mínimos cuadrados en lugar de una
-  regresión ordinal para facilitar el cálculo y su interpretación.}:
-\scriptsize
+\footnote{Obsérvese que la variable \texttt{Response} en esta simulación
+  es cuantitativa y no ordinal. Se ha realizado de esta forma para poder
+  usar un ajuste de mínimos cuadrados en lugar de una regresión ordinal
+  para facilitar el cálculo y su interpretación.}: \scriptsize
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4002,9 +3978,9 @@ de los modelos
 
 \normalsize
 
-\hypertarget{anuxe1lisis-con-un-solo-factor-tratamiento.}{%
+\hypertarget{anuxe1lisis-con-un-solo-factor-tratamiento}{%
 \section{Análisis con un solo factor
-(tratamiento).}\label{anuxe1lisis-con-un-solo-factor-tratamiento.}}
+(tratamiento)}\label{anuxe1lisis-con-un-solo-factor-tratamiento}}
 
 \scriptsize
 
@@ -4147,9 +4123,9 @@ tratamiento, y esta variable tiene el valor 0 para el nivel \(A\) por
 ser el de referencia y 1 para el nivel \(B\). La pendiente se codifica
 como la diferencia del efecto de los dos niveles (\(B - A\)).
 
-\hypertarget{anuxe1lisis-con-un-dos-factores-tratamiento-y-periodo.}{%
+\hypertarget{anuxe1lisis-con-un-dos-factores-tratamiento-y-periodo}{%
 \section{Análisis con un dos factores (tratamiento y
-periodo).}\label{anuxe1lisis-con-un-dos-factores-tratamiento-y-periodo.}}
+periodo)}\label{anuxe1lisis-con-un-dos-factores-tratamiento-y-periodo}}
 
 \scriptsize
 
@@ -4311,8 +4287,8 @@ produce el mismo resultado:
 
 \normalsize
 
-\hypertarget{factor-secuencia.}{%
-\section{Factor secuencia.}\label{factor-secuencia.}}
+\hypertarget{factor-secuencia}{%
+\section{Factor secuencia}\label{factor-secuencia}}
 
 Vamos a incorporar la secuencia como factor para ver si es equivalente a
 la interacción entre periodo y tratamiento. En caso de serlo los
@@ -4413,7 +4389,7 @@ X.Intercept. & Treat1 & Period1 & Treat1.Period1 \\
 
 \normalsize
 
-La interpretación de los contrastes es diferente. Para explicarlo,
+La interpretación de los coeficientes es diferente. Para explicarlo,
 mostramos la matriz de contraste:
 
 \scriptsize
@@ -4719,6 +4695,80 @@ Treat1:Period1
 \end{verbatim}
 
 \normalsize
+
+\hypertarget{resumen-de-modelos-y-equivalencias-de-paruxe1metros}{%
+\section{Resumen de modelos y equivalencias de
+parámetros}\label{resumen-de-modelos-y-equivalencias-de-paruxe1metros}}
+
+En la Tabla \ref{tbl-contrasts-compare} se muestran las equivalencias de
+los coeficientes de cada modelo. Todas las filas de la misma columna
+corresponden a un determinado nivel para cada factor y la fórmula
+mostrada es el modelo resultante teniendo en cuenta que:
+
+\begin{itemize}
+\item
+  En el contraste \texttt{treatment} se utiliza como referencia el
+  primer nivel de cada factor, que corresponderá con el intercepto; los
+  coeficientes se denominan \((Intercept)\), \(TreatB\), \(Period2\) y
+  \(SeqBA\) y son la diferencia del nivel que representa cada
+  coeficiente con el intercepto; y los valores de cada nivel de factor
+  son: \(TreatA = 0\), \(TreatB = 1\), \(Period1 = 0\), \(Period2 = 1\),
+  \(SeqAB = 0\), \(SeqBA = 1\).
+\item
+  En el contraste \texttt{sum}, el intercepto es el valor medio y se
+  excluye elcoeficiente del último nivel que se calcula como la suma del
+  resto de niveles con signo opuesto \footnote{Como en este caso solo
+    hay dos niveles en cada factor, el valor del segundo nivel será
+    simplemente el opuesto del primer nivel.}; los coeficientes se
+  denominan \((Intercept)\), \(Treat1\), \(Period1\) y \(Seq1\); y los
+  valores de cada nivel de factor son:\(TreatA = 1\), \(TreatB = -1\),
+  \(Period1 = 1\), \(Period2 = -1\), \(SeqAB = 1\), \(SeqBA = -1\).
+\end{itemize}
+
+\begin{table}[H]
+\caption{\label{tbl-contrasts-compare}Equivalencia entre coeficientes y modelos.}\tabularnewline
+\tiny
+\begin{adjustwidth}{-3.5cm}{}
+% Please add the following required packages to your document preamble:
+\begin{tabular}{@{}|c|l|llll|@{}}
+\toprule
+\multicolumn{1}{|l|}{} &
+  \multicolumn{1}{c|}{} &
+  \multicolumn{4}{c|}{\textbf{Factor Levels}} \\ \cmidrule(l){3-6} 
+\multicolumn{1}{|l|}{\multirow{-2}{*}{\textbf{Contrast}}} &
+  \multicolumn{1}{c|}{\multirow{-2}{*}{\textbf{Model}}} &
+  \multicolumn{1}{c|}{{\color[HTML]{9A0000} \textbf{\begin{tabular}[c]{@{}c@{}}TreatA\\ Period1\\ SeqAB\end{tabular}}}} &
+  \multicolumn{1}{c|}{{\color[HTML]{3531FF} \textbf{\begin{tabular}[c]{@{}c@{}}TreatA\\ Period2\\ SeqBA\end{tabular}}}} &
+  \multicolumn{1}{c|}{{\color[HTML]{646809} \textbf{\begin{tabular}[c]{@{}c@{}}TreatB\\ Period1\\ SeqBA\end{tabular}}}} &
+  \multicolumn{1}{c|}{{\color[HTML]{986536} \textbf{\begin{tabular}[c]{@{}c@{}}TreatB\\ Period2\\ SeqAB\end{tabular}}}} \\ \midrule
+ &
+  $R \! = \! \beta_0 \! +\!  \beta_1Treat \! +\!  \beta_2Period \! +\!  \beta_3Treat\!:\!Period$ &
+  \multicolumn{1}{l|}{{\color[HTML]{9A0000} $R \! = \! \beta_0$}} &
+  \multicolumn{1}{l|}{{\color[HTML]{3531FF} $R \! = \! \beta_0 \! +\!  \beta_2$}} &
+  \multicolumn{1}{l|}{{\color[HTML]{646809} $R \! = \! \beta_0 \! +\!  \beta_1$}} &
+  {\color[HTML]{986536} $R \! = \! \beta_0 \! +\!  \beta_1 \! +\!  \beta_2 \! +\!  \beta_3$} \\ \cmidrule(l){2-6} 
+\multirow{-2}{*}{\textbf{Treatment}} &
+  $R \! = \! \beta_0 \! +\!  \beta_1Treat \! +\!  \beta_2Period \! +\!  \beta_3Seq$ &
+  \multicolumn{1}{l|}{{\color[HTML]{9A0000} $R \! = \! \beta_0$}} &
+  \multicolumn{1}{l|}{{\color[HTML]{3531FF} $R \! = \! \beta_0 \! +\!  \beta_2 \! +\!  \beta_3$}} &
+  \multicolumn{1}{l|}{{\color[HTML]{646809} $R \! = \! \beta_0 \! +\!  \beta_1 \! +\!  \beta_3$}} &
+  {\color[HTML]{986536} $R \! = \! \beta_0 \! +\!  \beta_1 \! +\!  \beta_2$} \\ \midrule
+ &
+  $R \! = \! \beta_0 \! +\!  \beta_1Treat \! +\!  \beta_2Period \! +\!  \beta_3Treat\!:\!Period$ &
+  \multicolumn{1}{l|}{{\color[HTML]{9A0000} $R \! = \! \beta_0 \! +\!  \beta_1 \! +\!  \beta_2 \! +\!  \beta_3$}} &
+  \multicolumn{1}{l|}{{\color[HTML]{3531FF} $R \! = \! \beta_0 \! +\!  \beta_1 \! -\! \beta_2 \! -\! \beta_3$}} &
+  \multicolumn{1}{l|}{{\color[HTML]{646809} $R \! = \! \beta_0 \! -\! \beta_1 \! +\!  \beta_2 \! -\! \beta_3$}} &
+  {\color[HTML]{986536} $R \! = \! \beta_0 \! -\! \beta_1 \! -\! \beta_2 \! +\!  \beta_3$} \\ \cmidrule(l){2-6} 
+\multirow{-2}{*}{\textbf{Sum}} &
+  $R \! = \! \beta_0 \! +\!  \beta_1Treat \! +\!  \beta_2Period \! +\!  \beta_3Seq$ &
+  \multicolumn{1}{l|}{{\color[HTML]{9A0000} $R \! = \! \beta_0 \! +\!  \beta_1 \! +\!  \beta_2 \! +\!  \beta_3$}} &
+  \multicolumn{1}{l|}{{\color[HTML]{3531FF} $R \! = \! \beta_0 \! +\!  \beta_1 \! -\! \beta_2 \! -\! \beta_3$}} &
+  \multicolumn{1}{l|}{{\color[HTML]{646809} $R \! = \! \beta_0 \! -\! \beta_1 \! +\!  \beta_2 \! -\! \beta_3$}} &
+  {\color[HTML]{986536} $R \! = \! \beta_0 \! -\!\beta_1 \! -\! \beta_2 \! +\!  \beta_3$} \\ \bottomrule
+\end{tabular}
+\end{adjustwidth}
+\normalsize
+\end{table}
 
 
 \backmatter

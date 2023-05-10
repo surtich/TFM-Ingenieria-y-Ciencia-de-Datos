@@ -8,7 +8,7 @@
 \addvspace {10pt}
 \contentsline {table}{\numberline {3.1}{\ignorespaces Niveles de los items de la escala de Likert.\relax }}{19}{table.3.1}%
 \contentsline {table}{\numberline {3.2}{\ignorespaces Items de la escala de Likert. \relax }}{19}{table.3.2}%
-\contentsline {table}{\numberline {3.3}{\ignorespaces Tablas de contingencia de la información del sexo, edad y nivel de conocimientos previos.\relax }}{20}{table.caption.17}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces Tablas de contingencia de la información del sexo, edad y nivel de conocimientos previos.\relax }}{20}{table.caption.15}%
 \contentsline {table}{\numberline {3.7}{\ignorespaces Descripción de las variables más importantes. \relax }}{22}{table.3.7}%
 \contentsline {table}{\numberline {3.8}{\ignorespaces Muestra del dataframe preparado para el modelado estadístico en formato largo. \relax }}{23}{table.3.8}%
 \addvspace {10pt}
@@ -22,8 +22,8 @@
 \contentsline {table}{\numberline {4.8}{\ignorespaces Equivalencia entre los coeficientes calculados con \texttt {contr.treatment} y \texttt {contr.sum} en el modelo Response \textasciitilde {} Treat*Period.\relax }}{40}{table.4.8}%
 \contentsline {table}{\numberline {4.9}{\ignorespaces Distribuciones a priori del modelo Response \textasciitilde {} Treat * Period + (1 + Treat \textbar {} Subject) + (1 + Treat \textbar {} Question). \relax }}{48}{table.4.9}%
 \addvspace {10pt}
-\contentsline {table}{\numberline {5.1}{\ignorespaces Relación de cada ítem con el índice alpha de Cronbach.\relax }}{53}{table.caption.49}%
-\contentsline {table}{\numberline {5.4}{\ignorespaces Tablas de contingencia.\relax }}{54}{table.caption.51}%
+\contentsline {table}{\numberline {5.1}{\ignorespaces Relación de cada ítem con el índice alpha de Cronbach.\relax }}{53}{table.caption.47}%
+\contentsline {table}{\numberline {5.4}{\ignorespaces Tablas de contingencia.\relax }}{54}{table.caption.49}%
 \contentsline {table}{\numberline {5.5}{\ignorespaces Valores del contraste de hipótesis \(\chi ^2\)\relax }}{54}{table.5.5}%
 \contentsline {table}{\numberline {5.6}{\ignorespaces \(Log OR\) \textasciitilde {} Treat + Seq + Response\_l \relax }}{54}{table.5.6}%
 \contentsline {table}{\numberline {5.7}{\ignorespaces Log OR \textasciitilde {} Treat + Period + Response\_l \relax }}{55}{table.5.7}%

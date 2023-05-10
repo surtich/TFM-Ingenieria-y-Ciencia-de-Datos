@@ -136,6 +136,7 @@ format:
       - extrafontsizes
       - onecolumn
       - openright
+      - table
     mainfontoptions:
       - Extension=.otf
       - UprightFont=*-regular

@@ -1,0 +1,293 @@
+---
+title: "Regresión Ordinal Acumulativa"
+author: "Javier Pérez Arteaga"
+institute: "Máster en Ingeniería y Ciencia de Datos"
+format:
+    revealjs:
+        logo: images/logo.png
+        output-file: tfm.html
+        slide-number: true
+        multiplex: true
+        theme: [simple, assets/monash.scss]
+        show-slide-number: all
+        controls: true
+        width: 1920
+        height: 1080
+        css: [assets/syntax-highlight.css, assets/custom.css, assets/pacman.css]
+        header-includes: |
+            <link rel="stylesheet" href="/assets/fontawesome-free-6.1.1-web/css/font-awesome.min.css">
+            <script defer src="/assets/fontawesome-free-6.1.1-web/js/all.min.js"></script>
+execute:
+  echo: false
+---
+
+
+
+```{r}
+#| echo: false
+library(triangle)
+library(ggplot2)
+library(plotly)
+library(dplyr)
+library(ordinal)
+
+ord_fit <- function(x, y) {
+    fit <- clm(y ~ x)
+    m <- matrix()
+    y <- 0:5
+    x <- 0:90
+    coefs <- c(-Inf, coef(fit)[1:4], Inf)
+    m <- outer(coefs, x, FUN = function(coef, x) coef - coef(fit)[5] * x)
+    df_cum <- data.frame(x = rep(x, each = length(y)), y = rep(y, times = length(x)), cum.log.odds = c(m))
+
+    df_cum$cum.prob <- plogis(df_cum$cum.log.odds)
+    df_cum$cum.log.odds <- ifelse(df_cum$y == 5, 4.5, ifelse(df_cum$y == 0, -5.5, df_cum$cum.log.odds))
+    df_cum$color <- ifelse(df_cum$y == 5, "grey", "blue")
+
+    return(df_cum)
+}
+
+set.seed(420)
+N <- 200
+
+nsteps <- 7
+
+data <- list()
+for (step in 1:nsteps) {
+    x <- rnorm(N, step * 10, 10)
+    y <- factor(floor(sapply(x, function(c) rtriangle(n = 1, a = 1, b = 5.99, c = min(5.99, max(1, c %/% 10))))), levels = 1:5)
+    yfreq <- table(y) %>% data.frame()
+    colnames(yfreq) <- c("y", "n")
+    yfreq$cum <- cumsum(yfreq$n)
+    fit <- ord_fit(x, y)
+    data[[step]] <- list(
+        c = step * 10,
+        x = x,
+        y = y,
+        yfreq = yfreq,
+        fit = fit
+    )
+}
+
+```
+
+```{r}
+#| echo: false
+fig1 <- plot_ly()
+fig1 <- add_segments(fig1,
+    x = data[1][[1]]$yfreq$y, xend = data[1][[1]]$yfreq$y, y = 0, yend = data[1][[1]]$yfreq$n, line = list(width = 4, color = "blue"),
+    visible = data[1][[1]]$visible
+)
+fig1 <- add_trace(fig1,
+    x = data[1][[1]]$yfreq$y, y = data[1][[1]]$yfreq$n,
+    type = "scatter", mode = "markers", marker = list(color = "blue", size = 15),
+    visible = data[1][[1]]$visible
+)
+
+fig1 <- fig1 %>% layout(
+    showlegend = FALSE,
+    xaxis = list(zeroline = F, range = c(-0.5, 5)),
+    yaxis = list(range = c(0, 210))
+)
+
+fig1.1 <- add_segments(fig1,
+    x = data[1][[1]]$yfreq$y, xend = data[1][[1]]$yfreq$y, y = data[1][[1]]$yfreq$n, yend = data[1][[1]]$yfreq$cum, line = list(width = 4, color = "red", dash = "dash"),
+    visible = data[1][[1]]$visible
+)
+
+fig1.1 <- add_trace(fig1.1,
+    x = data[1][[1]]$yfreq$y, y = data[1][[1]]$yfreq$cum,
+    type = "scatter", mode = "markers", marker = list(color = "red", size = 15),
+    visible = data[1][[1]]$visible
+)
+```
+
+
+
+
+
+## Distribución acumulada 
+
+
+```{r}
+#| echo: false
+fig1
+```
+
+
+## Distribución acumulada {auto-animate=true}
+
+
+
+::: {data-id="box1"}
+
+```{r}
+#| echo: false
+fig1.1
+```
+
+
+:::
+
+
+## Distribución acumulada {auto-animate=true}
+
+
+:::::: {.columns}
+
+
+
+:::::: {.column width="40%"}
+::: {data-id="box1"}
+
+
+```{r}
+#| echo: false
+#| fig-width: 7
+fig1.1
+```
+
+
+:::
+
+
+::: {.fragment .fade-left fragment-index=3}
+
+
+```{r}
+#| echo: false
+#| fig-width: 7
+fig3 <- plot_ly()
+fig3 <- add_segments(fig3,
+    x = data[6][[1]]$yfreq$y, xend = data[6][[1]]$yfreq$y, y = 0, yend = data[6][[1]]$yfreq$n, line = list(width = 4, color = "blue"),
+    visible = data[6][[1]]$visible
+)
+fig3 <- add_trace(fig3,
+    x = data[6][[1]]$yfreq$y, y = data[6][[1]]$yfreq$n,
+    type = "scatter", mode = "markers", marker = list(color = "blue", size = 15),
+    visible = data[6][[1]]$visible
+)
+
+fig3 <- fig3 %>% layout(
+    showlegend = FALSE,
+    xaxis = list(zeroline = F, range = c(-0.5, 5)),
+    yaxis = list(range = c(0, 210))
+)
+
+fig3 <- add_segments(fig3,
+    x = data[6][[1]]$yfreq$y, xend = data[6][[1]]$yfreq$y, y = data[6][[1]]$yfreq$n, yend = data[6][[1]]$yfreq$cum, line = list(width = 4, color = "red", dash = "dash"),
+    visible = data[6][[1]]$visible
+)
+
+fig3 <- add_trace(fig3,
+    x = data[6][[1]]$yfreq$y, y = data[6][[1]]$yfreq$cum,
+    type = "scatter", mode = "markers", marker = list(color = "red", size = 15),
+    visible = data[6][[1]]$visible
+)
+
+fig3
+```
+
+
+:::
+
+:::
+
+:::::: {.column width="60%"}
+
+::: {data-id="box2"}
+
+
+
+```{r}
+#| echo: false
+library(latex2exp)
+x_labels <- as.character(-4.5:4.5)
+x_labels[length(x_labels)] <- "Inf"
+
+fig2 <- plot_ly(data[[1]]$fit, x = ~cum.log.odds, y = ~cum.prob) %>%
+    add_segments(x = ~cum.log.odds, xend = ~cum.log.odds, y = 0, yend = ~cum.prob, frame = ~x, line = list(dash = "dash"), color = ~color) %>%
+    add_segments(x = -5, xend = ~cum.log.odds, y = ~cum.prob, yend = ~cum.prob, frame = ~x, line = list(dash = "dash"), color = ~color) %>%
+    layout(
+        showlegend = FALSE,
+        yaxis = list(range = c(-0.05, 1.2), tickvals = seq(0, 1, 0.2)),
+        xaxis = list(zeroline = F, range = c(-5, 5))
+    ) %>%
+    add_lines(x = c(-5, -5), y = c(0, 1), line = list(color = "black", width = 1)) %>%
+    add_trace(x = ~cum.log.odds, y = ~cum.prob, type = "scatter", mode = "lines+markers+text", frame = ~x, line = list(color = "blue", shape = "spline"), marker = list(color = ~color, size = 20), text = ~y, textposition = "middle center", textfont = list(color = "white", size = 12)) %>%
+    animation_opts(frame = 30, redraw = T, easing = "linear") %>%
+    animation_slider(value = "10")
+
+fig2
+```
+
+:::
+
+
+::: {.fragment .fade-left fragment-index=4}
+
+```{r}
+#| echo: false
+x_labels <- as.character(-4.5:4.5)
+x_labels[length(x_labels)] <- "Inf"
+
+fig4 <- plot_ly(data[[6]]$fit, x = ~cum.log.odds, y = ~cum.prob) %>%
+    add_segments(x = ~cum.log.odds, xend = ~cum.log.odds, y = 0, yend = ~cum.prob, frame = ~x, line = list(dash = "dash"), color = ~color) %>%
+    add_segments(x = -5, xend = ~cum.log.odds, y = ~cum.prob, yend = ~cum.prob, frame = ~x, line = list(dash = "dash"), color = ~color) %>%
+    layout(
+        showlegend = FALSE,
+        yaxis = list(range = c(-0.05, 1.2), tickvals = seq(0, 1, 0.2)),
+        xaxis = list(zeroline = F, range = c(-5, 5))
+    ) %>%
+    add_lines(x = c(-5, -5), y = c(0, 1), line = list(color = "black", width = 1)) %>%
+    add_trace(x = ~cum.log.odds, y = ~cum.prob, type = "scatter", mode = "lines+markers+text", frame = ~x, line = list(color = "blue", shape = "spline"), marker = list(color = ~color, size = 20), text = ~y, textposition = "middle center", textfont = list(color = "white", size = 12)) %>%
+    animation_opts(frame = 30, redraw = T, easing = "linear") %>%
+    animation_slider(value = "10")
+
+fig4
+```
+
+:::
+
+
+::::::
+
+::::::
+
+
+## Distribución acumulada {auto-animate=true}
+
+
+:::::: {.columns}
+
+:::::: {.column width="40%"}
+
+
+::::::
+
+:::::: {.column width="60%"}
+
+
+::: {data-id="box2"}
+
+
+```{r}
+#| echo: false
+fig2
+```
+:::
+
+::: {data-id="box1"}
+
+
+```{r}
+#| echo: false
+fig1.1
+```
+
+:::
+
+
+::::::
+
+::::::
