@@ -1,5 +1,5 @@
 ---
-title: "Regresión Ordinal Acumulativa"
+title: "Regresión Ordinal"
 author: "Javier Pérez Arteaga"
 institute: "Máster en Ingeniería y Ciencia de Datos"
 format:
@@ -76,31 +76,36 @@ for (step in 1:nsteps) {
 #| echo: false
 fig1 <- plot_ly()
 fig1 <- add_segments(fig1,
-    x = data[1][[1]]$yfreq$y, xend = data[1][[1]]$yfreq$y, y = 0, yend = data[1][[1]]$yfreq$n, line = list(width = 4, color = "blue"),
-    visible = data[1][[1]]$visible
+    x = data[2][[1]]$yfreq$y, xend = data[2][[1]]$yfreq$y, y = 0, yend = data[2][[1]]$yfreq$n, line = list(width = 4, color = "blue"),
+    visible = data[2][[1]]$visible
 )
 fig1 <- add_trace(fig1,
-    x = data[1][[1]]$yfreq$y, y = data[1][[1]]$yfreq$n,
+    x = data[2][[1]]$yfreq$y, y = data[2][[1]]$yfreq$n,
     type = "scatter", mode = "markers", marker = list(color = "blue", size = 15),
-    visible = data[1][[1]]$visible
+    visible = data[2][[1]]$visible
 )
 
 fig1 <- fig1 %>% layout(
     showlegend = FALSE,
-    xaxis = list(zeroline = F, range = c(-0.5, 5)),
-    yaxis = list(range = c(0, 210))
+    xaxis = list(zeroline = F, range = c(-0.5, 5), title = "Y"),
+    yaxis = list(range = c(0, 210), title = "Frequencies")
 )
 
 fig1.1 <- add_segments(fig1,
-    x = data[1][[1]]$yfreq$y, xend = data[1][[1]]$yfreq$y, y = data[1][[1]]$yfreq$n, yend = data[1][[1]]$yfreq$cum, line = list(width = 4, color = "red", dash = "dash"),
-    visible = data[1][[1]]$visible
+    x = data[2][[1]]$yfreq$y, xend = data[2][[1]]$yfreq$y, y = data[2][[1]]$yfreq$n, yend = data[2][[1]]$yfreq$cum, line = list(width = 4, color = "red", dash = "dash"),
+    visible = data[2][[1]]$visible
 )
 
 fig1.1 <- add_trace(fig1.1,
-    x = data[1][[1]]$yfreq$y, y = data[1][[1]]$yfreq$cum,
+    x = data[2][[1]]$yfreq$y, y = data[2][[1]]$yfreq$cum,
     type = "scatter", mode = "markers", marker = list(color = "red", size = 15),
-    visible = data[1][[1]]$visible
+    visible = data[2][[1]]$visible
+) %>% layout(
+    yaxis = list(title = "Cumulative Frequencies")
 )
+
+
+fig1.2 <- plot_ly(y = data[3][[1]]$x, color = data[3][[1]]$y, type = "box") %>% layout(showlegend = F, xaxis = list(title = "Y"), yaxis = list(title = "X"))
 ```
 
 
@@ -112,24 +117,45 @@ fig1.1 <- add_trace(fig1.1,
 
 ```{r}
 #| echo: false
+#| fig-width: 9
 fig1
 ```
 
 
 ## Regresión Ordinal {auto-animate=true}
 
+:::::: {.columns}
+
+
+
+:::::: {.column width="50%"}
 
 
 ::: {data-id="box1"}
 
 ```{r}
 #| echo: false
+#| fig-width: 9
 fig1.1
 ```
+::: 
+
+::::::
 
 
+:::::: {.column width="50%"}
+
+::: {.fragment .fade-left fragment-index=1}
+
+```{r}
+#| echo: false
+#| fig-width: 9
+fig1.2
+```
 :::
 
+::::::
+::::::
 
 ## Regresión Ordinal {auto-animate=true}
 
@@ -171,8 +197,8 @@ fig3 <- add_trace(fig3,
 
 fig3 <- fig3 %>% layout(
     showlegend = FALSE,
-    xaxis = list(zeroline = F, range = c(-0.5, 5)),
-    yaxis = list(range = c(0, 210))
+    xaxis = list(zeroline = F, range = c(-0.5, 5), title = "Y"),
+    yaxis = list(range = c(0, 210), title = "Frequencies")
 )
 
 fig3 <- add_segments(fig3,
@@ -290,7 +316,10 @@ fig5
 [Cálculo de probabilidad de respuesta]{.story}
 <br>
 $$
-P(Y = k) =  P(Y \le k) - P(Y \le k-1)
+\begin{aligned}
+P(Y = k) &=  P(Y \le k) - P(Y \le k-1) \\
+P(Y \le k) &= logit^{-1}\left[\tau_k-\beta_1x_1-...-\beta_px_p \right]
+\end{aligned}
 $$
 :::
 
