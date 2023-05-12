@@ -11,6 +11,7 @@ format:
         theme: [simple, assets/monash.scss]
         show-slide-number: all
         controls: true
+        pdf-separate-fragments: true
         width: 1920
         height: 1080
         css: [assets/custom.css, assets/pacman.css, assets/tachyons-addon.css]
@@ -361,7 +362,7 @@ this situation"]{.speech .monash-blue2}
 <br>
 
 $$
-\frac{P(Y \le k)}{1-P(Y \le k)} = c \frac{P(Y \le l)}{1-P(Y \le l)}
+\frac{P(Y \le k | X = x)}{1-P(Y \le k | X = x)} \propto \frac{P(Y \le l | X = x)}{1-P(Y \le l | X = x)}
 $$
 :::
 
@@ -389,6 +390,7 @@ fig2
 :::
 
 ::: {.fragment .fade-in-then-out fragment-index=1}
+::: {data-id="eq-ordinal"}
 ::: box
 [Ecuación Regresión Logística]{.story}
 <br>
@@ -396,16 +398,20 @@ $$
 logit(Y=1) = log \left[\frac{P(Y=1)}{1-P(Y=1)} \right] = \tau+\beta_1x_1+...+\beta_px_p
 $$
 :::
+:::
 
 :::
 
 ::: {.fragment .fade-in fragment-index=2}
+
+::: {data-id="eq-ordinal"}
+
 ::: box
 [Ecuación Regresión Ordinal]{.story}
 <br>
 $$logit [P(Y \color{red}{\le k})] = log \left[\frac{P(Y \color{red}{\le k})}{1-P(Y \color{red}{\le k})} \right] = \tau_{\color{red}{k}} \color{red}{-} \beta_1 x_1 \color{red}{-} \beta_2 x_2 \color{red}{-} ... \color{red}{-} \beta_p x_p$$
 :::
-
+:::
 :::
 
 
@@ -430,7 +436,7 @@ fig1.1
 <br>
 $$
 \begin{aligned}
-exp(\tau_k) &= \frac{P(Y \le k)}{1-P(Y \le k)} \forall x_i = 0 \\
+exp(\tau_k) &= \frac{P(Y \le k | x_i = 0)}{1-P(Y \le k| x_i = 0)} \\
 exp(\beta_{i}) &= \frac{\frac{\mathrm{Pr}(Y > k \mid x_i = x + 1)}{\mathrm{Pr}(Y \leq k \mid x_i = x + 1)}}{\frac{\mathrm{Pr}(Y > k \mid x_i = x)}{\mathrm{Pr}(Y \leq k \mid x_i = x)}}
 \end{aligned}
 $$

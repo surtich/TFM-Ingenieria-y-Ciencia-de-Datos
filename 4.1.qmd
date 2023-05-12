@@ -41,6 +41,36 @@ summary(glm_improve_seq)
 
 En la @sec-ordinal se presentó el fundamento teórico de la Regresión Ordinal Acumulativa. En esta sección se ajustan algunos modelos y se interpretan los resultados.
 
+#### Comprobación de los presupuestos del modelo
+
+La Regresión Ordinal presupone que los $odds$ entre dos niveles de respuesta son proporcionales para los mismos valores de variables explicativas. Como se vio en la @eq-ordinal2, es equivalente comprobar que los $odds$ son proporcionales que comprobar que la diferencia en `logits` es constante. Una forma de hacer esto es calcular la diferencia en `logits` entre dos niveles de respuesta consecutivos en cada valor de cada variable predictiva y comparar si las diferencias son similares [ver @harrell2015, pp. 315-316]. En la @fig-po.check se han calculado para los predictores `Treat`, `Period`, `Seq` y `Question` las diferencias de $odds$ entre cada dos niveles consecutivos de respuesta. Se constata que las diferencias son pequeñas particularmente para el periodo y para la secuencia. También son moderadas para la mayoría de las preguntas. La diferencia es mayor en el subtitulado en la comparación de los niveles 1 y 2. Con esta evidencia, se acepta la hipótesis de proporcionalidad de $odds$.
+
+```{r}
+#| label: fig-po.check
+#| fig-cap: Comprobación de la proporcionalidad de *odds*.
+#| fig-height: 8
+#| fig-width: 10
+po.check <- function(x) {
+    return(df_clean %>% group_by(.data[[x]], Response) %>% count() %>% ungroup(Response) %>% mutate(cum.sum = cumsum(n), log.odds = qlogis(cum.sum / last(cum.sum)), diff.log.odds = log.odds - lead(x = log.odds, n = 1), odds = cum.sum / (last(cum.sum) - cum.sum), ratio.odds = odds / lead(odds)) %>% arrange(Response) %>% filter(Response %in% 1:3) %>% mutate(Predictor = x) %>% rename_with(~"Value", x))
+}
+
+
+bind_rows(po.check("Question"), po.check("Period"), po.check("Seq"), po.check("Treat")) %>%
+    mutate(Response = recode_factor(Response, "1" = "1|2", "2" = "2|3", "3" = "3|4")) %>%
+    ggplot(aes(
+        x = diff.log.odds, y = Value,
+        shape = Predictor, color = Predictor
+    )) +
+    geom_point(size = 5) +
+    facet_grid(
+        cols = vars(Response), rows = vars(Predictor), scales = "free_y",
+        space = "free", switch = "both"
+    ) +
+    theme(panel.spacing.y = unit(0.2, "lines"))
+```
+
+
+
 #### Ajuste del modelo ordinal `Response ~ Treat`
 
 Existen varios paquetes en R que permiten ajustar una Regresión Ordinal con función de enlace logística. El más popular es el paquete `Ordinal` [@ordinalR]. El paquete `VGAM` [@VGAMR] es más flexible y potente. Otra posibilidad es usar la función `polr` del paquete `MASS` [@MASSR]. Finalmente la función `orm` del paquete `rms` también permite hacerlo [ver @harrell2015]. En este trabajo usaremos el paquete `Ordinal` por permitir también incluir efectos aleatorios que utilizaremos en un apartado posterior. Comenzamos con un modelo simple que tiene como único predictor el nivel de subtitulado por ser la variable objetivo de nuestro modelo:
@@ -147,7 +177,7 @@ Para saber si existe un efecto periodo, añadimos como predictor la variable `Pe
 
 $$
 \text{logit}(P(Response_i \leq k)) = \tau_k - \beta_1 \text{Treat}_i - \beta_2 \text{Period}_i - \beta_3 \text{Treat}_i * \text{Period}_i
-$$ {#eq-ordinal}
+$$ {#eq-ordinal-3}
 
 \normalsize
 
@@ -219,7 +249,7 @@ df_contrast %>%
 Comprobamos que coinciden los coeficientes de los dos modelos con contraste `sum` y que el efecto secuencia es equivalente a la interacción de periodo y subtitulado con este contraste. Sin embargo, en el contraste `treatment` coinciden los coeficientes de los interceptores pero no así los de los factores. Además, estos tres últimos coeficientes tienen nombres diferentes en los dos contrastes. La diferencia en el nombre se corresponde con la diferente interpretación del significado de los coeficientes. En el contraste `treatment` los valores de los interceptos se refieren a los valores de los factores en el nivel de referencia de cada factor (en este caso $Treat = A$ y $Period = 1$) y los valores de los otros coeficientes ($TreatB$ y $Period2$) son la diferencia con el de referencia. Así, por ejemplo, $TreatB$ es la diferencia con $TreatA$ en el periodo 1. Con este tipo de contraste es más difícil aislar el efecto que produce un nivel de un factor independiente del otro factor. En el contraste `sum` los valores de los interceptos son el efecto medio y los coeficientes $Treat1$ y $Period1$ son los efectos que sobre ese valor medio produce el nivel de factor de referencia, que en este caso es el primero ($Treat = A$ y $Period = 1$ respectivamente). Así por ejemplo en el contraste `sum`:
 
 * El coeficiente $`r names(coef(clm_sum_treat.period))[1]`$ tiene un valor `r round(coef(clm_sum_treat.period)[1], 3)` y es el `logit` medio de que la respuesta sea menor que 1 frente a que sea mayor que 1.
-* El coeficiente $`r names(coef(clm_sum_treat.period))[5]`$ tiene un valor de `r round(coef(clm_sum_treat.period)[5], 3)` y es la diferencia en `logits` que se añade en el nivel de subtitulado $A$ sin tener en cuenta el periodo. Es decir, que es el efecto del subtitulado $A$. Su valor es positivo, como en la @eq-ordinal aparece restando, el subtitulado $A$ hace más pequeño el `logit` y, por lo tanto, disminuye la probabilidad de una respuesta inferior frente a una superior. 
+* El coeficiente $`r names(coef(clm_sum_treat.period))[5]`$ tiene un valor de `r round(coef(clm_sum_treat.period)[5], 3)` y es la diferencia en `logits` que se añade en el nivel de subtitulado $A$ sin tener en cuenta el periodo. Es decir, que es el efecto del subtitulado $A$. Su valor es positivo, como en la @eq-ordinal-3 aparece restando, el subtitulado $A$ hace más pequeño el `logit` y, por lo tanto, disminuye la probabilidad de una respuesta inferior frente a una superior. 
 * Para obtener el efecto del subtitulado $B$ se cambia el signo a $Treat1$: `r round(-coef(clm_sum_treat.period)[5], 3)`. Por ello aumenta la probabilidad de menor valor de respuesta.
 * La diferencia en `logits` de los efectos totales del subtitulado es el doble de `r round(abs(coef(clm_sum_treat.period))[5], 3)`.
 * El coeficiente $`r names(coef(clm_sum_treat.period))[6]`$ tiene un valor `r round(coef(clm_sum_treat.period)[6], 3)` y es la diferencia en `logits` que produce el periodo $1$ sin tener en cuenta el subtitulado. 
@@ -297,3 +327,14 @@ El incremento del número de coeficientes complica mucho su interpretación. Alg
  
 {{< include 4.2.qmd >}}
 
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#

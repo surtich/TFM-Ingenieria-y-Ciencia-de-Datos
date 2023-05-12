@@ -321,7 +321,9 @@ $$\mathrm{Pr}(Y = k) = \Phi(\tau_k - \eta) - \Phi(\tau_{k - 1} - \eta)$$
 Donde hay que estimar los umbrales y los coeficientes de regresión. La función anterior es la conocida como la función de enlace `probit`. Otra función de enlace popular es la función `logit`. Es la que usaremos en este trabajo por ser más fácil su interpretación
 ^[En la práctica los coeficientes estimados con las funciones de enlace `probit` y `logit` suelen similares.]. Con esta función de enlace la interpretación de los coeficientes es parecida a la de los coeficientes de la regresión logística. Para entender como se deben interpretar los coeficientes del modelo $CM$. se parte del supuesto de que el $logit$ de la función de probabilidad es lineal:
 
-$$logit [P(Y \le k)] = \tau_{k} - \eta = \tau_{k} - (\beta_1 x_1 + \beta_2 x_2 + ... + \beta_p x_p)$$
+$$
+logit [P(Y \le k)] = \tau_{k} - \eta = \tau_{k} - (\beta_1 x_1 + \beta_2 x_2 + ... + \beta_p x_p)
+$$ {#eq-ordinal}
 
 En ese caso, se puede demostrar fácilmente que, por ejemplo:
 
@@ -334,12 +336,28 @@ $$\frac{\frac{\mathrm{Pr}(Y \leq k \mid x_i = 1)}{\mathrm{Pr}(Y > k \mid x_i = 1
 
 o, equivalentemente:
 
-$$\frac{\frac{\mathrm{Pr}(Y > k \mid x_i = x + 1)}{\mathrm{Pr}(Y \leq k \mid x_i = x + 1)}}{\frac{\mathrm{Pr}(Y > k \mid x_i = x)}{\mathrm{Pr}(Y \leq k \mid x_i = x)}} = exp(\beta_{i})$$
+$$\frac{\frac{\mathrm{Pr}(Y > k \mid x_i = x + 1)}{\mathrm{Pr}(Y \leq k \mid x_i = x + 1)}}{\frac{\mathrm{Pr}(Y > k \mid x_i = x)}{\mathrm{Pr}(Y \leq k \mid x_i = x)}} = \exp(\beta_{i})$$
 
 Es decir, que $\exp(\beta_{i})$ es el $OR$ (cambio relativo entre $odds$) de que la variable respuesta esté por encima de una determinada categoría versus estar por debajo de ella para una unidad de incremento del predictor $x_i$. Un valor del coeficiente $\beta_i$ positivo indica que la relación entre el predictor $x_i$ y la función de $logit$ es positiva y, por lo tanto, se incrementa la probabilidad de un mayor valor de la variable respuesta.
-Este modelo se denomina proporcional ya que se asume que cada predictor tiene los mismos efectos sobre todos los niveles de la variable de respuesta ordinal [ver @Liu2202]. Esta suposición frecuentemente no es realista y se puede relajar permitiendo estimar un coeficiente diferente para cada nivel de la variable respuesta. Sin embargo, el incremento del número de coeficientes dificulta la interpretabilidad del modelo. @harrell2020 aboga por usar este modelo incluso aunque la suposición de proporcionalidad no se cumpla:
+
+#### Presunciones del modelo
+
+Este modelo se denomina proporcional ya que se asume que cada predictor tiene los mismos efectos sobre todos los niveles de la variable de respuesta ordinal [ver @Liu2202]. Es decir, que los $odds$ de los niveles de respuesta deben ser proporcionales para los mismos valores de las variables explicativas. Esta suposición frecuentemente no es realista y se puede relajar permitiendo estimar un coeficiente diferente para cada nivel de la variable respuesta. Sin embargo, el incremento del número de coeficientes dificulta la interpretabilidad del modelo. @harrell2020 aboga por usar este modelo incluso aunque la suposición de proporcionalidad no se cumpla:
 
 > "Ningún modelo se ajusta perfectamente a los datos, ..., la aproximación ofrecida por el modelo $CM$ sigue siendo bastante útil. Y un análisis unificado del modelo $CM$ es decididamente mejor que recurrir a análisis ineficientes y arbitrarios de valores dicotomizados de Y."
+
+Matemáticamente la presunción de la proporcionalidad de los $odd$ se demuestra a partir de la @eq-ordinal. Si fijamos los valores de los predictores en un valor arbitrario $X=x$ y consideramos dos niveles de respuesta cualesquiera $k$ y $l$, entonces:
+
+$$
+\begin{aligned}
+logit [P(Y \le k | X = x)] - logit [P(Y \le l | X = x)] & = \tau_{k} - \tau_{l} \\
+\frac{odds(P(Y \le k | X = x))}{odds(P(Y \le l | X = x))} & =  \exp(\tau_{k} - \tau_{l}) \implies \\
+odds(P(Y \le k | X = x)) & \propto odds(P(Y \le l | X = x))
+\end{aligned}
+$$ {#eq-ordinal2}
+
+Es decir, que la proporcionalidad de $odds$ de dos niveles de respuesta es independiente de los valores concretos de los predictores por lo que la constante de proporcionalidad debe ser similar para todos ellos. Esta proporcionalidad se puede comprobar mediante diferencia de $logits$.
+
 
  
 ## Modelos multinivel {#sec-multinivel}

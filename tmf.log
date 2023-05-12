@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.5.8)  8 MAY 2023 18:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.5.12)  12 MAY 2023 16:29
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -6,7 +6,7 @@ entering extended mode
 **/home/surtich/projects/TFMQ/tmf.tex
 (/home/surtich/projects/TFMQ/tmf.tex
 LaTeX2e <2022-11-01> patch level 1
-L3 programming layer <2023-05-05> (/home/surtich/.TinyTeX/texmf-dist/tex/latex/memoir/memoir.cls
+L3 programming layer <2023-05-11> (/home/surtich/.TinyTeX/texmf-dist/tex/latex/memoir/memoir.cls
 Document Class: memoir 2022/11/17 v3.7.19 configurable book, report, article document class
 (/home/surtich/.TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
@@ -770,7 +770,7 @@ Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
 ) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
 Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
 )) (/home/surtich/.TinyTeX/texmf-dist/tex/latex/l3packages/xparse/xparse.sty (/home/surtich/.TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2023-05-05 L3 programming layer (loader) 
+Package: expl3 2023-05-11 L3 programming layer (loader) 
  (/home/surtich/.TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2023-04-19 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count358
@@ -1268,7 +1268,7 @@ File: csquotes.cfg
 Package csquotes Info: Enabling strict warnings.
 Package csquotes Info: Enabling multilingual quotes.
 ) (/home/surtich/.TinyTeX/texmf-dist/tex/generic/babel/babel.sty
-Package: babel 2023/04/18 3.88 The Babel package
+Package: babel 2023/05/11 v3.89 The Babel package
 \babel@savecnt=\count427
 \U@D=\dimen350
 \l@unhyphenated=\language4
@@ -1276,9 +1276,9 @@ Package: babel 2023/04/18 3.88 The Babel package
 \bbl@readstream=\read5
 \bbl@dirlevel=\count428
 Package babel Info: You haven't specified a language as a class or package
-(babel)             option. I'll load 'nil'. Reported on input line 4444.
+(babel)             option. I'll load 'nil'. Reported on input line 4262.
  (/home/surtich/.TinyTeX/texmf-dist/tex/generic/babel/nil.ldf
-Language: nil 2023/04/18 3.88 Nil language
+Language: nil 2023/05/11 v3.89 Nil language
 \l@nil=\language5
 ))
 \everypar=\toks70
@@ -1498,7 +1498,7 @@ File: biblatex.cfg
 Package biblatex Info: Input encoding 'utf8' detected.
 Package biblatex Info: Document encoding is UTF8 ....
 Package biblatex Info: ... and expl3
-(biblatex)             2023-05-05 L3 programming layer (loader) 
+(biblatex)             2023-05-11 L3 programming layer (loader) 
 (biblatex)             is new enough (at least 2020/04/06),
 (biblatex)             setting 'casechanger=expl3'.
  (/home/surtich/.TinyTeX/texmf-dist/tex/latex/biblatex/blx-case-expl3.sty
@@ -2174,15 +2174,15 @@ Package logreq Info: Writing requests to 'tmf.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 54237 strings out of 477989
- 1057037 string characters out of 5838492
- 2032905 words of memory out of 5000000
- 72929 multiletter control sequences out of 15000+600000
+ 54456 strings out of 477989
+ 1063060 string characters out of 5838288
+ 2032827 words of memory out of 5000000
+ 73148 multiletter control sequences out of 15000+600000
  640486 words of font info for 271 fonts, out of 8000000 for 9000
  16 hyphenation exceptions out of 8191
  109i,21n,117p,2305b,2349s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/fontawesome5/FontAwesome5Free-Solid.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi5.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi9.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr5.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr9.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy5.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt8.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt9.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on tmf.pdf (84 pages, 2219092 bytes).
+Output written on tmf.pdf (84 pages, 2219125 bytes).
 PDF statistics:
  1569 PDF objects out of 1728 (max. 8388607)
  1316 compressed objects within 14 object streams

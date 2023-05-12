@@ -43,6 +43,8 @@ library(hrbrthemes)
 library(ggrepel)
 library(modelr)
 library(ggtext)
+library(modelsummary)
+library(bmmb)
 
 ## ggplot options
 theme_set(theme_bw())

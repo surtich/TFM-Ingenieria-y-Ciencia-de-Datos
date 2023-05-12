@@ -26,6 +26,18 @@ execute:
 ```{r}
 setwd("/home/surtich/projects/TFMQ")
 source("_setup.R")
+
+rotating_text <- function(x, align = "center") {
+    glue::glue('
+<div style="overflow: hidden; height: 1.2em;">
+<ul class="content__container__list {align}" style="text-align: {align}">
+<li class="content__container__list__item">{x[1]}</li>
+<li class="content__container__list__item">{x[2]}</li>
+<li class="content__container__list__item">{x[3]}</li>
+<li class="content__container__list__item">{x[4]}</li>
+</ul>
+</div>')
+}
 ```
 
 ## Objetivo del experimento
@@ -184,9 +196,10 @@ questions.tbl
 
 [Treat]{.f1}
 
-[¿A? ¿B?]{.f1}
+[¿$A$? ¿$B$?]{.f1}
 ![](images/video.png) 
-[¿A? ¿B?]{.f1}
+
+[¿$A$? ¿$B$?]{.f1}
 ![](images/video2.png) 
 :::
 
@@ -212,7 +225,7 @@ Efecto que se produce cuando las respuestas en el segundo periodo están influid
 ::: box  
 [Efecto secuencia]{.story}
 <br>
-Efecto que se produce cuando las respuestas en el segundo periodo son diferentes en función de si previamente se realizó el test A o el test B. 
+Efecto que se produce cuando las respuestas en el segundo periodo son diferentes en función de si previamente se realizó el test $A$ o el test $B$. 
 
 :::
 
@@ -236,3 +249,119 @@ Estudiantes participantes en el estudio.
 
 ::::::
 ::::::
+
+## Herramientas
+
+* ![Quarto](images/quarto.png){width=2in}: herramienta de publicación de documentación científica en <i class="fa-brands fa-r-project"></i>, $\LaTeX$, <i class="fa-brands fa-markdown"></i> Markdown, ...
+* <i class="fa-brands fa-r-project"></i> lenguaje de programación estadístico:
+    * Manipulación de datos: tidyr, dplyr, ...
+    * Gráficos: ggplot2, pyplot
+    * Tablas: knitr, gt
+    * Modelado estadístico: lme4, stats, ordinal, vcd, VGAM, brms, stan, ...
+* ![](images/vscode.png){width=40px} VScode: Entorno de desarrollo.
+* <i class="fa-brands fa-github"></i> [memoiQ](https://github.com/EricMarcon/memoiQ): Plantilla memoria
+* <i class="fa-brands fa-github"></i> [emitanaka](https://github.com/emitanaka/talks): Plantilla presentación
+* Tanto la memoria como la presentación son reproducibles.
+
+
+## Exploración inicial
+
+* Los estudiantes eligen participar o no voluntariamente en el estudio.
+* Los datos se suministran anonimizados.
+* Algunos de los estudiantes que realizaron la actividad de subtitulado no dieron su consentimiento para participar en el estudio y se han eliminado.
+* Algunos de los estudiantes solo realizaron la primera actividad de subtitulado y también se han eliminado.
+
+```{r}
+#| fig-align: center
+df_all %>%
+    distinct(Seq, Subject) %>%
+    group_by(Seq) %>%
+    count() %>%
+    ggplot(aes(x = Seq, y = n, fill = Seq)) +
+    geom_bar(stat = "identity") +
+    geom_text(aes(label = n, y = n / 2), size = 16) +
+    geom_text(aes(label = Seq, y = -3), size = 16) +
+    theme_void() +
+    theme(
+        legend.position = "none", plot.title = element_text(hjust = 0.6)
+    )
+```
+
+
+## Exploración inicial
+
+* El subtitulado denominado como $A$, muestra claramente mejores puntuaciones.
+* El comportamiento por grupos (secuencias) y periodos es similar con sutiles diferencias.
+
+```{r}
+#| fig-align: center
+#| out-width: 150%
+df_freqs <- df_all %>%
+    group_by(Period, Seq, Treat) %>%
+    count(Response) %>%
+    mutate(freq = n / sum(n)) %>%
+    ungroup()
+
+level_labeller <- function(variable, value) {
+    paste0(variable, " ", value)
+}
+
+
+df_freqs %>%
+    ggplot(aes(
+        x = Response, y = freq,
+        fill = Response
+    )) +
+    geom_bar(stat = "identity") +
+    facet_wrap(~ Seq + Period + Treat, nrow = 2, labeller = level_labeller) +
+    geom_text(aes(label = Response, y = 0.9), size = 5) +
+    geom_text(aes(label = formatC(freq, digits = 2, format = "f")), nudge_y = 0.1, size = 4) +
+    ylim(0, 1) +
+    theme(
+        legend.position = "none",
+        axis.line.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.text.x = element_blank(),
+        strip.text = element_text(size = 16), strip.background = element_blank()
+    ) +
+    labs(y = "Frecuencia relativa de respuesta", x = "Valor de la respuesta")
+```
+
+
+## Exploración inicial
+
+* En el subtitulado $A$ hay mayor homogeneidad entre grupos que en el $B$.
+* En el subtitulado $A$, los ítems $Q15$, $Q16$, $Q17$, tienen relativamente peores valoraciones.
+* En el subtitulado $B$, las peores valoraciones corresponden a los ítems $Q05$ y $Q09$.
+
+```{r}
+#| fig-align: center
+#| out-width: 80%
+df_clean %>%
+    group_by(Seq, Treat, Question, Level) %>%
+    mutate(Question = factor(Question, levels = rev(levels(Question)))) %>%
+    count(Response) %>%
+    ggplot(aes(x = Question, y = n, fill = Level)) +
+    geom_bar(position = "fill", stat = "identity") +
+    scale_y_continuous(labels = scales::percent, expand = c(0, 0)) +
+    scale_fill_brewer(name = "Level:", type = "div", palette = "Spectral") +
+    ylab("Percentage") +
+    theme_bw() +
+    theme(legend.position = "top", axis.text.y = element_text(size = 7)) +
+    facet_grid(rows = vars(Seq), cols = vars(Treat)) +
+    coord_flip() +
+    labs(x = "Question", y = "Percentage", fill = "Response")
+```
+
+## Modelado estadístico
+
+```{r}
+modelsummary(list(`Response ~ 1` = clm(Response ~ 1, data = df_clean), `Response ~ Treat` = clm(Response ~ Treat, data = df_clean)), estimate = "{estimate}{stars}", gof_omit = "RMSE", statistic = c("std.error", "conf.int"), shape = term:contrast ~ model + statistic, output = "kableExtra", metrics = "Log.Lik.")
+```
+
+$$
+\begin{aligned}
+logit [P(Y \le k | X = x)] - logit [P(Y \le l | X = x)] = \tau_{k} - \tau_{l} \\
+\frac{odds(P(Y \le k | X = x))}{odds(P(Y \le l | X = x))} =  exp(\tau_{k} - \tau_{l}) \implies odds(P(Y \le k | X = x)) \propto odds(P(Y \le l | X = x))
+\end{aligned}
+$$ {#eq-ordinal2}

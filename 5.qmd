@@ -55,9 +55,9 @@ En la @sec-chi2 se describe el marco teórico de esta prueba no paramétrica. Se
 #| label: tbl-contingencia-2
 #| tbl-cap: Tablas de contingencia.
 #| tbl-subcap:
-#|   - "~ Response + Treat"
-#|   - "~ Response + Period"
-#|   - "~ Response + Seq"
+#|   - Response + Treat
+#|   - Response + Period
+#|   - Response + Seq
 #| layout-ncol: 3
 
 xtabs(~ Response + Treat, data = df_clean) %>%

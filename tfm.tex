@@ -145,8 +145,20 @@
 \usepackage{multirow}
 \usepackage{booktabs}
 \usepackage{booktabs}
-\usepackage{caption}
 \usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\usepackage{caption}
 \usepackage{amsmath}
 \makeatletter
 \@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
@@ -549,7 +561,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada nulla aug
 
 Phasellus vitae magna nec mi sagittis luctus vitae eu augue. Donec scelerisque laoreet arcu, eget tempor mi ultricies vel. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum at blandit ex. Vestibulum eu sagittis mauris. In hac habitasse platea dictumst. Duis eget ante vel lacus sollicitudin convallis quis eu velit. Sed auctor sem non nisi hendrerit, vel tincidunt tortor bibendum.
 
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, sharp corners, interior hidden, enhanced, frame hidden, breakable, boxrule=0pt]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, enhanced, interior hidden, borderline west={3pt}{0pt}{shadecolor}, sharp corners, frame hidden, breakable]}{\end{tcolorbox}}\fi
 
 % Contents
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -595,7 +607,7 @@ experimento}\label{caracteruxedsticas-del-diseuxf1o-del-experimento}}
 
 El objetivo del estudio es responder a la pregunta de investigación:
 
-\begin{tcolorbox}[enhanced jigsaw, left=2mm, breakable, coltitle=black, colframe=quarto-callout-note-color-frame, colback=white, rightrule=.15mm, toprule=.15mm, opacitybacktitle=0.6, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, arc=.35mm, bottomtitle=1mm, leftrule=.75mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Pregunta de investigación}, bottomrule=.15mm, opacityback=0]
+\begin{tcolorbox}[enhanced jigsaw, left=2mm, toprule=.15mm, bottomrule=.15mm, colframe=quarto-callout-note-color-frame, bottomtitle=1mm, coltitle=black, breakable, opacityback=0, toptitle=1mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Pregunta de investigación}, colback=white, arc=.35mm, rightrule=.15mm, opacitybacktitle=0.6, leftrule=.75mm, titlerule=0mm, colbacktitle=quarto-callout-note-color!10!white]
 
 ¿Son los estudiantes de un curso de creación de materiales accesibles
 capaces de encontrar diferencias en la calidad del subtitulado de un
@@ -1060,7 +1072,9 @@ logística. Para entender como se deben interpretar los coeficientes del
 modelo \(CM\). se parte del supuesto de que el \(logit\) de la función
 de probabilidad es lineal:
 
-\[logit [P(Y \le k)] = \tau_{k} - \eta = \tau_{k} - (\beta_1 x_1 + \beta_2 x_2 + ... + \beta_p x_p)\]
+\begin{equation}\protect\hypertarget{eq-ordinal}{}{
+logit [P(Y \le k)] = \tau_{k} - \eta = \tau_{k} - (\beta_1 x_1 + \beta_2 x_2 + ... + \beta_p x_p)
+}\label{eq-ordinal}\end{equation}
 
 En ese caso, se puede demostrar fácilmente que, por ejemplo:
 
@@ -1081,15 +1095,21 @@ determinada categoría versus estar por debajo de ella para una unidad de
 incremento del predictor \(x_i\). Un valor del coeficiente \(\beta_i\)
 positivo indica que la relación entre el predictor \(x_i\) y la función
 de \(logit\) es positiva y, por lo tanto, se incrementa la probabilidad
-de un mayor valor de la variable respuesta. Este modelo se denomina
-proporcional ya que se asume que cada predictor tiene los mismos efectos
-sobre todos los niveles de la variable de respuesta ordinal
-\autocite[ver][]{Liu2202}. Esta suposición frecuentemente no es realista
-y se puede relajar permitiendo estimar un coeficiente diferente para
-cada nivel de la variable respuesta. Sin embargo, el incremento del
-número de coeficientes dificulta la interpretabilidad del modelo.
-\textcite{harrell2020} aboga por usar este modelo incluso aunque la
-suposición de proporcionalidad no se cumpla:
+de un mayor valor de la variable respuesta.
+
+\hypertarget{asunciones-del-modelo}{%
+\subsubsection{Asunciones del modelo}\label{asunciones-del-modelo}}
+
+Este modelo se denomina proporcional ya que se asume que cada predictor
+tiene los mismos efectos sobre todos los niveles de la variable de
+respuesta ordinal \autocite[ver][]{Liu2202}. Es decir, que los \(odds\)
+de los niveles de respuesta deben ser proporcionales para los mismos
+valores de las variables explicativas. Esta suposición frecuentemente no
+es realista y se puede relajar permitiendo estimar un coeficiente
+diferente para cada nivel de la variable respuesta. Sin embargo, el
+incremento del número de coeficientes dificulta la interpretabilidad del
+modelo. \textcite{harrell2020} aboga por usar este modelo incluso aunque
+la suposición de proporcionalidad no se cumpla:
 
 \begin{quote}
 \enquote{Ningún modelo se ajusta perfectamente a los datos, \ldots, la
@@ -1098,6 +1118,25 @@ un análisis unificado del modelo \(CM\) es decididamente mejor que
 recurrir a análisis ineficientes y arbitrarios de valores dicotomizados
 de Y.}
 \end{quote}
+
+Matemáticamente la asunción de la proporcionalidad de los \(odd\) se
+demuestra a partir de la Ecuación~\ref{eq-ordinal}. Si fijamos los
+valores de los predictores en un valor arbitrario \(X=x\) y consideramos
+dos niveles de respuesta cualesquiera \(k\) y \(l\), entonces:
+
+\begin{equation}\protect\hypertarget{eq-ordinal2}{}{
+\begin{aligned}
+logit [P(Y \le k | X = x)] - logit [P(Y \le l | X = x)] & = \tau_{k} - \tau_{l} \\
+\frac{odds(P(Y \le k | X = x))}{odds(P(Y \le l | X = x))} & =  \exp(\tau_{k} - \tau_{l}) \implies \\
+odds(P(Y \le k | X = x)) & \propto odds(P(Y \le l | X = x))
+\end{aligned}
+}\label{eq-ordinal2}\end{equation}
+
+Es decir, que la proporcionalidad de \(odds\) de dos niveles de
+respuesta es independiente de los valores concretos de los predictores
+por lo que la constante de proporcionalidad debe ser similar para todos
+ellos. Esta proporcionalidad se puede comprobar mediante diferencia de
+\(logits\).
 
 \hypertarget{sec-multinivel}{%
 \section{Modelos multinivel}\label{sec-multinivel}}
@@ -1824,16 +1863,16 @@ largo. }\tabularnewline
 \toprule
 Seq & Period & Treat & Subject & Question & Response & Level \\ 
 \midrule
-BA & 2 & A & 803 & Q04 & 4 & Positive \\ 
-BA & 1 & B & 765 & Q07 & 1 & Negative \\ 
-AB & 1 & A & 1126 & Q10 & 5 & Positive \\ 
-BA & 1 & B & 1002 & Q06 & 3 & Neutral \\ 
-AB & 1 & A & 498 & Q05 & 5 & Positive \\ 
-AB & 1 & A & 1011 & Q04 & 5 & Positive \\ 
-BA & 1 & B & 1217 & Q06 & 4 & Positive \\ 
-BA & 2 & A & 901 & Q14 & 5 & Positive \\ 
-BA & 2 & A & 440 & Q12 & 5 & Positive \\ 
-BA & 2 & A & 1040 & Q04 & 5 & Positive \\ 
+BA & 1 & B & 333 & Q13 & 4 & Positive \\ 
+AB & 2 & B & 498 & Q13 & 4 & Positive \\ 
+BA & 1 & B & 986 & Q16 & 3 & Neutral \\ 
+AB & 2 & B & 1011 & Q08 & 2 & Negative \\ 
+BA & 1 & B & 1118 & Q14 & 4 & Positive \\ 
+AB & 2 & B & 75 & Q11 & 5 & Positive \\ 
+AB & 2 & B & 1117 & Q11 & 4 & Positive \\ 
+AB & 1 & A & 1011 & Q11 & 5 & Positive \\ 
+AB & 1 & A & 288 & Q13 & 4 & Positive \\ 
+AB & 2 & B & 288 & Q14 & 2 & Negative \\ 
 \bottomrule
 \end{longtable}
 
@@ -2385,6 +2424,39 @@ En la Sección~\ref{sec-ordinal} se presentó el fundamento teórico de la
 Regresión Ordinal Acumulativa. En esta sección se ajustan algunos
 modelos y se interpretan los resultados.
 
+\hypertarget{comprobaciuxf3n-de-los-presupuestos-del-modelo}{%
+\subsubsection{Comprobación de los presupuestos del
+modelo}\label{comprobaciuxf3n-de-los-presupuestos-del-modelo}}
+
+La Regresión Ordinal presupone que los \(odds\) entre dos niveles de
+respuesta son proporcionales para los mismos valores de variables
+explicativas. Como se vio en la Ecuación~\ref{eq-ordinal2}, es
+equivalente comprobar que los \(odds\) son proporcionales que comprobar
+que la diferencia en \texttt{logits} es constante. Una forma de hacer
+esto es calcular la diferencia en \texttt{logits} entre dos niveles de
+respuesta consecutivos en cada valor de cada variable predictiva y
+comparar si las diferencias son similares
+\autocite[ver][pp.~315-316]{harrell2015}. En la
+Figura~\ref{fig-po.check} se han calculado para los predictores
+\texttt{Treat}, \texttt{Period}, \texttt{Seq} y \texttt{Question} las
+diferencias de \(odds\) entre cada dos niveles consecutivos de
+respuesta. Se constata que las diferencias son pequeñas particularmente
+para el periodo y para la secuencia. También son moderadas para la
+mayoría de las preguntas. La diferencia es mayor en el subtitulado de en
+la comparación de los niveles 1 y 2. Con esta evidencia, se acepta la
+hipótesis de proporcionalidad de \(odds\).
+
+\begin{figure}[h]
+
+{\centering \includegraphics{4_files/figure-pdf/fig-po.check-1.pdf}
+
+}
+
+\caption{\label{fig-po.check}Comprobación de la proporcionalidad de
+\emph{odds}.}
+
+\end{figure}
+
 \hypertarget{ajuste-del-modelo-ordinal-response-treat}{%
 \subsubsection{\texorpdfstring{Ajuste del modelo ordinal
 \texttt{Response\ \textasciitilde{}\ Treat}}{Ajuste del modelo ordinal Response \textasciitilde{} Treat}}\label{ajuste-del-modelo-ordinal-response-treat}}
@@ -2521,22 +2593,21 @@ En Tabla~\ref{tbl-probs-clm-treat} se muestran las probabilidades para
 ambos niveles de subtitulado y todos los posibles valores de respuesta.
 
 \hypertarget{tbl-probs-clm-treat}{}
-\begin{longtable}[]{@{}lrrrrr@{}}
-\caption{\label{tbl-probs-clm-treat}Probabilidades de respuesta para el
-modelo ordinal Response \textasciitilde{} Treat}\tabularnewline
-\toprule\noalign{}
-& 1 & 2 & 3 & 4 & 5 \\
-\midrule\noalign{}
-\endfirsthead
-\toprule\noalign{}
-& 1 & 2 & 3 & 4 & 5 \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-A & 0.018 & 0.061 & 0.08 & 0.315 & 0.526 \\
-B & 0.095 & 0.229 & 0.19 & 0.320 & 0.166 \\
-\end{longtable}
+\begin{table}
+\caption{\label{tbl-probs-clm-treat}Probabilidades de respuesta para el modelo ordinal Response
+\textasciitilde{} Treat }\tabularnewline
+
+\centering
+\begin{tabular}{l|r|r|r|r|r}
+\hline
+  & 1 & 2 & 3 & 4 & 5\\
+\hline
+A & 0.018 & 0.061 & 0.08 & 0.315 & 0.526\\
+\hline
+B & 0.095 & 0.229 & 0.19 & 0.320 & 0.166\\
+\hline
+\end{tabular}
+\end{table}
 
 \hypertarget{sec-response-treat.period}{%
 \subsubsection{\texorpdfstring{Ajuste del modelo ordinal
@@ -2548,9 +2619,9 @@ subtitulado y periodo:
 
 \small
 
-\begin{equation}\protect\hypertarget{eq-ordinal}{}{
+\begin{equation}\protect\hypertarget{eq-ordinal-3}{}{
 \text{logit}(P(Response_i \leq k)) = \tau_k - \beta_1 \text{Treat}_i - \beta_2 \text{Period}_i - \beta_3 \text{Treat}_i * \text{Period}_i
-}\label{eq-ordinal}\end{equation}
+}\label{eq-ordinal-3}\end{equation}
 
 \normalsize
 
@@ -2636,7 +2707,7 @@ contraste \texttt{sum}:
   El coeficiente \(Treat1\) tiene un valor de 0.874 y es la diferencia
   en \texttt{logits} que se añade en el nivel de subtitulado \(A\) sin
   tener en cuenta el periodo. Es decir, que es el efecto del subtitulado
-  \(A\). Su valor es positivo, como en la Ecuación~\ref{eq-ordinal}
+  \(A\). Su valor es positivo, como en la Ecuación~\ref{eq-ordinal-3}
   aparece restando, el subtitulado \(A\) hace más pequeño el
   \texttt{logit} y, por lo tanto, disminuye la probabilidad de una
   respuesta inferior frente a una superior.
@@ -3325,20 +3396,20 @@ prior & class & coef & group & resp & dpar & nlpar & lb & ub & source \\
  & b & Treat1 &  &  &  &  &  &  & default \\ 
  & b & Treat1:Period1 &  &  &  &  &  &  & default \\ 
 student\_t(3, 0, 2.5) & Intercept &  &  &  &  &  &  &  & default \\ 
- & Intercept & 1 &  &  &  &  &  &  & default \\ 
- & Intercept & 2 &  &  &  &  &  &  & default \\ 
- & Intercept & 3 &  &  &  &  &  &  & default \\ 
- & Intercept & 4 &  &  &  &  &  &  & default \\ 
+student\_t(3, 0, 2.5) & Intercept & 1 &  &  &  &  &  &  & default \\ 
+student\_t(3, 0, 2.5) & Intercept & 2 &  &  &  &  &  &  & default \\ 
+student\_t(3, 0, 2.5) & Intercept & 3 &  &  &  &  &  &  & default \\ 
+student\_t(3, 0, 2.5) & Intercept & 4 &  &  &  &  &  &  & default \\ 
 lkj\_corr\_cholesky(1) & L &  &  &  &  &  &  &  & default \\ 
- & L &  & Question &  &  &  &  &  & default \\ 
- & L &  & Subject &  &  &  &  &  & default \\ 
+lkj\_corr\_cholesky(1) & L &  & Question &  &  &  &  &  & default \\ 
+lkj\_corr\_cholesky(1) & L &  & Subject &  &  &  &  &  & default \\ 
 student\_t(3, 0, 2.5) & sd &  &  &  &  &  & 0 &  & default \\ 
- & sd &  & Question &  &  &  &  &  & default \\ 
- & sd & Intercept & Question &  &  &  &  &  & default \\ 
- & sd & Treat1 & Question &  &  &  &  &  & default \\ 
- & sd &  & Subject &  &  &  &  &  & default \\ 
- & sd & Intercept & Subject &  &  &  &  &  & default \\ 
- & sd & Treat1 & Subject &  &  &  &  &  & default \\ 
+student\_t(3, 0, 2.5) & sd &  & Question &  &  &  &  &  & default \\ 
+student\_t(3, 0, 2.5) & sd & Intercept & Question &  &  &  &  &  & default \\ 
+student\_t(3, 0, 2.5) & sd & Treat1 & Question &  &  &  &  &  & default \\ 
+student\_t(3, 0, 2.5) & sd &  & Subject &  &  &  &  &  & default \\ 
+student\_t(3, 0, 2.5) & sd & Intercept & Subject &  &  &  &  &  & default \\ 
+student\_t(3, 0, 2.5) & sd & Treat1 & Subject &  &  &  &  &  & default \\ 
 \bottomrule
 \end{longtable}
 
@@ -3395,6 +3466,61 @@ Response \textasciitilde{} Treat * Period + (1 + Treat \textbar{}
 Subject) + (1 + Treat \textbar{} Question).}
 
 \end{figure}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{section}{%
+\chapter{}\label{section}}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{section-1}{%
+\chapter{}\label{section-1}}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{section-2}{%
+\chapter{}\label{section-2}}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{section-3}{%
+\chapter{}\label{section-3}}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{section-4}{%
+\chapter{}\label{section-4}}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{section-5}{%
+\chapter{}\label{section-5}}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{section-6}{%
+\chapter{}\label{section-6}}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{section-7}{%
+\chapter{}\label{section-7}}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{section-8}{%
+\chapter{}\label{section-8}}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{section-9}{%
+\chapter{}\label{section-9}}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{section-10}{%
+\chapter{}\label{section-10}}
 
 \bookmarksetup{startatroot}
 
@@ -3489,21 +3615,27 @@ respuesta.
 
 \caption{\label{tbl-contingencia-2}Tablas de
 contingencia.}\begin{minipage}[t]{0.33\linewidth}
-\subcaption{\label{tbl-contingencia-2-1}\textasciitilde{} Response +
-Treat}
+\subcaption{\label{tbl-contingencia-2-1}Response + Treat }
 
 {\centering 
 
-\begin{tabular}[t]{lrr}
-\toprule
+\tabularnewline
+
+\centering
+\begin{tabular}{l|r|r}
+\hline
 Response & A & B\\
-\midrule
+\hline
 1 & 4 & 163\\
+\hline
 2 & 55 & 359\\
+\hline
 3 & 135 & 248\\
+\hline
 4 & 548 & 409\\
+\hline
 5 & 755 & 304\\
-\bottomrule
+\hline
 \end{tabular}
 
 }
@@ -3511,21 +3643,27 @@ Response & A & B\\
 \end{minipage}%
 %
 \begin{minipage}[t]{0.33\linewidth}
-\subcaption{\label{tbl-contingencia-2-2}\textasciitilde{} Response +
-Period}
+\subcaption{\label{tbl-contingencia-2-2}Response + Period }
 
 {\centering 
 
-\begin{tabular}[t]{rr}
-\toprule
+\tabularnewline
+
+\centering
+\begin{tabular}{r|r}
+\hline
 1 & 2\\
-\midrule
+\hline
 78 & 89\\
+\hline
 199 & 215\\
+\hline
 198 & 185\\
+\hline
 440 & 517\\
+\hline
 572 & 487\\
-\bottomrule
+\hline
 \end{tabular}
 
 }
@@ -3533,21 +3671,27 @@ Period}
 \end{minipage}%
 %
 \begin{minipage}[t]{0.33\linewidth}
-\subcaption{\label{tbl-contingencia-2-3}\textasciitilde{} Response +
-Seq}
+\subcaption{\label{tbl-contingencia-2-3}Response + Seq }
 
 {\centering 
 
-\begin{tabular}[t]{rr}
-\toprule
+\tabularnewline
+
+\centering
+\begin{tabular}{r|r}
+\hline
 AB & BA\\
-\midrule
+\hline
 89 & 78\\
+\hline
 210 & 204\\
+\hline
 192 & 191\\
+\hline
 375 & 582\\
+\hline
 600 & 459\\
-\bottomrule
+\hline
 \end{tabular}
 
 }
