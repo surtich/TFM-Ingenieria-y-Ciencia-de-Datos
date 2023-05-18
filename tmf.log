@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.5.12)  12 MAY 2023 16:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.5.12)  19 MAY 2023 00:47
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1592,7 +1592,15 @@ Package biblatex Info: Automatic encoding selection.
 
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'tmf.bbl' found.
- (./tmf.bbl)
+ (./tmf.bbl
+
+Package biblatex Warning: The following entry could not be found
+(biblatex)                in the database:
+(biblatex)                leton2021
+(biblatex)                Please verify the spelling and rerun
+(biblatex)                LaTeX afterwards.
+
+)
 Package biblatex Info: Reference section=0 on input line 512.
 Package biblatex Info: Reference segment=0 on input line 512.
 <images/logo.png, id=31, 371.3875pt x 177.66376pt>
@@ -1818,7 +1826,14 @@ LaTeX Font Info:    Trying to load font information for U+fontawesomefree1 on in
  (/home/surtich/.TinyTeX/texmf-dist/tex/latex/fontawesome5/ufontawesomefree1.fd)
 Underfull \vbox (badness 1681) has occurred while \output is active []
 
- [3{/home/surtich/.TinyTeX/texmf-dist/fonts/enc/dvips/fontawesome5/fa5free1.enc}] [4] [5{/home/surtich/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/home/surtich/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}] [6]
+ [3{/home/surtich/.TinyTeX/texmf-dist/fonts/enc/dvips/fontawesome5/fa5free1.enc}] [4] [5{/home/surtich/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/home/surtich/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}]
+
+LaTeX Warning: Citation 'leton2021' on page 6 undefined on input line 760.
+
+
+LaTeX Warning: Citation 'leton2021' on page 6 undefined on input line 813.
+
+[6]
 
 LaTeX Warning: Command \' invalid in math mode on input line 887.
 
@@ -1828,7 +1843,7 @@ Overfull \hbox (64.6772pt too wide) detected at line 956
  []
 
 [8]
-<2_files/figure-pdf/fig-cumulative-1.pdf, id=415, 492.84125pt x 110.4125pt>
+<2_files/figure-pdf/fig-cumulative-1.pdf, id=412, 492.84125pt x 110.4125pt>
 File: 2_files/figure-pdf/fig-cumulative-1.pdf Graphic file (type pdf)
 <use 2_files/figure-pdf/fig-cumulative-1.pdf>
 Package pdftex.def Info: 2_files/figure-pdf/fig-cumulative-1.pdf  used on input line 1020.
@@ -1869,7 +1884,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1739--1744
  []
 
 [22] [23] [24]
-<4_files/figure-pdf/fig-groups-1.pdf, id=586, 437.635pt x 138.5175pt>
+<4_files/figure-pdf/fig-groups-1.pdf, id=583, 437.635pt x 138.5175pt>
 File: 4_files/figure-pdf/fig-groups-1.pdf Graphic file (type pdf)
 <use 4_files/figure-pdf/fig-groups-1.pdf>
 Package pdftex.def Info: 4_files/figure-pdf/fig-groups-1.pdf  used on input line 1870.
@@ -1884,36 +1899,36 @@ Underfull \vbox (badness 1112) has occurred while \output is active []
  [25
 
 ]
-<4_files/figure-pdf/fig-distinct-1.pdf, id=598, 484.81125pt x 247.92625pt>
+<4_files/figure-pdf/fig-distinct-1.pdf, id=595, 484.81125pt x 247.92625pt>
 File: 4_files/figure-pdf/fig-distinct-1.pdf Graphic file (type pdf)
 <use 4_files/figure-pdf/fig-distinct-1.pdf>
 Package pdftex.def Info: 4_files/figure-pdf/fig-distinct-1.pdf  used on input line 1917.
 (pdftex.def)             Requested size: 380.01544pt x 194.33502pt.
  [26 <./4_files/figure-pdf/fig-groups-1.pdf> <./4_files/figure-pdf/fig-distinct-1.pdf>]
-<4_files/figure-pdf/fig-compare-1.pdf, id=622, 502.87875pt x 247.92625pt>
+<4_files/figure-pdf/fig-compare-1.pdf, id=619, 502.87875pt x 247.92625pt>
 File: 4_files/figure-pdf/fig-compare-1.pdf Graphic file (type pdf)
 <use 4_files/figure-pdf/fig-compare-1.pdf>
 Package pdftex.def Info: 4_files/figure-pdf/fig-compare-1.pdf  used on input line 1959.
 (pdftex.def)             Requested size: 379.99725pt x 187.34395pt.
  [27 <./4_files/figure-pdf/fig-compare-1.pdf>]
-<4_files/figure-pdf/fig-diff-1.pdf, id=638, 857.2025pt x 562.1pt>
+<4_files/figure-pdf/fig-diff-1.pdf, id=635, 857.2025pt x 562.1pt>
 File: 4_files/figure-pdf/fig-diff-1.pdf Graphic file (type pdf)
 <use 4_files/figure-pdf/fig-diff-1.pdf>
 Package pdftex.def Info: 4_files/figure-pdf/fig-diff-1.pdf  used on input line 2018.
 (pdftex.def)             Requested size: 379.99551pt x 249.17738pt.
  [28 <./4_files/figure-pdf/fig-diff-1.pdf>]
-<4_files/figure-pdf/fig-freqs-1.pdf, id=658, 499.8675pt x 418.56375pt>
+<4_files/figure-pdf/fig-freqs-1.pdf, id=655, 499.8675pt x 418.56375pt>
 File: 4_files/figure-pdf/fig-freqs-1.pdf Graphic file (type pdf)
 <use 4_files/figure-pdf/fig-freqs-1.pdf>
 Package pdftex.def Info: 4_files/figure-pdf/fig-freqs-1.pdf  used on input line 2102.
 (pdftex.def)             Requested size: 380.01003pt x 318.20116pt.
  [29] [30 <./4_files/figure-pdf/fig-freqs-1.pdf>]
-<4_files/figure-pdf/fig-levels-1.pdf, id=680, 495.8525pt x 417.56pt>
+<4_files/figure-pdf/fig-levels-1.pdf, id=677, 495.8525pt x 417.56pt>
 File: 4_files/figure-pdf/fig-levels-1.pdf Graphic file (type pdf)
 <use 4_files/figure-pdf/fig-levels-1.pdf>
 Package pdftex.def Info: 4_files/figure-pdf/fig-levels-1.pdf  used on input line 2168.
 (pdftex.def)             Requested size: 379.99931pt x 319.9994pt.
-<4_files/figure-pdf/fig-likert-1.pdf, id=682, 487.8225pt x 706.64pt>
+<4_files/figure-pdf/fig-likert-1.pdf, id=679, 487.8225pt x 706.64pt>
 File: 4_files/figure-pdf/fig-likert-1.pdf Graphic file (type pdf)
 <use 4_files/figure-pdf/fig-likert-1.pdf>
 Package pdftex.def Info: 4_files/figure-pdf/fig-likert-1.pdf  used on input line 2191.
@@ -1923,7 +1938,7 @@ Overfull \hbox (7.83014pt too wide) in paragraph at lines 2187--2192
  [][] 
  []
 
-<4_files/figure-pdf/fig-likert-2.pdf, id=683, 487.8225pt x 706.64pt>
+<4_files/figure-pdf/fig-likert-2.pdf, id=680, 487.8225pt x 706.64pt>
 File: 4_files/figure-pdf/fig-likert-2.pdf Graphic file (type pdf)
 <use 4_files/figure-pdf/fig-likert-2.pdf>
 Package pdftex.def Info: 4_files/figure-pdf/fig-likert-2.pdf  used on input line 2206.
@@ -1933,7 +1948,7 @@ Overfull \hbox (7.83014pt too wide) in paragraph at lines 2202--2207
  [][] 
  []
 
-<4_files/figure-pdf/fig-likert-3.pdf, id=684, 487.8225pt x 706.64pt>
+<4_files/figure-pdf/fig-likert-3.pdf, id=681, 487.8225pt x 706.64pt>
 File: 4_files/figure-pdf/fig-likert-3.pdf Graphic file (type pdf)
 <use 4_files/figure-pdf/fig-likert-3.pdf>
 Package pdftex.def Info: 4_files/figure-pdf/fig-likert-3.pdf  used on input line 2221.
@@ -1943,7 +1958,7 @@ Overfull \hbox (7.83014pt too wide) in paragraph at lines 2217--2222
  [][] 
  []
 
-<4_files/figure-pdf/fig-likert-4.pdf, id=685, 487.8225pt x 706.64pt>
+<4_files/figure-pdf/fig-likert-4.pdf, id=682, 487.8225pt x 706.64pt>
 File: 4_files/figure-pdf/fig-likert-4.pdf Graphic file (type pdf)
 <use 4_files/figure-pdf/fig-likert-4.pdf>
 Package pdftex.def Info: 4_files/figure-pdf/fig-likert-4.pdf  used on input line 2236.
@@ -1954,12 +1969,12 @@ Overfull \hbox (7.83014pt too wide) in paragraph at lines 2232--2237
  []
 
 [31 <./4_files/figure-pdf/fig-levels-1.pdf>] [32 <./4_files/figure-pdf/fig-likert-1.pdf> <./4_files/figure-pdf/fig-likert-2.pdf> <./4_files/figure-pdf/fig-likert-3.pdf> <./4_files/figure-pdf/fig-likert-4.pdf>]
-<4_files/figure-pdf/fig-improve-1.pdf, id=734, 499.8675pt x 241.90375pt>
+<4_files/figure-pdf/fig-improve-1.pdf, id=731, 499.8675pt x 241.90375pt>
 File: 4_files/figure-pdf/fig-improve-1.pdf Graphic file (type pdf)
 <use 4_files/figure-pdf/fig-improve-1.pdf>
 Package pdftex.def Info: 4_files/figure-pdf/fig-improve-1.pdf  used on input line 2258.
 (pdftex.def)             Requested size: 380.01003pt x 183.90042pt.
-<4_files/figure-pdf/fig-improve-2-1.pdf, id=735, 499.8675pt x 241.90375pt>
+<4_files/figure-pdf/fig-improve-2-1.pdf, id=732, 499.8675pt x 241.90375pt>
 File: 4_files/figure-pdf/fig-improve-2-1.pdf Graphic file (type pdf)
 <use 4_files/figure-pdf/fig-improve-2-1.pdf>
 Package pdftex.def Info: 4_files/figure-pdf/fig-improve-2-1.pdf  used on input line 2269.
@@ -1990,7 +2005,7 @@ Overfull \hbox (38.20668pt too wide) detected at line 2873
  []
 
 [42]
-<4_files/figure-pdf/fig-random-subject-var-1.pdf, id=858, 495.8525pt x 239.89626pt>
+<4_files/figure-pdf/fig-random-subject-var-1.pdf, id=855, 495.8525pt x 239.89626pt>
 File: 4_files/figure-pdf/fig-random-subject-var-1.pdf Graphic file (type pdf)
 <use 4_files/figure-pdf/fig-random-subject-var-1.pdf>
 Package pdftex.def Info: 4_files/figure-pdf/fig-random-subject-var-1.pdf  used on input line 2941.
@@ -2010,7 +2025,7 @@ Overfull \hbox (60.52898pt too wide) detected at line 3164
 [][][][][]
  []
 
-<4_files/figure-pdf/fig-probs-clmm_treat.period.subject.question-1.pdf, id=888, 493.845pt x 243.91125pt>
+<4_files/figure-pdf/fig-probs-clmm_treat.period.subject.question-1.pdf, id=885, 493.845pt x 243.91125pt>
 File: 4_files/figure-pdf/fig-probs-clmm_treat.period.subject.question-1.pdf Graphic file (type pdf)
 <use 4_files/figure-pdf/fig-probs-clmm_treat.period.subject.question-1.pdf>
 Package pdftex.def Info: 4_files/figure-pdf/fig-probs-clmm_treat.period.subject.question-1.pdf  used on input line 3176.
@@ -2025,7 +2040,7 @@ Overfull \hbox (34.2507pt too wide) in alignment at lines 3319--3347
  [] [] [] [] [] [] [] [] [] [] 
  []
 
-<4_files/figure-pdf/fig-priors-1.pdf, id=912, 495.8525pt x 240.9pt>
+<4_files/figure-pdf/fig-priors-1.pdf, id=909, 495.8525pt x 240.9pt>
 File: 4_files/figure-pdf/fig-priors-1.pdf Graphic file (type pdf)
 <use 4_files/figure-pdf/fig-priors-1.pdf>
 Package pdftex.def Info: 4_files/figure-pdf/fig-priors-1.pdf  used on input line 3353.
@@ -2034,7 +2049,7 @@ Package pdftex.def Info: 4_files/figure-pdf/fig-priors-1.pdf  used on input line
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [48]
-<4_files/figure-pdf/fig-trace-1.pdf, id=921, 489.83pt x 710.655pt>
+<4_files/figure-pdf/fig-trace-1.pdf, id=918, 489.83pt x 710.655pt>
 File: 4_files/figure-pdf/fig-trace-1.pdf Graphic file (type pdf)
 <use 4_files/figure-pdf/fig-trace-1.pdf>
 Package pdftex.def Info: 4_files/figure-pdf/fig-trace-1.pdf  used on input line 3380.
@@ -2043,7 +2058,7 @@ Package pdftex.def Info: 4_files/figure-pdf/fig-trace-1.pdf  used on input line 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<4_files/figure-pdf/fig-predictive-1.pdf, id=922, 489.83pt x 710.655pt>
+<4_files/figure-pdf/fig-predictive-1.pdf, id=919, 489.83pt x 710.655pt>
 File: 4_files/figure-pdf/fig-predictive-1.pdf Graphic file (type pdf)
 <use 4_files/figure-pdf/fig-predictive-1.pdf>
 Package pdftex.def Info: 4_files/figure-pdf/fig-predictive-1.pdf  used on input line 3392.
@@ -2062,7 +2077,7 @@ Overfull \hbox (90.92471pt too wide) in alignment at lines 3722--3746
  []
 
 [56]
-<5_files/figure-pdf/fig-or2-1.pdf, id=1012, 288.07625pt x 207.77625pt>
+<5_files/figure-pdf/fig-or2-1.pdf, id=1009, 288.07625pt x 207.77625pt>
 File: 5_files/figure-pdf/fig-or2-1.pdf Graphic file (type pdf)
 <use 5_files/figure-pdf/fig-or2-1.pdf>
 Package pdftex.def Info: 5_files/figure-pdf/fig-or2-1.pdf  used on input line 3781.
@@ -2074,7 +2089,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 [57
 
 ] [58 <./5_files/figure-pdf/fig-or2-1.pdf>]
-<images/bayes-preg.png, id=1033, 803.0pt x 1204.5pt>
+<images/bayes-preg.png, id=1030, 803.0pt x 1204.5pt>
 File: images/bayes-preg.png Graphic file (type png)
 <use images/bayes-preg.png>
 Package pdftex.def Info: images/bayes-preg.png  used on input line 3873.
@@ -2174,18 +2189,18 @@ Package logreq Info: Writing requests to 'tmf.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 54456 strings out of 477989
- 1063060 string characters out of 5838288
- 2032827 words of memory out of 5000000
- 73148 multiletter control sequences out of 15000+600000
- 640486 words of font info for 271 fonts, out of 8000000 for 9000
+ 54447 strings out of 477989
+ 1062853 string characters out of 5838288
+ 2032775 words of memory out of 5000000
+ 73142 multiletter control sequences out of 15000+600000
+ 640357 words of font info for 270 fonts, out of 8000000 for 9000
  16 hyphenation exceptions out of 8191
  109i,21n,117p,2305b,2349s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/fontawesome5/FontAwesome5Free-Solid.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi5.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi9.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr5.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr9.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy5.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt8.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt9.pfb></home/surtich/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on tmf.pdf (84 pages, 2219125 bytes).
+Output written on tmf.pdf (84 pages, 2218598 bytes).
 PDF statistics:
- 1569 PDF objects out of 1728 (max. 8388607)
- 1316 compressed objects within 14 object streams
- 334 named destinations out of 1000 (max. 500000)
+ 1564 PDF objects out of 1728 (max. 8388607)
+ 1311 compressed objects within 14 object streams
+ 333 named destinations out of 1000 (max. 500000)
  72307 words of extra memory for PDF output out of 74296 (max. 10000000)
 

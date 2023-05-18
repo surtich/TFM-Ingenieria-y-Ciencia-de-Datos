@@ -12,6 +12,7 @@ En la @sec-or-3 se constató la existencia de un efecto periodo en las respuesta
 ```{r}
 #| label: fig-or2
 #| fig-cap: OR ~ Treat + Period + Response
+#| fig-scap: Test Odds Ratio ~ Treat + Period + Response
 #| fig-height: 4
 fourfold(xtabs(~ Treat + Period + Response, data = df_all))
 ```
@@ -34,7 +35,7 @@ La magnitud del efecto del subtitulado sobre las valoraciones es muy superior a 
 
 En definitiva, nuestro modelo predice que los estudiantes están bastante de acuerdo en que en las preguntas $Q05$ y $Q09$ hay una diferencia de calidad importante entre subtitulados. También están de acuerdo en que en las preguntas $Q04$ y $Q13$ no hay apenas cambio entre los subtitulados. En las preguntas $Q15$, $Q16$ y $Q17$ hay una gran confusión en ambos niveles de subtitulado predominando la respuesta 4 y siendo muy parecidas las respuestas en ambos niveles. En el resto la confusión se circunscribe al nivel de subtitulado $B$, ya que en el nivel $A$ las opciones 4 y 5 predominan.
 
-![Muestreo de la función predictiva a posteriori por tratamiento y pregunta del modelo Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question).](images/bayes-preg.png){#fig-pred-3 width=100%}
+![Muestreo de la función predictiva a posteriori por tratamiento y pregunta.](images/bayes-preg.png){#fig-pred-3 width=100%}
 
 
 ```{r}

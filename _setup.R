@@ -192,10 +192,10 @@ df_clean <- df_clean %>% mutate(
     Level = as.ordered(
         ifelse(
             Response %in% c(1, 2),
-            "Negative",
+            "Negativo",
             ifelse(
                 Response %in% c(4, 5),
-                "Positive",
+                "Positivo",
                 "Neutral"
             )
         )
@@ -210,3 +210,10 @@ df_improve <- df_clean %>%
         Improve = A > B, Improve_level = (A %in% c(4, 5)) & (B %in% c(1, 2)),
         Worse_level = (A %in% c(1, 2)) & (B %in% c(4, 5))
     )
+
+no_want_users <- length(read_lines("data/original/ids_a_eliminar.txt"))
+
+n_users <- test_all_df %>%
+    group_by(User) %>%
+    distinct(User) %>%
+    nrow()

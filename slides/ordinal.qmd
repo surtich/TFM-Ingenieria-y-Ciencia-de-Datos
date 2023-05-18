@@ -113,15 +113,25 @@ fig1.2 <- plot_ly(y = data[3][[1]]$x, color = data[3][[1]]$y, type = "box") %>% 
 
 
 
-## Regresión Ordinal 
+## Regresión Ordinal
 
+
+:::::: {.columns}
+
+
+
+:::::: {.column width="50%"}
+
+::: {data-id="box1"}
 
 ```{r}
 #| echo: false
 #| fig-width: 9
 fig1
 ```
-
+:::
+::::::
+::::::
 
 ## Regresión Ordinal {auto-animate=true}
 
@@ -158,130 +168,6 @@ fig1.2
 ::::::
 ::::::
 
-## Regresión Ordinal {auto-animate=true}
-
-
-:::::: {.columns}
-
-
-
-:::::: {.column width="40%"}
-::: {data-id="box1"}
-
-
-```{r}
-#| echo: false
-#| fig-width: 7
-fig1.1
-```
-
-
-:::
-
-
-::: {.fragment .fade-left fragment-index=3}
-
-
-```{r}
-#| echo: false
-#| fig-width: 7
-fig3 <- plot_ly()
-fig3 <- add_segments(fig3,
-    x = data[6][[1]]$yfreq$y, xend = data[6][[1]]$yfreq$y, y = 0, yend = data[6][[1]]$yfreq$n, line = list(width = 4, color = "blue"),
-    visible = data[6][[1]]$visible
-)
-fig3 <- add_trace(fig3,
-    x = data[6][[1]]$yfreq$y, y = data[6][[1]]$yfreq$n,
-    type = "scatter", mode = "markers", marker = list(color = "blue", size = 15),
-    visible = data[6][[1]]$visible
-)
-
-fig3 <- fig3 %>% layout(
-    showlegend = FALSE,
-    xaxis = list(zeroline = F, range = c(-0.5, 5), title = "Y"),
-    yaxis = list(range = c(0, 210), title = "Frequencies")
-)
-
-fig3 <- add_segments(fig3,
-    x = data[6][[1]]$yfreq$y, xend = data[6][[1]]$yfreq$y, y = data[6][[1]]$yfreq$n, yend = data[6][[1]]$yfreq$cum, line = list(width = 4, color = "red", dash = "dash"),
-    visible = data[6][[1]]$visible
-)
-
-fig3 <- add_trace(fig3,
-    x = data[6][[1]]$yfreq$y, y = data[6][[1]]$yfreq$cum,
-    type = "scatter", mode = "markers", marker = list(color = "red", size = 15),
-    visible = data[6][[1]]$visible
-)
-
-fig3
-```
-
-
-:::
-
-:::
-
-:::::: {.column width="60%"}
-
-::: {data-id="box2"}
-
-
-
-```{r}
-#| echo: false
-library(latex2exp)
-x_labels <- as.character(-4.5:4.5)
-x_labels[length(x_labels)] <- "Inf"
-
-fig2 <- plot_ly(data[[1]]$fit, x = ~cum.log.odds, y = ~cum.prob) %>%
-    add_segments(x = ~cum.log.odds, xend = ~cum.log.odds, y = 0, yend = ~cum.prob, frame = ~x, line = list(dash = "dash"), color = ~color) %>%
-    add_segments(x = -5, xend = ~cum.log.odds, y = ~cum.prob, yend = ~cum.prob, frame = ~x, line = list(dash = "dash"), color = ~color) %>%
-    layout(
-        showlegend = FALSE,
-        yaxis = list(range = c(-0.05, 1.2), tickvals = seq(0, 1, 0.2)),
-        xaxis = list(zeroline = F, range = c(-5, 5))
-    ) %>%
-    add_lines(x = c(-5, -5), y = c(0, 1), line = list(color = "black", width = 1)) %>%
-    add_trace(x = ~cum.log.odds, y = ~cum.prob, type = "scatter", mode = "lines+markers+text", frame = ~x, line = list(color = "blue", shape = "spline"), marker = list(color = ~color, size = 20), text = ~y, textposition = "middle center", textfont = list(color = "white", size = 12)) %>%
-    animation_opts(frame = 30, redraw = T, easing = "linear") %>%
-    animation_slider(value = "10")
-
-fig2
-```
-
-:::
-
-
-::: {.fragment .fade-left fragment-index=4}
-
-```{r}
-#| echo: false
-x_labels <- as.character(-4.5:4.5)
-x_labels[length(x_labels)] <- "Inf"
-
-fig4 <- plot_ly(data[[6]]$fit, x = ~cum.log.odds, y = ~cum.prob) %>%
-    add_segments(x = ~cum.log.odds, xend = ~cum.log.odds, y = 0, yend = ~cum.prob, frame = ~x, line = list(dash = "dash"), color = ~color) %>%
-    add_segments(x = -5, xend = ~cum.log.odds, y = ~cum.prob, yend = ~cum.prob, frame = ~x, line = list(dash = "dash"), color = ~color) %>%
-    layout(
-        showlegend = FALSE,
-        yaxis = list(range = c(-0.05, 1.2), tickvals = seq(0, 1, 0.2)),
-        xaxis = list(zeroline = F, range = c(-5, 5))
-    ) %>%
-    add_lines(x = c(-5, -5), y = c(0, 1), line = list(color = "black", width = 1)) %>%
-    add_trace(x = ~cum.log.odds, y = ~cum.prob, type = "scatter", mode = "lines+markers+text", frame = ~x, line = list(color = "blue", shape = "spline"), marker = list(color = ~color, size = 20), text = ~y, textposition = "middle center", textfont = list(color = "white", size = 12)) %>%
-    animation_opts(frame = 30, redraw = T, easing = "linear") %>%
-    animation_slider(value = "10")
-
-fig4
-```
-
-:::
-
-
-::::::
-
-::::::
-
 
 ## Regresión Ordinal {auto-animate=true}
 
@@ -294,7 +180,7 @@ fig4
 
 
 ::: {.r-stack}
-::: {.fragment .fade-left fragment-index=4}
+::: {.fragment .fade-left fragment-index=5}
 
 
 
@@ -312,7 +198,7 @@ fig5
 
 :::
 
-::: {.fragment .fade-in fragment-index=5}
+::: {.fragment .fade-in fragment-index=6}
 ::: box
 [Cálculo de probabilidad de respuesta]{.story}
 <br>
@@ -330,7 +216,7 @@ $$
 :::
 
 ::: {.r-stack}
-::: {.fragment .fade-left fragment-index=6}
+::: {.fragment .fade-left fragment-index=7}
 
 ```{r}
 #| fig.width: 7
@@ -338,20 +224,21 @@ fig6 <- data[[1]]$fit %>%
     arrange(x, y) %>%
     filter(y != 5 & y != 0) %>%
     group_by(y) %>%
-    plot_ly(x = ~x, y = ~cum.log.odds, split = ~y, type = "scatter", mode = "lines")
+    plot_ly(x = ~x, y = ~plogis(cum.log.odds), split = ~y, type = "scatter", mode = "lines")
 fig6
 ```
 
 :::
-::: {.fragment .fade-left fragment-index=7}
 
 ::: {.fragment .fade-left fragment-index=8}
+::: {.fragment .fade-left fragment-index=9}
 ::: {.absolute left="0" top="-200px" width="600px" .f4 .cite}
 ["The proportional hazards assumption is frequently violated, just as the
 assumptions of normality of residuals with equal variance in ordinary regression
 are frequently violated, but the PO model can still be useful and powerful in
 this situation"]{.speech .monash-blue2}
 <span>Frank E. Harrel</span>
+
 :::
 
 :::
@@ -380,12 +267,12 @@ $$
 
 ::: {.r-stack}
 
-::: {data-id="box2"}
+::: {data-id="box1"}
 
 
 ```{r}
 #| echo: false
-fig2
+fig1.1
 ```
 :::
 
@@ -420,17 +307,39 @@ $$logit [P(Y \color{red}{\le k})] = log \left[\frac{P(Y \color{red}{\le k})}{1-P
 
 ::: {.r-stack}
 
-::: {data-id="box1"}
+
+::: {.fragment .fade-in fragment-index=3}
+
+
+
+::: {data-id="box2"}
 
 
 ```{r}
 #| echo: false
-fig1.1
+x_labels <- as.character(-4.5:4.5)
+x_labels[length(x_labels)] <- "Inf"
+
+fig2 <- plot_ly(data[[1]]$fit, x = ~cum.log.odds, y = ~cum.prob) %>%
+    add_segments(x = ~cum.log.odds, xend = ~cum.log.odds, y = 0, yend = ~cum.prob, frame = ~x, line = list(dash = "dash"), color = ~color) %>%
+    add_segments(x = -5, xend = ~cum.log.odds, y = ~cum.prob, yend = ~cum.prob, frame = ~x, line = list(dash = "dash"), color = ~color) %>%
+    layout(
+        showlegend = FALSE,
+        yaxis = list(range = c(-0.05, 1.2), tickvals = seq(0, 1, 0.2)),
+        xaxis = list(zeroline = F, range = c(-5, 5))
+    ) %>%
+    add_lines(x = c(-5, -5), y = c(0, 1), line = list(color = "black", width = 1)) %>%
+    add_trace(x = ~cum.log.odds, y = ~cum.prob, type = "scatter", mode = "lines+markers+text", frame = ~x, line = list(color = "blue", shape = "spline"), marker = list(color = ~color, size = 20), text = ~y, textposition = "middle center", textfont = list(color = "white", size = 12)) %>%
+    animation_opts(frame = 30, redraw = T, easing = "linear") %>%
+    animation_slider(value = "10")
+
+fig2
 ```
 
 :::
+:::
 
-::: {.fragment fragment-index=3}
+::: {.fragment fragment-index=4}
 ::: box
 [Interpretación de los coeficientes]{.story}
 <br>

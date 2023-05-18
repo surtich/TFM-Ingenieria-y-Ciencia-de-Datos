@@ -1,10 +1,8 @@
 ## Modelos utilizados {#sec-modelos-utilizados}
 
-Algunas de las técnicas de análisis y modelado estadístico propuesto en la @sec-modelos-utilizados requieren concreción y adaptación para poder ser utilizadas en el diseño de experimento de subtitulado. En esta sección se explica la forma concreta de aplicarlas y los paquetes y configuración en R utilizados. También se justifican las variables incluidas en cada modelo. La presentación de los resultados se pospone al @sec-resultados.
-
 ### Comparación con *Odds Ratio* {#sec-or-2}
 
-En la sección @sec-or se explicó el fundamento teórico de esta técnica. Aquí se expone como se puede aplicar al diseño de experimento que se está analizando. Dado que los factores $Treat$, $Period$ y $Seq$ tienen todos 2 niveles, podemos contrastar si hay interacción entre ellos para cada nivel de respuesta. Es decir, se contrasta la hipótesis $H_0: OR=1$ de ausencia de interacción frente a $H_1: OR \neq 1$ de existencia de interacción en algún nivel de respuesta. Por ejemplo, el $OR$ para el nivel respuesta $r$ entre subtítulos y secuencias se define de la siguiente forma:
+La métrica *Odds Ratio* (OR) permite medir la asociación entre dos variables con dos niveles cada una. En el diseño de experimento que se está analizando, los factores $Treat$, $Period$ y $Seq$ tienen todos 2 niveles y podemos contrastar si hay interacción entre cada par para cada nivel de respuesta. Es decir, se contrasta la hipótesis $H_0: OR=1$ de ausencia de interacción frente a $H_1: OR \neq 1$ de existencia de interacción en algún nivel de respuesta. Por ejemplo, el $OR$ para el nivel respuesta $r$ entre subtítulos y secuencias se define de la siguiente forma:
 
 $$
 OR_{(Treat, Seq \mid Response=r)}=\frac{
@@ -29,7 +27,7 @@ Si los $odds$ son similares en cada nivel de respuesta, podemos aceptar que la h
 
 En la @sec-logistica se presentó el fundamento teórico de la Regresión Logística. En esta sección se justifica el uso de este modelo y se ajustan y comparan varios modelos. La variable respuesta se compone de 5 valores ordenados. Esto imposibilita usar directamente la Regresión Logística ya que requiere que la variable de respuesta sea dicotómica. No obstante, se puede comparar la respuesta que cada estudiante dio a cada uno de los subtitulados y comprobar si ha mejorado. Esto producirá una variable de respuesta binaria que permitirá el uso de la Regresión Logística. No obstante, esta transformación reducirá la cantidad de datos disponibles a la mitad e impedirá analizar el efecto periodo ya que al comparar los subtitulados, desaparece el periodo. Se ha transformado el `dataframe` de tal forma que si un usuario valoró una pregunta mejor en el subtitulado $A$ que en el $B$, se consigna 1 en la variable respuesta, si empeoró o puntuó igual se consigna 0. Si en uno de los test valora una pregunta con "No sé / No contesto", se elimina esa pregunta.
 
-Se ajusta el modelo con la secuencia como predictor. Se constata que el coeficiente del intercepto es positivo y significativo. El intercepto es el $log\ odds$ de mejorar la valoración en $A$ sobre $B$ respecto a empeorar la valoración. Sin embargo, la secuencia no resulta significativa y además añadirla apenas reduce la "deviance", por lo que el modelo nulo sin predictores resulta más parsimonioso. Se podrían añadir como predictores las preguntas y los estudiantes. No se hace aquí y se pospone la sección de resultados.
+Se ajusta el modelo con la secuencia como predictor. Se constata que el coeficiente del intercepto es positivo y significativo. El intercepto es el $log\ odds$ de mejorar la valoración en $A$ sobre $B$ respecto a empeorar la valoración. Sin embargo, la secuencia no resulta significativa y además añadirla apenas reduce la "deviance", por lo que el modelo nulo sin predictores resulta más parsimonioso. Se podrían añadir como predictores las preguntas y los estudiantes. Esto se analizará en la sección de resultados (ver @sec-conclusiones).
 
 ```{r}
 options(contrasts = rep("contr.treatment", 2))
@@ -43,7 +41,8 @@ En la @sec-ordinal se presentó el fundamento teórico de la Regresión Ordinal 
 
 #### Comprobación de los presupuestos del modelo
 
-La Regresión Ordinal presupone que los $odds$ entre dos niveles de respuesta son proporcionales para los mismos valores de variables explicativas. Como se vio en la @eq-ordinal2, es equivalente comprobar que los $odds$ son proporcionales que comprobar que la diferencia en `logits` es constante. Una forma de hacer esto es calcular la diferencia en `logits` entre dos niveles de respuesta consecutivos en cada valor de cada variable predictiva y comparar si las diferencias son similares [ver @harrell2015, pp. 315-316]. En la @fig-po.check se han calculado para los predictores `Treat`, `Period`, `Seq` y `Question` las diferencias de $odds$ entre cada dos niveles consecutivos de respuesta. Se constata que las diferencias son pequeñas particularmente para el periodo y para la secuencia. También son moderadas para la mayoría de las preguntas. La diferencia es mayor en el subtitulado en la comparación de los niveles 1 y 2. Con esta evidencia, se acepta la hipótesis de proporcionalidad de $odds$.
+La Regresión Ordinal presupone que los $odds$ entre dos niveles de respuesta son proporcionales para los mismos valores de variables explicativas. Como se vio en la @eq-ordinal2, es equivalente comprobar que los $odds$ son proporcionales que comprobar que la diferencia en `logits` es constante. Una forma de hacer esto es calcular la diferencia en `logits` entre dos niveles de respuesta consecutivos en cada valor de cada variable predictiva y comparar si las diferencias son similares [ver @harrell2015, pp. 315-316]. En la @fig-po.check se han calculado para los predictores `Treat`, `Period`, `Seq` y `Question` las diferencias de $odds$ entre cada dos niveles consecutivos de respuesta. Se constata que las diferencias son pequeñas particularmente para el periodo y para la secuencia. También son moderadas para la mayoría de las preguntas. La diferencia es mayor en el subtitulado 
+en la comparación de los niveles 1 y 2. Con esta evidencia, se acepta la hipótesis de proporcionalidad de $odds$.
 
 ```{r}
 #| label: fig-po.check
@@ -162,6 +161,7 @@ En @tbl-probs-clm-treat se muestran las probabilidades para ambos niveles de sub
 ```{r}
 #| label: tbl-probs-clm-treat
 #| tbl-cap: Probabilidades de respuesta para el modelo ordinal Response ~ Treat
+#| tbl-scap: Probabilidades de respuesta para el modelo ordinal con un predictor.
 probs_clm_treat <- predict(clm_treat, newdata = data.frame(Treat = c("A", "B")), type = "prob")$fit
 rownames(probs_clm_treat) <- c("A", "B")
 
@@ -275,7 +275,7 @@ En la @tbl-contrat2 se muestra la equivalencia de los coeficientes entre los mod
 | Period2          | -2(Period1 + Treat1:Period1)             | `r round(-2*(coef(clm_sum_treat.period)[6]+coef(clm_sum_treat.period)[7]),3)` |
 | TreatB:Period2          | 4(Treat1:Period1)             | `r round(4*coef(clm_sum_treat.period)[7],3)` |
 
-: Equivalencia entre los coeficientes calculados con `contr.treatment` y `contr.sum` en el modelo Response ~ Treat*Period.  {#tbl-contrat2}
+: Equivalencia entre los coeficientes `contr.treatment` y `contr.sum` en el modelo Response ~ Treat*Period.  {#tbl-contrat2}
 
 \normalsize
 
@@ -326,15 +326,3 @@ El incremento del número de coeficientes complica mucho su interpretación. Alg
 
  
 {{< include 4.2.qmd >}}
-
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#

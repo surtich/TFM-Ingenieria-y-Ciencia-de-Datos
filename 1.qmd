@@ -1,0 +1,13 @@
+El objetivo del estudio es responder a la pregunta de investigación:
+
+::: {.callout-note}
+## Pregunta de investigación
+
+¿Son los estudiantes de un curso de creación de materiales accesibles capaces de encontrar diferencias en la calidad del subtitulado de un vídeo?
+:::
+
+Este trabajo pretende responder a la pregunta anterior construyendo un modelo estadístico que compare las respuestas de los estudiantes en los dos subtitulados. Como objetivo secundario se analizará si existen diferencias en las respuestas entre diferentes preguntas.
+
+El diseño del experimento fue completamente aleatorizado, de respuesta ordinal, cruzado $AB/BA$ y triple ciego. Es decir, que la asignación de los estudiantes a cada grupo fue aleatoria; cada grupo vio los vídeos en orden inverso; los estudiantes no conocían a priori qué vídeo estaban viendo en cada momento y tampoco se disponía de esta información en el momento de realizar el modelado estadístico, ni tampoco por los directores del curso en el que se realizó la experiencia.
+
+Los términos escala de Likert e ítem de Likert se prestan a menudo a confusión ya que se utilizan con distintos significados. En este trabajo se seguirá la convención más habitual [ver @uebersax2006] de denominar ítem de Likert a cada una de las preguntas de que consta un cuestionario o test, siendo la escala de Likert el conjunto de todos los ítems del cuestionario. Cada ítem se contestará marcado una opción entre un conjunto ordenado de respuestas o niveles. Por ello se debe evitar denominar escala a los niveles de un ítem.

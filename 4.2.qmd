@@ -1,6 +1,6 @@
 ### Regresión Ordinal Multinivel {#sec-multinivel-2}
 
-En la @sec-multinivel se expuso el fundamento teórico de estos modelos. Aquí se justificará su interés aplicado al caso del subtitulado de vídeos. Hay dos variables susceptibles de ser incorporadas al modelo como efectos aleatorios. Una primera variable candidata es el factor `Subject`. Es evidente que los estudiantes representan una muestra de una población más amplia que estaría constituida por todos los estudiantes de todos los cursos de accesibilidad. Pero es que además cada estudiante responde a cada ítem dos veces y, por lo tanto, sus observaciones no son independientes. Por otro lado, las preguntas no son independientes unas de otras ya que pretenden medir la misma variable subyacente. Además, el interés no es conocer el valor concreto de sus coeficientes sino su valor en relación a los coeficientes de las otras preguntas. En @burkner2021 [pp. 14-16] @burkner2019 [pp. 19-20] podemos encontrar un ejemplo con esta parametrización aplicada a una escala de Likert.
+En la @sec-multinivel se expuso el fundamento teórico de estos modelos. Aquí se justificará su interés aplicado al caso del subtitulado de vídeos. Hay dos variables susceptibles de ser incorporadas al modelo como efectos aleatorios. Una primera variable candidata es el factor `Subject`. Es evidente que los estudiantes representan una muestra de una población más amplia que estaría constituida por todos los estudiantes de todos los cursos de accesibilidad. Pero es que además cada estudiante responde a cada ítem dos veces y, por lo tanto, sus observaciones no son independientes. En la @fig-subjects se muestran las respuestas de diez estudiantes a cada subtitulado. Se observa que las respuestas no son independientes ya que cada estudiante tiene un preferencia por un nivel de respuesta en cada test. Por otro lado, las preguntas no son independientes unas de otras ya que pretenden medir la misma variable subyacente. Además, el interés no es conocer el valor concreto de sus coeficientes sino su valor en relación a los coeficientes de las otras preguntas. En @burkner2021 [pp. 14-16] @burkner2019 [pp. 19-20] podemos encontrar un ejemplo con esta parametrización aplicada a una escala de Likert.
 
 #### Modelo Response ~ Treat * Period + (1 | Subject)
 
@@ -22,6 +22,23 @@ donde $ij$ es la observación $i$ del estudiante $j$. Obsérvese que ahora los i
 
 \scriptsize
 ```{r}
+#| label: fig-subjects
+#| fig-cap: Respuestas de los estudiantes por nivel de subtitulado.
+
+set.seed(10)
+random_subjects <- sample(unique(df_clean$Subject), size = 10)
+df_clean %>%
+    filter(Subject %in% random_subjects) %>%
+    ggplot(aes(x = Treat, y = Response, color = Treat)) +
+    geom_point(position = position_jitter(height = 0.3, width = 0), size = 1) +
+    facet_grid(cols = vars(Subject), space = "free", switch = "both") +
+    theme(panel.grid.major.x = element_blank(), legend.position = "none")
+```
+\normalsize
+
+
+\scriptsize
+```{r}
 #| echo: true
 #| cache: true
 options(contrasts = rep("contr.sum", 2))
@@ -39,6 +56,7 @@ En la parte de efectos fijos: los interceptos tienen valores similares al modelo
 ```{r}
 #| label: fig-random-subject-var
 #| fig-cap: Distribución de interceptos aleatorios en el modelo Response ~ Treat * Period + (1 | Subject)
+#| fig-scap: Distribución de interceptos aleatorios.
 ranef(clmm_treat.period_subject) %>%
     data.frame() %>%
     ggplot(aes(y = X.Intercept.)) +
@@ -148,7 +166,7 @@ donde $ijk$ se corresponde con la observación $i$-ésima del estudiante $j$ y n
 ```{r}
 #| label: fig-probs-clmm_treat.period.subject.question
 #| fig-cap: Probabilidades de respuesta para el modelo ordinal Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question)
-
+#| fig-scap: Probabilidades de respuesta para el modelo ordinal seleccionado.
 emmeans(clmm_treat.period.subject.question, ~ Response + Treat + Period, mode = "prob") %>%
     data.frame() %>%
     ggplot(aes(x = glue::glue("{Treat}-{Period}"), y = prob, fill = Response)) +

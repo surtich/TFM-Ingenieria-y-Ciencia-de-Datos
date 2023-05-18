@@ -288,39 +288,6 @@
       \field{title}{Cumulative Link Models for Ordinal Regression with the R Package ordinal}
       \field{year}{2018}
     \endentry
-    \entry{leton2021}{book}{}
-      \name{author}{2}{}{%
-        {{un=0,uniquepart=base,hash=4fb9f75f8b732f68bb0e6659e3133011}{%
-           family={Emilio},
-           familyi={E\bibinitperiod},
-           given={Letón},
-           giveni={L\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=b2e39901b71fa2e9d2c3647fc21f73e9}{%
-           family={Molanes-López},
-           familyi={M\bibinithyphendelim L\bibinitperiod},
-           given={Elisa\bibnamedelima M.},
-           giveni={E\bibinitperiod\bibinitdelim M\bibinitperiod},
-           givenun=0}}%
-      }
-      \list{organization}{1}{%
-        {UNED}%
-      }
-      \strng{namehash}{0f95cc9737979240437759d708c798ef}
-      \strng{fullhash}{0f95cc9737979240437759d708c798ef}
-      \strng{bibnamehash}{0f95cc9737979240437759d708c798ef}
-      \strng{authorbibnamehash}{0f95cc9737979240437759d708c798ef}
-      \strng{authornamehash}{0f95cc9737979240437759d708c798ef}
-      \strng{authorfullhash}{0f95cc9737979240437759d708c798ef}
-      \field{sortinit}{E}
-      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
-      \field{labeldatesource}{nodate}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{edition}{ver 3 2021-2022}
-      \field{note}{2021}
-      \field{title}{Principales técnicas estadísticas}
-    \endentry
     \entry{frienly2015}{book}{}
       \name{author}{3}{}{%
         {{un=0,uniquepart=base,hash=bf9ca6cb23dc5c82345688ff31f98b1e}{%
@@ -907,6 +874,7 @@
       \endverb
     \endentry
   \enddatalist
+  \missing{leton2021}
 \endrefsection
 \endinput
 

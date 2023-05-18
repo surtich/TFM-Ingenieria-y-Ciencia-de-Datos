@@ -46,6 +46,7 @@ Se han mantenido las distribuciones de probabilidad a priori que por defecto uti
 ```{r}
 #| label: tbl-priors
 #| tbl-cap: Distribuciones a priori del modelo Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question).
+#| tbl-scap: Distribuciones a priori del modelo seleccionado.
 prior_summary(brm_treat.period.subject.question) %>%
     gt() %>%
     tab_options(table.font.size = 6)
@@ -55,6 +56,7 @@ prior_summary(brm_treat.period.subject.question) %>%
 ```{r}
 #| label: fig-priors
 #| fig-cap: Distribuciones a priori del modelo Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question).
+#| fig-scap: Distribuciones a priori del modelo seleccionado.
 prior_draws(brm_treat.period.subject.question) %>%
     pivot_longer(cols = everything(), names_to = "term", values_to = "value") %>%
     ggplot(aes(x = value, y = term, fill = term)) +
@@ -70,6 +72,7 @@ Es importante asegurar que el entrenamiento ha convergido a su distribución a p
 ```{r}
 #| label: fig-trace
 #| fig-cap: Cadenas MCMC del modelo Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question).
+#| fig-scap: Cadenas MCMC del modelo seleccionado.
 #| cache: true
 #| fig-height: 10
 mcmc_plot(brm_treat.period.subject.question, type = "trace")
@@ -78,6 +81,7 @@ mcmc_plot(brm_treat.period.subject.question, type = "trace")
 ```{r}
 #| label: fig-predictive
 #| fig-cap: Comparación de los valores reales con los obtenidos a partir de la función predictiva a posteriori del modelo Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question).
+#| fig-scap: Verificación usando la función predictiva a posteriori del modelo seleccionado.
 #| fig-height: 10
 pp_check(brm_treat.period.subject.question, type = "bars_grouped", group = "Question", ndraws = 1000)
 ```

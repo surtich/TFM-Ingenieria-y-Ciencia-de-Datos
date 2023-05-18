@@ -6,90 +6,13 @@ source("_setup.R")
 
 En esté capítulo se comentarán los resultados de las técnicas estadísticas y de los modelos propuestos (ver @sec-modelado).
 
-
-### Correlación entre preguntas con el alfa de Cronbach {#sec-cronbach-2}
-
-\scriptsize
-```{r}
-alpha <- df_all %>%
-    pivot_wider(
-        names_from = Question,
-        values_from = Response_v,
-        id_cols = c(Treat, Subject)
-    ) %>%
-    dplyr::select(-c(Treat, Subject)) %>%
-    psych::alpha()
-```
-\normalsize
-
-
-El coeficiente `alfa de Cronbach` (ver @sec-cronbach) de la escala de Likert es `r formatC(alpha$total[[1]], 3)` lo que indica una muy buena correlación entre las respuestas a todas los ítems. Este valor apenas se ve alterado si se elimina una de ellos. Esto nos permite concluir que todos los ítems pertenecen a la misma escala de Likert. En la @tbl-item-alpha mostramos los ítems que más contribuyen al índice `alpha de Cronbach`. Un resultado interesante es constatar que el ítem $Q18$, que es la valoración general del cuestionario, es el que mejor contribución tiene al índice.
-
-\tiny
-```{r}
-#| label: tbl-item-alpha
-#| tbl-cap: Relación de cada ítem con el índice alpha de Cronbach.
-#| tbl-subcap:
-#|   - "Variables con mayor asociación."
-#|   - "Variables con menor asociación."
-alpha.item <- alpha$item.stats[2] %>%
-    arrange(desc(raw.r)) %>%
-    t() %>%
-    data.frame() %>%
-    round(2)
-alpha.item[1:9] %>%
-    gt() %>%
-    tab_options(table.font.size = 6)
-alpha.item[10:18] %>%
-    gt() %>%
-    tab_options(table.font.size = 6)
-```
-\normalsize
-
-
-### Asociación de variables con la prueba de homogeneidad *X²* {#sec-chi2-2}
-
-En la @sec-chi2 se describe el marco teórico de esta prueba no paramétrica. Se ha contrastado la existencia de asociación entre la variable respuesta $Response$ y cada una de las tres variables más importantes de nuestro modelo ($Treat$, $Period$ y $Seq$). En la @tbl-contingencia-2 se muestran las tablas de contingencia. La @tbl-chi2 permite comprobar que todos los contrastes son significativos, con lo que se rechaza la hipótesis nula de homogeneidad. Todas las variables explicativas tienen influencia en la variable respuesta.
-
-```{r}
-#| label: tbl-contingencia-2
-#| tbl-cap: Tablas de contingencia.
-#| tbl-subcap:
-#|   - Response + Treat
-#|   - Response + Period
-#|   - Response + Seq
-#| layout-ncol: 3
-
-xtabs(~ Response + Treat, data = df_clean) %>%
-    data.frame() %>%
-    pivot_wider(names_from = Treat, values_from = Freq) %>%
-    knitr::kable()
-xtabs(~ Response + Period, data = df_clean) %>% knitr::kable()
-xtabs(~ Response + Seq, data = df_clean) %>% knitr::kable()
-```
-
-```{r}
-chi1 <- chisq.test(df_all$Treat, df_all$Response)
-chi2 <- chisq.test(df_all$Period, df_all$Response)
-chi3 <- chisq.test(df_all$Seq, df_all$Response)
-```
-
-
-|           | ~ Response + Treat          | ~ Response + Period          | ~ Response + Seq             |
-|-----------|----------------------------:|-----------------------------:|-----------------------------:|
-| $\chi^2$  | `r round(chi1$statistic,3)` | `r round(chi2$statistic,3)`  | `r round(chi3$statistic,3)`  |
-| $p$-value | `r chi1$p.value`            | `r chi2$p.value`             | `r chi3$p.value`             |
-| $df$      | `r chi1$parameter`          | `r chi2$parameter`           | `r chi3$parameter`           |
-
-: Valores del contraste de hipótesis $\chi^2$ {#tbl-chi2}
-
 ### Comparación con *Odds Ratio* {#sec-or-3}
 
-En @sec-or y en @sec-or-2 se exponen el marco teórico y la fundamentación de los contrastes de hipótesis realizados respectivamente. El contraste de hipótesis del $log\ OR$ del subtitulado para cada grupo no produce significación estadística en ningún nivel de respuesta, por lo que según esta prueba estadística la secuencia de subtitulado no influiría en la respuesta de los estudiantes (ver @tbl-logor1). Es decir, de acuerdo a este test la secuencia no influye en la valoración de los subtítulos.
+El contraste de hipótesis del $log\ OR$ del subtitulado para cada grupo (ver @sec-or-2) no produce significación estadística en ningún nivel de respuesta, por lo que según esta prueba estadística la secuencia de subtitulado no influiría en la respuesta de los estudiantes (ver @tbl-logor1). Es decir, de acuerdo a este test la secuencia no influye en la valoración de los subtítulos.
 
 ```{r}
 #| label: tbl-logor1
-#| tbl-cap: $Log OR$ ~ Treat + Seq + Response_l
+#| tbl-cap: Log OR ~ Treat + Seq + Response_l
 data.frame(summary(loddsratio(~ Treat + Seq + Response_l, data = df_all)) %>% unclass(), check.names = F) %>%
     rownames_to_column("Response") %>%
     mutate_if(is.numeric, round, 3) %>%
@@ -174,6 +97,7 @@ brm_treat.period.subject.question <- brm(
 ```{r}
 #| label: tbl-model-comp
 #| tbl-cap: Comparación frecuentista/bayesiano de coeficientes estimados en el modelo Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question).
+#| tbl-scap: Comparación frecuentista/bayesiano de coeficientes estimados.
 #| cache: true
 df_clmm <- coef(clmm_treat.period.subject.question) %>% data.frame()
 colnames(df_clmm) <- c("Estimation.clmm")

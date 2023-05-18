@@ -356,12 +356,28 @@ df_clean %>%
 ## Modelado estadístico
 
 ```{r}
-modelsummary(list(`Response ~ 1` = clm(Response ~ 1, data = df_clean), `Response ~ Treat` = clm(Response ~ Treat, data = df_clean)), estimate = "{estimate}{stars}", gof_omit = "RMSE", statistic = c("std.error", "conf.int"), shape = term:contrast ~ model + statistic, output = "kableExtra", metrics = "Log.Lik.")
+po.check <- function(x) {
+    return(df_clean %>% group_by(.data[[x]], Response) %>% count() %>% ungroup(Response) %>% mutate(cum.sum = cumsum(n), log.odds = qlogis(cum.sum / last(cum.sum)), diff.log.odds = log.odds - lead(x = log.odds, n = 1), odds = cum.sum / (last(cum.sum) - cum.sum), ratio.odds = odds / lead(odds)) %>% arrange(Response) %>% filter(Response %in% 1:3) %>% mutate(Predictor = x) %>% rename_with(~"Value", x))
+}
+
+
+bind_rows(po.check("Question"), po.check("Period"), po.check("Seq"), po.check("Treat")) %>%
+    mutate(Response = recode_factor(Response, "1" = "1|2", "2" = "2|3", "3" = "3|4")) %>%
+    ggplot(aes(
+        x = diff.log.odds, y = Value,
+        shape = Predictor, color = Predictor
+    )) +
+    geom_point(size = 3) +
+    facet_grid(
+        cols = vars(Response), rows = vars(Predictor), scales = "free_y",
+        space = "free", switch = "both"
+    ) +
+    theme(panel.spacing.y = unit(0.2, "lines"))
 ```
 
-$$
-\begin{aligned}
-logit [P(Y \le k | X = x)] - logit [P(Y \le l | X = x)] = \tau_{k} - \tau_{l} \\
-\frac{odds(P(Y \le k | X = x))}{odds(P(Y \le l | X = x))} =  exp(\tau_{k} - \tau_{l}) \implies odds(P(Y \le k | X = x)) \propto odds(P(Y \le l | X = x))
-\end{aligned}
-$$ {#eq-ordinal2}
+
+## Modelado estadístico
+
+```{r}
+modelsummary(list(`Response ~ 1` = clm(Response ~ 1, data = df_clean), `Response ~ Treat` = clm(Response ~ Treat, data = df_clean)), estimate = "{estimate}{stars}", gof_omit = "RMSE", statistic = c("std.error", "conf.int"), shape = term:contrast ~ model + statistic, output = "kableExtra", metrics = "Log.Lik.")
+```

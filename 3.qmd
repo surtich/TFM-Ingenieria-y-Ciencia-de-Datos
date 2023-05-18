@@ -8,7 +8,7 @@ source("_setup.R")
 
 ### Marco de la experiencia
 
-Los datos se recogieron de una actividad de subtitulado que se propuso a los estudiantes de la edición 2022 del curso MOOC Materiales digitales accesibles de la UNED Abierta. Este curso pertenece al Canal Fundación ONCE (IEDRA) está dirigido por los profesores Emilio Letón Molina y Alejandro Rodríguez Ascaso y según se recoge en la propia página Web del curso sus objetivos son:
+Los datos se recogieron de una actividad de subtitulado que se propuso a los estudiantes de la sexta edición, 2022, del curso MOOC Materiales Digitales Accesibles en UNED Abierta. Este curso pertenece al Canal Fundación ONCE (IEDRA) está dirigido por los profesores Emilio Letón Molina y Alejandro Rodríguez Ascaso y según se recoge en la propia página Web del curso sus objetivos son:
 
 * Reconocer y abordar los desafíos a los que se enfrentan las personas con discapacidad (por ejemplo los estudiantes) al usar los documentos electrónicos, adquirir conciencia y experiencia.
 
@@ -22,7 +22,7 @@ Los datos se recogieron de una actividad de subtitulado que se propuso a los est
 
 * Adquirir, como autores, estrategias para la producción sostenible de material digital, como la modularidad.
 
-Está destinado "a todos aquellas personas que desean participar en el desarrollo de soluciones de diseño éticas y creativas, que quieran escribir o gestionar contenidos electrónicos accesibles, desde páginas web o aplicaciones a libros electrónicos "ePub".
+Está destinado "a todos aquellas personas que desean participar en el desarrollo de soluciones de diseño éticas y creativas, que quieran escribir o gestionar contenidos electrónicos accesibles, desde páginas web o aplicaciones a libros electrónicos ePub".
 
 El curso tiene cuatro módulos:
 
@@ -33,18 +33,19 @@ El curso tiene cuatro módulos:
 
 ### Actividad de subtitulado
 
-La actividad de subtitulado es voluntaria y sin influencia en la calificación final del alumno ni el material al que se tiene acceso. Se realiza en el módulo "Accesibilidad del material multimedia". En este mismo módulo, y antes de proponerles la actividad de subtitulado, los alumnos completaron las secciones "Accesibilidad de la información sonora" y "Accesibilidad de la información visual", con lo cual ya tienen conocimiento sobre creación de vídeos y subtítulos accesibles.
+La actividad de subtitulado es voluntaria y sin influencia en la calificación final del alumno. Se realiza en el módulo "Accesibilidad del material multimedia". En este mismo módulo, y antes de proponerles la actividad de subtitulado, los alumnos completaron las secciones "Accesibilidad de la información sonora" y "Accesibilidad de la información visual", con lo cual ya tienen conocimiento sobre creación de vídeos y subtítulos accesibles.
 
-La actividad consistió en ver dos vídeos idénticos y que solo se diferencian en la calidad del subtitulado de 43 segundos de duración. Los subtítulos de uno de los vídeos se realizaron [ver @jperez1; @jperez2] siguiendo la guía Web Content Accessibility Guidelines 2.1 (WCAG 2.1) del W3C (World Wide Web Consortium). El otro vídeo tenía un subtitulado similar pero se introdujeron pequeñas deficiencias, algunas de ellas inapreciables para alguien que carezca de conocimientos sobre accesibilidad. El orden de los vídeos es aleatorio, de tal forma que una cohorte de alumnos vio primero el vídeo bien subtitulado y luego el mal subtitulado y la otra lo hizo al revés. Después de ver cada uno de los vídeos, los alumnos respondieron a una escala de Likert de 5 niveles y 18 ítems.
-Los 18 items de Likert responden a los criterios de la norma UNE 153010 [ver @aenor2012]. El diseño de experimento es doble ciego: es decir, a los alumnos no se les informó de si estaban viendo el vídeo con mejor o con peor calidad de subtitulado. Esta información tampoco se conoce en el momento de realizar este trabajo ya que los vídeos tienen identificaciones genéricas que no contienen ninguna indicación del tipo de subtitulado del vídeo^[En la respuesta a cada ítem, el alumno puede añadir comentarios. Éstos han sido eliminados del estudio para que no filtren información referente al tipo de subtitulado que el alumno cree estar contestando.].
+La actividad consistió en ver dos vídeos idénticos de 43 segundos que solo se diferencian en la calidad del subtitulado. Los subtítulos del vídeo bien subtitulado se realizaron por un experto de FIAPAS (Confederación Española de Familias de Personas Sordas) siguiendo la norma UNE 153010 [ver @jperez1]. El otro vídeo tenía un subtitulado similar pero se introdujeron pequeñas deficiencias, algunas de ellas inapreciables para alguien que carezca de conocimientos sobre accesibilidad. El orden de los vídeos fue aleatorio, de tal forma que una cohorte de alumnos vio primero el vídeo bien subtitulado y luego el mal subtitulado y la otra lo hizo al revés. Después de ver cada uno de los vídeos, los alumnos respondieron a una escala de Likert de 5 niveles y 18 ítems.
 
-En la @tbl-likert-levels se muestran los 5 niveles de cada uno de los items de la escala de Likert utilizados para valorar el subtitulado
-^[En la codificación original los valores asignados a cada respuesta eran diferentes: la opción "No sé / No contesto" se codificó con 5 y las demás opciones con una unidad menos que la mostrada. En este trabajo se ha hecho una rotación para asignar valores más usuales en la literatura científica sobre el tema.]. En la @tbl-likert-scale se muestran los 18 items de la escala de Likert que se propuso a los alumnos para que evaluaran cada uno de los vídeos.
+Los 18 ítems de Likert responden a los criterios de la norma UNE 153010 [ver @aenor2012]. El diseño de experimento es triple ciego: es decir, a los alumnos no se les informó de si estaban viendo el vídeo con mejor o con peor calidad de subtitulado. Los directores del MOOC tampoco conocen esta información. Finalmente esta información no se conocía en el momento de analizar los datos ya que los vídeos tienen identificaciones ofuscadas con CRC32B que no contienen ninguna indicación del tipo de subtitulado del vídeo^[En la respuesta a cada ítem, el alumno puede añadir comentarios. Éstos han sido eliminados del estudio para que no filtren información referente al tipo de subtitulado que el alumno cree estar contestando.]. El "ciego" fue liberado en la fase de elaboración de la discusión de este trabajo (ver @sec-conclusiones).
+
+En la @tbl-likert-levels se muestran los 5 niveles de cada uno de los ítems de la escala de Likert utilizados para valorar el subtitulado
+^[En la codificación original los valores asignados a cada respuesta eran diferentes: la opción "No sé / No contesto" se codificó con 5 y las demás opciones con una unidad menos que la mostrada. En este trabajo se ha hecho una rotación para asignar valores más usuales en la literatura científica sobre el tema.]. En la @tbl-likert-scale se muestran los 18 ìtems de la escala de Likert que se propuso a los alumnos para que evaluaran cada uno de los vídeos.
 
 
 ```{r}
 #| label: tbl-likert-levels
-#| tbl-cap: Niveles de los items de la escala de Likert.
+#| tbl-cap: Niveles de los ítems de la escala de Likert.
 data.frame(`values` = 0:5, `levels` = response_labels) %>%
     gt() %>%
     as_raw_html()
@@ -52,7 +53,7 @@ data.frame(`values` = 0:5, `levels` = response_labels) %>%
 
 ```{r}
 #| label: tbl-likert-scale
-#| tbl-cap: Items de la escala de Likert.
+#| tbl-cap: Ítems de la escala de Likert.
 tibble(Item = levels(df_all$Question), Texto = levels(df_all$Question_l)) %>%
     arrange(Item) %>%
     gt()
@@ -64,63 +65,21 @@ tibble(Item = levels(df_all$Question), Texto = levels(df_all$Question_l)) %>%
 # Leemos el tibble preprocesado
 test_all_df <- read_csv("./data/preprocess/test_all.csv", show_col_types = FALSE)
 
-n_users <- test_all_df %>%
-    group_by(User) %>%
-    distinct(User) %>%
-    nrow()
-```
-
-Los datos personales de los estudiantes se suministraron anonimizados para evitar conocer su identidad. De acuerdo con nuestro compromiso ético, del estudio se han eliminado a aquellos estudiantes que, a pesar de haber realizado la actividad, no dieron su consentimiento para que sus datos se utilizaran en estudios científicos. Tras este proceso, se dispone de `r test_all_df %>% nrow()` cuestionarios correspondientes a `r n_users` alumnos. Hay `r n_users -  n_distinct(df_all$Subject)` estudiantes que sólo realizaron el primero de los test. Como la muestra es suficientemente amplia, se ha decidido eliminar estos test quedando `r  n_distinct(df_all$Subject)` estudiantes participantes. En la @tbl-contingencia-eco se muestran las tablas de contingencia de algunos de los datos que los estudiantes voluntariamente facilitaron en el cuestionario inicial del curso.
-
-
-::: {#tbl-contingencia-eco layout-ncol=2}
-
-```{r}
-#| tbl-cap: Estudiantes por sexo.
-df_all %>%
+sex <- df_all %>%
     group_by(Subject) %>%
     slice_head(n = 1) %>%
-    xtabs(data = ., ~gender, addNA = T) %>%
-    data.frame() %>%
-    gt()
+    xtabs(data = ., ~gender, addNA = T)
+
 ```
 
-```{r}
-#| tbl-cap: Estudiantes con valor nulo en el campo año de nacimiento.
-df_all %>%
-    group_by(Subject) %>%
-    slice_head(n = 1) %>%
-    filter(is.na(year_of_birth) | year_of_birth == "None") %>%
-    xtabs(~year_of_birth, addNA = T, data = .) %>%
-    data.frame() %>%
-    gt()
-```
+Los datos personales de los estudiantes se suministraron anonimizados para evitar conocer su identidad. De acuerdo con nuestro compromiso ético, del estudio se han eliminado `r no_want_users` estudiantes que, a pesar de haber realizado la actividad, no dieron su consentimiento para que sus datos se utilizaran en estudios científicos. Tras este proceso, se dispone de `r test_all_df %>% nrow()` cuestionarios correspondientes a `r n_users` alumnos. Hay `r n_users -  n_distinct(df_all$Subject)` estudiantes que sólo realizaron el primero de los test. Como la muestra es suficientemente amplia, se ha decidido eliminar estos test quedando `r  n_distinct(df_all$Subject)` estudiantes participantes. De estos, `r sex["femenino"]` manifestaron tener sexo femenino, `r sex["masculino"]` masculino y el resto (`r sex[3]`) prefirieron no suministrar esta información. Se constata que hay un claro sesgo hacia el sexo femenino entre los participantes en la actividad de subtitulado.
 
-
-```{r}
-#| tbl-cap: Estudiantes en función del número de preguntas acertadas en el test de conocimiento sobre accesibilidad.
-df_all %>%
-    group_by(Subject) %>%
-    slice_head(n = 1) %>%
-    xtabs(~level_of_knowledge, data = ., addNA = T) %>%
-    data.frame() %>%
-    gt()
-```
-
-
-Tablas de contingencia de la información del sexo, edad y nivel de conocimientos previos.
-:::
 
 ## Ficheros suministrados
 
-
 Se dispuso de los siguientes ficheros `csv`:
 
-* El fichero `grade` contiene el identificador de estudiante y el grupo al que pertenece (campo `cohort`).
-* El fichero `abo` es la información socioeconómica que voluntariamente ha aportado el estudiante: sexo, año nacimiento, nivel de estudios, ocupación.
-* El fichero `conoc` contiene el test de evaluación inicial de conocimientos del estudiante.
-* El fichero `exp` es la evaluación del curso realizada por cada estudiante.
-* El fichero `acc` contiene la información sobre las necesidades/preferencias de accesibilidad que tiene el estudiante.
+* El fichero `grade` contiene el identificador de estudiante y el grupo al que pertenece (campo `cohort`). Ofuscado con SHA-512 para no conocer la identidad real del estudiante y con CRC-32B para no conocer si el grupo es que el vio primero el vídeo bien subtitulado.
 * Los ficheros `test1` y `test2` son las repuestas a las escalas de Likert sobre la calidad del subtitulado del primer y del segundo vídeo realizado por cada grupo respectivamente.
 
 ## Preprocesado {#sec-preprocesado}
@@ -143,14 +102,23 @@ En esta sección se describen las transformaciones realizadas con los ficheros s
 * Se seleccionan las preguntas que contienen las respuestas y se renombran para que sea más fácil saber de qué pregunta se trata
 ^[En los ficheros suministrados la respuesta a cada pregunta ocupa varios campos. Se selecciona en cada pregunta el que contiene el valor de la respuesta y se convierte a numérico.]. Se convierte el campo `LastTry`, que contiene la fecha y hora de realización del test, a formato fecha y hora.
 
-* Se realizan algunas comprobaciones como la ausencia de valores nulos en la variables más relevantes o que no existan inconsistencias ni errores de procesado.
+* Se realizan algunas comprobaciones como la ausencia de valores nulos en las variables más relevantes y que no existan inconsistencias ni errores de procesado.
 
 * Se eliminan los comentarios y se graban en fichero aparte para que no revelen información que podría descubrir el tipo de subtitulado que piensa que está evaluando el estudiante.
 
-* Se almacenan los resultados de los test preprocesados en un fichero `csv`.
 
+* Se renombran las variables (ver @tbl-variables).
+n
+* Se eliminar del estudio los usuarios que solo han realizado uno de los test.
 
-## Variables del modelo. {#variables}
+* Se transforma las variables que lo requieran en factores. La pregunta 18 se usará como referencia en el factor `Question`.
+
+* Se rotan los valores de respuesta para que "No sé / No contesto" tenga valor 0 y el resto de 1 a 5 desde "Muy en desacuerdo", 1, hasta "Muy de acuerdo", 5.
+
+* Se Crean los factores `Level` con los niveles `negativo`, `neutral` y `positivo` dependiendo de si la respuesta es 1 ó 2, 3, 4 ó 5 respectivamente e `Improve` con valores 0 ó 1, dependiendo de si la respuesta en el test $A$ es mejor (1) o igual o peor (0) que la del $B$ para cada pregunta y estudiante.
+  
+* Se transforma el `dataframe` de formato ancho a largo: los ficheros de respuestas se suministran en formato ancho. Es decir, que cada fila es un test que contiene 18 columnas para las respuestas a cada pregunta. Los nombres de las columnas son $Q01$, $Q02$, ..., $Q18$ y tendrán valores de 0 a 5 con las respuestas. La mayoría de los paquetes de R que vamos a usar requieren que los datos estén en formato largo. Esto que quiere decir que cada fila tendrá una única respuesta por lo que habrá únicamente dos columnas, $Question$ y $Response$. En la primera se almacenará el identificador de la pregunta ($Q01$, $Q02$, ..., $Q18$) y en la segunda el valor de la respuesta (de 0 a 5). De esta forma, un test pasará de ocupar una fila y 18 columnas en el formato ancho a 18 filas y dos columnas en el largo.
+
 
 En la @tbl-variables se describen las características más relevantes de las principales variables que se utilizarán en el modelado y en el análisis estadístico.
 
@@ -160,34 +128,21 @@ En la @tbl-variables se describen las características más relevantes de las pr
 #| label: tbl-variables
 #| tbl-cap: Descripción de las variables más importantes.
 tibble(
-    Nombre = c("Response", "Level", "Treat", "Period", "Seq", "Subject", "Question"),
+    Nombre = c("Response", "Level", "Improve", "Treat", "Period", "Seq", "Subject", "Question"),
     `Descripción` = c(
         "Respuesta a las preguntas del test.",
         "Valoración de la respuesta.",
+        "Mejor respuesta en test A que en B.",
         "Subtítulos",
         "Periodo", "Secuencia de aplicación de los tratamientos.", "Identificación del estudiante", "Número de la pregunta"
     ),
-    Tipo = c("Factor ordenado", "Factor ordenado", "Factor", "Factor", "Factor", "Factor", "Factor"),
-    Valores = c("De 0 a 5", "Negative, Neutral, Positive", "A o B", "1 ó 2", "AB o BA", "Numérico", "Q01, Q02, ..., Q18")
+    Tipo = c("Factor ordenado", "Factor ordenado", "Factor", "Factor", "Factor", "Factor", "Factor", "Factor"),
+    Valores = c("De 0 a 5", "Negativo, Neutral, Positivo", "1 ó 0", "A o B", "1 ó 2", "AB o BA", "Numérico", "Q01, Q02, ..., Q18")
 ) %>%
     gt() %>%
     gt_theme_guardian() %>%
     tab_footnote(
-        footnote = "Se ha hecho una rotación sobre los valores originales. 0 = No sé, 1 = Muy en desacuerdo, ..., 5 Muy de acuerdo.",
-        locations = cells_body(
-            columns = Valores,
-            rows = Nombre == "Response"
-        )
-    ) %>%
-    tab_footnote(
-        footnote = "No se conoce si el tratamiento A es el subtitulado bueno o lo es el B.",
-        locations = cells_body(
-            columns = Valores,
-            rows = Nombre == "Treat"
-        )
-    ) %>%
-    tab_footnote(
-        footnote = "Positive cuando Response sea 4 ó 5, Negative cuando sea 1 ó 2 y Neutral para 3.",
+        footnote = "Positivo cuando Response sea 4 ó 5, Negativo cuando sea 1 ó 2 y Neutral para 3.",
         locations = cells_body(
             columns = Valores,
             rows = Nombre == "Level"
@@ -199,32 +154,17 @@ tibble(
             columns = Valores,
             rows = Nombre == "Period"
         )
-    ) %>%
-    tab_footnote(
-        footnote = "Se ha reorganizado de tal forma que Q18, que es la pregunta resumen, sea el valor primero y de referencia.",
-        locations = cells_body(
-            columns = Valores,
-            rows = Nombre == "Question"
-        )
     )
 ```
 \normalsize
 
 Partiendo del `dataframe` que se construyó en el preprocesado (ver @sec-preprocesado) construimos el `dataframe` que usaremos a partir de este momento. Las operaciones principales que se han realizado han sido:
 
-* Renombrar las variables (ver @tbl-variables).
-* Eliminar del estudio los usuarios que solo han realizado uno de los test.
-* Transformar las variables que lo requieran en factores. La pregunta 18 se usará como referencia en el factor `Question`.
-* Rotar los valores de respuesta para que "No sé / No contesto" tenga valor 0 y el resto de 1 a 5 desde "Muy en desacuerdo", 1, hasta "Muy de acuerdo", 5.
-* Crear el factor `Level` con los niveles `negative`, `neutral` y `positive` dependiendo de si la respuesta es 1 ó 2, 3, 4 ó 5 respectivamente.
-* Transformar el `dataframe` de formato ancho a largo: los ficheros de respuestas se suministran en formato ancho. Es decir, que cada fila es un test que contiene 18 columnas para las respuestas a cada pregunta. Los nombres de las columnas son $Q01$, $Q02$, ..., $Q18$ y tendrán valores de 0 a 5 con las respuestas. La mayoría de los paquetes de R que vamos a usar requieren que los datos estén en formato largo. Esto que quiere decir que cada fila tendrá una única respuesta por lo que habrá únicamente dos columnas, $Question$ y $Response$. En la primera se almacenará el identificador de la pregunta ($Q01$, $Q02$, ..., $Q18$) y en la segunda el valor de la respuesta (de 0 a 5). De esta forma, un test pasará de ocupar una fila y 18 columnas en el formato ancho a 18 filas y dos columnas en el largo.
 
 Se crean dos `dataframes`:
 
-* `df_all` contiene en formato largo todas las respuestas a los test.
-* `df_clean` tiene la misma estructura que `df_all` pero en él se han eliminado las respuestas "No sé / No contesto".
-
-`df_all` se utilizará cuando se traten las respuestas como categóricas y, por lo tanto, como no ordenadas. `df_clean` se utilizará cuando se traten las respuestas como ordenadas y por ello no contiene las respuestas con valor "No sé / No contesto".
+* `df_clean` contiene las respuestas con valor de 1 a 5. Se han eliminado las de valor 0 ("No sé / No contesto"). Se utilizará cuando se traten las respuestas como ordinales y, por lo tanto, como ordenadas.
+* `df_all` incluye todas las respuestas de 0 a 5. Se utilizará cuando se trate las respuestas como categóricas y no ordenadas.
 
 La estructura de estos `dataframes` es la siguiente:
 
@@ -239,9 +179,8 @@ En la @tbl-df_clean se muestran algunos ejemplos datos.
 #| tbl-cap: Muestra del dataframe preparado para el modelado estadístico en formato largo.
 df_clean %>%
     dplyr::select(Seq, Period, Treat, Subject, Question, Response, Level) %>%
-    sample_n(10, Replace = F) %>%
-    dplyr::select(Seq, Period, Treat, Subject, Question, Response, Level) %>%
-    sample_n(10, Replace = F) %>%
+    filter(Subject %in% c(33, 35) & Question %in% c("Q18", "Q01", "Q02")) %>%
+    arrange(desc(Subject), Period, Question) %>%
     gt()
 
 ``` 

@@ -13,7 +13,8 @@ aprendizaje de la mejora de la
 accesibilidad en el subtitulado de
 vídeos"
   author: "Javier Pérez Arteaga"
-  date: "10/03/2023"
+  date: "06/01/2023"
+  date-format: "MMM YYYY"
   description: "TFM UNED Máster en Ingeniería y Ciencia de Datos"
   chapters:    
     - index.qmd
@@ -112,7 +113,7 @@ format:
     cite-method: biblatex
     biblatexoptions:
       - backend=biber
-      - style=authoryear-ibid  # or verbose-inote with large margins
+      - style=authoryear  # or verbose-inote with large margins
       #- pageref=true          # uncomment for verbose-inotes style
       - isbn=false
       - backref=true

@@ -30,17 +30,17 @@ test_all_df <- test_all_df %>%
 
 # Modelado estadístico {#sec-modelado}
 
-En este capítulo se realizará un análisis inicial para describir los datos y descubrir las relaciones que se han encontrado utilizando técnicas de estadística descriptiva. En la @sec-modelos-utilizados se concreta y detalla cómo se aplicarán las técnicas estadísticas propuestas en el @sec-arte al diseño de experimento. Se pospone la presentación de resultados al @sec-resultados.
 
-## Análisis inicial {#sec-eda}
+## Análisis exploratorio {#sec-eda}
 
 
-Como se explica en la @tbl-variables, al subtitulado le denominamos tratamiento y a sus niveles (correcto e incorrecto) se les ha llamado $A$ y $B$ sin hacer ninguna conjetura de cual de los dos es el subtitulado correcto. El grupo con secuencia $AB$ será el que primero vio el vídeo con subtitulado $A$ y luego el $B$. Análogamente, el grupo con secuencia $BA$ vio los vídeos en orden inverso. Recuérdese que el nivel 0 de respuesta se corresponde con "No sé / No contesto" (ver @tbl-likert-levels). Tras eliminar los test de los usuarios que no dieron su consentimiento para participar en el estudio y los de los que no realizaron el segundo test, las dos cohortes están equilibradas (ver @fig-groups).
+Como se explica en la @tbl-variables, al subtitulado le denominamos tratamiento y a sus niveles (correcto e incorrecto) se les ha llamado $A$ y $B$ sin hacer ninguna conjetura de cual de los dos es el subtitulado correcto. El grupo con secuencia $AB$ será el que primero vio el vídeo con subtitulado $A$ y luego el $B$. Análogamente, el grupo con secuencia $BA$ vio los vídeos en orden inverso. Recuérdese que el nivel 0 de respuesta se corresponde con "No sé / No contesto" (ver @tbl-likert-levels). Tras eliminar los test de los `r no_want_users` estudiantes que no dieron su consentimiento para participar en el estudio y los de los `r n_users -  n_distinct(df_all$Subject)` estudiantes que no realizaron el segundo test, las dos cohortes están equilibradas ya que hay `r (df_all %>% distinct(Seq, Subject) %>%   group_by(Seq) %>% count() %>% filter(Seq=="AB"))$n` estudiantes que realizaron el test con secuencia $AB$ y `r (df_all %>% distinct(Seq, Subject) %>%   group_by(Seq) %>% count() %>% filter(Seq=="BA"))$n` con secuencia $BA$.
 
 ```{r}
 #| label: fig-groups
 #| fig-cap: Estudiantes asignados a cada grupo.
 #| fig-height: 2
+#| eval: false
 
 df_all %>%
     distinct(Seq, Subject) %>%
@@ -62,22 +62,22 @@ En esta sección se analiza si hay test que tienen valores de respuesta que pued
 En los test no se ha observado ningún valor nulo ni erróneo.
 
 ```{r}
+washout_cut_1 <- 300
+washout_cut_2 <- 120
+video_duration <- 43
+
 # Calculamos el tiempo transcurrido entre la realización de los test
-
 washout_periods_df <- test_all_df %>%
-    dplyr::select(User, Test, Row, LastTry) %>%
-    pivot_wider(id_cols = c(User), names_from = Test, values_from = c(Row, LastTry), names_prefix = "Test") %>%
-    mutate(diff_min = difftime(LastTry_Test02, LastTry_Test01, units = "mins")) %>%
-    dplyr::select(Row_Test01, Row_Test02, User, diff_min)
+    dplyr::select(User, Test, Row, LastTry, Group) %>%
+    pivot_wider(id_cols = c(User, Group), names_from = Test, values_from = c(Row, LastTry), names_prefix = "Test") %>%
+    mutate(diff_sec = difftime(LastTry_Test02, LastTry_Test01, units = "secs")) %>%
+    dplyr::select(Group, Row_Test01, Row_Test02, User, diff_sec)
 
 
 
-washout_cut_1 <- 5
-washout_cut_2 <- 2
 ```
 
-El campo `LastTry` contiene la fecha y hora de realización del test. Con esta información se puede conocer el tiempo que empleó cada estudiante entre actividades. 
-La @tbl-washout muestra que hay algunos test que se hicieron demasiado rápido
+El campo `LastTry` contiene la fecha y hora de realización del test. Con esta información se puede conocer el tiempo que transcurrió desde que un estudiante rellenó el primer test hasta que completó el segundo. Dado que los vídeos duran 43 segundos y hay 18 preguntas, se puede estimar el tiempo medio que cada estudiante empleó en contestar cada pregunta suponiendo que haya visto el segundo vídeo completo. La @tbl-washout muestra que hay algunos test en los que los estudiantes emplearon un tiempo muy breve en contestar.
 ^[Hay que tener en cuenta que la duración de vídeo es de algo más de 40 segundos y que los estudiantes tienen que contestar un test de 18 ítems.].
 
 ```{r}
@@ -85,10 +85,10 @@ La @tbl-washout muestra que hay algunos test que se hicieron demasiado rápido
 #| tbl-cap: Tiempos de realización de la segunda actividad de duración inferior a 2 minutos.
 
 washout_periods_df %>%
-    filter(diff_min < washout_cut_2) %>%
-    mutate(Minutes = round(diff_min, 2)) %>%
-    dplyr::select(Minutes) %>%
-    arrange(Minutes) %>%
+    filter(diff_sec < washout_cut_2) %>%
+    mutate(Test = ifelse(Group == "A", "B", "A"), by_question = round((diff_sec - video_duration) / 18, 2)) %>%
+    arrange(diff_sec) %>%
+    dplyr::select(Subject = User, Test, "Spent time (secs)" = diff_sec, "Time by Question (secs)" = by_question) %>%
     gt()
 ```
 
@@ -160,7 +160,8 @@ distinct_response_df %>%
     filter(n == n_questions) %>%
     arrange(Response, Seq, Test) %>%
     ungroup() %>%
-    dplyr::select(Response, Seq, Test) %>%
+    mutate(Test = ifelse(Seq == "AB", ifelse(Test == "01", "A", "B"), ifelse(Test == "01", "B", "A"))) %>%
+    dplyr::select(Response, Seq, Test, "Subject" = User) %>%
     gt()
 ```
 
@@ -205,12 +206,13 @@ Tan solo `r compare_test_df %>% filter(Total == 0) %>% nrow()` estudiante respon
 #| label: tbl-noanswer
 #| tbl-cap: Los 5 test con más respuestas 'No sé/No contesto'
 test_lg_df %>%
+    mutate(Test = ifelse(Group == "A", ifelse(Test == "01", "A", "B"), ifelse(Test == "01", "B", "A"))) %>%
     filter(Response == 5) %>%
     group_by(Test, Row, User) %>%
     count() %>%
     arrange(desc(n)) %>%
     ungroup() %>%
-    dplyr::select(Test, `Total respuesta por test` = n) %>%
+    dplyr::select(Test, "Subject" = User, `Total answers by test` = n) %>%
     head(5) %>%
     gt()
 ```
@@ -261,7 +263,7 @@ compare_test_df %>% ggplot(aes(x = Total, y = n, fill = Total >= 0)) +
     scale_x_continuous(
         breaks = -18:18
     ) +
-    labs(y = "Cantidad de test (en negativo cuando la diferencia es negativa)", x = "Diferencias entre test de un estudiante (negativo cuando el segundo test es valorado peor)")
+    labs(y = "Cantidad de test (en negativo la diferencia en eje x es negativa)", x = "Diferencias entre test de un estudiante (negativo cuando el segundo test es valorado peor)")
 ```
 
 Vemos que en el grupo $AB$ las diferencias tienden a ser negativas y en el $BA$ positivas. Esto estaría indicando que los estudiantes valoran mejor el subtitulado de nivel $A$ en ambas secuencias. Por ello es esperable que las respuestas de los estudiantes del grupo $AB$ hayan empeorado y que las diferencias sean negativas y que lo contrario haya sucedido con las del grupo $BA$. La diferencia más frecuente en el grupo $AB$ es `r -((compare_test_df %>% arrange(n)) %>% head(1))$Total` y en el grupo $BA$ este valor es `r ((compare_test_df %>% arrange(n)) %>% tail(1))$Total`.
@@ -278,7 +280,7 @@ left_join(compare_test_user_df %>% filter(Seq == "AB" & Total >= 0 | Seq == "BA"
     filter(abs(Diff) >= 7) %>%
     mutate(Minutes = round(difftime(LastTry_02, LastTry_01, units = "mins"), 2)) %>%
     ungroup() %>%
-    dplyr::select(-c(User, Row_01, Row_02, LastTry_01, LastTry_02)) %>%
+    dplyr::select(Seq,"Subject"=User, Diff, Minutes) %>%
     gt()
 ```
 
@@ -336,8 +338,6 @@ get_freqs <- function(df = df_freqs, ...) {
 ```
 
 
-En la @fig-freqs se muestra la frecuencia relativa del valor de respuesta para cada grupo y test en todas la preguntas
-^[En el @tbl-resume se presenta la misma información con los valores absolutos.]. Esta es otra forma de comparar los niveles de subtitulado.
 
 
 ```{r}
@@ -369,11 +369,12 @@ df_resume %>%
 ```
 
 
-La @fig-freqs muestra algunas cuestiones interesantes:
+En la @tbl-resume se muestra la absoluta del valor de respuesta para cada grupo y test en todas la preguntas. 
+Esta es otra forma de comparar los niveles de subtitulado. La @fig-freqs muestra la misma información gráficamente y con frecuencias relativas. En esta figura se pueden apreciar algunas cuestiones interesantes:
 
 * El tratamiento (subtitulado) con nivel $A$ presenta claramente mayores valores de respuesta que el $B$ como ya habíamos visto (ver @fig-diff).
 
-* En general los dos grupos muestran bastante acuerdo en el subtitulado en ambos niveles: En el nivel de tratamiento $A$ los dos grupos tienen una frecuencia relativa similar de respuestas positivas (valores 4 y 5). El grupo $AB$ tiene un `r get_freqs(Seq="AB", Treat="A", Response=c(4,5))` de respuestas positivas frente a un `r get_freqs(Seq="BA", Treat="A", Response=c(4,5))` el grupo $BA$. No obstante, el grupo $AB$ tiene más respuestas con valor 5 que el grupo $BA$ (`r get_freqs(Seq="AB", Treat="A", Response=5)` frente a `r get_freqs(Seq="BA", Treat="A", Response=5)`). La valoración es también similar entre grupos en el nivel de tratamiento $B$: el grupo $AB$ tiene `r get_freqs(Seq="AB", Treat="B", Response=c(4,5))` de respuestas positivas y `r get_freqs(Seq="BA", Treat="B", Response=c(4,5))` el grupo $BA$. Las valoraciones negativas (1, 2), la neutra (3) y la 'No sé / No contesto' (0) son también muy similares.
+* En general los dos grupos muestran bastante acuerdo en el subtitulado en ambos niveles: En el nivel de tratamiento $A$ los dos grupos tienen una frecuencia relativa similar de respuestas positivas (valores 4 y 5). El grupo $AB$ tiene un `r get_freqs(Seq="AB", Treat="A", Response=c(4,5))` de respuestas positivas y el grupo $BA$ `r get_freqs(Seq="BA", Treat="A", Response=c(4,5))`. No obstante, el grupo $AB$ tiene más respuestas con valor 5 que el grupo $BA$ (`r get_freqs(Seq="AB", Treat="A", Response=5)` frente a `r get_freqs(Seq="BA", Treat="A", Response=5)`). La valoración es también similar entre grupos en el nivel de tratamiento $B$: el grupo $AB$ tiene `r get_freqs(Seq="AB", Treat="B", Response=c(4,5))` de respuestas positivas y `r get_freqs(Seq="BA", Treat="B", Response=c(4,5))` el grupo $BA$. Las valoraciones negativas (1, 2), la neutra (3) y la 'No sé / No contesto' (0) son también muy similares.
 
 ```{r}
 #| label: fig-freqs
@@ -492,68 +493,6 @@ likert_df %>%
     likert() %>%
     plot()
 ```
-
-
-En la @fig-improve se muestra para cada pregunta la proporción de estudiantes que han valorado mejor el subtitulado $A$ que el $B$
-^[Se han eliminado las preguntas en las que una de las dos respuestas del usuario ha sido "No sé / No contesto". La comparación realizada es respuesta en $A > B$ frente a $A <= B$.]. Se comprueba que la mayoría de las preguntas superan el 50%, lo que indica que los estudiantes valoran mejor el subtitulado $A$.
-
-```{r}
-#| label: fig-improve
-#| fig-cap: Frecuencia de preguntas que mejoran por estudiante entre subtitulados (A > B)
-df_improve_resume <- df_improve %>%
-    group_by(Question) %>%
-    summarize(Improve = sum(Improve) / n()) %>%
-    arrange(Improve)
-
-df_improve_resume %>% ggplot(aes(y = Improve)) +
-    geom_rect(aes(xmin = -Inf, xmax = Inf, ymin = 0.5, ymax = Inf), fill = "#5AB4AC", alpha = 0.2) +
-    geom_rect(aes(
-        xmin = -Inf, xmax = Inf, ymin = -Inf,
-        ymax = 0.5
-    ), fill = "#D8B365", alpha = 0.2) +
-    geom_hline(yintercept = seq(0.2, 0.8, by = 0.1), linetype = "dashed", color = "gray80", size = 0.25) +
-    geom_hline(yintercept = 0.5, linetype = "dashed", size = 2) +
-    geom_label_repel(sedd = 100, size = 4, position = position_jitter(height = 0), aes(x = 0, label = Question, y = Improve)) +
-    labs(y = "Frequency of improve", x = NULL) +
-    theme(
-        axis.line.x = element_blank(),
-        axis.text.x = element_blank(),
-        axis.ticks.x = element_blank()
-    ) +
-    scale_y_continuous(limits = c(0, 1), breaks = seq(0, 1, by = 0.1), expand = c(0.005, 0.005))
-```
-
-
-
-
-```{r}
-#| label: fig-improve-2
-#| fig-cap: Frecuencia de preguntas que mejoran por estudiante entre subtitulados (positive A vs negative B)
-df_improve_resume <- df_improve %>%
-    group_by(Question) %>%
-    summarize(Improve = sum(Improve_level) / n()) %>%
-    arrange(Improve)
-
-df_improve_resume %>% ggplot(aes(y = Improve)) +
-    geom_rect(aes(xmin = -Inf, xmax = Inf, ymin = 0.5, ymax = Inf), fill = "#5AB4AC", alpha = 0.2) +
-    geom_rect(aes(
-        xmin = -Inf, xmax = Inf, ymin = -Inf,
-        ymax = 0.5
-    ), fill = "#D8B365", alpha = 0.2) +
-    geom_hline(yintercept = seq(0.2, 0.8, by = 0.1), linetype = "dashed", color = "gray80", size = 0.25) +
-    geom_hline(yintercept = 0.5, linetype = "dashed", size = 2) +
-    geom_label_repel(seed = 100, size = 4, position = position_jitter(height = 0), aes(x = 0, label = Question, y = Improve)) +
-    labs(y = "Frequency of improve", x = NULL) +
-    theme(
-        axis.line.x = element_blank(),
-        axis.text.x = element_blank(),
-        axis.ticks.x = element_blank()
-    ) +
-    scale_y_continuous(limits = c(0, 1), breaks = seq(0, 1, by = 0.1), expand = c(0.005, 0.005))
-```
-
-
-En la @fig-improve-2 se hace una comparación más exigente ya que ahora se muestra la frecuencia con la que los estudiantes cambian el nivel del subtitulado: de haber valorado el subtitulado positivamente (4 ó 5) en $A$ a hacerlo de forma negativa en $B$ (1 ó 2). En esta ocasión solo las preguntas `r paste((df_improve_resume %>% filter(df_improve_resume$Improve > 0.5) %>% arrange(Question))$Question, collapse=", ")` superan el 50%.
 
 
  
