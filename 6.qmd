@@ -113,3 +113,5 @@ p +
     ) + scale_x_discrete(expand = c(0, 0), limits = c("A", "B"))
 
 ```
+
+# Conclusión y trabajo futuro {#sec-conclusion}

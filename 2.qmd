@@ -6,13 +6,10 @@ source("_setup.R")
 
 ## Características del diseño del experimento
 
-El diseño del experimento es cruzado AB/BA. En este tipo de diseños, se asignan aleatoriamente a los participantes en dos grupos y se miden los niveles de factor en dos periodos. En el primer peri
+En este trabajo se estudiarán las diferencias existentes entre los dos niveles de subtitulado a través de las respuestas de los alumnos a los ítems de las escalas de Likert de cada uno de los vídeos. Para ello se propondrán modelos estadísticos adecuados al diseño del experimento.
 
-Un diseño **completamente aleatorizado** [@lawson2015, pp. 18] "garantiza la validez del experimento contra sesgos causados por otras variables ocultas. Cuando las unidades experimentales se asignan aleatoriamente a los niveles de factor de tratamiento, se puede realizar una prueba exacta de la hipótesis de que el efecto del tratamiento es cero utilizando una prueba de aleatorización".
+El diseño del experimento de la actividad de subtitulado es completamente aleatorizado y **cruzado *AB/BA***. En este diseño se desea conocer el efecto de un factor con dos niveles sobre una variable respuesta. Para ello se asigna aleatoriamente a los participantes a dos grupos y se mide la variable respuesta en dos periodos en cada grupo. En el primer periodo a uno de los grupos se le asigna un nivel de factor y al otro grupo el otro nivel de factor. En el segundo periodo se intercambian los niveles de factor asignados a cada grupo (ver @fig-ab-ba). Este diseño se diferencia del diseño paralelo $AA/BB$ en el que el nivel de factor asignado a cada grupo se mantiene entre periodos (ver @fig-aa-bb). El diseño cruzado y paralelo se pueden combinar si los participantes se clasifican en cuatro grupos ($AA/AB/BA/BB$). Por último, se pueden hacer diseños con más periodos o/y con más factores o niveles de factor. Los diseños cruzados son habituales en estudios clínicos en investigación médica [ver @lim2021] y farmacológica para la evaluación de medicamentos genéricos.
 
-En este trabajo se estudiarán las diferencias existentes entre los dos niveles de subtitulado a través de las respuestas de los alumnos a los ítems de las escalas de Likert de cada uno de los vídeos. Para ello se propondrán modelos estadísticos adecuados al diseño del experimento. La primera cuestión que debemos abordar es que el diseño sea cruzado.
-
-Los diseños cruzados son habituales en estudios clínicos en investigación médica [ver @lim2021] y farmacológica para la evaluación de medicamentos genéricos. En la @fig-ab-ba se muestra un diagrama de flujo de un diseño cruzado AB/BA.
 
 ```{mermaid}
 %%| label: fig-ab-ba
@@ -35,7 +32,7 @@ flowchart LR
 
 ```{mermaid}
 %%| label: fig-aa-bb
-%%| fig-cap: Diagrama de diseño cruzado AA/BB
+%%| fig-cap: Diagrama de diseño paralelo AA/BB
 %%| fig-width: 6
 flowchart LR
   subgraph Primer Periodo
@@ -52,11 +49,13 @@ flowchart LR
 ``` 
 
 
-Siguiendo a @senn2022, para que el ensayo sea de tipo cruzado no sería suficiente intercambiar las secuencias sino que debe ser objeto del ensayo el estudio de las diferencias entre los tratamientos individuales que componen las secuencias. Los principales problemas de un diseño cruzado son el abandono, `drop-out`, de alguno de los participantes y la interacción entre el tratamiento y el periodo o `carry-over`. Además, el análisis estadístico es más complicado. particularmente cuando la respuesta es ordinal y hay más de dos tratamientos. En la misma línea, @lui2016 afirma que "el objetivo principal de un diseño cruzado es estudiar la diferencia entre tratamientos individuales (en lugar de la diferencia entre secuencias de tratamiento). Debido a que cada paciente sirve como su propio control, el diseño cruzado es una alternativa útil al diseño de grupos paralelos para aumentar la potencia".
+Un diseño **completamente aleatorizado** [@lawson2015, pp. 18] "garantiza la validez del experimento contra sesgos causados por otras variables ocultas. Cuando las unidades experimentales se asignan aleatoriamente a los niveles de factor de tratamiento, se puede realizar una prueba exacta de la hipótesis de que el efecto del tratamiento es cero utilizando una prueba de aleatorización".
 
-En un diseño cruzado debemos preocuparnos de la existencia de los efectos periodo y secuencia (o `carry-over`). El **efecto periodo** aplicado al experimento del subtitulado, se producirá si las respuestas del segundo periodo están influidas por haber realizado la primera actividad de subtitulado. El **efecto secuencia** se producirá si las respuestas fueran diferentes cuando se realizan en un orden que cuando se realizan en el otro. Como ejemplo de estos efectos se puede ver @senn2022 [pp. 35-53]. Se analiza un experimento que consistió en medir el flujo espiratorio máximo (PEF, por sus siglas en inglés) en 13 niños con edades entre los 7 y los 14 años con asma a los que se les administró salbutamol (un conocido broncodilatador) y formoterol (un broncodilatador de reciente aparición en el momento en que se realizó el estudio). Se hicieron dos grupos a los que se les administró ambos tratamientos en orden inverso dejando un periodo de lavado entre aplicaciones. El efecto periodo resulta de medir si el PEF medio de los dos grupos es diferente entre periodos, y el efecto secuencia consiste en comprobar si hay diferencias significativas entre aplicar primero el tratamiento con salbutamol y luego con formoterol o hacerlo al revés.
+Siguiendo a @senn2022 [pp. 5-9], para que el ensayo sea de tipo cruzado no sería suficiente intercambiar las secuencias sino que debe ser objeto del ensayo el estudio de las diferencias entre los tratamientos individuales que componen las secuencias. Los principales problemas de un diseño cruzado son el abandono, `drop-out`, de alguno de los participantes y la interacción entre el tratamiento y el periodo o `carry-over`. Además, el análisis estadístico es más complicado, particularmente cuando la respuesta es ordinal y hay más de dos tratamientos. En la misma línea, @lui2016 [pp. 1-2] afirma que "el objetivo principal de un diseño cruzado es estudiar la diferencia entre tratamientos individuales (en lugar de la diferencia entre secuencias de tratamiento). Debido a que cada paciente sirve como su propio control, el diseño cruzado es una alternativa útil al diseño de grupos paralelos para aumentar la potencia".
 
-La segunda cuestión de relevancia es que las respuestas a los ítems de una escala de Likert son de **tipo ordinal**. Los test estadísticos ANOVA o MANOVA presuponen que la variable de respuesta es cuantitativa y con distribución normal. Tratar las respuestas a una escala de Likert como si fueran cuantitativas no es correcto por las siguientes razones:
+En un diseño cruzado debemos preocuparnos de la existencia de los efectos periodo y secuencia (o `carry-over`). El **efecto periodo** aplicado al experimento del subtitulado, se producirá si las respuestas del segundo periodo están influidas por haber realizado la primera actividad de subtitulado. El **efecto secuencia** se producirá si las respuestas fueran diferentes cuando se realizan en un orden que cuando se realizan en el otro. Como ejemplo de estos efectos se puede ver @senn2022 [pp. 35-53]. Se analiza un experimento que consistió en medir el flujo espiratorio máximo (PEF, por sus siglas en inglés) en 13 niños con edades entre los 7 y los 14 años con asma a los que se les administró salbutamol (un conocido broncodilatador) y formoterol (un broncodilatador de reciente aparición en el momento en que se realizó el estudio). Se hicieron dos grupos a los que se les administró ambos tratamientos en orden inverso dejando un periodo de lavado (`washout period`) entre aplicaciones. El efecto periodo resulta de medir si el PEF medio de los dos grupos es diferente entre periodos, y el efecto secuencia consiste en comprobar si hay diferencias significativas entre aplicar primero el tratamiento con salbutamol y luego con formoterol o hacerlo al revés.
+
+La segunda cuestión de relevancia es que las respuestas a los ítems de una escala de Likert son de **tipo ordinal**. Los test estadísticos *ANOVA* o *MANOVA* presuponen que la variable de respuesta es cuantitativa y con distribución normal. Tratar las respuestas a una escala de Likert como si fueran cuantitativas no es correcto por las siguientes razones:
 
 * Los niveles de respuesta no son necesariamente equidistantes: la distancia entre cada par de opciones de respuesta correlativos puede no ser la misma para todos los pares. Por ejemplo, la diferencia entre "Muy en desacuerdo" y "En desacuerdo" y la diferencia entre "De acuerdo" y "Muy de acuerdo" es de un nivel, pero psicológicamente puede ser percibida de forma diferente por cada sujeto.
 
@@ -71,20 +70,15 @@ En @kruschke2018 se han analizado los problemas potenciales de tratar datos ordi
 * Incluso se pueden invertir los efectos de un tratamiento.
 * También puede malinterpretarse la interacción entre factores.
 
-Otro factor que hay que tener en cuenta es que, al tratarse de un diseño cruzado, es de **medidas repetidas** ya que cada sujeto realiza dos veces el test, uno con cada vídeo y que, por lo tanto, las respuestas a cada test de un mismo sujeto no son independientes. Además, tampoco podemos considerar independientes los ítems que componen el test ya que los ítems pretenden medir la misma variable latente: la calidad del subtitulado.
+Otra cuestión que hay que tener en cuenta es que, al tratarse de un diseño cruzado, es de **medidas repetidas** ya que cada sujeto realiza dos veces el test, uno con cada vídeo y que, por lo tanto, las respuestas a cada test de un mismo sujeto no son independientes. Además, tampoco podemos considerar independientes los ítems que componen el test ya que los ítems pretenden medir la misma variable latente: la calidad del subtitulado.
 
-En los siguientes apartados se proponen distintas técnicas que pretenden responder al objetivo del trabajo teniendo en cuenta las peculiaridades del diseño del experimento comentadas en el apartado anterior.
+En el experimento del subtitulado se analizó si el nivel de subtitulado (correcto o defectuoso) influye en el nivel de respuesta a los ítems de la escala de Likert, que es la variable respuesta. Se evaluó también la existencia de efectos secuencia y periodo y la influencia que tienen sobre el nivel de respuesta el estudiante y el propio ítem (pregunt:).
 
-## Métodos exploratorios
+## Modelo Lineales Generalizad[^GLM] {#sec-glm}
 
-En esta sección se aplicarán técnicas estadísticas que se basan en tablas de contingencia. Una descripción teórica de este tipo de técnicas se puede encontrar en @agresti_2018. Un tratamiento aplicado y basado en gráficos, que será el enfoque que seguiremos en este trabajo, es realizado en @frienly2015.
- 
+[^GLM]: No se deben confundir los modelos lineales generales con los modelos lineales generalizados. En los primeros, también llamados Modelos de Regresión Multivariante, se presupone que la variable respuesta tiene una relación lineal con los predictores y sus valores se distribuyen normalmente. Los segundos son una generalización de los primeros y permiten que la variable respuesta admita otras distribuciones además de la normal.
 
-## Modelos lineales generalizados[^GLM] {#sec-glm}
-
-[^GLM]: No se deben confundir los Modelos Lineales Generales con los Modelos Lineales Generalizados. En los primeros, también llamados Modelos de Regresión Multivariante, se presupone que la variable respuesta tiene una relación lineal con los predictores y sus valores se distribuyen normalmente. Los segundos son una generalización de los primeros y permiten que la variable respuesta admita otras distribuciones además de la normal.
-
-Los modelos lineales generalizados ($GLM$) son modelos en los que la variable respuesta no sigue una distribución normal. Para especificar un $GLM$ son necesarios tres componentes [ver @agresti_2018, pp. 66-67]:
+El Modelo Lineal Generalizado (*Generalized Linear Model*, $GLM$) es un modelo en el que la variable respuesta no sigue una distribución Normal. Para especificar un $GLM$ son necesarios tres componentes [ver @agresti_2018, pp. 66-67]:
 
 * Un componente aleatorio que será una distribución de probabilidad de la familia exponencial. Se asume que la variable respuesta $Y$ se distribuye según este componente aleatorio.
 * Un componente lineal de predictores.
@@ -98,11 +92,13 @@ g(\mu)=\alpha+\beta_1x_1+...+\beta_px_p
 $$
 
 
-La estimación de coeficientes *GLM* se realiza maximizando la función de verosimilitud ($MLE$). Es decir, que los coeficientes del modelo son aquellos que maximizan la probabilidad de los datos.
+La estimación de coeficientes en *GLM* se realiza maximizando la función de verosimilitud (*Maximum Likelihood Estimation*, $MLE$). Es decir, que los coeficientes del modelo son aquellos que maximizan la probabilidad de los datos.
 
 ### Regresión Logística {#sec-logistica}
 
-La regresión logística [ver @agresti_2018, pp. 68-69] es un caso particular de $GLM$ donde la variable respuesta, $Y$, es Benoulli o Binomial. Es decir, que $Y$ toma valores 0 ó 1. En una función de Bernoulli de parámetro $\pi$, $E[Y] = P(Y=1) = \pi$. Necesitamos una función que mapee los valores que puede tomar el componente lineal de rango $(-\infty, +\infty)$ a los valores que puede tomar $\pi$ en el rango $(0, 1)$. Una función que permite hacer esto es la función $logit$:
+La Regresión Logística no es aplicable directamente en respuestas ordinales ya que solo admite variables respuesta dicotómicas. Sin embargo, la Regresión Ordinal, que se describe en el siguiente apartado (ver @sec-ordinal), se puede considerar un extensión de la Regresión Logística y de ahí el interés de presentarla antes introducir la Regresión Logística. Además, una escala de Likert se puede convertir en dicotómica si se reduce a dos niveles (por ejemplo, contestación positiva y negativa).
+
+La Regresión Logística [ver @agresti_2018, pp. 68-69] es un caso particular de $GLM$ donde la variable respuesta, $Y$, es Benoulli o Binomial. Es decir, que $Y$ toma valores 0 ó 1. En una función de Bernoulli de parámetro $\pi$, $E[Y] = P(Y=1) = \pi$. Necesitamos una función que mapee los valores que puede tomar el componente lineal de rango $(-\infty, +\infty)$ a los valores que puede tomar $\pi$ en el rango $(0, 1)$. Una función que permite hacer esto es la función $logit$:
 
 $$
 logit(Y=1) = log \left[\frac{P(Y=1)}{1-P(Y=1)} \right] = \alpha+\beta_1x_1+...+\beta_px_p
@@ -116,8 +112,8 @@ $$
 
 La interpretación de los coeficientes es la siguiente [ver @frienly2015, p. 260]:
 
-* $\beta_j$ es el $log\ OR$ asociado a una unidad de incremento de $x_j$.
-* $\alpha$ es el $log\ odds$ de $Y$ cuando $x_j=0, \forall j \in 1...p$.
+* $\beta_j$ es el logaritmo del *odds ratio* asociado a una unidad de incremento de $x_j$.
+* $\alpha$ es el logaritmo del *odds* de $Y$ cuando $x_j=0, \forall j \in 1...p$.
 
 El contraste de hipótesis para los coeficientes $\beta$:
 
@@ -137,7 +133,7 @@ W & = \frac{\hat\beta_j - 0}{se(\hat\beta_j)} \sim N(0,1)
 $$
 
 
-o con el Test de Razón de Verosimilitudes (LRT):
+o con el Test de Razón de Verosimilitudes (*Likelihood Ratio Test*, $LRT$):
 
 $$
 \begin{aligned}
@@ -149,8 +145,8 @@ $$
 donde:
 
 * r es el número de $\beta's$ iguales a cero.
-* *L(reducido)* es el valor que maximiza la función de verosimilitud en la que algunos de los $\beta's$ han sido igualados a cero.
-* *L(completo)* es el valor que maximiza la función de verosimilitud con todos los $\beta's$.
+* $L(\widehat{reducido})$ es el valor que maximiza la función de verosimilitud en la que algunos de los $\beta's$ han sido igualados a cero.
+* $L(\widehat{completo})$ es el valor que maximiza la función de verosimilitud en el modelo que incluye todos los $\beta's$.
 
 $LTR$ permite comprobar la hipótesis de que uno o varios coeficientes sean cero. Para comparar modelos no anidados, se puede usar el Criterio de Información de Akaike (AIC) o el Criterio de Información Bayesiano (BIC), que se definen respectivamente:
 
@@ -161,7 +157,7 @@ BIC &: -2 \log L + p \log(n)
 \end{aligned}
 $$ {#eq-aic}
 
-donde $L$ es el valor de maxima verosimilitud y el segundo sumando es una penalización que será mayor cuanto más complejo sea el modelo.   
+donde $L$ es el valor de maxima verosimilitud y el segundo sumando es una penalización que será mayor cuanto más complejo sea el modelo (*p = número de parámetros*, *n = observaciones*).   
 
 
 ### Regresión Ordinal {#sec-ordinal}
@@ -222,16 +218,16 @@ for (i in 1:3) {
 }
 ```
   
-Las respuestas a los ítems de una escala de Likert son ordinales. Ninguna de las técnicas anteriormente expuestas tiene en cuenta esta circunstancia. La Regresión Ordinal es una clase de $GLM$ que comparte muchas similitudes con la Regresión Logística (ver @sec-logistica) pero que tiene en consideración que los valores de la variable de respuesta están ordenados
-^[Otras variantes de la Regresión Logística son la Regresión Categórica y la Regresión Multinomial. En estos tipos de GLM la variable respuesta puede adoptar varios valores pero no se asume que estén ordenados. La Regresión Categórica y la Regresión Multinomial están relacionadas en el mismo sentido en que lo están la Regresión Logística con función de enlace Bernoulli y con función de enlace Binomial. Es decir, que la Regresión Categórica se usa cuando las observaciones no están agrupadas y la Multinomial cuando sí lo están.]. Según @burkner2019 hay tres clases de Regresión Ordinal:
+Las respuestas a los ítems de una escala de Likert son ordinales. La Regresión Ordinal es una clase de $GLM$ que comparte muchas similitudes con la Regresión Logística (ver @sec-logistica) pero que tiene en consideración que los valores de la variable de respuesta están ordenados
+^[Otras variantes de la Regresión Logística son la Regresión Categórica y la Regresión Multinomial. En estos tipos de *GLM* la variable respuesta puede adoptar varios valores pero no se asume que estén ordenados. La Regresión Categórica y la Regresión Multinomial están relacionadas en el mismo sentido en que lo están la Regresión Logística con función de enlace Bernoulli y con función de enlace Binomial. Es decir, que la Regresión Categórica se usa cuando las observaciones no están agrupadas y la Multinomial cuando sí lo están.]. Según @burkner2019 [pp. 3-11] hay tres clases de Regresión Ordinal:
 
 * Regresión Ordinal Acumulativa.
 * Regresión Ordinal Secuencial.
 * Regresión Ordinal Adyacente.
 
-La primera es la más habitual y más adecuada para el diseño de experimento realizado [ver @burkner2019, pp. 23-24]. Las regresiones ordinales secuencial y adyacente presuponen que para alcanzar un nivel se ha tenido que pasar previamente por los anteriores. En un ítem de Likert esto carece de sentido y, por lo tanto, se descartan estos modelos.
+Las regresiones ordinales secuencial y adyacente presuponen que para alcanzar un nivel se ha tenido que pasar previamente por los anteriores. En un ítem de Likert esto carece de sentido y, por lo tanto, se descartan estos modelos. Por ello el *Modelo Acumulativo* (*Cumulative Model*, $CM$) es el más adecuado para el diseño de experimento realizado [ver @burkner2019, pp. 23-24] y además es el más utilizado.
 
-El modelo acumulativo ($CM$, Cumulative Model) presupone que la variable ordinal observada, $Y$, proviene de la categorización de una variable latente (no observada) continua, $\tilde{Y}$. Hay $K$ umbrales $\tau_k$ que particionan $\tilde{Y}$ en $K + 1$ categorías ordenadas observables (ver @fig-cumulative). Si asumimos que $\tilde{Y}$ tiene una cierta distribución (por ejemplo, normal) con distribución acumulada $F$, se calcula como la probabilidad de que $Y$ sea la categoría $k$ de esta forma:
+$CM$ presupone que la variable ordinal observada, $Y$, proviene de la categorización de una variable latente (no observada) continua, $\tilde{Y}$. Hay $K$ umbrales $\tau_k$ que particionan $\tilde{Y}$ en $K + 1$ categorías ordenadas observables (ver @fig-cumulative). Si asumimos que $\tilde{Y}$ tiene una cierta distribución (por ejemplo, normal) con distribución acumulada $F$, se calcula la probabilidad de que $Y$ sea la categoría $k$ de esta forma:
 
 $$Pr(Y = k) = F(\tau_k) - F(\tau_{k-1})$$
 
@@ -265,7 +261,7 @@ Por lo que asumiendo la normalidad de los errores:
 
 $$\mathrm{Pr}(Y = k) = \Phi(\tau_k - \eta) - \Phi(\tau_{k - 1} - \eta)$$
 
-Donde hay que estimar los umbrales y los coeficientes de regresión. La función anterior es la conocida como la función de enlace `probit`. La interpretación de los coeficientes con esta función de enlace es compleja. Por ello en este trabajo se va a utilizar la función de enlace `logit`. Con esta función de enlace la interpretación de los coeficientes es parecida a la de los coeficientes de la regresión logística, además, en la práctica, los coeficientes suelen tener valores similares a los de la función `probit`. Para entender como se deben interpretar los coeficientes del modelo $CM$ se parte del supuesto de que el $logit$ de la función de probabilidad es lineal:
+Donde hay que estimar los umbrales y las pendientes de cada variable explicativa. La función anterior es la conocida como la función de enlace `probit`. La interpretación de los coeficientes con esta función de enlace no resulta intuitiva. Por ello en este trabajo se va a utilizar la función de enlace `logit`. Con esta función de enlace la interpretación de los coeficientes es parecida a la de los coeficientes de la regresión logística, además, en la práctica, los coeficientes suelen tener valores similares a los de la función `probit`. Para entender como se deben interpretar los coeficientes del modelo $CM$ se parte del supuesto de que el $logit$ de la función de probabilidad es lineal:
 
 $$
 logit [P(Y \le k)] = \tau_{k} - \eta = \tau_{k} - (\beta_1 x_1 + \beta_2 x_2 + ... + \beta_p x_p)
@@ -284,26 +280,25 @@ o, equivalentemente:
 
 $$\frac{\frac{\mathrm{Pr}(Y > k \mid x_i = x + 1)}{\mathrm{Pr}(Y \leq k \mid x_i = x + 1)}}{\frac{\mathrm{Pr}(Y > k \mid x_i = x)}{\mathrm{Pr}(Y \leq k \mid x_i = x)}} = \exp(\beta_{i})$$
 
-Es decir, que $\exp(\beta_{i})$ es el $OR$ (cambio relativo entre $odds$) de que la variable respuesta esté por encima de una determinada categoría versus estar por debajo de ella para una unidad de incremento del predictor $x_i$. Un valor del coeficiente $\beta_i$ positivo indica que la relación entre el predictor $x_i$ y la función de $logit$ es positiva y, por lo tanto, se incrementa la probabilidad de un mayor valor de la variable respuesta.
+Es decir, que $\exp(\beta_{i})$ es el $odds ratio$ (cambio relativo entre $odds$, $OR$) de que la variable respuesta esté por encima de una determinada categoría versus estar por debajo de ella para una unidad de incremento del predictor $x_i$. Un valor del coeficiente $\beta_i$ positivo indica que la relación entre el predictor $x_i$ y la función de $logit$ es positiva y, por lo tanto, se incrementa la probabilidad de un mayor valor de la variable respuesta.
 
 #### Presunciones del modelo
 
-Este modelo se denomina proporcional ya que se asume que cada predictor tiene los mismos efectos sobre todos los niveles de la variable de respuesta ordinal [ver @Liu2202]. Es decir, que los $odds$ de los niveles de respuesta deben ser proporcionales para los mismos valores de las variables explicativas. Esta suposición frecuentemente no es realista y se puede relajar permitiendo estimar un coeficiente diferente para cada nivel de la variable respuesta. Sin embargo, el incremento del número de coeficientes dificulta la interpretabilidad del modelo. @harrell2020 aboga por usar este modelo incluso aunque la suposición de proporcionalidad no se cumpla:
+Este modelo se denomina proporcional ya que se asume que cada predictor tiene los mismos efectos sobre todos los niveles de la variable de respuesta ordinal [ver @Liu2202, chap. 5]. Es decir, que los $odds$ de los niveles de respuesta deben ser proporcionales para los mismos valores de las variables explicativas. Esta suposición frecuentemente no es realista y se puede relajar permitiendo estimar un coeficiente diferente para cada nivel de la variable respuesta. Sin embargo, el incremento del número de coeficientes dificulta la interpretabilidad del modelo. @harrell2020 aboga por usar este modelo incluso aunque la suposición de proporcionalidad no se cumpla:
 
 > "Ningún modelo se ajusta perfectamente a los datos, ..., la aproximación ofrecida por el modelo $CM$ sigue siendo bastante útil. Y un análisis unificado del modelo $CM$ es decididamente mejor que recurrir a análisis ineficientes y arbitrarios de valores dicotomizados de Y."
 
-Matemáticamente la presunción de la proporcionalidad de los $odd$ se demuestra a partir de la @eq-ordinal. Si fijamos los valores de los predictores en un valor arbitrario $X=x$ y consideramos dos niveles de respuesta cualesquiera $k$ y $l$, entonces:
+Matemáticamente la presunción de la proporcionalidad de los $odds$ se demuestra a partir de la @eq-ordinal. Si sne fijan los valores de los predictores en un valor arbitrario $X=x$ y se considera dos niveles de respuesta cualesquiera $k$ y $l$, entonces:
 
 $$
 \begin{aligned}
-logit [P(Y \le k | X = x)] - logit [P(Y \le l | X = x)] & = \tau_{k} - \tau_{l} \\
-\frac{odds(P(Y \le k | X = x))}{odds(P(Y \le l | X = x))} & =  \exp(\tau_{k} - \tau_{l}) \implies \\
-odds(P(Y \le k | X = x)) & \propto odds(P(Y \le l | X = x))
+logit [P(Y \le k | X = x)] - logit [P(Y \le l | X = x)] = \tau_{k} - \tau_{l} \\
+\frac{odds(P(Y \le k | X = x))}{odds(P(Y \le l | X = x))}  =  \exp(\tau_{k} - \tau_{l}) \implies \\
+odds(P(Y \le k | X = x))  \propto odds(P(Y \le l | X = x))
 \end{aligned}
 $$ {#eq-ordinal2}
 
-Es decir, que la proporcionalidad de $odds$ de dos niveles de respuesta es independiente de los valores concretos de los predictores por lo que la constante de proporcionalidad debe ser similar para todos ellos. Esta proporcionalidad se puede comprobar mediante diferencia de $logits$.
-
+Es decir, que la proporcionalidad de $odds$ de dos niveles de respuesta es independiente de los valores concretos de los predictores, por lo que la constante de proporcionalidad debe ser similar para todos ellos.
 
  
 ## Modelos multinivel {#sec-multinivel}
@@ -349,13 +344,13 @@ $$
 
 donde $j$ son los grupos que varían $j = 1,...,J$ ($J$ es el número de grupos); $ij$ es la observación $i-ésima$ del grupo $j$ ($i = 1,...,n_j$, $n_j$ es el número de observaciones del grupo $j$). El modelo se compone de una parte fija $\beta_0 + \beta_1 x_{1ij}$ y una aleatoria $U_{0j} + U_{1j} x_{1ij} + \epsilon{ij}$. Los parámetros de este modelo son el intercepto y la pendiente de efectos fijos ($\beta_0$ y $\beta_1$), la varianza intra-grupos ($\sigma^2$), la varianza inter-grupos del intercepto aleatoria ($\tau_0$) y de la pendiente aleatoria ($\tau_1$), y la correlación entre intercepto y pendiente aleatorias ($\rho_{01}$).
 
-En @gelman2013 se evalúan tres posibilidades a la hora de definir un modelo:
+En @gelman2013 [p. 115] se evalúan tres posibilidades a la hora de definir un modelo:
 
 * $Complete\ pooling$: Consiste en estimar un único parámetro para cada predictor. Es equivalente a un modelo con efectos fijos.
 * $No\ pooling$: Se estiman tantos parámetros como grupos haya de forma independiente.
 * $Partial\ pooling$: Es el modelo jerárquico. Es una mezcla de ambos, ya que aunque se estima un parámetro para cada grupo (como en $no\ pooling$), esta estimación no es independiente, sino que se supone que las observaciones de un mismo grupo proceden de una misma distribución de probabilidad. Esto se traduce en que se produce una contracción ($shrinkage$) en la estimación de los parámetros hacia la media. Al influir la estimación de unas observaciones en otras, la estimación es de menor valor absoluto que la que resultaría en un modelo de $no\ pooling$. De esta forma podemos ver el $complete\ pooling$ y el $no\ pooling$ como dos casos particulares y extremos del $partial\ pooling$. La contracción de coeficientes en los modelos multinivel actúa como una regularización que puede evitar el sobreajuste.
 
-Los modelos multinivel requieren supuestos adicionales en el nivel segundo y superiores que son similares a los supuestos para los modelos de efectos fijos [ver @chen2021, pp. 43]. Para estimar los parámetros en un modelo multinivel se suele utilizar el método de máxima verosimilitud restringida (RMLE), que es una variante de la estimación por máxima verosimilitud (MLE) en la que se hacen ajustes en los grados de libertad del modelo con efectos aleatorios para corregir el sesgo que se produce al usar MLE en estos modelos.
+Los modelos multinivel requieren supuestos adicionales en el nivel segundo y superiores que son similares a los supuestos para los modelos de efectos fijos [ver @chen2021, pp. 43]. Para estimar los parámetros en un modelo multinivel se suele utilizar el método de Máxima Verosimilitud Restringida ($RMLE$), que es una variante de la estimación por Máxima Verosimilitud ($MLE$) en la que se hacen ajustes en los grados de libertad del modelo con efectos aleatorios para corregir el sesgo que se produce al usar $MLE$ en estos modelos.
 
 ## Modelado bayesiano {#sec-bayesiano}
 
@@ -377,7 +372,9 @@ p(y_{pred}\mid \theta,y)p(\theta \mid y)\, d\theta \\
 \end{aligned}
 $$ {#eq-ypred}
 
-donde la última igualdad resulta de la independencia condicional de $y_{pred}$ e $y$ dado $\theta$ ($y_{pred} \perp\!\!\!\perp y \mid \theta$). Una crítica habitual a la inferencia bayesiana es que la elección de la distribución de probabilidad a priori es subjetiva. Aunque es cierto que hay un grado de subjetividad en esta elección, en realidad en el modelado frecuentista hay que tomar ciertas decisiones que también lo son, como por ejemplo la elección del nivel de significación o la forma que adopta la función de verosimilitud. En la práctica, si las observaciones son suficientemente informativas y la distribución a priori es poco informativa, la distribución de probabilidad a priori tendrá poca o nula influencia en la distribución a posteriori ya que estará dominada por la función de verosimilitud y los coeficientes estimados serán muy parecidos en ambos paradigmas. Sin embargo, en lo que diferirán es en la interpretación ya que, por ejemplo, en un modelo bayesiano se pueden interpretar los intervalos de confianza como la probabilidad de que el parámetro esté dentro del intervalo. Por eso a estos intervalos se les conoce como intervalos de credibilidad. Esa interpretación en un modelo frecuentista carecería de sentido ya que los parámetros del modelo no se consideran variables aleatorias y, por lo tanto, tendrán probabilidad 1 si el verdadero valor del parámetro cae dentro del intervalo y 0 si no lo hace. Para obtener la distribución de probabilidad a posteriori normalmente se recurre a métodos del simulación MCMC (Métodos de Montcarlo basados en Cadenas de Márkov)
+donde la última igualdad resulta de la independencia condicional de $y_{pred}$ e $y$ dado $\theta$ ($y_{pred} \perp\!\!\!\perp y \mid \theta$).
+
+Una crítica habitual a la inferencia bayesiana es que la elección de la distribución de probabilidad a priori es subjetiva. Aunque es cierto que hay un grado de subjetividad en esta elección, en realidad en el modelado frecuentista hay que tomar ciertas decisiones que también lo son, como por ejemplo la elección del nivel de significación o la forma que adopta la función de verosimilitud. En la práctica, si las observaciones son suficientemente informativas y la distribución a priori es poco informativa, la distribución de probabilidad a priori tendrá poca o nula influencia en la distribución a posteriori ya que estará dominada por la función de verosimilitud y los coeficientes estimados serán muy parecidos en ambos paradigmas. Sin embargo, en lo que diferirán es en la interpretación ya que, por ejemplo, en un modelo bayesiano se pueden interpretar los intervalos de confianza como la probabilidad de que el parámetro esté dentro del intervalo. Por eso a estos intervalos se les conoce como intervalos de credibilidad. Esa interpretación en un modelo frecuentista carecería de sentido ya que los parámetros del modelo no se consideran variables aleatorias y, por lo tanto, tendrán probabilidad 1 si el verdadero valor del parámetro cae dentro del intervalo y 0 si no lo hace. Para obtener la distribución de probabilidad a posteriori normalmente se recurre a métodos del simulación Métodos de Montcarlo basados en Cadenas de Márkov ($MCMC$).
 ^[En ocasiones se puede obtener una forma análitica de la distribución a posteriori si se elige una adecuada combinación de función de verosimilitud y distribución a priori conocidas como distribuciones conjugadas. Aunque esto evita la utilización de métodos de simulación, restringe las formas posibles de las distribuciones. En la actualidad, con el aumento de la capacidad de cálculo de los ordenadores, normalmente no es necesaria la utilización de distribuciones conjugadas.].
 
 Para comparar modelos entre sí se pueden usar varias medidas [ver @barreda2023]. Por ejemplo, la conocida como *log pointwise predictive density* o densidad predictiva puntal ($lpd$) se calcula como:
@@ -412,7 +409,7 @@ $$
 \end{aligned}
 $$
 
-Una forma alternativa de evaluar un modelo es mediante validación cruzada ($CV$, Cross Validation). La validación cruzada más popular es $K-fold-CV$. Con esta técnica se divide el conjunto de datos en $K$ partes y se entrena el modelo separando sucesivamente una cada una de las partes datos que se usan para evaluar el modelo. Los valores estimados resultan de promediar los $K$ resultados. El problema es que cuanto menor sea $K$ más inestables son los resultafos obtenidos, y cuanto menor sea $K$$ más veces hay que entrenar el modelo. Un caso extremo de validación cruzada, que produce gran estabilidad en las estimaciones, es dejar un dato fuera cada vez ($LOO$, Leave One Out). La dificultad es que requiere estimar el modelo tantas veces como datos tengamos. Para evitar esto, hay formas de aproximar $\widehat{\mathrm{elpd}}$ basadas en $LOO$ sin tener que reentrenar el modelo. Las fórmula es la siguiente:
+Una forma alternativa de evaluar un modelo es mediante validación cruzada ($CV$, Cross Validation). La validación cruzada más popular es *K-fold-CV*. Con esta técnica se divide el conjunto de datos en $K$ partes y se entrena el modelo separando sucesivamente cada una de las partes datos que se usan para evaluar el modelo. Los valores estimados resultan de promediar los $K$ resultados. El problema es que cuanto menor sea $K$ más inestables son los resultafos obtenidos, y cuanto menor sea $K$ más veces hay que entrenar el modelo. Un caso extremo de validación cruzada, que produce gran estabilidad en las estimaciones, es dejar un dato fuera cada vez (*Leave One Out*, $LOO$ ). La dificultad es que requiere estimar el modelo tantas veces como datos tengamos. Para evitar esto, hay formas de aproximar $\widehat{\mathrm{elpd}}$ basadas en $LOO$ sin tener que reentrenar el modelo. Las fórmula es la siguiente:
 
 $$
 \begin{aligned}

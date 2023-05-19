@@ -1,4 +1,12 @@
-El objetivo del estudio es responder a la pregunta de investigación:
+## Motivación
+
+Algunas personas tienen problemas de accesibilidad a contenidos multimedia. Añadir subtítulos a los vídeos facilita que muchas de ellas superen estas dificultades de accesibilidad ya que permiten la percepción visual de información que originalmente era acústica. Por ello, los subtítulos ayudan a las personas sordas o con discapacidad auditiva a acceder al contenido audiovisual y constituyen uno de los componentes fundamentales de la accesibilidad audiovisual [ver @jperez1]. En las *Pautas de Accesibilidad para el Contenido Web, WCAG2.1* [ver @WCAG21] se incluyen pautas y criterios que deben seguirse en el subtitulado. La norma UNE 153010 [ver @aenor2012] sobre *Subtitulado para personas sordas y personas con discapacidad auditiva* "especifica requisitos y recomendaciones sobre la presentación del subtitulado para personas sordas y personas con discapacidad auditiva como medio de apoyo a la comunicación para facilitar la accesibilidad de los contenidos audiovisuales de la Sociedad de la Información."
+
+Las plataformas de compartición de vídeos como Youtube o las de creación de cursos MOOC como Coursera o EDX permiten en la actualidad la generación de subtítulos automáticos. Además, existen comunidades que se dedican a subtitular todo tipo de material multimedia. No obstante, frecuentemente los subtítulos producidos de esta manera no tienen en cuenta la necesidades de accesibilidad específicas de personas con problemas de audición. Estas personas normalmente van a necesitar un subtitulado cerrado (*closed caption*). Este subtitulado consta de información interpretativa e incluye descripción textual de efectos sonoros junto con otros elementos como la perfecta sincronización con el hablante, el número de caracteres por línea, la exactitud del diálogo, la ubicación, el tamaño y el contraste del subtítulo,... Así, @parton2016  realizó un estudio para determinar si los subtítulos automáticos generados por YouTube cumplen las necesidades de los estudiantes universitarios sordos. En el estudio se contabilizaron un total de 525 errores en 68 minutos de video (una tasa de 7.7 errores por minuto). La accesibilidad multimedia es, por lo tanto, una actividad importante y compleja que requiere dedicación y conocimiento específico y va más allá de verificar si el vídeo tiene o no subtítulos.
+
+## Objetivos
+
+El objetivo del estudio es responder a la siguiente pregunta de investigación:
 
 ::: {.callout-note}
 ## Pregunta de investigación
@@ -6,8 +14,58 @@ El objetivo del estudio es responder a la pregunta de investigación:
 ¿Son los estudiantes de un curso de creación de materiales accesibles capaces de encontrar diferencias en la calidad del subtitulado de un vídeo?
 :::
 
-Este trabajo pretende responder a la pregunta anterior construyendo un modelo estadístico que compare las respuestas de los estudiantes en los dos subtitulados. Como objetivo secundario se analizará si existen diferencias en las respuestas entre diferentes preguntas.
+Los datos utilizados proceden de una actividad voluntaria sobre evaluación del subtitulado que se propuso a los estudiantes de la sexta edición del curso MOOC Materiales Digitales Accesibles, 2022, perteneciente al Canal Fundación ONCE en UNED Abierta. Este curso es una iniciativa el Real Patronato sobre Discapacidad en colaboración con la Fundación ONCE y la UNED. El curso está dirigido por los profesores Emilio Letón Molina y Alejandro Rodríguez Ascaso. El Canal ofrece formación en conocimientos y habilidades necesarios para diseñar productos, entornos, sistemas y servicios desde una perspectiva de diseño universal:
 
-El diseño del experimento fue completamente aleatorizado, de respuesta ordinal, cruzado $AB/BA$ y triple ciego. Es decir, que la asignación de los estudiantes a cada grupo fue aleatoria; cada grupo vio los vídeos en orden inverso; los estudiantes no conocían a priori qué vídeo estaban viendo en cada momento y tampoco se disponía de esta información en el momento de realizar el modelado estadístico, ni tampoco por los directores del curso en el que se realizó la experiencia.
+* Reconocer las necesidades relacionadas con la accesibilidad.
+* Dar respuesta a estas necesidades, cada actor en la medida de sus posibilidades.
+* Integrar soluciones de accesibilidad universales y específicas utilizando la tecnología apropiada.
 
-Los términos escala de Likert e ítem de Likert se prestan a menudo a confusión ya que se utilizan con distintos significados. En este trabajo se seguirá la convención más habitual [ver @uebersax2006] de denominar ítem de Likert a cada una de las preguntas de que consta un cuestionario o test, siendo la escala de Likert el conjunto de todos los ítems del cuestionario. Cada ítem se contestará marcado una opción entre un conjunto ordenado de respuestas o niveles. Por ello se debe evitar denominar escala a los niveles de un ítem.
+La Fundación ONCE, el Real Patronato sobre Discapacidad y la UNED colaboran para producir recursos educativos abiertos, gratuitos, de calidad y accesibles para todas las personas.
+
+@jperez2 realizaron una experiencia similar y llegaron a la conclusión de que evaluadores novatos pueden identificar problemas de accesibilidad en vídeos. Por lo tanto, la evaluación social propuesta por @kawanaka2008 se podría aplicar a los contenidos de video en la Web. Sin embargo, también constataron que los evaluadores novatos pueden pasar por alto problemas sutiles de accesibilidad que requieren un conocimiento experto como, por ejemplo, la evaluación del contraste, ya que requieren herramientas adecuadas. Por ello, se responderá al siguiente objetivo específico:
+
+::: {.callout-tip}
+## Objetivos específicos
+
+¿Qué aspectos de la calidad del subtitulado son más fácilmente reconocibles por los estudiantes y en cuáles existe mayor dificultad?
+:::
+
+## Descripción de la experiencia
+
+La actividad de subtitulado fue voluntaria y sin influencia en la calificación final del alumno. Se realizó en el módulo "Accesibilidad del material multimedia". En este mismo módulo, y antes de la actividad de subtitulado, los alumnos hubieron completado las secciones "Accesibilidad de la información sonora" y "Accesibilidad de la información visual", con lo cual adquirieron un conocimiento previo sobre creación de vídeos y subtítulos accesibles. Se estima que los estudiantes hubieron empleado unas tres horas de formación en accesibilidad multimedia (una de ellas específicamente en subtitulado) antes de realizar la actividad.
+
+De acuerdo a nuestro **compromiso ético** los datos de los estudiantes se han suministrado anonimizados usando un identificador generado con SHA512. Además, se han eliminado del estudio los datos de estudiantes que, a pesar de haber realizado la actividad de subtitulado, no dieron su consentimiento para que sus datos se utilizaran en estudios científicos.
+
+La actividad consistió en ver dos vídeos idénticos de 43 segundos que solo se diferencian en la calidad del subtitulado. Los subtítulos del vídeo bien subtitulado se realizaron por un experto de FIAPAS (Confederación Española de Familias de Personas Sordas) siguiendo la norma UNE 153010 [ver @aenor2012]. El otro vídeo tenía un subtitulado similar pero se introdujeron pequeñas deficiencias, algunas de ellas inapreciables para alguien que carezca de conocimientos sobre accesibilidad. El orden de los vídeos fue aleatorio, de tal forma que una cohorte de alumnos vio primero el vídeo bien subtitulado y luego el mal subtitulado y la otra lo hizo al revés. Después de ver cada uno de los vídeos, los alumnos respondieron a una escala de Likert de 5 niveles y 18 ítems. Los 18 ítems de Likert responden a los criterios de la norma UNE 153010 [ver @aenor2012].
+
+Los términos **escala de Likert** e ítem de Likert se prestan a menudo a confusión ya que se utilizan con distintos significados. En este trabajo se seguirá la convención más habitual [ver @uebersax2006] de denominar ítem de Likert a cada una de las preguntas de que consta un cuestionario o test, siendo la escala de Likert el conjunto de todos los ítems del cuestionario. Cada ítem se contestará marcado una opción entre un conjunto ordenado de respuestas o niveles. Por ello, se debe evitar denominar escala a los niveles de un ítem.
+
+El diseño de experimento es **triple ciego**: es decir, a los alumnos no se les informó de si estaban viendo el vídeo con mejor o con peor calidad de subtitulado. Los directores del MOOC tampoco conocieron esta información, como tampoco se conocía en el momento de analizar los datos, ya que los vídeos tienen identificaciones ofuscadas con CRC32B y no contienen ninguna indicación del tipo de subtitulado del vídeo^[En la respuesta a cada ítem, el alumno pudo añadir comentarios. Éstos fueron eliminados del estudio para que no filtren información referente al tipo de subtitulado que el alumno creyó estar contestando.]. El "ciego" fue liberado en la fase de elaboración de la discusión de este trabajo (ver @sec-conclusiones).
+
+
+## Organización del trabajo
+
+En el capítulo **Marco teórico y estado del arte** (ver @sec-arte) se enmarca la actividad de subtitulado en el contexto del modelado estadístico, describiendo sus principales características y proponiendo y justificando las técnicas y modelos que se van a utilizar. En este capítulo también se explica la forma en que se deben interpretar y evaluar los modelos.
+
+El capítulo **Materiales y métodos** (ver @sec-metodo) describe los ficheros de datos suministrados, la actividad de preprocesado realizada sobre los mismos y las variables que se utilizarán en el modelado estadístico.
+
+El capítulo **Modelado estadístico** (ver @sec-modelado) comienza con un análisis exploratorio de los datos, tras el que se describe cómo se han aplicado las técnicas de modelado presentadas en el Marco Teórico al diseño del experimento de la actividad de subtitulado. 
+
+El capítulo de **Resultados** (ver @sec-resultados) se presentan los resultados de los modelos seleccionados en el capítulo anterior.
+
+En el capítulo **Discusión y conclusiones** (ver @sec-conclusiones) se utilizan los resultados del capítulo anterior para responder a la pregunta de investigación y a los objetivos específicos.
+
+Finalmente el capítulo **Conclusión y trabajo futuro** (ver @sec-conclusion) se destina a proponer posibles líneas de investigación futuras en base a los resultados obtenidos.
+
+## Convenciones usadas
+
+En este trabajo se ha evitado en la medida de lo posible el uso de anglicismos traduciendo al español los términos ingleses cuando su uso sea habitual en la publicación científica en español. No obstante, algunos términos se han mantenido en inglés por no tener una traducción fácil o habitual. Es el caso, por ejemplo, de *odds* y de *odds ratio*. Se ha considerado que la utilización de los términos en español, *cuota* y *razón de momios* respectivamente, dificultan la comprensión y se ha preferido el inglés para estos casos.
+
+Los nombres de los modelos estadísticos se han escrito con la inicial de cada palabra en mayúscula. En los acrónimos generalmente se ha mantenido su correspondencia en inglés. Por ejemplo, Modelo Lineal Generalizado (GLM, Generalized Linear Model).
+
+Para los nombres de las variables utilizadas en el modelado estadístico se ha preferido el inglés. Por ejemplo, *Treat*
+o *Response*. La razón de esta decisión es evitar la mezcla de idiomas en los resúmenes de los modelos o en los ejemplos de código.
+
+Este trabajo es reproducible. Para su elaboración se ha utilizado la herramienta de publicación científica Quarto y el lenguaje de programación R.
+
+

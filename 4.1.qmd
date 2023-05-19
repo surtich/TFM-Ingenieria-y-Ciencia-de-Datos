@@ -1,8 +1,12 @@
 ## Modelos utilizados {#sec-modelos-utilizados}
 
-### Comparación con *Odds Ratio* {#sec-or-2}
+Es esta sección se adecúan y concretan los modelos presentados en el Marco teórico (ver @sec-arte) para el caso de la actividad de subtitulado.
 
-La métrica *Odds Ratio* (OR) permite medir la asociación entre dos variables con dos niveles cada una. En el diseño de experimento que se está analizando, los factores $Treat$, $Period$ y $Seq$ tienen todos 2 niveles y podemos contrastar si hay interacción entre cada par para cada nivel de respuesta. Es decir, se contrasta la hipótesis $H_0: OR=1$ de ausencia de interacción frente a $H_1: OR \neq 1$ de existencia de interacción en algún nivel de respuesta. Por ejemplo, el $OR$ para el nivel respuesta $r$ entre subtítulos y secuencias se define de la siguiente forma:
+### Comparación con *Odds Ratio* ^[or] {#sec-or-2}
+
+^[or]: Esta técnica se ha omitido en el Marco teórico por considerarla conocida por el lector. Si se desea ampliar información se puede consultar @agresti_2018 [p. 18].
+
+La métrica *Odds Ratio* ($OR$) permite medir la asociación entre dos variables con dos niveles cada una. En el diseño de experimento que se está analizando, los factores $Treat$, $Period$ y $Seq$ tienen todos 2 niveles y podemos contrastar si hay interacción entre cada par de factores para cada nivel de respuesta. Es decir, se contrasta la hipótesis $H_0: OR=1$ de ausencia de interacción frente a $H_1: OR \neq 1$ de existencia de interacción en algún nivel de respuesta. Por ejemplo, el $OR$ para el nivel respuesta $r$ entre subtítulos y secuencias se define de la siguiente forma:
 
 $$
 OR_{(Treat, Seq \mid Response=r)}=\frac{

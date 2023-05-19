@@ -27,7 +27,7 @@ vídeos"
   appendices:
     #- 75-Preprocesado.qmd
     #- 76-Setup.qmd
-    - 77-Contrasts.qmd
+   - 77-Contrasts.qmd
     #- 78-Bayesiano.qmd
 
   cover-image: "images/logo-cover.png"

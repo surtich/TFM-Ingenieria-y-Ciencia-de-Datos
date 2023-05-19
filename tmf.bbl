@@ -483,7 +483,8 @@
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
-      \field{booktitle}{Design and Analysis of Experiments with R (1st ed.)}
+      \field{labeltitlesource}{title}
+      \field{title}{Design and Analysis of Experiments with R (1st ed.)}
       \field{year}{2015}
       \verb{doi}
       \verb 10.1201/b17883
@@ -792,7 +793,8 @@
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
-      \field{booktitle}{Cross‐over Trials In Clinical Research}
+      \field{labeltitlesource}{title}
+      \field{title}{Cross‐over Trials In Clinical Research}
       \field{year}{2022}
       \verb{doi}
       \verb 10.1002/0470854596

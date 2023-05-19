@@ -566,7 +566,7 @@ Phasellus vitae magna nec mi sagittis luctus vitae eu augue. Donec scelerisque l
 \addto\captionsspanish{
 \def\listtablename{\'Indice de tablas}%
 \def\tablename{Tabla}}
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, interior hidden, breakable, sharp corners, borderline west={3pt}{0pt}{shadecolor}, boxrule=0pt, enhanced]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, enhanced, borderline west={3pt}{0pt}{shadecolor}, sharp corners, boxrule=0pt, breakable, frame hidden]}{\end{tcolorbox}}\fi
 
 % Contents
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -601,9 +601,53 @@ Phasellus vitae magna nec mi sagittis luctus vitae eu augue. Donec scelerisque l
 \hypertarget{intro}{%
 \chapter{Introducción}\label{intro}}
 
-El objetivo del estudio es responder a la pregunta de investigación:
+\hypertarget{motivaciuxf3n}{%
+\section{Motivación}\label{motivaciuxf3n}}
 
-\begin{tcolorbox}[enhanced jigsaw, coltitle=black, left=2mm, bottomtitle=1mm, colbacktitle=quarto-callout-note-color!10!white, opacitybacktitle=0.6, colframe=quarto-callout-note-color-frame, opacityback=0, bottomrule=.15mm, titlerule=0mm, rightrule=.15mm, toprule=.15mm, colback=white, breakable, arc=.35mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Pregunta de investigación}, toptitle=1mm, leftrule=.75mm]
+Algunas personas tienen problemas de accesibilidad a contenidos
+multimedia. Añadir subtítulos a los vídeos facilita que muchas de ellas
+superen estas dificultades de accesibilidad ya que permiten la
+percepción visual de información que originalmente era acústica. Por
+ello, los subtítulos ayudan a las personas sordas o con discapacidad
+auditiva a acceder al contenido audiovisual y constituyen uno de los
+componentes fundamentales de la accesibilidad audiovisual
+\autocite[ver][]{jperez1}. En las \emph{Pautas de Accesibilidad para el
+Contenido Web, WCAG2.1} \autocite[ver][]{WCAG21} se incluyen pautas y
+criterios que deben seguirse en el subtitulado. La norma UNE 153010
+\autocite[ver][]{aenor2012} sobre \emph{Subtitulado para personas sordas
+y personas con discapacidad auditiva} \enquote{especifica requisitos y
+recomendaciones sobre la presentación del subtitulado para personas
+sordas y personas con discapacidad auditiva como medio de apoyo a la
+comunicación para facilitar la accesibilidad de los contenidos
+audiovisuales de la Sociedad de la Información.}
+
+Las plataformas de compartición de vídeos como Youtube o las de creación
+de cursos MOOC como Coursera o EDX permiten en la actualidad la
+generación de subtítulos automáticos. Además, existen comunidades que se
+dedican a subtitular todo tipo de material multimedia. No obstante,
+frecuentemente los subtítulos producidos de esta manera no tienen en
+cuenta la necesidades de accesibilidad específicas de personas con
+problemas de audición. Estas personas normalmente van a necesitar un
+subtitulado cerrado (\emph{closed caption}). Este subtitulado consta de
+información interpretativa e incluye descripción textual de efectos
+sonoros junto con otros elementos como la perfecta sincronización con el
+hablante, el número de caracteres por línea, la exactitud del diálogo,
+la ubicación, el tamaño y el contraste del subtítulo,\ldots{} Así,
+\textcite{parton2016} realizó un estudio para determinar si los
+subtítulos automáticos generados por YouTube cumplen las necesidades de
+los estudiantes universitarios sordos. En el estudio se contabilizaron
+un total de 525 errores en 68 minutos de video (una tasa de 7.7 errores
+por minuto). La accesibilidad multimedia es, por lo tanto, una actividad
+importante y compleja que requiere dedicación y conocimiento específico
+y va más allá de verificar si el vídeo tiene o no subtítulos.
+
+\hypertarget{objetivos}{%
+\section{Objetivos}\label{objetivos}}
+
+El objetivo del estudio es responder a la siguiente pregunta de
+investigación:
+
+\begin{tcolorbox}[enhanced jigsaw, left=2mm, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, colback=white, breakable, coltitle=black, toprule=.15mm, opacityback=0, leftrule=.75mm, arc=.35mm, bottomrule=.15mm, titlerule=0mm, bottomtitle=1mm, rightrule=.15mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Pregunta de investigación}, toptitle=1mm, opacitybacktitle=0.6]
 
 ¿Son los estudiantes de un curso de creación de materiales accesibles
 capaces de encontrar diferencias en la calidad del subtitulado de un
@@ -611,27 +655,168 @@ vídeo?
 
 \end{tcolorbox}
 
-Este trabajo pretende responder a la pregunta anterior construyendo un
-modelo estadístico que compare las respuestas de los estudiantes en los
-dos subtitulados. Como objetivo secundario se analizará si existen
-diferencias en las respuestas entre diferentes preguntas.
+Los datos utilizados proceden de una actividad voluntaria sobre
+evaluación del subtitulado que se propuso a los estudiantes de la sexta
+edición del curso MOOC Materiales Digitales Accesibles, 2022,
+perteneciente al Canal Fundación ONCE en UNED Abierta. Este curso es una
+iniciativa el Real Patronato sobre Discapacidad en colaboración con la
+Fundación ONCE y la UNED. El curso está dirigido por los profesores
+Emilio Letón Molina y Alejandro Rodríguez Ascaso. El Canal ofrece
+formación en conocimientos y habilidades necesarios para diseñar
+productos, entornos, sistemas y servicios desde una perspectiva de
+diseño universal:
 
-El diseño del experimento fue completamente aleatorizado, de respuesta
-ordinal, cruzado \(AB/BA\) y triple ciego. Es decir, que la asignación
-de los estudiantes a cada grupo fue aleatoria; cada grupo vio los vídeos
-en orden inverso; los estudiantes no conocían a priori qué vídeo estaban
-viendo en cada momento y tampoco se disponía de esta información en el
-momento de realizar el modelado estadístico, ni tampoco por los
-directores del curso en el que se realizó la experiencia.
+\begin{itemize}
+\tightlist
+\item
+  Reconocer las necesidades relacionadas con la accesibilidad.
+\item
+  Dar respuesta a estas necesidades, cada actor en la medida de sus
+  posibilidades.
+\item
+  Integrar soluciones de accesibilidad universales y específicas
+  utilizando la tecnología apropiada.
+\end{itemize}
 
-Los términos escala de Likert e ítem de Likert se prestan a menudo a
-confusión ya que se utilizan con distintos significados. En este trabajo
-se seguirá la convención más habitual \autocite[ver][]{uebersax2006} de
-denominar ítem de Likert a cada una de las preguntas de que consta un
-cuestionario o test, siendo la escala de Likert el conjunto de todos los
-ítems del cuestionario. Cada ítem se contestará marcado una opción entre
-un conjunto ordenado de respuestas o niveles. Por ello se debe evitar
-denominar escala a los niveles de un ítem.
+La Fundación ONCE, el Real Patronato sobre Discapacidad y la UNED
+colaboran para producir recursos educativos abiertos, gratuitos, de
+calidad y accesibles para todas las personas.
+
+\textcite{jperez2} realizaron una experiencia similar y llegaron a la
+conclusión de que evaluadores novatos pueden identificar problemas de
+accesibilidad en vídeos. Por lo tanto, la evaluación social propuesta
+por \textcite{kawanaka2008} se podría aplicar a los contenidos de video
+en la Web. Sin embargo, también constataron que los evaluadores novatos
+pueden pasar por alto problemas sutiles de accesibilidad que requieren
+un conocimiento experto como, por ejemplo, la evaluación del contraste,
+ya que requieren herramientas adecuadas. Por ello, se responderá al
+siguiente objetivo específico:
+
+\begin{tcolorbox}[enhanced jigsaw, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, colback=white, breakable, coltitle=black, toprule=.15mm, opacityback=0, leftrule=.75mm, arc=.35mm, bottomrule=.15mm, titlerule=0mm, bottomtitle=1mm, rightrule=.15mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Objetivos específicos}, toptitle=1mm, opacitybacktitle=0.6]
+
+¿Qué aspectos de la calidad del subtitulado son más fácilmente
+reconocibles por los estudiantes y en cuáles existe mayor dificultad?
+
+\end{tcolorbox}
+
+\hypertarget{descripciuxf3n-de-la-experiencia}{%
+\section{Descripción de la
+experiencia}\label{descripciuxf3n-de-la-experiencia}}
+
+La actividad de subtitulado fue voluntaria y sin influencia en la
+calificación final del alumno. Se realizó en el módulo
+\enquote{Accesibilidad del material multimedia}. En este mismo módulo, y
+antes de la actividad de subtitulado, los alumnos hubieron completado
+las secciones \enquote{Accesibilidad de la información sonora} y
+\enquote{Accesibilidad de la información visual}, con lo cual
+adquirieron un conocimiento previo sobre creación de vídeos y subtítulos
+accesibles. Se estima que los estudiantes hubieron empleado unas tres
+horas de formación en accesibilidad multimedia (una de ellas
+específicamente en subtitulado) antes de realizar la actividad.
+
+De acuerdo a nuestro \textbf{compromiso ético} los datos de los
+estudiantes se han suministrado anonimizados usando un identificador
+generado con SHA512. Además, se han eliminado del estudio los datos de
+estudiantes que, a pesar de haber realizado la actividad de subtitulado,
+no dieron su consentimiento para que sus datos se utilizaran en estudios
+científicos.
+
+La actividad consistió en ver dos vídeos idénticos de 43 segundos que
+solo se diferencian en la calidad del subtitulado. Los subtítulos del
+vídeo bien subtitulado se realizaron por un experto de FIAPAS
+(Confederación Española de Familias de Personas Sordas) siguiendo la
+norma UNE 153010 \autocite[ver][]{aenor2012}. El otro vídeo tenía un
+subtitulado similar pero se introdujeron pequeñas deficiencias, algunas
+de ellas inapreciables para alguien que carezca de conocimientos sobre
+accesibilidad. El orden de los vídeos fue aleatorio, de tal forma que
+una cohorte de alumnos vio primero el vídeo bien subtitulado y luego el
+mal subtitulado y la otra lo hizo al revés. Después de ver cada uno de
+los vídeos, los alumnos respondieron a una escala de Likert de 5 niveles
+y 18 ítems. Los 18 ítems de Likert responden a los criterios de la norma
+UNE 153010 \autocite[ver][]{aenor2012}.
+
+Los términos \textbf{escala de Likert} e ítem de Likert se prestan a
+menudo a confusión ya que se utilizan con distintos significados. En
+este trabajo se seguirá la convención más habitual
+\autocite[ver][]{uebersax2006} de denominar ítem de Likert a cada una de
+las preguntas de que consta un cuestionario o test, siendo la escala de
+Likert el conjunto de todos los ítems del cuestionario. Cada ítem se
+contestará marcado una opción entre un conjunto ordenado de respuestas o
+niveles. Por ello, se debe evitar denominar escala a los niveles de un
+ítem.
+
+El diseño de experimento es \textbf{triple ciego}: es decir, a los
+alumnos no se les informó de si estaban viendo el vídeo con mejor o con
+peor calidad de subtitulado. Los directores del MOOC tampoco conocieron
+esta información, como tampoco se conocía en el momento de analizar los
+datos, ya que los vídeos tienen identificaciones ofuscadas con CRC32B y
+no contienen ninguna indicación del tipo de subtitulado del
+vídeo\footnote{En la respuesta a cada ítem, el alumno pudo añadir
+  comentarios. Éstos fueron eliminados del estudio para que no filtren
+  información referente al tipo de subtitulado que el alumno creyó estar
+  contestando.}. El \enquote{ciego} fue liberado en la fase de
+elaboración de la discusión de este trabajo (ver
+Capítulo~\ref{sec-conclusiones}).
+
+\hypertarget{organizaciuxf3n-del-trabajo}{%
+\section{Organización del trabajo}\label{organizaciuxf3n-del-trabajo}}
+
+En el capítulo \textbf{Marco teórico y estado del arte} (ver
+Capítulo~\ref{sec-arte}) se enmarca la actividad de subtitulado en el
+contexto del modelado estadístico, describiendo sus principales
+características y proponiendo y justificando las técnicas y modelos que
+se van a utilizar. En este capítulo también se explica la forma en que
+se deben interpretar y evaluar los modelos.
+
+El capítulo \textbf{Materiales y métodos} (ver
+Capítulo~\ref{sec-metodo}) describe los ficheros de datos suministrados,
+la actividad de preprocesado realizada sobre los mismos y las variables
+que se utilizarán en el modelado estadístico.
+
+El capítulo \textbf{Modelado estadístico} (ver
+Capítulo~\ref{sec-modelado}) comienza con un análisis exploratorio de
+los datos, tras el que se describe cómo se han aplicado las técnicas de
+modelado presentadas en el Marco Teórico al diseño del experimento de la
+actividad de subtitulado.
+
+El capítulo de \textbf{Resultados} (ver Capítulo~\ref{sec-resultados})
+se presentan los resultados de los modelos seleccionados en el capítulo
+anterior.
+
+En el capítulo \textbf{Discusión y conclusiones} (ver
+Capítulo~\ref{sec-conclusiones}) se utilizan los resultados del capítulo
+anterior para responder a la pregunta de investigación y a los objetivos
+específicos.
+
+Finalmente el capítulo \textbf{Conclusión y trabajo futuro} (ver
+Sección~\ref{sec-conclusion}) se destina a proponer posibles líneas de
+investigación futuras en base a los resultados obtenidos.
+
+\hypertarget{convenciones-usadas}{%
+\section{Convenciones usadas}\label{convenciones-usadas}}
+
+En este trabajo se ha evitado en la medida de lo posible el uso de
+anglicismos traduciendo al español los términos ingleses cuando su uso
+sea habitual en la publicación científica en español. No obstante,
+algunos términos se han mantenido en inglés por no tener una traducción
+fácil o habitual. Es el caso, por ejemplo, de \emph{odds} y de
+\emph{odds ratio}. Se ha considerado que la utilización de los términos
+en español, \emph{cuota} y \emph{razón de momios} respectivamente,
+dificultan la comprensión y se ha preferido el inglés para estos casos.
+
+Los nombres de los modelos estadísticos se han escrito con la inicial de
+cada palabra en mayúscula. En los acrónimos generalmente se ha mantenido
+su correspondencia en inglés. Por ejemplo, Modelo Lineal Generalizado
+(GLM, Generalized Linear Model).
+
+Para los nombres de las variables utilizadas en el modelado estadístico
+se ha preferido el inglés. Por ejemplo, \emph{Treat} o \emph{Response}.
+La razón de esta decisión es evitar la mezcla de idiomas en los
+resúmenes de los modelos o en los ejemplos de código.
+
+Este trabajo es reproducible. Para su elaboración se ha utilizado la
+herramienta de publicación científica Quarto y el lenguaje de
+programación R.
 
 \bookmarksetup{startatroot}
 
@@ -642,28 +827,28 @@ denominar escala a los niveles de un ítem.
 \section{Características del diseño del
 experimento}\label{caracteruxedsticas-del-diseuxf1o-del-experimento}}
 
-El diseño del experimento es cruzado AB/BA. En este tipo de diseños, se
-asignan aleatoriamente a los participantes en dos grupos y se miden los
-niveles de factor en dos periodos. En el primer peri
-
-Un diseño \textbf{completamente aleatorizado}
-\autocite[pp.~18]{lawson2015} \enquote{garantiza la validez del
-experimento contra sesgos causados por otras variables ocultas. Cuando
-las unidades experimentales se asignan aleatoriamente a los niveles de
-factor de tratamiento, se puede realizar una prueba exacta de la
-hipótesis de que el efecto del tratamiento es cero utilizando una prueba
-de aleatorización}.
-
 En este trabajo se estudiarán las diferencias existentes entre los dos
 niveles de subtitulado a través de las respuestas de los alumnos a los
 ítems de las escalas de Likert de cada uno de los vídeos. Para ello se
-propondrán modelos estadísticos adecuados al diseño del experimento. La
-primera cuestión que debemos abordar es que el diseño sea cruzado.
+propondrán modelos estadísticos adecuados al diseño del experimento.
 
-Los diseños cruzados son habituales en estudios clínicos en
-investigación médica \autocite[ver][]{lim2021} y farmacológica para la
-evaluación de medicamentos genéricos. En la Figura~\ref{fig-ab-ba} se
-muestra un diagrama de flujo de un diseño cruzado AB/BA.
+El diseño del experimento de la actividad de subtitulado es
+completamente aleatorizado y \textbf{cruzado \emph{AB/BA}}. En este
+diseño se desea conocer el efecto de un factor con dos niveles sobre una
+variable respuesta. Para ello se asigna aleatoriamente a los
+participantes a dos grupos y se mide la variable respuesta en dos
+periodos en cada grupo. En el primer periodo a uno de los grupos se le
+asigna un nivel de factor y al otro grupo el otro nivel de factor. En el
+segundo periodo se intercambian los niveles de factor asignados a cada
+grupo (ver Figura~\ref{fig-ab-ba}). Este diseño se diferencia del diseño
+paralelo \(AA/BB\) en el que el nivel de factor asignado a cada grupo se
+mantiene entre periodos (ver Figura~\ref{fig-aa-bb}). El diseño cruzado
+y paralelo se pueden combinar si los participantes se clasifican en
+cuatro grupos (\(AA/AB/BA/BB\)). Por último, se pueden hacer diseños con
+más periodos o/y con más factores o niveles de factor. Los diseños
+cruzados son habituales en estudios clínicos en investigación médica
+\autocite[ver][]{lim2021} y farmacológica para la evaluación de
+medicamentos genéricos.
 
 \begin{figure}
 
@@ -697,20 +882,28 @@ muestra un diagrama de flujo de un diseño cruzado AB/BA.
 
 }
 
-\caption{\label{fig-aa-bb}Diagrama de diseño cruzado AA/BB}
+\caption{\label{fig-aa-bb}Diagrama de diseño paralelo AA/BB}
 
 \end{figure}
 
-Siguiendo a \textcite{senn2022}, para que el ensayo sea de tipo cruzado
-no sería suficiente intercambiar las secuencias sino que debe ser objeto
-del ensayo el estudio de las diferencias entre los tratamientos
-individuales que componen las secuencias. Los principales problemas de
-un diseño cruzado son el abandono, \texttt{drop-out}, de alguno de los
-participantes y la interacción entre el tratamiento y el periodo o
-\texttt{carry-over}. Además, el análisis estadístico es más complicado.
-particularmente cuando la respuesta es ordinal y hay más de dos
-tratamientos. En la misma línea, \textcite{lui2016} afirma que
-\enquote{el objetivo principal de un diseño cruzado es estudiar la
+Un diseño \textbf{completamente aleatorizado}
+\autocite[pp.~18]{lawson2015} \enquote{garantiza la validez del
+experimento contra sesgos causados por otras variables ocultas. Cuando
+las unidades experimentales se asignan aleatoriamente a los niveles de
+factor de tratamiento, se puede realizar una prueba exacta de la
+hipótesis de que el efecto del tratamiento es cero utilizando una prueba
+de aleatorización}.
+
+Siguiendo a \textcite[pp.~5-9]{senn2022}, para que el ensayo sea de tipo
+cruzado no sería suficiente intercambiar las secuencias sino que debe
+ser objeto del ensayo el estudio de las diferencias entre los
+tratamientos individuales que componen las secuencias. Los principales
+problemas de un diseño cruzado son el abandono, \texttt{drop-out}, de
+alguno de los participantes y la interacción entre el tratamiento y el
+periodo o \texttt{carry-over}. Además, el análisis estadístico es más
+complicado, particularmente cuando la respuesta es ordinal y hay más de
+dos tratamientos. En la misma línea, \textcite[pp.~1-2]{lui2016} afirma
+que \enquote{el objetivo principal de un diseño cruzado es estudiar la
 diferencia entre tratamientos individuales (en lugar de la diferencia
 entre secuencias de tratamiento). Debido a que cada paciente sirve como
 su propio control, el diseño cruzado es una alternativa útil al diseño
@@ -730,17 +923,18 @@ los que se les administró salbutamol (un conocido broncodilatador) y
 formoterol (un broncodilatador de reciente aparición en el momento en
 que se realizó el estudio). Se hicieron dos grupos a los que se les
 administró ambos tratamientos en orden inverso dejando un periodo de
-lavado entre aplicaciones. El efecto periodo resulta de medir si el PEF
-medio de los dos grupos es diferente entre periodos, y el efecto
-secuencia consiste en comprobar si hay diferencias significativas entre
-aplicar primero el tratamiento con salbutamol y luego con formoterol o
-hacerlo al revés.
+lavado (\texttt{washout\ period}) entre aplicaciones. El efecto periodo
+resulta de medir si el PEF medio de los dos grupos es diferente entre
+periodos, y el efecto secuencia consiste en comprobar si hay diferencias
+significativas entre aplicar primero el tratamiento con salbutamol y
+luego con formoterol o hacerlo al revés.
 
 La segunda cuestión de relevancia es que las respuestas a los ítems de
 una escala de Likert son de \textbf{tipo ordinal}. Los test estadísticos
-ANOVA o MANOVA presuponen que la variable de respuesta es cuantitativa y
-con distribución normal. Tratar las respuestas a una escala de Likert
-como si fueran cuantitativas no es correcto por las siguientes razones:
+\emph{ANOVA} o \emph{MANOVA} presuponen que la variable de respuesta es
+cuantitativa y con distribución normal. Tratar las respuestas a una
+escala de Likert como si fueran cuantitativas no es correcto por las
+siguientes razones:
 
 \begin{itemize}
 \item
@@ -779,26 +973,19 @@ pueden presentar las siguientes situaciones:
   También puede malinterpretarse la interacción entre factores.
 \end{itemize}
 
-Otro factor que hay que tener en cuenta es que, al tratarse de un diseño
-cruzado, es de \textbf{medidas repetidas} ya que cada sujeto realiza dos
-veces el test, uno con cada vídeo y que, por lo tanto, las respuestas a
-cada test de un mismo sujeto no son independientes. Además, tampoco
-podemos considerar independientes los ítems que componen el test ya que
-los ítems pretenden medir la misma variable latente: la calidad del
-subtitulado.
+Otra cuestión que hay que tener en cuenta es que, al tratarse de un
+diseño cruzado, es de \textbf{medidas repetidas} ya que cada sujeto
+realiza dos veces el test, uno con cada vídeo y que, por lo tanto, las
+respuestas a cada test de un mismo sujeto no son independientes. Además,
+tampoco podemos considerar independientes los ítems que componen el test
+ya que los ítems pretenden medir la misma variable latente: la calidad
+del subtitulado.
 
-En los siguientes apartados se proponen distintas técnicas que pretenden
-responder al objetivo del trabajo teniendo en cuenta las peculiaridades
-del diseño del experimento comentadas en el apartado anterior.
-
-\hypertarget{muxe9todos-exploratorios}{%
-\section{Métodos exploratorios}\label{muxe9todos-exploratorios}}
-
-En esta sección se aplicarán técnicas estadísticas que se basan en
-tablas de contingencia. Una descripción teórica de este tipo de técnicas
-se puede encontrar en \textcite{agresti_2018}. Un tratamiento aplicado y
-basado en gráficos, que será el enfoque que seguiremos en este trabajo,
-es realizado en \textcite{frienly2015}.
+En el experimento del subtitulado se analizó si el nivel de subtitulado
+(correcto o defectuoso) influye en el nivel de respuesta a los ítems de
+la escala de Likert, que es la variable respuesta. Se evaluó también la
+existencia de efectos secuencia y periodo y la influencia que tienen
+sobre el nivel de respuesta el estudiante y el propio ítem (pregunt:).
 
 \hypertarget{sec-glm}{%
 \section[Modelos lineales generalizados]{\texorpdfstring{Modelos
@@ -811,10 +998,10 @@ generalizados\footnote{No se deben confundir los Modelos Lineales
   generalización de los primeros y permiten que la variable respuesta
   admita otras distribuciones además de la normal.}}{Modelos lineales generalizados}}\label{sec-glm}}
 
-Los modelos lineales generalizados (\(GLM\)) son modelos en los que la
-variable respuesta no sigue una distribución normal. Para especificar un
-\(GLM\) son necesarios tres componentes
-\autocite[ver][pp.~66-67]{agresti_2018}:
+Los Modelos Lineales Generalizados (\(Generalized Linear Models\),
+\(GLM\)) son modelos en los que la variable respuesta no sigue una
+distribución Normal. Para especificar un \(GLM\) son necesarios tres
+componentes \autocite[ver][pp.~66-67]{agresti_2018}:
 
 \begin{itemize}
 \item
@@ -832,14 +1019,24 @@ variable respuesta no sigue una distribución normal. Para especificar un
   \]
 \end{itemize}
 
-La estimación de coeficientes \emph{GLM} se realiza maximizando la
-función de verosimilitud (\(MLE\)). Es decir, que los coeficientes del
-modelo son aquellos que maximizan la probabilidad de los datos.
+La estimación de coeficientes en \emph{GLM} se realiza maximizando la
+función de verosimilitud (\(Maximum Likelihood Estimation\), \(MLE\)).
+Es decir, que los coeficientes del modelo son aquellos que maximizan la
+probabilidad de los datos.
 
 \hypertarget{sec-logistica}{%
 \subsection{Regresión Logística}\label{sec-logistica}}
 
-La regresión logística \autocite[ver][pp.~68-69]{agresti_2018} es un
+La Regresión Logística no es aplicable directamente en respuestas
+ordinales ya que solo admite variables respuesta dicotómicas. Sin
+embargo, la Regresión Ordinal, que se describe en el siguiente apartado
+(ver Sección~\ref{sec-ordinal}), se puede considerar un extensión de la
+Regresión Logística y de ahí el interés de presentarla antes introducir
+la Regresión Logística. Además, una escala de Likert se puede convertir
+en dicotómica si se reduce a dos niveles (por ejemplo, contestación
+positiva y negativa).
+
+La Regresión Logística \autocite[ver][pp.~68-69]{agresti_2018} es un
 caso particular de \(GLM\) donde la variable respuesta, \(Y\), es
 Benoulli o Binomial. Es decir, que \(Y\) toma valores 0 ó 1. En una
 función de Bernoulli de parámetro \(\pi\), \(E[Y] = P(Y=1) = \pi\).
@@ -865,10 +1062,10 @@ La interpretación de los coeficientes es la siguiente
 \begin{itemize}
 \tightlist
 \item
-  \(\beta_j\) es el \(log\ OR\) asociado a una unidad de incremento de
-  \(x_j\).
+  \(\beta_j\) es el logaritmo del \emph{odds ratio} asociado a una
+  unidad de incremento de \(x_j\).
 \item
-  \(\alpha\) es el \(log\ odds\) de \(Y\) cuando
+  \(\alpha\) es el logaritmo del \emph{odds} de \(Y\) cuando
   \(x_j=0, \forall j \in 1...p\).
 \end{itemize}
 
@@ -889,7 +1086,8 @@ W & = \frac{\hat\beta_j - 0}{se(\hat\beta_j)} \sim N(0,1)
 \end{aligned}
 \]
 
-o con el Test de Razón de Verosimilitudes (LRT):
+o con el Test de Razón de Verosimilitudes (\emph{Likelihood Ratio Test},
+\(LRT\)):
 
 \[
 \begin{aligned}
@@ -905,12 +1103,12 @@ donde:
 \item
   r es el número de \(\beta's\) iguales a cero.
 \item
-  \emph{L(reducido)} es el valor que maximiza la función de
+  \(L(\widehat{reducido})\) es el valor que maximiza la función de
   verosimilitud en la que algunos de los \(\beta's\) han sido igualados
   a cero.
 \item
-  \emph{L(completo)} es el valor que maximiza la función de
-  verosimilitud con todos los \(\beta's\).
+  \(L(\widehat{completo})\) es el valor que maximiza la función de
+  verosimilitud en el modelo que incluye todos los \(\beta's\).
 \end{itemize}
 
 \(LTR\) permite comprobar la hipótesis de que uno o varios coeficientes
@@ -926,26 +1124,26 @@ BIC &: -2 \log L + p \log(n)
 }\label{eq-aic}\end{equation}
 
 donde \(L\) es el valor de maxima verosimilitud y el segundo sumando es
-una penalización que será mayor cuanto más complejo sea el modelo.
+una penalización que será mayor cuanto más complejo sea el modelo
+(\emph{p = número de parámetros}, \emph{n = observaciones}).
 
 \hypertarget{sec-ordinal}{%
 \subsection{Regresión Ordinal}\label{sec-ordinal}}
 
-Las respuestas a los ítems de una escala de Likert son ordinales.
-Ninguna de las técnicas anteriormente expuestas tiene en cuenta esta
-circunstancia. La Regresión Ordinal es una clase de \(GLM\) que comparte
-muchas similitudes con la Regresión Logística (ver
-Sección~\ref{sec-logistica}) pero que tiene en consideración que los
-valores de la variable de respuesta están ordenados \footnote{Otras
-  variantes de la Regresión Logística son la Regresión Categórica y la
-  Regresión Multinomial. En estos tipos de GLM la variable respuesta
-  puede adoptar varios valores pero no se asume que estén ordenados. La
-  Regresión Categórica y la Regresión Multinomial están relacionadas en
-  el mismo sentido en que lo están la Regresión Logística con función de
-  enlace Bernoulli y con función de enlace Binomial. Es decir, que la
-  Regresión Categórica se usa cuando las observaciones no están
-  agrupadas y la Multinomial cuando sí lo están.}. Según
-\textcite{burkner2019} hay tres clases de Regresión Ordinal:
+Las respuestas a los ítems de una escala de Likert son ordinales. La
+Regresión Ordinal es una clase de \(GLM\) que comparte muchas
+similitudes con la Regresión Logística (ver Sección~\ref{sec-logistica})
+pero que tiene en consideración que los valores de la variable de
+respuesta están ordenados \footnote{Otras variantes de la Regresión
+  Logística son la Regresión Categórica y la Regresión Multinomial. En
+  estos tipos de \emph{GLM} la variable respuesta puede adoptar varios
+  valores pero no se asume que estén ordenados. La Regresión Categórica
+  y la Regresión Multinomial están relacionadas en el mismo sentido en
+  que lo están la Regresión Logística con función de enlace Bernoulli y
+  con función de enlace Binomial. Es decir, que la Regresión Categórica
+  se usa cuando las observaciones no están agrupadas y la Multinomial
+  cuando sí lo están.}. Según \textcite[pp.~3-11]{burkner2019} hay tres
+clases de Regresión Ordinal:
 
 \begin{itemize}
 \tightlist
@@ -957,21 +1155,22 @@ valores de la variable de respuesta están ordenados \footnote{Otras
   Regresión Ordinal Adyacente.
 \end{itemize}
 
-La primera es la más habitual y más adecuada para el diseño de
-experimento realizado \autocite[ver][pp.~23-24]{burkner2019}. Las
-regresiones ordinales secuencial y adyacente presuponen que para
+Las regresiones ordinales secuencial y adyacente presuponen que para
 alcanzar un nivel se ha tenido que pasar previamente por los anteriores.
 En un ítem de Likert esto carece de sentido y, por lo tanto, se
-descartan estos modelos.
+descartan estos modelos. Por ello el \emph{Modelo Acumulativo}
+(\emph{Cumulative Model}, \(CM\)) es el más adecuado para el diseño de
+experimento realizado \autocite[ver][pp.~23-24]{burkner2019} y además es
+el más utilizado.
 
-El modelo acumulativo (\(CM\), Cumulative Model) presupone que la
-variable ordinal observada, \(Y\), proviene de la categorización de una
-variable latente (no observada) continua, \(\tilde{Y}\). Hay \(K\)
-umbrales \(\tau_k\) que particionan \(\tilde{Y}\) en \(K + 1\)
-categorías ordenadas observables (ver Figura~\ref{fig-cumulative}). Si
-asumimos que \(\tilde{Y}\) tiene una cierta distribución (por ejemplo,
-normal) con distribución acumulada \(F\), se calcula como la
-probabilidad de que \(Y\) sea la categoría \(k\) de esta forma:
+\(CM\) presupone que la variable ordinal observada, \(Y\), proviene de
+la categorización de una variable latente (no observada) continua,
+\(\tilde{Y}\). Hay \(K\) umbrales \(\tau_k\) que particionan
+\(\tilde{Y}\) en \(K + 1\) categorías ordenadas observables (ver
+Figura~\ref{fig-cumulative}). Si asumimos que \(\tilde{Y}\) tiene una
+cierta distribución (por ejemplo, normal) con distribución acumulada
+\(F\), se calcula la probabilidad de que \(Y\) sea la categoría \(k\) de
+esta forma:
 
 \[Pr(Y = k) = F(\tau_k) - F(\tau_{k-1})\]
 
@@ -1008,17 +1207,17 @@ Por lo que asumiendo la normalidad de los errores:
 
 \[\mathrm{Pr}(Y = k) = \Phi(\tau_k - \eta) - \Phi(\tau_{k - 1} - \eta)\]
 
-Donde hay que estimar los umbrales y los coeficientes de regresión. La
-función anterior es la conocida como la función de enlace
-\texttt{probit}. La interpretación de los coeficientes con esta función
-de enlace es compleja. Por ello en este trabajo se va a utilizar la
-función de enlace \texttt{logit}. Con esta función de enlace la
-interpretación de los coeficientes es parecida a la de los coeficientes
-de la regresión logística, además, en la práctica, los coeficientes
-suelen tener valores similares a los de la función \texttt{probit}. Para
-entender como se deben interpretar los coeficientes del modelo \(CM\) se
-parte del supuesto de que el \(logit\) de la función de probabilidad es
-lineal:
+Donde hay que estimar los umbrales y las pendientes de cada variable
+explicativa. La función anterior es la conocida como la función de
+enlace \texttt{probit}. La interpretación de los coeficientes con esta
+función de enlace no resulta intuitiva. Por ello en este trabajo se va a
+utilizar la función de enlace \texttt{logit}. Con esta función de enlace
+la interpretación de los coeficientes es parecida a la de los
+coeficientes de la regresión logística, además, en la práctica, los
+coeficientes suelen tener valores similares a los de la función
+\texttt{probit}. Para entender como se deben interpretar los
+coeficientes del modelo \(CM\) se parte del supuesto de que el \(logit\)
+de la función de probabilidad es lineal:
 
 \begin{equation}\protect\hypertarget{eq-ordinal}{}{
 logit [P(Y \le k)] = \tau_{k} - \eta = \tau_{k} - (\beta_1 x_1 + \beta_2 x_2 + ... + \beta_p x_p)
@@ -1037,27 +1236,27 @@ o, equivalentemente:
 
 \[\frac{\frac{\mathrm{Pr}(Y > k \mid x_i = x + 1)}{\mathrm{Pr}(Y \leq k \mid x_i = x + 1)}}{\frac{\mathrm{Pr}(Y > k \mid x_i = x)}{\mathrm{Pr}(Y \leq k \mid x_i = x)}} = \exp(\beta_{i})\]
 
-Es decir, que \(\exp(\beta_{i})\) es el \(OR\) (cambio relativo entre
-\(odds\)) de que la variable respuesta esté por encima de una
-determinada categoría versus estar por debajo de ella para una unidad de
-incremento del predictor \(x_i\). Un valor del coeficiente \(\beta_i\)
-positivo indica que la relación entre el predictor \(x_i\) y la función
-de \(logit\) es positiva y, por lo tanto, se incrementa la probabilidad
-de un mayor valor de la variable respuesta.
+Es decir, que \(\exp(\beta_{i})\) es el \(odds ratio\) (cambio relativo
+entre \(odds\), \(OR\)) de que la variable respuesta esté por encima de
+una determinada categoría versus estar por debajo de ella para una
+unidad de incremento del predictor \(x_i\). Un valor del coeficiente
+\(\beta_i\) positivo indica que la relación entre el predictor \(x_i\) y
+la función de \(logit\) es positiva y, por lo tanto, se incrementa la
+probabilidad de un mayor valor de la variable respuesta.
 
 \hypertarget{presunciones-del-modelo}{%
 \subsubsection{Presunciones del modelo}\label{presunciones-del-modelo}}
 
 Este modelo se denomina proporcional ya que se asume que cada predictor
 tiene los mismos efectos sobre todos los niveles de la variable de
-respuesta ordinal \autocite[ver][]{Liu2202}. Es decir, que los \(odds\)
-de los niveles de respuesta deben ser proporcionales para los mismos
-valores de las variables explicativas. Esta suposición frecuentemente no
-es realista y se puede relajar permitiendo estimar un coeficiente
-diferente para cada nivel de la variable respuesta. Sin embargo, el
-incremento del número de coeficientes dificulta la interpretabilidad del
-modelo. \textcite{harrell2020} aboga por usar este modelo incluso aunque
-la suposición de proporcionalidad no se cumpla:
+respuesta ordinal \autocite[ver][chap.~5]{Liu2202}. Es decir, que los
+\(odds\) de los niveles de respuesta deben ser proporcionales para los
+mismos valores de las variables explicativas. Esta suposición
+frecuentemente no es realista y se puede relajar permitiendo estimar un
+coeficiente diferente para cada nivel de la variable respuesta. Sin
+embargo, el incremento del número de coeficientes dificulta la
+interpretabilidad del modelo. \textcite{harrell2020} aboga por usar este
+modelo incluso aunque la suposición de proporcionalidad no se cumpla:
 
 \begin{quote}
 \enquote{Ningún modelo se ajusta perfectamente a los datos, \ldots, la
@@ -1067,24 +1266,23 @@ recurrir a análisis ineficientes y arbitrarios de valores dicotomizados
 de Y.}
 \end{quote}
 
-Matemáticamente la presunción de la proporcionalidad de los \(odd\) se
-demuestra a partir de la Ecuación~\ref{eq-ordinal}. Si fijamos los
-valores de los predictores en un valor arbitrario \(X=x\) y consideramos
+Matemáticamente la presunción de la proporcionalidad de los \(odds\) se
+demuestra a partir de la Ecuación~\ref{eq-ordinal}. Si sne fijan los
+valores de los predictores en un valor arbitrario \(X=x\) y se considera
 dos niveles de respuesta cualesquiera \(k\) y \(l\), entonces:
 
 \begin{equation}\protect\hypertarget{eq-ordinal2}{}{
 \begin{aligned}
-logit [P(Y \le k | X = x)] - logit [P(Y \le l | X = x)] & = \tau_{k} - \tau_{l} \\
-\frac{odds(P(Y \le k | X = x))}{odds(P(Y \le l | X = x))} & =  \exp(\tau_{k} - \tau_{l}) \implies \\
-odds(P(Y \le k | X = x)) & \propto odds(P(Y \le l | X = x))
+logit [P(Y \le k | X = x)] - logit [P(Y \le l | X = x)] = \tau_{k} - \tau_{l} \\
+\frac{odds(P(Y \le k | X = x))}{odds(P(Y \le l | X = x))}  =  \exp(\tau_{k} - \tau_{l}) \implies \\
+odds(P(Y \le k | X = x))  \propto odds(P(Y \le l | X = x))
 \end{aligned}
 }\label{eq-ordinal2}\end{equation}
 
 Es decir, que la proporcionalidad de \(odds\) de dos niveles de
-respuesta es independiente de los valores concretos de los predictores
+respuesta es independiente de los valores concretos de los predictores,
 por lo que la constante de proporcionalidad debe ser similar para todos
-ellos. Esta proporcionalidad se puede comprobar mediante diferencia de
-\(logits\).
+ellos.
 
 \hypertarget{sec-multinivel}{%
 \section{Modelos multinivel}\label{sec-multinivel}}
@@ -1171,8 +1369,8 @@ inter-grupos del intercepto aleatoria (\(\tau_0\)) y de la pendiente
 aleatoria (\(\tau_1\)), y la correlación entre intercepto y pendiente
 aleatorias (\(\rho_{01}\)).
 
-En \textcite{gelman2013} se evalúan tres posibilidades a la hora de
-definir un modelo:
+En \textcite[p.~115]{gelman2013} se evalúan tres posibilidades a la hora
+de definir un modelo:
 
 \begin{itemize}
 \tightlist
@@ -1201,11 +1399,11 @@ definir un modelo:
 Los modelos multinivel requieren supuestos adicionales en el nivel
 segundo y superiores que son similares a los supuestos para los modelos
 de efectos fijos \autocite[ver][pp.~43]{chen2021}. Para estimar los
-parámetros en un modelo multinivel se suele utilizar el método de máxima
-verosimilitud restringida (RMLE), que es una variante de la estimación
-por máxima verosimilitud (MLE) en la que se hacen ajustes en los grados
-de libertad del modelo con efectos aleatorios para corregir el sesgo que
-se produce al usar MLE en estos modelos.
+parámetros en un modelo multinivel se suele utilizar el método de Máxima
+Verosimilitud Restringida (\(RMLE\)), que es una variante de la
+estimación por Máxima Verosimilitud (\(MLE\)) en la que se hacen ajustes
+en los grados de libertad del modelo con efectos aleatorios para
+corregir el sesgo que se produce al usar \(MLE\) en estos modelos.
 
 \hypertarget{sec-bayesiano}{%
 \section{Modelado bayesiano}\label{sec-bayesiano}}
@@ -1246,35 +1444,37 @@ p(y_{pred}\mid \theta,y)p(\theta \mid y)\, d\theta \\
 
 donde la última igualdad resulta de la independencia condicional de
 \(y_{pred}\) e \(y\) dado \(\theta\)
-(\(y_{pred} \perp\!\!\!\perp y \mid \theta\)). Una crítica habitual a la
-inferencia bayesiana es que la elección de la distribución de
-probabilidad a priori es subjetiva. Aunque es cierto que hay un grado de
-subjetividad en esta elección, en realidad en el modelado frecuentista
-hay que tomar ciertas decisiones que también lo son, como por ejemplo la
-elección del nivel de significación o la forma que adopta la función de
-verosimilitud. En la práctica, si las observaciones son suficientemente
-informativas y la distribución a priori es poco informativa, la
-distribución de probabilidad a priori tendrá poca o nula influencia en
-la distribución a posteriori ya que estará dominada por la función de
-verosimilitud y los coeficientes estimados serán muy parecidos en ambos
-paradigmas. Sin embargo, en lo que diferirán es en la interpretación ya
-que, por ejemplo, en un modelo bayesiano se pueden interpretar los
-intervalos de confianza como la probabilidad de que el parámetro esté
-dentro del intervalo. Por eso a estos intervalos se les conoce como
-intervalos de credibilidad. Esa interpretación en un modelo frecuentista
-carecería de sentido ya que los parámetros del modelo no se consideran
-variables aleatorias y, por lo tanto, tendrán probabilidad 1 si el
-verdadero valor del parámetro cae dentro del intervalo y 0 si no lo
-hace. Para obtener la distribución de probabilidad a posteriori
-normalmente se recurre a métodos del simulación MCMC (Métodos de
-Montcarlo basados en Cadenas de Márkov) \footnote{En ocasiones se puede
-  obtener una forma análitica de la distribución a posteriori si se
-  elige una adecuada combinación de función de verosimilitud y
-  distribución a priori conocidas como distribuciones conjugadas. Aunque
-  esto evita la utilización de métodos de simulación, restringe las
-  formas posibles de las distribuciones. En la actualidad, con el
-  aumento de la capacidad de cálculo de los ordenadores, normalmente no
-  es necesaria la utilización de distribuciones conjugadas.}.
+(\(y_{pred} \perp\!\!\!\perp y \mid \theta\)).
+
+Una crítica habitual a la inferencia bayesiana es que la elección de la
+distribución de probabilidad a priori es subjetiva. Aunque es cierto que
+hay un grado de subjetividad en esta elección, en realidad en el
+modelado frecuentista hay que tomar ciertas decisiones que también lo
+son, como por ejemplo la elección del nivel de significación o la forma
+que adopta la función de verosimilitud. En la práctica, si las
+observaciones son suficientemente informativas y la distribución a
+priori es poco informativa, la distribución de probabilidad a priori
+tendrá poca o nula influencia en la distribución a posteriori ya que
+estará dominada por la función de verosimilitud y los coeficientes
+estimados serán muy parecidos en ambos paradigmas. Sin embargo, en lo
+que diferirán es en la interpretación ya que, por ejemplo, en un modelo
+bayesiano se pueden interpretar los intervalos de confianza como la
+probabilidad de que el parámetro esté dentro del intervalo. Por eso a
+estos intervalos se les conoce como intervalos de credibilidad. Esa
+interpretación en un modelo frecuentista carecería de sentido ya que los
+parámetros del modelo no se consideran variables aleatorias y, por lo
+tanto, tendrán probabilidad 1 si el verdadero valor del parámetro cae
+dentro del intervalo y 0 si no lo hace. Para obtener la distribución de
+probabilidad a posteriori normalmente se recurre a métodos del
+simulación Métodos de Montcarlo basados en Cadenas de Márkov (\(MCMC\)).
+\footnote{En ocasiones se puede obtener una forma análitica de la
+  distribución a posteriori si se elige una adecuada combinación de
+  función de verosimilitud y distribución a priori conocidas como
+  distribuciones conjugadas. Aunque esto evita la utilización de métodos
+  de simulación, restringe las formas posibles de las distribuciones. En
+  la actualidad, con el aumento de la capacidad de cálculo de los
+  ordenadores, normalmente no es necesaria la utilización de
+  distribuciones conjugadas.}.
 
 Para comparar modelos entre sí se pueden usar varias medidas
 \autocite[ver][]{barreda2023}. Por ejemplo, la conocida como \emph{log
@@ -1338,16 +1538,16 @@ complejos, se usa la varianza de la función de densidad logarítmica:
 
 Una forma alternativa de evaluar un modelo es mediante validación
 cruzada (\(CV\), Cross Validation). La validación cruzada más popular es
-\(K-fold-CV\). Con esta técnica se divide el conjunto de datos en \(K\)
-partes y se entrena el modelo separando sucesivamente una cada una de
+\emph{K-fold-CV}. Con esta técnica se divide el conjunto de datos en
+\(K\) partes y se entrena el modelo separando sucesivamente cada una de
 las partes datos que se usan para evaluar el modelo. Los valores
 estimados resultan de promediar los \(K\) resultados. El problema es que
 cuanto menor sea \(K\) más inestables son los resultafos obtenidos, y
-cuanto menor sea \(K\)\$ más veces hay que entrenar el modelo. Un caso
+cuanto menor sea \(K\) más veces hay que entrenar el modelo. Un caso
 extremo de validación cruzada, que produce gran estabilidad en las
-estimaciones, es dejar un dato fuera cada vez (\(LOO\), Leave One Out).
-La dificultad es que requiere estimar el modelo tantas veces como datos
-tengamos. Para evitar esto, hay formas de aproximar
+estimaciones, es dejar un dato fuera cada vez (\emph{Leave One Out},
+\(LOO\) ). La dificultad es que requiere estimar el modelo tantas veces
+como datos tengamos. Para evitar esto, hay formas de aproximar
 \(\widehat{\mathrm{elpd}}\) basadas en \(LOO\) sin tener que reentrenar
 el modelo. Las fórmula es la siguiente:
 
@@ -1364,119 +1564,44 @@ pp.~175-176]{gelman2013}.
 \bookmarksetup{startatroot}
 
 \hypertarget{sec-metodo}{%
-\chapter{Métodología/Materiales y métodos}\label{sec-metodo}}
+\chapter{Materiales y métodos}\label{sec-metodo}}
 
-\hypertarget{descripciuxf3n-de-la-experiencia}{%
-\section{Descripción de la
-experiencia}\label{descripciuxf3n-de-la-experiencia}}
+En este capítulo se describen los ficheros de datos suministrados, se
+explica la tarea de preprocesado realizada sobre ellos y las variables
+que se han utilizado en el modelado estadístico.
 
-\hypertarget{marco-de-la-experiencia}{%
-\subsection{Marco de la experiencia}\label{marco-de-la-experiencia}}
+\hypertarget{ficheros-suministrados}{%
+\section{Ficheros suministrados}\label{ficheros-suministrados}}
 
-Los datos se recogieron de una actividad de subtitulado que se propuso a
-los estudiantes de la sexta edición, 2022, del curso MOOC Materiales
-Digitales Accesibles en UNED Abierta. Este curso pertenece al Canal
-Fundación ONCE (IEDRA) está dirigido por los profesores Emilio Letón
-Molina y Alejandro Rodríguez Ascaso y según se recoge en la propia
-página Web del curso sus objetivos son:
-
-\begin{itemize}
-\item
-  Reconocer y abordar los desafíos a los que se enfrentan las personas
-  con discapacidad (por ejemplo los estudiantes) al usar los documentos
-  electrónicos, adquirir conciencia y experiencia.
-\item
-  Obtener una mejor comprensión de la accesibilidad como un asunto de
-  derechos civiles y desarrollar los conocimientos y habilidades
-  necesarios para diseñar recursos de aprendizaje que promuevan
-  ambientes de aprendizaje inclusivos.
-\item
-  Valorar cómo los documentos accesibles benefician a todas las
-  personas, incluyendo a las que tienen y a las que no tienen
-  discapacidad, a través de una mayor facilidad de uso y la
-  interoperabilidad de los materiales basados en la web.
-\item
-  Tomar conciencia de que cómo los autores pueden no solo eliminar
-  barreras, sino evitar crearlas en primer lugar.
-\item
-  Adquirir autosuficiencia en la producción de contenidos accesibles y
-  en la identificación de problemas de accesibilidad.
-\item
-  Adquirir, como autores, estrategias para la producción sostenible de
-  material digital, como la modularidad.
-\end{itemize}
-
-Está destinado \enquote{a todos aquellas personas que desean participar
-en el desarrollo de soluciones de diseño éticas y creativas, que quieran
-escribir o gestionar contenidos electrónicos accesibles, desde páginas
-web o aplicaciones a libros electrónicos ePub}.
-
-El curso tiene cuatro módulos:
+Se dispuso de los siguientes ficheros \texttt{csv}:
 
 \begin{itemize}
 \tightlist
 \item
-  Introducción.
+  Fichero \texttt{grade} contiene el identificador de estudiante y el
+  grupo al que pertenece (campo \texttt{cohort}). Ofuscado con SHA-512
+  para no conocer la identidad real del estudiante y con CRC-32B para no
+  conocer si el grupo es que el vio primero el vídeo bien subtitulado.
 \item
-  Accesibilidad de material multimedia.
-\item
-  Accesibilidad de texto digitales.
-\item
-  Materiales digitales en la práctica.
+  Los ficheros \texttt{test1} y \texttt{test2} son las repuestas a las
+  escalas de Likert sobre la calidad del subtitulado del primer y del
+  segundo vídeo realizado por cada grupo respectivamente.
 \end{itemize}
 
-\hypertarget{actividad-de-subtitulado}{%
-\subsection{Actividad de subtitulado}\label{actividad-de-subtitulado}}
-
-La actividad de subtitulado es voluntaria y sin influencia en la
-calificación final del alumno. Se realiza en el módulo
-\enquote{Accesibilidad del material multimedia}. En este mismo módulo, y
-antes de proponerles la actividad de subtitulado, los alumnos
-completaron las secciones \enquote{Accesibilidad de la información
-sonora} y \enquote{Accesibilidad de la información visual}, con lo cual
-ya tienen conocimiento sobre creación de vídeos y subtítulos accesibles.
-
-La actividad consistió en ver dos vídeos idénticos de 43 segundos que
-solo se diferencian en la calidad del subtitulado. Los subtítulos del
-vídeo bien subtitulado se realizaron por un experto de FIAPAS
-(Confederación Española de Familias de Personas Sordas) siguiendo la
-norma UNE 153010 \autocite[ver][]{jperez1}. El otro vídeo tenía un
-subtitulado similar pero se introdujeron pequeñas deficiencias, algunas
-de ellas inapreciables para alguien que carezca de conocimientos sobre
-accesibilidad. El orden de los vídeos fue aleatorio, de tal forma que
-una cohorte de alumnos vio primero el vídeo bien subtitulado y luego el
-mal subtitulado y la otra lo hizo al revés. Después de ver cada uno de
-los vídeos, los alumnos respondieron a una escala de Likert de 5 niveles
-y 18 ítems.
-
-Los 18 items de Likert responden a los criterios de la norma UNE 153010
-\autocite[ver][]{aenor2012}. El diseño de experimento es triple ciego:
-es decir, a los alumnos no se les informó de si estaban viendo el vídeo
-con mejor o con peor calidad de subtitulado. Los directores del MOOC
-tampoco conocen esta información. Finalmente esta información no se
-conocía en el momento de analizar los datos ya que los vídeos tienen
-identificaciones ofuscadas con CRC32B que no contienen ninguna
-indicación del tipo de subtitulado del vídeo\footnote{En la respuesta a
-  cada ítem, el alumno puede añadir comentarios. Éstos han sido
-  eliminados del estudio para que no filtren información referente al
-  tipo de subtitulado que el alumno cree estar contestando.}. El
-\enquote{ciego} fue liberado en la fase de elaboración de la discusión
-de este trabajo (ver Capítulo~\ref{sec-conclusiones}).
-
 En la Tabla~\ref{tbl-likert-levels} se muestran los 5 niveles de cada
-uno de los items de la escala de Likert utilizados para valorar el
+uno de los ítems de la escala de Likert utilizados para valorar el
 subtitulado \footnote{En la codificación original los valores asignados
   a cada respuesta eran diferentes: la opción \enquote{No sé / No
   contesto} se codificó con 5 y las demás opciones con una unidad menos
   que la mostrada. En este trabajo se ha hecho una rotación para asignar
   valores más usuales en la literatura científica sobre el tema.}. En la
-Tabla~\ref{tbl-likert-scale} se muestran los 18 items de la escala de
+Tabla~\ref{tbl-likert-scale} se muestran los 18 ìtems de la escala de
 Likert que se propuso a los alumnos para que evaluaran cada uno de los
 vídeos.
 
 \hypertarget{tbl-likert-levels}{}
 \begin{longtable}[]{@{}rl@{}}
-\caption{\label{tbl-likert-levels}Niveles de los items de la escala de
+\caption{\label{tbl-likert-levels}Niveles de los ítems de la escala de
 Likert.}\tabularnewline
 \toprule\noalign{}
 values & levels \\
@@ -1498,7 +1623,7 @@ values & levels \\
 
 \hypertarget{tbl-likert-scale}{}
 \begin{longtable}{ll}
-\caption{\label{tbl-likert-scale}Items de la escala de Likert. }\tabularnewline
+\caption{\label{tbl-likert-scale}Ítems de la escala de Likert. }\tabularnewline
 
 \toprule
 Item & Texto \\ 
@@ -1524,8 +1649,8 @@ Q18 & Los subtítulos del vídeo cumplen en general con los requisitos de accesi
 \bottomrule
 \end{longtable}
 
-\hypertarget{participantes}{%
-\section{Participantes}\label{participantes}}
+\hypertarget{sec-preprocesado}{%
+\section{Preprocesado}\label{sec-preprocesado}}
 
 Los datos personales de los estudiantes se suministraron anonimizados
 para evitar conocer su identidad. De acuerdo con nuestro compromiso
@@ -1540,112 +1665,95 @@ femenino, 19 masculino y el resto (22) prefirieron no suministrar esta
 información. Se constata que hay un claro sesgo hacia el sexo femenino
 entre los participantes en la actividad de subtitulado.
 
-\hypertarget{ficheros-suministrados}{%
-\section{Ficheros suministrados}\label{ficheros-suministrados}}
-
-Se dispuso de los siguientes ficheros \texttt{csv}:
-
-\begin{itemize}
-\tightlist
-\item
-  El fichero \texttt{grade} contiene el identificador de estudiante y el
-  grupo al que pertenece (campo \texttt{cohort}). Ofuscado con SHA-512
-  para no conocer la identidad real del estudiante y con CRC-32B para no
-  conocer si el grupo es que el vio primero el vídeo bien subtitulado.
-\item
-  Los ficheros \texttt{test1} y \texttt{test2} son las repuestas a las
-  escalas de Likert sobre la calidad del subtitulado del primer y del
-  segundo vídeo realizado por cada grupo respectivamente.
-\end{itemize}
-
-\hypertarget{sec-preprocesado}{%
-\section{Preprocesado}\label{sec-preprocesado}}
-
 En esta sección se describen las transformaciones realizadas con los
 ficheros suministrados:
 
 \begin{itemize}
 \item
-  Se lee el fichero de perfil del usuario. El número de fila con el que
-  el usuario aparece en el fichero se utilizará como identificador del
+  Se leyó el fichero \texttt{grade}. El número de fila con el que el
+  usuario aparece en el fichero se utilizó como identificador del
   usuario para mantener la trazabilidad y comprobar que las
   transformaciones realizadas son correctas.
 \item
-  Se eliminan los datos de los estudiantes que, aun habiendo realizado
-  la actividad, no han dado su consentimiento para participar en el
+  Se eliminaron los datos de los estudiantes que, aun habiendo realizado
+  la actividad, no dieron su consentimiento para participar en el
   estudio.
 \item
-  El valor del campo \texttt{cohort} se sustituye por una letra, \(A\) o
-  \(B\), en función del grupo asignado. En el momento de realizar este
-  proceso se desconoce qué vídeo vio primero cada cohorte.
+  El valor del campo \texttt{cohort}, que se indica el valor anonimizado
+  para el grupo, se sustituyó por una letra, \(A\) o \(B\). En el
+  momento en que se realizó este proceso se desconocía qué vídeo vio
+  primero cada cohorte.
 \item
-  Se lee el fichero \texttt{profile} y se añade información sobre el
-  sexo y el año de nacimiento.
+  Se leyeron los ficheros de test y se procesaron. Se utilizó el nombre
+  del fichero (\texttt{test1} o \texttt{test2}) para saber de qué vídeo
+  se estaba respondiendo el test \footnote{Se reitera que en el momento
+    de realizar este proceso se desconocía si el vídeo es el
+    correctamente subtitulado o el otro. La única información que se
+    almacenó es si se estaba respondiendo al vídeo que se vio primero.}.
 \item
-  Se lee el fichero \texttt{conoc} y se calcula cuántas preguntas acertó
-  cada usuario en el test de evaluación de conocimientos previos. Se
-  añade esta información al perfil del usuario.
-\item
-  Se leen los ficheros de test y se procesan. Se utiliza el nombre del
-  fichero (\texttt{test1} o \texttt{test2}) para saber de qué vídeo se
-  está respondiendo el test \footnote{Se reitera que en el momento de
-    realizar este proceso se desconoce si el vídeo es el correctamente
-    subtitulado o el otro. La única información que se almacena es si se
-    está respondiendo al vídeo que se vio primero.}.
-\item
-  Se seleccionan las preguntas que contienen las respuestas y se
-  renombran para que sea más fácil saber de qué pregunta se trata
+  Se seleccionaron las preguntas que contienen las respuestas y se
+  renombraron para que fuera más fácil saber de qué pregunta se trataba
   \footnote{En los ficheros suministrados la respuesta a cada pregunta
-    ocupa varios campos. Se selecciona en cada pregunta el que contiene
-    el valor de la respuesta y se convierte a numérico.}. Se convierte
-  el campo \texttt{LastTry}, que contiene la fecha y hora de realización
-  del test, a formato fecha y hora.
+    ocupaba varios campos. Se seleccionó en cada pregunta el que
+    contiene el valor de la respuesta y se convirtió a numérico.}. Se
+  convirtió el campo \texttt{LastTry}, que contiene la fecha y hora de
+  realización del test, a formato fecha y hora.
 \item
-  Se realizan algunas comprobaciones como la ausencia de valores nulos
-  en las variables más relevantes y que no existan inconsistencias ni
-  errores de procesado.
+  Se realizaron algunas comprobaciones como la ausencia de valores nulos
+  en las variables más relevantes y la no existencia de inconsistencias
+  o errores de procesado.
 \item
-  Se eliminan los comentarios y se graban en fichero aparte para que no
-  revelen información que podría descubrir el tipo de subtitulado que
-  piensa que está evaluando el estudiante.
+  Se eliminaron los comentarios y se grabaron en fichero aparte para que
+  no revelaran información que podría descubrir el tipo de subtitulado
+  que piensa que estaba evaluando el estudiante.
 \item
-  Se renombran las variables (ver Tabla~\ref{tbl-variables}). n
+  Se renombraron las variables (ver Tabla~\ref{tbl-variables}).
 \item
-  Se eliminar del estudio los usuarios que solo han realizado uno de los
-  test.
+  Se eliminaron del estudio los usuarios que solo han realizado uno de
+  los test.
 \item
-  Se transforma las variables que lo requieran en factores. La pregunta
-  18 se usará como referencia en el factor \texttt{Question}.
+  Se transformaron las variables que lo requieran en factores. La
+  pregunta 18 se usa como referencia en el factor \texttt{Question}.
 \item
-  Se rotan los valores de respuesta para que \enquote{No sé / No
+  Se rotaron los valores de respuesta para que \enquote{No sé / No
   contesto} tenga valor 0 y el resto de 1 a 5 desde \enquote{Muy en
   desacuerdo}, 1, hasta \enquote{Muy de acuerdo}, 5.
 \item
-  Se Crean los factores \texttt{Level} con los niveles
+  Se crearon los factores \texttt{Level} con los niveles
   \texttt{negativo}, \texttt{neutral} y \texttt{positivo} dependiendo de
   si la respuesta es 1 ó 2, 3, 4 ó 5 respectivamente e \texttt{Improve}
   con valores 0 ó 1, dependiendo de si la respuesta en el test \(A\) es
   mejor (1) o igual o peor (0) que la del \(B\) para cada pregunta y
   estudiante.
 \item
-  Se transforma el \texttt{dataframe} de formato ancho a largo: los
-  ficheros de respuestas se suministran en formato ancho. Es decir, que
-  cada fila es un test que contiene 18 columnas para las respuestas a
-  cada pregunta. Los nombres de las columnas son \(Q01\), \(Q02\),
-  \ldots, \(Q18\) y tendrán valores de 0 a 5 con las respuestas. La
-  mayoría de los paquetes de R que vamos a usar requieren que los datos
+  Se transformó el \texttt{dataframe} de formato ancho a largo: los
+  ficheros de respuestas se suministraron en formato ancho. Es decir,
+  que cada fila es un test que contiene 18 columnas para las respuestas
+  a cada pregunta. Los nombres de las columnas son \(Q01\), \(Q02\),
+  \ldots, \(Q18\) y tienen valores de 0 a 5 con las respuestas. La
+  mayoría de los paquetes de R que utilizados requieren que los datos
   estén en formato largo. Esto que quiere decir que cada fila tendrá una
   única respuesta por lo que habrá únicamente dos columnas, \(Question\)
   y \(Response\). En la primera se almacenará el identificador de la
   pregunta (\(Q01\), \(Q02\), \ldots, \(Q18\)) y en la segunda el valor
-  de la respuesta (de 0 a 5). De esta forma, un test pasará de ocupar
-  una fila y 18 columnas en el formato ancho a 18 filas y dos columnas
-  en el largo.
+  de la respuesta (de 0 a 5). De esta forma, un test pasó de ocupar una
+  fila y 18 columnas en el formato ancho a 18 filas y dos columnas en el
+  largo.
 \end{itemize}
+
+\hypertarget{variables-utilizadas}{%
+\section{Variables utilizadas}\label{variables-utilizadas}}
 
 En la Tabla~\ref{tbl-variables} se describen las características más
 relevantes de las principales variables que se utilizarán en el modelado
-y en el análisis estadístico.
+y en el análisis estadístico. La variable dependiente o respuesta en
+todos los modelos es \texttt{Response} contiene las respuestas a todos
+los ìtems. La variable explicativa principal es el factor \texttt{Treat}
+y permite diferenciar los dos niveles de subtitulado. Los factores
+\texttt{Period} y \texttt{Seq} permiten evaluar la presencia d eefectos
+periodo y secuencia respectivamente. Por último, los factores
+\texttt{Subject} y \texttt{Question} son variables explicativas que se
+tratan como efectos aleatorios en el modelado multinivel.
 
 \footnotesize
 
@@ -1674,12 +1782,11 @@ Question & Número de la pregunta & Factor & Q01, Q02, ..., Q18 \\
 
 \normalsize
 
-Partiendo del \texttt{dataframe} que se construyó en el preprocesado
-(ver Sección~\ref{sec-preprocesado}) construimos el \texttt{dataframe}
-que usaremos a partir de este momento. Las operaciones principales que
-se han realizado han sido:
+\hypertarget{dataframes-utilizados}{%
+\section{\texorpdfstring{\texttt{Dataframes}
+utilizados}{Dataframes utilizados}}\label{dataframes-utilizados}}
 
-Se crean dos \texttt{dataframes}:
+Se van a usar dos \texttt{dataframes}:
 
 \begin{itemize}
 \tightlist
@@ -3575,6 +3682,9 @@ nivel \(A\) las opciones 4 y 5 predominan.
 posteriori por tratamiento y pregunta.}
 
 \end{figure}
+
+\hypertarget{sec-conclusion}{%
+\section{Conclusión y trabajo futuro}\label{sec-conclusion}}
 
 \bookmarksetup{startatroot}
 
