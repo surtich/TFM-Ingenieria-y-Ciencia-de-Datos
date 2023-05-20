@@ -1,6 +1,6 @@
 ## Modelado Bayesiano.
 
-En el apéndice (ver @sec-bayes-2) se comparan diversas parametrizaciones de modelado bayesiano utilizando la función `brm()` del paquete `brms`. Analizamos aquí la que mejor resultado produjo con la validación cruzada bayesiana `leave-one-out`:
+En el apéndice (ver @sec-bayes-2) se comparan diversas parametrizaciones de modelado bayesiano utilizando la función `brm()` del paquete `brms`. Se analiza aquí el mejor modelo según el criterio de validación cruzada bayesiana `leave-one-out`:
 
 \scriptsize
 ```{r}
@@ -17,7 +17,7 @@ brm_treat.period.subject.question <- brm(
 ```
 \normalsize
 
-Esta parametrización coincide con la que elegimos en el apartado de Regresión Ordinal con efectos mixtos. El modelo utiliza como factores con efectos fijos (`complete pooling` en terminología bayesiana) el nivel de subtitulado y el periodo y la interacción entre ambos; y como efectos aleatorios (`partial pooling`) los sujetos y las preguntas del test. Cada uno de ellos con un intercepto y un nivel de subtitulado variable. El resumen del modelo es el siguiente:
+este modelo coincide con el seleccionado en el apartado de Regresión Ordinal con efectos mixtos. El modelo utiliza como factores con efectos fijos (`complete pooling` en terminología bayesiana) el nivel de subtitulado y el periodo y la interacción entre ambos; y como efectos aleatorios (`partial pooling`) los sujetos y las preguntas del test. Cada uno de ellos con un intercepto y un nivel de subtitulado variable. El resumen del modelo es el siguiente:
 
 \scriptsize
 ```{r}
@@ -26,7 +26,7 @@ summary(brm_treat.period.subject.question)
 ```
 \normalsize
 
-En la @tbl-model-comp se comparan las estimaciones puntuales que obtuvimos para este modelo con la función `clmm` para ajustar el modelo con efectos mixtos. Se comprueba que son muy similares. Vemos que los interceptores son claramente significativos y también el coeficiente de `TreatB`. Sin embargo los coeficientes correspondientes al efecto periodo, `Period2`, y al efecto secuencia, `TreatB:Period`, incluyen el cero y además tienen intervalos muy grandes por lo que hay mucha incertidumbre respecto a su verdadero valor.  
+En la @tbl-model-comp se comparan las estimaciones puntuales que se obtuvo para este modelo con la función `clmm` para ajustar el modelo con efectos mixtos. Se comprueba que son muy similares. Los interceptores son claramente significativos y también el coeficiente de `TreatB`. Sin embargo los coeficientes correspondientes al efecto periodo, `Period2`, y al efecto secuencia, `TreatB:Period`, incluyen el cero y además tienen intervalos muy grandes por lo que hay mucha incertidumbre respecto a su verdadero valor.  
 
 \tiny
 ```{r}
@@ -77,7 +77,7 @@ left_join(df_clmm, df_brm) %>%
 ```
 \normalsize
 
-Hemos mantenido las distribuciones de probabilidad a priori que por defecto utiliza `brm` confiando en que sus parámetros son adecuados. Sin embargo, conviene comprobar que realmente sea así. En la @tbl-priors se muestran las distribuciones a priori de los parámetros aleatorios del modelo. En la @fig-priors se constata que toman valores razonables y no informativos.
+Se han mantenido las distribuciones de probabilidad a priori que por defecto utiliza `brm` confiando en que sus parámetros son adecuados. Sin embargo, conviene comprobar que realmente sea así. En la @tbl-priors se muestran las distribuciones a priori de los parámetros aleatorios del modelo. En la @fig-priors se constata que toman valores razonables y no informativos.
 
 \tiny
 ```{r}
@@ -105,7 +105,7 @@ prior_draws(brm_treat.period.subject.question) %>%
     theme(legend.position = "none")
 ```
 
-Es importante asegurar que el entrenamiento ha convergido a su distribución a posteriori. En la tabla de resumen constatamos que el valor de `Rhat` es inferior a 1.1 y el de `ESS` superior a 400 en todos los parámetros, que son umbrales que no se deberían violar [ver @burkner2019]. En la
+Es importante asegurar que el entrenamiento ha convergido a su distribución a posteriori. En la tabla de resumen se constata que el valor de `Rhat` es inferior a 1.1 y el de `ESS` superior a 400 en todos los parámetros, que son umbrales que no se deberían violar [ver @burkner2019]. En la
  @fig-trace se comprueba que las cadenas MCMC de muestreo de la distribución a posteriori se mezclan correctamente y no se aprecia autocorrelación en ninguno de las parámetros. Por último, en la @fig-predictive se muestra una comparación entre los histogramas construidos con los datos con los intervalos de confianza marginales de la función predictiva a posteriori del modelo. En la mayoría de las preguntas, el muestreo reproduce bastante bien el histograma de respuestas. En algunas preguntas, como la `Q16` o la `Q17`, hay diferencias relevantes.
  
 ```{r}
@@ -123,7 +123,7 @@ mcmc_plot(brm_treat.period.subject.question, type = "trace")
 pp_check(brm_treat.period.subject.question, type = "bars_grouped", group = "Question", ndraws = 1000)
 ```
 
-En cuanto a las conclusiones que podemos extraer del modelo, la más importante es que, como hemos constatado desde el principio de este trabajo, los alumnos perciben claramente una diferencia entre los niveles de subtitulado $A$ y $B$, siendo preferido el $A$. En la @fig-predictive-2 se representan gráficamente los valores esperados de la probabilidad de respuesta a cada pregunta por tratamiento y periodo. Lo más interesante es confirmar la existencia de sendos efectos periodo y secuencia de pequeña magnitud que se materializan en que, para el nivel de subtitulado $A$, son ligeramente más probables las respuestas con valor 4 en el periodo 2 (secuencia $BA$) que en el 1 (secuencia $AB$). Con las respuestas de valor 5 ocurre lo contrario: en el subtitulado $A$ son más probables en el periodo 1 (secuencia $AB$) que el 2 (secuencia $BA$). Esto ya lo habíamos constatado antes en el análisis del $OR$ (ver @sec-or).
+En cuanto a las conclusiones que se pueden extraer del modelo, la más importante es que, como se ha constatado desde el principio de este trabajo, los alumnos perciben claramente una diferencia entre los niveles de subtitulado $A$ y $B$, siendo preferido el $A$. En la @fig-predictive-2 se representan gráficamente los valores esperados de la probabilidad de respuesta a cada pregunta por tratamiento y periodo. Lo más interesante es confirmar la existencia de sendos efectos periodo y secuencia de pequeña magnitud que se materializan en que, para el nivel de subtitulado $A$, son ligeramente más probables las respuestas con valor 4 en el periodo 2 (secuencia $BA$) que en el 1 (secuencia $AB$). Con las respuestas de valor 5 ocurre lo contrario: en el subtitulado $A$ son más probables en el periodo 1 (secuencia $AB$) que el 2 (secuencia $BA$). Esto ya se había constatado antes en el análisis del $OR$ (ver @sec-or).
 
 
 ```{r}
@@ -152,7 +152,7 @@ pred_brm %>% ggplot(aes(x = Treat, y = Probability, colour = Response)) +
     scale_x_discrete(expand = c(0.05, .05), limits = c("A", "B"))
 ```
 
-Constatados los efectos periodo y secuencia, y sabiendo que son de pequeña magnitud, pasamos ahora a hacer un análisis de las predicciones que realiza el modelo sobre la distribución de respuestas en cada pregunta. Para ello en la @fig-pred-3 se representan 50 muestras de la esperanza de la distribución predictiva a posteriori para cada pregunta y nivel de subtitulado marginalizadas por periodo y estudiante. La primera conclusión que podemos extraer es que el modelo tiene bastante incertidumbre sobre los valores de respuesta a cada pregunta no superando casi nunca el 50% de probabilidad para todas las preguntas y niveles de subtitulado. En general se observa en la mayoría de las preguntas del nivel de subtitulado $A$ que los alumnos están bastante seguros de que la respuesta a las preguntas debe ser 4 ó 5, asignando una muy baja probabilidad a los valores 1, 2, ó 3, pero habiendo bastante confusión respecto cuál de los dos valores (4 ó 5) asignar. En el nivel de subtitulado $B$ la situación es bastante más confusa. Aunque la opción de respuesta preferida es 4 y las menos preferidas son la 5 y la 1, hay bastante mezcla entre las opciones de respuesta 2, 3 y 4. En cuanto al análisis individualizado por pregunta podemos extraer las siguientes conclusiones:
+Contrastados los efectos periodo y secuencia, y sabiendo que son de pequeña magnitud, se hace ahora un análisis de las predicciones que realiza el modelo sobre la distribución de respuestas en cada pregunta. Para ello en la @fig-pred-3 se representan 50 muestras de la esperanza de la distribución predictiva a posteriori para cada pregunta y nivel de subtitulado marginalizadas por periodo y estudiante. La primera conclusión que se puede extraer es que el modelo tiene bastante incertidumbre sobre los valores de respuesta a cada pregunta no superando casi nunca el 50% de probabilidad para todas las preguntas y niveles de subtitulado. En general se observa en la mayoría de las preguntas del nivel de subtitulado $A$ que los alumnos están bastante seguros de que la respuesta a las preguntas debe ser 4 ó 5, asignando una muy baja probabilidad a los valores 1, 2, ó 3, pero habiendo bastante confusión respecto cuál de los dos valores (4 ó 5) asignar. En el nivel de subtitulado $B$ la situación es bastante más confusa. Aunque la opción de respuesta preferida es 4 y las menos preferidas son la 5 y la 1, hay bastante mezcla entre las opciones de respuesta 2, 3 y 4. En cuanto al análisis individualizado por pregunta extraen las siguientes conclusiones:
 
 * En las preguntas $Q04$ y $Q13$ los estudiantes no aprecian defectos en el subtitulado ni diferencias entre un nivel y otro. Son valoradas en ambos niveles con puntuaciones de 4 y de 5.
 

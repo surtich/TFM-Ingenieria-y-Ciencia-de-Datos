@@ -63,9 +63,8 @@ En este trabajo se ha evitado en la medida de lo posible el uso de anglicismos t
 
 Los nombres de los modelos estadísticos se han escrito con la inicial de cada palabra en mayúscula. En los acrónimos generalmente se ha mantenido su correspondencia en inglés. Por ejemplo, Modelo Lineal Generalizado (GLM, Generalized Linear Model).
 
-Para los nombres de las variables utilizadas en el modelado estadístico se ha preferido el inglés. Por ejemplo, *Treat*
-o *Response*. La razón de esta decisión es evitar la mezcla de idiomas en los resúmenes de los modelos o en los ejemplos de código.
+Para los nombres de las variables utilizadas en el modelado estadístico se ha preferido el inglés. Por ejemplo, *Treat* para referirse a los subtitulados y *Response* para las respuestas. La razón de esta decisión es evitar la mezcla de idiomas en los resúmenes de los modelos o en los ejemplos de código.
 
-Este trabajo es reproducible. Para su elaboración se ha utilizado la herramienta de publicación científica Quarto y el lenguaje de programación R.
+Este trabajo es reproducible. Para su elaboración se ha utilizado la herramienta de publicación científica Quarto y el lenguaje de programación R. Todas las figuras mostradas han sido generadas con R.
 
 

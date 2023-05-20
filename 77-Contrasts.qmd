@@ -10,11 +10,11 @@ source("_setup.R")
 
 # Efecto secuencia e interacción tratamiento vs. periodo {#sec-contrasts}
 
-Vamos a demostrar que el efecto secuencia es equivalente a la interacción de los factores tratamiento y periodo.
+Se va a demostrar que el efecto secuencia es equivalente a la interacción de los factores tratamiento y periodo.
 
 ## Preparación
 
-Partimos del siguiente conjunto de datos generado aleatoriamente
+Partiendo del siguiente conjunto de datos generado aleatoriamente
 ^[Obsérvese que la variable `Response` en esta simulación es cuantitativa y no ordinal. Se ha realizado de esta forma para poder usar un ajuste de mínimos cuadrados en lugar de una regresión ordinal para facilitar el cálculo y su interpretación.]:
 \scriptsize
 ```{r}
@@ -43,7 +43,7 @@ head(df, 10)
 options(contrasts = rep("contr.treatment", 2))
 ```
 
-Calculamos las medias por cada nivel de factor y combinaciones de niveles que utilizaremos luego en la interpretación de los coeficientes de los modelos
+Se calculan las medias por cada nivel de factor y combinaciones de niveles que luego serán utilizadas en la interpretación de los coeficientes de los modelos:
 
 \scriptsize
 ```{r}
@@ -81,7 +81,7 @@ data.frame(t(coef(l1))) %>% gt()
 ```
 \normalsize
 
-Vemos que el intercepto es la media de la respuesta en el nivel de tratamiento $A$:
+Se comprueba que el intercepto es la media de la respuesta en el nivel de tratamiento $A$:
 
 \scriptsize
 ```{r}
@@ -113,7 +113,7 @@ contr.treatment(2)
 ```
 \normalsize
 
-Podemos ver la matriz ampliada añadiendo el intercepto, que siempre será una columna de 1's:
+La matriz ampliada añadiendo el intercepto siempre tendrá una columna de 1's:
 
 \scriptsize
 ```{r}
@@ -121,10 +121,10 @@ model.matrix(~Treat, expand.grid(Treat = c("A", "B")))
 ```
 \normalsize
 
-Cada fila representa el nivel del tratamiento (fila 1 nivel $A$ y fila 2 nivel $B$) y las columnas representan los parámetros del modelo. Los valores son los niveles de tratamiento (0 ó 1). Para obtener el significado de cada parámetro, multiplicamos el valor del contraste por el parámetro. Así:
+Cada fila representa el nivel del tratamiento (fila 1 nivel $A$ y fila 2 nivel $B$) y las columnas representan los parámetros del modelo. Los valores son los niveles de tratamiento (0 ó 1). Para obtener el significado de cada parámetro, se multiplica el valor del contraste por el parámetro. Así:
 
-* De la primera fila obtenemos que el efecto del tratamiento $A$ es el intercepto: $A = 1 \cdot Intercept + 0 \cdot TreatB$.
-* De la segunda fila obtenemos que el valor del parámetro $TreatB$ es la diferencia de los niveles de tratamiento. $B = 1 \cdot Intercept + 1 \cdot TreatB \Rightarrow TreatB = B - Intercept$. 
+* En la primera fila se comprueba que el efecto del tratamiento $A$ es el intercepto: $A = 1 \cdot Intercept + 0 \cdot TreatB$.
+* En la segunda fila permite comprobar que el valor del parámetro $TreatB$ es la diferencia de los niveles de tratamiento. $B = 1 \cdot Intercept + 1 \cdot TreatB \Rightarrow TreatB = B - Intercept$. 
 
 
 Esto quiere decir que existe una variable para codificar el efecto tratamiento, y esta variable tiene el valor 0 para el nivel $A$ por ser el de referencia y 1 para el nivel $B$. La pendiente se codifica como la diferencia del efecto de los dos niveles ($B - A$).
@@ -141,7 +141,7 @@ data.frame(t(coef(l2))) %>% gt()
 ```
 \normalsize
 
-Vemos que el intercepto es la media del tratamiento $A$ en el periodo $1$ por ser estos los valores que R usa como referencia
+Se comprueba que el intercepto es la media del tratamiento $A$ en el periodo $1$ por ser estos los valores que R usa como referencia
 ^[R utiliza como valor de referencia el nivel más bajo de factor.]: 
 
 \scriptsize
@@ -184,10 +184,10 @@ model.matrix(~ Treat * Period, expand.grid(Treat = c("A", "B"), Period = c("1", 
 
 * La primera fila es el intercepto y corresponde  con el tratamiento $A$ y el periodo 1.
 * La segunda fila es el efecto del tratamiento $B$ en el periodo 1 y se calcula con la suma del intercepto y el parámetro $TreatB$. Luego $TreatB$ es la diferencia del efecto de los tratamientos en el periodo 1.
-* Análogamente con la tercera fila concluimos que $Period2$ es la deferencia entre periodos para el tratamiento $A$.
+* Análogamente con la tercera fila cse concluye que $Period2$ es la deferencia entre periodos para el tratamiento $A$.
 * Finalmente, la cuarta fila, es el tratamiento $B$ en el periodo 2 y, por lo tanto, $Treat2:Period2$ es la diferencia el nivel $B$ de tratamiento y el periodo 2 y el nivel de tratamiento $A$ en el periodo 1, menos la diferencia de niveles de tratamiento para el periodo 1 y menos la diferencia de periodos para el tratamiento $A$.
 
-Obsérvese que antes hemos calculado de forma diferente $TreatB:Period2$. Podemos aplicar la fórmula anterior y comprobar que produce el mismo resultado:
+Obsérvese que antes se ha calculado de forma diferente $TreatB:Period2$. Aplicando la fórmula anterior y se comprueba que produce el mismo resultado:
 
 \scriptsize
 ```{r}
@@ -197,7 +197,7 @@ m2["B", "2"] - m2["A", "1"] - (m2["B", "1"] - m2["A", "1"]) - (m2["A", "2"] - m2
 
 ## Factor secuencia
 
-Vamos a incorporar la secuencia como factor para ver si es equivalente a la interacción entre periodo y tratamiento. En caso de serlo los coeficientes del modelo ajustado deberían coincidir. Sin embargo vemos que los modelos l2 (@tbl-l2) y l3 (@tbl-l3) tienen distintos coeficientes.
+Se incorpora la secuencia como factor para ver si es equivalente a la interacción entre periodo y tratamiento. En caso de serlo los coeficientes del modelo ajustado deberían coincidir. Sin embargo se constata que los modelos l2 (@tbl-l2) y l3 (@tbl-l3) tienen distintos coeficientes.
 
 \scriptsize
 ```{r}
@@ -209,7 +209,7 @@ data.frame(t(coef(l3))) %>% gt()
 \normalsize
 
 
-Los coeficientes no coinciden debido a que estamos usando el contraste con `codificación de tratamientos`. Pero si cambiamos a `codificación de sumas`:
+Los coeficientes no coinciden debido a que se está usando el contraste con `codificación de tratamientos`. Pero si se cambia a `codificación de sumas`:
 
 \scriptsize
 ```{r}
@@ -217,7 +217,7 @@ options(contrasts = rep("contr.sum", 2))
 ```
 \normalsize
 
-Y volvemos a ajustar los modelos que ya usarán el `contraste suma`, podemos comprobar que ahora tienen los mismos coeficientes y el coeficiente $Seq1$
+Y se vuelven a ajustar los modelos que ya usarán el `contraste suma`, se comprueba que ahora tienen los mismos coeficientes y el coeficiente $Seq1$
 del modelo que incorpora el efecto secuencia (@tbl-l4) es igual que el coeficiente $Treat1:Period1$ del modelo que incorpora la interacción entre tratamiento y periodo (@tbl-l5).
 Obsérvese que los nombres de los coeficientes han cambiado respecto al `contraste de tratamiento`. Esto sucede porque la interpretación de los coeficientes varía como se explica a continuación.
 
@@ -241,7 +241,7 @@ data.frame(t(coef(l5))) %>% gt()
 ```
 \normalsize
 
-La interpretación de los coeficientes es diferente. Para explicarlo, mostramos la matriz de contraste:
+La interpretación de los coeficientes es diferente. Para explicarlo, se muestra la matriz de contraste:
 
 \scriptsize
 ```{r}
@@ -249,11 +249,11 @@ model.matrix(~ Treat * Period, expand.grid(Treat = c("A", "B"), Period = c("1", 
 ```
 \normalsize
 
-Vemos que ahora los niveles son 1 y -1
+Ahora los niveles son 1 y -1
 ^[El nivel de referencia del factor tendrá valor 1 y el otro -1. Por ejemplo, en la variable `Treat`, $A$ tendrá +1 y $B$ tendrá valor -1.]
 en vez de 0 y 1 que se utilizan en el contraste de tratamiento. La interpretación es la siguiente:
 
-* El interceptor es la media de la media de cada uno de los niveles de factor. ¿Por qué?. El interceptor es el valor de la variable de respuesta cuando cuando todas las variables explicativas valen 0. Esto sucede en la media de la variable de respuesta ya que cero es el valor que está en la mitad de +1 y -1. Podemos comprobar que la media global coincide con el interceptor del modelo l4 (@tbl-l4):
+* El interceptor es la media de la media de cada uno de los niveles de factor. ¿Por qué?. El interceptor es el valor de la variable de respuesta cuando cuando todas las variables explicativas valen 0. Esto sucede en la media de la variable de respuesta ya que cero es el valor que está en la mitad de +1 y -1. Se comprueba que la media global coincide con el interceptor del modelo l4 (@tbl-l4):
 
 \scriptsize
 ```{r}
@@ -329,7 +329,7 @@ O reorganizando los términos de otra forma, sería la cuarta parte de la suma d
 ```
 \normalsize
 
-* Podemos obtener el coeficiente $TreatB$ del modelo $l2$ (@tbl-l2) como $-2 \cdot (Treat1 + Treat1:Period1)$:
+* Se puede obtener el coeficiente $TreatB$ del modelo $l2$ (@tbl-l2) como $-2 \cdot (Treat1 + Treat1:Period1)$:
 
 \scriptsize
 ```{r}

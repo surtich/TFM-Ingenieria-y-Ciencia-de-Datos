@@ -378,6 +378,6 @@ bind_rows(po.check("Question"), po.check("Period"), po.check("Seq"), po.check("T
 
 ## Modelado estadístico
 
-```{r}
-modelsummary(list(`Response ~ 1` = clm(Response ~ 1, data = df_clean), `Response ~ Treat` = clm(Response ~ Treat, data = df_clean)), estimate = "{estimate}{stars}", gof_omit = "RMSE", statistic = c("std.error", "conf.int"), shape = term:contrast ~ model + statistic, output = "kableExtra", metrics = "Log.Lik.")
-```
+    ```{r}
+    modelsummary(list(`Response ~ 1` = clm(Response ~ 1, data = df_clean), `Response ~ Treat` = clm(Response ~ Treat, data = df_clean)), estimate = "{estimate}{stars}", gof_omit = "RMSE", statistic = c("std.error", "conf.int"), shape = term:contrast ~ model + statistic, output = "kableExtra", metrics = "Log.Lik.")
+    ```

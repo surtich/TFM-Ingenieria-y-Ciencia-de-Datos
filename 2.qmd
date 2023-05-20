@@ -70,7 +70,7 @@ En @kruschke2018 se han analizado los problemas potenciales de tratar datos ordi
 * Incluso se pueden invertir los efectos de un tratamiento.
 * También puede malinterpretarse la interacción entre factores.
 
-Otra cuestión que hay que tener en cuenta es que, al tratarse de un diseño cruzado, es de **medidas repetidas** ya que cada sujeto realiza dos veces el test, uno con cada vídeo y que, por lo tanto, las respuestas a cada test de un mismo sujeto no son independientes. Además, tampoco podemos considerar independientes los ítems que componen el test ya que los ítems pretenden medir la misma variable latente: la calidad del subtitulado.
+Otra cuestión que hay que tener en cuenta es que, al tratarse de un diseño cruzado, es de **medidas repetidas** ya que cada sujeto realiza dos veces el test, uno con cada vídeo y que, por lo tanto, las respuestas a cada test de un mismo sujeto no son independientes. Además, tampoco se pueden considerar independientes los ítems que componen el test ya que los ítems pretenden medir la misma variable latente: la calidad del subtitulado.
 
 En el experimento del subtitulado se analizó si el nivel de subtitulado (correcto o defectuoso) influye en el nivel de respuesta a los ítems de la escala de Likert, que es la variable respuesta. Se evaluó también la existencia de efectos secuencia y periodo y la influencia que tienen sobre el nivel de respuesta el estudiante y el propio ítem (pregunt:).
 
@@ -98,7 +98,7 @@ La estimación de coeficientes en *GLM* se realiza maximizando la función de ve
 
 La Regresión Logística no es aplicable directamente en respuestas ordinales ya que solo admite variables respuesta dicotómicas. Sin embargo, la Regresión Ordinal, que se describe en el siguiente apartado (ver @sec-ordinal), se puede considerar un extensión de la Regresión Logística y de ahí el interés de presentarla antes introducir la Regresión Logística. Además, una escala de Likert se puede convertir en dicotómica si se reduce a dos niveles (por ejemplo, contestación positiva y negativa).
 
-La Regresión Logística [ver @agresti_2018, pp. 68-69] es un caso particular de $GLM$ donde la variable respuesta, $Y$, es Benoulli o Binomial. Es decir, que $Y$ toma valores 0 ó 1. En una función de Bernoulli de parámetro $\pi$, $E[Y] = P(Y=1) = \pi$. Necesitamos una función que mapee los valores que puede tomar el componente lineal de rango $(-\infty, +\infty)$ a los valores que puede tomar $\pi$ en el rango $(0, 1)$. Una función que permite hacer esto es la función $logit$:
+La Regresión Logística [ver @agresti_2018, pp. 68-69] es un caso particular de $GLM$ donde la variable respuesta, $Y$, es Benoulli o Binomial. Es decir, que $Y$ toma valores 0 ó 1. En una función de Bernoulli de parámetro $\pi$, $E[Y] = P(Y=1) = \pi$. Es necesaria una función que mapee los valores que puede tomar el componente lineal de rango $(-\infty, +\infty)$ a los valores que puede tomar $\pi$ en el rango $(0, 1)$. Una función que permite hacer esto es la función $logit$:
 
 $$
 logit(Y=1) = log \left[\frac{P(Y=1)}{1-P(Y=1)} \right] = \alpha+\beta_1x_1+...+\beta_px_p
@@ -227,7 +227,7 @@ Las respuestas a los ítems de una escala de Likert son ordinales. La Regresión
 
 Las regresiones ordinales secuencial y adyacente presuponen que para alcanzar un nivel se ha tenido que pasar previamente por los anteriores. En un ítem de Likert esto carece de sentido y, por lo tanto, se descartan estos modelos. Por ello el *Modelo Acumulativo* (*Cumulative Model*, $CM$) es el más adecuado para el diseño de experimento realizado [ver @burkner2019, pp. 23-24] y además es el más utilizado.
 
-$CM$ presupone que la variable ordinal observada, $Y$, proviene de la categorización de una variable latente (no observada) continua, $\tilde{Y}$. Hay $K$ umbrales $\tau_k$ que particionan $\tilde{Y}$ en $K + 1$ categorías ordenadas observables (ver @fig-cumulative). Si asumimos que $\tilde{Y}$ tiene una cierta distribución (por ejemplo, normal) con distribución acumulada $F$, se calcula la probabilidad de que $Y$ sea la categoría $k$ de esta forma:
+$CM$ presupone que la variable ordinal observada, $Y$, proviene de la categorización de una variable latente (no observada) continua, $\tilde{Y}$. Hay $K$ umbrales $\tau_k$ que particionan $\tilde{Y}$ en $K + 1$ categorías ordenadas observables (ver @fig-cumulative). Si se asume que $\tilde{Y}$ tiene una cierta distribución (por ejemplo, normal) con distribución acumulada $F$, se calcula la probabilidad de que $Y$ sea la categoría $k$ de esta forma:
 
 $$Pr(Y = k) = F(\tau_k) - F(\tau_{k-1})$$
 
@@ -245,7 +245,7 @@ Por ejemplo en la @fig-cumulative,
 
 $$Pr(Y = 2) = F(\tau_2) - F(\tau_{1})$$
 
-Si suponemos que $\tilde{Y}$ tiene una relación lineal los predictores:
+Suponiendo que $\tilde{Y}$ tenga una relación lineal los predictores:
 
 $$\tilde{Y} = \eta + \epsilon = \beta_1 x_1 + \beta_2 x_2 + ... + \beta_p x_p + \epsilon$$
 
@@ -253,7 +253,7 @@ entonces la función de probabilidad acumulada de los errores tendrá la misma f
 
 $$\mathrm{Pr}(\epsilon \leq z) = F(z)$$
 
-Y podremos calcular la distribución de probabilidad acumulada de $Y$:
+Y se puede calcular la distribución de probabilidad acumulada de $Y$:
 
 $$\mathrm{Pr}(Y \leq k \mid \eta) = \mathrm{Pr}(\tilde{Y} \leq \tau_k \mid \eta) = \mathrm{Pr}(\eta + \epsilon \leq \tau_k) = \mathrm{Pr}(\epsilon \leq \tau_k - \eta) = F(\tau_k - \eta)$$
 
@@ -304,7 +304,7 @@ Es decir, que la proporcionalidad de $odds$ de dos niveles de respuesta es indep
 ## Modelos multinivel {#sec-multinivel}
 
 Un modelo multinivel, jerárquico o mixto es un modelo en el que los datos están anidados en una estructura jerárquica. Se utilizan cuando se incumple la hipótesis de independencia entre las observaciones. Por ejemplo, si se quisiera evaluar el rendimiento de varios métodos de enseñanza, se podrían seleccionar aleatoriamente varios colegios participantes y en cada uno de ellos elegir varias clases en las que se impartiría uno de los métodos de enseñanza.  En este caso, los alumnos de una clase no son independientes de los alumnos de otra clase del mismo colegio y también es esperable que los alumnos de un mismo colegio sean más parecidos entre sí que los de otro colegio. Otra situación en la que se viola la condición de independencia entre observaciones es cuando se toman varias medidas del mismo sujeto. Este tipo de experimentos se llaman de medidas repetidas o longitudinales
-^[Hay una diferencia conceptual entre medidas repetidas y longitudinales. Una variable se dice que es longitudinal cuando se toman varias medidas de los sujetos objeto del estudio en diferentes momentos del tiempo. Para que sea considerada de medidas repetidas, las medidas de cada sujeto se toman con distintos niveles de factor. En la práctica la distinción es poco relevante ya que ambas situaciones se parametrizan de la misma forma.]. Cuando se da este supuesto, se considera que las medidas están anidadas en el sujeto [ver @Liu2202]. En un modelo multinivel no es necesario que todas las variables tengan una estructura jerárquica. Distinguimos entonces dos tipos de variables: Las conocidas como de efectos fijos son aquellas que se considera que tienen el mismo efecto en toda la población y, por lo tanto, se debe estimar un único coeficiente. Las variables de efectos aleatorios tienen un coeficiente diferente para cada elemento de la población y se supone que son una muestra de una población mucho mayor, como el caso de seleccionar aleatoriamente una muestra de colegios. Normalmente el coeficiente particular de cada elemento no es de interés para el investigador y se asume que tienen una media centrada en cero. El mayor interés de los efectos aleatorios es la estimación de su matriz de varianzas-covarianzas.
+^[Hay una diferencia conceptual entre medidas repetidas y longitudinales. Una variable se dice que es longitudinal cuando se toman varias medidas de los sujetos objeto del estudio en diferentes momentos del tiempo. Para que sea considerada de medidas repetidas, las medidas de cada sujeto se toman con distintos niveles de factor. En la práctica la distinción es poco relevante ya que ambas situaciones se parametrizan de la misma forma.]. Cuando se da este supuesto, se considera que las medidas están anidadas en el sujeto [ver @Liu2202]. En un modelo multinivel no es necesario que todas las variables tengan una estructura jerárquica. Se distinguen entonces dos tipos de variables: Las conocidas como de efectos fijos son aquellas que se considera que tienen el mismo efecto en toda la población y, por lo tanto, se debe estimar un único coeficiente. Las variables de efectos aleatorios tienen un coeficiente diferente para cada elemento de la población y se supone que son una muestra de una población mucho mayor, como el caso de seleccionar aleatoriamente una muestra de colegios. Normalmente el coeficiente particular de cada elemento no es de interés para el investigador y se asume que tienen una media centrada en cero. El mayor interés de los efectos aleatorios es la estimación de su matriz de varianzas-covarianzas.
 
 La ecuación general de un modelo multinivel con dos niveles y un solo predictor con efectos aleatorios es [ver @chen2021, pp. 40]:
 
@@ -348,7 +348,7 @@ En @gelman2013 [p. 115] se evalúan tres posibilidades a la hora de definir un m
 
 * $Complete\ pooling$: Consiste en estimar un único parámetro para cada predictor. Es equivalente a un modelo con efectos fijos.
 * $No\ pooling$: Se estiman tantos parámetros como grupos haya de forma independiente.
-* $Partial\ pooling$: Es el modelo jerárquico. Es una mezcla de ambos, ya que aunque se estima un parámetro para cada grupo (como en $no\ pooling$), esta estimación no es independiente, sino que se supone que las observaciones de un mismo grupo proceden de una misma distribución de probabilidad. Esto se traduce en que se produce una contracción ($shrinkage$) en la estimación de los parámetros hacia la media. Al influir la estimación de unas observaciones en otras, la estimación es de menor valor absoluto que la que resultaría en un modelo de $no\ pooling$. De esta forma podemos ver el $complete\ pooling$ y el $no\ pooling$ como dos casos particulares y extremos del $partial\ pooling$. La contracción de coeficientes en los modelos multinivel actúa como una regularización que puede evitar el sobreajuste.
+* $Partial\ pooling$: Es el modelo jerárquico. Es una mezcla de ambos, ya que aunque se estima un parámetro para cada grupo (como en $no\ pooling$), esta estimación no es independiente, sino que se supone que las observaciones de un mismo grupo proceden de una misma distribución de probabilidad. Esto se traduce en que se produce una contracción ($shrinkage$) en la estimación de los parámetros hacia la media. Al influir la estimación de unas observaciones en otras, la estimación es de menor valor absoluto que la que resultaría en un modelo de $no\ pooling$. De esta forma se puede ver el $complete\ pooling$ y el $no\ pooling$ como dos casos particulares y extremos del $partial\ pooling$. La contracción de coeficientes en los modelos multinivel actúa como una regularización que puede evitar el sobreajuste.
 
 Los modelos multinivel requieren supuestos adicionales en el nivel segundo y superiores que son similares a los supuestos para los modelos de efectos fijos [ver @chen2021, pp. 43]. Para estimar los parámetros en un modelo multinivel se suele utilizar el método de Máxima Verosimilitud Restringida ($RMLE$), que es una variante de la estimación por Máxima Verosimilitud ($MLE$) en la que se hacen ajustes en los grados de libertad del modelo con efectos aleatorios para corregir el sesgo que se produce al usar $MLE$ en estos modelos.
 
@@ -388,7 +388,7 @@ $$
 \mathrm{elpd} = \sum_{i=1}^{N} \mathbb{E}(\mathrm{log} (p(\tilde{y}_i | \theta)))
 $$
 
-En la práctica no podemos saber el valor de $elpd$ ya que no conocemos el proceso que genera verdaderos valores $\tilde{y}$. Una forma de estimar $elpd$ que empíricamente se ha demostrado que funciona es penalizar $lpd$ con el número de parámetros $p$ de forma análoga a lo que se hace en $AIC$ (ver @eq-aic):
+En la práctica no se puede saber el valor de $elpd$ ya que no se conoce el proceso que genera verdaderos valores $\tilde{y}$. Una forma de estimar $elpd$ que empíricamente se ha demostrado que funciona es penalizar $lpd$ con el número de parámetros $p$ de forma análoga a lo que se hace en $AIC$ (ver @eq-aic):
 
 $$
 \widehat{\mathrm{elpd}} = \widehat{\mathrm{lpd}} - \mathrm{p}
@@ -409,7 +409,7 @@ $$
 \end{aligned}
 $$
 
-Una forma alternativa de evaluar un modelo es mediante validación cruzada ($CV$, Cross Validation). La validación cruzada más popular es *K-fold-CV*. Con esta técnica se divide el conjunto de datos en $K$ partes y se entrena el modelo separando sucesivamente cada una de las partes datos que se usan para evaluar el modelo. Los valores estimados resultan de promediar los $K$ resultados. El problema es que cuanto menor sea $K$ más inestables son los resultafos obtenidos, y cuanto menor sea $K$ más veces hay que entrenar el modelo. Un caso extremo de validación cruzada, que produce gran estabilidad en las estimaciones, es dejar un dato fuera cada vez (*Leave One Out*, $LOO$ ). La dificultad es que requiere estimar el modelo tantas veces como datos tengamos. Para evitar esto, hay formas de aproximar $\widehat{\mathrm{elpd}}$ basadas en $LOO$ sin tener que reentrenar el modelo. Las fórmula es la siguiente:
+Una forma alternativa de evaluar un modelo es mediante validación cruzada ($CV$, Cross Validation). La validación cruzada más popular es *K-fold-CV*. Con esta técnica se divide el conjunto de datos en $K$ partes y se entrena el modelo separando sucesivamente cada una de las partes datos que se usan para evaluar el modelo. Los valores estimados resultan de promediar los $K$ resultados. El problema es que cuanto menor sea $K$ más inestables son los resultafos obtenidos, y cuanto menor sea $K$ más veces hay que entrenar el modelo. Un caso extremo de validación cruzada, que produce gran estabilidad en las estimaciones, es dejar un dato fuera cada vez (*Leave One Out*, $LOO$ ). La dificultad es que requiere estimar el modelo tantas veces como datos se tengan. Para evitar esto, hay formas de aproximar $\widehat{\mathrm{elpd}}$ basadas en $LOO$ sin tener que reentrenar el modelo. Las fórmula es la siguiente:
 
 $$
 \begin{aligned}

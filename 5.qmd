@@ -4,7 +4,7 @@ source("_setup.R")
 
 # Resultados {#sec-resultados}
 
-En esté capítulo se comentarán los resultados de las técnicas estadísticas y de los modelos propuestos (ver @sec-modelado).
+En este capítulo se comentan los resultados de los modelos seleccionados (ver @sec-modelado).
 
 ### Comparación con *Odds Ratio* {#sec-or-3}
 
@@ -19,7 +19,7 @@ data.frame(summary(loddsratio(~ Treat + Seq + Response_l, data = df_all)) %>% un
     gt()
 ```
 
-Sin embargo, si realizamos este contraste entre subtítulos y periodos podemos constatar la existencia de un efecto periodo de signo contrario para las preguntas 4 y 5 (ver @tbl-logor2). 
+Sin embargo, si se realiza este contraste entre subtítulos y periodos, se constata la existencia de un efecto periodo de signo contrario para las preguntas 4 y 5 (ver @tbl-logor2). 
 
 ```{r}
 #| label: tbl-logor2
