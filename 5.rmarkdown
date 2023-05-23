@@ -2,11 +2,187 @@
 source("_setup.R")
 ```
 
+
+
+# Resultados {#sec-resultados}
+
+En este capítulo se comentan los resultados de los modelos seleccionados (ver @sec-modelado).
+
+### Comparación con *Odds Ratio* {#sec-or-3}
+
+El contraste de hipótesis del $log\ OR$ del subtitulado para cada grupo (ver @sec-or-2) no produce significación estadística en ningún nivel de respuesta, por lo que según esta prueba estadística la secuencia de subtitulado no influiría en la respuesta de los estudiantes (ver @tbl-logor1). Es decir, de acuerdo a este test la secuencia no influye en la valoración de los subtítulos.
+
+
+
+```{r}
+#| label: tbl-logor1
+#| tbl-cap: Log OR ~ Treat + Seq + Response_l
+data.frame(summary(loddsratio(~ Treat + Seq + Response_l, data = df_all)) %>% unclass(), check.names = F) %>%
+    rownames_to_column("Response") %>%
+    mutate_if(is.numeric, round, 3) %>%
+    gt()
+```
+
+
+
+Sin embargo, si se realiza este contraste entre subtítulos y periodos, se constata la existencia de un efecto periodo de signo contrario para los ítems 4 y 5 (ver @tbl-logor2). 
+
+
+
+```{r}
+#| label: tbl-logor2
+#| tbl-cap: Log OR ~ Treat + Period + Response_l
+data.frame(summary(loddsratio(~ Treat + Period + Response_l, data = df_all)) %>% unclass(), check.names = F) %>%
+    rownames_to_column("Response") %>%
+    mutate_if(is.numeric, round, 3) %>%
+    gt()
+```
+
+
+
+### Modelado
+
+
+
+```{r}
+options(contrasts = rep("contr.sum", 2))
+glmer_improve_subject_question <- glmer(Improve ~ 1 + (1 | Subject) + (1 | Question), family = "binomial", data = df_improve)
+
+improve_question <- 1 / (1 + exp(-coef(glmer_improve_subject_question)$Question + fixef(glmer_improve_subject_question)))
+
+improve_question <- cbind(rownames(improve_question), improve_question)
+colnames(improve_question) <- c("Question", "Prob")
+
+# summary(glmer_improve_subject_question)
+```
+
+
+
+El modelo de efectos mixtos ajustado con Regresión Logística:
+
+> Improve ~ 1 + (1 | Subject) + (1 | Question)
+
+estima la probabilidad de que la respuesta a un ítem en el subtitulado $A$ sea mejor que en el subtitulado $B$ frente a que sea igual o peor.
+El intercepto del modelo ajustado es `r round(fixef(glmer_improve_subject_question)[[1]],3)`. Por ello, la probabilidad de que se otorgue una mayor puntuación en $A$ que en $B$ es del `r paste(round(100/(1+exp(-fixef(glmer_improve_subject_question)[[1]])),2),"%", sep="")`. En la @tbl-improve-question se muestra la probabilidad de que la respuesta sea mejor en $A$ que en $B$ por ítem.
+
+\scriptsize
+
+
+```{r}
+#| label: tbl-improve-question
+#| tbl-cap: Probabilidad de que la respuesta a un ítem sea A > B frente a A <= B
+improve_question %>%
+    gt() %>%
+    fmt_number(Prob, decimals = 2)
+```
+
+
+
+\normalsize
+
+En la @sec-ordinal-2 se evaluaron distintas parametrizaciones de la Regresión Ordinal Acumulativa tanto desde el punto de vista frecuentista como bayesiano y considerando únicamente efectos fijos y también efectos aleatorios. Finalmente, tanto en el análisis frecuentista como en el bayesiano, el modelo que resultó ser más parsimonioso es el de la @eq-mejor-modelo, que se reproduce aquí en sintaxis R:
+
+\small
+> Response ~ Treat*Period + (1 + Treat  | Subject) + (1 + Treat | Question)
+\normalsize
+
+
+Este modelo produce en los dos paradigmas unas estimaciones similares, como se puede comprobar en la @tbl-model-comp.
+
+
+
+
+```{r}
+#| cache: true
+options(contrasts = rep("contr.sum", 2))
+
+clmm_treat.period.subject.question <- clmm(
+    Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question),
+    data = df_clean
+)
+
+brm_treat.period.subject.question <- brm(
+    Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question),
+    data = df_clean,
+    family = cumulative("logit"),
+    iter = 4000,
+    sample_prior = TRUE,
+    file = "models/brm_treat.period.subject.question",
+    file_refit = "on_change"
+)
+```
+
+
+
+
+\tiny
+
+
+```{r}
+#| label: tbl-model-comp
+#| tbl-cap: Comparación frecuentista/bayesiano de coeficientes estimados en el modelo Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question).
+#| tbl-scap: Comparación frecuentista/bayesiano de coeficientes estimados.
+#| cache: true
+df_clmm <- coef(clmm_treat.period.subject.question) %>% data.frame()
+colnames(df_clmm) <- c("Estimation.clmm")
+
+df_clmm <- bind_cols(df_clmm, confint(clmm_treat.period.subject.question))
+
+df_clmm_ranef_coefs <- c(
+    attr(VarCorr(clmm_treat.period.subject.question)$Question, "stddev")[1],
+    attr(VarCorr(clmm_treat.period.subject.question)$Question, "stddev")[2],
+    attr(VarCorr(clmm_treat.period.subject.question)$Subject, "stddev")[1],
+    attr(VarCorr(clmm_treat.period.subject.question)$Subject, "stddev")[2],
+    attr(VarCorr(clmm_treat.period.subject.question)$Question, "correlation")[2, 1],
+    attr(VarCorr(clmm_treat.period.subject.question)$Subject, "correlation")[2, 1]
+) %>% data.frame()
+
+rownames(df_clmm_ranef_coefs) <- c("Question.sd(Intercept)", "Question.sd(Treat1)", "Subject.sd(Intercept)", "Subject.sd(Treat1)", "Question.cor(Intercept,Treat1)", "Subject.cor(Intercept,Treat1)")
+colnames(df_clmm_ranef_coefs) <- c("Estimation.clmm")
+
+df_clmm <- bind_rows(df_clmm, df_clmm_ranef_coefs)
+df_brm <- (broom.mixed::tidyMCMC(brm_treat.period.subject.question, conf.int = T))[1:13, ]
+
+colnames(df_clmm) <- c("Estimation.clmm", "conf.2.5%", "conf.97.5%")
+colnames(df_brm) <- c("Name", "Estimation.brm", "std.error", "cred.2.5%", "cred.97.5%")
+df_brm$Name <- rownames(df_clmm)
+df_clmm$Name <- df_brm$Name
+df_clmm <- df_clmm %>% tibble()
+
+left_join(df_clmm, df_brm) %>%
+    relocate(Name) %>%
+    mutate(across(where(is.numeric), ~ round(., 2))) %>%
+    select(-c("std.error")) %>%
+    gt() %>%
+    tab_spanner(
+        label = "ordinal::clmm",
+        columns = c(Estimation.clmm, `conf.2.5%`, `conf.97.5%`)
+    ) %>%
+    tab_spanner(
+        label = "brms::brm",
+        columns = c(Estimation.brm, `cred.2.5%`, `cred.97.5%`)
+    ) %>%
+    sub_missing(columns = everything(), missing_text = "") %>%
+    tab_options(table.font.size = 6)
+```
+
+
+\normalsize
+
+
+
+
+```{r}
+source("_setup.R")
+```
+
+
 # Discusión y conclusiones {#sec-conclusiones}
 
 ## Comparación con *Odds Ratio* {#sec-or-4}
 
 En la @sec-or-3 se constató la existencia de un efecto periodo en las respuestas 4 y 5. El test es significativo porque el ratio entre subtítulos de respuestas con valor 4 es diferente en cada periodo habiendo mayor respuestas 4 en el segundo periodo que en el primero. Con las respuestas 5 ocurre lo contrario: la proporción es mayor en el primer periodo. La @fig-or2 permite una comprobación visual. Esto estaría indicando que los estudiantes de ambos grupos prestaron más atención o fueron más exigentes en el segundo visionado y decidieron no otorgar la puntuación máxima. Que el efecto periodo sea de signo contrario en dos respuestas no debe sorprender en este diseño de experimento, ya que un test es un juego de suma cero: la valoraciones que se ganan o se pierden en un nivel de respuesta necesariamente provocan que el resto de niveles pierdan o ganen respectivamente la misma cantidad. En cualquier caso, el efecto periodo es cuantitativa y cualitativamente pequeño. Al afectar solo al intercambio de valoraciones entre los niveles 4 y 5 es simplemente una pequeña corrección en la valoración del subtitulado y cualitativamente es poco importante ya que las respuestas 4 y 5 son ambas valoraciones positivas.
+
 
 ```{r}
 #| label: fig-or2
@@ -15,6 +191,7 @@ En la @sec-or-3 se constató la existencia de un efecto periodo en las respuesta
 #| fig-height: 4
 fourfold(xtabs(~ Treat + Period + Response, data = df_all))
 ```
+
 
 ## Modelado
 
@@ -35,6 +212,7 @@ La magnitud del efecto del subtitulado sobre las valoraciones es muy superior a 
 En definitiva, nuestro modelo predice que los estudiantes están bastante de acuerdo en que en los ítems $Q05$ y $Q09$ hay una diferencia de calidad importante entre subtitulados. También están de acuerdo en que en los ítems $Q04$ y $Q13$ no hay apenas cambio entre los subtitulados. En los ítems $Q15$, $Q16$ y $Q17$ hay una gran confusión en ambos niveles de subtitulado predominando la respuesta 4 y siendo muy parecidas las respuestas en ambos niveles. En el resto la confusión se circunscribe al nivel de subtitulado $B$, ya que en el nivel $A$ las opciones 4 y 5 predominan.
 
 ![Muestreo de la función predictiva a posteriori por tratamiento e ítem.](images/bayes-preg.png){#fig-pred-3 width="100%"}
+
 
 ```{r}
 #| fig-height: 10
@@ -112,7 +290,9 @@ p +
 
 ```
 
+
 \scriptsize
+
 ```{r}
 #| eval: false
 #| cache: true
@@ -172,19 +352,23 @@ inner_join(df_prob_data, df_prob_model) %>%
     cols_align(align = "center", columns = everything()) %>%
     gtsave("images/bayes-probs.png", vwidth = 1500)
 ```
+
 \normalsize
 
 
 ![Comparación de las respuestas generadas por el modelo y las frecuencias relativas de los datos.](images/bayes-probs.png){#fig-prob-compare width="120%" fig-align="left"}
+
 
 ```{=tex}
 \includegraphics{./images/bayes-probs.png}
 ```
 
 
+
 # Ciego
 
 En esta sección se discuten los resultados una vez descubierto el ciego. Se confirma que el subtitulado del vídeo que se ha denominado como $A$ es el que está correctamente subtitulado y el $B$ es el vídeo en el que se han introducido errores en los subtítulos. En la @tbl-blind-errors se muestran los errores introducidos y los ítems de la escala de Likert en los que se ha valorado el error (ver @tbl-likert-scale para la descripción textual de cada ítem).
+
 
 ```{=tex}
 \begin{table}[H]
@@ -247,4 +431,7 @@ En esta sección se discuten los resultados una vez descubierto el ciego. Se con
 \end{table}
 ```
 
+
 # Conclusión y trabajo futuro {#sec-conclusion}
+
+

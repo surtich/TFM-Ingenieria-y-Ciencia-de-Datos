@@ -74,7 +74,7 @@ Otra cuestión que hay que tener en cuenta es que, al tratarse de un diseño cru
 
 En el experimento del subtitulado se analizó si el nivel de subtitulado (correcto o defectuoso) influye en el nivel de respuesta a los ítems de la escala de Likert, que es la variable respuesta. Se evaluó también la existencia de efectos secuencia y periodo y la influencia que tienen sobre el nivel de respuesta el estudiante y el propio ítem (pregunt:).
 
-## Modelo Lineales Generalizad[^GLM] {#sec-glm}
+## Modelos Lineales Generalizados [^GLM] {#sec-glm}
 
 [^GLM]: No se deben confundir los modelos lineales generales con los modelos lineales generalizados. En los primeros, también llamados Modelos de Regresión Multivariante, se presupone que la variable respuesta tiene una relación lineal con los predictores y sus valores se distribuyen normalmente. Los segundos son una generalización de los primeros y permiten que la variable respuesta admita otras distribuciones además de la normal.
 

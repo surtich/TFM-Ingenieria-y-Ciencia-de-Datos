@@ -144,6 +144,7 @@
 
 \usepackage{multirow}
 \usepackage{booktabs}
+
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{array}
@@ -566,7 +567,7 @@ Phasellus vitae magna nec mi sagittis luctus vitae eu augue. Donec scelerisque l
 \addto\captionsspanish{
 \def\listtablename{\'Indice de tablas}%
 \def\tablename{Tabla}}
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, interior hidden, borderline west={3pt}{0pt}{shadecolor}, boxrule=0pt, breakable, enhanced, sharp corners]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, enhanced, sharp corners, breakable, boxrule=0pt, borderline west={3pt}{0pt}{shadecolor}, frame hidden]}{\end{tcolorbox}}\fi
 
 % Contents
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -647,7 +648,7 @@ y va más allá de verificar si el vídeo tiene o no subtítulos.
 El objetivo del estudio es responder a la siguiente pregunta de
 investigación:
 
-\begin{tcolorbox}[enhanced jigsaw, coltitle=black, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Pregunta de investigación}, colback=white, leftrule=.75mm, titlerule=0mm, toprule=.15mm, left=2mm, rightrule=.15mm, breakable, toptitle=1mm, opacitybacktitle=0.6, bottomtitle=1mm, colbacktitle=quarto-callout-note-color!10!white, arc=.35mm, bottomrule=.15mm, colframe=quarto-callout-note-color-frame, opacityback=0]
+\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, opacityback=0, bottomrule=.15mm, colback=white, arc=.35mm, opacitybacktitle=0.6, coltitle=black, left=2mm, bottomtitle=1mm, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, titlerule=0mm, toprule=.15mm, breakable, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Pregunta de investigación}, leftrule=.75mm, rightrule=.15mm]
 
 ¿Son los estudiantes de un curso de creación de materiales accesibles
 capaces de encontrar diferencias en la calidad del subtitulado de un
@@ -692,7 +693,7 @@ un conocimiento experto como, por ejemplo, la evaluación del contraste,
 ya que requieren herramientas adecuadas. Por ello, se responderá al
 siguiente objetivo específico:
 
-\begin{tcolorbox}[enhanced jigsaw, coltitle=black, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Objetivos específicos}, colback=white, leftrule=.75mm, titlerule=0mm, toprule=.15mm, left=2mm, rightrule=.15mm, breakable, toptitle=1mm, opacitybacktitle=0.6, bottomtitle=1mm, colbacktitle=quarto-callout-tip-color!10!white, arc=.35mm, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, opacityback=0]
+\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, opacityback=0, bottomrule=.15mm, colback=white, arc=.35mm, opacitybacktitle=0.6, coltitle=black, left=2mm, bottomtitle=1mm, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, titlerule=0mm, toprule=.15mm, breakable, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Objetivos específicos}, leftrule=.75mm, rightrule=.15mm]
 
 ¿Qué aspectos de la calidad del subtitulado son más fácilmente
 reconocibles por los estudiantes y en cuáles existe mayor dificultad?
@@ -749,7 +750,7 @@ El diseño de experimento es \textbf{triple ciego}: es decir, a los
 alumnos no se les informó de si estaban viendo el vídeo con mejor o con
 peor calidad de subtitulado. Los directores del MOOC tampoco conocieron
 esta información, como tampoco se conocía en el momento de analizar los
-datos, ya que los vídeos tienen identificaciones ofuscadas con CRC32B y
+datos, ya que los vídeos tienen identificaciones ofuscadas con CRC32b y
 no contienen ninguna indicación del tipo de subtitulado del
 vídeo\footnote{En la respuesta a cada ítem, el alumno pudo añadir
   comentarios. Éstos fueron eliminados del estudio para que no filtren
@@ -817,7 +818,7 @@ o en los ejemplos de código.
 
 Este trabajo es reproducible. Para su elaboración se ha utilizado la
 herramienta de publicación científica Quarto y el lenguaje de
-programación R.
+programación R. Todas las figuras mostradas han sido generadas con R.
 
 \bookmarksetup{startatroot}
 
@@ -989,14 +990,15 @@ existencia de efectos secuencia y periodo y la influencia que tienen
 sobre el nivel de respuesta el estudiante y el propio ítem (pregunt:).
 
 \hypertarget{sec-glm}{%
-\section[Modelo Lineales Generalizad]{\texorpdfstring{Modelo Lineales
-Generalizad\footnote{No se deben confundir los modelos lineales
-  generales con los modelos lineales generalizados. En los primeros,
-  también llamados Modelos de Regresión Multivariante, se presupone que
-  la variable respuesta tiene una relación lineal con los predictores y
-  sus valores se distribuyen normalmente. Los segundos son una
-  generalización de los primeros y permiten que la variable respuesta
-  admita otras distribuciones además de la normal.}}{Modelo Lineales Generalizad}}\label{sec-glm}}
+\section[Modelos Lineales Generalizados ]{\texorpdfstring{Modelos
+Lineales Generalizados
+\footnote{No se deben confundir los modelos lineales generales con los
+  modelos lineales generalizados. En los primeros, también llamados
+  Modelos de Regresión Multivariante, se presupone que la variable
+  respuesta tiene una relación lineal con los predictores y sus valores
+  se distribuyen normalmente. Los segundos son una generalización de los
+  primeros y permiten que la variable respuesta admita otras
+  distribuciones además de la normal.}}{Modelos Lineales Generalizados }}\label{sec-glm}}
 
 El Modelo Lineal Generalizado (\emph{Generalized Linear Model}, \(GLM\))
 es un modelo en el que la variable respuesta no sigue una distribución
@@ -1578,8 +1580,8 @@ Se dispuso de los siguientes ficheros \texttt{csv}:
 \tightlist
 \item
   Fichero \texttt{grade} contiene el identificador de estudiante y el
-  grupo al que pertenece (campo \texttt{cohort}), ofuscado con SHA-512
-  para no conocer la identidad real del estudiante y con CRC-32B para no
+  grupo al que pertenece (campo \texttt{cohort}), ofuscado con SHA512
+  para no conocer la identidad real del estudiante y con CRC32b para no
   conocer si el grupo es el que el vio primero el vídeo bien
   subtitulado.
 \item
@@ -1691,13 +1693,13 @@ ficheros suministrados:
     correctamente subtitulado o el otro. La única información que se
     almacenó es si se estaba respondiendo al vídeo que se vio primero.}.
 \item
-  Se seleccionaron las preguntas que contienen las respuestas y se
-  renombraron para que fuera más fácil saber de qué pregunta se trataba
-  \footnote{En los ficheros suministrados la respuesta a cada pregunta
-    ocupaba varios campos. Se seleccionó en cada pregunta el que
-    contiene el valor de la respuesta y se convirtió a numérico.}. Se
-  convirtió el campo \texttt{LastTry}, que contiene la fecha y hora de
-  realización del test, a formato fecha y hora.
+  Se seleccionaron los ítems que contienen las respuestas y se
+  renombraron para que fuera más fácil saber de qué ítem se trataba
+  \footnote{En los ficheros suministrados la respuesta a cada ítem
+    ocupaba varios campos. Se seleccionó en cada ñitem el que contiene
+    el valor de la respuesta y se convirtió a numérico.}. Se convirtió
+  el campo \texttt{LastTry}, que contiene la fecha y hora de realización
+  del test, a formato fecha y hora.
 \item
   Se realizaron algunas comprobaciones como la ausencia de valores nulos
   en las variables más relevantes y la no existencia de inconsistencias
@@ -1712,9 +1714,9 @@ ficheros suministrados:
   Se eliminaron del estudio los usuarios que solo han realizado uno de
   los test.
 \item
-  Se transformaron las variables que lo requirieron en factores. La
-  pregunta 18 se fijó como referencia en el factor \texttt{Question} ya
-  que es una valoración general del subtitulado.
+  Se transformaron las variables que lo requirieron en factores. El ítem
+  18 se fijó como referencia en el factor \texttt{Question} ya que es
+  una valoración general del subtitulado.
 \item
   Se rotaron los valores de respuesta para que \enquote{No sé / No
   contesto} tenga valor 0 y el resto de 1 a 5 desde \enquote{Muy en
@@ -1724,22 +1726,21 @@ ficheros suministrados:
   \texttt{negativo}, \texttt{neutral} y \texttt{positivo} dependiendo de
   si la respuesta es 1 ó 2, 3, 4 ó 5 respectivamente e \texttt{Improve}
   con valores 0 ó 1, dependiendo de si la respuesta en el test \(A\) es
-  mejor (1) o igual o peor (0) que la del \(B\) para cada pregunta y
+  mejor (1) o igual o peor (0) que la del \(B\) para cada ítem y
   estudiante.
 \item
   Se transformó el \texttt{dataframe} de formato ancho a largo. Los
   ficheros de respuestas originales se suministraron en formato ancho.
   Es decir, que cada fila es un test que contiene 18 columnas para las
-  respuestas a cada pregunta. Los nombres de las columnas son \(Q01\),
+  respuestas a cada ítem. Los nombres de las columnas son \(Q01\),
   \(Q02\), \ldots, \(Q18\) y tienen valores de 0 a 5 con las respuestas.
   La mayoría de los paquetes de R utilizados requieren que los datos
   estén en formato largo. Esto que quiere decir que cada fila tendrá una
   única respuesta por lo que habrá únicamente dos columnas, \(Question\)
-  y \(Response\). En la primera se almacena el identificador de la
-  pregunta (\(Q01\), \(Q02\), \ldots, \(Q18\)) y en la segunda el valor
-  de la respuesta (de 0 a 5). De esta forma, un test pasó de ocupar una
-  fila y 18 columnas en el formato ancho a 18 filas y dos columnas en el
-  largo.
+  y \(Response\). En la primera se almacena el identificador del ítem
+  (\(Q01\), \(Q02\), \ldots, \(Q18\)) y en la segunda el valor de la
+  respuesta (de 0 a 5). De esta forma, un test pasó de ocupar una fila y
+  18 columnas en el formato ancho a 18 filas y dos columnas en el largo.
 \end{itemize}
 
 \hypertarget{variables-utilizadas}{%
@@ -1766,14 +1767,14 @@ tratan como efectos aleatorios en el modelado multinivel.
 \toprule
 Nombre & Descripción & Tipo & Valores \\ 
 \midrule
-Response & Respuesta a las preguntas del test. & Factor ordenado & De 0 a 5 \\ 
+Response & Respuesta a los ítems del test. & Factor ordenado & De 0 a 5 \\ 
 Level & Valoración de la respuesta. & Factor ordenado & Negativo, Neutral, Positivo\textsuperscript{\textit{1}} \\ 
 Improve & Mejor respuesta en test A que en B. & Factor & 1 ó 0 \\ 
 Treat & Subtítulos & Factor & A o B \\ 
 Period & Periodo & Factor & 1 ó 2\textsuperscript{\textit{2}} \\ 
 Seq & Secuencia de aplicación de los tratamientos. & Factor & AB o BA \\ 
 Subject & Identificación del estudiante & Factor & Numérico \\ 
-Question & Número de la pregunta & Factor & Q01, Q02, ..., Q18 \\ 
+Question & Número del ítem & Factor & Q01, Q02, ..., Q18 \\ 
 \bottomrule
 \end{longtable}
 \begin{minipage}{\linewidth}
@@ -1872,9 +1873,9 @@ valor nulo ni erróneo.
 El campo \texttt{LastTry} contiene la fecha y hora de realización del
 test. Con esta información se puede conocer el tiempo que transcurrió
 desde que un estudiante rellenó el primer test hasta que completó el
-segundo. Dado que los vídeos duran 43 segundos y hay 18 preguntas, se
-puede estimar el tiempo medio que cada estudiante empleó en contestar
-cada pregunta suponiendo que haya visto el segundo vídeo completo. La
+segundo. Dado que los vídeos duran 43 segundos y hay 18 ítems, se puede
+estimar el tiempo medio que cada estudiante empleó en contestar cada
+ítem suponiendo que haya visto el segundo vídeo completo. La
 Tabla~\ref{tbl-washout} muestra que hay algunos test en los que los
 estudiantes emplearon un tiempo muy breve en contestar \footnote{Hay que
   tener en cuenta que la duración de vídeo es de algo más de 40 segundos
@@ -1917,11 +1918,11 @@ La tabla Tabla~\ref{tbl-distinct2} muestra los test de respuesta única y
 el valor de esa respuesta. Se aprecia que la mayoría de estos test
 tienen valor de respuesta 4, la secuencia mayoritaria es la \(BA\) y el
 test el \(A\). El estudiante 4 responde ambos test utilizando el mismo
-valor de respuesta en todas las preguntas.
+valor de respuesta en todas los ítems.
 
 \hypertarget{tbl-distinct2}{}
 \begin{longtable}{rllr}
-\caption{\label{tbl-distinct2}Test en los que todas las preguntas se contestan el mismo valor de
+\caption{\label{tbl-distinct2}Test en los que todas los ítems se contestan el mismo valor de
 respuesta. }\tabularnewline
 
 \toprule
@@ -1946,10 +1947,10 @@ Response & Seq & Test & Subject \\
 La Figura~\ref{fig-compare} presenta la distribución de la cantidad de
 respuestas cuyo valor cambia entre los dos test que realiza cada
 estudiante. La mayoría de los estudiantes cambian entre uno y otro test
-entre 11 y 17 respuestas. Tan solo 1 estudiante respondió a todas las
-preguntas con el mismo valor en los dos test. Por otro lado, no hay test
-que tengan un número excesivo de contestaciones \enquote{No sé/No
-contesto} (ver Tabla~\ref{tbl-noanswer}).
+entre 11 y 17 respuestas. Tan solo 1 estudiante respondió a todos los
+ítems con el mismo valor en los dos test. Por otro lado, no hay test que
+tengan un número excesivo de contestaciones \enquote{No sé/No contesto}
+(ver Tabla~\ref{tbl-noanswer}).
 
 \begin{figure}[h]
 
@@ -1962,9 +1963,9 @@ test para cada estudiante.}
 
 \end{figure}
 
-Tan solo 1 estudiante respondió a todas las preguntas con el mismo valor
-en los dos test. Por otro lado, no hay test que tengan un número
-excesivo de contestaciones \enquote{No sé/No contesto} (ver
+Tan solo 1 estudiante respondió a todas los ítems con el mismo valor en
+los dos test. Por otro lado, no hay test que tengan un número excesivo
+de contestaciones \enquote{No sé/No contesto} (ver
 Tabla~\ref{tbl-noanswer}).
 
 \hypertarget{tbl-noanswer}{}
@@ -1996,21 +1997,21 @@ debida atención y diligencia.
 grupos}{Comparación de los tratamientos A y B entre grupos}}\label{sec-eda-3}}
 
 La Figura~\ref{fig-diff} presenta una forma de comparar los dos test
-realizados por los estudiantes. Para cada estudiante se comparó pregunta
-a pregunta sus dos test y se contabilizó la diferencia entre el número
-de preguntas en que la puntuación en el segundo vídeo fue superior y en
-las que lo fue inferior (las que no variaron de puntuación no se
-consideraron). En el eje \(x\) se muestra la diferencia entre preguntas.
-Cantidades negativas indican que hay más respuestas en el segundo de los
-test que han empeorado respecto al primero de las que han mejorado. En
-el eje \(y\) se representa el número de estudiantes para cada
-diferencia. Esta frecuencia se representa en negativo cuando la
+realizados por los estudiantes. Para cada estudiante se comparó ítem a
+ítem sus dos test y se contabilizó la diferencia entre el número de
+ítems en los que la puntuación en el segundo vídeo fue superior y en los
+que lo fue inferior (las que no variaron de puntuación no se
+consideraron). En el eje \(x\) se muestran las diferencias entre
+respuestas. Cantidades negativas indican que hay más respuestas en el
+segundo de los test que han empeorado respecto al primero de las que han
+mejorado. En el eje \(y\) se representa el número de estudiantes para
+cada diferencia. Esta frecuencia se representa en negativo cuando la
 diferencia en el eje x sea negativa para facilitar la
 comparación\footnote{En la comparación se han omitido aquellas
   respuestas en las que el estudiante contestó \enquote{No sé / No
-  contesto} en la pregunta correspondiente de uno de los test.}. Esto es
-una forma de evaluar si el estudiante valoró mejor o no el segundo vídeo
-que el primero.
+  contesto} en el ítem correspondiente de uno de los test.}. Esto es una
+forma de evaluar si el estudiante valoró mejor o no el segundo vídeo que
+el primero.
 
 \begin{figure}[h]
 
@@ -2072,7 +2073,7 @@ BA & 2 & A & 30 & 2 & 30 & 64 & 345 & 321 \\
 \end{longtable}
 
 En la Tabla~\ref{tbl-resume} se muestra la frecuencia absoluta del valor
-de respuesta para cada grupo y test en todas la preguntas. Esta es otra
+de respuesta para cada grupo y test en todas los ítems. Esta es otra
 forma de comparar los niveles de subtitulado. La Figura~\ref{fig-freqs}
 muestra la misma información gráficamente y con frecuencias relativas.
 En esta figura se pueden apreciar algunas cuestiones interesantes:
@@ -2108,8 +2109,7 @@ test.}
 \end{figure}
 
 El análisis marginalizado de tratamiento, secuencia y periodo tiene
-estos resultados referidos a las preguntas con contestación positiva (4,
-5):
+estos resultados referidos a los ítems con contestación positiva (4, 5):
 
 \begin{itemize}
 \item
@@ -2123,12 +2123,11 @@ estos resultados referidos a las preguntas con contestación positiva (4,
   frente 66\% de la secuencia \(BA\).
 \end{itemize}
 
-\hypertarget{anuxe1lisis-de-las-preguntas.}{%
-\subsection{Análisis de las
-preguntas.}\label{anuxe1lisis-de-las-preguntas.}}
+\hypertarget{anuxe1lisis-de-los-uxedtems}{%
+\subsection{Análisis de los ítems}\label{anuxe1lisis-de-los-uxedtems}}
 
 El gráfico Figura~\ref{fig-levels} muestra la frecuencia relativa por
-grupo y por test de las preguntas clasificadas por niveles de respuesta,
+grupo y por test de los ítems clasificados por niveles de respuesta,
 considerando que:
 
 \begin{itemize}
@@ -2144,22 +2143,21 @@ considerando que:
   análisis.
 \end{itemize}
 
-Se muestra en primer lugar la pregunta 18 por ser una valoración global
-del subtitulado y que resume la opinión que sobre el mismo tiene el
+Se muestra en primer lugar el ítem 18 por ser una valoración global del
+subtitulado y que resume la opinión que sobre el mismo tiene el
 estudiante. Se vuelve a constatar que el subtitulado \(A\) es mejor
-valorado por los estudiantes, pero ahora se confirma que en las 18
-preguntas ambos grupos tienen más puntuaciones positivas y menos
-negativas en el subtitulado \(A\) que en el \(B\). También se vuelve a
-constatar que los dos grupos valoran de forma muy similar los dos
-niveles de subtitulado en todas las preguntas. En el nivel de
-subtitulado \(A\) las preguntas \(Q15\), \(Q16\) y \(Q17\) obtienen
-relativamente peores valoraciones (consultar la
-Tabla~\ref{tbl-likert-scale} para ver el texto de las preguntas) y estas
-son similares en ambos subtitulados. Hay algunas preguntas que son
-valoradas de forma positiva incluso en el nivel de subtitulado \(B\)
-(por ejemplo \(Q04\) o \(Q13\)). Por último, las preguntas \(Q05\) y
-\(Q09\) (también la \(Q14\) pero solo para el grupo \(BA\)) tienen una
-valoración muy negativa en el nivel de subtitulado \(B\).
+valorado por los estudiantes, pero ahora se confirma que en los 18 ítems
+ambos grupos tienen más puntuaciones positivas y menos negativas en el
+subtitulado \(A\) que en el \(B\). También se vuelve a constatar que los
+dos grupos valoran de forma muy similar los dos niveles de subtitulado
+en todos los ítems. En el nivel de subtitulado \(A\) los ítems \(Q15\),
+\(Q16\) y \(Q17\) obtienen relativamente peores valoraciones (consultar
+la Tabla~\ref{tbl-likert-scale} para ver el texto de los ítems) y estas
+son similares en ambos subtitulados. Hay algunos ítems que son valoradas
+de forma positiva incluso en el nivel de subtitulado \(B\) (por ejemplo
+\(Q04\) o \(Q13\)). Por último, los ítems \(Q05\) y \(Q09\) (también la
+\(Q14\) pero solo para el grupo \(BA\)) tienen una valoración muy
+negativa en el nivel de subtitulado \(B\).
 
 \begin{figure}[h]
 
@@ -2168,9 +2166,34 @@ valoración muy negativa en el nivel de subtitulado \(B\).
 }
 
 \caption{\label{fig-levels}Frecuencias relativas de las respuestas por
-pregunta.}
+ítem.}
 
 \end{figure}
+
+En la Tabla~\ref{tbl-no-response} se muestran las contastaciones
+\enquote{No sé / No contesto} por subtitulado e ítem. Se observa que hay
+relativamente pocas contestaciones \enquote{No śe / No contesto} y que
+éstas se concentran en los ítems \(Q14\), \(Q15\), \(Q16\) y \(Q17\).
+
+\tiny
+
+\hypertarget{tbl-no-response}{}
+\begin{longtable}{rrrrrrrrrrrrrrrrrr}
+\caption{\label{tbl-no-response}Contestaciones ``No sé / No contesto'' por nivel de subtitulado e ítem }\tabularnewline
+
+\toprule
+Q18 & Q01 & Q02 & Q03 & Q04 & Q05 & Q06 & Q07 & Q08 & Q09 & Q10 & Q11 & Q12 & Q13 & Q14 & Q15 & Q16 & Q17 \\ 
+\midrule
+\multicolumn{18}{l}{A} \\ 
+\midrule
+0 & 0 & 0 & 1 & 0 & 0 & 1 & 0 & 3 & 1 & 0 & 1 & 1 & 0 & 11 & 11 & 22 & 17 \\ 
+\midrule
+\multicolumn{18}{l}{B} \\ 
+0 & 0 & 0 & 4 & 0 & 1 & 0 & 0 & 1 & 0 & 8 & 2 & 4 & 1 & 10 & 15 & 25 & 12 \\ 
+\bottomrule
+\end{longtable}
+
+\normalsize
 
 \hypertarget{sec-modelos-utilizados}{%
 \section{Modelos utilizados}\label{sec-modelos-utilizados}}
@@ -2234,10 +2257,10 @@ el uso de la Regresión Logística. No obstante, esta transformación
 reducirá la cantidad de datos disponibles a la mitad e impedirá analizar
 el efecto periodo ya que al comparar los subtitulados, desaparece el
 periodo. Se ha creado una variable \texttt{Improve} con dos valores
-posibles: 1 cuando el estudiante valoró la pregunta mejor en el
-subtitulado \(A\) que en el \(B\), 0 si empeoró o puntuó igual. Si en
-uno de los test contestó una pregunta con \enquote{No sé / No contesto},
-se elimina esa pregunta.
+posibles: 1 cuando el estudiante valoró el ítem mejor en el subtitulado
+\(A\) que en el \(B\), 0 si empeoró o puntuó igual. Si en uno de los
+test contestó un ítem con \enquote{No sé / No contesto}, se elimina ese
+ítem.
 
 Se ajusta el modelo con la secuencia como predictor:
 
@@ -2276,11 +2299,10 @@ Number of Fisher Scoring iterations: 4
 Se constata que el coeficiente del intercepto es positivo y
 significativo (0.37). El intercepto es el \(log\ odds\) de mejorar la
 valoración en \(A\) sobre \(B\) respecto a empeorar la valoración. La
-probabilidad de que la respuesta a una pregunta sea mejor en el
-subtitulado \(A\) que en el \(B\) es 0.59. Sin embargo, la secuencia no
-resulta significativa y además añadirla apenas reduce la
-\enquote{deviance}, por lo que el modelo nulo sin predictores resulta
-más parsimonioso.
+probabilidad de que la respuesta a un ítem sea mejor en el subtitulado
+\(A\) que en el \(B\) es 0.59. Sin embargo, la secuencia no resulta
+significativa y además añadirla apenas reduce la \enquote{deviance}, por
+lo que el modelo nulo sin predictores resulta más parsimonioso.
 
 \hypertarget{sec-ordinal-2}{%
 \subsection{Regresión Ordinal}\label{sec-ordinal-2}}
@@ -2326,18 +2348,18 @@ predictores \texttt{Treat}, \texttt{Period}, \texttt{Seq} y
 \texttt{Question} las diferencias de \texttt{logits} entre cada dos
 niveles consecutivos de respuesta. Se constata que las diferencias son
 pequeñas particularmente para el periodo y para la secuencia. También
-son moderadas para la mayoría de las preguntas. La diferencia es mayor
-en el subtitulado en la comparación de los niveles de respuesta 1 y 2.
-Con esta evidencia, se acepta la hipótesis de proporcionalidad de
-\(odds\). En la Tabla~\ref{tbl-po.check} se muestra cómo se realiza el
-cálculo de la diferencia de \(odds\) para el predictor \texttt{Seq} y
-así facilitar la comprensión de la construcción de la figura. En caso de
-que la proporcinalidad de \(odds\) no se cumpla existen varias
-posibilidades. Una sería desechar el modelo ordinal y usar una Regresión
-Multinomial. Otra sería relajar la hipótesis de proporcionalidad de
-\(odds\) estimando un coeficiente distinto para cada nivel de respuesta
-y nivel de factor. La función \texttt{vglm} del paquete \texttt{VGAM}
-permite hacer esto.
+son moderadas para la mayoría de los ítems. La diferencia es mayor en el
+subtitulado en la comparación de los niveles de respuesta 1 y 2. Con
+esta evidencia, se acepta la hipótesis de proporcionalidad de \(odds\).
+En la Tabla~\ref{tbl-po.check} se muestra cómo se realiza el cálculo de
+la diferencia de \(odds\) para el predictor \texttt{Seq} y así facilitar
+la comprensión de la construcción de la figura. En caso de que la
+proporcinalidad de \(odds\) no se cumpla existen varias posibilidades.
+Una sería desechar el modelo ordinal y usar una Regresión Multinomial.
+Otra sería relajar la hipótesis de proporcionalidad de \(odds\)
+estimando un coeficiente distinto para cada nivel de respuesta y nivel
+de factor. La función \texttt{vglm} del paquete \texttt{VGAM} permite
+hacer esto.
 
 \begin{figure}[h]
 
@@ -2490,10 +2512,10 @@ niveles inferiores y superiores a uno dado, \(k\), es 5.59 veces en el
 subtitulado \(B\) que en el \(A\). Esto indica que el subtitulado \(B\)
 es percibido por los estudiantes como de peor calidad que el subtitulado
 \(A\). Concretamente, el \texttt{OR} de observar una mejor respuesta en
-una pregunta del test es 5.59 veces superior en el nivel de subtitulado
-\(A\) que en el \(B\). Aunque no suele ser de interés la interpretación
-de los coeficientes de los umbrales (\texttt{Threshold\ coefficients}),
-se pueden utilizar para estimar las probabilidades de respuesta. Por
+un ítem del test es 5.59 veces superior en el nivel de subtitulado \(A\)
+que en el \(B\). Aunque no suele ser de interés la interpretación de los
+coeficientes de los umbrales (\texttt{Threshold\ coefficients}), se
+pueden utilizar para estimar las probabilidades de respuesta. Por
 ejemplo, para el nivel de subtitulado \(B\) y nivel de respuesta 2:
 
 \[
@@ -2529,9 +2551,8 @@ Esto se corresponde con lo que ya se había constatado en el análisis
 exploratorio (ver Figura~\ref{fig-freqs}). Se debe tener en cuenta que
 este modelo tiene un único predictor y, por lo tanto, no es capaz de
 explicar las diferencias en el nivel de respuesta para distintos
-periodos, secuencias, preguntas o estudiantes. En las siguientes
-secciones se investiga si en el nivel de respuesta influyen estos
-predictores.
+periodos, secuencias, ítems o estudiantes. En las siguientes secciones
+se investiga si en el nivel de respuesta influyen estos predictores.
 
 \hypertarget{tbl-probs-clm-treat}{}
 \begin{table}
@@ -2873,10 +2894,10 @@ observaciones no son independientes. En la Figura~\ref{fig-subjects} se
 muestran las respuestas de diez estudiantes a cada subtitulado. Se
 observa que las respuestas no son independientes ya que cada estudiante
 tiene un preferencia por uno o varios niveles de respuesta en cada test.
-Por otro lado, las preguntas no son independientes unas de otras ya que
+Por otro lado, los ítems no son independientes unos de otros ya que
 pretenden medir la misma variable subyacente. Además, el interés no es
 conocer el valor concreto de sus coeficientes sino su valor en relación
-a los coeficientes de las otras preguntas. En
+a los coeficientes de los otros ítems. En
 \textcite[pp.~14-16]{burkner2021} \textcite[pp.~19-20]{burkner2019} se
 puede encontrar un ejemplo con esta parametrización aplicada a una
 escala de Likert.
@@ -3306,9 +3327,9 @@ Response \textasciitilde{} Treat*Period + (1 + Treat \textbar{} Subject)
 El modelo utiliza como factores con efectos fijos
 (\texttt{complete\ pooling} en terminología bayesiana) el nivel de
 subtitulado y el periodo y la interacción entre ambos; y como efectos
-aleatorios (\texttt{partial\ pooling}) los sujetos y las preguntas del
-test, cada uno de ellos con un intercepto y un nivel de subtitulado
-variable. El resumen del modelo es el siguiente:
+aleatorios (\texttt{partial\ pooling}) los sujetos y los ítems del test,
+cada uno de ellos con un intercepto y un nivel de subtitulado variable.
+El resumen del modelo es el siguiente:
 
 \tiny
 
@@ -3441,10 +3462,10 @@ mezclan correctamente y no se aprecia autocorrelación en ninguno de los
 parámetros. Por último, en la Figura~\ref{fig-predictive} se muestra una
 comparación entre los histogramas construidos con los datos de las
 respuestas a los test con los intervalos de credibilidad marginales de
-la función predictiva a posteriori del modelo. En la mayoría de las
-preguntas, el muestreo se ajusta bastante bien al histograma de
-respuestas; aunque en algunas preguntas, como la \texttt{Q16} o la
-\texttt{Q17}, se aprecian diferencias relevantes.
+la función predictiva a posteriori del modelo. En la mayoría de los
+ítems, el muestreo se ajusta bastante bien al histograma de respuestas;
+aunque en algunos ítems, como el \texttt{Q16} o el \texttt{Q17}, se
+aprecian diferencias relevantes.
 
 \begin{figure}[h]
 
@@ -3509,7 +3530,7 @@ Muy de acuerdo & 0.117 & 0.137 & 0.855 & 0.393 \\
 
 Sin embargo, si se realiza este contraste entre subtítulos y periodos,
 se constata la existencia de un efecto periodo de signo contrario para
-las preguntas 4 y 5 (ver Tabla~\ref{tbl-logor2}).
+los ítems 4 y 5 (ver Tabla~\ref{tbl-logor2}).
 
 \hypertarget{tbl-logor2}{}
 \begin{longtable}{lrrrr}
@@ -3651,10 +3672,10 @@ valoraciones que se ganan o se pierden en un nivel de respuesta
 necesariamente provocan que el resto de niveles pierdan o ganen
 respectivamente la misma cantidad. En cualquier caso, el efecto periodo
 es cuantitativa y cualitativamente pequeño. Al afectar solo al
-intercambio de valoraciones entre los niveles 4 y 5, es simplemente una
-pequeña corrección en la valoración del subtitulado y que
-cualitativamente es poco importante ya que las respuestas 4 y 5 son
-ambas valoraciones positivas.
+intercambio de valoraciones entre los niveles 4 y 5 es simplemente una
+pequeña corrección en la valoración del subtitulado y cualitativamente
+es poco importante ya que las respuestas 4 y 5 son ambas valoraciones
+positivas.
 
 \begin{figure}[h]
 
@@ -3688,62 +3709,60 @@ superior a la de los efectos periodo y secuencia (ver
 Tabla~\ref{tbl-model-comp}), por lo que se pueden realizar
 interpretaciones del modelo sin que nos deba preocupar su existencia. En
 la Figura~\ref{fig-pred-3} se representan 50 muestras de la esperanza de
-la distribución predictiva a posteriori para cada pregunta y nivel de
-subtitulado marginalizadas por periodo y estudiante. La primera
+la distribución predictiva a posteriori para cada ítem y nivel de
+subtitulado marginalizados por periodo y estudiante. La primera
 conclusión que se puede extraer es que el modelo tiene bastante
-incertidumbre sobre los valores de respuesta a cada pregunta no
-superando casi nunca el 50\% de probabilidad para todas las preguntas y
-niveles de subtitulado. En general se observa en la mayoría de las
-preguntas del nivel de subtitulado \(A\) que los alumnos están bastante
-seguros de que la respuesta a las preguntas debe ser 4 ó 5, asignando
-una muy baja probabilidad a los valores 1, 2, ó 3, pero habiendo
-bastante incertidumbre respecto cuál de los dos valores (4 ó 5) asignar.
-En el nivel de subtitulado \(B\) la situación es bastante más confusa.
-Aunque la opción de respuesta preferida es 4 y las menos preferidas son
-la 5 y la 1, hay bastante mezcla entre las opciones de respuesta 2, 3 y
-4. En cuanto al análisis individualizado por pregunta se llega a las
-siguientes conclusiones:
+incertidumbre sobre los valores de respuesta a cada ítem no superando
+casi nunca el 50\% de probabilidad para todas los ítems y niveles de
+subtitulado. En general se observa en la mayoría de los ítems del nivel
+de subtitulado \(A\) que los alumnos están bastante seguros de que la
+respuesta a los ítems debe ser 4 ó 5, asignando una muy baja
+probabilidad a los valores 1, 2, ó 3, pero habiendo bastante
+incertidumbre respecto cuál de los dos valores (4 ó 5) asignar. En el
+nivel de subtitulado \(B\) la situación es bastante más confusa. Aunque
+la opción de respuesta preferida es 4 y las menos preferidas son la 5 y
+la 1, hay bastante mezcla entre las opciones de respuesta 2, 3 y 4. En
+cuanto al análisis individualizado por ítem se llega a las siguientes
+conclusiones:
 
 \begin{itemize}
 \item
-  En las preguntas \(Q04\) y \(Q13\) los estudiantes no aprecian
-  defectos en el subtitulado ni diferencias entre un nivel y otro. Son
-  valoradas en ambos subtitulados con puntuaciones de 4 y de 5.
+  En los ítems \(Q04\) y \(Q13\) los estudiantes no aprecian defectos en
+  el subtitulado ni diferencias entre un nivel y otro. Son valoradas en
+  ambos subtitulados con puntuaciones de 4 y de 5.
 \item
-  En las preguntas \(Q15\), \(Q16\) y \(Q17\), la opción de respuesta
-  más probable es 4 en ambos subtitulados. El modelo asigna una baja
+  En los ítems \(Q15\), \(Q16\) y \(Q17\), la opción de respuesta más
+  probable es 4 en ambos subtitulados. El modelo asigna una baja
   probabilidad de respuesta a la opción 1 y similares al resto. La
   probabilidad de la opción 5 decrece ligeramente entre subtitulado
   \(A\) y \(B\) y lo contrario ocurre con las opciones 2 y 3.
 \item
-  Las preguntas \(Q01\), \(Q02\), \(Q03\), \(Q10\), \(Q11\) y \(Q12\)
-  son similares a las anteriores. Particularmente en lo referente a que
-  la respuesta más probable en el subtitulado \(B\) es 4. En el
-  subtitulado \(A\) hay preferencia por 4 y 5. El nivel 5 cae
-  acusadamente en el subtitulado \(B\) y en este nivel aumenta
-  ligeramente la probabilidad de respuesta 2 y 3.
+  Los ítems \(Q01\), \(Q02\), \(Q03\), \(Q10\), \(Q11\) y \(Q12\) son
+  similares a las anteriores. Particularmente en lo referente a que la
+  respuesta más probable en el subtitulado \(B\) es 4. En el subtitulado
+  \(A\) hay preferencia por 4 y 5. El nivel 5 cae acusadamente en el
+  subtitulado \(B\) y en este nivel aumenta ligeramente la probabilidad
+  de respuesta 2 y 3.
 \item
-  Las preguntas \(Q06\), \(Q07\), \(Q14\) y \(Q18\) no son muy
-  diferentes de las anteriores. En general el modelo predice mayor
-  probabilidad de respuesta para 5 en el subtitulado \(A\) pero este
-  valor es con alta probabilidad cercano a cero en el subtitulado \(B\).
-  En el subtitulado \(B\) la probabilidad de respuesta 2, 3 ó 4 es
-  similar.
+  Los ítems \(Q06\), \(Q07\), \(Q14\) y \(Q18\) no son muy diferentes de
+  las anteriores. En general el modelo predice mayor probabilidad de
+  respuesta para 5 en el subtitulado \(A\) pero este valor es con alta
+  probabilidad cercano a cero en el subtitulado \(B\). En el subtitulado
+  \(B\) la probabilidad de respuesta 2, 3 ó 4 es similar.
 \item
-  Las preguntas \(Q05\), \(Q08\) y \(Q09\) son las que más diferencias
-  entre subtitulados presentan. La respuesta más probable en el
-  subtitulado \(A\) es 5 (en \(Q08\) y en \(Q09\) muy parecida a 4). Por
-  contra, en el subtitulado \(B\) las respuestas 4 y 5 tienden a cero,
-  siendo la más probable la respuesta 2. En \(Q05\) y en \(Q09\) la
-  segunda respuesta más probable al subtitulado \(B\) es 1 y 4 en la
-  \(Q08\).
+  Los ítems \(Q05\), \(Q08\) y \(Q09\) son las que más diferencias entre
+  subtitulados presentan. La respuesta más probable en el subtitulado
+  \(A\) es 5 (en \(Q08\) y en \(Q09\) muy parecida a 4). Por contra, en
+  el subtitulado \(B\) las respuestas 4 y 5 tienden a cero, siendo la
+  más probable la respuesta 2. En \(Q05\) y en \(Q09\) la segunda
+  respuesta más probable al subtitulado \(B\) es 1 y 4 en la \(Q08\).
 \end{itemize}
 
 En definitiva, nuestro modelo predice que los estudiantes están bastante
-de acuerdo en que en las preguntas \(Q05\) y \(Q09\) hay una diferencia
-de calidad importante entre subtitulados. También están de acuerdo en
-que en las preguntas \(Q04\) y \(Q13\) no hay apenas cambio entre los
-subtitulados. En las preguntas \(Q15\), \(Q16\) y \(Q17\) hay una gran
+de acuerdo en que en los ítems \(Q05\) y \(Q09\) hay una diferencia de
+calidad importante entre subtitulados. También están de acuerdo en que
+en los ítems \(Q04\) y \(Q13\) no hay apenas cambio entre los
+subtitulados. En los ítems \(Q15\), \(Q16\) y \(Q17\) hay una gran
 confusión en ambos niveles de subtitulado predominando la respuesta 4 y
 siendo muy parecidas las respuestas en ambos niveles. En el resto la
 confusión se circunscribe al nivel de subtitulado \(B\), ya que en el
@@ -3756,9 +3775,97 @@ nivel \(A\) las opciones 4 y 5 predominan.
 }
 
 \caption{\label{fig-pred-3}Muestreo de la función predictiva a
-posteriori por tratamiento y pregunta.}
+posteriori por tratamiento e ítem.}
 
 \end{figure}
+
+\scriptsize
+
+\normalsize
+
+\begin{figure}[h]
+
+\includegraphics[width=1.2\textwidth,height=\textheight]{images/bayes-probs.png} \hfill{}
+
+\caption{\label{fig-prob-compare}Comparación de las respuestas generadas
+por el modelo y las frecuencias relativas de los datos.}
+
+\end{figure}
+
+\graphicspath{ {./images/} }
+\includegraphics{bayes-probs.png}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{ciego}{%
+\chapter{Ciego}\label{ciego}}
+
+En esta sección se discuten los resultados una vez descubierto el ciego.
+Se confirma que el subtitulado del vídeo que se ha denominado como \(A\)
+es el que está correctamente subtitulado y el \(B\) es el vídeo en el
+que se han introducido errores en los subtítulos. En la
+\textbf{?@tbl-blind-errors} se muestran los errores introducidos y los
+ítems de la escala de Likert en los que se ha valorado el error (ver
+Tabla~\ref{tbl-likert-scale} para la descripción textual de cada ítem).
+
+\begin{table}[H]
+\caption{\label{tbl-blind-errors}Errores introducidos en el subtitulado.}\tabularnewline
+\tiny
+\begin{adjustwidth}{-2.5cm}{}
+\begin{tabular}{@{}|c|l|l|l|@{}}
+\toprule
+\multicolumn{1}{|l|}{\textbf{Error nº}} &
+  \textbf{Subtítulo} &
+  \textbf{Requisito que se incumple} &
+  \textbf{Ítems} \\ \midrule
+1 &
+  \begin{tabular}[c]{@{}l@{}}Correcto:\\ Hola, este vídeo nos va a servir\\ \\ Incorrecto:\\ Hola este video nos ba a servir\end{tabular} &
+  \begin{tabular}[c]{@{}l@{}}Los subtítulos deben ser correctos\\ ortográfica y gramaticalmente.\end{tabular} &
+  Q05 \\ \midrule
+2 &
+  \begin{tabular}[c]{@{}l@{}}Correcto: para hacer una práctica de subtitulado\\ \\ Incorrecto: para hacer una prácti\\ ca de subtitulado\end{tabular} &
+  \begin{tabular}[c]{@{}l@{}}No se deben separar en dos líneas\\ las sílabas de la misma palabra.\end{tabular} &
+   \\ \midrule
+3 &
+   &
+  \begin{tabular}[c]{@{}l@{}}Los subtítulos deben ocupar\\ dos líneas y, excepcionalmente tres.\end{tabular} &
+  Q02 \\ \midrule
+4 &
+   &
+  \begin{tabular}[c]{@{}l@{}}Las conjunciones y los nexos\\ deben ir en la línea inferior.\end{tabular} &
+  Q14 \\ \midrule
+5 &
+  \begin{tabular}[c]{@{}l@{}}Incorrecto: El texto del subtítulo es válido,\\ pero su entrada debe producirse antes para que\\ coincida con la información sonora.\end{tabular} &
+  \begin{tabular}[c]{@{}l@{}}Las entradas y salidas de los subtítulos\\ deben coincidir con el movimiento labial,\\ con la locución y/o con la información sonora.\end{tabular} &
+  Q10, Q09 \\ \midrule
+6 &
+  \begin{tabular}[c]{@{}l@{}}Correcto: (Teléfono) Perdonad\\ \\ Incorrecto: Perdonad\end{tabular} &
+  \begin{tabular}[c]{@{}l@{}}Deben describirse los efectos sonoros\\ que sean relevantes para la comprensión del vídeo.\end{tabular} &
+  Q09 \\ \midrule
+7 &
+  \begin{tabular}[c]{@{}l@{}}Correcto: ¿Dígame? \\ (EMI) Hola, soy Emilio.\\ \\ Incorrecto: ¿Dígame? (EMI) Hola, soy Emilio.\end{tabular} &
+  \begin{tabular}[c]{@{}l@{}}Para cada participante en el diálogo\\ debe comenzarse una nueva línea.\end{tabular} &
+  Q08 \\ \midrule
+8 &
+  \begin{tabular}[c]{@{}l@{}}Correcto:\\ (ALE) Emilio, muy buenas. Mira,\\ precisamente estoy grabando el vídeo\\ \\ Incorrecto:\\ (ALE) Emilio, muy buenas. Mira, precisamente estoy grabando el vídeo\end{tabular} &
+  \begin{tabular}[c]{@{}l@{}}El máximo número de caracteres\\ por línea es 37.\end{tabular} &
+  Q12 \\ \midrule
+9 &
+  \begin{tabular}[c]{@{}l@{}}Incorrecto: El texto del subtítulo es válido,\\ pero su duración debe ser de al menos 3 segundos.\end{tabular} &
+  \begin{tabular}[c]{@{}l@{}}La velocidad de exposición del subtítulo\\ debe permitir leerlo sin dificultad.\\ La velocidad recomendada para los subtítulos\\ es de unos 12 caracteres por segundo.\end{tabular} &
+  Q11 \\ \midrule
+10 &
+  \begin{tabular}[c]{@{}l@{}}Correcto: Luego voy a verte al despacho ¿de acuerdo?\\ \\ Incorrecto: Luego voy a verte al despacho ¿Ok?\end{tabular} &
+  Los subtítulos deben ser literales. &
+  Q06 \\ \midrule
+11 &
+  \begin{tabular}[c]{@{}l@{}}Correcto: (EMI) Muy bien, estupendo. Aquí estaré. \\ (ALE) Hasta luego\\ \\ Incorrecto: Muy bien, estupendo. Aquí estaré. \\ Hasta luego\end{tabular} &
+  \begin{tabular}[c]{@{}l@{}}Los diferentes personajes que intervienen en la\\ obra audiovisual deben estar claramente identificados.\end{tabular} &
+  Q07 \\ \bottomrule
+\end{tabular}
+\end{adjustwidth}
+\normalsize
+\end{table}
 
 \bookmarksetup{startatroot}
 

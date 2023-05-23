@@ -10,7 +10,7 @@ En este capítulo se describen los ficheros de datos suministrados, se explica l
 
 Se dispuso de los siguientes ficheros `csv`:
 
-* Fichero `grade` contiene el identificador de estudiante y el grupo al que pertenece (campo `cohort`), ofuscado con SHA-512 para no conocer la identidad real del estudiante y con CRC-32B para no conocer si el grupo es el que el vio primero el vídeo bien subtitulado.
+* Fichero `grade` contiene el identificador de estudiante y el grupo al que pertenece (campo `cohort`), ofuscado con SHA512 para no conocer la identidad real del estudiante y con CRC32b para no conocer si el grupo es el que el vio primero el vídeo bien subtitulado.
 * Los ficheros `test1` y `test2` son las repuestas a las escalas de Likert sobre la calidad del subtitulado del primer y del segundo vídeo realizado por cada grupo respectivamente.
 
 En la @tbl-likert-levels se muestran los 5 niveles de cada uno de los ítems de la escala de Likert utilizados para valorar el subtitulado
@@ -61,8 +61,8 @@ En esta sección se describen las transformaciones realizadas con los ficheros s
 * Se leyeron los ficheros de test y se procesaron. Se utilizó el nombre del fichero (`test1` o `test2`) para saber de qué vídeo se estaba respondiendo el test
 ^[Se reitera que en el momento de realizar este proceso se desconocía si el vídeo es el correctamente subtitulado o el otro. La única información que se almacenó es si se estaba respondiendo al vídeo que se vio primero.].
 
-* Se seleccionaron las preguntas que contienen las respuestas y se renombraron para que fuera más fácil saber de qué pregunta se trataba
-^[En los ficheros suministrados la respuesta a cada pregunta ocupaba varios campos. Se seleccionó en cada pregunta el que contiene el valor de la respuesta y se convirtió a numérico.]. Se convirtió el campo `LastTry`, que contiene la fecha y hora de realización del test, a formato fecha y hora.
+* Se seleccionaron los ítems que contienen las respuestas y se renombraron para que fuera más fácil saber de qué ítem se trataba
+^[En los ficheros suministrados la respuesta a cada ítem ocupaba varios campos. Se seleccionó en cada ñitem el que contiene el valor de la respuesta y se convirtió a numérico.]. Se convirtió el campo `LastTry`, que contiene la fecha y hora de realización del test, a formato fecha y hora.
 
 * Se realizaron algunas comprobaciones como la ausencia de valores nulos en las variables más relevantes y la no existencia de inconsistencias o errores de procesado.
 
@@ -72,13 +72,13 @@ En esta sección se describen las transformaciones realizadas con los ficheros s
 
 * Se eliminaron del estudio los usuarios que solo han realizado uno de los test.
 
-* Se transformaron las variables que lo requirieron en factores. La pregunta 18 se fijó como referencia en el factor `Question` ya que es una valoración general del subtitulado.
+* Se transformaron las variables que lo requirieron en factores. El ítem 18 se fijó como referencia en el factor `Question` ya que es una valoración general del subtitulado.
 
 * Se rotaron los valores de respuesta para que "No sé / No contesto" tenga valor 0 y el resto de 1 a 5 desde "Muy en desacuerdo", 1, hasta "Muy de acuerdo", 5.
 
-* Se crearon los factores `Level` con los niveles `negativo`, `neutral` y `positivo` dependiendo de si la respuesta es 1 ó 2, 3, 4 ó 5 respectivamente e `Improve` con valores 0 ó 1, dependiendo de si la respuesta en el test $A$ es mejor (1) o igual o peor (0) que la del $B$ para cada pregunta y estudiante.
+* Se crearon los factores `Level` con los niveles `negativo`, `neutral` y `positivo` dependiendo de si la respuesta es 1 ó 2, 3, 4 ó 5 respectivamente e `Improve` con valores 0 ó 1, dependiendo de si la respuesta en el test $A$ es mejor (1) o igual o peor (0) que la del $B$ para cada ítem y estudiante.
   
-* Se transformó el `dataframe` de formato ancho a largo. Los ficheros de respuestas originales se suministraron en formato ancho. Es decir, que cada fila es un test que contiene 18 columnas para las respuestas a cada pregunta. Los nombres de las columnas son $Q01$, $Q02$, ..., $Q18$ y tienen valores de 0 a 5 con las respuestas. La mayoría de los paquetes de R utilizados requieren que los datos estén en formato largo. Esto que quiere decir que cada fila tendrá una única respuesta por lo que habrá únicamente dos columnas, $Question$ y $Response$. En la primera se almacena el identificador de la pregunta ($Q01$, $Q02$, ..., $Q18$) y en la segunda el valor de la respuesta (de 0 a 5). De esta forma, un test pasó de ocupar una fila y 18 columnas en el formato ancho a 18 filas y dos columnas en el largo.
+* Se transformó el `dataframe` de formato ancho a largo. Los ficheros de respuestas originales se suministraron en formato ancho. Es decir, que cada fila es un test que contiene 18 columnas para las respuestas a cada ítem. Los nombres de las columnas son $Q01$, $Q02$, ..., $Q18$ y tienen valores de 0 a 5 con las respuestas. La mayoría de los paquetes de R utilizados requieren que los datos estén en formato largo. Esto que quiere decir que cada fila tendrá una única respuesta por lo que habrá únicamente dos columnas, $Question$ y $Response$. En la primera se almacena el identificador del ítem ($Q01$, $Q02$, ..., $Q18$) y en la segunda el valor de la respuesta (de 0 a 5). De esta forma, un test pasó de ocupar una fila y 18 columnas en el formato ancho a 18 filas y dos columnas en el largo.
 
 ## Variables utilizadas
 
@@ -92,11 +92,11 @@ En la @tbl-variables se describen las características más relevantes de las pr
 tibble(
     Nombre = c("Response", "Level", "Improve", "Treat", "Period", "Seq", "Subject", "Question"),
     `Descripción` = c(
-        "Respuesta a las preguntas del test.",
+        "Respuesta a los ítems del test.",
         "Valoración de la respuesta.",
         "Mejor respuesta en test A que en B.",
         "Subtítulos",
-        "Periodo", "Secuencia de aplicación de los tratamientos.", "Identificación del estudiante", "Número de la pregunta"
+        "Periodo", "Secuencia de aplicación de los tratamientos.", "Identificación del estudiante", "Número del ítem"
     ),
     Tipo = c("Factor ordenado", "Factor ordenado", "Factor", "Factor", "Factor", "Factor", "Factor", "Factor"),
     Valores = c("De 0 a 5", "Negativo, Neutral, Positivo", "1 ó 0", "A o B", "1 ó 2", "AB o BA", "Numérico", "Q01, Q02, ..., Q18")
