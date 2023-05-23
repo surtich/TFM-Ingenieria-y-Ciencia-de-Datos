@@ -102,6 +102,7 @@
 
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{multirow}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
 \usepackage{etoolbox}
@@ -567,7 +568,7 @@ Phasellus vitae magna nec mi sagittis luctus vitae eu augue. Donec scelerisque l
 \addto\captionsspanish{
 \def\listtablename{\'Indice de tablas}%
 \def\tablename{Tabla}}
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, enhanced, sharp corners, breakable, boxrule=0pt, borderline west={3pt}{0pt}{shadecolor}, frame hidden]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, borderline west={3pt}{0pt}{shadecolor}, boxrule=0pt, sharp corners, enhanced, frame hidden, breakable]}{\end{tcolorbox}}\fi
 
 % Contents
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -648,7 +649,7 @@ y va más allá de verificar si el vídeo tiene o no subtítulos.
 El objetivo del estudio es responder a la siguiente pregunta de
 investigación:
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, opacityback=0, bottomrule=.15mm, colback=white, arc=.35mm, opacitybacktitle=0.6, coltitle=black, left=2mm, bottomtitle=1mm, colbacktitle=quarto-callout-note-color!10!white, colframe=quarto-callout-note-color-frame, titlerule=0mm, toprule=.15mm, breakable, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Pregunta de investigación}, leftrule=.75mm, rightrule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, leftrule=.75mm, bottomtitle=1mm, left=2mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, colframe=quarto-callout-note-color-frame, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Pregunta de investigación}, bottomrule=.15mm, colback=white, arc=.35mm, toptitle=1mm, rightrule=.15mm, toprule=.15mm, opacitybacktitle=0.6, breakable, coltitle=black]
 
 ¿Son los estudiantes de un curso de creación de materiales accesibles
 capaces de encontrar diferencias en la calidad del subtitulado de un
@@ -693,7 +694,7 @@ un conocimiento experto como, por ejemplo, la evaluación del contraste,
 ya que requieren herramientas adecuadas. Por ello, se responderá al
 siguiente objetivo específico:
 
-\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, opacityback=0, bottomrule=.15mm, colback=white, arc=.35mm, opacitybacktitle=0.6, coltitle=black, left=2mm, bottomtitle=1mm, colbacktitle=quarto-callout-tip-color!10!white, colframe=quarto-callout-tip-color-frame, titlerule=0mm, toprule=.15mm, breakable, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Objetivos específicos}, leftrule=.75mm, rightrule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, leftrule=.75mm, bottomtitle=1mm, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, titlerule=0mm, colframe=quarto-callout-tip-color-frame, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Objetivos específicos}, bottomrule=.15mm, colback=white, arc=.35mm, toptitle=1mm, rightrule=.15mm, toprule=.15mm, opacitybacktitle=0.6, breakable, coltitle=black]
 
 ¿Qué aspectos de la calidad del subtitulado son más fácilmente
 reconocibles por los estudiantes y en cuáles existe mayor dificultad?
@@ -3781,19 +3782,714 @@ posteriori por tratamiento e ítem.}
 
 \scriptsize
 
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
+  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
+  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
+  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
+  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
+  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
+  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
+  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
+  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
+  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
+  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
+  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
+  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
+  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
+  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
+  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
+  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
+  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
+  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
+  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
+  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\centering
+\end{minipage} &
+\multicolumn{10}{>{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.4762} + 18\tabcolsep}}{%
+\begin{minipage}[b]{\linewidth}\centering
+{Treat A}
+\end{minipage}} &
+\multicolumn{10}{>{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.4762} + 18\tabcolsep}@{}}{%
+\begin{minipage}[b]{\linewidth}\centering
+{Treat B}
+\end{minipage}} \\
+\multirow{2}{*}{\begin{minipage}[b]{\linewidth}\centering
+Question
+\end{minipage}} &
+\multicolumn{5}{>{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.2381} + 8\tabcolsep}}{%
+\begin{minipage}[b]{\linewidth}\centering
+{Data Frequencies}
+\end{minipage}} &
+\multicolumn{5}{>{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.2381} + 8\tabcolsep}}{%
+\begin{minipage}[b]{\linewidth}\centering
+{Model Probabilities}
+\end{minipage}} &
+\multicolumn{5}{>{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.2381} + 8\tabcolsep}}{%
+\begin{minipage}[b]{\linewidth}\centering
+{Data Frequencies}
+\end{minipage}} &
+\multicolumn{5}{>{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.2381} + 8\tabcolsep}@{}}{%
+\begin{minipage}[b]{\linewidth}\centering
+{Model Probabilities}
+\end{minipage}} \\
+& \begin{minipage}[b]{\linewidth}\centering
+1
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+2
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+3
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+4
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+5
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+1
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+2
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+3
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+4
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+5
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+1
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+2
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+3
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+4
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+5
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+1
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+2
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+3
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+4
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+5
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Q18 & 0.01 & 0.03 & 0.01 & 0.37 & 0.57 &
+\begin{minipage}[t]{\linewidth}\centering
+0.00\\
+{(0.00-0.00)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.01\\
+{(0.00-0.02)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.03\\
+{(0.01-0.06)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.30\\
+{(0.15-0.47)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.66\\
+{(0.44-0.83)}\strut
+\end{minipage} & 0.11 & 0.34 & 0.20 & 0.23 & 0.11 &
+\begin{minipage}[t]{\linewidth}\centering
+0.05\\
+{(0.03-0.11)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.32\\
+{(0.20-0.46)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.30\\
+{(0.26-0.33)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.28\\
+{(0.16-0.42)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.03\\
+{(0.02-0.07)}\strut
+\end{minipage} \\
+Q01 & 0.01 & 0.02 & 0.06 & 0.34 & 0.56 &
+\begin{minipage}[t]{\linewidth}\centering
+0.00\\
+{(0.00-0.00)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.01\\
+{(0.00-0.03)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.03\\
+{(0.01-0.07)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.32\\
+{(0.17-0.49)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.63\\
+{(0.41-0.82)}\strut
+\end{minipage} & 0.10 & 0.21 & 0.06 & 0.33 & 0.30 &
+\begin{minipage}[t]{\linewidth}\centering
+0.01\\
+{(0.01-0.03)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.11\\
+{(0.05-0.20)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.21\\
+{(0.13-0.29)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.53\\
+{(0.41-0.58)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.13\\
+{(0.07-0.25)}\strut
+\end{minipage} \\
+Q02 & 0.00 & 0.01 & 0.03 & 0.33 & 0.62 &
+\begin{minipage}[t]{\linewidth}\centering
+0.00\\
+{(0.00-0.00)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.01\\
+{(0.00-0.02)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.02\\
+{(0.01-0.05)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.26\\
+{(0.13-0.43)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.71\\
+{(0.49-0.86)}\strut
+\end{minipage} & 0.06 & 0.29 & 0.13 & 0.33 & 0.20 &
+\begin{minipage}[t]{\linewidth}\centering
+0.02\\
+{(0.01-0.05)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.17\\
+{(0.09-0.29)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.27\\
+{(0.18-0.32)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.46\\
+{(0.32-0.56)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.08\\
+{(0.04-0.16)}\strut
+\end{minipage} \\
+Q03 & 0.00 & 0.07 & 0.03 & 0.37 & 0.52 &
+\begin{minipage}[t]{\linewidth}\centering
+0.00\\
+{(0.00-0.00)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.01\\
+{(0.01-0.03)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.04\\
+{(0.02-0.09)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.37\\
+{(0.20-0.52)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.58\\
+{(0.36-0.78)}\strut
+\end{minipage} & 0.06 & 0.24 & 0.10 & 0.34 & 0.27 &
+\begin{minipage}[t]{\linewidth}\centering
+0.02\\
+{(0.01-0.03)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.13\\
+{(0.06-0.23)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.23\\
+{(0.15-0.30)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.51\\
+{(0.38-0.57)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.11\\
+{(0.06-0.22)}\strut
+\end{minipage} \\
+Q04 & 0.00 & 0.02 & 0.06 & 0.31 & 0.61 &
+\begin{minipage}[t]{\linewidth}\centering
+0.00\\
+{(0.00-0.00)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.01\\
+{(0.00-0.02)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.02\\
+{(0.01-0.06)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.28\\
+{(0.14-0.45)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.69\\
+{(0.47-0.85)}\strut
+\end{minipage} & 0.02 & 0.06 & 0.06 & 0.39 & 0.47 &
+\begin{minipage}[t]{\linewidth}\centering
+0.00\\
+{(0.00-0.01)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.02\\
+{(0.01-0.05)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.06\\
+{(0.03-0.12)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.46\\
+{(0.32-0.56)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.45\\
+{(0.27-0.64)}\strut
+\end{minipage} \\
+Q05 & 0.00 & 0.00 & 0.05 & 0.31 & 0.64 &
+\begin{minipage}[t]{\linewidth}\centering
+0.00\\
+{(0.00-0.00)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.01\\
+{(0.00-0.02)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.02\\
+{(0.01-0.05)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.23\\
+{(0.11-0.41)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.74\\
+{(0.53-0.88)}\strut
+\end{minipage} & 0.34 & 0.36 & 0.09 & 0.08 & 0.13 &
+\begin{minipage}[t]{\linewidth}\centering
+0.18\\
+{(0.09-0.33)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.51\\
+{(0.43-0.56)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.19\\
+{(0.11-0.28)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.09\\
+{(0.05-0.18)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.01\\
+{(0.00-0.02)}\strut
+\end{minipage} \\
+Q06 & 0.00 & 0.00 & 0.05 & 0.36 & 0.59 &
+\begin{minipage}[t]{\linewidth}\centering
+0.00\\
+{(0.00-0.00)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.01\\
+{(0.00-0.02)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.02\\
+{(0.01-0.06)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.27\\
+{(0.13-0.44)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.70\\
+{(0.48-0.85)}\strut
+\end{minipage} & 0.07 & 0.33 & 0.20 & 0.25 & 0.15 &
+\begin{minipage}[t]{\linewidth}\centering
+0.04\\
+{(0.02-0.08)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.26\\
+{(0.15-0.39)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.30\\
+{(0.25-0.33)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.35\\
+{(0.21-0.48)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.05\\
+{(0.02-0.10)}\strut
+\end{minipage} \\
+Q07 & 0.00 & 0.03 & 0.07 & 0.39 & 0.51 &
+\begin{minipage}[t]{\linewidth}\centering
+0.00\\
+{(0.00-0.00)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.01\\
+{(0.01-0.04)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.04\\
+{(0.02-0.09)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.38\\
+{(0.21-0.53)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.56\\
+{(0.34-0.76)}\strut
+\end{minipage} & 0.15 & 0.33 & 0.09 & 0.23 & 0.20 &
+\begin{minipage}[t]{\linewidth}\centering
+0.04\\
+{(0.02-0.09)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.28\\
+{(0.16-0.42)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.30\\
+{(0.26-0.33)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.32\\
+{(0.19-0.47)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.04\\
+{(0.02-0.09)}\strut
+\end{minipage} \\
+Q08 & 0.00 & 0.07 & 0.12 & 0.30 & 0.51 &
+\begin{minipage}[t]{\linewidth}\centering
+0.00\\
+{(0.00-0.00)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.02\\
+{(0.01-0.04)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.05\\
+{(0.02-0.11)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.42\\
+{(0.24-0.55)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.51\\
+{(0.30-0.73)}\strut
+\end{minipage} & 0.17 & 0.41 & 0.10 & 0.17 & 0.14 &
+\begin{minipage}[t]{\linewidth}\centering
+0.07\\
+{(0.04-0.15)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.38\\
+{(0.25-0.50)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.29\\
+{(0.22-0.33)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.22\\
+{(0.12-0.36)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.02\\
+{(0.01-0.05)}\strut
+\end{minipage} \\
+Q09 & 0.01 & 0.06 & 0.05 & 0.37 & 0.51 &
+\begin{minipage}[t]{\linewidth}\centering
+0.00\\
+{(0.00-0.00)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.01\\
+{(0.01-0.04)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.04\\
+{(0.02-0.09)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.38\\
+{(0.21-0.53)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.57\\
+{(0.35-0.77)}\strut
+\end{minipage} & 0.44 & 0.28 & 0.09 & 0.11 & 0.08 &
+\begin{minipage}[t]{\linewidth}\centering
+0.25\\
+{(0.14-0.42)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.52\\
+{(0.45-0.56)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.15\\
+{(0.08-0.24)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.07\\
+{(0.03-0.13)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.01\\
+{(0.00-0.01)}\strut
+\end{minipage} \\
+Q10 & 0.00 & 0.01 & 0.08 & 0.43 & 0.48 &
+\begin{minipage}[t]{\linewidth}\centering
+0.00\\
+{(0.00-0.00)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.01\\
+{(0.01-0.04)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.04\\
+{(0.02-0.09)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.37\\
+{(0.21-0.53)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.57\\
+{(0.35-0.77)}\strut
+\end{minipage} & 0.05 & 0.29 & 0.14 & 0.28 & 0.24 &
+\begin{minipage}[t]{\linewidth}\centering
+0.02\\
+{(0.01-0.05)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.18\\
+{(0.09-0.30)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.27\\
+{(0.19-0.32)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.45\\
+{(0.30-0.55)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.08\\
+{(0.04-0.16)}\strut
+\end{minipage} \\
+Q11 & 0.00 & 0.02 & 0.03 & 0.45 & 0.49 &
+\begin{minipage}[t]{\linewidth}\centering
+0.00\\
+{(0.00-0.00)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.01\\
+{(0.01-0.03)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.04\\
+{(0.02-0.08)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.36\\
+{(0.20-0.52)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.59\\
+{(0.36-0.78)}\strut
+\end{minipage} & 0.02 & 0.14 & 0.24 & 0.42 & 0.18 &
+\begin{minipage}[t]{\linewidth}\centering
+0.01\\
+{(0.01-0.03)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.12\\
+{(0.06-0.21)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.22\\
+{(0.14-0.30)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.52\\
+{(0.41-0.58)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.13\\
+{(0.06-0.24)}\strut
+\end{minipage} \\
+Q12 & 0.00 & 0.03 & 0.05 & 0.49 & 0.43 &
+\begin{minipage}[t]{\linewidth}\centering
+0.00\\
+{(0.00-0.00)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.02\\
+{(0.01-0.04)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.05\\
+{(0.02-0.11)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.42\\
+{(0.25-0.55)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.51\\
+{(0.30-0.73)}\strut
+\end{minipage} & 0.05 & 0.28 & 0.17 & 0.33 & 0.18 &
+\begin{minipage}[t]{\linewidth}\centering
+0.02\\
+{(0.01-0.05)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.18\\
+{(0.10-0.30)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.28\\
+{(0.20-0.32)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.44\\
+{(0.30-0.55)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.08\\
+{(0.04-0.15)}\strut
+\end{minipage} \\
+Q13 & 0.00 & 0.00 & 0.07 & 0.32 & 0.61 &
+\begin{minipage}[t]{\linewidth}\centering
+0.00\\
+{(0.00-0.00)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.01\\
+{(0.00-0.02)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.02\\
+{(0.01-0.05)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.27\\
+{(0.13-0.44)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.70\\
+{(0.48-0.86)}\strut
+\end{minipage} & 0.02 & 0.02 & 0.15 & 0.40 & 0.41 &
+\begin{minipage}[t]{\linewidth}\centering
+0.00\\
+{(0.00-0.01)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.03\\
+{(0.01-0.07)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.08\\
+{(0.04-0.15)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.51\\
+{(0.39-0.57)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.37\\
+{(0.21-0.56)}\strut
+\end{minipage} \\
+Q14 & 0.01 & 0.04 & 0.12 & 0.36 & 0.47 &
+\begin{minipage}[t]{\linewidth}\centering
+0.00\\
+{(0.00-0.01)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.02\\
+{(0.01-0.04)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.05\\
+{(0.02-0.11)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.43\\
+{(0.25-0.55)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.50\\
+{(0.29-0.72)}\strut
+\end{minipage} & 0.10 & 0.34 & 0.23 & 0.22 & 0.10 &
+\begin{minipage}[t]{\linewidth}\centering
+0.05\\
+{(0.02-0.11)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.32\\
+{(0.19-0.45)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.30\\
+{(0.26-0.33)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.28\\
+{(0.16-0.43)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.04\\
+{(0.02-0.07)}\strut
+\end{minipage} \\
+Q15 & 0.00 & 0.13 & 0.22 & 0.37 & 0.28 &
+\begin{minipage}[t]{\linewidth}\centering
+0.01\\
+{(0.00-0.02)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.06\\
+{(0.02-0.12)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.13\\
+{(0.06-0.23)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.55\\
+{(0.46-0.58)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.25\\
+{(0.12-0.45)}\strut
+\end{minipage} & 0.07 & 0.21 & 0.26 & 0.26 & 0.19 &
+\begin{minipage}[t]{\linewidth}\centering
+0.02\\
+{(0.01-0.05)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.18\\
+{(0.09-0.31)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.28\\
+{(0.19-0.32)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.44\\
+{(0.29-0.55)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.08\\
+{(0.04-0.15)}\strut
+\end{minipage} \\
+Q16 & 0.00 & 0.03 & 0.40 & 0.35 & 0.22 &
+\begin{minipage}[t]{\linewidth}\centering
+0.01\\
+{(0.00-0.02)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.06\\
+{(0.02-0.13)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.13\\
+{(0.06-0.24)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.55\\
+{(0.46-0.58)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.24\\
+{(0.11-0.45)}\strut
+\end{minipage} & 0.03 & 0.05 & 0.50 & 0.26 & 0.16 &
+\begin{minipage}[t]{\linewidth}\centering
+0.02\\
+{(0.01-0.04)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.15\\
+{(0.08-0.27)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.26\\
+{(0.17-0.32)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.48\\
+{(0.34-0.56)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.09\\
+{(0.05-0.18)}\strut
+\end{minipage} \\
+Q17 & 0.00 & 0.09 & 0.26 & 0.36 & 0.30 &
+\begin{minipage}[t]{\linewidth}\centering
+0.00\\
+{(0.00-0.01)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.04\\
+{(0.02-0.09)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.10\\
+{(0.04-0.19)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.54\\
+{(0.40-0.58)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.31\\
+{(0.15-0.54)}\strut
+\end{minipage} & 0.05 & 0.12 & 0.35 & 0.32 & 0.16 &
+\begin{minipage}[t]{\linewidth}\centering
+0.02\\
+{(0.01-0.05)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.18\\
+{(0.09-0.30)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.27\\
+{(0.19-0.32)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.44\\
+{(0.30-0.55)}\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
+0.08\\
+{(0.04-0.15)}\strut
+\end{minipage} \\
+\end{longtable}
+
+Comparación de las respuestas generadas por el modelo y las frecuencias
+relativas de los datos.
+
 \normalsize
 
 \begin{figure}[h]
+\begin{adjustwidth}{-3.4cm}{}
 
-\includegraphics[width=1.2\textwidth,height=\textheight]{images/bayes-probs.png} \hfill{}
+\includegraphics[width=1.2\linewidth]{images/bayes-probs.png} \hfill{}
 
 \caption{\label{fig-prob-compare}Comparación de las respuestas generadas
 por el modelo y las frecuencias relativas de los datos.}
 
+\end{adjustwidth}
 \end{figure}
-
-\graphicspath{ {./images/} }
-\includegraphics{bayes-probs.png}
 
 \bookmarksetup{startatroot}
 
@@ -3804,8 +4500,8 @@ En esta sección se discuten los resultados una vez descubierto el ciego.
 Se confirma que el subtitulado del vídeo que se ha denominado como \(A\)
 es el que está correctamente subtitulado y el \(B\) es el vídeo en el
 que se han introducido errores en los subtítulos. En la
-\textbf{?@tbl-blind-errors} se muestran los errores introducidos y los
-ítems de la escala de Likert en los que se ha valorado el error (ver
+\ref{tbl-blind-errors} se muestran los errores introducidos y los ítems
+de la escala de Likert en los que se ha valorado el error (ver
 Tabla~\ref{tbl-likert-scale} para la descripción textual de cada ítem).
 
 \begin{table}[H]
