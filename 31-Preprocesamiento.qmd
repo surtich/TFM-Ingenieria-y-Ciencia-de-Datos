@@ -27,7 +27,7 @@ En la @tbl-likert-scale se muestran los 18 items de la escala de Likert que se p
 ```{r}
 #| label: tbl-likert-scale
 #| tbl-cap: Items de la escala de Likert.
-tibble(Item = levels(df_all$Question), Texto = levels(df_all$Question_l)) %>%
+tibble(Item = levels(df_all$Item), Texto = levels(df_all$Item_l)) %>%
     arrange(Item) %>%
     gt()
 ```

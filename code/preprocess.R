@@ -114,10 +114,10 @@ assert("Comprobamos que no hay respuestas con valores incorrectos", sum(sort(uni
 
 
 comments_df <- test_df %>%
-    pivot_longer(cols = starts_with(c("Q", "C")), names_to = c(".value", "Question"), names_pattern = "(Q|C)(.*)") %>%
+    pivot_longer(cols = starts_with(c("Q", "C")), names_to = c(".value", "Item"), names_pattern = "(Q|C)(.*)") %>%
     rename(Response = Q, Comment = C) %>%
     filter(!is.na(Comment) & grepl("[a-zA-Z]", Comment)) %>%
-    dplyr::select(Test, Row, Group, User, Question, Response, Comment) %>%
+    dplyr::select(Test, Row, Group, User, Item, Response, Comment) %>%
     arrange(Test, Group, Response, Row)
 
 

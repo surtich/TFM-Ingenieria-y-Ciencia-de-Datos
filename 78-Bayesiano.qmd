@@ -26,7 +26,7 @@ summary(brm_subject)
 #| echo: true
 #| cache: true
 brm_treat.period.subject.question <- brm(
-    Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question),
+    Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item),
     data = df_clean,
     family = cumulative("logit"),
     sample_prior = TRUE,
@@ -40,7 +40,7 @@ summary(brm_treat.period.subject.question)
 #| echo: true
 #| cache: true
 brm_treat.period.subject_question <- brm(
-    Response ~ Treat * Period + (1 + Treat | Subject) + (1 | Question),
+    Response ~ Treat * Period + (1 + Treat | Subject) + (1 | Item),
     data = df_clean,
     family = cumulative("logit"),
     sample_prior = TRUE,
@@ -54,7 +54,7 @@ summary(brm_treat.period.subject_question)
 #| echo: true
 #| cache: true
 brm_cs.treat.subject.question <- brm(
-    Response ~ 1 + cs(Treat) + (1 | Subject) + (1 | Question),
+    Response ~ 1 + cs(Treat) + (1 | Subject) + (1 | Item),
     data = df_clean,
     family = cumulative("logit"),
     sample_prior = TRUE,
@@ -68,9 +68,9 @@ summary(brm_cs.treat.subject.question)
 
 ```{r}
 #| eval: false
-conditions <- make_conditions(brm_treat.period.subject.question, vars = c("Question"))
+conditions <- make_conditions(brm_treat.period.subject.question, vars = c("Item"))
 conditional_effects(brm_treat.period.subject.question, categorical = T, effects = "Treat", conditions = conditions, re_formula = NULL, ask = F, robust = T, prob = 0.5)
-pp_check(brm_treat.period.subject.question, type = "bars_grouped", group = "Question", ndraws = 1000)
+pp_check(brm_treat.period.subject.question, type = "bars_grouped", group = "Item", ndraws = 1000)
 
 ```
 
@@ -78,7 +78,7 @@ pp_check(brm_treat.period.subject.question, type = "bars_grouped", group = "Ques
 #| echo: true
 #| cache: true
 brm_treat_question_subject_question <- brm(
-    Response ~ 1 + Treat + (1 | Question) + (1 | Subject:Question),
+    Response ~ 1 + Treat + (1 | Item) + (1 | Subject:Item),
     data = df_clean,
     family = cumulative("logit"),
     sample_prior = TRUE,
@@ -93,7 +93,7 @@ summary(brm_treat_question_subject_question)
 #| echo: true
 #| cache: true
 brm_treat_question_subject <- brm(
-    Response ~ 1 + Treat + (1 | Question) + (1 | Subject),
+    Response ~ 1 + Treat + (1 | Item) + (1 | Subject),
     data = df_clean,
     family = cumulative("logit"),
     sample_prior = TRUE,
@@ -108,7 +108,7 @@ _
 #| echo: true
 #| cache: true
 brm_period.treat.subject_question <- brm(
-    Response ~ Period * Treat + (1 + Treat | Subject) + (1 | Question),
+    Response ~ Period * Treat + (1 + Treat | Subject) + (1 | Item),
     data = df_clean,
     family = cumulative("logit"),
     sample_prior = TRUE,
@@ -122,7 +122,7 @@ summary(brm_period.treat.subject_question)
 #| echo: true
 #| cache: true
 brm_period.treat_subject_question <- brm(
-    Response ~ Period * Treat + (1 | Subject) + (1 | Question),
+    Response ~ Period * Treat + (1 | Subject) + (1 | Item),
     data = df_clean,
     family = cumulative("logit"),
     sample_prior = TRUE,
@@ -136,7 +136,7 @@ summary(brm_period.treat_subject_question)
 #| echo: true
 #| cache: true
 brm_period.treat.question_subject <- brm(
-    Response ~ Period * Treat + (1 | Subject) + (1 + Treat | Question),
+    Response ~ Period * Treat + (1 | Subject) + (1 + Treat | Item),
     data = df_clean,
     family = cumulative("logit"),
     sample_prior = TRUE,
@@ -151,7 +151,7 @@ summary(brm_period.treat.question_subject)
 #| echo: true
 #| cache: true
 brm_thres.question_period.treat.subject <- brm(
-    bf(Response | thres(gr = Question) ~ Period * Treat + (1 + Treat | Subject)),
+    bf(Response | thres(gr = Item) ~ Period * Treat + (1 + Treat | Subject)),
     data = df_clean,
     family = cumulative("logit"),
     sample_prior = TRUE,
@@ -166,8 +166,8 @@ summary(brm_thres.question_period.treat.subject)
 #| cache: true
 brm_period.treat.subject_question.disc <- brm(
     bf(
-        Response ~ Period * Treat + (1 + Treat | Subject) + (1 | q | Question),
-        disc ~ 1 + (1 | q | Question)
+        Response ~ Period * Treat + (1 + Treat | Subject) + (1 | q | Item),
+        disc ~ 1 + (1 | q | Item)
     ),
     data = df_clean,
     family = cumulative("logit"),
@@ -175,8 +175,8 @@ brm_period.treat.subject_question.disc <- brm(
     file = "models/brm_period.treat.subject_question.disc",
     file_refit = "on_change",
     prior = prior("constant(1)", class = "sd", group = "Subject") +
-        prior("normal(0, 3)", class = "sd", group = "Question") +
-        prior("normal(0, 1)", class = "sd", group = "Question", dpar = "disc")
+        prior("normal(0, 3)", class = "sd", group = "Item") +
+        prior("normal(0, 1)", class = "sd", group = "Item", dpar = "disc")
 )
 summary(brm_period.treat.subject_question.disc)
 ```
@@ -185,7 +185,7 @@ summary(brm_period.treat.subject_question.disc)
 #| echo: true
 #| cache: true
 brm_acat_cs.treat.subject.question <- brm(
-    Response ~ 1 + cs(Treat) + (1 | Subject) + (1 | Question),
+    Response ~ 1 + cs(Treat) + (1 | Subject) + (1 | Item),
     data = df_clean,
     family = acat("logit"),
     sample_prior = TRUE,
@@ -199,7 +199,7 @@ summary(brm_acat_cs.treat.subject.question)
 #| echo: true
 #| cache: true
 brm_treat.period.subject.question <- brm(
-    Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question),
+    Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item),
     data = df_clean,
     family = cumulative("logit"),
     sample_prior = TRUE,

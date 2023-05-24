@@ -75,43 +75,43 @@ predictions(
     by = "TX",
     re_formula = NA
 )
-newdata <- df_clean %>% modelr::data_grid(Period, Treat, Question)
+newdata <- df_clean %>% modelr::data_grid(Period, Treat, Item)
 
-posterior_predict(brm_treat.period.subject.question, newdata, re_formula = ~ (1 + Treat | Question)) %>% head()
+posterior_predict(brm_treat.period.subject.question, newdata, re_formula = ~ (1 + Treat | Item)) %>% head()
 
 
 
 tidy_pred <- brm_treat.period.subject.question %>%
-    predictions(newdata = newdata, re_formula = ~ (1 + Treat | Question))
+    predictions(newdata = newdata, re_formula = ~ (1 + Treat | Item))
 tidy_pred
 
 
 
-posterior_predict(brm_treat.period.subject.question, re_formula = ~ (1 + Treat | Question), newdata) %>% head()
+posterior_predict(brm_treat.period.subject.question, re_formula = ~ (1 + Treat | Item), newdata) %>% head()
 
 
 
 conditional_preds <- brm_treat.period.subject.question %>%
-    predictions(newdata = newdata, re_formula = ~ (1 + Treat | Question), by = c("Treat", "Question")) %>%
+    predictions(newdata = newdata, re_formula = ~ (1 + Treat | Item), by = c("Treat", "Item")) %>%
     posteriordraws()
 
-brm_treat.period.subject.question %>% comparisons(newdata = newdata, variable = "Question", re_formula = ~ (1 + Treat | Question))
+brm_treat.period.subject.question %>% comparisons(newdata = newdata, variable = "Item", re_formula = ~ (1 + Treat | Item))
 
 
 tidy_pred <- brm_treat.period.subject.question %>%
-    predicted_draws(newdata = newdata, re_formula = ~ (1 + Treat | Question))
+    predicted_draws(newdata = newdata, re_formula = ~ (1 + Treat | Item))
 tidy_pred
 
 tidy_epred <- brm_treat.period.subject.question %>%
-    epred_draws(newdata = newdata, re_formula = ~ (1 + Treat | Question))
+    epred_draws(newdata = newdata, re_formula = ~ (1 + Treat | Item))
 tidy_epred
 
 
-newdata <- df_clean %>% modelr::data_grid(Period, Treat, Question)
+newdata <- df_clean %>% modelr::data_grid(Period, Treat, Item)
 pred_brm <- brm_treat.period.subject.question %>%
-    epred_draws(newdata = newdata, re_formula = ~ (1 + Treat | Question), by = c("Treat", "Question"), category = "Response") %>%
-    select(Period, Treat, Question, Response, .epred) %>%
-    group_by(Period, Treat, Question, Response) %>%
+    epred_draws(newdata = newdata, re_formula = ~ (1 + Treat | Item), by = c("Treat", "Item"), category = "Response") %>%
+    select(Period, Treat, Item, Response, .epred) %>%
+    group_by(Period, Treat, Item, Response) %>%
     summarize(
         lo = quantile(.epred, 0.025),
         Probability = median(.epred),
@@ -123,12 +123,12 @@ pred_brm %>% ggplot(aes(x = Treat, y = Probability, colour = Response)) +
     geom_point(aes(shape = Period)) +
     geom_line(aes(group = interaction(Period, Response), linetype = Period)) +
     geom_ribbon(data = pred_brm, aes(ymin = lo, ymax = hi, fill = Response, group = Response), colour = NA, alpha = 0.2) +
-    facet_grid(Question ~ Response, labeller = label_both) +
+    facet_grid(Item ~ Response, labeller = label_both) +
     theme(panel.spacing = grid::unit(0, "lines"))
 
 pred2_brm <- brm_treat.period.subject.question %>%
-    epred_draws(ndraws = 100, newdata = newdata, re_formula = ~ (1 + Treat | Question), by = c("Treat", "Question"), category = "Response") %>%
-    select(Period, Treat, Question, Response, Probability = .epred, .draw) %>%
+    epred_draws(ndraws = 100, newdata = newdata, re_formula = ~ (1 + Treat | Item), by = c("Treat", "Item"), category = "Response") %>%
+    select(Period, Treat, Item, Response, Probability = .epred, .draw) %>%
     ungroup() %>%
     group_by(.draw, Response) %>%
     mutate(indices = cur_group_id()) %>%
@@ -142,7 +142,7 @@ colors <- viridis(
     n = 5
 )
 
-questions_vector <- setNames(levels(df_clean$Question_lr), levels(df_clean$Question))
+questions_vector <- setNames(levels(df_clean$Item_lr), levels(df_clean$Item))
 
 question_labeller <- function(string) paste0(string, ": ", questions_vector[string])
 
@@ -155,7 +155,7 @@ p <- pred2_brm %>%
         # Don't forget the indices!
         group = indices
     )) +
-    facet_wrap(~Question, nrow = 6, labeller = as_labeller(question_labeller)) +
+    facet_wrap(~Item, nrow = 6, labeller = as_labeller(question_labeller)) +
     geom_line(alpha = 0.2) +
     scale_color_manual(values = colors) +
     # We won't need these
@@ -184,8 +184,8 @@ p +
     coord_cartesian(clip = "off") +
     # Finally, our labels. We filter the data to avoid having a million of them
     geom_text_repel(
-        data = pred2_brm %>% filter(Question %in% c("Q02", "Q05", "Q08", "Q11", "Q14", "Q17") & Period == 2, Treat == "B") %>% distinct(Treat,
-            Period, Question, Response,
+        data = pred2_brm %>% filter(Item %in% c("Q02", "Q05", "Q08", "Q11", "Q14", "Q17") & Period == 2, Treat == "B") %>% distinct(Treat,
+            Period, Item, Response,
             .keep_all = TRUE
         ) %>% mutate(Response_l = ordered(Response, labels = levels(df_clean$Response_l))),
         aes(label = Response_l),

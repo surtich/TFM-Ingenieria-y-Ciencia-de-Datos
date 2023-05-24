@@ -342,7 +342,7 @@ N
 $$
 
 
-donde $j$ son los grupos que varían $j = 1,...,J$ ($J$ es el número de grupos); $ij$ es la observación $i-ésima$ del grupo $j$ ($i = 1,...,n_j$, $n_j$ es el número de observaciones del grupo $j$). El modelo se compone de una parte fija $\beta_0 + \beta_1 x_{1ij}$ y una aleatoria $U_{0j} + U_{1j} x_{1ij} + \epsilon{ij}$. Los parámetros de este modelo son el intercepto y la pendiente de efectos fijos ($\beta_0$ y $\beta_1$), la varianza intra-grupos ($\sigma^2$), la varianza inter-grupos del intercepto aleatoria ($\tau_0$) y de la pendiente aleatoria ($\tau_1$), y la correlación entre intercepto y pendiente aleatorias ($\rho_{01}$).
+donde $j$ son los grupos que varían $j = 1,...,J$ ($J$ es el número de grupos); $ij$ es la observación $i$-ésima del grupo $j$ ($i = 1,...,n_j$, $n_j$ es el número de observaciones del grupo $j$). El modelo se compone de una parte fija $\beta_0 + \beta_1 x_{1ij}$ y una aleatoria $U_{0j} + U_{1j} x_{1ij} + \epsilon{ij}$. Los parámetros de este modelo son el intercepto y la pendiente de efectos fijos ($\beta_0$ y $\beta_1$), la varianza intra-grupos ($\sigma^2$), la varianza inter-grupos del intercepto aleatoria ($\tau_0$) y de la pendiente aleatoria ($\tau_1$), y la correlación entre intercepto y pendiente aleatorias ($\rho_{01}$).
 
 En @gelman2013 [p. 115] se evalúan tres posibilidades a la hora de definir un modelo:
 
@@ -350,7 +350,15 @@ En @gelman2013 [p. 115] se evalúan tres posibilidades a la hora de definir un m
 * $No\ pooling$: Se estiman tantos parámetros como grupos haya de forma independiente.
 * $Partial\ pooling$: Es el modelo jerárquico. Es una mezcla de ambos, ya que aunque se estima un parámetro para cada grupo (como en $no\ pooling$), esta estimación no es independiente, sino que se supone que las observaciones de un mismo grupo proceden de una misma distribución de probabilidad. Esto se traduce en que se produce una contracción ($shrinkage$) en la estimación de los parámetros hacia la media. Al influir la estimación de unas observaciones en otras, la estimación es de menor valor absoluto que la que resultaría en un modelo de $no\ pooling$. De esta forma se puede ver el $complete\ pooling$ y el $no\ pooling$ como dos casos particulares y extremos del $partial\ pooling$. La contracción de coeficientes en los modelos multinivel actúa como una regularización que puede evitar el sobreajuste.
 
-Los modelos multinivel requieren supuestos adicionales en el nivel segundo y superiores que son similares a los supuestos para los modelos de efectos fijos [ver @chen2021, pp. 43]. Para estimar los parámetros en un modelo multinivel se suele utilizar el método de Máxima Verosimilitud Restringida ($RMLE$), que es una variante de la estimación por Máxima Verosimilitud ($MLE$) en la que se hacen ajustes en los grados de libertad del modelo con efectos aleatorios para corregir el sesgo que se produce al usar $MLE$ en estos modelos.
+Los modelos multinivel requieren supuestos adicionales en el nivel segundo y superiores que son similares a los supuestos para los modelos de efectos fijos [ver @chen2021, p. 43]. Para estimar los parámetros en un modelo multinivel se suele utilizar el método de Máxima Verosimilitud Restringida ($RMLE$), que es una variante de la estimación por Máxima Verosimilitud ($MLE$) en la que se hacen ajustes en los grados de libertad del modelo con efectos aleatorios para corregir el sesgo que se produce al usar $MLE$ en estos modelos.
+
+Para evaluar si la estructura anidada es adecuada se utiliza la Correlación Intra-Clase ($ICC$, Intra-Class Correlation). $ICC$ se puede interpretar como la proporción de la varianza explicada por la estructura de agrupamiento de la población. Se diferencia del Coeficiente de Determinación ($R2$) en que éste es la proporción de la varianza explicada por el modelo completo, mientras que $ICC$ es la varianza explicada por los efectos aleatorios [ver @performance]. La $ICC$ se calcula como el ratio de la varianza entre grupos y la varianza total [ver @chen2021, pp. 29-33]:
+
+$$
+ICC = \rho = \frac{\tau^2}{\tau^2+\sigma^2}
+$$
+
+donde $\tau^2$ es la varianza poblacional entre grupos y $\sigma^2$ es la varianza de la población dentro del grupo.  $ICC$ oscila entre 0 (ausencia de varianza entre grupos) y 1 (no varianza intra-grupos). Cuanto más proxima a 1 sea $ICC$ mayor evidencia hay de la existencia de una estructura anidada. Sin embargo, no hay un consenso sobre el umbral concreto que debe tener $ICC$ para decidir si es preferible o no la estructura anidada [ver @chen2021, p. 33]. $ICC$ se estima a partir de la varianza de los coeficientes y residual aleatorias calculadas por el modelo. En modelos $GLM$ no se calcula la varianza residual y se recurre a métodos de simulación para estimar $ICC$.
 
 ## Modelado bayesiano {#sec-bayesiano}
 

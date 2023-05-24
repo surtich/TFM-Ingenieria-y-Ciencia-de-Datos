@@ -4,120 +4,189 @@ source("_setup.R")
 
 # Resultados {#sec-resultados}
 
-En este capítulo se comentan los resultados de los modelos seleccionados (ver @sec-modelado).
+En el @sec-modelado se realizó una exploración de los datos y se adecuaron los modelos presentados en el @sec-arte al diseño del experimento del subtitulado. En este capítulo se comentan los resultados de los modelos seleccionados siguiendo el mismo orden expositivo, comenzando por el análisis del $OR$, continuando por la Regresión Logística y finalizando con la Regresión Ordinal.
 
 ### Comparación con *Odds Ratio* {#sec-or-3}
 
-El contraste de hipótesis del $log\ OR$ del subtitulado para cada grupo (ver @sec-or-2) no produce significación estadística en ningún nivel de respuesta, por lo que según esta prueba estadística la secuencia de subtitulado no influiría en la respuesta de los estudiantes (ver @tbl-logor1). Es decir, de acuerdo a este test la secuencia no influye en la valoración de los subtítulos.
+El contraste de hipótesis del $log\ OR$ del nivel subtitulado y secuencia (ver @sec-or-2) no produce significación estadística en ningún nivel de respuesta, por lo que según esta prueba estadística el orden en el que se ven los vídeos no influiría en la respuesta de los estudiantes (ver @tbl-logor1).
 
 ```{r}
 #| label: tbl-logor1
-#| tbl-cap: Log OR ~ Treat + Seq + Response_l
+#| tbl-cap: Log OR ~ Treat + Seq + Response
 data.frame(summary(loddsratio(~ Treat + Seq + Response_l, data = df_all)) %>% unclass(), check.names = F) %>%
     rownames_to_column("Response") %>%
     mutate_if(is.numeric, round, 3) %>%
     gt()
 ```
 
-Sin embargo, si se realiza este contraste entre subtítulos y periodos, se constata la existencia de un efecto periodo de signo contrario para los ítems 4 y 5 (ver @tbl-logor2). 
+Sin embargo, si se realiza este contraste entre subtítulos y periodos, se constata la existencia de un efecto periodo de signo contrario para los ítems 4 y 5 (ver @tbl-logor2).  El test es significativo porque el ratio entre subtítulos de respuestas con valor 4 es diferente en cada periodo habiendo mayor cantidad de respuestas 4 en el segundo periodo que en el primero. Con las respuestas 5 ocurre lo contrario: la proporción es mayor en el primer periodo. La @fig-or2 permite una comprobación visual. Esto indica que los estudiantes de ambos grupos prestaron más atención o fueron más exigentes en el segundo visionado y valoraron relativamente peor el segundo vídeo. Que el efecto periodo sea de signo contrario en dos respuestas no debe sorprender en este diseño de experimento, ya que un test es un juego de suma cero: la valoraciones que se ganan o se pierden en un nivel de respuesta necesariamente se reparten entre el resto de niveles. En cualquier caso, el efecto periodo es cuantitativa y cualitativamente pequeño. Al afectar solo al intercambio de valoraciones entre los niveles 4 y 5 es simplemente una pequeña corrección en la valoración del subtitulado y cualitativamente es poco importante ya que las respuestas 4 y 5 son ambas valoraciones positivas. 
 
 ```{r}
 #| label: tbl-logor2
-#| tbl-cap: Log OR ~ Treat + Period + Response_l
+#| tbl-cap: Log OR ~ Treat + Period + Response
 data.frame(summary(loddsratio(~ Treat + Period + Response_l, data = df_all)) %>% unclass(), check.names = F) %>%
     rownames_to_column("Response") %>%
     mutate_if(is.numeric, round, 3) %>%
     gt()
 ```
 
+
+```{r}
+#| label: fig-or2
+#| fig-cap: OR ~ Treat + Period + Response
+#| fig-scap: Test Odds Ratio ~ Treat + Period + Response
+#| fig-height: 4
+fourfold(xtabs(~ Treat + Period + Response, data = df_all))
+```
+
+
 ### Modelado
+
+#### Regresión Logística {#sec-logistica-3}
 
 ```{r}
 options(contrasts = rep("contr.sum", 2))
-glmer_improve_subject_question <- glmer(Improve ~ 1 + (1 | Subject) + (1 | Question), family = "binomial", data = df_improve)
+glmer_improve_subject_question <- glmer(Improve ~ 1 + (1 | Subject) + (1 | Item), family = "binomial", data = df_improve)
 
-improve_question <- 1 / (1 + exp(-coef(glmer_improve_subject_question)$Question + fixef(glmer_improve_subject_question)))
+improve_question <- 1 / (1 + exp(-coef(glmer_improve_subject_question)$Item + fixef(glmer_improve_subject_question)))
 
 improve_question <- cbind(rownames(improve_question), improve_question)
-colnames(improve_question) <- c("Question", "Prob")
+colnames(improve_question) <- c("Item", "Prob")
 
 # summary(glmer_improve_subject_question)
 ```
 
-El modelo de efectos mixtos ajustado con Regresión Logística:
+En la @sec-logistica-2 se explicó una forma de crear una variable dicotómica que permite ajustar los datos a una Regresión Logística. Concretamente, se creo la variable respuesta $Improve$ que compara si las respuestas de cada estudiante a cada Ítem entre los niveles de subtitulado ($A$ frente $B$) han mejorado (valor 1) o se han mantenido o empeorado (valor 0). El modelo que se propone en esta sección no tiene en cuenta el efecto secuencia ya que resultó no significativo en el análisis y, en cambio, se incluye como efectos aleatorios los estudiantes y los ítems sobre el intercepto ya que, como se ha explicado, son variables que no se pueden considerar independientes:
 
-> Improve ~ 1 + (1 | Subject) + (1 | Question)
+> Improve ~ 1 + (1 | Subject) + (1 | Item)
 
-estima la probabilidad de que la respuesta a un ítem en el subtitulado $A$ sea mejor que en el subtitulado $B$ frente a que sea igual o peor.
-El intercepto del modelo ajustado es `r round(fixef(glmer_improve_subject_question)[[1]],3)`. Por ello, la probabilidad de que se otorgue una mayor puntuación en $A$ que en $B$ es del `r paste(round(100/(1+exp(-fixef(glmer_improve_subject_question)[[1]])),2),"%", sep="")`. En la @tbl-improve-question se muestra la probabilidad de que la respuesta sea mejor en $A$ que en $B$ por ítem.
+El resumen del modelo ajustado con la función `glmer` del paquete `lme4` [ver @lme4] produce los resultados de la @tbl-selected-logistic. El intercepto del modelo ajustado es `r round(fixef(glmer_improve_subject_question)[[1]],3)` (std.error `r round((vcov(glmer_improve_subject_question)^.5)[1], 3)`). Por ello, la probabilidad de que se otorgue una mayor puntuación en $A$ que en $B$ es del `r paste(round(100/(1+exp(-fixef(glmer_improve_subject_question)[[1]])),2),"%", sep="")`. La proporción de varianza explicada por los efectos aleatorios ($ICC$) es `r round((performance::icc(glmer_improve_subject_question))$ICC_adjusted,3)`.
+
+En la @tbl-improve-question se muestra la probabilidad de que la respuesta sea mejor en $A$ que en $B$ por ítem.
+
+
+\scriptsize
+```{r}
+#| echo: true
+#| eval: false
+glmer_improve_subject_question <- glmer(
+    Improve ~ 1 + (1 | Subject) + (1 | Item),
+    family = "binomial", data = df_improve
+)
+```
+\normalsize
+
+```{r}
+#| eval: true
+#| label: tbl-selected-logistic
+#| tbl-cap: Resumen del modelo Improve ~ 1 + (1 | Subject) + (1 | Item)
+modelsummary(list("Improve ~ 1 + (1 | Subject) + (1 | Item)" = glmer_improve_subject_question), gof_omit = "RMSE|R2|ICC", output = "kableExtra")
+``` 
 
 \scriptsize
 ```{r}
 #| label: tbl-improve-question
 #| tbl-cap: Probabilidad de que la respuesta a un ítem sea A > B frente a A <= B
-improve_question %>%
-    gt() %>%
-    fmt_number(Prob, decimals = 2)
+ inner_join(
+     df_improve %>% group_by(Item) %>% summarize(n = n(), improve = sum(Improve), Freq = improve / n) %>% select(Item, Freq),
+     improve_question
+ ) %>%
+     gt() %>%
+     fmt_percent(decimals = 1) %>%
+     data_color(
+         rows = Item %in% q.no.errors, columns = Prob, palette = "ggsci::grey_material", target_columns = c(Freq, Item, Prob), domain =
+             c(0.1, .7), autocolor_text = T
+     ) %>%
+     data_color(
+         rows = Item %in% q.errors, columns = Prob, palette = "ggsci::purple_material", target_columns = c(Freq, Item, Prob), reverse =
+             T, domain = c(0.3, 0.87)
+     )
 ```
 
 \normalsize
 
-En la @sec-ordinal-2 se evaluaron distintas parametrizaciones de la Regresión Ordinal Acumulativa tanto desde el punto de vista frecuentista como bayesiano y considerando únicamente efectos fijos y también efectos aleatorios. Finalmente, tanto en el análisis frecuentista como en el bayesiano, el modelo que resultó ser más parsimonioso es el de la @eq-mejor-modelo, que se reproduce aquí en sintaxis R:
 
-\small
-> Response ~ Treat*Period + (1 + Treat  | Subject) + (1 + Treat | Question)
-\normalsize
-
-
-Este modelo produce en los dos paradigmas unas estimaciones similares, como se puede comprobar en la @tbl-model-comp.
+#### Regresión Ordinal {#sec-ordinal-3}
 
 
 ```{r}
 #| cache: true
 options(contrasts = rep("contr.sum", 2))
 
-clmm_treat.period.subject.question <- clmm(
-    Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question),
+clmm_treat.period.subject.item <- clmm(
+    Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item),
     data = df_clean
 )
 
-brm_treat.period.subject.question <- brm(
-    Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question),
+brm_treat.period.subject.item <- brm(
+    Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item),
     data = df_clean,
     family = cumulative("logit"),
     iter = 4000,
     sample_prior = TRUE,
-    file = "models/brm_treat.period.subject.question",
+    file = "models/brm_treat.period.subject.item",
     file_refit = "on_change"
 )
 ```
 
 
+En la @sec-ordinal-2 se evaluaron distintas parametrizaciones de la Regresión Ordinal Acumulativa tanto desde el punto de vista frecuentista como bayesiano, considerando únicamente efectos fijos y también efectos aleatorios. Finalmente, tanto en el análisis frecuentista como en el bayesiano, el modelo que resultó ser más parsimonioso (evaluado con $LRT$ y con $AIC$) es el de la @eq-mejor-modelo, que se reproduce aquí en sintaxis R:
+
+\small
+
+> Response ~ Treat*Period + (1 + Treat  | Subject) + (1 + Treat | Item)
+
+
+\normalsize
+
+
+Este modelo incluye como efectos fijos el nivel de subtitulado (`Treat`), el periodo (`Period`) y su interacción; y como efectos aleatorios el estudiante (`Subject`) y el ítem (`Item`). Ambos con interceptos y pendientes variables por nivel de subtítulo. Los coeficientes estimados son muy similares tanto en el paradigma frecuentista como en el bayesiano. En la @tbl-model-comp se comparan las estimaciones producidas por ambos modelos. Como ya se dijo, el efecto más importante es el debido al subtitulado (coeficiente frecuentista `r round(coef(clmm_treat.period.subject.item)[5], 3)`). En comparación con él, los efectos debido al periodo y la secuencia son muy pequeños (coeficientes `r round(coef(clmm_treat.period.subject.item)[6], 3)` y `r round(coef(clmm_treat.period.subject.item)[7], 3)` respectivamente). La proporción de la varianza explicada debida a efectos aleatorios ($ICC$) es `r round((performance::icc(clmm_treat.period.subject.item))$ICC_adjusted,3)`.
+
+
+
+En la @fig-probs-clmm_treat.period.subject.question se muestran las predicciones del modelo por nivel de subtítulo y periodo. El modelo predice para el subtitulado $B$ el nivel 4 de respuesta como el más probable seguido del 3, mientras para el subtitulado $A$ el nivel de respuesta más probable es el 5 seguido del 4. En el subtitulado $B$ apenas hay diferencias entre periodos, sin embargo, en el subtitulado $A$ hay mayor probabilidad del nivel de respuesta 5 en el periodo 1 y nivel de respuesta 4 en el periodo 2.
+
+```{r}
+#| label: fig-probs-clmm_treat.period.subject.question
+#| fig-cap: Probabilidades de respuesta para el modelo ordinal Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item)
+#| fig-scap: Probabilidades de respuesta para el modelo ordinal seleccionado.
+#| fig-height: 2
+emmeans(clmm_treat.period.subject.item, ~ Response + Treat + Period, mode = "prob") %>%
+    data.frame() %>%
+    ggplot(aes(x = glue::glue("{Treat}-{Period}"), y = prob, fill = Response)) +
+    geom_col() +
+    scale_fill_td(palette = "div5") +
+    scale_y_continuous(expand = c(0, 0), labels = scales::percent) +
+    labs(x = "Treat-Period", y = "Predicted probability")
+```
+
+
+
 \tiny
 ```{r}
 #| label: tbl-model-comp
-#| tbl-cap: Comparación frecuentista/bayesiano de coeficientes estimados en el modelo Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question).
+#| tbl-cap: Comparación frecuentista/bayesiano de coeficientes estimados en el modelo Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item).
 #| tbl-scap: Comparación frecuentista/bayesiano de coeficientes estimados.
 #| cache: true
-df_clmm <- coef(clmm_treat.period.subject.question) %>% data.frame()
+df_clmm <- coef(clmm_treat.period.subject.item) %>% data.frame()
 colnames(df_clmm) <- c("Estimation.clmm")
 
-df_clmm <- bind_cols(df_clmm, confint(clmm_treat.period.subject.question))
+df_clmm <- bind_cols(df_clmm, confint(clmm_treat.period.subject.item))
 
 df_clmm_ranef_coefs <- c(
-    attr(VarCorr(clmm_treat.period.subject.question)$Question, "stddev")[1],
-    attr(VarCorr(clmm_treat.period.subject.question)$Question, "stddev")[2],
-    attr(VarCorr(clmm_treat.period.subject.question)$Subject, "stddev")[1],
-    attr(VarCorr(clmm_treat.period.subject.question)$Subject, "stddev")[2],
-    attr(VarCorr(clmm_treat.period.subject.question)$Question, "correlation")[2, 1],
-    attr(VarCorr(clmm_treat.period.subject.question)$Subject, "correlation")[2, 1]
+    attr(VarCorr(clmm_treat.period.subject.item)$Item, "stddev")[1],
+    attr(VarCorr(clmm_treat.period.subject.item)$Item, "stddev")[2],
+    attr(VarCorr(clmm_treat.period.subject.item)$Subject, "stddev")[1],
+    attr(VarCorr(clmm_treat.period.subject.item)$Subject, "stddev")[2],
+    attr(VarCorr(clmm_treat.period.subject.item)$Item, "correlation")[2, 1],
+    attr(VarCorr(clmm_treat.period.subject.item)$Subject, "correlation")[2, 1]
 ) %>% data.frame()
 
-rownames(df_clmm_ranef_coefs) <- c("Question.sd(Intercept)", "Question.sd(Treat1)", "Subject.sd(Intercept)", "Subject.sd(Treat1)", "Question.cor(Intercept,Treat1)", "Subject.cor(Intercept,Treat1)")
+rownames(df_clmm_ranef_coefs) <- c("Item.sd(Intercept)", "Item.sd(Treat1)", "Subject.sd(Intercept)", "Subject.sd(Treat1)", "Item.cor(Intercept,Treat1)", "Subject.cor(Intercept,Treat1)")
 colnames(df_clmm_ranef_coefs) <- c("Estimation.clmm")
 
 df_clmm <- bind_rows(df_clmm, df_clmm_ranef_coefs)
-df_brm <- (broom.mixed::tidyMCMC(brm_treat.period.subject.question, conf.int = T))[1:13, ]
+df_brm <- (broom.mixed::tidyMCMC(brm_treat.period.subject.item, conf.int = T))[1:13, ]
 
 colnames(df_clmm) <- c("Estimation.clmm", "conf.2.5%", "conf.97.5%")
 colnames(df_brm) <- c("Name", "Estimation.brm", "std.error", "cred.2.5%", "cred.97.5%")
@@ -142,6 +211,101 @@ left_join(df_clmm, df_brm) %>%
     tab_options(table.font.size = 6)
 ```
 \normalsize
+
+
+
+En la @fig-pred-3 se representan 50 muestras de la esperanza de la distribución predictiva a posteriori para cada ítem y nivel de subtitulado marginalizados por periodo y estudiante. La primera conclusión que se puede extraer es que el modelo tiene bastante incertidumbre sobre los valores de respuesta a cada ítem no superando casi nunca el 50% de probabilidad para todos los ítems y niveles de subtitulado. En general se observa en la mayoría de los ítems del nivel de subtitulado $A$ que los alumnos están bastante seguros de que la respuesta a los ítems debe ser 4 ó 5, asignando una muy baja probabilidad a los valores 1, 2, ó 3, pero habiendo bastante incertidumbre respecto cuál de los dos valores (4 ó 5) asignar. En el nivel de subtitulado $B$ la situación es bastante más confusa. Aunque la opción de respuesta preferida es 4 y las menos preferidas son la 5 y la 1, hay bastante mezcla entre las opciones de respuesta 2, 3 y 4. En cuanto al análisis individualizado por ítem se llega a las siguientes conclusiones:
+
+- En los ítems $Q04$ y $Q13$ los estudiantes no aprecian defectos en el subtitulado ni diferencias entre un nivel y otro. Son valoradas en ambos subtitulados con puntuaciones de 4 y de 5.
+
+- En los ítems $Q15$, $Q16$ y $Q17$, la opción de respuesta más probable es 4. El modelo asigna una baja probabilidad de respuesta a la opción 1 y similares al resto. La probabilidad de la opción 5 decrece ligeramente entre subtitulado $A$ y $B$ y lo contrario ocurre con las opciones 2 y 3.
+
+- Los ítems $Q01$, $Q02$, $Q03$, $Q10$, $Q11$ y $Q12$ son similares a las anteriores. Particularmente en lo referente a que la respuesta más probable en el subtitulado $B$ es 4. En el subtitulado $A$ hay preferencia por 4 y 5. El nivel 5 cae acusadamente en el subtitulado $B$ y en este nivel aumenta ligeramente la probabilidad de respuesta 2 y 3.
+
+- Los ítems $Q06$, $Q07$, $Q14$ y $Q18$ no son muy diferentes de los anteriores. En general el modelo predice mayor probabilidad de respuesta para 5 en el subtitulado $A$ pero este valor es con alta probabilidad cercano a cero en el subtitulado $B$. En el subtitulado $B$ la probabilidad de respuesta 2, 3 ó 4 es similar.
+
+- Los ítems $Q05$, $Q08$ y $Q09$ son los que más diferencias entre subtitulados presentan. La respuesta más probable en el subtitulado $A$ es 5 (en $Q08$ y en $Q09$ muy parecida a 4). Por contra, en el subtitulado $B$ las respuestas 4 y 5 tienden a cero, siendo la más probable la respuesta 2. En los ítems $Q05$ y $Q09$ la segunda respuesta más probable al subtitulado $B$ es 1 y 4 en el ítem $Q08$.
+
+En definitiva, nuestro modelo predice que los estudiantes están bastante de acuerdo en que en los ítems $Q05$ y $Q09$ hay una diferencia de calidad importante entre subtitulados. También están de acuerdo en que en los ítems $Q04$ y $Q13$ no hay apenas cambio entre los subtitulados. En los ítems $Q15$, $Q16$ y $Q17$ hay una gran confusión en ambos niveles de subtitulado predominando la respuesta 4 y siendo muy parecidas las respuestas en ambos niveles. En el resto la confusión se circunscribe al nivel de subtitulado $B$, ya que en el nivel $A$ las opciones 4 y 5 predominan.
+
+![Muestreo de la función predictiva a posteriori por tratamiento e ítem.](images/bayes-preg.png){#fig-pred-3 width="100%"}
+
+```{r}
+#| fig-height: 10
+#| fig-width: 8
+#| cache: true
+#| eval: false
+pred2_brm <- brm_treat.period.subject.item %>%
+    epred_draws(ndraws = 50, newdata = expand.grid(list(Period = c(1, 2), Treat = levels(df_clean$Treat), Item = levels(df_clean$Item))), re_formula = ~ (1 + Treat | Item), by = c("Treat", "Item"), category = "Response") %>%
+    select(Period, Treat, Item, Response, Probability = .epred, .draw) %>%
+    mutate(q50 = ave(Probability, FUN = function(x) quantile(x, .5, type = 3, na.rm = TRUE))) %>%
+    ungroup() %>%
+    group_by(.draw, Response) %>%
+    mutate(indices = cur_group_id()) %>%
+    ungroup()
+
+colors <- viridis(
+    option = "plasma",
+    begin = 0,
+    end = 0.9,
+    direction = -1,
+    n = 5
+)
+
+questions_vector <- setNames(levels(df_clean$Item_lr), levels(df_clean$Item))
+
+question_labeller <- function(string) paste0(string, ": ", questions_vector[string])
+
+# Plotting the fitted draws
+p <- pred2_brm %>%
+    ggplot(aes(
+        x = Treat,
+        y = Probability,
+        color = Response,
+        # Don't forget the indices!
+        group = indices
+    )) +
+    facet_wrap(~Item, nrow = 6, labeller = as_labeller(question_labeller)) +
+    geom_line(alpha = 0.4) +
+    scale_color_manual(values = colors) +
+    # We won't need these
+    guides(
+        color = FALSE,
+        label = FALSE,
+        scale = "none"
+    ) +
+    theme_ipsum_ps(base_family = NULL)
+p +
+    labs(
+        x = "Treat",
+        y = "Probability"
+    ) +
+    theme(
+        plot.margin = margin(0, 100, 0, 0),
+    ) +
+    # This allows any labels or data to go past the grid
+    coord_cartesian(clip = "off") +
+    # Finally, our labels. We filter the data to avoid having a million of them
+    geom_text_repel(
+        data = pred2_brm %>% filter(Probability == q50 & Item %in% c("Q02", "Q05", "Q08", "Q11", "Q14", "Q17") & Period == 2, Treat == "B") %>% distinct(Treat,
+            Period, Item, Response,
+            .keep_all = TRUE
+        ) %>% mutate(Response_l = ordered(Response, labels = levels(df_clean$Response_l))),
+        aes(label = Response_l),
+        direction = "y",
+        hjust = 0,
+        segment.size = 0.2,
+        # Move the labels to the right
+        nudge_x = 0.1,
+        na.rm = TRUE,
+        # Expand limits so that the label doesn't get stuck
+        xlim = c(0, 5),
+        # Adjust size as needed!
+        size = 3.5
+    ) + scale_x_discrete(expand = c(0, 0), limits = c("A", "B"))
+
+```
+
 
 
 

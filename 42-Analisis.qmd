@@ -33,7 +33,7 @@ Para calcular en R este coeficiente podemos usar la función `alpha` del paquete
 #| echo: true
 alpha <- df_all %>%
     pivot_wider(
-        names_from = Question,
+        names_from = Item,
         values_from = Response_v,
         id_cols = c(Treat, Subject)
     ) %>%
@@ -85,7 +85,7 @@ Vamos a realizar una agrupación jerárquica aglomerativa de las preguntas en fu
 ```{r}
 #| echo: true
 table <- df_all %>%
-    xtabs(~ Question + Response, data = .)
+    xtabs(~ Item + Response, data = .)
 ```
 
 \tiny

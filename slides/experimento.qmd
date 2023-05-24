@@ -94,7 +94,7 @@ rotating_text <- function(x, align = "center") {
 <br>
 
 ```{r}
-questions.tbl <- tibble(Item = levels(df_all$Question), Texto = levels(df_all$Question_l)) %>%
+questions.tbl <- tibble(Item = levels(df_all$Item), Texto = levels(df_all$Item_l)) %>%
     arrange(Item) %>%
     gt() %>%
     tab_style(
@@ -178,7 +178,7 @@ response.tbl %>%
 ::: {.fragment .fade-in fragment-index=5}
 ::: {data-id="box-questions"}
 
-[Question]{.f1}
+[Item]{.f1}
 
 ::: box  
 ```{r}
@@ -338,10 +338,10 @@ df_freqs %>%
 #| fig-align: center
 #| out-width: 80%
 df_clean %>%
-    group_by(Seq, Treat, Question, Level) %>%
-    mutate(Question = factor(Question, levels = rev(levels(Question)))) %>%
+    group_by(Seq, Treat, Item, Level) %>%
+    mutate(Item = factor(Item, levels = rev(levels(Item)))) %>%
     count(Response) %>%
-    ggplot(aes(x = Question, y = n, fill = Level)) +
+    ggplot(aes(x = Item, y = n, fill = Level)) +
     geom_bar(position = "fill", stat = "identity") +
     scale_y_continuous(labels = scales::percent, expand = c(0, 0)) +
     scale_fill_brewer(name = "Level:", type = "div", palette = "Spectral") +
@@ -350,7 +350,7 @@ df_clean %>%
     theme(legend.position = "top", axis.text.y = element_text(size = 7)) +
     facet_grid(rows = vars(Seq), cols = vars(Treat)) +
     coord_flip() +
-    labs(x = "Question", y = "Percentage", fill = "Response")
+    labs(x = "Item", y = "Percentage", fill = "Response")
 ```
 
 ## Modelado estadístico
@@ -361,7 +361,7 @@ po.check <- function(x) {
 }
 
 
-bind_rows(po.check("Question"), po.check("Period"), po.check("Seq"), po.check("Treat")) %>%
+bind_rows(po.check("Item"), po.check("Period"), po.check("Seq"), po.check("Treat")) %>%
     mutate(Response = recode_factor(Response, "1" = "1|2", "2" = "2|3", "3" = "3|4")) %>%
     ggplot(aes(
         x = diff.log.odds, y = Value,

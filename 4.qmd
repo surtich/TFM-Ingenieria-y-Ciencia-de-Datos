@@ -18,7 +18,7 @@ unique_tests_df <- test_all_df %>%
 
 unique_count <- unique_tests_df %>% count(Seq)
 
-# Eliminamos aquellos usuarios que no han hecho uno de los test
+# Eliminamos aquellos estudiantes que no han hecho uno de los test
 test_all_df <- test_all_df %>%
     group_by(User) %>%
     mutate(Rows = n()) %>%
@@ -88,7 +88,7 @@ washout_periods_df %>%
     filter(diff_sec < washout_cut_2) %>%
     mutate(Test = ifelse(Group == "A", "B", "A"), by_question = round((diff_sec - video_duration) / 18, 2)) %>%
     arrange(diff_sec) %>%
-    dplyr::select(Subject = User, Test, "Spent time (secs)" = diff_sec, "Time by Question (secs)" = by_question) %>%
+    dplyr::select(Subject = User, Test, "Spent time (secs)" = diff_sec, "Time by Item (secs)" = by_question) %>%
     gt()
 ```
 
@@ -97,7 +97,7 @@ washout_periods_df %>%
 
 n_questions <- sum(startsWith(colnames(test_all_df), "Q"))
 
-test_lg_df <- test_all_df %>% pivot_longer(cols = all_of(starts_with("Q")), names_to = "Question", values_to = "Response")
+test_lg_df <- test_all_df %>% pivot_longer(cols = all_of(starts_with("Q")), names_to = "Item", values_to = "Response")
 
 distinct_response_df <- test_lg_df %>%
     group_by(Row, Test, Seq, User) %>%
@@ -169,10 +169,10 @@ distinct_response_df %>%
 # Calculamos cuántas respuestas diferentes hay entre los dos test para cada estudiante
 
 compare_test_df <- test_lg_df %>%
-    group_by(User, Question) %>%
-    arrange(User, Question) %>%
+    group_by(User, Item) %>%
+    arrange(User, Item) %>%
     mutate(n = as.numeric(Response != lag(Response))) %>%
-    arrange(User, Question) %>%
+    arrange(User, Item) %>%
     filter(row_number() %% 2 == 0) %>%
     summarize(Total = sum(n)) %>%
     summarize(Total = sum(Total))
@@ -220,17 +220,17 @@ test_lg_df %>%
 
 Se constata que algunos test tienen valores que no parecen muy razonables. Por ejemplo, no parece razonable realizar la actividad en menos de `r washout_cut_2` segundos. Se observa que en algunos test hay poca variabilidad. Sin embargo, no son muchos los test con estas características así que se ha decidido mantener estos datos a pesar de que se pueda dudar de si en ellos los estudiantes contestaron con la debida atención y diligencia.
 
-### Comparación de los tratamientos $A$ y $B$ entre grupos {#sec-eda-3}
+### Comparación de los subtítulos $A$ y $B$ entre grupos {#sec-eda-3}
 
 La @fig-diff presenta una forma de comparar los dos test realizados por los estudiantes. Para cada estudiante se comparó ítem a ítem sus dos test y se contabilizó la diferencia entre el número de ítems en los que la puntuación en el segundo vídeo fue superior y en los que lo fue inferior (las que no variaron de puntuación no se consideraron). En el eje $x$ se muestran las diferencias entre respuestas. Cantidades negativas indican que hay más respuestas en el segundo de los test que han empeorado respecto al primero de las que han mejorado. En el eje $y$ se representa el número de estudiantes para cada diferencia. Esta frecuencia se representa en negativo cuando la diferencia en el eje x sea negativa para facilitar la comparación^[En la comparación se han omitido aquellas respuestas en las que el estudiante contestó "No sé / No contesto" en el ítem correspondiente de uno de los test.]. Esto es una forma de evaluar si el estudiante valoró mejor o no el segundo vídeo que el primero. 
 
 
 ```{r}
 compare_test_user_df <- test_lg_df %>%
-    group_by(Seq, User, Question) %>%
-    arrange(User, Question, Test) %>%
+    group_by(Seq, User, Item) %>%
+    arrange(User, Item, Test) %>%
     mutate(n = if_else(Response != 5 & lag(Response) != 5, sign(Response - lag(Response)), 0)) %>%
-    arrange(User, Question, Test) %>%
+    arrange(User, Item, Test) %>%
     filter(row_number() %% 2 == 0) %>%
     summarize(Total = sum(n)) %>%
     summarize(Total = sum(Total))
@@ -342,7 +342,7 @@ get_freqs <- function(df = df_freqs, ...) {
 
 ```{r}
 df_resume <- df_all %>%
-    dplyr::select(Subject, Period, Seq, Treat, Response, Question) %>%
+    dplyr::select(Subject, Period, Seq, Treat, Response, Item) %>%
     group_by(Seq, Period, Treat) %>%
     count(Response) %>%
     ungroup()
@@ -419,7 +419,7 @@ de respuestas positivas frente `r get_freqs(df_freqs_seq, Seq="BA", Response=c(4
 ### Análisis de los ítems
 
 ```{r}
-likert_df <- df_clean %>% pivot_wider(names_from = Question, values_from = Response_l, id_cols = c(Seq, Period, Subject, Treat))
+likert_df <- df_clean %>% pivot_wider(names_from = Item, values_from = Response_l, id_cols = c(Seq, Period, Subject, Treat))
 ```
 
 El gráfico @fig-levels muestra la frecuencia relativa por grupo y por test de los ítems clasificados por niveles de respuesta, considerando que:
@@ -438,10 +438,10 @@ Se muestra en primer lugar el ítem 18 por ser una valoración global del subtit
 #| fig-cap: Frecuencias relativas de las respuestas por ítem.
 
 df_clean %>%
-    group_by(Seq, Treat, Question, Level) %>%
-    mutate(Question = factor(Question, levels = rev(levels(Question)))) %>%
+    group_by(Seq, Treat, Item, Level) %>%
+    mutate(Item = factor(Item, levels = rev(levels(Item)))) %>%
     count(Response) %>%
-    ggplot(aes(x = Question, y = n, fill = Level)) +
+    ggplot(aes(x = Item, y = n, fill = Level)) +
     geom_bar(position = "fill", stat = "identity") +
     scale_y_continuous(labels = scales::percent, expand = c(0, 0)) +
     scale_fill_brewer(name = "Level:", type = "div", palette = "Spectral") +
@@ -450,7 +450,7 @@ df_clean %>%
     theme(legend.position = "top", axis.text.y = element_text(size = 7)) +
     facet_grid(rows = vars(Seq), cols = vars(Treat)) +
     coord_flip() +
-    labs(x = "Question", y = "Percentage", fill = "Response")
+    labs(x = "Item", y = "Percentage", fill = "Response")
 ```
 
 ```{r}
@@ -501,10 +501,10 @@ En la @tbl-no-response se muestran las contastaciones "No sé / No contesto" por
 #| tbl-cap: Contestaciones "No sé / No contesto" por nivel de subtitulado e ítem
 df_all %>%
     filter(Response == 0) %>%
-    group_by(Treat, Question, .drop = F) %>%
+    group_by(Treat, Item, .drop = F) %>%
     count() %>%
-    arrange(Treat, Question) %>%
-    pivot_wider(id_cols = c(Treat), names_from = c(Question), values_from = c(n)) %>%
+    arrange(Treat, Item) %>%
+    pivot_wider(id_cols = c(Treat), names_from = c(Item), values_from = c(n)) %>%
     gt()
 ```
 \normalsize

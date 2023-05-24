@@ -20,7 +20,7 @@
 \contentsline {table}{\numberline {4.6}{\ignorespaces Probabilidades de respuesta para el modelo ordinal Response \textasciitilde {} Treat\relax }}{38}{table.4.6}%
 \contentsline {table}{\numberline {4.7}{\ignorespaces Comparación de los coeficientes con contraste ``treatment'' y ``sum''. \relax }}{38}{table.4.7}%
 \contentsline {table}{\numberline {4.8}{\ignorespaces Equivalencia entre los coeficientes calculados con \texttt {contr.treatment} y \texttt {contr.sum} en el modelo Response \textasciitilde {} Treat*Period.\relax }}{40}{table.4.8}%
-\contentsline {table}{\numberline {4.9}{\ignorespaces Distribuciones a priori del modelo Response \textasciitilde {} Treat * Period + (1 + Treat \textbar {} Subject) + (1 + Treat \textbar {} Question). \relax }}{48}{table.4.9}%
+\contentsline {table}{\numberline {4.9}{\ignorespaces Distribuciones a priori del modelo Response \textasciitilde {} Treat * Period + (1 + Treat \textbar {} Subject) + (1 + Treat \textbar {} Item). \relax }}{48}{table.4.9}%
 \addvspace {10pt}
 \contentsline {table}{\numberline {5.1}{\ignorespaces Relación de cada ítem con el índice alpha de Cronbach.\relax }}{53}{table.caption.47}%
 \contentsline {table}{\numberline {5.4}{\ignorespaces Tablas de contingencia.\relax }}{54}{table.caption.49}%
@@ -28,7 +28,7 @@
 \contentsline {table}{\numberline {5.6}{\ignorespaces \(Log OR\) \textasciitilde {} Treat + Seq + Response\_l \relax }}{54}{table.5.6}%
 \contentsline {table}{\numberline {5.7}{\ignorespaces Log OR \textasciitilde {} Treat + Period + Response\_l \relax }}{55}{table.5.7}%
 \contentsline {table}{\numberline {5.8}{\ignorespaces Probabilidad de que la respuesta a un ítem sea A \textgreater {} B frente a A \textless = B \relax }}{55}{table.5.8}%
-\contentsline {table}{\numberline {5.9}{\ignorespaces Comparación frecuentista/bayesiano de coeficientes estimados en el modelo Response \textasciitilde {} Treat * Period + (1 + Treat \textbar {} Subject) + (1 + Treat \textbar {} Question). \relax }}{56}{table.5.9}%
+\contentsline {table}{\numberline {5.9}{\ignorespaces Comparación frecuentista/bayesiano de coeficientes estimados en el modelo Response \textasciitilde {} Treat * Period + (1 + Treat \textbar {} Subject) + (1 + Treat \textbar {} Item). \relax }}{56}{table.5.9}%
 \addvspace {10pt}
 \addvspace {10pt}
 \contentsline {table}{\numberline {A.1}{\ignorespaces Ajuste del modelo Response \textasciitilde {} Treat con contrasts treatment. \relax }}{64}{table.A.1}%

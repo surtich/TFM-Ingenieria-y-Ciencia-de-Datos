@@ -18,7 +18,7 @@ $$
 
 \normalsize
 
-donde $ij$ es la observación $i$ del estudiante $j$. Obsérvese que ahora los interceptos $\tau_{kj}$ se descomponen en una parte fija y común para cada nivel de respuesta $k$, $\tau_{k}$ y una parte variable específica para cada estudiante $Subject_{0j}$. Para ajustar el modelo se va a utilizar la función `clmm` del paquete `Ordinal` ya que permite la inclusión de efectos aleatorios. 
+donde $ij$ es la observación $i$ del estudiante $j$. Obsérvese que ahora los interceptos $\tau_{kj}$ se descomponen en una parte fija y común para cada nivel de respuesta $k$, $\tau_{k}$ y una parte variable específica para cada estudiante $Subject_{0j}$. Para ajustar el modelo se va a utilizar la función `clmm` del paquete `ordinal` [ver @ordinal] ya que permite la inclusión de efectos aleatorios. 
 
 \scriptsize
 ```{r}
@@ -106,7 +106,7 @@ summary(clmm_treat.period_treat.subject)
 
 #### Comparación de modelos
 
-Se pueden comparar los modelos con el test de razón de verosimilitud que se realiza con la función `anova` del paquete `ordinal`. Se comprueba que en este test resulta significativamente mejor el último modelo:
+Se pueden comparar los modelos con el test de razón de verosimilitud que se realiza con la función `anova` del paquete `ordinal` [ver @ordinal]. Se comprueba que en este test resulta significativamente mejor el último modelo:
 
 \scriptsize
 ```{r}
@@ -121,16 +121,16 @@ Se han comparado distintos modelos:
 
 * Response ~ (1 | Subject)
 * Response ~ (1 + Treat | Subject)
-* Response ~ (1 + Treat | Question)
+* Response ~ (1 + Treat | Item)
 * Response ~ Treat + (1 + Treat | Subject)
-* Response ~ Treat + (1 + Treat | Question)
+* Response ~ Treat + (1 + Treat | Item)
 * Response ~ Treat*Period + (1 + Treat  | Subject)
-* Response ~ Treat*Period + (1 + Treat  | Question)
-* Response ~ Treat*Period + (1 + Period | Subject) + (1 + Treat | Question)
-* Response ~ Treat + (1 + Treat | Subject) + (1 + Treat | Question)
-* Response ~ Treat*Period + (1 + Treat  | Subject) + (1 + Treat | Question)
+* Response ~ Treat*Period + (1 + Treat  | Item)
+* Response ~ Treat*Period + (1 + Period | Subject) + (1 + Treat | Item)
+* Response ~ Treat + (1 + Treat | Subject) + (1 + Treat | Item)
+* Response ~ Treat*Period + (1 + Treat  | Subject) + (1 + Treat | Item)
 
-El último de ellos produce un resultado significativo en el test de razón de verosimilitud con todos los demás. Sin embargo los parámetros de todos los modelos tienen valores similares por lo que no cambia la interpretación que se haga de ellos en cada modelo. Este modelo tiene un $AIC$ menor que los modelos ordinales ajustados en el apartado anterior (ver @sec-ordinal-2) incluso si a esos modelos se les añade como factor predictor `Question`. Será este, por lo tanto, el modelo seleccionado.
+El último de ellos produce un resultado significativo en el test de razón de verosimilitud con todos los demás. Sin embargo los parámetros de todos los modelos tienen valores similares por lo que no cambia la interpretación que se haga de ellos en cada modelo. Este modelo tiene un $AIC$ menor que los modelos ordinales ajustados en el apartado anterior (ver @sec-ordinal-2) incluso si a esos modelos se les añade como factor predictor `Item`. Será este, por lo tanto, el modelo seleccionado.
 
 
 
@@ -142,8 +142,8 @@ La @eq-mejor-modelo del modelo seleccionado es la siguiente:
 $$
 \begin{aligned}
 Nivel\ 1: & \text{logit}(P(Response_{ijl} \leq k)) = \tau_{kjl} - \beta_{1jl} \text{Treat}_{ijl} - \beta_{2} \text{Period}_{ijl} - \beta_{3} \text{Treat}_{ijl} * \text{Period}_{ijl} \\
-Nivel\ 2: & \tau_{kjl}  =  \tau_{k} + Subject_{0j} + Question_{0l} \\
-          & \beta_{1jl}  =  \beta_{1} + Subject_{1j} + Question_{1l}
+Nivel\ 2: & \tau_{kjl}  =  \tau_{k} + Subject_{0j} + Item_{0l} \\
+          & \beta_{1jl}  =  \beta_{1} + Subject_{1j} + Item_{1l}
 \end{aligned}
 $$ {#eq-mejor-modelo}
 
@@ -159,32 +159,15 @@ El resumen de parámetros del modelo es el siguiente:
 #| echo: true
 #| cache: true
 options(contrasts = rep("contr.sum", 2))
-clmm_treat.period.subject.question <- clmm(
-    Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question),
+clmm_treat.period.subject.item <- clmm(
+    Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item),
     data = df_clean
 )
-summary(clmm_treat.period.subject.question)
+summary(clmm_treat.period.subject.item)
 ```
 \normalsize
 
 Con este modelo los efectos secuencia y periodo no son significativos. En cualquier caso se mantienen ya que el test de razón de verosimilitud resulta significativo en este modelo respecto al modelo sin estos predictores.
-
-
-En la @fig-probs-clmm_treat.period.subject.question se muestran las predicciones del modelo. El modelo predice para el subtitulado $B$ el nivel 4 de respuesta como el más probable seguido del 3, mientras para el subtitulado $A$ el nivel de respuesta más probable es el 5 seguido del 4. En el subtitulado $B$ apenas hay diferencias entre periodos, sin embargo, en el subtitulado $A$ hay mayor probabilidad del nivel de respuesta 5 en el periodo 1 y nivel de respuesta 4 en el periodo 2.
-
-```{r}
-#| label: fig-probs-clmm_treat.period.subject.question
-#| fig-cap: Probabilidades de respuesta para el modelo ordinal Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question)
-#| fig-scap: Probabilidades de respuesta para el modelo ordinal seleccionado.
-#| fig-height: 2
-emmeans(clmm_treat.period.subject.question, ~ Response + Treat + Period, mode = "prob") %>%
-    data.frame() %>%
-    ggplot(aes(x = glue::glue("{Treat}-{Period}"), y = prob, fill = Response)) +
-    geom_col() +
-    scale_fill_td(palette = "div5") +
-    scale_y_continuous(expand = c(0, 0), labels = scales::percent) +
-    labs(x = "Treat-Period", y = "Predicted probability")
-```
 
  
 {{< include 4.3.qmd >}}

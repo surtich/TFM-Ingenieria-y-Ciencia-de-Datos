@@ -119,13 +119,13 @@ bmmb::short_summary(model.null)
 
 ```{r}
 df.improved <- df %>%
-    pivot_wider(values_from = Response_v, names_from = Treat, names_prefix = "Treat", id_cols = c(Seq, Subject, Question)) %>%
+    pivot_wider(values_from = Response_v, names_from = Treat, names_prefix = "Treat", id_cols = c(Seq, Subject, Item)) %>%
     filter(!is.na(TreatA) & !is.na(TreatB)) %>%
     mutate(diff = TreatA - TreatB, Improved = as.numeric(diff > 0))
 ```
 
 ```{r}
-xtabs(~ Improved + Question, data = df.improved)
+xtabs(~ Improved + Item, data = df.improved)
 ```
 
 ```{r}
@@ -138,7 +138,7 @@ summary (model.ols)
 
 ```{r}
 options (contrasts = c('contr.sum','contr.sum'))
-brms::get_prior(Improved ~ Seq + (1|Subject) + (1|Question), data = df.improved)[, -c(7:9)]
+brms::get_prior(Improved ~ Seq + (1|Subject) + (1|Item), data = df.improved)[, -c(7:9)]
 
 priors <- c(
     set_prior("student_t(3, 0, 3)", class = "Intercept"),
@@ -147,7 +147,7 @@ priors <- c(
 )
 
 model.improved.priors <-
-    brm(Improved ~ Seq + (1|Subject) + (1|Question),
+    brm(Improved ~ Seq + (1|Subject) + (1|Item),
         data = df.improved, chains = 4, cores = 4,
         family = "bernoulli", warmup = 1000, iter = 5000, thin = 4, prior = priors, sample_prior = "only"
     )
@@ -155,7 +155,7 @@ model.improved.priors <-
 bmmb::p_check (model.improved.priors)
 
 model.improved <-
-    brm(Improved ~ Seq + (1 | Subject) + (1 | Question),
+    brm(Improved ~ Seq + (1 | Subject) + (1 | Item),
         data = df.improved, chains = 4, cores = 4,
         family = "bernoulli", warmup = 1000, iter = 5000, thin = 4, prior = priors
     )

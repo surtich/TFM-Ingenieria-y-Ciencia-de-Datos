@@ -7,7 +7,7 @@ En el apéndice (ver @sec-bayes-2) se comparan diversas parametrizaciones de mod
 #| echo: true
 #| cache: true
 brm_treat.period.subject.question <- brm(
-    Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question),
+    Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item),
     data = df_clean,
     family = cumulative("logit"),
     sample_prior = TRUE,
@@ -31,7 +31,7 @@ En la @tbl-model-comp se comparan las estimaciones puntuales que se obtuvo para 
 \tiny
 ```{r}
 #| label: tbl-model-comp
-#| tbl-cap: Comparación frecuentista/bayesiano de coeficientes estimados en el modelo Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question).
+#| tbl-cap: Comparación frecuentista/bayesiano de coeficientes estimados en el modelo Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item).
 #| cache: true
 df_clmm <- coef(clmm_treat.period.subject.question) %>% data.frame()
 colnames(df_clmm) <- c("Estimation.clmm")
@@ -39,15 +39,15 @@ colnames(df_clmm) <- c("Estimation.clmm")
 df_clmm <- bind_cols(df_clmm, confint(clmm_treat.period.subject.question))
 
 df_clmm_ranef_coefs <- c(
-    attr(VarCorr(clmm_treat.period.subject.question)$Question, "stddev")[1],
-    attr(VarCorr(clmm_treat.period.subject.question)$Question, "stddev")[2],
+    attr(VarCorr(clmm_treat.period.subject.question)$Item, "stddev")[1],
+    attr(VarCorr(clmm_treat.period.subject.question)$Item, "stddev")[2],
     attr(VarCorr(clmm_treat.period.subject.question)$Subject, "stddev")[1],
     attr(VarCorr(clmm_treat.period.subject.question)$Subject, "stddev")[2],
-    attr(VarCorr(clmm_treat.period.subject.question)$Question, "correlation")[2, 1],
+    attr(VarCorr(clmm_treat.period.subject.question)$Item, "correlation")[2, 1],
     attr(VarCorr(clmm_treat.period.subject.question)$Subject, "correlation")[2, 1]
 ) %>% data.frame()
 
-rownames(df_clmm_ranef_coefs) <- c("Subject.sd(Intercept)", "Subject.sd(TreatB)", "Subject.cor(Intercept,TreatB)", "Question.sd(Intercept)", "Question.sd(TreatB)", "Question.cor(Intercept,TreatB)")
+rownames(df_clmm_ranef_coefs) <- c("Subject.sd(Intercept)", "Subject.sd(TreatB)", "Subject.cor(Intercept,TreatB)", "Item.sd(Intercept)", "Item.sd(TreatB)", "Item.cor(Intercept,TreatB)")
 colnames(df_clmm_ranef_coefs) <- c("Estimation.clmm")
 
 df_clmm <- bind_rows(df_clmm, df_clmm_ranef_coefs)
@@ -82,7 +82,7 @@ Se han mantenido las distribuciones de probabilidad a priori que por defecto uti
 \tiny
 ```{r}
 #| label: tbl-priors
-#| tbl-cap: Distribuciones a priori del modelo Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question).
+#| tbl-cap: Distribuciones a priori del modelo Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item).
 #| tbl-scap: Distribuciones a priori del modelo seleccionado.
 #| cache: true
 #| fig-width: 8
@@ -94,7 +94,7 @@ prior_summary(brm_treat.period.subject.question) %>%
 
 ```{r}
 #| label: fig-priors
-#| fig-cap: Distribuciones a priori del modelo Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question).
+#| fig-cap: Distribuciones a priori del modelo Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item).
 #| fig-scap: Distribuciones a priori del modelo seleccionado.
 prior_draws(brm_treat.period.subject.question) %>%
     pivot_longer(cols = everything(), names_to = "term", values_to = "value") %>%
@@ -110,7 +110,7 @@ Es importante asegurar que el entrenamiento ha convergido a su distribución a p
  
 ```{r}
 #| label: fig-trace
-#| fig-cap: Cadenas MCMC del modelo Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question).
+#| fig-cap: Cadenas MCMC del modelo Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item).
 #| cache: true
 #| fig-height: 10
 mcmc_plot(brm_treat.period.subject.question, type = "trace")
@@ -118,9 +118,9 @@ mcmc_plot(brm_treat.period.subject.question, type = "trace")
 
 ```{r}
 #| label: fig-predictive
-#| fig-cap: Comparación de los valores reales con los obtenidos a partir de la función predictiva a posteriori del modelo Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question).
+#| fig-cap: Comparación de los valores reales con los obtenidos a partir de la función predictiva a posteriori del modelo Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item).
 #| fig-height: 10
-pp_check(brm_treat.period.subject.question, type = "bars_grouped", group = "Question", ndraws = 1000)
+pp_check(brm_treat.period.subject.question, type = "bars_grouped", group = "Item", ndraws = 1000)
 ```
 
 En cuanto a las conclusiones que se pueden extraer del modelo, la más importante es que, como se ha constatado desde el principio de este trabajo, los alumnos perciben claramente una diferencia entre los niveles de subtitulado $A$ y $B$, siendo preferido el $A$. En la @fig-predictive-2 se representan gráficamente los valores esperados de la probabilidad de respuesta a cada pregunta por tratamiento y periodo. Lo más interesante es confirmar la existencia de sendos efectos periodo y secuencia de pequeña magnitud que se materializan en que, para el nivel de subtitulado $A$, son ligeramente más probables las respuestas con valor 4 en el periodo 2 (secuencia $BA$) que en el 1 (secuencia $AB$). Con las respuestas de valor 5 ocurre lo contrario: en el subtitulado $A$ son más probables en el periodo 1 (secuencia $AB$) que el 2 (secuencia $BA$). Esto ya se había constatado antes en el análisis del $OR$ (ver @sec-or).
@@ -128,14 +128,14 @@ En cuanto a las conclusiones que se pueden extraer del modelo, la más important
 
 ```{r}
 #| label: fig-predictive-2
-#| fig-cap: Muestreo de la esperanza de la función predictiva a posteriori por tratamiento, periodo y pregunta del modelo Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question).
+#| fig-cap: Muestreo de la esperanza de la función predictiva a posteriori por tratamiento, periodo y pregunta del modelo Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item).
 #| fig-height: 10
 #| cache: true
-newdata <- df_clean %>% modelr::data_grid(Period, Treat, Question)
+newdata <- df_clean %>% modelr::data_grid(Period, Treat, Item)
 pred_brm <- brm_treat.period.subject.question %>%
-    epred_draws(newdata = newdata, re_formula = ~ (1 + Treat | Question), by = c("Treat", "Question"), category = "Response") %>%
-    select(Period, Treat, Question, Response, .epred) %>%
-    group_by(Period, Treat, Question, Response) %>%
+    epred_draws(newdata = newdata, re_formula = ~ (1 + Treat | Item), by = c("Treat", "Item"), category = "Response") %>%
+    select(Period, Treat, Item, Response, .epred) %>%
+    group_by(Period, Treat, Item, Response) %>%
     summarize(
         lo = quantile(.epred, 0.025),
         Probability = median(.epred),
@@ -147,7 +147,7 @@ pred_brm %>% ggplot(aes(x = Treat, y = Probability, colour = Response)) +
     geom_point(aes(shape = Period)) +
     geom_line(aes(group = interaction(Period, Response), linetype = Period)) +
     geom_ribbon(data = pred_brm, aes(ymin = lo, ymax = hi, fill = Response, group = Response), colour = NA, alpha = 0.2) +
-    facet_grid(Question ~ Response) +
+    facet_grid(Item ~ Response) +
     theme(panel.spacing = grid::unit(0, "lines"), legend.position = "top") +
     scale_x_discrete(expand = c(0.05, .05), limits = c("A", "B"))
 ```
@@ -166,7 +166,7 @@ Contrastados los efectos periodo y secuencia, y sabiendo que son de pequeña mag
 
 En definitiva, nuestro modelo predice que los estudiantes están bastante de acuerdo en que en las preguntas $Q05$ y $Q09$ hay una diferencia de calidad importante entre subtitulados. También están de acuerdo en que en las preguntas $Q04$ y $Q13$ no hay apenas cambio entre los subtitulados. En las preguntas $Q15$, $Q16$ y $Q17$ hay una gran confusión en ambos niveles de subtitulado y en el resto la confusión se circunscribe al nivel de subtitulado $B$, ya que en el nivel $A$ las opciones 4 y 5 predominan.
 
-![Muestreo de la función predictiva a posteriori por tratamiento y pregunta del modelo Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question).](images/bayes-preg.png){#fig-pred-3 width=100%}
+![Muestreo de la función predictiva a posteriori por tratamiento y pregunta del modelo Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item).](images/bayes-preg.png){#fig-pred-3 width=100%}
 
 
 ```{r}
@@ -175,8 +175,8 @@ En definitiva, nuestro modelo predice que los estudiantes están bastante de acu
 #| cache: true
 #| eval: false
 pred2_brm <- brm_treat.period.subject.question %>%
-    epred_draws(ndraws = 50, newdata = newdata, re_formula = ~ (1 + Treat | Question), by = c("Treat", "Question"), category = "Response") %>%
-    select(Period, Treat, Question, Response, Probability = .epred, .draw) %>%
+    epred_draws(ndraws = 50, newdata = newdata, re_formula = ~ (1 + Treat | Item), by = c("Treat", "Item"), category = "Response") %>%
+    select(Period, Treat, Item, Response, Probability = .epred, .draw) %>%
     mutate(Median = ave(Probability, FUN = function(x) quantile(x, .5, type = 3, na.rm = TRUE))) %>%
     ungroup() %>%
     group_by(.draw, Response) %>%
@@ -191,7 +191,7 @@ colors <- viridis(
     n = 5
 )
 
-questions_vector <- setNames(levels(df_clean$Question_lr), levels(df_clean$Question))
+questions_vector <- setNames(levels(df_clean$Item_lr), levels(df_clean$Item))
 
 question_labeller <- function(string) paste0(string, ": ", questions_vector[string])
 
@@ -204,7 +204,7 @@ p <- pred2_brm %>%
         # Don't forget the indices!
         group = indices
     )) +
-    facet_wrap(~Question, nrow = 6, labeller = as_labeller(question_labeller)) +
+    facet_wrap(~Item, nrow = 6, labeller = as_labeller(question_labeller)) +
     geom_line(alpha = 0.4) +
     scale_color_manual(values = colors) +
     # We won't need these
@@ -226,8 +226,8 @@ p +
     coord_cartesian(clip = "off") +
     # Finally, our labels. We filter the data to avoid having a million of them
     geom_text_repel(
-        data = pred2_brm %>% filter(Probability == Median & Question %in% c("Q02", "Q05", "Q08", "Q11", "Q14", "Q17") & Period == 2, Treat == "B") %>% distinct(Treat,
-            Period, Question, Response,
+        data = pred2_brm %>% filter(Probability == Median & Item %in% c("Q02", "Q05", "Q08", "Q11", "Q14", "Q17") & Period == 2, Treat == "B") %>% distinct(Treat,
+            Period, Item, Response,
             .keep_all = TRUE
         ) %>% mutate(Response_l = ordered(Response, labels = levels(df_clean$Response_l))),
         aes(label = Response_l),

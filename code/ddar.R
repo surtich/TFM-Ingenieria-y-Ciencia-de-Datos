@@ -1,4 +1,4 @@
-ftable(df_all %>% dplyr::select(Treat, Response, Question))
+ftable(df_all %>% dplyr::select(Treat, Response, Item))
 
 library(vcd)
 
@@ -6,14 +6,14 @@ stable <- structable(df_all %>% dplyr::select(Treat, Cluster, Response))
 stable
 plot(stable)
 
-spineplot(Response ~ Question, data = df_all)
+spineplot(Response ~ Item, data = df_all)
 
 
 df_clean %>%
-    group_by(Treat, Question) %>%
+    group_by(Treat, Item) %>%
     summarize(Response = mean(Response_v)) %>%
     ungroup() %>%
-    xyplot(Response ~ Question | Treat,
+    xyplot(Response ~ Item | Treat,
         data =
             ., type = c("h", "p"), pch = 16, lwd = 4, cex = 1.25
     )
@@ -38,7 +38,7 @@ CMHtest(~ Response + Period, data = df_clean)
 
 CMHtest(~ Response + Period + Treat, data = df_clean)
 
-CMHtest(~ Response + Treat + Question, data = df_clean)
+CMHtest(~ Response + Treat + Item, data = df_clean)
 
 # Página 134
 fourfold(xtabs(~ Treat + Seq + Response, data = df_all))
@@ -91,7 +91,7 @@ VGAM::lrtest(m1.npo, m1.po)
 
 
 library(rms)
-m1.po2 <- lrm(Response ~ Treat + Question, data = df_clean)
+m1.po2 <- lrm(Response ~ Treat + Item, data = df_clean)
 m1.po2
 
 plot.xmean.ordinaly(Response ~ Treat, data = df_clean, lwd = 2, pch = 16, subn = FALSE)
@@ -123,7 +123,7 @@ library(corrplot)
 library(brms)
 library(bmmb)
 
-model_ordinal <- brms::brm(Response ~ Treat + (1 | Subject) + (1 | Question), data = df_clean, family = "cumulative")
+model_ordinal <- brms::brm(Response ~ Treat + (1 | Subject) + (1 | Item), data = df_clean, family = "cumulative")
 bmmb::short_summary(model_ordinal)
 
 # make latent variable predictions

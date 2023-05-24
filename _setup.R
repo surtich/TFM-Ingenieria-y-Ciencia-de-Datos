@@ -92,14 +92,14 @@ df <- test_df %>%
     ) %>%
     pivot_longer(
         cols = all_of(starts_with("Q")),
-        names_to = "Question",
+        names_to = "Item",
         values_to = "Response"
     ) %>%
     mutate(
-        Question = relevel(as.factor(Question), ref = "Q18"),
+        Item = relevel(as.factor(Item), ref = "Q18"),
         Response = factor(Response, ordered = TRUE)
     ) %>%
-    arrange(Subject, Period, Question)
+    arrange(Subject, Period, Item)
 
 response_labels <- c(
     "No sé / No contesto",
@@ -155,12 +155,12 @@ question_labels_reduced <- c(
 df <- df %>% mutate(
     Response_v = as.numeric(Response) - 1,
     Response_l = ordered(Response_v, labels = response_labels),
-    Question_l = factor(Question, labels = question_labels),
-    Question_lr = factor(Question, labels = question_labels_reduced)
+    Item_l = factor(Item, labels = question_labels),
+    Item_lr = factor(Item, labels = question_labels_reduced)
 )
 
 dist <- df %>%
-    xtabs(~ Question + Response, data = .) %>%
+    xtabs(~ Item + Response, data = .) %>%
     dist(x = ., method = "euclidean")
 
 cluster <- hclust(dist, method = "complete")
@@ -172,12 +172,12 @@ cuts <- c(1, 2, 2, 2, 2, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3)
 df <- inner_join(
     df,
     data.frame(
-        Question = factor(levels(df$Question),
-            levels = levels(df$Question)
+        Item = factor(levels(df$Item),
+            levels = levels(df$Item)
         ),
         Cluster = as.factor(cuts)
     ),
-    by = "Question"
+    by = "Item"
 )
 
 write_csv(df, "./data/preprocess/test_lg.csv")
@@ -204,7 +204,7 @@ df_clean <- df_clean %>% mutate(
 df_0 <- df %>% filter(Response == 0)
 
 df_improve <- df_clean %>%
-    pivot_wider(id_cols = c(Subject, Question, Seq), names_from = Treat, values_from = Response) %>%
+    pivot_wider(id_cols = c(Subject, Item, Seq), names_from = Treat, values_from = Response) %>%
     filter(A != 0 & A != 3 & B != 0 & B != 3) %>%
     mutate(
         Improve = A > B, Improve_level = (A %in% c(4, 5)) & (B %in% c(1, 2)),

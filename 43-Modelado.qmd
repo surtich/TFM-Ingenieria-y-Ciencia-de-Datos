@@ -226,7 +226,7 @@ Es decir, que $\exp(\beta_{i})$ es el $OR$ (cambio en $odds$) de que la variable
 
 ### Ajuste del modelo ordinal `Response ~ Treat`.
 
-Existen varios paquetes en R que permiten ajustar una regresión ordinal logística. El más popular es el paquete `Ordinal` [@ordinalR]. El paquete `VGAM` [@VGAMR] es más flexible y potente. Otra posibilidad es usar la función `polr` del paquete `MASS` [@MASSR]. Finalmente la función `orm` del paquete `rms` también permite hacerlo [ver @harrell2015]. En este trabajo usaremos el paquete `Ordinal` por permitir también incluir efectos aleatorios que utilizaremos en un apartado posterior. Comenzamos con un modelo simple que tiene como único predictor el nivel de subtitulado por ser la variable objetivo de nuestro modelo:
+Existen varios paquetes en R que permiten ajustar una regresión ordinal logística. El más popular es el paquete `Ordinal` [@ordinalR]. El paquete `VGAM` [@VGAMR] es más flexible y potente. Otra posibilidad es usar la función `polr` del paquete `MASS` [@MASSR]. Finalmente la función `orm` del paquete `rms` también permite hacerlo [ver @harrell2015]. En este trabajo usaremos el paquete @ordinal por permitir también incluir efectos aleatorios que utilizaremos en un apartado posterior. Comenzamos con un modelo simple que tiene como único predictor el nivel de subtitulado por ser la variable objetivo de nuestro modelo:
 
 $$
 \text{logit}(P(Response_i \leq k)) = \tau_k - \beta_1 \text{Treat}_i,
@@ -650,7 +650,7 @@ Queda, por último, discutir cómo añadir las preguntas al modelo. Consideramos
 #| echo: true
 #| cache: true
 clmm_treat.period.subject_question <- clmm(
-    Response ~ Treat * Period + (1 + Treat | Subject) + (1 | Question),
+    Response ~ Treat * Period + (1 + Treat | Subject) + (1 | Item),
     data = df_clean
 )
 summary(clmm_treat.period.subject_question)
@@ -660,7 +660,7 @@ summary(clmm_treat.period.subject_question)
 #| echo: true
 #| cache: true
 clmm_treat.period.subject.question <- clmm(
-    Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question),
+    Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item),
     data = df_clean
 )
 summary(clmm_treat.period.subject.question)
@@ -675,7 +675,7 @@ Un modelo más simple que el anterior que podemos considerar es eliminar la pend
 #| echo: true
 #| cache: true
 clmm_treat.period_subject_question <- clmm(
-    Response ~ Treat * Period + (1 | Subject) + (1 | Question),
+    Response ~ Treat * Period + (1 | Subject) + (1 | Item),
     data = df_clean
 )
 summary(clmm_treat.period_subject_question)
@@ -691,7 +691,7 @@ E incluso eliminar completamente el efecto aleatorio `Subject` y mantener solo l
 #| echo: true
 #| cache: true
 clmm_treat.period_question <- clmm(
-    Response ~ Treat * Period + (1 | Question),
+    Response ~ Treat * Period + (1 | Item),
     data = df_clean
 )
 summary(clmm_treat.period_question)
@@ -715,12 +715,12 @@ anova(
 ```
 \normalsize
 
-Vemos que el modelo más complejo, `clmm_treat.period.subject.question`, presenta una menor funcion de verosimilitud. Este modelo tiene un $AIC$ menor que los modelos ordinales ajustados en el apartado anterior incluso si a esos modelos se les añade como factor predictor `Question`. En el @tbl-question-intercepts se muestran los interceptores y pendientes estimadas para el efecto aleatorio `Question`. 
+Vemos que el modelo más complejo, `clmm_treat.period.subject.question`, presenta una menor funcion de verosimilitud. Este modelo tiene un $AIC$ menor que los modelos ordinales ajustados en el apartado anterior incluso si a esos modelos se les añade como factor predictor `Item`. En el @tbl-question-intercepts se muestran los interceptores y pendientes estimadas para el efecto aleatorio `Item`. 
 
 ```{r}
 #| label: tbl-question-intercepts
-#| tbl-cap: Intercepto y pendiente de Question en el modelo Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question)
-question_intercepts_coefs <- ranef(clmm_treat.period.subject.question)$Question
+#| tbl-cap: Intercepto y pendiente de Item en el modelo Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item)
+question_intercepts_coefs <- ranef(clmm_treat.period.subject.question)$Item
 question_intercepts_coefs %>% knitr::kable()
 ```
 
@@ -728,7 +728,7 @@ Las preguntas `r  paste(rownames(question_intercepts_coefs)[head(order(abs(quest
 
 ```{r}
 #| label: fig-probs-clmm_treat.period.subject.question
-#| fig-cap: Probabilidades de respuesta para el modelo ordinal Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question)
+#| fig-cap: Probabilidades de respuesta para el modelo ordinal Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item)
 
 emmeans(clmm_treat.period.subject.question, ~ Response + Treat + Period, mode = "prob") %>%
     data.frame() %>%

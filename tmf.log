@@ -1870,7 +1870,7 @@ Overfull \hbox (107.56372pt too wide) in alignment at lines 1506--1531
 
 [19] [20]
 Underfull \hbox (badness 4156) in paragraph at lines 1649--1652
-[]\T1/lmr/m/n/12 (+20) El fi-che-ro \T1/lmtt/m/n/12 acc \T1/lmr/m/n/12 (+20) con-tie-ne la in-for-ma-ción so-bre las ne-ce-si-da-
+[]\T1/lmr/m/n/12 (+20) El fi-che-ro \T1/lmtt/m/n/12 acc \T1/lmr/m/n/12 (+20) con-tie-ne la in-for-ma-ciï¿½n so-bre las ne-ce-si-da-
  []
 
 [21]
@@ -2032,7 +2032,7 @@ Package pdftex.def Info: 4_files/figure-pdf/fig-probs-clmm_treat.period.subject.
 (pdftex.def)             Requested size: 379.99808pt x 187.68196pt.
 [46 <./4_files/figure-pdf/fig-probs-clmm_treat.period.subject.question-1.pdf>]
 Overfull \hbox (12.17424pt too wide) in paragraph at lines 3262--3262
-[]\T1/lmtt/m/n/9 Formula: Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question)[] 
+[]\T1/lmtt/m/n/9 Formula: Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item)[] 
  []
 
 [47]

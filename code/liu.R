@@ -214,7 +214,7 @@ summary(mpo.2)
 anova(mpo.1, mpo.2)
 
 
-mpo.3 <- clmm2(Level ~ Treat + Period + Seq + Question, random = Subject, data = df_clean, Hess = TRUE, nAGQ = 1)
+mpo.3 <- clmm2(Level ~ Treat + Period + Seq + Item, random = Subject, data = df_clean, Hess = TRUE, nAGQ = 1)
 summary(mpo.3)
 sum(predict(mpo.3) >= 0.5)
 
@@ -222,7 +222,7 @@ library(brms)
 olr.brm <- brm(Response ~ Treat + Period + Seq, family = cumulative("logit"), data = df_clean, warmup = 500, iter = 1000)
 summary(olr.brm)
 
-mpo.brm <- brm(Response ~ Treat + Period + Seq + (1 | Subject) + (1 | Question), family = cumulative, data = df_clean, warmup = 500, iter = 1000)
+mpo.brm <- brm(Response ~ Treat + Period + Seq + (1 | Subject) + (1 | Item), family = cumulative, data = df_clean, warmup = 500, iter = 1000)
 print(mpo.brm, digits = 3)
 
 plot(mpo.brm)

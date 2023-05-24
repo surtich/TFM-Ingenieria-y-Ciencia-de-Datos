@@ -14,7 +14,7 @@ Vamos a realizar el análisis pero ahora con dos factores. Hay varias posibilida
 ```{r}
 df <- df_clean %>% mutate(Response = as.numeric(Response))
 
-df %>% ggplot(aes(x = Question, y = Response, color = Treat)) +
+df %>% ggplot(aes(x = Item, y = Response, color = Treat)) +
     stat_summary(fun = mean, geom = "line", aes(group = Treat)) +
     stat_smooth(method = "lm", formula = y ~ 1, aes(group = Treat), linetype = "dashed", linewidth = 1, se = FALSE, show.legend = FALSE) +
     theme_bw() +
@@ -30,7 +30,7 @@ Podemos observar que las preguntas 14, 15 y 17 y sobre todo la 16 tienen una gra
 #| fig-cap: Contestación a preguntas con valor No sé / No Contesto por tratamiento.
 
 df_0 %>% ggplot() +
-    geom_bar(aes(x = Question, fill = Treat)) +
+    geom_bar(aes(x = Item, fill = Treat)) +
     theme_bw() +
     scale_x_discrete(drop = FALSE) +
     theme(axis.text.x = element_text(size = 8))
@@ -60,7 +60,7 @@ Donde,
 Al haber eliminado las respuestas "No sé / No Contesto" y no tener el mismo número de sujetos en ambos grupos. La muestra no está completamente balanceada, pero las diferencias no son excesivas por lo que podemos ignorar este hecho:
 
 ```{r}
-xtabs(~ Treat + Question, data = df)
+xtabs(~ Treat + Item, data = df)
 ```
 
 Ajustamos el modelo y realizamos el contraste de hipótesis:
@@ -69,7 +69,7 @@ Ajustamos el modelo y realizamos el contraste de hipótesis:
 ```{r}
 #| echo: true
 options(contrasts = c("contr.sum", "contr.poly"))
-fit.qt <- aov(Response ~ Treat * Question, data = df)
+fit.qt <- aov(Response ~ Treat * Item, data = df)
 summary(fit.qt)
 ```
 
@@ -92,7 +92,7 @@ summary(fit.pt)
 ```{r}
 #| echo: true
 options(contrasts = c("contr.sum", "contr.poly"))
-fit.pq <- aov(Response ~ Period * Question, data = df)
+fit.pq <- aov(Response ~ Period * Item, data = df)
 summary(fit.pq)
 ```
 
@@ -113,9 +113,9 @@ De forma similar se realizará la modelización de más de dos factores. Por eje
 
 ```{r}
 #| echo: true
-fit.tpq <- lm( Response ~ Treat + Period + Question, data = df,
+fit.tpq <- lm( Response ~ Treat + Period + Item, data = df,
             contrasts = list(Treat = contr.sum, Period = contr.sum,
-                             Question = contr.sum))
+                             Item = contr.sum))
 Anova(fit.tpq, type = "III")
 ```
 
@@ -153,7 +153,7 @@ confint(fit.glht)
 
 # Comprobación de los supuestos de modelo
 
-Vemos que al haber añadido todas las preguntas ahora **QQ-plot** de los residuos del modelo $Response \sim Question + Treat$ se acerca más a la normalidad.
+Vemos que al haber añadido todas las preguntas ahora **QQ-plot** de los residuos del modelo $Response \sim Item + Treat$ se acerca más a la normalidad.
 
 ```{r}
 #| echo: false

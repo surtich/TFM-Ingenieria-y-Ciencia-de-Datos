@@ -7,7 +7,7 @@
 df <- df_clean %>% mutate(Response = as.numeric(Response))
 
 df %>%
-    filter(Question == "Q18") %>%
+    filter(Item == "Q18") %>%
     ggplot(aes(x = Treat, y = Response, group = Subject)) +
     geom_line(aes(color = Subject)) +
     theme_bw() +

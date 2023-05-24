@@ -186,7 +186,7 @@ glimpse(df)
 ```
 ```{r}
 df_resume <- df %>%
-    dplyr::select(Subject, Period, Group, Treat, Response, Question) %>%
+    dplyr::select(Subject, Period, Group, Treat, Response, Item) %>%
     group_by(Group, Period, Treat) %>%
     count(Response) %>%
     ungroup()
@@ -247,7 +247,7 @@ En nuestra escala de Likert tenemos $K$ = 5 niveles, el modelo mixto que vamos a
 
 $$
 \begin{aligned}
-\text{logit}(p(y_i \leq k)) &= \tau_k - \beta_1 \text{Period}_i - \beta_2 \text{Treat}_i - \beta_3 \text{Question}_i - u( \text{Subject}_i) \\
+\text{logit}(p(y_i \leq k)) &= \tau_k - \beta_1 \text{Period}_i - \beta_2 \text{Treat}_i - \beta_3 \text{Item}_i - u( \text{Subject}_i) \\
 i &= 1, \dots n \; \; \; \; \; \; k = 1, \dots, K - 1
 \end{aligned}
 $$
@@ -449,7 +449,7 @@ TODO: Comentar las implicaciones que tiene cada variante.
 #| echo: true
 clmm_likert_period_treat_subject_question <-
     clmm(
-        Response ~ Period + Treat + (1 | Subject) + (1 | Question),
+        Response ~ Period + Treat + (1 | Subject) + (1 | Item),
         data = df, link = "logit"
     )
 
@@ -467,7 +467,7 @@ Se ha usado la pregunta 18 como nivel de referencia porque al ser una pregunta s
 #| echo: true
 clmm_likert_period_treat_question_subject <-
     clmm(
-        Response ~ Period + Treat + Question + (1 | Subject),
+        Response ~ Period + Treat + Item + (1 | Subject),
         data = df, link = "logit"
     )
 
@@ -475,7 +475,7 @@ summary(clmm_likert_period_treat_question_subject)
 anova(clmm_likert_period_treat_subject, clmm_likert_period_treat_question_subject)
 ```
 
-Vemos que la mayoría de los factores `Question` no son significativos.
+Vemos que la mayoría de los factores `Item` no son significativos.
 
 ### Análisis del efecto periodo.
 
@@ -515,7 +515,7 @@ Es interesante analizar si existe efecto periodo en cada grupo de preguntas. Si 
 df %>%
     filter(Cluster == 3) %>%
     clmm(
-        Response ~ Period + Treat + Question + (1 | Subject),
+        Response ~ Period + Treat + Item + (1 | Subject),
         data = ., link = "logit"
     ) %>%
     summary()

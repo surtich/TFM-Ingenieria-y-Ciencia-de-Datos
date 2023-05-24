@@ -16,13 +16,13 @@
 \contentsline {figure}{\numberline {4.8}{\ignorespaces Frecuencia de preguntas que mejoran por estudiante entre subtitulados (A \textgreater {} B)\relax }}{33}{figure.caption.26}%
 \contentsline {figure}{\numberline {4.9}{\ignorespaces Frecuencia de preguntas que mejoran por estudiante entre subtitulados (positive A vs negative B)\relax }}{33}{figure.caption.27}%
 \contentsline {figure}{\numberline {4.10}{\ignorespaces Distribución de interceptos aleatorios en el modelo Response \textasciitilde {} Treat * Period + (1 \textbar {} Subject)\relax }}{43}{figure.caption.37}%
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Probabilidades de respuesta para el modelo ordinal Response \textasciitilde {} Treat * Period + (1 + Treat \textbar {} Subject) + (1 + Treat \textbar {} Question)\relax }}{46}{figure.caption.41}%
-\contentsline {figure}{\numberline {4.12}{\ignorespaces Distribuciones a priori del modelo Response \textasciitilde {} Treat * Period + (1 + Treat \textbar {} Subject) + (1 + Treat \textbar {} Question).\relax }}{49}{figure.caption.43}%
-\contentsline {figure}{\numberline {4.13}{\ignorespaces Cadenas MCMC del modelo Response \textasciitilde {} Treat * Period + (1 + Treat \textbar {} Subject) + (1 + Treat \textbar {} Question).\relax }}{50}{figure.caption.44}%
-\contentsline {figure}{\numberline {4.14}{\ignorespaces Comparación de los valores reales con los obtenidos a partir de la función predictiva a posteriori del modelo Response \textasciitilde {} Treat * Period + (1 + Treat \textbar {} Subject) + (1 + Treat \textbar {} Question).\relax }}{51}{figure.caption.45}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Probabilidades de respuesta para el modelo ordinal Response \textasciitilde {} Treat * Period + (1 + Treat \textbar {} Subject) + (1 + Treat \textbar {} Item)\relax }}{46}{figure.caption.41}%
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Distribuciones a priori del modelo Response \textasciitilde {} Treat * Period + (1 + Treat \textbar {} Subject) + (1 + Treat \textbar {} Item).\relax }}{49}{figure.caption.43}%
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Cadenas MCMC del modelo Response \textasciitilde {} Treat * Period + (1 + Treat \textbar {} Subject) + (1 + Treat \textbar {} Item).\relax }}{50}{figure.caption.44}%
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Comparación de los valores reales con los obtenidos a partir de la función predictiva a posteriori del modelo Response \textasciitilde {} Treat * Period + (1 + Treat \textbar {} Subject) + (1 + Treat \textbar {} Item).\relax }}{51}{figure.caption.45}%
 \addvspace {10pt}
 \addvspace {10pt}
 \contentsline {figure}{\numberline {6.1}{\ignorespaces OR \textasciitilde {} Treat + Period + Response\relax }}{58}{figure.caption.52}%
-\contentsline {figure}{\numberline {6.2}{\ignorespaces Muestreo de la función predictiva a posteriori por tratamiento y pregunta del modelo Response \textasciitilde {} Treat * Period + (1 + Treat \textbar {} Subject) + (1 + Treat \textbar {} Question).\relax }}{60}{figure.caption.53}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Muestreo de la función predictiva a posteriori por tratamiento y pregunta del modelo Response \textasciitilde {} Treat * Period + (1 + Treat \textbar {} Subject) + (1 + Treat \textbar {} Item).\relax }}{60}{figure.caption.53}%
 \addvspace {10pt}
 \contentsfinish 

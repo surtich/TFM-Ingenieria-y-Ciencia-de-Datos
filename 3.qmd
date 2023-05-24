@@ -29,7 +29,7 @@ data.frame(`values` = 0:5, `levels` = response_labels) %>%
 ```{r}
 #| label: tbl-likert-scale
 #| tbl-cap: Ítems de la escala de Likert.
-tibble(Item = levels(df_all$Question), Texto = levels(df_all$Question_l)) %>%
+tibble(Item = levels(df_all$Item), Texto = levels(df_all$Item_l)) %>%
     arrange(Item) %>%
     gt()
 ```
@@ -52,7 +52,7 @@ Los datos personales de los estudiantes se suministraron anonimizados para evita
 
 En esta sección se describen las transformaciones realizadas con los ficheros suministrados:
 
-* Se leyó el fichero `grade`. El número de fila con el que el usuario aparece en el fichero se utilizó como identificador del usuario para mantener la trazabilidad y comprobar que las transformaciones realizadas son correctas.
+* Se leyó el fichero `grade`. El número de fila con el que el estudiante aparece en el fichero se utilizó como identificador del estudiante para mantener la trazabilidad y comprobar que las transformaciones realizadas son correctas.
 
 * Se eliminaron los datos de los estudiantes que, aun habiendo realizado la actividad, no dieron su consentimiento para participar en el estudio.
 
@@ -70,19 +70,19 @@ En esta sección se describen las transformaciones realizadas con los ficheros s
 
 * Se renombraron las variables (ver @tbl-variables).
 
-* Se eliminaron del estudio los usuarios que solo han realizado uno de los test.
+* Se eliminaron del estudio los estudiantes que solo han realizado uno de los test.
 
-* Se transformaron las variables que lo requirieron en factores. El ítem 18 se fijó como referencia en el factor `Question` ya que es una valoración general del subtitulado.
+* Se transformaron las variables que lo requirieron en factores. El ítem 18 se fijó como referencia en el factor `Item` ya que es una valoración general del subtitulado.
 
 * Se rotaron los valores de respuesta para que "No sé / No contesto" tenga valor 0 y el resto de 1 a 5 desde "Muy en desacuerdo", 1, hasta "Muy de acuerdo", 5.
 
 * Se crearon los factores `Level` con los niveles `negativo`, `neutral` y `positivo` dependiendo de si la respuesta es 1 ó 2, 3, 4 ó 5 respectivamente e `Improve` con valores 0 ó 1, dependiendo de si la respuesta en el test $A$ es mejor (1) o igual o peor (0) que la del $B$ para cada ítem y estudiante.
   
-* Se transformó el `dataframe` de formato ancho a largo. Los ficheros de respuestas originales se suministraron en formato ancho. Es decir, que cada fila es un test que contiene 18 columnas para las respuestas a cada ítem. Los nombres de las columnas son $Q01$, $Q02$, ..., $Q18$ y tienen valores de 0 a 5 con las respuestas. La mayoría de los paquetes de R utilizados requieren que los datos estén en formato largo. Esto que quiere decir que cada fila tendrá una única respuesta por lo que habrá únicamente dos columnas, $Question$ y $Response$. En la primera se almacena el identificador del ítem ($Q01$, $Q02$, ..., $Q18$) y en la segunda el valor de la respuesta (de 0 a 5). De esta forma, un test pasó de ocupar una fila y 18 columnas en el formato ancho a 18 filas y dos columnas en el largo.
+* Se transformó el `dataframe` de formato ancho a largo. Los ficheros de respuestas originales se suministraron en formato ancho. Es decir, que cada fila es un test que contiene 18 columnas para las respuestas a cada ítem. Los nombres de las columnas son $Q01$, $Q02$, ..., $Q18$ y tienen valores de 0 a 5 con las respuestas. La mayoría de los paquetes de R utilizados requieren que los datos estén en formato largo. Esto que quiere decir que cada fila tendrá una única respuesta por lo que habrá únicamente dos columnas, $Item$ y $Response$. En la primera se almacena el identificador del ítem ($Q01$, $Q02$, ..., $Q18$) y en la segunda el valor de la respuesta (de 0 a 5). De esta forma, un test pasó de ocupar una fila y 18 columnas en el formato ancho a 18 filas y dos columnas en el largo.
 
 ## Variables utilizadas
 
-En la @tbl-variables se describen las características más relevantes de las principales variables que se utilizarán en el modelado y en el análisis estadístico. La variable dependiente o respuesta en todos los modelos es `Response` y contiene las respuestas a todos los ítems. La variable explicativa principal es el factor `Treat` y permite diferenciar los dos niveles de subtitulado. Los factores `Period` y `Seq` sirven para evaluar la presencia de efectos periodo y secuencia respectivamente. Por último, los factores `Subject` y `Question` son variables explicativas que se tratan como efectos aleatorios en el modelado multinivel.
+En la @tbl-variables se describen las características más relevantes de las principales variables que se utilizarán en el modelado y en el análisis estadístico. La variable dependiente o respuesta en todos los modelos es `Response` y contiene las respuestas a todos los ítems (de 0 a 5). La variable explicativa principal es el factor `Treat` y permite diferenciar los dos niveles de subtitulado ($A$ o $B$). Los factores `Period` y `Seq` sirven para evaluar la presencia de efectos periodo y secuencia respectivamente. El factor `Period` toma valores 1 ó 2 en función de si trata del primer o del segundo periodo respectivamente. El factor `Seq` toma valores $AB$ o $BA$ dependiendo de si se vio primero el vídeo con subtitulado $A$ o con subtitulado $B$. En este trabajo los términos secuencia y grupo se usan indistintamente. Por último, los factores `Subject` e `Item` son variables explicativas que se tratan como efectos aleatorios en el modelado multinivel (ver @sec-multinivel-2) y corresponden respectivamente a los estudiantes y a los ítems de la escala de Likert.
 
 \footnotesize
 
@@ -90,7 +90,7 @@ En la @tbl-variables se describen las características más relevantes de las pr
 #| label: tbl-variables
 #| tbl-cap: Descripción de las variables más importantes.
 tibble(
-    Nombre = c("Response", "Level", "Improve", "Treat", "Period", "Seq", "Subject", "Question"),
+    Nombre = c("Response", "Level", "Improve", "Treat", "Period", "Seq", "Subject", "Item"),
     `Descripción` = c(
         "Respuesta a los ítems del test.",
         "Valoración de la respuesta.",
@@ -130,18 +130,18 @@ Se van a usar dos `dataframes`:
 La estructura de estos `dataframes` es la siguiente:
 
 ```{r}
-str(df_clean %>% dplyr::select(Seq, Period, Treat, Subject, Question, Response, Level), strict.width = "cut")
+str(df_clean %>% dplyr::select(Seq, Period, Treat, Subject, Item, Response, Level), strict.width = "cut")
 ``` 
 
-En la @tbl-df_clean se muestran algunos ejemplos datos.
+En la @tbl-df_clean se muestran algunos ejemplos de datos. Concretamente se muestran las respuestas a tres ítems de dos estudiantes que vieron los vídeos en distinto orden.
 
 ```{r}
 #| label: tbl-df_clean
 #| tbl-cap: Muestra del dataframe preparado para el modelado estadístico en formato largo.
 df_clean %>%
-    dplyr::select(Seq, Period, Treat, Subject, Question, Response, Level) %>%
-    filter(Subject %in% c(33, 35) & Question %in% c("Q18", "Q01", "Q02")) %>%
-    arrange(desc(Subject), Question, Period) %>%
+    dplyr::select(Seq, Period, Treat, Subject, Item, Response, Level) %>%
+    filter(Subject %in% c(33, 35) & Item %in% c("Q18", "Q01", "Q02")) %>%
+    arrange(desc(Subject), Item, Period) %>%
     gt()
 
 ``` 

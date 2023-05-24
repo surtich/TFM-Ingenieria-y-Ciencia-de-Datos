@@ -102,7 +102,6 @@
 
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
-\usepackage{multirow}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
 \usepackage{etoolbox}
@@ -161,6 +160,16 @@
 \usepackage{makecell}
 \usepackage{xcolor}
 \usepackage{caption}
+\usepackage{siunitx}
+
+  \newcolumntype{d}{S[
+    input-open-uncertainty=,
+    input-close-uncertainty=,
+    parse-numbers = false,
+    table-align-text-pre=false,
+    table-align-text-post=false
+  ]}
+  
 \makeatletter
 \@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
 \@ifpackageloaded{fontawesome5}{}{\usepackage{fontawesome5}}
@@ -568,7 +577,7 @@ Phasellus vitae magna nec mi sagittis luctus vitae eu augue. Donec scelerisque l
 \addto\captionsspanish{
 \def\listtablename{\'Indice de tablas}%
 \def\tablename{Tabla}}
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, borderline west={3pt}{0pt}{shadecolor}, boxrule=0pt, sharp corners, enhanced, frame hidden, breakable]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, boxrule=0pt, frame hidden, borderline west={3pt}{0pt}{shadecolor}, enhanced, breakable, sharp corners]}{\end{tcolorbox}}\fi
 
 % Contents
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -649,7 +658,7 @@ y va más allá de verificar si el vídeo tiene o no subtítulos.
 El objetivo del estudio es responder a la siguiente pregunta de
 investigación:
 
-\begin{tcolorbox}[enhanced jigsaw, opacityback=0, leftrule=.75mm, bottomtitle=1mm, left=2mm, colbacktitle=quarto-callout-note-color!10!white, titlerule=0mm, colframe=quarto-callout-note-color-frame, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Pregunta de investigación}, bottomrule=.15mm, colback=white, arc=.35mm, toptitle=1mm, rightrule=.15mm, toprule=.15mm, opacitybacktitle=0.6, breakable, coltitle=black]
+\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, rightrule=.15mm, bottomtitle=1mm, opacityback=0, bottomrule=.15mm, arc=.35mm, colback=white, titlerule=0mm, colbacktitle=quarto-callout-note-color!10!white, toptitle=1mm, coltitle=black, leftrule=.75mm, breakable, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Pregunta de investigación}, toprule=.15mm, colframe=quarto-callout-note-color-frame, left=2mm]
 
 ¿Son los estudiantes de un curso de creación de materiales accesibles
 capaces de encontrar diferencias en la calidad del subtitulado de un
@@ -694,7 +703,7 @@ un conocimiento experto como, por ejemplo, la evaluación del contraste,
 ya que requieren herramientas adecuadas. Por ello, se responderá al
 siguiente objetivo específico:
 
-\begin{tcolorbox}[enhanced jigsaw, opacityback=0, leftrule=.75mm, bottomtitle=1mm, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, titlerule=0mm, colframe=quarto-callout-tip-color-frame, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Objetivos específicos}, bottomrule=.15mm, colback=white, arc=.35mm, toptitle=1mm, rightrule=.15mm, toprule=.15mm, opacitybacktitle=0.6, breakable, coltitle=black]
+\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, rightrule=.15mm, bottomtitle=1mm, opacityback=0, bottomrule=.15mm, arc=.35mm, colback=white, titlerule=0mm, colbacktitle=quarto-callout-tip-color!10!white, toptitle=1mm, coltitle=black, leftrule=.75mm, breakable, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Objetivos específicos}, toprule=.15mm, colframe=quarto-callout-tip-color-frame, left=2mm]
 
 ¿Qué aspectos de la calidad del subtitulado son más fácilmente
 reconocibles por los estudiantes y en cuáles existe mayor dificultad?
@@ -1360,7 +1369,7 @@ N
 \]
 
 donde \(j\) son los grupos que varían \(j = 1,...,J\) (\(J\) es el
-número de grupos); \(ij\) es la observación \(i-ésima\) del grupo \(j\)
+número de grupos); \(ij\) es la observación \(i\)-ésima del grupo \(j\)
 (\(i = 1,...,n_j\), \(n_j\) es el número de observaciones del grupo
 \(j\)). El modelo se compone de una parte fija
 \(\beta_0 + \beta_1 x_{1ij}\) y una aleatoria
@@ -1400,12 +1409,38 @@ de definir un modelo:
 
 Los modelos multinivel requieren supuestos adicionales en el nivel
 segundo y superiores que son similares a los supuestos para los modelos
-de efectos fijos \autocite[ver][pp.~43]{chen2021}. Para estimar los
+de efectos fijos \autocite[ver][p.~43]{chen2021}. Para estimar los
 parámetros en un modelo multinivel se suele utilizar el método de Máxima
 Verosimilitud Restringida (\(RMLE\)), que es una variante de la
 estimación por Máxima Verosimilitud (\(MLE\)) en la que se hacen ajustes
 en los grados de libertad del modelo con efectos aleatorios para
 corregir el sesgo que se produce al usar \(MLE\) en estos modelos.
+
+Para evaluar si la estructura anidada es adecuada se utiliza la
+Correlación Intra-Clase (\(ICC\), Intra-Class Correlation). \(ICC\) se
+puede interpretar como la proporción de la varianza explicada por la
+estructura de agrupamiento de la población. Se diferencia del
+Coeficiente de Determinación (\(R2\)) en que éste es la proporción de la
+varianza explicada por el modelo completo, mientras que \(ICC\) es la
+varianza explicada por los efectos aleatorios
+\autocite[ver][]{performance}. La \(ICC\) se calcula como el ratio de la
+varianza entre grupos y la varianza total
+\autocite[ver][pp.~29-33]{chen2021}:
+
+\[
+ICC = \rho = \frac{\tau^2}{\tau^2+\sigma^2}
+\]
+
+donde \(\tau^2\) es la varianza poblacional entre grupos y \(\sigma^2\)
+es la varianza de la población dentro del grupo. \(ICC\) oscila entre 0
+(ausencia de varianza entre grupos) y 1 (no varianza intra-grupos).
+Cuanto más proxima a 1 sea \(ICC\) mayor evidencia hay de la existencia
+de una estructura anidada. Sin embargo, no hay un consenso sobre el
+umbral concreto que debe tener \(ICC\) para decidir si es preferible o
+no la estructura anidada \autocite[ver][p.~33]{chen2021}. \(ICC\) se
+estima a partir de la varianza de los coeficientes y residual aleatorias
+calculadas por el modelo. En modelos \(GLM\) no se calcula la varianza
+residual y se recurre a métodos de simulación para estimar \(ICC\).
 
 \hypertarget{sec-bayesiano}{%
 \section{Modelado bayesiano}\label{sec-bayesiano}}
@@ -1674,8 +1709,8 @@ ficheros suministrados:
 \begin{itemize}
 \item
   Se leyó el fichero \texttt{grade}. El número de fila con el que el
-  usuario aparece en el fichero se utilizó como identificador del
-  usuario para mantener la trazabilidad y comprobar que las
+  estudiante aparece en el fichero se utilizó como identificador del
+  estudiante para mantener la trazabilidad y comprobar que las
   transformaciones realizadas son correctas.
 \item
   Se eliminaron los datos de los estudiantes que, aun habiendo realizado
@@ -1712,12 +1747,12 @@ ficheros suministrados:
 \item
   Se renombraron las variables (ver Tabla~\ref{tbl-variables}).
 \item
-  Se eliminaron del estudio los usuarios que solo han realizado uno de
-  los test.
+  Se eliminaron del estudio los estudiantes que solo han realizado uno
+  de los test.
 \item
   Se transformaron las variables que lo requirieron en factores. El ítem
-  18 se fijó como referencia en el factor \texttt{Question} ya que es
-  una valoración general del subtitulado.
+  18 se fijó como referencia en el factor \texttt{Item} ya que es una
+  valoración general del subtitulado.
 \item
   Se rotaron los valores de respuesta para que \enquote{No sé / No
   contesto} tenga valor 0 y el resto de 1 a 5 desde \enquote{Muy en
@@ -1737,8 +1772,8 @@ ficheros suministrados:
   \(Q02\), \ldots, \(Q18\) y tienen valores de 0 a 5 con las respuestas.
   La mayoría de los paquetes de R utilizados requieren que los datos
   estén en formato largo. Esto que quiere decir que cada fila tendrá una
-  única respuesta por lo que habrá únicamente dos columnas, \(Question\)
-  y \(Response\). En la primera se almacena el identificador del ítem
+  única respuesta por lo que habrá únicamente dos columnas, \(Item\) y
+  \(Response\). En la primera se almacena el identificador del ítem
   (\(Q01\), \(Q02\), \ldots, \(Q18\)) y en la segunda el valor de la
   respuesta (de 0 a 5). De esta forma, un test pasó de ocupar una fila y
   18 columnas en el formato ancho a 18 filas y dos columnas en el largo.
@@ -1751,12 +1786,19 @@ En la Tabla~\ref{tbl-variables} se describen las características más
 relevantes de las principales variables que se utilizarán en el modelado
 y en el análisis estadístico. La variable dependiente o respuesta en
 todos los modelos es \texttt{Response} y contiene las respuestas a todos
-los ítems. La variable explicativa principal es el factor \texttt{Treat}
-y permite diferenciar los dos niveles de subtitulado. Los factores
-\texttt{Period} y \texttt{Seq} sirven para evaluar la presencia de
-efectos periodo y secuencia respectivamente. Por último, los factores
-\texttt{Subject} y \texttt{Question} son variables explicativas que se
-tratan como efectos aleatorios en el modelado multinivel.
+los ítems (de 0 a 5). La variable explicativa principal es el factor
+\texttt{Treat} y permite diferenciar los dos niveles de subtitulado
+(\(A\) o \(B\)). Los factores \texttt{Period} y \texttt{Seq} sirven para
+evaluar la presencia de efectos periodo y secuencia respectivamente. El
+factor \texttt{Period} toma valores 1 ó 2 en función de si trata del
+primer o del segundo periodo respectivamente. El factor \texttt{Seq}
+toma valores \(AB\) o \(BA\) dependiendo de si se vio primero el vídeo
+con subtitulado \(A\) o con subtitulado \(B\). En este trabajo los
+términos secuencia y grupo se usan indistintamente. Por último, los
+factores \texttt{Subject} e \texttt{Item} son variables explicativas que
+se tratan como efectos aleatorios en el modelado multinivel (ver
+Sección~\ref{sec-multinivel-2}) y corresponden respectivamente a los
+estudiantes y a los ítems de la escala de Likert.
 
 \footnotesize
 
@@ -1775,7 +1817,7 @@ Treat & Subtítulos & Factor & A o B \\
 Period & Periodo & Factor & 1 ó 2\textsuperscript{\textit{2}} \\ 
 Seq & Secuencia de aplicación de los tratamientos. & Factor & AB o BA \\ 
 Subject & Identificación del estudiante & Factor & Numérico \\ 
-Question & Número del ítem & Factor & Q01, Q02, ..., Q18 \\ 
+Item & Número del ítem & Factor & Q01, Q02, ..., Q18 \\ 
 \bottomrule
 \end{longtable}
 \begin{minipage}{\linewidth}
@@ -1811,12 +1853,14 @@ tibble [2,980 x 7] (S3: tbl_df/tbl/data.frame)
  $ Period  : Factor w/ 2 levels "1","2": 1 1 1 1 1 1 1 1 1 1 ...
  $ Treat   : Factor w/ 2 levels "A","B": 1 1 1 1 1 1 1 1 1 1 ...
  $ Subject : Factor w/ 87 levels "4","33","35",..: 1 1 1 1 1 1 1 1 1 1 ...
- $ Question: Factor w/ 18 levels "Q18","Q01","Q02",..: 1 2 3 4 5 6 7 8 9 10 ...
+ $ Item    : Factor w/ 18 levels "Q18","Q01","Q02",..: 1 2 3 4 5 6 7 8 9 10 ...
  $ Response: Ord.factor w/ 5 levels "1"<"2"<"3"<"4"<..: 3 3 3 3 3 3 3 3 3 3 ...
  $ Level   : Ord.factor w/ 3 levels "Negativo"<"Neutral"<..: 2 2 2 2 2 2 2 2 2..
 \end{verbatim}
 
-En la Tabla~\ref{tbl-df_clean} se muestran algunos ejemplos datos.
+En la Tabla~\ref{tbl-df_clean} se muestran algunos ejemplos de datos.
+Concretamente se muestran las respuestas a tres ítems de dos estudiantes
+que vieron los vídeos en distinto orden.
 
 \hypertarget{tbl-df_clean}{}
 \begin{longtable}{ccccccc}
@@ -1824,7 +1868,7 @@ En la Tabla~\ref{tbl-df_clean} se muestran algunos ejemplos datos.
 largo. }\tabularnewline
 
 \toprule
-Seq & Period & Treat & Subject & Question & Response & Level \\ 
+Seq & Period & Treat & Subject & Item & Response & Level \\ 
 \midrule
 AB & 1 & A & 35 & Q18 & 5 & Positivo \\ 
 AB & 2 & B & 35 & Q18 & 4 & Positivo \\ 
@@ -1888,7 +1932,7 @@ estudiantes emplearon un tiempo muy breve en contestar \footnote{Hay que
 minutos. }\tabularnewline
 
 \toprule
-Subject & Test & Spent time (secs) & Time by Question (secs) \\ 
+Subject & Test & Spent time (secs) & Time by Item (secs) \\ 
 \midrule
 893 & B & 56 & 0.72 \\ 
 1020 & B & 78 & 1.94 \\ 
@@ -1993,9 +2037,9 @@ que se pueda dudar de si en ellos los estudiantes contestaron con la
 debida atención y diligencia.
 
 \hypertarget{sec-eda-3}{%
-\subsection{\texorpdfstring{Comparación de los tratamientos \(A\) y
-\(B\) entre
-grupos}{Comparación de los tratamientos A y B entre grupos}}\label{sec-eda-3}}
+\subsection{\texorpdfstring{Comparación de los subtítulos \(A\) y \(B\)
+entre
+grupos}{Comparación de los subtítulos A y B entre grupos}}\label{sec-eda-3}}
 
 La Figura~\ref{fig-diff} presenta una forma de comparar los dos test
 realizados por los estudiantes. Para cada estudiante se comparó ítem a
@@ -2241,7 +2285,8 @@ hipótesis nula de que los grupos responden de forma similar a cada nivel
 de subtitulado. En la Sección~\ref{sec-or-3} se puede consultar los
 resultados obtenidos. En esta misma sección se hace un test similar pero
 entre subtitulado y periodos. Para realizar el contraste de hipótesis se
-usa la función \(loddsratio\) del paquete \(vcd\).
+usa la función \(loddsratio\) del paquete \texttt{vcd}
+\autocite[ver][]{vcd}.
 
 \hypertarget{sec-logistica-2}{%
 \subsection{Regresión Logística}\label{sec-logistica-2}}
@@ -2332,35 +2377,35 @@ que la diferencia en \texttt{logits} es constante.
 
 No existe un acuerdo generalmente aceptado sobre como comprobar la
 proporcionalidad de \(odds\). Así, por ejemplo, el paquete
-\texttt{Ordinal} dispone de la función \texttt{nominal\_test()} que lo
-que hace es realizar un test de razón de verosimilitud para cada
-predictor ajustando un modelo en el que se ha relajado la condición de
-proporcionalidad. Otra posibilidad es utilizar el Test de Brant
-\autocite[ver][]{brant1990} que compara los coeficientes obtenidos con
-los que resultarían de ajustar cada nivel de respuesta mediante una
-Regresión Logística. Finalmente \textcite[ver pp.~315-316]{harrell2015}
-propone un método gráfico para verificar la hipótesis de
-proporcionalidad de \(odds\). En este trabajo se ha preferido esta
-última técnica. Para ello se calcula la diferencia en \texttt{logits}
-acumulados entre dos niveles de respuesta consecutivos en cada valor de
-cada variable predictiva y se comprueba si las diferencias son
-similares. En la Figura~\ref{fig-po.check} se han calculado para los
-predictores \texttt{Treat}, \texttt{Period}, \texttt{Seq} y
-\texttt{Question} las diferencias de \texttt{logits} entre cada dos
-niveles consecutivos de respuesta. Se constata que las diferencias son
-pequeñas particularmente para el periodo y para la secuencia. También
-son moderadas para la mayoría de los ítems. La diferencia es mayor en el
-subtitulado en la comparación de los niveles de respuesta 1 y 2. Con
-esta evidencia, se acepta la hipótesis de proporcionalidad de \(odds\).
-En la Tabla~\ref{tbl-po.check} se muestra cómo se realiza el cálculo de
-la diferencia de \(odds\) para el predictor \texttt{Seq} y así facilitar
-la comprensión de la construcción de la figura. En caso de que la
-proporcinalidad de \(odds\) no se cumpla existen varias posibilidades.
-Una sería desechar el modelo ordinal y usar una Regresión Multinomial.
-Otra sería relajar la hipótesis de proporcionalidad de \(odds\)
-estimando un coeficiente distinto para cada nivel de respuesta y nivel
-de factor. La función \texttt{vglm} del paquete \texttt{VGAM} permite
-hacer esto.
+\texttt{ordinal} \autocite[ver][]{ordinal} dispone de la función
+\texttt{nominal\_test()} que lo que hace es realizar un test de razón de
+verosimilitud para cada predictor ajustando un modelo en el que se ha
+relajado la condición de proporcionalidad. Otra posibilidad es utilizar
+el Test de Brant \autocite[ver][]{brant1990} que compara los
+coeficientes obtenidos con los que resultarían de ajustar cada nivel de
+respuesta mediante una Regresión Logística. Finalmente \textcite[ver
+pp.~315-316]{harrell2015} propone un método gráfico para verificar la
+hipótesis de proporcionalidad de \(odds\). En este trabajo se ha
+preferido esta última técnica. Para ello se calcula la diferencia en
+\texttt{logits} acumulados entre dos niveles de respuesta consecutivos
+en cada valor de cada variable predictiva y se comprueba si las
+diferencias son similares. En la Figura~\ref{fig-po.check} se han
+calculado para los predictores \texttt{Treat}, \texttt{Period},
+\texttt{Seq} y \texttt{Item} las diferencias de \texttt{logits} entre
+cada dos niveles consecutivos de respuesta. Se constata que las
+diferencias son pequeñas particularmente para el periodo y para la
+secuencia. También son moderadas para la mayoría de los ítems. La
+diferencia es mayor en el subtitulado en la comparación de los niveles
+de respuesta 1 y 2. Con esta evidencia, se acepta la hipótesis de
+proporcionalidad de \(odds\). En la Tabla~\ref{tbl-po.check} se muestra
+cómo se realiza el cálculo de la diferencia de \(odds\) para el
+predictor \texttt{Seq} y así facilitar la comprensión de la construcción
+de la figura. En caso de que la proporcinalidad de \(odds\) no se cumpla
+existen varias posibilidades. Una sería desechar el modelo ordinal y
+usar una Regresión Multinomial. Otra sería relajar la hipótesis de
+proporcionalidad de \(odds\) estimando un coeficiente distinto para cada
+nivel de respuesta y nivel de factor. La función \texttt{vglm} del
+paquete \texttt{VGAM} \autocite[ver][]{VGAM} permite hacer esto.
 
 \begin{figure}[h]
 
@@ -2404,15 +2449,16 @@ Response & n & cum.sum & odds & log.odds & diff.log.odds \\
 
 Existen varios paquetes en R que permiten ajustar un modelo \(CM\) con
 función de enlace logística. El más popular es el paquete
-\texttt{Ordinal} \autocite{ordinalR}. El paquete \texttt{VGAM}
-\autocite{VGAMR} es más flexible y potente. Otra posibilidad es usar la
-función \texttt{polr} del paquete \texttt{MASS} \autocite{MASSR}.
-Finalmente la función \texttt{orm} del paquete \texttt{rms} también
-permite hacerlo \autocite[ver][]{harrell2015}. En este trabajo se usa el
-paquete \texttt{Ordinal} por permitir también incluir efectos aleatorios
-que se utilizarán en el modelado multinivel. Se comienza con un modelo
-simple que tiene como único predictor el nivel de subtitulado por ser la
-variable más importante al ser el objeto de la pregunta de
+\texttt{ordinal} \autocite[ver][]{ordinalR}. El paquete \texttt{VGAM}
+\autocite[ver][]{VGAMR} es más flexible y potente. Otra posibilidad es
+usar la función \texttt{polr} del paquete \texttt{MASS}
+\autocite[ver][]{MASSR}. Finalmente la función \texttt{orm} del paquete
+\texttt{rms} también permite hacerlo \autocite[ver][]{harrell2015}. En
+este trabajo se usa el paquete \texttt{ordinal}
+\autocite[ver][]{ordinal} por permitir también incluir efectos
+aleatorios que se utilizarán en el modelado multinivel. Se comienza con
+un modelo simple que tiene como único predictor el nivel de subtitulado
+por ser la variable más importante al ser el objeto de la pregunta de
 investigación:
 
 \[
@@ -2930,7 +2976,8 @@ ahora los interceptos \(\tau_{kj}\) se descomponen en una parte fija y
 común para cada nivel de respuesta \(k\), \(\tau_{k}\) y una parte
 variable específica para cada estudiante \(Subject_{0j}\). Para ajustar
 el modelo se va a utilizar la función \texttt{clmm} del paquete
-\texttt{Ordinal} ya que permite la inclusión de efectos aleatorios.
+\texttt{ordinal} \autocite[ver][]{ordinal} ya que permite la inclusión
+de efectos aleatorios.
 
 \scriptsize
 
@@ -3092,9 +3139,9 @@ Threshold coefficients:
 \subsubsection{Comparación de modelos}\label{comparaciuxf3n-de-modelos}}
 
 Se pueden comparar los modelos con el test de razón de verosimilitud que
-se realiza con la función \texttt{anova} del paquete \texttt{ordinal}.
-Se comprueba que en este test resulta significativamente mejor el último
-modelo:
+se realiza con la función \texttt{anova} del paquete \texttt{ordinal}
+\autocite[ver][]{ordinal}. Se comprueba que en este test resulta
+significativamente mejor el último modelo:
 
 \scriptsize
 
@@ -3136,26 +3183,25 @@ Se han comparado distintos modelos:
 \item
   Response \textasciitilde{} (1 + Treat \textbar{} Subject)
 \item
-  Response \textasciitilde{} (1 + Treat \textbar{} Question)
+  Response \textasciitilde{} (1 + Treat \textbar{} Item)
 \item
   Response \textasciitilde{} Treat + (1 + Treat \textbar{} Subject)
 \item
-  Response \textasciitilde{} Treat + (1 + Treat \textbar{} Question)
+  Response \textasciitilde{} Treat + (1 + Treat \textbar{} Item)
 \item
   Response \textasciitilde{} Treat*Period + (1 + Treat \textbar{}
   Subject)
 \item
-  Response \textasciitilde{} Treat*Period + (1 + Treat \textbar{}
-  Question)
+  Response \textasciitilde{} Treat*Period + (1 + Treat \textbar{} Item)
 \item
   Response \textasciitilde{} Treat*Period + (1 + Period \textbar{}
-  Subject) + (1 + Treat \textbar{} Question)
+  Subject) + (1 + Treat \textbar{} Item)
 \item
   Response \textasciitilde{} Treat + (1 + Treat \textbar{} Subject) + (1
-  + Treat \textbar{} Question)
+  + Treat \textbar{} Item)
 \item
   Response \textasciitilde{} Treat*Period + (1 + Treat \textbar{}
-  Subject) + (1 + Treat \textbar{} Question)
+  Subject) + (1 + Treat \textbar{} Item)
 \end{itemize}
 
 El último de ellos produce un resultado significativo en el test de
@@ -3164,8 +3210,8 @@ de todos los modelos tienen valores similares por lo que no cambia la
 interpretación que se haga de ellos en cada modelo. Este modelo tiene un
 \(AIC\) menor que los modelos ordinales ajustados en el apartado
 anterior (ver Sección~\ref{sec-ordinal-2}) incluso si a esos modelos se
-les añade como factor predictor \texttt{Question}. Será este, por lo
-tanto, el modelo seleccionado.
+les añade como factor predictor \texttt{Item}. Será este, por lo tanto,
+el modelo seleccionado.
 
 La Ecuación~\ref{eq-mejor-modelo} del modelo seleccionado es la
 siguiente:
@@ -3175,8 +3221,8 @@ siguiente:
 \begin{equation}\protect\hypertarget{eq-mejor-modelo}{}{
 \begin{aligned}
 Nivel\ 1: & \text{logit}(P(Response_{ijl} \leq k)) = \tau_{kjl} - \beta_{1jl} \text{Treat}_{ijl} - \beta_{2} \text{Period}_{ijl} - \beta_{3} \text{Treat}_{ijl} * \text{Period}_{ijl} \\
-Nivel\ 2: & \tau_{kjl}  =  \tau_{k} + Subject_{0j} + Question_{0l} \\
-          & \beta_{1jl}  =  \beta_{1} + Subject_{1j} + Question_{1l}
+Nivel\ 2: & \tau_{kjl}  =  \tau_{k} + Subject_{0j} + Item_{0l} \\
+          & \beta_{1jl}  =  \beta_{1} + Subject_{1j} + Item_{1l}
 \end{aligned}
 }\label{eq-mejor-modelo}\end{equation}
 
@@ -3194,11 +3240,11 @@ El resumen de parámetros del modelo es el siguiente:
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{options}\NormalTok{(}\AttributeTok{contrasts =} \FunctionTok{rep}\NormalTok{(}\StringTok{"contr.sum"}\NormalTok{, }\DecValTok{2}\NormalTok{))}
-\NormalTok{clmm\_treat.period.subject.question }\OtherTok{\textless{}{-}} \FunctionTok{clmm}\NormalTok{(}
-\NormalTok{    Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{*}\NormalTok{ Period }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ Treat }\SpecialCharTok{|}\NormalTok{ Subject) }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ Treat }\SpecialCharTok{|}\NormalTok{ Question),}
+\NormalTok{clmm\_treat.period.subject.item }\OtherTok{\textless{}{-}} \FunctionTok{clmm}\NormalTok{(}
+\NormalTok{    Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{*}\NormalTok{ Period }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ Treat }\SpecialCharTok{|}\NormalTok{ Subject) }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ Treat }\SpecialCharTok{|}\NormalTok{ Item),}
     \AttributeTok{data =}\NormalTok{ df\_clean}
 \NormalTok{)}
-\FunctionTok{summary}\NormalTok{(clmm\_treat.period.subject.question)}
+\FunctionTok{summary}\NormalTok{(clmm\_treat.period.subject.item)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3206,19 +3252,19 @@ El resumen de parámetros del modelo es el siguiente:
 Cumulative Link Mixed Model fitted with the Laplace approximation
 
 formula: Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat |  
-    Question)
+    Item)
 data:    df_clean
 
  link  threshold nobs logLik   AIC     niter       max.grad cond.H 
  logit flexible  2980 -3186.06 6398.11 1468(12273) 2.37e-03 1.5e+02
 
 Random effects:
- Groups   Name        Variance Std.Dev. Corr   
- Subject  (Intercept) 2.2176   1.4892          
-          Treat1      1.3650   1.1683   -0.128 
- Question (Intercept) 0.4831   0.6950          
-          Treat1      0.4655   0.6823   -0.528 
-Number of groups:  Subject 87,  Question 18 
+ Groups  Name        Variance Std.Dev. Corr   
+ Subject (Intercept) 2.2176   1.4892          
+         Treat1      1.3650   1.1683   -0.128 
+ Item    (Intercept) 0.4831   0.6950          
+         Treat1      0.4655   0.6823   -0.528 
+Number of groups:  Subject 87,  Item 18 
 
 Coefficients:
                Estimate Std. Error z value Pr(>|z|)    
@@ -3243,29 +3289,6 @@ En cualquier caso se mantienen ya que el test de razón de verosimilitud
 resulta significativo en este modelo respecto al modelo sin estos
 predictores.
 
-En la Figura~\ref{fig-probs-clmm_treat.period.subject.question} se
-muestran las predicciones del modelo. El modelo predice para el
-subtitulado \(B\) el nivel 4 de respuesta como el más probable seguido
-del 3, mientras para el subtitulado \(A\) el nivel de respuesta más
-probable es el 5 seguido del 4. En el subtitulado \(B\) apenas hay
-diferencias entre periodos, sin embargo, en el subtitulado \(A\) hay
-mayor probabilidad del nivel de respuesta 5 en el periodo 1 y nivel de
-respuesta 4 en el periodo 2.
-
-\begin{figure}[h]
-
-{\centering \includegraphics{4_files/figure-pdf/fig-probs-clmm_treat.period.subject.question-1.pdf}
-
-}
-
-\caption[Probabilidades de respuesta para el modelo ordinal
-seleccionado.]{\label{fig-probs-clmm_treat.period.subject.question}Probabilidades
-de respuesta para el modelo ordinal Response \textasciitilde{} Treat *
-Period + (1 + Treat \textbar{} Subject) + (1 + Treat \textbar{}
-Question)}
-
-\end{figure}
-
 \hypertarget{sec-bayesiano-2}{%
 \subsection{Modelado bayesiano}\label{sec-bayesiano-2}}
 
@@ -3284,9 +3307,10 @@ los más populares son:
   U-turn sampler). Stan tiene un lenguaje similar a C para definir
   modelos aunque hay muchos paquetes basados en Stan que facilitan la
   especificación de modelos con una sintaxis más sencilla. En este
-  trabajo se utilizará uno de ellos, \(brms\). La sintaxis de
-  especificación de modelos con este paquete es idéntica a la que se ha
-  utilizado en la sección anterior.
+  trabajo se utilizará uno de ellos, \texttt{brms}
+  \autocite[ver][]{brms} . La sintaxis de especificación de modelos con
+  este paquete es idéntica a la que se ha utilizado en la sección
+  anterior.
 \item
   INLA: Evita la simulación MCMC haciendo más rápida la convergencia. Es
   menos flexible ya que solo se pueden especificar modelos de la familia
@@ -3303,7 +3327,7 @@ Ecuación~\ref{eq-mejor-modelo}). Es decir:
 
 \begin{quote}
 Response \textasciitilde{} Treat*Period + (1 + Treat \textbar{} Subject)
-+ (1 + Treat \textbar{} Question) \normalsize
++ (1 + Treat \textbar{} Item) \normalsize
 \end{quote}
 
 \scriptsize
@@ -3311,13 +3335,13 @@ Response \textasciitilde{} Treat*Period + (1 + Treat \textbar{} Subject)
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{options}\NormalTok{(}\AttributeTok{contrasts =} \FunctionTok{rep}\NormalTok{(}\StringTok{"contr.sum"}\NormalTok{, }\DecValTok{2}\NormalTok{))}
-\NormalTok{brm\_treat.period.subject.question }\OtherTok{\textless{}{-}} \FunctionTok{brm}\NormalTok{(}
-\NormalTok{    Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{*}\NormalTok{ Period }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ Treat }\SpecialCharTok{|}\NormalTok{ Subject) }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ Treat }\SpecialCharTok{|}\NormalTok{ Question),}
+\NormalTok{brm\_treat.period.subject.item }\OtherTok{\textless{}{-}} \FunctionTok{brm}\NormalTok{(}
+\NormalTok{    Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{*}\NormalTok{ Period }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ Treat }\SpecialCharTok{|}\NormalTok{ Subject) }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ Treat }\SpecialCharTok{|}\NormalTok{ Item),}
     \AttributeTok{data =}\NormalTok{ df\_clean,}
     \AttributeTok{family =} \FunctionTok{cumulative}\NormalTok{(}\StringTok{"logit"}\NormalTok{),}
     \AttributeTok{iter =} \DecValTok{4000}\NormalTok{,}
     \AttributeTok{sample\_prior =} \ConstantTok{TRUE}\NormalTok{,}
-    \AttributeTok{file =} \StringTok{"models/brm\_treat.period.subject.question"}\NormalTok{,}
+    \AttributeTok{file =} \StringTok{"models/brm\_treat.period.subject.item"}\NormalTok{,}
     \AttributeTok{file\_refit =} \StringTok{"on\_change"}
 \NormalTok{)}
 \end{Highlighting}
@@ -3336,48 +3360,48 @@ El resumen del modelo es el siguiente:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{summary}\NormalTok{(brm\_treat.period.subject.question)}
+\FunctionTok{summary}\NormalTok{(brm\_treat.period.subject.item)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
  Family: cumulative 
   Links: mu = logit; disc = identity 
-Formula: Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question) 
+Formula: Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item) 
    Data: df_clean (Number of observations: 2980) 
   Draws: 4 chains, each with iter = 4000; warmup = 2000; thin = 1;
          total post-warmup draws = 8000
 
 Group-Level Effects: 
-~Question (Number of levels: 18) 
+~Item (Number of levels: 18) 
                       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
-sd(Intercept)             0.78      0.15     0.54     1.13 1.00     1873
-sd(Treat1)                0.76      0.15     0.53     1.12 1.01     1708
-cor(Intercept,Treat1)    -0.46      0.20    -0.79    -0.00 1.00     1738
+sd(Intercept)             0.78      0.16     0.54     1.15 1.00     1363
+sd(Treat1)                0.77      0.16     0.52     1.14 1.00     1563
+cor(Intercept,Treat1)    -0.46      0.21    -0.79     0.00 1.00     1351
                       Tail_ESS
-sd(Intercept)             3754
-sd(Treat1)                3645
-cor(Intercept,Treat1)     2863
+sd(Intercept)             2647
+sd(Treat1)                2417
+cor(Intercept,Treat1)     2600
 
 ~Subject (Number of levels: 87) 
                       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
-sd(Intercept)             1.54      0.14     1.30     1.83 1.00     1339
-sd(Treat1)                1.21      0.11     1.02     1.45 1.00     1644
-cor(Intercept,Treat1)    -0.11      0.13    -0.36     0.13 1.00     1213
+sd(Intercept)             1.55      0.14     1.30     1.85 1.00     1278
+sd(Treat1)                1.21      0.11     1.01     1.45 1.00     1640
+cor(Intercept,Treat1)    -0.11      0.13    -0.35     0.14 1.00     1063
                       Tail_ESS
-sd(Intercept)             3047
-sd(Treat1)                3421
-cor(Intercept,Treat1)     2301
+sd(Intercept)             2397
+sd(Treat1)                3215
+cor(Intercept,Treat1)     2132
 
 Population-Level Effects: 
                Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-Intercept[1]      -4.96      0.27    -5.50    -4.42 1.00      985     1681
-Intercept[2]      -2.60      0.26    -3.09    -2.11 1.00      899     1788
-Intercept[3]      -1.32      0.25    -1.80    -0.82 1.00      876     1748
-Intercept[4]       1.24      0.25     0.76     1.74 1.00      872     1775
-Treat1             1.45      0.23     1.01     1.93 1.00     1229     2318
-Period1            0.17      0.14    -0.10     0.43 1.00     1004     2236
-Treat1:Period1     0.14      0.17    -0.19     0.47 1.01      698     1414
+Intercept[1]      -4.96      0.28    -5.51    -4.43 1.00      909     1845
+Intercept[2]      -2.60      0.26    -3.11    -2.10 1.00      810     1757
+Intercept[3]      -1.31      0.26    -1.82    -0.82 1.00      778     1627
+Intercept[4]       1.24      0.26     0.74     1.75 1.00      771     1590
+Treat1             1.46      0.23     1.00     1.91 1.00     1050     1783
+Period1            0.18      0.14    -0.09     0.45 1.00      962     1745
+Treat1:Period1     0.13      0.17    -0.21     0.47 1.00      551     1066
 
 Family Specific Parameters: 
      Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
@@ -3402,8 +3426,7 @@ constata que toman valores razonables y no informativos.
 \hypertarget{tbl-priors}{}
 \begin{longtable}{llllrrrrrl}
 \caption{\label{tbl-priors}Distribuciones a priori del modelo Response \textasciitilde{} Treat *
-Period + (1 + Treat \textbar{} Subject) + (1 + Treat \textbar{}
-Question). }\tabularnewline
+Period + (1 + Treat \textbar{} Subject) + (1 + Treat \textbar{} Item). }\tabularnewline
 
 \toprule
 prior & class & coef & group & resp & dpar & nlpar & lb & ub & source \\ 
@@ -3418,12 +3441,12 @@ student\_t(3, 0, 2.5) & Intercept & 2 &  &  &  &  &  &  & default \\
 student\_t(3, 0, 2.5) & Intercept & 3 &  &  &  &  &  &  & default \\ 
 student\_t(3, 0, 2.5) & Intercept & 4 &  &  &  &  &  &  & default \\ 
 lkj\_corr\_cholesky(1) & L &  &  &  &  &  &  &  & default \\ 
-lkj\_corr\_cholesky(1) & L &  & Question &  &  &  &  &  & default \\ 
+lkj\_corr\_cholesky(1) & L &  & Item &  &  &  &  &  & default \\ 
 lkj\_corr\_cholesky(1) & L &  & Subject &  &  &  &  &  & default \\ 
 student\_t(3, 0, 2.5) & sd &  &  &  &  &  & 0 &  & default \\ 
-student\_t(3, 0, 2.5) & sd &  & Question &  &  &  &  &  & default \\ 
-student\_t(3, 0, 2.5) & sd & Intercept & Question &  &  &  &  &  & default \\ 
-student\_t(3, 0, 2.5) & sd & Treat1 & Question &  &  &  &  &  & default \\ 
+student\_t(3, 0, 2.5) & sd &  & Item &  &  &  &  &  & default \\ 
+student\_t(3, 0, 2.5) & sd & Intercept & Item &  &  &  &  &  & default \\ 
+student\_t(3, 0, 2.5) & sd & Treat1 & Item &  &  &  &  &  & default \\ 
 student\_t(3, 0, 2.5) & sd &  & Subject &  &  &  &  &  & default \\ 
 student\_t(3, 0, 2.5) & sd & Intercept & Subject &  &  &  &  &  & default \\ 
 student\_t(3, 0, 2.5) & sd & Treat1 & Subject &  &  &  &  &  & default \\ 
@@ -3441,7 +3464,7 @@ student\_t(3, 0, 2.5) & sd & Treat1 & Subject &  &  &  &  &  & default \\
 \caption[Distribuciones a priori del modelo
 seleccionado.]{\label{fig-priors}Distribuciones a priori del modelo
 Response \textasciitilde{} Treat * Period + (1 + Treat \textbar{}
-Subject) + (1 + Treat \textbar{} Question).}
+Subject) + (1 + Treat \textbar{} Item).}
 
 \end{figure}
 
@@ -3476,7 +3499,7 @@ aprecian diferencias relevantes.
 
 \caption[Cadenas MCMC del modelo seleccionado.]{\label{fig-trace}Cadenas
 MCMC del modelo Response \textasciitilde{} Treat * Period + (1 + Treat
-\textbar{} Subject) + (1 + Treat \textbar{} Question).}
+\textbar{} Subject) + (1 + Treat \textbar{} Item).}
 
 \end{figure}
 
@@ -3490,7 +3513,7 @@ MCMC del modelo Response \textasciitilde{} Treat * Period + (1 + Treat
 modelo seleccionado.]{\label{fig-predictive}Comparación de los valores
 reales con los obtenidos a partir de la función predictiva a posteriori
 del modelo Response \textasciitilde{} Treat * Period + (1 + Treat
-\textbar{} Subject) + (1 + Treat \textbar{} Question).}
+\textbar{} Subject) + (1 + Treat \textbar{} Item).}
 
 \end{figure}
 
@@ -3499,23 +3522,27 @@ del modelo Response \textasciitilde{} Treat * Period + (1 + Treat
 \hypertarget{sec-resultados}{%
 \chapter{Resultados}\label{sec-resultados}}
 
-En este capítulo se comentan los resultados de los modelos seleccionados
-(ver Capítulo~\ref{sec-modelado}).
+En el Capítulo~\ref{sec-modelado} se realizó una exploración de los
+datos y se adecuaron los modelos presentados en el
+Capítulo~\ref{sec-arte} al diseño del experimento del subtitulado. En
+este capítulo se comentan los resultados de los modelos seleccionados
+siguiendo el mismo orden expositivo, comenzando por el análisis del
+\(OR\), continuando por la Regresión Logística y finalizando con la
+Regresión Ordinal.
 
 \hypertarget{sec-or-3}{%
 \subsection{\texorpdfstring{Comparación con \emph{Odds
 Ratio}}{Comparación con Odds Ratio}}\label{sec-or-3}}
 
-El contraste de hipótesis del \(log\ OR\) del subtitulado para cada
-grupo (ver Sección~\ref{sec-or-2}) no produce significación estadística
-en ningún nivel de respuesta, por lo que según esta prueba estadística
-la secuencia de subtitulado no influiría en la respuesta de los
-estudiantes (ver Tabla~\ref{tbl-logor1}). Es decir, de acuerdo a este
-test la secuencia no influye en la valoración de los subtítulos.
+El contraste de hipótesis del \(log\ OR\) del nivel subtitulado y
+secuencia (ver Sección~\ref{sec-or-2}) no produce significación
+estadística en ningún nivel de respuesta, por lo que según esta prueba
+estadística el orden en el que se ven los vídeos no influiría en la
+respuesta de los estudiantes (ver Tabla~\ref{tbl-logor1}).
 
 \hypertarget{tbl-logor1}{}
 \begin{longtable}{lrrrr}
-\caption{\label{tbl-logor1}Log OR \textasciitilde{} Treat + Seq + Response\_l }\tabularnewline
+\caption{\label{tbl-logor1}Log OR \textasciitilde{} Treat + Seq + Response }\tabularnewline
 
 \toprule
 Response & Estimate & Std. Error & z value & Pr(>|z|) \\ 
@@ -3531,11 +3558,27 @@ Muy de acuerdo & 0.117 & 0.137 & 0.855 & 0.393 \\
 
 Sin embargo, si se realiza este contraste entre subtítulos y periodos,
 se constata la existencia de un efecto periodo de signo contrario para
-los ítems 4 y 5 (ver Tabla~\ref{tbl-logor2}).
+los ítems 4 y 5 (ver Tabla~\ref{tbl-logor2}). El test es significativo
+porque el ratio entre subtítulos de respuestas con valor 4 es diferente
+en cada periodo habiendo mayor cantidad de respuestas 4 en el segundo
+periodo que en el primero. Con las respuestas 5 ocurre lo contrario: la
+proporción es mayor en el primer periodo. La Figura~\ref{fig-or2}
+permite una comprobación visual. Esto indica que los estudiantes de
+ambos grupos prestaron más atención o fueron más exigentes en el segundo
+visionado y valoraron relativamente peor el segundo vídeo. Que el efecto
+periodo sea de signo contrario en dos respuestas no debe sorprender en
+este diseño de experimento, ya que un test es un juego de suma cero: la
+valoraciones que se ganan o se pierden en un nivel de respuesta
+necesariamente se reparten entre el resto de niveles. En cualquier caso,
+el efecto periodo es cuantitativa y cualitativamente pequeño. Al afectar
+solo al intercambio de valoraciones entre los niveles 4 y 5 es
+simplemente una pequeña corrección en la valoración del subtitulado y
+cualitativamente es poco importante ya que las respuestas 4 y 5 son
+ambas valoraciones positivas.
 
 \hypertarget{tbl-logor2}{}
 \begin{longtable}{lrrrr}
-\caption{\label{tbl-logor2}Log OR \textasciitilde{} Treat + Period + Response\_l }\tabularnewline
+\caption{\label{tbl-logor2}Log OR \textasciitilde{} Treat + Period + Response }\tabularnewline
 
 \toprule
 Response & Estimate & Std. Error & z value & Pr(>|z|) \\ 
@@ -3549,23 +3592,84 @@ Muy de acuerdo & 0.486 & 0.137 & 3.557 & 0.000 \\
 \bottomrule
 \end{longtable}
 
+\begin{figure}[h]
+
+{\centering \includegraphics{5_files/figure-pdf/fig-or2-1.pdf}
+
+}
+
+\caption[Test Odds Ratio \textasciitilde{} Treat + Period +
+Response]{\label{fig-or2}OR \textasciitilde{} Treat + Period + Response}
+
+\end{figure}
+
 \hypertarget{modelado}{%
 \subsection{Modelado}\label{modelado}}
 
-El modelo de efectos mixtos ajustado con Regresión Logística:
+\hypertarget{sec-logistica-3}{%
+\subsubsection{Regresión Logística}\label{sec-logistica-3}}
+
+En la Sección~\ref{sec-logistica-2} se explicó una forma de crear una
+variable dicotómica que permite ajustar los datos a una Regresión
+Logística. Concretamente, se creo la variable respuesta \(Improve\) que
+compara si las respuestas de cada estudiante a cada Ítem entre los
+niveles de subtitulado (\(A\) frente \(B\)) han mejorado (valor 1) o se
+han mantenido o empeorado (valor 0). El modelo que se propone en esta
+sección no tiene en cuenta el efecto secuencia ya que resultó no
+significativo en el análisis y, en cambio, se incluye como efectos
+aleatorios los estudiantes y los ítems sobre el intercepto ya que, como
+se ha explicado, son variables que no se pueden considerar
+independientes:
 
 \begin{quote}
 Improve \textasciitilde{} 1 + (1 \textbar{} Subject) + (1 \textbar{}
-Question)
+Item)
 \end{quote}
 
-estima la probabilidad de que la respuesta a un ítem en el subtitulado
-\(A\) sea mejor que en el subtitulado \(B\) frente a que sea igual o
-peor. El intercepto del modelo ajustado es 0.404. Por ello, la
-probabilidad de que se otorgue una mayor puntuación en \(A\) que en
-\(B\) es del 59.95\%. En la Tabla~\ref{tbl-improve-question} se muestra
-la probabilidad de que la respuesta sea mejor en \(A\) que en \(B\) por
-ítem.
+El resumen del modelo ajustado con la función \texttt{glmer} del paquete
+\texttt{lme4} \autocite[ver][]{lme4} produce los resultados de la
+Tabla~\ref{tbl-selected-logistic}. El intercepto del modelo ajustado es
+0.404 (std.error 0.329). Por ello, la probabilidad de que se otorgue una
+mayor puntuación en \(A\) que en \(B\) es del 59.95\%. La proporción de
+varianza explicada por los efectos aleatorios (\(ICC\)) es 0.575.
+
+En la Tabla~\ref{tbl-improve-question} se muestra la probabilidad de que
+la respuesta sea mejor en \(A\) que en \(B\) por ítem.
+
+\scriptsize
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{glmer\_improve\_subject\_question }\OtherTok{\textless{}{-}} \FunctionTok{glmer}\NormalTok{(}
+\NormalTok{    Improve }\SpecialCharTok{\textasciitilde{}} \DecValTok{1} \SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{|}\NormalTok{ Subject) }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{|}\NormalTok{ Item),}
+    \AttributeTok{family =} \StringTok{"binomial"}\NormalTok{, }\AttributeTok{data =}\NormalTok{ df\_improve}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\normalsize
+
+\hypertarget{tbl-selected-logistic}{}
+\begin{table}
+\caption{\label{tbl-selected-logistic}Resumen del modelo Improve \textasciitilde{} 1 + (1 \textbar{} Subject)
++ (1 \textbar{} Item) }\tabularnewline
+
+\centering
+\begin{tabular}[t]{lc}
+\toprule
+  & Improve \textasciitilde{} 1 + (1 | Subject) + (1 | Item)\\
+\midrule
+(Intercept) & \num{0.404}\\
+ & (\num{0.329})\\
+SD (Intercept Subject) & \num{1.832}\\
+SD (Intercept Item) & \num{1.051}\\
+\midrule
+Num.Obs. & \num{1152}\\
+AIC & \num{1215.6}\\
+BIC & \num{1230.8}\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \scriptsize
 
@@ -3575,7 +3679,7 @@ la probabilidad de que la respuesta sea mejor en \(A\) que en \(B\) por
 a A \textless= B }\tabularnewline
 
 \toprule
-Question & Prob \\ 
+Item & Prob \\ 
 \midrule
 Q18 & $0.70$ \\ 
 Q01 & $0.36$ \\ 
@@ -3600,23 +3704,60 @@ Q17 & $0.33$ \\
 
 \normalsize
 
+\hypertarget{sec-ordinal-3}{%
+\subsubsection{Regresión Ordinal}\label{sec-ordinal-3}}
+
 En la Sección~\ref{sec-ordinal-2} se evaluaron distintas
 parametrizaciones de la Regresión Ordinal Acumulativa tanto desde el
-punto de vista frecuentista como bayesiano y considerando únicamente
+punto de vista frecuentista como bayesiano, considerando únicamente
 efectos fijos y también efectos aleatorios. Finalmente, tanto en el
 análisis frecuentista como en el bayesiano, el modelo que resultó ser
-más parsimonioso es el de la Ecuación~\ref{eq-mejor-modelo}, que se
-reproduce aquí en sintaxis R:
+más parsimonioso (evaluado con \(LRT\) y con \(AIC\)) es el de la
+Ecuación~\ref{eq-mejor-modelo}, que se reproduce aquí en sintaxis R:
 
 \small
 
 \begin{quote}
 Response \textasciitilde{} Treat*Period + (1 + Treat \textbar{} Subject)
-+ (1 + Treat \textbar{} Question) \normalsize
++ (1 + Treat \textbar{} Item)
 \end{quote}
 
-Este modelo produce en los dos paradigmas unas estimaciones similares,
-como se puede comprobar en la Tabla~\ref{tbl-model-comp}.
+\normalsize
+
+Este modelo incluye como efectos fijos el nivel de subtitulado
+(\texttt{Treat}), el periodo (\texttt{Period}) y su interacción; y como
+efectos aleatorios el estudiante (\texttt{Subject}) y el ítem
+(\texttt{Item}). Ambos con interceptos y pendientes variables por nivel
+de subtítulo. Los coeficientes estimados son muy similares tanto en el
+paradigma frecuentista como en el bayesiano. En la
+Tabla~\ref{tbl-model-comp} se comparan las estimaciones producidas por
+ambos modelos. Como ya se dijo, el efecto más importante es el debido al
+subtitulado (coeficiente frecuentista 1.432). En comparación con él, los
+efectos debido al periodo y la secuencia son muy pequeños (coeficientes
+0.173 y 0.14 respectivamente). La proporción de la varianza explicada
+debida a efectos aleatorios (\(ICC\)) es 0.579.
+
+En la Figura~\ref{fig-probs-clmm_treat.period.subject.question} se
+muestran las predicciones del modelo por nivel de subtítulo y periodo.
+El modelo predice para el subtitulado \(B\) el nivel 4 de respuesta como
+el más probable seguido del 3, mientras para el subtitulado \(A\) el
+nivel de respuesta más probable es el 5 seguido del 4. En el subtitulado
+\(B\) apenas hay diferencias entre periodos, sin embargo, en el
+subtitulado \(A\) hay mayor probabilidad del nivel de respuesta 5 en el
+periodo 1 y nivel de respuesta 4 en el periodo 2.
+
+\begin{figure}[h]
+
+{\centering \includegraphics{5_files/figure-pdf/fig-probs-clmm_treat.period.subject.question-1.pdf}
+
+}
+
+\caption[Probabilidades de respuesta para el modelo ordinal
+seleccionado.]{\label{fig-probs-clmm_treat.period.subject.question}Probabilidades
+de respuesta para el modelo ordinal Response \textasciitilde{} Treat *
+Period + (1 + Treat \textbar{} Subject) + (1 + Treat \textbar{} Item)}
+
+\end{figure}
 
 \tiny
 
@@ -3624,97 +3765,37 @@ como se puede comprobar en la Tabla~\ref{tbl-model-comp}.
 \begin{longtable}{lrrrrrr}
 \caption{\label{tbl-model-comp}Comparación frecuentista/bayesiano de coeficientes estimados en el
 modelo Response \textasciitilde{} Treat * Period + (1 + Treat \textbar{}
-Subject) + (1 + Treat \textbar{} Question). }\tabularnewline
+Subject) + (1 + Treat \textbar{} Item). }\tabularnewline
 
 \toprule
  & \multicolumn{3}{c}{ordinal::clmm} & \multicolumn{3}{c}{brms::brm} \\ 
 \cmidrule(lr){2-4} \cmidrule(lr){5-7}
 Name & Estimation.clmm & conf.2.5\% & conf.97.5\% & Estimation.brm & cred.2.5\% & cred.97.5\% \\ 
 \midrule
-1|2 & -5.00 & -5.52 & -4.49 & -4.96 & -5.50 & -4.42 \\ 
-2|3 & -2.65 & -3.12 & -2.18 & -2.60 & -3.09 & -2.11 \\ 
-3|4 & -1.37 & -1.83 & -0.90 & -1.32 & -1.80 & -0.82 \\ 
-4|5 & 1.18 & 0.72 & 1.65 & 1.24 & 0.76 & 1.74 \\ 
-Treat1 & 1.43 & 1.02 & 1.84 & 1.45 & 1.01 & 1.93 \\ 
-Period1 & 0.17 & -0.09 & 0.43 & 0.17 & -0.10 & 0.43 \\ 
-Treat1:Period1 & 0.14 & -0.18 & 0.46 & 0.14 & -0.19 & 0.47 \\ 
-Question.sd(Intercept) & 0.70 &  &  & 0.76 & 0.54 & 1.13 \\ 
-Question.sd(Treat1) & 0.68 &  &  & 0.74 & 0.53 & 1.12 \\ 
-Subject.sd(Intercept) & 1.49 &  &  & 1.53 & 1.30 & 1.83 \\ 
-Subject.sd(Treat1) & 1.17 &  &  & 1.21 & 1.02 & 1.45 \\ 
-Question.cor(Intercept,Treat1) & -0.53 &  &  & -0.48 & -0.79 & 0.00 \\ 
-Subject.cor(Intercept,Treat1) & -0.13 &  &  & -0.11 & -0.36 & 0.13 \\ 
+1|2 & -5.00 & -5.52 & -4.49 & -4.96 & -5.51 & -4.43 \\ 
+2|3 & -2.65 & -3.12 & -2.18 & -2.60 & -3.11 & -2.10 \\ 
+3|4 & -1.37 & -1.83 & -0.90 & -1.31 & -1.82 & -0.82 \\ 
+4|5 & 1.18 & 0.72 & 1.65 & 1.24 & 0.74 & 1.75 \\ 
+Treat1 & 1.43 & 1.02 & 1.84 & 1.46 & 1.00 & 1.91 \\ 
+Period1 & 0.17 & -0.09 & 0.43 & 0.18 & -0.09 & 0.45 \\ 
+Treat1:Period1 & 0.14 & -0.18 & 0.46 & 0.13 & -0.21 & 0.47 \\ 
+Item.sd(Intercept) & 0.70 &  &  & 0.76 & 0.54 & 1.15 \\ 
+Item.sd(Treat1) & 0.68 &  &  & 0.75 & 0.52 & 1.14 \\ 
+Subject.sd(Intercept) & 1.49 &  &  & 1.54 & 1.30 & 1.85 \\ 
+Subject.sd(Treat1) & 1.17 &  &  & 1.21 & 1.01 & 1.45 \\ 
+Item.cor(Intercept,Treat1) & -0.53 &  &  & -0.49 & -0.79 & 0.00 \\ 
+Subject.cor(Intercept,Treat1) & -0.13 &  &  & -0.11 & -0.35 & 0.14 \\ 
 \bottomrule
 \end{longtable}
 
 \normalsize
 
-\bookmarksetup{startatroot}
-
-\hypertarget{sec-conclusiones}{%
-\chapter{Discusión y conclusiones}\label{sec-conclusiones}}
-
-\hypertarget{sec-or-4}{%
-\section{\texorpdfstring{Comparación con \emph{Odds
-Ratio}}{Comparación con Odds Ratio}}\label{sec-or-4}}
-
-En la Sección~\ref{sec-or-3} se constató la existencia de un efecto
-periodo en las respuestas 4 y 5. El test es significativo porque el
-ratio entre subtítulos de respuestas con valor 4 es diferente en cada
-periodo habiendo mayor respuestas 4 en el segundo periodo que en el
-primero. Con las respuestas 5 ocurre lo contrario: la proporción es
-mayor en el primer periodo. La Figura~\ref{fig-or2} permite una
-comprobación visual. Esto estaría indicando que los estudiantes de ambos
-grupos prestaron más atención o fueron más exigentes en el segundo
-visionado y decidieron no otorgar la puntuación máxima. Que el efecto
-periodo sea de signo contrario en dos respuestas no debe sorprender en
-este diseño de experimento, ya que un test es un juego de suma cero: la
-valoraciones que se ganan o se pierden en un nivel de respuesta
-necesariamente provocan que el resto de niveles pierdan o ganen
-respectivamente la misma cantidad. En cualquier caso, el efecto periodo
-es cuantitativa y cualitativamente pequeño. Al afectar solo al
-intercambio de valoraciones entre los niveles 4 y 5 es simplemente una
-pequeña corrección en la valoración del subtitulado y cualitativamente
-es poco importante ya que las respuestas 4 y 5 son ambas valoraciones
-positivas.
-
-\begin{figure}[h]
-
-{\centering \includegraphics{5_files/figure-pdf/fig-or2-1.pdf}
-
-}
-
-\caption[Test Odds Ratio \textasciitilde{} Treat + Period +
-Response]{\label{fig-or2}OR \textasciitilde{} Treat + Period + Response}
-
-\end{figure}
-
-\hypertarget{modelado-1}{%
-\section{Modelado}\label{modelado-1}}
-
-La probabilidad de que los alumnos puntúen mejor el subtitulado \(A\)
-que el \(B\) frente a que lo puntúen igual o peor se estima que es del
-59.95\%. Sin embargo, la distribución por ítems no es uniforme (ver
-Tabla~\ref{tbl-improve-question}). Así, hay ítems en que esta
-probabilidad sobrepasa el 80\% (Q09, Q05). Sin embargo hay otros en que
-no supera el 25\% (Q04, Q16, Q13). La respuesta al ítem Q18 está por
-encima de la media (69.82\%). Parece claro que los ítems en los que la
-respuesta de los estudiantes es diferente en los dos subtitulados es
-porque aprecian diferencias reales entre ellos. Quedaría por dilucidar
-si en los ítems en los que no hay diferencia en las respuestas, se debe
-a que realmente no las hay o si es que los estudiantes no son capaces de
-detectarlas.
-
-La magnitud del efecto del subtitulado sobre las valoraciones es muy
-superior a la de los efectos periodo y secuencia (ver
-Tabla~\ref{tbl-model-comp}), por lo que se pueden realizar
-interpretaciones del modelo sin que nos deba preocupar su existencia. En
-la Figura~\ref{fig-pred-3} se representan 50 muestras de la esperanza de
-la distribución predictiva a posteriori para cada ítem y nivel de
+En la Figura~\ref{fig-pred-3} se representan 50 muestras de la esperanza
+de la distribución predictiva a posteriori para cada ítem y nivel de
 subtitulado marginalizados por periodo y estudiante. La primera
 conclusión que se puede extraer es que el modelo tiene bastante
 incertidumbre sobre los valores de respuesta a cada ítem no superando
-casi nunca el 50\% de probabilidad para todas los ítems y niveles de
+casi nunca el 50\% de probabilidad para todos los ítems y niveles de
 subtitulado. En general se observa en la mayoría de los ítems del nivel
 de subtitulado \(A\) que los alumnos están bastante seguros de que la
 respuesta a los ítems debe ser 4 ó 5, asignando una muy baja
@@ -3733,10 +3814,10 @@ conclusiones:
   ambos subtitulados con puntuaciones de 4 y de 5.
 \item
   En los ítems \(Q15\), \(Q16\) y \(Q17\), la opción de respuesta más
-  probable es 4 en ambos subtitulados. El modelo asigna una baja
-  probabilidad de respuesta a la opción 1 y similares al resto. La
-  probabilidad de la opción 5 decrece ligeramente entre subtitulado
-  \(A\) y \(B\) y lo contrario ocurre con las opciones 2 y 3.
+  probable es 4. El modelo asigna una baja probabilidad de respuesta a
+  la opción 1 y similares al resto. La probabilidad de la opción 5
+  decrece ligeramente entre subtitulado \(A\) y \(B\) y lo contrario
+  ocurre con las opciones 2 y 3.
 \item
   Los ítems \(Q01\), \(Q02\), \(Q03\), \(Q10\), \(Q11\) y \(Q12\) son
   similares a las anteriores. Particularmente en lo referente a que la
@@ -3746,17 +3827,18 @@ conclusiones:
   de respuesta 2 y 3.
 \item
   Los ítems \(Q06\), \(Q07\), \(Q14\) y \(Q18\) no son muy diferentes de
-  las anteriores. En general el modelo predice mayor probabilidad de
+  los anteriores. En general el modelo predice mayor probabilidad de
   respuesta para 5 en el subtitulado \(A\) pero este valor es con alta
   probabilidad cercano a cero en el subtitulado \(B\). En el subtitulado
   \(B\) la probabilidad de respuesta 2, 3 ó 4 es similar.
 \item
-  Los ítems \(Q05\), \(Q08\) y \(Q09\) son las que más diferencias entre
+  Los ítems \(Q05\), \(Q08\) y \(Q09\) son los que más diferencias entre
   subtitulados presentan. La respuesta más probable en el subtitulado
   \(A\) es 5 (en \(Q08\) y en \(Q09\) muy parecida a 4). Por contra, en
   el subtitulado \(B\) las respuestas 4 y 5 tienden a cero, siendo la
-  más probable la respuesta 2. En \(Q05\) y en \(Q09\) la segunda
-  respuesta más probable al subtitulado \(B\) es 1 y 4 en la \(Q08\).
+  más probable la respuesta 2. En los ítems \(Q05\) y \(Q09\) la segunda
+  respuesta más probable al subtitulado \(B\) es 1 y 4 en el ítem
+  \(Q08\).
 \end{itemize}
 
 En definitiva, nuestro modelo predice que los estudiantes están bastante
@@ -3780,703 +3862,33 @@ posteriori por tratamiento e ítem.}
 
 \end{figure}
 
+\bookmarksetup{startatroot}
+
+\hypertarget{sec-conclusiones}{%
+\chapter{Discusión y conclusiones}\label{sec-conclusiones}}
+
+\hypertarget{modelado-1}{%
+\section{Modelado}\label{modelado-1}}
+
+La probabilidad de que los alumnos puntúen mejor el subtitulado \(A\)
+que el \(B\) frente a que lo puntúen igual o peor se estima que es del
+59.95\%. Sin embargo, la distribución por ítems no es uniforme (ver
+Tabla~\ref{tbl-improve-question}). Así, hay ítems en que esta
+probabilidad sobrepasa el 80\% (Q09, Q05). Sin embargo hay otros en que
+no supera el 25\% (Q04, Q16, Q13). La respuesta al ítem Q18 está por
+encima de la media (69.82\%). Parece claro que los ítems en los que la
+respuesta de los estudiantes es diferente en los dos subtitulados es
+porque aprecian diferencias reales entre ellos. Quedaría por dilucidar
+si en los ítems en los que no hay diferencia en las respuestas, se debe
+a que realmente no las hay o si es que los estudiantes no son capaces de
+detectarlas.
+
+La magnitud del efecto del subtitulado sobre las valoraciones es muy
+superior a la de los efectos periodo y secuencia (ver
+Tabla~\ref{tbl-model-comp}), por lo que se pueden realizar
+interpretaciones del modelo sin que nos deba preocupar su existencia.
+
 \scriptsize
-
-\begin{longtable}[]{@{}
-  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
-  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
-  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
-  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
-  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
-  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
-  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
-  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
-  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
-  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
-  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
-  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
-  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
-  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
-  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
-  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
-  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
-  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
-  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
-  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}
-  >{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.0476}}@{}}
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\centering
-\end{minipage} &
-\multicolumn{10}{>{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.4762} + 18\tabcolsep}}{%
-\begin{minipage}[b]{\linewidth}\centering
-{Treat A}
-\end{minipage}} &
-\multicolumn{10}{>{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.4762} + 18\tabcolsep}@{}}{%
-\begin{minipage}[b]{\linewidth}\centering
-{Treat B}
-\end{minipage}} \\
-\multirow{2}{*}{\begin{minipage}[b]{\linewidth}\centering
-Question
-\end{minipage}} &
-\multicolumn{5}{>{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.2381} + 8\tabcolsep}}{%
-\begin{minipage}[b]{\linewidth}\centering
-{Data Frequencies}
-\end{minipage}} &
-\multicolumn{5}{>{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.2381} + 8\tabcolsep}}{%
-\begin{minipage}[b]{\linewidth}\centering
-{Model Probabilities}
-\end{minipage}} &
-\multicolumn{5}{>{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.2381} + 8\tabcolsep}}{%
-\begin{minipage}[b]{\linewidth}\centering
-{Data Frequencies}
-\end{minipage}} &
-\multicolumn{5}{>{\centering\arraybackslash}p{(\columnwidth - 40\tabcolsep) * \real{0.2381} + 8\tabcolsep}@{}}{%
-\begin{minipage}[b]{\linewidth}\centering
-{Model Probabilities}
-\end{minipage}} \\
-& \begin{minipage}[b]{\linewidth}\centering
-1
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-2
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-3
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-4
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-5
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-1
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-2
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-3
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-4
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-5
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-1
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-2
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-3
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-4
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-5
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-1
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-2
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-3
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-4
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-5
-\end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-Q18 & 0.01 & 0.03 & 0.01 & 0.37 & 0.57 &
-\begin{minipage}[t]{\linewidth}\centering
-0.00\\
-{(0.00-0.00)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.01\\
-{(0.00-0.02)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.03\\
-{(0.01-0.06)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.30\\
-{(0.15-0.47)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.66\\
-{(0.44-0.83)}\strut
-\end{minipage} & 0.11 & 0.34 & 0.20 & 0.23 & 0.11 &
-\begin{minipage}[t]{\linewidth}\centering
-0.05\\
-{(0.03-0.11)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.32\\
-{(0.20-0.46)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.30\\
-{(0.26-0.33)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.28\\
-{(0.16-0.42)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.03\\
-{(0.02-0.07)}\strut
-\end{minipage} \\
-Q01 & 0.01 & 0.02 & 0.06 & 0.34 & 0.56 &
-\begin{minipage}[t]{\linewidth}\centering
-0.00\\
-{(0.00-0.00)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.01\\
-{(0.00-0.03)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.03\\
-{(0.01-0.07)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.32\\
-{(0.17-0.49)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.63\\
-{(0.41-0.82)}\strut
-\end{minipage} & 0.10 & 0.21 & 0.06 & 0.33 & 0.30 &
-\begin{minipage}[t]{\linewidth}\centering
-0.01\\
-{(0.01-0.03)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.11\\
-{(0.05-0.20)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.21\\
-{(0.13-0.29)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.53\\
-{(0.41-0.58)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.13\\
-{(0.07-0.25)}\strut
-\end{minipage} \\
-Q02 & 0.00 & 0.01 & 0.03 & 0.33 & 0.62 &
-\begin{minipage}[t]{\linewidth}\centering
-0.00\\
-{(0.00-0.00)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.01\\
-{(0.00-0.02)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.02\\
-{(0.01-0.05)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.26\\
-{(0.13-0.43)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.71\\
-{(0.49-0.86)}\strut
-\end{minipage} & 0.06 & 0.29 & 0.13 & 0.33 & 0.20 &
-\begin{minipage}[t]{\linewidth}\centering
-0.02\\
-{(0.01-0.05)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.17\\
-{(0.09-0.29)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.27\\
-{(0.18-0.32)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.46\\
-{(0.32-0.56)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.08\\
-{(0.04-0.16)}\strut
-\end{minipage} \\
-Q03 & 0.00 & 0.07 & 0.03 & 0.37 & 0.52 &
-\begin{minipage}[t]{\linewidth}\centering
-0.00\\
-{(0.00-0.00)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.01\\
-{(0.01-0.03)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.04\\
-{(0.02-0.09)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.37\\
-{(0.20-0.52)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.58\\
-{(0.36-0.78)}\strut
-\end{minipage} & 0.06 & 0.24 & 0.10 & 0.34 & 0.27 &
-\begin{minipage}[t]{\linewidth}\centering
-0.02\\
-{(0.01-0.03)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.13\\
-{(0.06-0.23)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.23\\
-{(0.15-0.30)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.51\\
-{(0.38-0.57)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.11\\
-{(0.06-0.22)}\strut
-\end{minipage} \\
-Q04 & 0.00 & 0.02 & 0.06 & 0.31 & 0.61 &
-\begin{minipage}[t]{\linewidth}\centering
-0.00\\
-{(0.00-0.00)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.01\\
-{(0.00-0.02)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.02\\
-{(0.01-0.06)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.28\\
-{(0.14-0.45)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.69\\
-{(0.47-0.85)}\strut
-\end{minipage} & 0.02 & 0.06 & 0.06 & 0.39 & 0.47 &
-\begin{minipage}[t]{\linewidth}\centering
-0.00\\
-{(0.00-0.01)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.02\\
-{(0.01-0.05)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.06\\
-{(0.03-0.12)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.46\\
-{(0.32-0.56)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.45\\
-{(0.27-0.64)}\strut
-\end{minipage} \\
-Q05 & 0.00 & 0.00 & 0.05 & 0.31 & 0.64 &
-\begin{minipage}[t]{\linewidth}\centering
-0.00\\
-{(0.00-0.00)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.01\\
-{(0.00-0.02)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.02\\
-{(0.01-0.05)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.23\\
-{(0.11-0.41)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.74\\
-{(0.53-0.88)}\strut
-\end{minipage} & 0.34 & 0.36 & 0.09 & 0.08 & 0.13 &
-\begin{minipage}[t]{\linewidth}\centering
-0.18\\
-{(0.09-0.33)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.51\\
-{(0.43-0.56)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.19\\
-{(0.11-0.28)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.09\\
-{(0.05-0.18)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.01\\
-{(0.00-0.02)}\strut
-\end{minipage} \\
-Q06 & 0.00 & 0.00 & 0.05 & 0.36 & 0.59 &
-\begin{minipage}[t]{\linewidth}\centering
-0.00\\
-{(0.00-0.00)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.01\\
-{(0.00-0.02)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.02\\
-{(0.01-0.06)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.27\\
-{(0.13-0.44)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.70\\
-{(0.48-0.85)}\strut
-\end{minipage} & 0.07 & 0.33 & 0.20 & 0.25 & 0.15 &
-\begin{minipage}[t]{\linewidth}\centering
-0.04\\
-{(0.02-0.08)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.26\\
-{(0.15-0.39)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.30\\
-{(0.25-0.33)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.35\\
-{(0.21-0.48)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.05\\
-{(0.02-0.10)}\strut
-\end{minipage} \\
-Q07 & 0.00 & 0.03 & 0.07 & 0.39 & 0.51 &
-\begin{minipage}[t]{\linewidth}\centering
-0.00\\
-{(0.00-0.00)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.01\\
-{(0.01-0.04)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.04\\
-{(0.02-0.09)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.38\\
-{(0.21-0.53)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.56\\
-{(0.34-0.76)}\strut
-\end{minipage} & 0.15 & 0.33 & 0.09 & 0.23 & 0.20 &
-\begin{minipage}[t]{\linewidth}\centering
-0.04\\
-{(0.02-0.09)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.28\\
-{(0.16-0.42)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.30\\
-{(0.26-0.33)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.32\\
-{(0.19-0.47)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.04\\
-{(0.02-0.09)}\strut
-\end{minipage} \\
-Q08 & 0.00 & 0.07 & 0.12 & 0.30 & 0.51 &
-\begin{minipage}[t]{\linewidth}\centering
-0.00\\
-{(0.00-0.00)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.02\\
-{(0.01-0.04)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.05\\
-{(0.02-0.11)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.42\\
-{(0.24-0.55)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.51\\
-{(0.30-0.73)}\strut
-\end{minipage} & 0.17 & 0.41 & 0.10 & 0.17 & 0.14 &
-\begin{minipage}[t]{\linewidth}\centering
-0.07\\
-{(0.04-0.15)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.38\\
-{(0.25-0.50)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.29\\
-{(0.22-0.33)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.22\\
-{(0.12-0.36)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.02\\
-{(0.01-0.05)}\strut
-\end{minipage} \\
-Q09 & 0.01 & 0.06 & 0.05 & 0.37 & 0.51 &
-\begin{minipage}[t]{\linewidth}\centering
-0.00\\
-{(0.00-0.00)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.01\\
-{(0.01-0.04)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.04\\
-{(0.02-0.09)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.38\\
-{(0.21-0.53)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.57\\
-{(0.35-0.77)}\strut
-\end{minipage} & 0.44 & 0.28 & 0.09 & 0.11 & 0.08 &
-\begin{minipage}[t]{\linewidth}\centering
-0.25\\
-{(0.14-0.42)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.52\\
-{(0.45-0.56)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.15\\
-{(0.08-0.24)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.07\\
-{(0.03-0.13)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.01\\
-{(0.00-0.01)}\strut
-\end{minipage} \\
-Q10 & 0.00 & 0.01 & 0.08 & 0.43 & 0.48 &
-\begin{minipage}[t]{\linewidth}\centering
-0.00\\
-{(0.00-0.00)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.01\\
-{(0.01-0.04)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.04\\
-{(0.02-0.09)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.37\\
-{(0.21-0.53)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.57\\
-{(0.35-0.77)}\strut
-\end{minipage} & 0.05 & 0.29 & 0.14 & 0.28 & 0.24 &
-\begin{minipage}[t]{\linewidth}\centering
-0.02\\
-{(0.01-0.05)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.18\\
-{(0.09-0.30)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.27\\
-{(0.19-0.32)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.45\\
-{(0.30-0.55)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.08\\
-{(0.04-0.16)}\strut
-\end{minipage} \\
-Q11 & 0.00 & 0.02 & 0.03 & 0.45 & 0.49 &
-\begin{minipage}[t]{\linewidth}\centering
-0.00\\
-{(0.00-0.00)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.01\\
-{(0.01-0.03)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.04\\
-{(0.02-0.08)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.36\\
-{(0.20-0.52)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.59\\
-{(0.36-0.78)}\strut
-\end{minipage} & 0.02 & 0.14 & 0.24 & 0.42 & 0.18 &
-\begin{minipage}[t]{\linewidth}\centering
-0.01\\
-{(0.01-0.03)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.12\\
-{(0.06-0.21)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.22\\
-{(0.14-0.30)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.52\\
-{(0.41-0.58)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.13\\
-{(0.06-0.24)}\strut
-\end{minipage} \\
-Q12 & 0.00 & 0.03 & 0.05 & 0.49 & 0.43 &
-\begin{minipage}[t]{\linewidth}\centering
-0.00\\
-{(0.00-0.00)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.02\\
-{(0.01-0.04)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.05\\
-{(0.02-0.11)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.42\\
-{(0.25-0.55)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.51\\
-{(0.30-0.73)}\strut
-\end{minipage} & 0.05 & 0.28 & 0.17 & 0.33 & 0.18 &
-\begin{minipage}[t]{\linewidth}\centering
-0.02\\
-{(0.01-0.05)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.18\\
-{(0.10-0.30)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.28\\
-{(0.20-0.32)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.44\\
-{(0.30-0.55)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.08\\
-{(0.04-0.15)}\strut
-\end{minipage} \\
-Q13 & 0.00 & 0.00 & 0.07 & 0.32 & 0.61 &
-\begin{minipage}[t]{\linewidth}\centering
-0.00\\
-{(0.00-0.00)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.01\\
-{(0.00-0.02)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.02\\
-{(0.01-0.05)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.27\\
-{(0.13-0.44)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.70\\
-{(0.48-0.86)}\strut
-\end{minipage} & 0.02 & 0.02 & 0.15 & 0.40 & 0.41 &
-\begin{minipage}[t]{\linewidth}\centering
-0.00\\
-{(0.00-0.01)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.03\\
-{(0.01-0.07)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.08\\
-{(0.04-0.15)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.51\\
-{(0.39-0.57)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.37\\
-{(0.21-0.56)}\strut
-\end{minipage} \\
-Q14 & 0.01 & 0.04 & 0.12 & 0.36 & 0.47 &
-\begin{minipage}[t]{\linewidth}\centering
-0.00\\
-{(0.00-0.01)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.02\\
-{(0.01-0.04)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.05\\
-{(0.02-0.11)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.43\\
-{(0.25-0.55)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.50\\
-{(0.29-0.72)}\strut
-\end{minipage} & 0.10 & 0.34 & 0.23 & 0.22 & 0.10 &
-\begin{minipage}[t]{\linewidth}\centering
-0.05\\
-{(0.02-0.11)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.32\\
-{(0.19-0.45)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.30\\
-{(0.26-0.33)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.28\\
-{(0.16-0.43)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.04\\
-{(0.02-0.07)}\strut
-\end{minipage} \\
-Q15 & 0.00 & 0.13 & 0.22 & 0.37 & 0.28 &
-\begin{minipage}[t]{\linewidth}\centering
-0.01\\
-{(0.00-0.02)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.06\\
-{(0.02-0.12)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.13\\
-{(0.06-0.23)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.55\\
-{(0.46-0.58)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.25\\
-{(0.12-0.45)}\strut
-\end{minipage} & 0.07 & 0.21 & 0.26 & 0.26 & 0.19 &
-\begin{minipage}[t]{\linewidth}\centering
-0.02\\
-{(0.01-0.05)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.18\\
-{(0.09-0.31)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.28\\
-{(0.19-0.32)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.44\\
-{(0.29-0.55)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.08\\
-{(0.04-0.15)}\strut
-\end{minipage} \\
-Q16 & 0.00 & 0.03 & 0.40 & 0.35 & 0.22 &
-\begin{minipage}[t]{\linewidth}\centering
-0.01\\
-{(0.00-0.02)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.06\\
-{(0.02-0.13)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.13\\
-{(0.06-0.24)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.55\\
-{(0.46-0.58)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.24\\
-{(0.11-0.45)}\strut
-\end{minipage} & 0.03 & 0.05 & 0.50 & 0.26 & 0.16 &
-\begin{minipage}[t]{\linewidth}\centering
-0.02\\
-{(0.01-0.04)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.15\\
-{(0.08-0.27)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.26\\
-{(0.17-0.32)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.48\\
-{(0.34-0.56)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.09\\
-{(0.05-0.18)}\strut
-\end{minipage} \\
-Q17 & 0.00 & 0.09 & 0.26 & 0.36 & 0.30 &
-\begin{minipage}[t]{\linewidth}\centering
-0.00\\
-{(0.00-0.01)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.04\\
-{(0.02-0.09)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.10\\
-{(0.04-0.19)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.54\\
-{(0.40-0.58)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.31\\
-{(0.15-0.54)}\strut
-\end{minipage} & 0.05 & 0.12 & 0.35 & 0.32 & 0.16 &
-\begin{minipage}[t]{\linewidth}\centering
-0.02\\
-{(0.01-0.05)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.18\\
-{(0.09-0.30)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.27\\
-{(0.19-0.32)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.44\\
-{(0.30-0.55)}\strut
-\end{minipage} & \begin{minipage}[t]{\linewidth}\centering
-0.08\\
-{(0.04-0.15)}\strut
-\end{minipage} \\
-\end{longtable}
-
-Comparación de las respuestas generadas por el modelo y las frecuencias
-relativas de los datos.
 
 \normalsize
 
@@ -4567,6 +3979,11 @@ Tabla~\ref{tbl-likert-scale} para la descripción textual de cada ítem).
 
 \hypertarget{sec-conclusion}{%
 \chapter{Conclusión y trabajo futuro}\label{sec-conclusion}}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{section}{%
+\chapter{}\label{section}}
 
 \bookmarksetup{startatroot}
 

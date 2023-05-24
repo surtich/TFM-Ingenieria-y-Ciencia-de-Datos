@@ -147,7 +147,7 @@ summary(brm_treat)
 
 options(contrasts = rep("contr.sum", 2))
 brm_treat.period.subject.question_thres <- brm(
-    Response | thres(gr = Question) ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Question),
+    Response | thres(gr = Item) ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item),
     data = df_clean,
     family = cumulative("logit"),
     iter = 4000,
@@ -161,12 +161,12 @@ brm_treat.period.subject.question_thres <- brm(
 
 summary(brm_treat.period.subject.question_thres)
 
-pp_check(brm_treat.period.subject.question_thres, type = "bars_grouped", group = "Question", ndraws = 1000)
+pp_check(brm_treat.period.subject.question_thres, type = "bars_grouped", group = "Item", ndraws = 1000)
 
 
 pred2_brm <- brm_treat.period.subject.question_thres %>%
-    epred_draws(ndraws = 50, newdata = newdata, re_formula = ~ (1 + Treat | Question), by = c("Treat", "Question"), category = "Response") %>%
-    select(Period, Treat, Question, Response, Probability = .epred, .draw) %>%
+    epred_draws(ndraws = 50, newdata = newdata, re_formula = ~ (1 + Treat | Item), by = c("Treat", "Item"), category = "Response") %>%
+    select(Period, Treat, Item, Response, Probability = .epred, .draw) %>%
     mutate(Median = ave(Probability, FUN = function(x) quantile(x, .5, type = 3, na.rm = TRUE))) %>%
     ungroup() %>%
     group_by(.draw, Response) %>%
@@ -181,7 +181,7 @@ colors <- viridis(
     n = 5
 )
 
-questions_vector <- setNames(levels(df_clean$Question_lr), levels(df_clean$Question))
+questions_vector <- setNames(levels(df_clean$Item_lr), levels(df_clean$Item))
 
 question_labeller <- function(string) paste0(string, ": ", questions_vector[string])
 
@@ -194,7 +194,7 @@ p <- pred2_brm %>%
         # Don't forget the indices!
         group = indices
     )) +
-    facet_wrap(~Question, nrow = 6, labeller = as_labeller(question_labeller)) +
+    facet_wrap(~Item, nrow = 6, labeller = as_labeller(question_labeller)) +
     geom_line(alpha = 0.4) +
     scale_color_manual(values = colors) +
     # We won't need these
@@ -216,8 +216,8 @@ p +
     coord_cartesian(clip = "off") +
     # Finally, our labels. We filter the data to avoid having a million of them
     geom_text_repel(
-        data = pred2_brm %>% filter(Probability == Median & Question %in% c("Q02", "Q05", "Q08", "Q11", "Q14", "Q17") & Period == 2, Treat == "B") %>% distinct(Treat,
-            Period, Question, Response,
+        data = pred2_brm %>% filter(Probability == Median & Item %in% c("Q02", "Q05", "Q08", "Q11", "Q14", "Q17") & Period == 2, Treat == "B") %>% distinct(Treat,
+            Period, Item, Response,
             .keep_all = TRUE
         ) %>% mutate(Response_l = ordered(Response, labels = levels(df_clean$Response_l))),
         aes(label = Response_l),
@@ -236,7 +236,7 @@ p +
 
 library(marginaleffects)
 options(marginaleffects_posterior_center = mean)
-predictions(brm_treat.period.subject.question, newdata = newdata, re_formula = ~ (1 + Treat | Question), by = c("Question", "Treat"))
+predictions(brm_treat.period.subject.question, newdata = newdata, re_formula = ~ (1 + Treat | Item), by = c("Item", "Treat"))
 
-avg_comparisons(brm_treat.period.subject.question, newdata = newdata, re_formula = ~ (1 + Treat | Question), variables = c("Treat"))
-avg_comparisons(brm_treat.period.subject.question, newdata = newdata, re_formula = ~ (1 + Treat | Question), by = c("Question"), variables = c("Treat"))
+avg_comparisons(brm_treat.period.subject.question, newdata = newdata, re_formula = ~ (1 + Treat | Item), variables = c("Treat"))
+avg_comparisons(brm_treat.period.subject.question, newdata = newdata, re_formula = ~ (1 + Treat | Item), by = c("Item"), variables = c("Treat"))

@@ -1,4 +1,4 @@
-Seq,Period,Treat,Subject,gender,year_of_birth,level_of_education,level_of_knowledge,Question,Response,Response_v,Response_l,Question_l,Question_lr,Cluster
+Seq,Period,Treat,Subject,gender,year_of_birth,level_of_education,level_of_knowledge,Item,Response,Response_v,Response_l,Item_l,Item_lr,Cluster
 AB,1,A,4,femenino,1976,p,NA,Q18,3,3,Neutral,Los subtítulos del vídeo cumplen en general con los requisitos de accesibilidad.,Valoración general,1
 AB,1,A,4,femenino,1976,p,NA,Q01,3,3,Neutral,La posición de los subtítulos.,Posición,2
 AB,1,A,4,femenino,1976,p,NA,Q02,3,3,Neutral,El número de líneas por subtítulo.,Número líneas,2

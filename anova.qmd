@@ -58,8 +58,8 @@ df <- test_df %>%
     mutate(Period = as.factor(if_else(Test == "01", 1, 2)), Treat = as.factor(if_else(Group == "A" & Test == "01" | Group == "B" & Test == "02", "A", "B")), Group = as.factor(if_else(Group == "A", "AB", "BA")), Subject = as.factor(User)) %>%
     dplyr::select(Group, Period, Treat, Subject, starts_with("Q")) %>%
     mutate_at(vars(starts_with("Q")), ~ (. + 1) %% 6) %>%
-    pivot_longer(cols = all_of(starts_with("Q")), names_to = "Question", values_to = "Response") %>%
-    arrange(Subject, Period, Question)
+    pivot_longer(cols = all_of(starts_with("Q")), names_to = "Item", values_to = "Response") %>%
+    arrange(Subject, Period, Item)
 
 write_csv(df, "./data/preprocess/test_lg.csv")
 ``` 
@@ -77,7 +77,7 @@ El test de Likert tiene una escala ordinal y, por lo tanto, ANOVA no es una téc
 ```{r}
 #| echo: false
 #| include: false
-df18 <- df %>% filter(Question == "Q18" & Response != 0)
+df18 <- df %>% filter(Item == "Q18" & Response != 0)
 ```
 
 ## Modelo nulo.
