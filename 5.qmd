@@ -145,12 +145,11 @@ emmeans(clmm_treat.period.subject.item, ~ Response + Treat + Period, mode = "pro
 ```
 
 
-
 \tiny
 ```{r}
 #| label: tbl-model-comp
-#| tbl-cap: Comparación frecuentista/bayesiano de coeficientes estimados en el modelo Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item).
-#| tbl-scap: Comparación frecuentista/bayesiano de coeficientes estimados.
+#| tbl-scap: Comparación frecuentista/bayesiano de coeficientes estimados en el modelo Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item).
+#| tbl-cap: Comparación frecuentista/bayesiano de coeficientes estimados en el modelo ordinal.
 #| cache: false
 df_clmm <- coef(clmm_treat.period.subject.item) %>% data.frame()
 colnames(df_clmm) <- c("Estimation.clmm")

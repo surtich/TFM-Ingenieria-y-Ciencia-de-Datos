@@ -14,15 +14,17 @@ El objetivo del estudio es responder a la siguiente pregunta de investigación:
 ¿Son los estudiantes de un curso de creación de materiales accesibles capaces de encontrar diferencias en la calidad del subtitulado de un vídeo?
 :::
 
-Los datos utilizados proceden de una actividad voluntaria sobre evaluación del subtitulado que se propuso a los estudiantes de la sexta edición del curso MOOC Materiales Digitales Accesibles, 2022, perteneciente al Canal Fundación ONCE en UNED Abierta. Este curso es una iniciativa el Real Patronato sobre Discapacidad en colaboración con la Fundación ONCE y la UNED. El curso está dirigido por los profesores Emilio Letón Molina y Alejandro Rodríguez Ascaso. El Canal ofrece formación en conocimientos y habilidades necesarios para diseñar productos, entornos, sistemas y servicios desde una perspectiva de diseño universal:
+Los datos utilizados proceden de una actividad voluntaria sobre evaluación del subtitulado que se propuso a los estudiantes de la sexta edición de 2022 del curso MOOC Materiales Digitales Accesibles, perteneciente al Canal Fundación ONCE en UNED Abierta. Este curso es una iniciativa el Real Patronato sobre Discapacidad en colaboración con la Fundación ONCE y la UNED. El curso está dirigido por los profesores Emilio Letón Molina y Alejandro Rodríguez Ascaso. El Canal se creó en 2016 y hasta mayo de 2021 más de 16.000 estudiantes se han inscrito en sus cursos. Ofrece formación en conocimientos y habilidades necesarios para diseñar productos, entornos, sistemas y servicios desde una perspectiva de diseño universal:
 
 * Reconocer las necesidades relacionadas con la accesibilidad.
 * Dar respuesta a estas necesidades, cada actor en la medida de sus posibilidades.
 * Integrar soluciones de accesibilidad universales y específicas utilizando la tecnología apropiada.
 
-La Fundación ONCE, el Real Patronato sobre Discapacidad y la UNED colaboran para producir recursos educativos abiertos, gratuitos, de calidad y accesibles para todas las personas.
+La Fundación ONCE, el Real Patronato sobre Discapacidad y la UNED colaboran para producir recursos educativos abiertos, gratuitos, de calidad y accesibles para todas las personas. Los cursos del Canal se ofrecen a través de UNED Abierta, portal de formación en formato MOOC sobre una instancia personalizada de la plataforma OpenEdX. En la actualidad la oferta es de nueve cursos. En el año 2022 se matricularon 3.764 alumnos y aprobaron el 19,34% de ellos.
 
-@jperez2 realizaron una experiencia similar y llegaron a la conclusión de que evaluadores novatos pueden identificar problemas de accesibilidad en vídeos. Por lo tanto, la evaluación social propuesta por @kawanaka2008 se podría aplicar a los contenidos de video en la Web. Sin embargo, también constataron que los evaluadores novatos pueden pasar por alto problemas sutiles de accesibilidad que requieren un conocimiento experto como, por ejemplo, la evaluación del contraste, ya que requieren herramientas adecuadas. Por ello, se responderá al siguiente objetivo específico:
+El curso de Materiales Digitales Accesibles se lleva realizando desde 2017, se han matriculado en alguna de sus siete ediciones (hasta mayo de 2023) más de 8.000 alumnos y tiene un porcentaje medio de aprobados sobre matriculados del 14,6%. En la sexta edición se matricularon 1.261 alumnos y aprobaron 165 (13,08%).
+
+@jperez2 realizaron una experiencia similar a la planteada en este trabajo y llegaron a la conclusión de que evaluadores novatos pueden identificar problemas de accesibilidad en vídeos. Por lo tanto, la evaluación social propuesta por @kawanaka2008 se podría aplicar a los contenidos de vídeo en la Web. Sin embargo, también constataron que los evaluadores novatos pueden pasar por alto problemas sutiles de accesibilidad que requieren un conocimiento experto como, por ejemplo, la evaluación del contraste, ya que requieren herramientas adecuadas. Por ello, se responderá al siguiente objetivo específico:
 
 ::: {.callout-tip}
 ## Objetivos específicos
@@ -55,7 +57,7 @@ El capítulo de **Resultados** (ver @sec-resultados) se presentan los resultados
 
 En el capítulo **Discusión** (ver @sec-discusion) se utilizan los resultados del capítulo anterior para responder a la pregunta de investigación y a los objetivos específicos.
 
-Finalmente el capítulo **Conclusión y trabajo futuro** (ver @sec-conclusion) se destina a proponer posibles líneas de investigación futuras en base a los resultados obtenidos.
+Finalmente el capítulo **Conclusión y trabajo futuro** (ver @sec-conclusion) se destina a recapitular los hallazgos encontrados aventurando posibles explicaciones a los mismos y propone líneas de investigación futuras en base a los resultados obtenidos.
 
 ## Convenciones usadas
 

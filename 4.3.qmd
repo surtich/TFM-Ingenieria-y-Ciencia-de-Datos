@@ -45,8 +45,8 @@ Se han mantenido las distribuciones de probabilidad a priori que por defecto uti
 \tiny
 ```{r}
 #| label: tbl-priors
-#| tbl-cap: Distribuciones a priori del modelo Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item).
-#| tbl-scap: Distribuciones a priori del modelo seleccionado.
+#| tbl-cap: Distribuciones a priori del modelo ordinal seleccionado.
+#| tbl-scap: Distribuciones a priori del modelo Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item).
 prior_summary(brm_treat.period.subject.item) %>%
     gt() %>%
     tab_options(table.font.size = 6)

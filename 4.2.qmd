@@ -18,7 +18,7 @@ $$
 
 \normalsize
 
-donde $ij$ es la observación $i$ del estudiante $j$. Obsérvese que ahora los interceptos $\tau_{kj}$ se descomponen en una parte fija y común para cada nivel de respuesta $k$, $\tau_{k}$ y una parte variable específica para cada estudiante $Subject_{0j}$. Para ajustar el modelo se va a utilizar la función `clmm` del paquete `ordinal` [ver @ordinal] ya que permite la inclusión de efectos aleatorios. 
+donde $ij$ es la observación $i$ del estudiante $j$. Obsérvese que ahora los interceptos $\tau_{kj}$ se descomponen en una parte fija y común para cada nivel de respuesta $k$, $\tau_{k}$ y una parte variable específica para cada estudiante $Subject_{0j}$. Para ajustar el modelo se va a utilizar la función `clmm` del paquete `ordinal` [ver @ordinalR] ya que permite la inclusión de efectos aleatorios. 
 
 \scriptsize
 ```{r}
@@ -106,7 +106,7 @@ summary(clmm_treat.period_treat.subject)
 
 #### Comparación de modelos
 
-Se pueden comparar los modelos con el test de razón de verosimilitud que se realiza con la función `anova` del paquete `ordinal` [ver @ordinal]. Se comprueba que en este test resulta significativamente mejor el último modelo:
+Se pueden comparar los modelos con el test de razón de verosimilitud que se realiza con la función `anova` del paquete `ordinal` [ver @ordinalR]. Se comprueba que en este test resulta significativamente mejor el último modelo:
 
 \scriptsize
 ```{r}

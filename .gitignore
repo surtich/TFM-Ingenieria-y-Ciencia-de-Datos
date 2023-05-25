@@ -9,5 +9,6 @@
 index.*
 !index.qmd
 tfm.*
+!docs/tfm.pdf
 *_cache
 models/
