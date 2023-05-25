@@ -577,7 +577,7 @@ Phasellus vitae magna nec mi sagittis luctus vitae eu augue. Donec scelerisque l
 \addto\captionsspanish{
 \def\listtablename{\'Indice de tablas}%
 \def\tablename{Tabla}}
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, boxrule=0pt, frame hidden, borderline west={3pt}{0pt}{shadecolor}, enhanced, breakable, sharp corners]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[enhanced, frame hidden, sharp corners, boxrule=0pt, borderline west={3pt}{0pt}{shadecolor}, breakable, interior hidden]}{\end{tcolorbox}}\fi
 
 % Contents
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -652,13 +652,13 @@ por minuto). La accesibilidad multimedia es, por lo tanto, una actividad
 importante y compleja que requiere dedicación y conocimiento específico
 y va más allá de verificar si el vídeo tiene o no subtítulos.
 
-\hypertarget{objetivos}{%
-\section{Objetivos}\label{objetivos}}
+\hypertarget{sec-objetivos}{%
+\section{Objetivos}\label{sec-objetivos}}
 
 El objetivo del estudio es responder a la siguiente pregunta de
 investigación:
 
-\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, rightrule=.15mm, bottomtitle=1mm, opacityback=0, bottomrule=.15mm, arc=.35mm, colback=white, titlerule=0mm, colbacktitle=quarto-callout-note-color!10!white, toptitle=1mm, coltitle=black, leftrule=.75mm, breakable, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Pregunta de investigación}, toprule=.15mm, colframe=quarto-callout-note-color-frame, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, colback=white, breakable, toprule=.15mm, coltitle=black, rightrule=.15mm, titlerule=0mm, colframe=quarto-callout-note-color-frame, toptitle=1mm, bottomtitle=1mm, opacityback=0, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Pregunta de investigación}, arc=.35mm, bottomrule=.15mm, opacitybacktitle=0.6, leftrule=.75mm, left=2mm, colbacktitle=quarto-callout-note-color!10!white]
 
 ¿Son los estudiantes de un curso de creación de materiales accesibles
 capaces de encontrar diferencias en la calidad del subtitulado de un
@@ -703,7 +703,7 @@ un conocimiento experto como, por ejemplo, la evaluación del contraste,
 ya que requieren herramientas adecuadas. Por ello, se responderá al
 siguiente objetivo específico:
 
-\begin{tcolorbox}[enhanced jigsaw, opacitybacktitle=0.6, rightrule=.15mm, bottomtitle=1mm, opacityback=0, bottomrule=.15mm, arc=.35mm, colback=white, titlerule=0mm, colbacktitle=quarto-callout-tip-color!10!white, toptitle=1mm, coltitle=black, leftrule=.75mm, breakable, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Objetivos específicos}, toprule=.15mm, colframe=quarto-callout-tip-color-frame, left=2mm]
+\begin{tcolorbox}[enhanced jigsaw, colback=white, breakable, toprule=.15mm, coltitle=black, rightrule=.15mm, titlerule=0mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, bottomtitle=1mm, opacityback=0, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Objetivos específicos}, arc=.35mm, bottomrule=.15mm, opacitybacktitle=0.6, leftrule=.75mm, left=2mm, colbacktitle=quarto-callout-tip-color!10!white]
 
 ¿Qué aspectos de la calidad del subtitulado son más fácilmente
 reconocibles por los estudiantes y en cuáles existe mayor dificultad?
@@ -767,7 +767,7 @@ vídeo\footnote{En la respuesta a cada ítem, el alumno pudo añadir
   información referente al tipo de subtitulado que el alumno creyó estar
   contestando.}. El \enquote{ciego} fue liberado en la fase de
 elaboración de la discusión de este trabajo (ver
-Capítulo~\ref{sec-conclusiones}).
+Capítulo~\ref{sec-discusion}).
 
 \hypertarget{organizaciuxf3n-del-trabajo}{%
 \section{Organización del trabajo}\label{organizaciuxf3n-del-trabajo}}
@@ -785,7 +785,7 @@ la actividad de preprocesado realizada sobre los mismos y las variables
 que se utilizarán en el modelado estadístico.
 
 El capítulo \textbf{Modelado estadístico} (ver
-Capítulo~\ref{sec-modelado}) comienza con un análisis exploratorio de
+Capítulo~\ref{sec-modelado}) comienza con un Análisis Exploratorio de
 los datos, tras el que se describe cómo se han aplicado las técnicas de
 modelado presentadas en el Marco Teórico al diseño del experimento de la
 actividad de subtitulado.
@@ -794,10 +794,9 @@ El capítulo de \textbf{Resultados} (ver Capítulo~\ref{sec-resultados})
 se presentan los resultados de los modelos seleccionados en el capítulo
 anterior.
 
-En el capítulo \textbf{Discusión y conclusiones} (ver
-Capítulo~\ref{sec-conclusiones}) se utilizan los resultados del capítulo
-anterior para responder a la pregunta de investigación y a los objetivos
-específicos.
+En el capítulo \textbf{Discusión} (ver \textbf{?@sec-discusión}) se
+utilizan los resultados del capítulo anterior para responder a la
+pregunta de investigación y a los objetivos específicos.
 
 Finalmente el capítulo \textbf{Conclusión y trabajo futuro} (ver
 Capítulo~\ref{sec-conclusion}) se destina a proponer posibles líneas de
@@ -1666,24 +1665,24 @@ values & levels \\
 \toprule
 Item & Texto \\ 
 \midrule
-Q01 & La posición de los subtítulos. \\ 
-Q02 & El número de líneas por subtítulo. \\ 
-Q03 & La disposición del texto respecto a la caja donde se muestran los subtítulos. \\ 
-Q04 & El contraste entre los caracteres y el fondo. \\ 
-Q05 & La corrección ortográfica y gramatical. \\ 
-Q06 & La literalidad. \\ 
-Q07 & La identificación de los personajes. \\ 
-Q08 & La asignación de líneas a los personajes en los diálogos. \\ 
-Q09 & La descripción de efectos sonoros. \\ 
-Q10 & La sincronización de las entradas y salidas de los subtítulos. \\ 
-Q11 & La velocidad de exposición de los subtítulos. \\ 
-Q12 & El máximo número de caracteres por línea. \\ 
-Q13 & La legibilidad de la tipografía. \\ 
-Q14 & La separación en líneas diferentes de sintagmas nominales, verbales y preposicionales. \\ 
-Q15 & La utilización de puntos suspensivos. \\ 
-Q16 & La escritura de los números. \\ 
-Q17 & Las incorrecciones en el habla. \\ 
-Q18 & Los subtítulos del vídeo cumplen en general con los requisitos de accesibilidad. \\ 
+Q01 & La posición de los subtítulos \\ 
+Q02 & El número de líneas por subtítulo \\ 
+Q03 & La disposición del texto respecto a la caja donde se muestran los subtítulos \\ 
+Q04 & El contraste entre los caracteres y el fondo \\ 
+Q05 & La corrección ortográfica y gramatical \\ 
+Q06 & La literalidad \\ 
+Q07 & La identificación de los personajes \\ 
+Q08 & La asignación de líneas a los personajes en los diálogos \\ 
+Q09 & La descripción de efectos sonoros \\ 
+Q10 & La sincronización de las entradas y salidas de los subtítulos \\ 
+Q11 & La velocidad de exposición de los subtítulos \\ 
+Q12 & El máximo número de caracteres por línea \\ 
+Q13 & La legibilidad de la tipografía \\ 
+Q14 & La separación en líneas diferentes de sintagmas nominales, verbales y preposicionales \\ 
+Q15 & La utilización de puntos suspensivos \\ 
+Q16 & La escritura de los números \\ 
+Q17 & Las incorrecciones en el habla \\ 
+Q18 & Los subtítulos del vídeo cumplen en general con los requisitos de accesibilidad \\ 
 \bottomrule
 \end{longtable}
 
@@ -1836,10 +1835,10 @@ Se van a usar dos \texttt{dataframes}:
 \begin{itemize}
 \tightlist
 \item
-  \texttt{df\_clean} contiene las respuestas con valor de 1 a 5. Se han
-  eliminado las de valor 0 (\enquote{No sé / No contesto}). Se utiliza
-  cuando se traten las respuestas como ordinales y, por lo tanto, como
-  ordenadas.
+  \texttt{df\_response} contiene las respuestas con valor de 1 a 5. Se
+  han eliminado las de valor 0 (\enquote{No sé / No contesto}). Se
+  utiliza cuando se traten las respuestas como ordinales y, por lo
+  tanto, como ordenadas.
 \item
   \texttt{df\_all} incluye todas las respuestas de 0 a 5. Se utiliza
   cuando se traten las respuestas como categóricas y no ordenadas.
@@ -1858,13 +1857,13 @@ tibble [2,980 x 7] (S3: tbl_df/tbl/data.frame)
  $ Level   : Ord.factor w/ 3 levels "Negativo"<"Neutral"<..: 2 2 2 2 2 2 2 2 2..
 \end{verbatim}
 
-En la Tabla~\ref{tbl-df_clean} se muestran algunos ejemplos de datos.
+En la Tabla~\ref{tbl-df_response} se muestran algunos ejemplos de datos.
 Concretamente se muestran las respuestas a tres ítems de dos estudiantes
 que vieron los vídeos en distinto orden.
 
-\hypertarget{tbl-df_clean}{}
+\hypertarget{tbl-df_response}{}
 \begin{longtable}{ccccccc}
-\caption{\label{tbl-df_clean}Muestra del dataframe preparado para el modelado estadístico en formato
+\caption{\label{tbl-df_response}Muestra del dataframe preparado para el modelado estadístico en formato
 largo. }\tabularnewline
 
 \toprule
@@ -1891,7 +1890,7 @@ BA & 2 & A & 33 & Q02 & 4 & Positivo \\
 \chapter{Modelado estadístico}\label{sec-modelado}}
 
 \hypertarget{sec-eda}{%
-\section{Análisis exploratorio}\label{sec-eda}}
+\section{Análisis Exploratorio}\label{sec-eda}}
 
 Como se explica en la Tabla~\ref{tbl-variables}, al subtitulado se le
 denomina tratamiento y a sus niveles (correcto e incorrecto) se les ha
@@ -2350,6 +2349,11 @@ probabilidad de que la respuesta a un ítem sea mejor en el subtitulado
 significativa y además añadirla apenas reduce la \enquote{deviance}, por
 lo que el modelo nulo sin predictores resulta más parsimonioso.
 
+Otra forma de plantear una Regresión Logística es crear una variable de
+respuesta dicotómica que tenga valor 1 cuando la respuesta sea positiva
+(valores 4 ó 5) y cero cuando no lo sea (valores 1, 2, 3). En la
+Sección~\ref{sec-ordinal-3} se comentan los resultados de este modelo.
+
 \hypertarget{sec-ordinal-2}{%
 \subsection{Regresión Ordinal}\label{sec-ordinal-2}}
 
@@ -2472,7 +2476,7 @@ investigación:
 \NormalTok{clm\_treat }\OtherTok{\textless{}{-}}
     \FunctionTok{clm}\NormalTok{(}
 \NormalTok{        Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat,}
-        \AttributeTok{data =}\NormalTok{ df\_clean, }\AttributeTok{link =} \StringTok{"logit"}
+        \AttributeTok{data =}\NormalTok{ df\_response, }\AttributeTok{link =} \StringTok{"logit"}
 \NormalTok{    )}
 \FunctionTok{summary}\NormalTok{(clm\_treat)}
 \end{Highlighting}
@@ -2480,7 +2484,7 @@ investigación:
 
 \begin{verbatim}
 formula: Response ~ Treat
-data:    df_clean
+data:    df_response
 
  link  threshold nobs logLik   AIC     niter max.grad cond.H 
  logit flexible  2980 -3966.11 7942.21 5(0)  1.64e-10 3.1e+01
@@ -2594,8 +2598,8 @@ Se confirma que en el nivel de subtitulado \(A\) son más probables las
 respuestas 5 y 4, siendo poco probables el resto de niveles. Sin
 embargo, en el subtitulado \(B\) existe bastante incertidumbre, siendo
 el valor más probable el nivel 4 y muy similares los niveles 2, 3 y 5.
-Esto se corresponde con lo que ya se había constatado en el análisis
-exploratorio (ver Figura~\ref{fig-freqs}). Se debe tener en cuenta que
+Esto se corresponde con lo que ya se había constatado en el Análisis
+Exploratorio (ver Figura~\ref{fig-freqs}). Se debe tener en cuenta que
 este modelo tiene un único predictor y, por lo tanto, no es capaz de
 explicar las diferencias en el nivel de respuesta para distintos
 periodos, secuencias, ítems o estudiantes. En las siguientes secciones
@@ -2808,7 +2812,7 @@ significativos:
 
 \begin{verbatim}
 formula: Response ~ Treat * Period
-data:    df_clean
+data:    df_response
 
  link  threshold nobs logLik   AIC     niter max.grad cond.H 
  logit flexible  2980 -3953.01 7920.03 5(0)  2.13e-10 1.4e+01
@@ -3001,7 +3005,7 @@ subtitulado.}
 \FunctionTok{options}\NormalTok{(}\AttributeTok{contrasts =} \FunctionTok{rep}\NormalTok{(}\StringTok{"contr.sum"}\NormalTok{, }\DecValTok{2}\NormalTok{))}
 \NormalTok{clmm\_treat.period\_subject }\OtherTok{\textless{}{-}} \FunctionTok{clmm}\NormalTok{(}
 \NormalTok{    Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{*}\NormalTok{ Period }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{|}\NormalTok{ Subject),}
-    \AttributeTok{data =}\NormalTok{ df\_clean}
+    \AttributeTok{data =}\NormalTok{ df\_response}
 \NormalTok{)}
 \FunctionTok{summary}\NormalTok{(clmm\_treat.period\_subject)}
 \end{Highlighting}
@@ -3011,7 +3015,7 @@ subtitulado.}
 Cumulative Link Mixed Model fitted with the Laplace approximation
 
 formula: Response ~ Treat * Period + (1 | Subject)
-data:    df_clean
+data:    df_response
 
  link  threshold nobs logLik   AIC     niter     max.grad cond.H 
  logit flexible  2980 -3655.71 7327.41 765(3046) 1.63e-03 8.1e+01
@@ -3096,7 +3100,7 @@ entre intercepto y pendiente es prácticamente nula.
 \FunctionTok{options}\NormalTok{(}\AttributeTok{contrasts =} \FunctionTok{rep}\NormalTok{(}\StringTok{"contr.sum"}\NormalTok{, }\DecValTok{2}\NormalTok{))}
 \NormalTok{clmm\_treat.period\_treat.subject }\OtherTok{\textless{}{-}} \FunctionTok{clmm}\NormalTok{(}
 \NormalTok{    Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{*}\NormalTok{ Period }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ Treat }\SpecialCharTok{|}\NormalTok{ Subject),}
-    \AttributeTok{data =}\NormalTok{ df\_clean}
+    \AttributeTok{data =}\NormalTok{ df\_response}
 \NormalTok{)}
 \FunctionTok{summary}\NormalTok{(clmm\_treat.period\_treat.subject)}
 \end{Highlighting}
@@ -3106,7 +3110,7 @@ entre intercepto y pendiente es prácticamente nula.
 Cumulative Link Mixed Model fitted with the Laplace approximation
 
 formula: Response ~ Treat * Period + (1 + Treat | Subject)
-data:    df_clean
+data:    df_response
 
  link  threshold nobs logLik   AIC     niter     max.grad cond.H 
  logit flexible  2980 -3429.88 6879.76 905(6264) 1.33e-03 8.2e+01
@@ -3242,7 +3246,7 @@ El resumen de parámetros del modelo es el siguiente:
 \FunctionTok{options}\NormalTok{(}\AttributeTok{contrasts =} \FunctionTok{rep}\NormalTok{(}\StringTok{"contr.sum"}\NormalTok{, }\DecValTok{2}\NormalTok{))}
 \NormalTok{clmm\_treat.period.subject.item }\OtherTok{\textless{}{-}} \FunctionTok{clmm}\NormalTok{(}
 \NormalTok{    Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{*}\NormalTok{ Period }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ Treat }\SpecialCharTok{|}\NormalTok{ Subject) }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ Treat }\SpecialCharTok{|}\NormalTok{ Item),}
-    \AttributeTok{data =}\NormalTok{ df\_clean}
+    \AttributeTok{data =}\NormalTok{ df\_response}
 \NormalTok{)}
 \FunctionTok{summary}\NormalTok{(clmm\_treat.period.subject.item)}
 \end{Highlighting}
@@ -3253,7 +3257,7 @@ Cumulative Link Mixed Model fitted with the Laplace approximation
 
 formula: Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat |  
     Item)
-data:    df_clean
+data:    df_response
 
  link  threshold nobs logLik   AIC     niter       max.grad cond.H 
  logit flexible  2980 -3186.06 6398.11 1468(12273) 2.37e-03 1.5e+02
@@ -3337,7 +3341,7 @@ Response \textasciitilde{} Treat*Period + (1 + Treat \textbar{} Subject)
 \FunctionTok{options}\NormalTok{(}\AttributeTok{contrasts =} \FunctionTok{rep}\NormalTok{(}\StringTok{"contr.sum"}\NormalTok{, }\DecValTok{2}\NormalTok{))}
 \NormalTok{brm\_treat.period.subject.item }\OtherTok{\textless{}{-}} \FunctionTok{brm}\NormalTok{(}
 \NormalTok{    Response }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Treat }\SpecialCharTok{*}\NormalTok{ Period }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ Treat }\SpecialCharTok{|}\NormalTok{ Subject) }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ Treat }\SpecialCharTok{|}\NormalTok{ Item),}
-    \AttributeTok{data =}\NormalTok{ df\_clean,}
+    \AttributeTok{data =}\NormalTok{ df\_response,}
     \AttributeTok{family =} \FunctionTok{cumulative}\NormalTok{(}\StringTok{"logit"}\NormalTok{),}
     \AttributeTok{iter =} \DecValTok{4000}\NormalTok{,}
     \AttributeTok{sample\_prior =} \ConstantTok{TRUE}\NormalTok{,}
@@ -3368,40 +3372,40 @@ El resumen del modelo es el siguiente:
  Family: cumulative 
   Links: mu = logit; disc = identity 
 Formula: Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item) 
-   Data: df_clean (Number of observations: 2980) 
+   Data: df_response (Number of observations: 2980) 
   Draws: 4 chains, each with iter = 4000; warmup = 2000; thin = 1;
          total post-warmup draws = 8000
 
 Group-Level Effects: 
 ~Item (Number of levels: 18) 
                       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
-sd(Intercept)             0.78      0.16     0.54     1.15 1.00     1363
-sd(Treat1)                0.77      0.16     0.52     1.14 1.00     1563
-cor(Intercept,Treat1)    -0.46      0.21    -0.79     0.00 1.00     1351
+sd(Intercept)             0.77      0.16     0.53     1.15 1.00     1468
+sd(Treat1)                0.77      0.15     0.53     1.12 1.00     1935
+cor(Intercept,Treat1)    -0.46      0.20    -0.78     0.01 1.00     1421
                       Tail_ESS
-sd(Intercept)             2647
-sd(Treat1)                2417
-cor(Intercept,Treat1)     2600
+sd(Intercept)             2605
+sd(Treat1)                3580
+cor(Intercept,Treat1)     2555
 
 ~Subject (Number of levels: 87) 
                       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
-sd(Intercept)             1.55      0.14     1.30     1.85 1.00     1278
-sd(Treat1)                1.21      0.11     1.01     1.45 1.00     1640
-cor(Intercept,Treat1)    -0.11      0.13    -0.35     0.14 1.00     1063
+sd(Intercept)             1.54      0.14     1.29     1.85 1.00     1484
+sd(Treat1)                1.21      0.11     1.01     1.45 1.00     1519
+cor(Intercept,Treat1)    -0.11      0.12    -0.34     0.14 1.00     1228
                       Tail_ESS
-sd(Intercept)             2397
-sd(Treat1)                3215
-cor(Intercept,Treat1)     2132
+sd(Intercept)             2741
+sd(Treat1)                3081
+cor(Intercept,Treat1)     2475
 
 Population-Level Effects: 
                Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-Intercept[1]      -4.96      0.28    -5.51    -4.43 1.00      909     1845
-Intercept[2]      -2.60      0.26    -3.11    -2.10 1.00      810     1757
-Intercept[3]      -1.31      0.26    -1.82    -0.82 1.00      778     1627
-Intercept[4]       1.24      0.26     0.74     1.75 1.00      771     1590
-Treat1             1.46      0.23     1.00     1.91 1.00     1050     1783
-Period1            0.18      0.14    -0.09     0.45 1.00      962     1745
-Treat1:Period1     0.13      0.17    -0.21     0.47 1.00      551     1066
+Intercept[1]      -4.95      0.28    -5.52    -4.42 1.00      785     1753
+Intercept[2]      -2.59      0.26    -3.11    -2.09 1.01      743     1636
+Intercept[3]      -1.30      0.26    -1.82    -0.82 1.01      726     1532
+Intercept[4]       1.25      0.26     0.74     1.75 1.00      745     1571
+Treat1             1.46      0.23     1.01     1.92 1.00     1046     2071
+Period1            0.17      0.14    -0.09     0.44 1.00      848     1714
+Treat1:Period1     0.14      0.17    -0.20     0.47 1.01      686     1127
 
 Family Specific Parameters: 
      Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
@@ -3611,7 +3615,7 @@ Response]{\label{fig-or2}OR \textasciitilde{} Treat + Period + Response}
 
 En la Sección~\ref{sec-logistica-2} se explicó una forma de crear una
 variable dicotómica que permite ajustar los datos a una Regresión
-Logística. Concretamente, se creo la variable respuesta \(Improve\) que
+Logística. Concretamente, se creó la variable respuesta \(Improve\) que
 compara si las respuestas de cada estudiante a cada Ítem entre los
 niveles de subtitulado (\(A\) frente \(B\)) han mejorado (valor 1) o se
 han mantenido o empeorado (valor 0). El modelo que se propone en esta
@@ -3626,16 +3630,6 @@ Improve \textasciitilde{} 1 + (1 \textbar{} Subject) + (1 \textbar{}
 Item)
 \end{quote}
 
-El resumen del modelo ajustado con la función \texttt{glmer} del paquete
-\texttt{lme4} \autocite[ver][]{lme4} produce los resultados de la
-Tabla~\ref{tbl-selected-logistic}. El intercepto del modelo ajustado es
-0.404 (std.error 0.329). Por ello, la probabilidad de que se otorgue una
-mayor puntuación en \(A\) que en \(B\) es del 59.95\%. La proporción de
-varianza explicada por los efectos aleatorios (\(ICC\)) es 0.575.
-
-En la Tabla~\ref{tbl-improve-question} se muestra la probabilidad de que
-la respuesta sea mejor en \(A\) que en \(B\) por ítem.
-
 \scriptsize
 
 \begin{Shaded}
@@ -3649,60 +3643,66 @@ la respuesta sea mejor en \(A\) que en \(B\) por ítem.
 
 \normalsize
 
+El resumen del modelo ajustado con la función \texttt{glmer} del paquete
+\texttt{lme4} \autocite[ver][]{lme4} produce los resultados de la
+columna izquierda de la Tabla~\ref{tbl-selected-logistic}. El intercepto
+del modelo ajustado es 0.404 (std.error 0.329). Por ello, la
+probabilidad de que se otorgue una mayor puntuación en \(A\) que en
+\(B\) es del 59.95\%. La proporción de varianza explicada por los
+efectos aleatorios (\(ICC\)) es 0.575.
+
 \hypertarget{tbl-selected-logistic}{}
 \begin{table}
-\caption{\label{tbl-selected-logistic}Resumen del modelo Improve \textasciitilde{} 1 + (1 \textbar{} Subject)
-+ (1 \textbar{} Item) }\tabularnewline
+\caption{\label{tbl-selected-logistic}Resumen de los modelos de Regresión Logística. }\tabularnewline
 
 \centering
-\begin{tabular}[t]{lc}
+\begin{tabular}[t]{lcc}
 \toprule
-  & Improve \textasciitilde{} 1 + (1 | Subject) + (1 | Item)\\
+  & Improve (A>B) & Level == 'Positivo'\\
 \midrule
-(Intercept) & \num{0.404}\\
- & (\num{0.329})\\
-SD (Intercept Subject) & \num{1.832}\\
-SD (Intercept Item) & \num{1.051}\\
+(Intercept) & \num{0.404} & \num{1.474}\\
+ & (\num{0.329}) & (\num{0.284})\\
+Treat1 &  & \num{1.548}\\
+ &  & (\num{0.223})\\
+SD (Intercept Subject) & \num{1.832} & \num{1.590}\\
+SD (Treat1 Subject) &  & \num{1.082}\\
+Cor (Intercept\textasciitilde{}Treat1 Subject) &  & \num{-0.093}\\
+SD (Intercept Item) & \num{1.051} & \num{0.893}\\
+SD (Treat1 Item) &  & \num{0.726}\\
+Cor (Intercept\textasciitilde{}Treat1 Item) &  & \num{-0.119}\\
 \midrule
-Num.Obs. & \num{1152}\\
-AIC & \num{1215.6}\\
-BIC & \num{1230.8}\\
+Num.Obs. & \num{1152} & \num{2980}\\
+AIC & \num{1215.6} & \num{2390.0}\\
+BIC & \num{1230.8} & \num{2438.0}\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\scriptsize
+Una forma alternativa de Regresión Logística es simplemente saber si
+cada respuesta es positiva (4 ó 5) frente a si es negativa o neutra (1,
+2, ó 3). Como efecto fijo se incorpora el nivel de subtitulado y como
+efectos aleatorios el estudiante y el ítem ambos con intercepto y
+pendiente sobre el subtitulado variables por tener mejor valor de
+\(AIC\). La fórmula del modelo es la siguiente:
 
-\hypertarget{tbl-improve-question}{}
-\begin{longtable}{lr}
-\caption{\label{tbl-improve-question}Probabilidad de que la respuesta a un ítem sea A \textgreater{} B frente
-a A \textless= B }\tabularnewline
+\small
 
-\toprule
-Item & Prob \\ 
-\midrule
-Q18 & $0.70$ \\ 
-Q01 & $0.36$ \\ 
-Q02 & $0.57$ \\ 
-Q03 & $0.38$ \\ 
-Q04 & $0.16$ \\ 
-Q05 & $0.81$ \\ 
-Q06 & $0.68$ \\ 
-Q07 & $0.58$ \\ 
-Q08 & $0.68$ \\ 
-Q09 & $0.86$ \\ 
-Q10 & $0.45$ \\ 
-Q11 & $0.40$ \\ 
-Q12 & $0.50$ \\ 
-Q13 & $0.24$ \\ 
-Q14 & $0.64$ \\ 
-Q15 & $0.30$ \\ 
-Q16 & $0.24$ \\ 
-Q17 & $0.33$ \\ 
-\bottomrule
-\end{longtable}
+\begin{quote}
+I(Level == \enquote{Positivo}) \textasciitilde{} Treat + (1 + Treat
+\textbar{} Subject) + (1 + Treat \textbar{} Item)
+\end{quote}
 
 \normalsize
+
+En la columna derecha de la Tabla~\ref{tbl-selected-logistic} se muestra
+el resumen del modelo. En este caso, el intercepto tiene una valor de
+1.474. Por lo que la probabilidad de respuesta positiva en cualquier
+ítem y nivel de subtitulado es 81.4\%. El coeficiente \texttt{Treat1}
+tiene valor 1.548 y es el valor en \texttt{logits} que se añade o se
+quita en función de si el subtitulado es el \(A\) o el \(B\). Esto se
+traduce en que la posibilidad de una respuesta positiva en el
+subtitulado \(A\) es 95.4\%. En el subtitulado \(B\) esta probabilidad
+se reduce a 48.2\%. Por último, el valor de \(ICC\) del modelo es0.604
 
 \hypertarget{sec-ordinal-3}{%
 \subsubsection{Regresión Ordinal}\label{sec-ordinal-3}}
@@ -3772,19 +3772,19 @@ Subject) + (1 + Treat \textbar{} Item). }\tabularnewline
 \cmidrule(lr){2-4} \cmidrule(lr){5-7}
 Name & Estimation.clmm & conf.2.5\% & conf.97.5\% & Estimation.brm & cred.2.5\% & cred.97.5\% \\ 
 \midrule
-1|2 & -5.00 & -5.52 & -4.49 & -4.96 & -5.51 & -4.43 \\ 
-2|3 & -2.65 & -3.12 & -2.18 & -2.60 & -3.11 & -2.10 \\ 
-3|4 & -1.37 & -1.83 & -0.90 & -1.31 & -1.82 & -0.82 \\ 
-4|5 & 1.18 & 0.72 & 1.65 & 1.24 & 0.74 & 1.75 \\ 
-Treat1 & 1.43 & 1.02 & 1.84 & 1.46 & 1.00 & 1.91 \\ 
-Period1 & 0.17 & -0.09 & 0.43 & 0.18 & -0.09 & 0.45 \\ 
-Treat1:Period1 & 0.14 & -0.18 & 0.46 & 0.13 & -0.21 & 0.47 \\ 
-Item.sd(Intercept) & 0.70 &  &  & 0.76 & 0.54 & 1.15 \\ 
-Item.sd(Treat1) & 0.68 &  &  & 0.75 & 0.52 & 1.14 \\ 
-Subject.sd(Intercept) & 1.49 &  &  & 1.54 & 1.30 & 1.85 \\ 
+1|2 & -5.00 & -5.52 & -4.49 & -4.94 & -5.52 & -4.42 \\ 
+2|3 & -2.65 & -3.12 & -2.18 & -2.58 & -3.11 & -2.09 \\ 
+3|4 & -1.37 & -1.83 & -0.90 & -1.30 & -1.82 & -0.82 \\ 
+4|5 & 1.18 & 0.72 & 1.65 & 1.25 & 0.74 & 1.75 \\ 
+Treat1 & 1.43 & 1.02 & 1.84 & 1.46 & 1.01 & 1.92 \\ 
+Period1 & 0.17 & -0.09 & 0.43 & 0.17 & -0.09 & 0.44 \\ 
+Treat1:Period1 & 0.14 & -0.18 & 0.46 & 0.14 & -0.20 & 0.47 \\ 
+Item.sd(Intercept) & 0.70 &  &  & 0.75 & 0.53 & 1.15 \\ 
+Item.sd(Treat1) & 0.68 &  &  & 0.75 & 0.53 & 1.12 \\ 
+Subject.sd(Intercept) & 1.49 &  &  & 1.53 & 1.29 & 1.85 \\ 
 Subject.sd(Treat1) & 1.17 &  &  & 1.21 & 1.01 & 1.45 \\ 
-Item.cor(Intercept,Treat1) & -0.53 &  &  & -0.49 & -0.79 & 0.00 \\ 
-Subject.cor(Intercept,Treat1) & -0.13 &  &  & -0.11 & -0.35 & 0.14 \\ 
+Item.cor(Intercept,Treat1) & -0.53 &  &  & -0.49 & -0.78 & 0.01 \\ 
+Subject.cor(Intercept,Treat1) & -0.13 &  &  & -0.11 & -0.34 & 0.14 \\ 
 \bottomrule
 \end{longtable}
 
@@ -3864,60 +3864,29 @@ posteriori por tratamiento e ítem.}
 
 \bookmarksetup{startatroot}
 
-\hypertarget{sec-conclusiones}{%
-\chapter{Discusión y conclusiones}\label{sec-conclusiones}}
-
-\hypertarget{modelado-1}{%
-\section{Modelado}\label{modelado-1}}
-
-La probabilidad de que los alumnos puntúen mejor el subtitulado \(A\)
-que el \(B\) frente a que lo puntúen igual o peor se estima que es del
-59.95\%. Sin embargo, la distribución por ítems no es uniforme (ver
-Tabla~\ref{tbl-improve-question}). Así, hay ítems en que esta
-probabilidad sobrepasa el 80\% (Q09, Q05). Sin embargo hay otros en que
-no supera el 25\% (Q04, Q16, Q13). La respuesta al ítem Q18 está por
-encima de la media (69.82\%). Parece claro que los ítems en los que la
-respuesta de los estudiantes es diferente en los dos subtitulados es
-porque aprecian diferencias reales entre ellos. Quedaría por dilucidar
-si en los ítems en los que no hay diferencia en las respuestas, se debe
-a que realmente no las hay o si es que los estudiantes no son capaces de
-detectarlas.
-
-La magnitud del efecto del subtitulado sobre las valoraciones es muy
-superior a la de los efectos periodo y secuencia (ver
-Tabla~\ref{tbl-model-comp}), por lo que se pueden realizar
-interpretaciones del modelo sin que nos deba preocupar su existencia.
+\hypertarget{sec-discusion}{%
+\chapter{Discusión}\label{sec-discusion}}
 
 \scriptsize
 
 \normalsize
 
-\begin{figure}[h]
-\begin{adjustwidth}{-3.4cm}{}
-
-\includegraphics[width=1.2\linewidth]{images/bayes-probs.png} \hfill{}
-
-\caption{\label{fig-prob-compare}Comparación de las respuestas generadas
-por el modelo y las frecuencias relativas de los datos.}
-
-\end{adjustwidth}
-\end{figure}
-
-\bookmarksetup{startatroot}
-
-\hypertarget{ciego}{%
-\chapter{Ciego}\label{ciego}}
-
-En esta sección se discuten los resultados una vez descubierto el ciego.
-Se confirma que el subtitulado del vídeo que se ha denominado como \(A\)
-es el que está correctamente subtitulado y el \(B\) es el vídeo en el
-que se han introducido errores en los subtítulos. En la
-\ref{tbl-blind-errors} se muestran los errores introducidos y los ítems
-de la escala de Likert en los que se ha valorado el error (ver
-Tabla~\ref{tbl-likert-scale} para la descripción textual de cada ítem).
+En esta sección se discuten los resultados una vez \enquote{descubierto
+el ciego} y se responden a las preguntas de investigación planteadas en
+la Sección~\ref{sec-objetivos}. Se reveló que el subtitulado que en este
+trabajo se ha denominado \(A\) se corresponde que el vídeo correctamente
+subtitulado. Adicionalmente se ha suministrado un documento que contiene
+los errores introducidos en el subtitulado \(B\). A partir del mismo, se
+ha elaborado la Tabla \ref{tbl-blind-errors} en la que se muestra la
+correspondencia de cada error con los ítems de la escala de Likert a la
+que respondieron los estudiantes (ver en la Tabla~\ref{tbl-likert-scale}
+una descripción textual de cada ítem). Para 7 de los 18 ítems (Q01, Q03,
+Q04, Q13, Q15, Q16, Q17) no se ha encontrado una adscripción clara en el
+documento de errores y, por lo tanto, sería deseable una valoración
+similar entre subtitulados en esos ítems.
 
 \begin{table}[H]
-\caption{\label{tbl-blind-errors}Errores introducidos en el subtitulado.}\tabularnewline
+\caption{\label{tbl-blind-errors}Correspondencia entre los errores introducidos en el subtitulado del vídeo B y los ítems de la escala de Likert.}\tabularnewline
 \tiny
 \begin{adjustwidth}{-2.5cm}{}
 \begin{tabular}{@{}|c|l|l|l|@{}}
@@ -3975,15 +3944,191 @@ Tabla~\ref{tbl-likert-scale} para la descripción textual de cada ítem).
 \normalsize
 \end{table}
 
+Para responder a las preguntas de investigación se van a utilizar los
+hallazgos del Análisis Exploratorio (ver Sección~\ref{sec-eda}) y los
+resultados de los tres modelos comentados en el
+Capítulo~\ref{sec-resultados}. A saber:
+
+\begin{itemize}
+\tightlist
+\item
+  Regresión Logística con variable respuesta \texttt{Improve}, que
+  calcula la probabilidad de que la respuesta a un ítem mejore entre
+  subtitulados \(A\) \textgreater{} \(B\) (ver
+  Sección~\ref{sec-logistica-3}).
+\item
+  Regresión Logística con variable respuesta \texttt{Positive}, que
+  calcula la probabilidad de que la respuesta a un ítem sea positiva (4
+  ó 5).
+\item
+  Regresión Ordinal con variable Respuesta \texttt{Response}, que
+  calcula la probabilidad de cada nivel de respuesta (ver
+  Sección~\ref{sec-ordinal-3}).
+\end{itemize}
+
+Por comodidad se vuelven a plantear aquí las preguntas de investigación:
+
+\begin{tcolorbox}[enhanced jigsaw, colback=white, breakable, toprule=.15mm, coltitle=black, rightrule=.15mm, titlerule=0mm, colframe=quarto-callout-note-color-frame, toptitle=1mm, bottomtitle=1mm, opacityback=0, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Pregunta de investigación}, arc=.35mm, bottomrule=.15mm, opacitybacktitle=0.6, leftrule=.75mm, left=2mm, colbacktitle=quarto-callout-note-color!10!white]
+
+¿Son los estudiantes de un curso de creación de materiales accesibles
+capaces de encontrar diferencias en la calidad del subtitulado de un
+vídeo?
+
+\end{tcolorbox}
+
+El subtitulado \(A\), que es el correcto, ha sido indubitablemente
+preferido por los estudiantes. Esto se ha constatado tanto en la
+exploración inicial como en cada uno de los tres modelos propuestos. Por
+ejemplo, en la exploración inicial se vio que la respuesta más frecuente
+en el subtitulado \(A\) es 5 y en el \(B\) es 4. El modelo con variable
+respuesta \texttt{Improve} predice que la probabilidad de que se otorgue
+una mayor puntuación en \(A\) que en \(B\) es 59.95\%. Por lo tanto, se
+concluye respondiendo afirmativamente a la pregunta: los estudiantes del
+curso han sabido reconocer diferencias en el subtitulado de los vídeos.
+
+\begin{tcolorbox}[enhanced jigsaw, colback=white, breakable, toprule=.15mm, coltitle=black, rightrule=.15mm, titlerule=0mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, bottomtitle=1mm, opacityback=0, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Objetivos específicos}, arc=.35mm, bottomrule=.15mm, opacitybacktitle=0.6, leftrule=.75mm, left=2mm, colbacktitle=quarto-callout-tip-color!10!white]
+
+¿Qué aspectos de la calidad del subtitulado son más fácilmente
+reconocibles por los estudiantes y en cuáles existe mayor dificultad?
+
+\end{tcolorbox}
+
+La respuesta a esta pregunta requiere un análisis pormenorizado ítem a
+ítem. Se ha elaborado una tabla para cada uno de los tres modelos. La
+Figura~\ref{fig-logistic-compare} contiene las tablas correspondientes a
+los dos modelos de Regresión Logística. Para su correcta interpretación
+se deben tener en cuenta las siguientes pautas:
+
+\begin{itemize}
+\tightlist
+\item
+  La columna \texttt{Freq} es la frecuencia relativa de las tablas de
+  contingencia. La columna \texttt{Prob} son las probabilidades
+  predichas por cada uno de los modelos.
+\item
+  Los ítems de Likert en los que hay errores en el subtitulado \(B\) se
+  han resaltado con letra negrilla y fondo color púrpura. En los que no
+  hay errores la letra es normal y el fondo gris.
+\item
+  Cuanto más oscuro sea el color de fondo más inesperado es el
+  resultado.
+\end{itemize}
+
+En el modelo con variable respuesta \texttt{Improve} (ver
+Figura~\ref{fig-or-improve}), los alumnos han sabido reconocer los ítems
+en los que no se han introducido errores (en los ítems comoo el \(Q01\)
+y \(Q03\) con mucha incertidumbre). También han sido capaces de
+identificar correctamente errores de subtitulado en \(Q05\) (la
+corrección ortográfica y gramatical), \(Q06\) (la literalidad), \(Q07\)
+(la identificación de los personajes), \(Q08\) (la asignación de líneas
+a los personajes en los diálogos), \(Q09\) (la descripción de efectos
+sonoros) y \(Q14\) (la separación en líneas diferentes de sintagmas
+nominales, verbales y preposicionales). SIn embargo hay ítems en los que
+sí se han introducido errores y sin embargo los alumnos apenas los han
+reflejado en sus valoraciones han sido:
+
+\begin{itemize}
+\tightlist
+\item
+  \(Q02\) (el número de líneas por subtítulo) probabilidad predicha de
+  mejorar la valoración 66.4\%.
+\item
+  \(Q10\) (la sincronización de las entradas y salidas de los
+  subtítulos) probabilidad 55.38\%.
+\item
+  \(Q11\) (la velocidad de exposición de los subtítulos) probabilidad
+  49.61\%.
+\item
+  \(Q12\) (el máximo número de caracteres por línea) probabilidad
+  59.74\%.
+\end{itemize}
+
+La Figura~\ref{fig-or-positive} muestra las predicciones del modelo con
+variable respuesta \texttt{Positive} de obtener una respuesta con nivel
+4 ó 5. Las conclusiones que se pueden extraer son muy similares a las
+del modelo con variable respuesta \texttt{Improve}. Los ítems \(Q15\),
+\(Q16\) y \(Q17\) son ítems que tienen una valoración comparativamente
+baja en ambos subtitulados e inferior en el \(B\) que en el \(A\) y
+ninguna de estas cosas debería haber sucedido ya que no se han
+introducido este tipo de errores.
+
+\begin{figure}
+
+\begin{minipage}[t]{0.50\linewidth}
+
+{\centering 
+
+\raisebox{-\height}{
+
+\includegraphics{images/improve.png}
+
+}
+
+}
+
+\subcaption{\label{fig-or-improve}Modelo Improve (respuesta A
+\textgreater{} B)}
+\end{minipage}%
+%
+\begin{minipage}[t]{0.50\linewidth}
+
+{\centering 
+
+\raisebox{-\height}{
+
+\includegraphics{images/positive.png}
+
+}
+
+}
+
+\subcaption{\label{fig-or-positive}Modelo Positive (respuesta es 4 ó 5)}
+\end{minipage}%
+
+\caption{\label{fig-logistic-compare}Predicciones de los modelos de
+Regresión Logística}
+
+\end{figure}
+
+En la \ref{fig-prob-compare} se muestra la probabilidad de nivel de
+respuesta por ítem y nivel de subtitulado correspondiente al modelo de
+Regresión Ordinal y se compara con la frecuencia de la tabla de
+contingencia. Los ítems con errores se muestran en negrita y
+recuadrados.
+
+\begin{figure}[h]
+\begin{adjustwidth}{-3.4cm}{}
+
+\includegraphics[width=1.2\linewidth]{images/bayes-probs.png} \hfill{}
+
+\caption{\label{fig-prob-compare}Comparación de las respuestas generadas
+por el modelo y las frecuencias relativas de los datos.}
+
+\end{adjustwidth}
+\end{figure}
+
+Para entender la explicación de la valoración de los alumnos en los
+ítems que tienen una respuesta no deseada se han analizado los
+comentarios que dejaron \footnote{Estos comentarios no se separaron en
+  la fase de preprocesado y no se han utilizado ni consultado hasta la
+  realización de este capítulo.}. La siguiente es una selección de
+comentarios:
+
+\begin{itemize}
+\tightlist
+\item
+  \(Q14\) la legibilidad de la tipografía: Aparece alguna palabra
+  cortada en alguna linea / Hay bastantes cortes de sintagmas
+  incorrectos / no entiendo la pregunta / No entiendo la pregunta.
+  Parece claro que algunos estudiantes no entendieron que la pregunta se
+  refiere únicamente a si la fuente tipográfica es adecuada y contestan
+  otras cuestiones.
+\end{itemize}
+
 \bookmarksetup{startatroot}
 
 \hypertarget{sec-conclusion}{%
 \chapter{Conclusión y trabajo futuro}\label{sec-conclusion}}
-
-\bookmarksetup{startatroot}
-
-\hypertarget{section}{%
-\chapter{}\label{section}}
 
 \bookmarksetup{startatroot}
 

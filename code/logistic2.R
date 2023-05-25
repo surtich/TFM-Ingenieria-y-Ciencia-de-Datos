@@ -1,4 +1,4 @@
-df_improve <- df_clean %>%
+df_improve <- df_response %>%
     pivot_wider(id_cols = c(Subject, Item, Seq), names_from = Treat, values_from = Response) %>%
     filter(A != 0 & B != 0) %>%
     mutate(Improve = A > B, Improve_level = (A %in% c(4, 5)) & (B %in% c(1, 2)))
@@ -62,7 +62,7 @@ question_effects_hat
 
 brm_treat.period.subject.question <- brm(
     Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item),
-    data = df_clean,
+    data = df_response,
     family = cumulative("logit"),
     sample_prior = TRUE,
     file = "models/brm_treat.period.subject.question",

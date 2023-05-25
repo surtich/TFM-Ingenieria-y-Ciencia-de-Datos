@@ -48,21 +48,13 @@ fourfold(xtabs(~ Treat + Period + Response, data = df_all))
 options(contrasts = rep("contr.sum", 2))
 glmer_improve_subject_question <- glmer(Improve ~ 1 + (1 | Subject) + (1 | Item), family = "binomial", data = df_improve)
 
-improve_question <- 1 / (1 + exp(-coef(glmer_improve_subject_question)$Item + fixef(glmer_improve_subject_question)))
+glmer_positive_treat_subject_question <- glmer(I(Level == "Positivo") ~ Treat + (1 + Treat | Subject) + (1 + Treat | Item), family = "binomial", df_response)
 
-improve_question <- cbind(rownames(improve_question), improve_question)
-colnames(improve_question) <- c("Item", "Prob")
-
-# summary(glmer_improve_subject_question)
 ```
 
-En la @sec-logistica-2 se explicó una forma de crear una variable dicotómica que permite ajustar los datos a una Regresión Logística. Concretamente, se creo la variable respuesta $Improve$ que compara si las respuestas de cada estudiante a cada Ítem entre los niveles de subtitulado ($A$ frente $B$) han mejorado (valor 1) o se han mantenido o empeorado (valor 0). El modelo que se propone en esta sección no tiene en cuenta el efecto secuencia ya que resultó no significativo en el análisis y, en cambio, se incluye como efectos aleatorios los estudiantes y los ítems sobre el intercepto ya que, como se ha explicado, son variables que no se pueden considerar independientes:
+En la @sec-logistica-2 se explicó una forma de crear una variable dicotómica que permite ajustar los datos a una Regresión Logística. Concretamente, se creó la variable respuesta $Improve$ que compara si las respuestas de cada estudiante a cada Ítem entre los niveles de subtitulado ($A$ frente $B$) han mejorado (valor 1) o se han mantenido o empeorado (valor 0). El modelo que se propone en esta sección no tiene en cuenta el efecto secuencia ya que resultó no significativo en el análisis y, en cambio, se incluye como efectos aleatorios los estudiantes y los ítems sobre el intercepto ya que, como se ha explicado, son variables que no se pueden considerar independientes:
 
 > Improve ~ 1 + (1 | Subject) + (1 | Item)
-
-El resumen del modelo ajustado con la función `glmer` del paquete `lme4` [ver @lme4] produce los resultados de la @tbl-selected-logistic. El intercepto del modelo ajustado es `r round(fixef(glmer_improve_subject_question)[[1]],3)` (std.error `r round((vcov(glmer_improve_subject_question)^.5)[1], 3)`). Por ello, la probabilidad de que se otorgue una mayor puntuación en $A$ que en $B$ es del `r paste(round(100/(1+exp(-fixef(glmer_improve_subject_question)[[1]])),2),"%", sep="")`. La proporción de varianza explicada por los efectos aleatorios ($ICC$) es `r round((performance::icc(glmer_improve_subject_question))$ICC_adjusted,3)`.
-
-En la @tbl-improve-question se muestra la probabilidad de que la respuesta sea mejor en $A$ que en $B$ por ítem.
 
 
 \scriptsize
@@ -76,34 +68,26 @@ glmer_improve_subject_question <- glmer(
 ```
 \normalsize
 
+
+El resumen del modelo ajustado con la función `glmer` del paquete `lme4` [ver @lme4] produce los resultados de la columna izquierda de la @tbl-selected-logistic. El intercepto del modelo ajustado es `r round(fixef(glmer_improve_subject_question)[[1]],3)` (std.error `r round((vcov(glmer_improve_subject_question)^.5)[1], 3)`). Por ello, la probabilidad de que se otorgue una mayor puntuación en $A$ que en $B$ es del `r paste(round(100/(1+exp(-fixef(glmer_improve_subject_question)[[1]])),2),"%", sep="")`. La proporción de varianza explicada por los efectos aleatorios ($ICC$) es `r round((performance::icc(glmer_improve_subject_question))$ICC_adjusted,3)`.
+
 ```{r}
 #| eval: true
 #| label: tbl-selected-logistic
-#| tbl-cap: Resumen del modelo Improve ~ 1 + (1 | Subject) + (1 | Item)
-modelsummary(list("Improve ~ 1 + (1 | Subject) + (1 | Item)" = glmer_improve_subject_question), gof_omit = "RMSE|R2|ICC", output = "kableExtra")
+#| tbl-cap: Resumen de los modelos de Regresión Logística.
+modelsummary(list("Improve (A>B)" = glmer_improve_subject_question, "Level == 'Positivo'" = glmer_positive_treat_subject_question), gof_omit = "RMSE|R2|ICC", output = "kableExtra")
 ``` 
 
-\scriptsize
-```{r}
-#| label: tbl-improve-question
-#| tbl-cap: Probabilidad de que la respuesta a un ítem sea A > B frente a A <= B
- inner_join(
-     df_improve %>% group_by(Item) %>% summarize(n = n(), improve = sum(Improve), Freq = improve / n) %>% select(Item, Freq),
-     improve_question
- ) %>%
-     gt() %>%
-     fmt_percent(decimals = 1) %>%
-     data_color(
-         rows = Item %in% q.no.errors, columns = Prob, palette = "ggsci::grey_material", target_columns = c(Freq, Item, Prob), domain =
-             c(0.1, .7), autocolor_text = T
-     ) %>%
-     data_color(
-         rows = Item %in% q.errors, columns = Prob, palette = "ggsci::purple_material", target_columns = c(Freq, Item, Prob), reverse =
-             T, domain = c(0.3, 0.87)
-     )
-```
+
+Una forma alternativa de Regresión Logística es simplemente saber si cada respuesta es positiva (4 ó 5) frente a si es negativa o neutra (1, 2, ó 3). Como efecto fijo se incorpora el nivel de subtitulado y como efectos aleatorios el estudiante y el ítem ambos con intercepto y pendiente sobre el subtitulado variables por tener mejor valor de $AIC$. La fórmula del modelo es la siguiente:
+
+\small
+
+> I(Level == "Positivo") ~ Treat + (1 + Treat | Subject) + (1 + Treat | Item)
 
 \normalsize
+
+En la columna derecha de la @tbl-selected-logistic se muestra el resumen del modelo. En este caso, el intercepto tiene una valor de `r round(fixef(glmer_positive_treat_subject_question)[1], 3)`. Por lo que la probabilidad de respuesta positiva en cualquier ítem y nivel de subtitulado es `r paste(round(100*plogis(fixef(glmer_positive_treat_subject_question)[1]), 1), "%", sep="")`. El coeficiente `Treat1` tiene valor `r round(fixef(glmer_positive_treat_subject_question)[2], 3)` y es el valor en `logits` que se añade o se quita en función de si el subtitulado es el $A$ o el $B$. Esto se traduce en que la posibilidad de una respuesta positiva en el subtitulado $A$ es `r paste(round(100*plogis(fixef(glmer_positive_treat_subject_question)[1]+fixef(glmer_positive_treat_subject_question)[2]),1),"%",sep="")`. En el subtitulado $B$ esta probabilidad se reduce a `r paste(round(100*plogis(fixef(glmer_positive_treat_subject_question)[1]-fixef(glmer_positive_treat_subject_question)[2]),1),"%",sep="")`. Por último, el valor de $ICC$ del modelo es`r round((performance::icc(glmer_positive_treat_subject_question))$ICC_adjusted,3)`
 
 
 #### Regresión Ordinal {#sec-ordinal-3}
@@ -115,12 +99,12 @@ options(contrasts = rep("contr.sum", 2))
 
 clmm_treat.period.subject.item <- clmm(
     Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item),
-    data = df_clean
+    data = df_response
 )
 
 brm_treat.period.subject.item <- brm(
     Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item),
-    data = df_clean,
+    data = df_response,
     family = cumulative("logit"),
     iter = 4000,
     sample_prior = TRUE,
@@ -167,7 +151,7 @@ emmeans(clmm_treat.period.subject.item, ~ Response + Treat + Period, mode = "pro
 #| label: tbl-model-comp
 #| tbl-cap: Comparación frecuentista/bayesiano de coeficientes estimados en el modelo Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item).
 #| tbl-scap: Comparación frecuentista/bayesiano de coeficientes estimados.
-#| cache: true
+#| cache: false
 df_clmm <- coef(clmm_treat.period.subject.item) %>% data.frame()
 colnames(df_clmm) <- c("Estimation.clmm")
 
@@ -236,7 +220,7 @@ En definitiva, nuestro modelo predice que los estudiantes están bastante de acu
 #| cache: true
 #| eval: false
 pred2_brm <- brm_treat.period.subject.item %>%
-    epred_draws(ndraws = 50, newdata = expand.grid(list(Period = c(1, 2), Treat = levels(df_clean$Treat), Item = levels(df_clean$Item))), re_formula = ~ (1 + Treat | Item), by = c("Treat", "Item"), category = "Response") %>%
+    epred_draws(ndraws = 50, newdata = expand.grid(list(Period = c(1, 2), Treat = levels(df_response$Treat), Item = levels(df_response$Item))), re_formula = ~ (1 + Treat | Item), by = c("Treat", "Item"), category = "Response") %>%
     select(Period, Treat, Item, Response, Probability = .epred, .draw) %>%
     mutate(q50 = ave(Probability, FUN = function(x) quantile(x, .5, type = 3, na.rm = TRUE))) %>%
     ungroup() %>%
@@ -252,7 +236,7 @@ colors <- viridis(
     n = 5
 )
 
-questions_vector <- setNames(levels(df_clean$Item_lr), levels(df_clean$Item))
+questions_vector <- setNames(levels(df_response$Item_lr), levels(df_response$Item))
 
 question_labeller <- function(string) paste0(string, ": ", questions_vector[string])
 
@@ -290,7 +274,7 @@ p +
         data = pred2_brm %>% filter(Probability == q50 & Item %in% c("Q02", "Q05", "Q08", "Q11", "Q14", "Q17") & Period == 2, Treat == "B") %>% distinct(Treat,
             Period, Item, Response,
             .keep_all = TRUE
-        ) %>% mutate(Response_l = ordered(Response, labels = levels(df_clean$Response_l))),
+        ) %>% mutate(Response_l = ordered(Response, labels = levels(df_response$Response_l))),
         aes(label = Response_l),
         direction = "y",
         hjust = 0,

@@ -111,24 +111,24 @@ response_labels <- c(
 )
 
 question_labels <- c(
-    "Los subtítulos del vídeo cumplen en general con los requisitos de accesibilidad.",
-    "La posición de los subtítulos.",
-    "El número de líneas por subtítulo.",
-    "La disposición del texto respecto a la caja donde se muestran los subtítulos.",
-    "El contraste entre los caracteres y el fondo.",
-    "La corrección ortográfica y gramatical.",
-    "La literalidad.",
-    "La identificación de los personajes.",
-    "La asignación de líneas a los personajes en los diálogos.",
-    "La descripción de efectos sonoros.",
-    "La sincronización de las entradas y salidas de los subtítulos.",
-    "La velocidad de exposición de los subtítulos.",
-    "El máximo número de caracteres por línea.",
-    "La legibilidad de la tipografía.",
-    "La separación en líneas diferentes de sintagmas nominales, verbales y preposicionales.",
-    "La utilización de puntos suspensivos.",
-    "La escritura de los números.",
-    "Las incorrecciones en el habla."
+    "Los subtítulos del vídeo cumplen en general con los requisitos de accesibilidad",
+    "La posición de los subtítulos",
+    "El número de líneas por subtítulo",
+    "La disposición del texto respecto a la caja donde se muestran los subtítulos",
+    "El contraste entre los caracteres y el fondo",
+    "La corrección ortográfica y gramatical",
+    "La literalidad",
+    "La identificación de los personajes",
+    "La asignación de líneas a los personajes en los diálogos",
+    "La descripción de efectos sonoros",
+    "La sincronización de las entradas y salidas de los subtítulos",
+    "La velocidad de exposición de los subtítulos",
+    "El máximo número de caracteres por línea",
+    "La legibilidad de la tipografía",
+    "La separación en líneas diferentes de sintagmas nominales, verbales y preposicionales",
+    "La utilización de puntos suspensivos",
+    "La escritura de los números",
+    "Las incorrecciones en el habla"
 )
 
 question_labels_reduced <- c(
@@ -185,8 +185,8 @@ df_all <- df
 
 df_all$Y <- model.matrix(~ Response - 1, data = df_all)
 
-df_clean <- df %>% filter(Response != 0)
-df_clean <- df_clean %>% mutate(
+df_response <- df %>% filter(Response != 0)
+df_response <- df_response %>% mutate(
     Response = factor(Response, levels = levels(Response)[-1]),
     Response_l = ordered(Response_l, levels = levels(Response_l)[-1]),
     Level = as.ordered(
@@ -203,7 +203,7 @@ df_clean <- df_clean %>% mutate(
 )
 df_0 <- df %>% filter(Response == 0)
 
-df_improve <- df_clean %>%
+df_improve <- df_response %>%
     pivot_wider(id_cols = c(Subject, Item, Seq), names_from = Treat, values_from = Response) %>%
     filter(A != 0 & A != 3 & B != 0 & B != 3) %>%
     mutate(

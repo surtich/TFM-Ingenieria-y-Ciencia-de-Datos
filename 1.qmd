@@ -4,7 +4,7 @@ Algunas personas tienen problemas de accesibilidad a contenidos multimedia. Aña
 
 Las plataformas de compartición de vídeos como Youtube o las de creación de cursos MOOC como Coursera o EDX permiten en la actualidad la generación de subtítulos automáticos. Además, existen comunidades que se dedican a subtitular todo tipo de material multimedia. No obstante, frecuentemente los subtítulos producidos de esta manera no tienen en cuenta la necesidades de accesibilidad específicas de personas con problemas de audición. Estas personas normalmente van a necesitar un subtitulado cerrado (*closed caption*). Este subtitulado consta de información interpretativa e incluye descripción textual de efectos sonoros junto con otros elementos como la perfecta sincronización con el hablante, el número de caracteres por línea, la exactitud del diálogo, la ubicación, el tamaño y el contraste del subtítulo,... Así, @parton2016  realizó un estudio para determinar si los subtítulos automáticos generados por YouTube cumplen las necesidades de los estudiantes universitarios sordos. En el estudio se contabilizaron un total de 525 errores en 68 minutos de video (una tasa de 7.7 errores por minuto). La accesibilidad multimedia es, por lo tanto, una actividad importante y compleja que requiere dedicación y conocimiento específico y va más allá de verificar si el vídeo tiene o no subtítulos.
 
-## Objetivos
+## Objetivos {#sec-objetivos}
 
 El objetivo del estudio es responder a la siguiente pregunta de investigación:
 
@@ -40,7 +40,7 @@ La actividad consistió en ver dos vídeos idénticos de 43 segundos que solo se
 
 Los términos **escala de Likert** e ítem de Likert se prestan a menudo a confusión ya que se utilizan con distintos significados. En este trabajo se seguirá la convención más habitual [ver @uebersax2006] de denominar ítem de Likert a cada una de las preguntas de que consta un cuestionario o test, siendo la escala de Likert el conjunto de todos los ítems del cuestionario. Cada ítem se contestará marcado una opción entre un conjunto ordenado de respuestas o niveles. Por ello, se debe evitar denominar escala a los niveles de un ítem.
 
-El diseño de experimento es **triple ciego**: es decir, a los alumnos no se les informó de si estaban viendo el vídeo con mejor o con peor calidad de subtitulado. Los directores del MOOC tampoco conocieron esta información, como tampoco se conocía en el momento de analizar los datos, ya que los vídeos tienen identificaciones ofuscadas con CRC32b y no contienen ninguna indicación del tipo de subtitulado del vídeo^[En la respuesta a cada ítem, el alumno pudo añadir comentarios. Éstos fueron eliminados del estudio para que no filtren información referente al tipo de subtitulado que el alumno creyó estar contestando.]. El "ciego" fue liberado en la fase de elaboración de la discusión de este trabajo (ver @sec-conclusiones).
+El diseño de experimento es **triple ciego**: es decir, a los alumnos no se les informó de si estaban viendo el vídeo con mejor o con peor calidad de subtitulado. Los directores del MOOC tampoco conocieron esta información, como tampoco se conocía en el momento de analizar los datos, ya que los vídeos tienen identificaciones ofuscadas con CRC32b y no contienen ninguna indicación del tipo de subtitulado del vídeo^[En la respuesta a cada ítem, el alumno pudo añadir comentarios. Éstos fueron eliminados del estudio para que no filtren información referente al tipo de subtitulado que el alumno creyó estar contestando.]. El "ciego" fue liberado en la fase de elaboración de la discusión de este trabajo (ver @sec-discusion).
 
 
 ## Organización del trabajo
@@ -49,11 +49,11 @@ En el capítulo **Marco teórico y estado del arte** (ver @sec-arte) se enmarca 
 
 El capítulo **Materiales y métodos** (ver @sec-metodo) describe los ficheros de datos suministrados, la actividad de preprocesado realizada sobre los mismos y las variables que se utilizarán en el modelado estadístico.
 
-El capítulo **Modelado estadístico** (ver @sec-modelado) comienza con un análisis exploratorio de los datos, tras el que se describe cómo se han aplicado las técnicas de modelado presentadas en el Marco Teórico al diseño del experimento de la actividad de subtitulado. 
+El capítulo **Modelado estadístico** (ver @sec-modelado) comienza con un Análisis Exploratorio de los datos, tras el que se describe cómo se han aplicado las técnicas de modelado presentadas en el Marco Teórico al diseño del experimento de la actividad de subtitulado. 
 
 El capítulo de **Resultados** (ver @sec-resultados) se presentan los resultados de los modelos seleccionados en el capítulo anterior.
 
-En el capítulo **Discusión y conclusiones** (ver @sec-conclusiones) se utilizan los resultados del capítulo anterior para responder a la pregunta de investigación y a los objetivos específicos.
+En el capítulo **Discusión** (ver @sec-discusión) se utilizan los resultados del capítulo anterior para responder a la pregunta de investigación y a los objetivos específicos.
 
 Finalmente el capítulo **Conclusión y trabajo futuro** (ver @sec-conclusion) se destina a proponer posibles líneas de investigación futuras en base a los resultados obtenidos.
 

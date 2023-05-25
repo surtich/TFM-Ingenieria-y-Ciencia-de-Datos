@@ -124,21 +124,21 @@ tibble(
 
 Se van a usar dos `dataframes`:
 
-* `df_clean` contiene las respuestas con valor de 1 a 5. Se han eliminado las de valor 0 ("No sé / No contesto"). Se utiliza cuando se traten las respuestas como ordinales y, por lo tanto, como ordenadas.
+* `df_response` contiene las respuestas con valor de 1 a 5. Se han eliminado las de valor 0 ("No sé / No contesto"). Se utiliza cuando se traten las respuestas como ordinales y, por lo tanto, como ordenadas.
 * `df_all` incluye todas las respuestas de 0 a 5. Se utiliza cuando se traten las respuestas como categóricas y no ordenadas.
 
 La estructura de estos `dataframes` es la siguiente:
 
 ```{r}
-str(df_clean %>% dplyr::select(Seq, Period, Treat, Subject, Item, Response, Level), strict.width = "cut")
+str(df_response %>% dplyr::select(Seq, Period, Treat, Subject, Item, Response, Level), strict.width = "cut")
 ``` 
 
-En la @tbl-df_clean se muestran algunos ejemplos de datos. Concretamente se muestran las respuestas a tres ítems de dos estudiantes que vieron los vídeos en distinto orden.
+En la @tbl-df_response se muestran algunos ejemplos de datos. Concretamente se muestran las respuestas a tres ítems de dos estudiantes que vieron los vídeos en distinto orden.
 
 ```{r}
-#| label: tbl-df_clean
+#| label: tbl-df_response
 #| tbl-cap: Muestra del dataframe preparado para el modelado estadístico en formato largo.
-df_clean %>%
+df_response %>%
     dplyr::select(Seq, Period, Treat, Subject, Item, Response, Level) %>%
     filter(Subject %in% c(33, 35) & Item %in% c("Q18", "Q01", "Q02")) %>%
     arrange(desc(Subject), Item, Period) %>%

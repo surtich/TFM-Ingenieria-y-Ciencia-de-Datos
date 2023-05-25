@@ -9,7 +9,7 @@ plot(stable)
 spineplot(Response ~ Item, data = df_all)
 
 
-df_clean %>%
+df_response %>%
     group_by(Treat, Item) %>%
     summarize(Response = mean(Response_v)) %>%
     ungroup() %>%
@@ -27,18 +27,18 @@ prop.table(ftable(df_all %>% dplyr::select(Treat, Period, Response)), margin = 1
     )
 
 # Test de independencia (pag 123)
-summary(loddsratio(~ Treat + Period + Response_l, data = df_clean))
-summary(loddsratio(~ Response_l + Period, data = df_clean))
+summary(loddsratio(~ Treat + Period + Response_l, data = df_response))
+summary(loddsratio(~ Response_l + Period, data = df_response))
 
 library(vcdExtra)
 
 # Tests for ordinal variables pag 125 (el importante es cmeans)
-CMHtest(~ Response + Treat, data = df_clean)
-CMHtest(~ Response + Period, data = df_clean)
+CMHtest(~ Response + Treat, data = df_response)
+CMHtest(~ Response + Period, data = df_response)
 
-CMHtest(~ Response + Period + Treat, data = df_clean)
+CMHtest(~ Response + Period + Treat, data = df_response)
 
-CMHtest(~ Response + Treat + Item, data = df_clean)
+CMHtest(~ Response + Treat + Item, data = df_response)
 
 # Página 134
 fourfold(xtabs(~ Treat + Seq + Response, data = df_all))
@@ -69,19 +69,19 @@ plot(ctree(Response ~ Treat + gender, data = df_all),
 )
 
 library(MASS)
-m1.polr <- polr(Response ~ Treat, data = df_clean, Hess = TRUE)
+m1.polr <- polr(Response ~ Treat, data = df_response, Hess = TRUE)
 summary(m1.polr)
-m1.o <- clm(Response ~ Treat, data = df_clean, Hess = TRUE)
+m1.o <- clm(Response ~ Treat, data = df_response, Hess = TRUE)
 summary(m1.o)
 # pag 327
 library(car)
 Anova(m1)
 
 library(VGAM)
-m1.po <- vglm(Response ~ Treat, data = df_clean, cumulative(parallel = TRUE))
+m1.po <- vglm(Response ~ Treat, data = df_response, cumulative(parallel = TRUE))
 summary(m1.po)
 
-m1.npo <- vglm(Response ~ Treat, data = df_clean, cumulative(parallel = FALSE))
+m1.npo <- vglm(Response ~ Treat, data = df_response, cumulative(parallel = FALSE))
 summary(m1.npo)
 
 coef(m1.po, matrix = TRUE)
@@ -91,15 +91,15 @@ VGAM::lrtest(m1.npo, m1.po)
 
 
 library(rms)
-m1.po2 <- lrm(Response ~ Treat + Item, data = df_clean)
+m1.po2 <- lrm(Response ~ Treat + Item, data = df_response)
 m1.po2
 
-plot.xmean.ordinaly(Response ~ Treat, data = df_clean, lwd = 2, pch = 16, subn = FALSE)
+plot.xmean.ordinaly(Response ~ Treat, data = df_response, lwd = 2, pch = 16, subn = FALSE)
 
 
 # pag 331
 # No usado. Necesita una varible continua
-plotdat <- cbind(df_clean, predict(m1.polr, type = "probs")) %>%
+plotdat <- cbind(df_response, predict(m1.polr, type = "probs")) %>%
     pivot_longer(cols = c(`1`, `2`, `3`, `4`, `5`), names_to = "Response_level", values_to = "Probability")
 
 # pag 333
@@ -109,7 +109,7 @@ plot(Effect("Treat", m1.polr), style = "stacked")
 
 # pag 343
 library(nnet)
-m1.multi <- multinom(Response ~ Treat * Period, data = df_clean, HESS = TRUE)
+m1.multi <- multinom(Response ~ Treat * Period, data = df_response, HESS = TRUE)
 
 Anova(m1.multi)
 
@@ -123,7 +123,7 @@ library(corrplot)
 library(brms)
 library(bmmb)
 
-model_ordinal <- brms::brm(Response ~ Treat + (1 | Subject) + (1 | Item), data = df_clean, family = "cumulative")
+model_ordinal <- brms::brm(Response ~ Treat + (1 | Subject) + (1 | Item), data = df_response, family = "cumulative")
 bmmb::short_summary(model_ordinal)
 
 # make latent variable predictions

@@ -1,4 +1,4 @@
-df_improve <- df_clean %>%
+df_improve <- df_response %>%
     pivot_wider(id_cols = c(Subject, Item, Seq), names_from = Treat, values_from = Response) %>%
     filter(A != 0 & B != 0) %>%
     mutate(Improve = A > B, Improve_level = (A %in% c(4,5)) &  (B %in% c(1,2)))
@@ -36,12 +36,12 @@ pp_check(m10, "bars_grouped", group = "Item", ndraws = 1000)
 
 sum((predict(m10)[, 1] > 0.5) == df_improve$Improve) / df_improve %>% nrow()
 sum((predict(m10, newdata=df_improve %>% select(Improve, Item), re_formula= ~ (1 | Item))[, 1] > 0.5) == df_improve$Impr   ove) / df_improve %>% nrow()
-sum(apply(predict(brm_treat.period.subject.question, type = "response"), 1, which.max) == df_clean$Response) / nrow(df_clean)
+sum(apply(predict(brm_treat.period.subject.question, type = "response"), 1, which.max) == df_response$Response) / nrow(df_response)
 
 sum(apply(predict(brm_treat.period.subject.question,
-    newdata = df_clean %>% select(Treat, Item, Seq, Response, Period),
+    newdata = df_response %>% select(Treat, Item, Seq, Response, Period),
     re_formula = ~ (1 + Treat | Item), type = "response", ndraws = 100
-), 1, which.max) == df_clean$Response) / nrow(df_clean)
+), 1, which.max) == df_response$Response) / nrow(df_response)
 
 df_improve$Prob = predict(m10)[, 1]
 

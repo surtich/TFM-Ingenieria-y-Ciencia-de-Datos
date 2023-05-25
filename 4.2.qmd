@@ -26,8 +26,8 @@ donde $ij$ es la observación $i$ del estudiante $j$. Obsérvese que ahora los i
 #| fig-cap: Respuestas de los estudiantes por nivel de subtitulado.
 
 set.seed(10)
-random_subjects <- sample(unique(df_clean$Subject), size = 10)
-df_clean %>%
+random_subjects <- sample(unique(df_response$Subject), size = 10)
+df_response %>%
     filter(Subject %in% random_subjects) %>%
     ggplot(aes(x = Treat, y = Response, color = Treat)) +
     geom_point(position = position_jitter(height = 0.3, width = 0), size = 1) +
@@ -44,7 +44,7 @@ df_clean %>%
 options(contrasts = rep("contr.sum", 2))
 clmm_treat.period_subject <- clmm(
     Response ~ Treat * Period + (1 | Subject),
-    data = df_clean
+    data = df_response
 )
 summary(clmm_treat.period_subject)
 ```
@@ -98,7 +98,7 @@ Ahora el parámetro $\beta_{1j}$ del subtitulado tiene dos componentes: Uno com�
 options(contrasts = rep("contr.sum", 2))
 clmm_treat.period_treat.subject <- clmm(
     Response ~ Treat * Period + (1 + Treat | Subject),
-    data = df_clean
+    data = df_response
 )
 summary(clmm_treat.period_treat.subject)
 ```
@@ -161,7 +161,7 @@ El resumen de parámetros del modelo es el siguiente:
 options(contrasts = rep("contr.sum", 2))
 clmm_treat.period.subject.item <- clmm(
     Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item),
-    data = df_clean
+    data = df_response
 )
 summary(clmm_treat.period.subject.item)
 ```

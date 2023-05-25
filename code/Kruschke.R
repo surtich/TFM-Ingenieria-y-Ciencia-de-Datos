@@ -3,7 +3,7 @@ library(scico)
 options(contrasts = rep("contr.sum", 2))
 brm_null <- brm(
     Response ~ 1,
-    data = df_clean,
+    data = df_response,
     family = cumulative("logit"),
     iter = 4000,
     cores = 4,
@@ -133,7 +133,7 @@ pp_check(brm_null, type = "bars", ndraws = 1000, fatten = 2) +
 
 brm_treat <- brm(
     Response ~ 1 + Treat,
-    data = df_clean,
+    data = df_response,
     family = cumulative("logit"),
     iter = 4000,
     cores = 4,
@@ -148,7 +148,7 @@ summary(brm_treat)
 options(contrasts = rep("contr.sum", 2))
 brm_treat.period.subject.question_thres <- brm(
     Response | thres(gr = Item) ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item),
-    data = df_clean,
+    data = df_response,
     family = cumulative("logit"),
     iter = 4000,
     sample_prior = TRUE,
@@ -181,7 +181,7 @@ colors <- viridis(
     n = 5
 )
 
-questions_vector <- setNames(levels(df_clean$Item_lr), levels(df_clean$Item))
+questions_vector <- setNames(levels(df_response$Item_lr), levels(df_response$Item))
 
 question_labeller <- function(string) paste0(string, ": ", questions_vector[string])
 
@@ -219,7 +219,7 @@ p +
         data = pred2_brm %>% filter(Probability == Median & Item %in% c("Q02", "Q05", "Q08", "Q11", "Q14", "Q17") & Period == 2, Treat == "B") %>% distinct(Treat,
             Period, Item, Response,
             .keep_all = TRUE
-        ) %>% mutate(Response_l = ordered(Response, labels = levels(df_clean$Response_l))),
+        ) %>% mutate(Response_l = ordered(Response, labels = levels(df_response$Response_l))),
         aes(label = Response_l),
         direction = "y",
         hjust = 0,

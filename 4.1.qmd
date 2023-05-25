@@ -48,6 +48,8 @@ summary(glm_improve_seq)
 
 Se constata que el coeficiente del intercepto es positivo y significativo (`r round(coef(glm_improve_seq)[1],2)`). El intercepto es el $log\ odds$ de mejorar la valoración en $A$ sobre $B$ respecto a empeorar la valoración. La probabilidad de que la respuesta a un ítem sea mejor en el subtitulado $A$ que en el $B$ es `r round(plogis(coef(glm_improve_seq)[1]),2)`. Sin embargo, la secuencia no resulta significativa y además añadirla apenas reduce la "deviance", por lo que el modelo nulo sin predictores resulta más parsimonioso.
 
+Otra forma de plantear una Regresión Logística es crear una variable de respuesta dicotómica que tenga valor 1 cuando la respuesta sea positiva (valores 4 ó 5) y cero cuando no lo sea (valores 1, 2, 3). En la @sec-ordinal-3 se comentan los resultados de este modelo.
+
 ### Regresión Ordinal {#sec-ordinal-2}
 
 En la @sec-ordinal se presentó el fundamento teórico de la Regresión Ordinal Acumulativa ($CM$). En esta sección se comprueban las hipótesis de este modelo para el experimento del subtitulado de vídeos y se ajustan varios modelos que tratan de predecir el nivel de respuesta (variable `Response`) obtenido en cada uno de los ítems de Likert. Concretamente, se compara el modelo que tenga como único predictor el nivel de subtitulado (`Treat`) con el modelo nulo (sin predictores) y también con el modelo en el que se han añadido los predictores `Period` y `Seq` para comprobar si hay significación estadística de la presencia de efectos periodo y secuencia respectivamente.
@@ -64,7 +66,7 @@ No existe un acuerdo generalmente aceptado sobre como comprobar la proporcionali
 #| fig-height: 8
 #| fig-width: 10
 po.check <- function(x, responses = 1:3) {
-    return(df_clean %>% group_by(.data[[x]], Response) %>% count() %>% ungroup(Response) %>% mutate(cum.sum = cumsum(n), log.odds = qlogis(cum.sum / last(cum.sum)), diff.log.odds = log.odds - lead(x = log.odds, n = 1), odds = cum.sum / (last(cum.sum) - cum.sum), ratio.odds = odds / lead(odds)) %>% arrange(Response) %>% filter(Response %in% responses) %>% mutate(Predictor = x) %>% rename_with(~"Value", x))
+    return(df_response %>% group_by(.data[[x]], Response) %>% count() %>% ungroup(Response) %>% mutate(cum.sum = cumsum(n), log.odds = qlogis(cum.sum / last(cum.sum)), diff.log.odds = log.odds - lead(x = log.odds, n = 1), odds = cum.sum / (last(cum.sum) - cum.sum), ratio.odds = odds / lead(odds)) %>% arrange(Response) %>% filter(Response %in% responses) %>% mutate(Predictor = x) %>% rename_with(~"Value", x))
 }
 
 
@@ -111,7 +113,7 @@ options(contrasts = rep("contr.treatment", 2))
 clm_treat <-
     clm(
         Response ~ Treat,
-        data = df_clean, link = "logit"
+        data = df_response, link = "logit"
     )
 summary(clm_treat)
 ```
@@ -182,7 +184,7 @@ P(Y = 2) & = & P(Y \le 2) - P(Y \le 1) & = &  `r sprintf("%.2f", exp(coef(clm_tr
 \end{aligned}
 $$
 
-En @tbl-probs-clm-treat se muestran las probabilidades para ambos niveles de subtitulado y todos los posibles valores de respuesta. Se confirma que en el nivel de subtitulado $A$ son más probables las respuestas 5 y 4, siendo poco probables el resto de niveles. Sin embargo, en el subtitulado $B$ existe bastante incertidumbre, siendo el valor más probable el nivel 4 y muy similares los niveles 2, 3 y 5. Esto se corresponde con lo que ya se había constatado en el análisis exploratorio (ver @fig-freqs). Se debe tener en cuenta que este modelo tiene un único predictor y, por lo tanto, no es capaz de explicar las diferencias en el nivel de respuesta para distintos periodos, secuencias, ítems o estudiantes. En las siguientes secciones se investiga si en el nivel de respuesta influyen estos predictores.
+En @tbl-probs-clm-treat se muestran las probabilidades para ambos niveles de subtitulado y todos los posibles valores de respuesta. Se confirma que en el nivel de subtitulado $A$ son más probables las respuestas 5 y 4, siendo poco probables el resto de niveles. Sin embargo, en el subtitulado $B$ existe bastante incertidumbre, siendo el valor más probable el nivel 4 y muy similares los niveles 2, 3 y 5. Esto se corresponde con lo que ya se había constatado en el Análisis Exploratorio (ver @fig-freqs). Se debe tener en cuenta que este modelo tiene un único predictor y, por lo tanto, no es capaz de explicar las diferencias en el nivel de respuesta para distintos periodos, secuencias, ítems o estudiantes. En las siguientes secciones se investiga si en el nivel de respuesta influyen estos predictores.
 
 ```{r}
 #| label: tbl-probs-clm-treat
@@ -220,26 +222,26 @@ options(contrasts = rep("contr.treatment", 2))
 clm_treat.period <-
     clm(
         Response ~ Treat * Period,
-        data = df_clean, link = "logit"
+        data = df_response, link = "logit"
     )
 
 clm_treat_period_seq <-
     clm(
         Response ~ Treat + Period + Seq,
-        data = df_clean, link = "logit"
+        data = df_response, link = "logit"
     )
 
 options(contrasts = rep("contr.sum", 2))
 clm_sum_treat.period <-
     clm(
         Response ~ Treat * Period,
-        data = df_clean, link = "logit"
+        data = df_response, link = "logit"
     )
 
 clm_sum_treat_period_seq <-
     clm(
         Response ~ Treat + Period + Seq,
-        data = df_clean, link = "logit"
+        data = df_response, link = "logit"
     )
 
 df_contrast <- cbind(names(coef(clm_treat.period)), coef(clm_treat.period), names(coef(clm_treat_period_seq)), coef(clm_treat_period_seq), names(coef(clm_sum_treat.period)), coef(clm_sum_treat.period), names(coef(clm_sum_treat_period_seq)), coef(clm_sum_treat_period_seq)) %>%
@@ -329,8 +331,8 @@ Se constata que los coeficientes estimados en los tres modelos son significativo
 #| tbl-cap: Comparación de modelos ordinales.
 
 options(contrasts = rep("contr.sum", 2))
-clm_sum_null <- clm(Response ~ 1, data = df_clean)
-clm_sum_treat <- clm(Response ~ Treat, data = df_clean)
+clm_sum_null <- clm(Response ~ 1, data = df_response)
+clm_sum_treat <- clm(Response ~ Treat, data = df_response)
 
 modelsummary(list("Response ~ 1" = clm_sum_null, "Response ~ Treat" = clm_sum_treat, "Response ~ Treat:Period" = clm_sum_treat.period), estimate = "{estimate}{stars}", gof_omit = "RMSE", statistic = c("std.error", "conf.int"), shape = term:contrast ~ model + statistic, output = "gt", metrics = "Log.Lik.")
 ```

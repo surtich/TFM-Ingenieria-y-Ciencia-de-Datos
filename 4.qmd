@@ -31,7 +31,7 @@ test_all_df <- test_all_df %>%
 # Modelado estadístico {#sec-modelado}
 
 
-## Análisis exploratorio {#sec-eda}
+## Análisis Exploratorio {#sec-eda}
 
 
 Como se explica en la @tbl-variables, al subtitulado se le denomina tratamiento y a sus niveles (correcto e incorrecto) se les ha llamado $A$ y $B$ sin hacer ninguna conjetura de cual de los dos es el subtitulado correcto. El grupo con secuencia $AB$ será el que primero vio el vídeo con subtitulado $A$ y luego el $B$. Análogamente, el grupo con secuencia $BA$ vio los vídeos en orden inverso. Recuérdese que el nivel 0 de respuesta se corresponde con "No sé / No contesto" (ver @tbl-likert-levels). Tras eliminar los test de los `r no_want_users` estudiantes que no dieron su consentimiento para participar en el estudio y los de los `r n_users -  n_distinct(df_all$Subject)` estudiantes que no realizaron el segundo test, las dos cohortes están equilibradas ya que hay `r (df_all %>% distinct(Seq, Subject) %>%   group_by(Seq) %>% count() %>% filter(Seq=="AB"))$n` estudiantes que realizaron el test con secuencia $AB$ y `r (df_all %>% distinct(Seq, Subject) %>%   group_by(Seq) %>% count() %>% filter(Seq=="BA"))$n` con secuencia $BA$.
@@ -419,7 +419,7 @@ de respuestas positivas frente `r get_freqs(df_freqs_seq, Seq="BA", Response=c(4
 ### Análisis de los ítems
 
 ```{r}
-likert_df <- df_clean %>% pivot_wider(names_from = Item, values_from = Response_l, id_cols = c(Seq, Period, Subject, Treat))
+likert_df <- df_response %>% pivot_wider(names_from = Item, values_from = Response_l, id_cols = c(Seq, Period, Subject, Treat))
 ```
 
 El gráfico @fig-levels muestra la frecuencia relativa por grupo y por test de los ítems clasificados por niveles de respuesta, considerando que:
@@ -437,7 +437,7 @@ Se muestra en primer lugar el ítem 18 por ser una valoración global del subtit
 #| fig-height: 6
 #| fig-cap: Frecuencias relativas de las respuestas por ítem.
 
-df_clean %>%
+df_response %>%
     group_by(Seq, Treat, Item, Level) %>%
     mutate(Item = factor(Item, levels = rev(levels(Item)))) %>%
     count(Response) %>%

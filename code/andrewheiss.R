@@ -41,7 +41,7 @@ fit <- brm(
 
 r_fit <- fit %>%
     tidy() %>%
-    mutate(term = janitor::make_clean_names(term)) %>%
+    mutate(term = janitor::make_response_names(term)) %>%
     split(~term)
 
 B0 <- r_fit$intercept$estimate
@@ -75,7 +75,7 @@ predictions(
     by = "TX",
     re_formula = NA
 )
-newdata <- df_clean %>% modelr::data_grid(Period, Treat, Item)
+newdata <- df_response %>% modelr::data_grid(Period, Treat, Item)
 
 posterior_predict(brm_treat.period.subject.question, newdata, re_formula = ~ (1 + Treat | Item)) %>% head()
 
@@ -107,7 +107,7 @@ tidy_epred <- brm_treat.period.subject.question %>%
 tidy_epred
 
 
-newdata <- df_clean %>% modelr::data_grid(Period, Treat, Item)
+newdata <- df_response %>% modelr::data_grid(Period, Treat, Item)
 pred_brm <- brm_treat.period.subject.question %>%
     epred_draws(newdata = newdata, re_formula = ~ (1 + Treat | Item), by = c("Treat", "Item"), category = "Response") %>%
     select(Period, Treat, Item, Response, .epred) %>%
@@ -142,7 +142,7 @@ colors <- viridis(
     n = 5
 )
 
-questions_vector <- setNames(levels(df_clean$Item_lr), levels(df_clean$Item))
+questions_vector <- setNames(levels(df_response$Item_lr), levels(df_response$Item))
 
 question_labeller <- function(string) paste0(string, ": ", questions_vector[string])
 
@@ -187,7 +187,7 @@ p +
         data = pred2_brm %>% filter(Item %in% c("Q02", "Q05", "Q08", "Q11", "Q14", "Q17") & Period == 2, Treat == "B") %>% distinct(Treat,
             Period, Item, Response,
             .keep_all = TRUE
-        ) %>% mutate(Response_l = ordered(Response, labels = levels(df_clean$Response_l))),
+        ) %>% mutate(Response_l = ordered(Response, labels = levels(df_response$Response_l))),
         aes(label = Response_l),
         direction = "y",
         hjust = 0,
