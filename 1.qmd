@@ -53,7 +53,7 @@ El capítulo **Modelado estadístico** (ver @sec-modelado) comienza con un Anál
 
 El capítulo de **Resultados** (ver @sec-resultados) se presentan los resultados de los modelos seleccionados en el capítulo anterior.
 
-En el capítulo **Discusión** (ver @sec-discusión) se utilizan los resultados del capítulo anterior para responder a la pregunta de investigación y a los objetivos específicos.
+En el capítulo **Discusión** (ver @sec-discusion) se utilizan los resultados del capítulo anterior para responder a la pregunta de investigación y a los objetivos específicos.
 
 Finalmente el capítulo **Conclusión y trabajo futuro** (ver @sec-conclusion) se destina a proponer posibles líneas de investigación futuras en base a los resultados obtenidos.
 

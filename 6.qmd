@@ -168,11 +168,10 @@ comments_df <- read_delim(
 ```
 
 
-
 En esta sección se discuten los resultados una vez "descubierto el ciego" y se responden a las preguntas de investigación planteadas en la @sec-objetivos. Se reveló que el subtitulado que en este trabajo se ha denominado $A$ se corresponde que el vídeo correctamente subtitulado. Adicionalmente se ha suministrado un documento que contiene los errores introducidos en el subtitulado $B$. A partir del mismo, se ha elaborado la Tabla \ref{tbl-blind-errors} en la que se muestra la correspondencia de cada error con los ítems de la escala de Likert a la que respondieron los estudiantes (ver en la @tbl-likert-scale una descripción textual de cada ítem). Para `r length(q.no.errors)` de los `r length(q.no.errors) + length(q.errors)` ítems (`r paste(q.no.errors, collapse=", ")`) no se ha encontrado una adscripción clara en el documento de errores y, por lo tanto, sería deseable una valoración similar entre subtitulados en esos ítems.
 
 ```{=tex}
-\begin{table}[H]
+\begin{table}[]
 \caption{\label{tbl-blind-errors}Correspondencia entre los errores introducidos en el subtitulado del vídeo B y los ítems de la escala de Likert.}\tabularnewline
 \tiny
 \begin{adjustwidth}{-2.5cm}{}
@@ -232,8 +231,7 @@ En esta sección se discuten los resultados una vez "descubierto el ciego" y se 
 \end{table}
 ```
 
-
-Para responder a las preguntas de investigación se van a utilizar los hallazgos del Análisis Exploratorio (ver @sec-eda) y los resultados de los tres modelos comentados en el @sec-resultados. A saber:
+Para responder a las preguntas de investigación se van a utilizar los hallazgos del Análisis Exploratorio (ver @sec-eda) y los resultados de los tres modelos comentados en el @sec-resultados:
 
 * Regresión Logística con variable respuesta `Improve`, que calcula la probabilidad de que la respuesta a un ítem mejore entre subtitulados $A$ > $B$ (ver @sec-logistica-3).
 * Regresión Logística con variable respuesta `Positive`, que calcula la probabilidad de que la respuesta a un ítem sea positiva (4 ó 5).
@@ -263,14 +261,14 @@ La respuesta a esta pregunta requiere un análisis pormenorizado ítem a ítem. 
 * Cuanto más oscuro sea el color de fondo más inesperado es el resultado. 
 
 En el modelo con variable respuesta `Improve` (ver @fig-or-improve), los alumnos han sabido reconocer los ítems en los que no se han introducido errores (en los ítems comoo el $Q01$ y $Q03$ con mucha incertidumbre). También han sido capaces de identificar correctamente errores de subtitulado en $Q05$ (`r tolower(question_labels[6])`), $Q06$ (`r tolower(question_labels[7])`), $Q07$ (`r tolower(question_labels[8])`), $Q08$ (`r tolower(question_labels[9])`), $Q09$ (`r tolower(question_labels[10])`) y $Q14$ (`r tolower(question_labels[15])`).
-SIn embargo hay ítems en los que sí se han introducido errores y sin embargo los alumnos apenas los han reflejado en sus valoraciones han sido:
+Sin embargo hay ítems en los que sí se han introducido errores y que apenas han sido valorados negativamente por los alumnos:
 
-* $Q02$ (`r tolower(question_labels[3])`) probabilidad predicha de mejorar la valoración `r paste(round(100*(improve_question$Prob)[3],2),"%",sep="")`.
-* $Q10$ (`r tolower(question_labels[11])`) probabilidad `r paste(round(100*(improve_question$Prob)[11],2),"%",sep="")`.
-* $Q11$ (`r tolower(question_labels[12])`) probabilidad `r paste(round(100*(improve_question$Prob)[12],2),"%",sep="")`.
-* $Q12$ (`r tolower(question_labels[13])`) probabilidad `r paste(round(100*(improve_question$Prob)[13],2),"%",sep="")`.
+* $Q02$ (`r tolower(question_labels[3])`) con probabilidad predicha de mejorar la valoración de `r paste(round(100*(improve_question$Prob)[3],2),"%",sep="")`.
+* $Q10$ (`r tolower(question_labels[11])`) con probabilidad de mejora `r paste(round(100*(improve_question$Prob)[11],2),"%",sep="")`.
+* $Q11$ (`r tolower(question_labels[12])`) con probabilidad `r paste(round(100*(improve_question$Prob)[12],2),"%",sep="")`.
+* $Q12$ (`r tolower(question_labels[13])`) con probabilidad `r paste(round(100*(improve_question$Prob)[13],2),"%",sep="")`.
 
-La @fig-or-positive muestra las predicciones del modelo con variable respuesta `Positive` de obtener una respuesta con nivel 4 ó 5. Las conclusiones que se pueden extraer son muy similares a las del modelo con variable respuesta `Improve`. Los ítems $Q15$, $Q16$ y $Q17$ son ítems que tienen una valoración comparativamente baja en ambos subtitulados e inferior en el $B$ que en el $A$ y ninguna de estas cosas debería haber sucedido ya que no se han introducido este tipo de errores.
+La @fig-or-positive muestra las predicciones del modelo con variable respuesta `Positive` de obtener una respuesta con nivel 4 ó 5. Las conclusiones que se pueden extraer son muy similares a las del modelo con variable respuesta `Improve`. Los ítems $Q15$, $Q16$ y $Q17$ son ítems que tienen una valoración comparativamente baja en ambos subtitulados e inferior en el $B$ que en el $A$ y ninguna de estas cosas era esperable que sucediera ya que no se han introducido este tipo de errores.
 
 ::: {#fig-logistic-compare layout-ncol=2}
 
@@ -281,12 +279,12 @@ La @fig-or-positive muestra las predicciones del modelo con variable respuesta `
 Predicciones de los modelos de Regresión Logística
 :::
 
-En la \ref{fig-prob-compare} se muestra la probabilidad de nivel de respuesta por ítem y nivel de subtitulado correspondiente al modelo de Regresión Ordinal y se compara con la frecuencia de la tabla de contingencia. Los ítems con errores se muestran en negrita y recuadrados. Se observa que en el subtitulado $A$ todas las respuestas a los ítems se concentran en valores positivos (4 ó 5). En este subtitulado $A$ los ítems $Q15$, $Q16$ y $Q17$ reciben bastantes respuestas negativas
-[^El modelo ordinal no es capaz de predecir esto debido a que, como estos ítems recibieron muchas contestaciones "No sé / No contesto", y éstas se han eliminado del análisis, el efecto "regresión a la media" que produce el modelado en estos ítems es grande.].
+En la Figura \ref{fig-prob-compare} se muestra la probabilidad de nivel de respuesta por ítem y nivel de subtitulado correspondiente al modelo de Regresión Ordinal y se compara con la frecuencia de la tabla de contingencia. Los ítems con errores se muestran en negrita y recuadrados. Se observa que en el subtitulado $A$ todas las respuestas a los ítems se concentran en valores positivos (4 ó 5). En este subtitulado $A$ los ítems $Q15$, $Q16$ y $Q17$ reciben bastantes respuestas negativas
+^[El modelo ordinal no es capaz de predecir esto debido a que, como estos ítems recibieron muchas contestaciones "No sé / No contesto" y éstas se han eliminado del análisis, el efecto "regresión a la media" que produce el modelado en estos ítems es grande.].
 
-En el subtitulado $B$ esperamos que los ítems en los que se han introducido errores tengan peores valoraciones. Esto sucede claramente en $Q05$ y en $Q09$ y también aunque en menor medida en $Q06$, $Q07$, $Q08$ y $Q14$. En $Q18$ (`r tolower(question_labels[1])`) también se observan claras diferencias indicando que los estudiantes han identificado con claridad que $B$ es el subtitulado con errores. Sin embargo, hay una gran incertidumbre en las respuestas a los ítems $Q02$, $Q10$, $Q11$ y $Q12$ en todos ellos hay más respuestas negativas que en el subtitulado $A$ pero se mantiene un elevado porcentaje de respuestas positivas. En los ítems en los que no se han introducido errores se deberían observar similares respuestas que en el subtitulado $A$. Esto sucede en $Q04$, $Q13$, $Q15$, $Q16$ y $Q17$. Sin embargo los ítems $Q01$ y $Q03$ reciben peores valoraciones en $B$ que en $A$ de forma inesperada.
+En el subtitulado $B$ esperamos que los ítems en los que se han introducido errores tengan peores valoraciones. Esto sucede claramente en $Q05$ y en $Q09$ y también aunque en menor medida en $Q06$, $Q07$, $Q08$ y $Q14$. En $Q18$ (`r tolower(question_labels[1])`) también se observan diferencias lo que es una clara indicación de que los estudiantes han considerado que $B$ es el subtitulado con errores. Sin embargo, hay una gran incertidumbre en las respuestas a los ítems $Q02$, $Q10$, $Q11$ y $Q12$. En todos ellos hay más respuestas negativas que en el subtitulado $A$ pero se mantiene un elevado porcentaje de respuestas positivas. En los ítems en los que no se han introducido errores se deberían observar respuestas similares a las del subtitulado $A$. Esto sucede en $Q04$, $Q13$, $Q15$, $Q16$ y $Q17$. Pero no ocurre lo mismo en los ítems $Q01$ y $Q03$ ya que reciben peores valoraciones en $B$ que en $A$ de forma inesperada.
 
-Una cuestión interesante a destacar es que en general el análisis de las predicciones del modelo ordinal es más parsimonioso y estable que el análisis de las frecuencias relativas. Esto se va claramente en los ítems $Q01$, $Q07$ y $Q08$ en los que los estudiantes se muestran divididos y han evitado la contestación neutral y preferido los valores extremos. El modelo ha corregido esto y hecho unas predicciones más equilibradas.
+Una cuestión interesante a destacar es que en general el análisis de las predicciones del modelo ordinal es más parsimonioso y estable que el análisis de las frecuencias relativas. Esto se va claramente en los ítems $Q01$, $Q07$ y $Q08$. El análisis en bruto de las frecuencias muestra que las valoraciones de los estudiantes están polarizadas y evitan la contestación neutral. El modelo ha corregido esto y hecho unas predicciones más equilibradas.
 
 
 ```{=tex}
@@ -304,14 +302,135 @@ por el modelo y las frecuencias relativas de los datos.}
 
 ```
 
+Para entender las motivaciones de las valoraciones de los alumnos en aquellos ítems que tienen una respuesta no deseada se han analizado los comentarios que dejaron
+^[Estos comentarios se separaron en la fase de preprocesado y no se han utilizado ni consultado hasta la realización de este capítulo.]. La siguiente es una selección de comentarios por ítems:
 
-Para entender la explicación de la valoración de los alumnos en los ítems que tienen una respuesta no deseada se han analizado los comentarios que dejaron
-^[Estos comentarios no se separaron en la fase de preprocesado y no se han utilizado ni consultado hasta la realización de este capítulo.]. La siguiente es una selección de comentarios:
-
-* $Q14$ `r tolower(question_labels[14])`: `r paste((comments_df %>% filter(Item == "14" & Comment != "Sin comentario." & Row %in% c(76,23,110,14)) %>%  arrange(Group, Response))$Comment, collapse=" / ")`. Parece claro que algunos estudiantes no entendieron que la pregunta se refiere únicamente a si la fuente tipográfica es adecuada y contestan otras cuestiones.
-
-
+* $Q01$, `r tolower(question_labels[2])`: Se trata de un error no existente en ninguno de los vídeos. Sin embargo, una selección de comentarios (hay otros ejemplos similares) evidencia que algunos alumnos (pocos) han manifestado no estaban bien posicionados los subtítulos en $A$ y que otros (bastantes) han comentado que en el vídeo $B$ los subtítulos no estaban bien posicionados.
   
+\scriptsize
+\color{blue}
+    > Subtitulado $A$ $Q01$: `r paste("'",(comments_df %>% filter(Item == "01" & Row %in% c(100,119)) %>%  arrange(Group, Response))$Comment, "'", collapse=", ", sep="")`.
+\color{black}
+\normalsize
+
+\scriptsize
+\color{red}
+    > Subtitulado $B$ $Q01$: `r paste("'",(comments_df %>% filter(Item == "01" & Row %in% c(99,72,143,24)) %>%  arrange(Group, Response))$Comment, "'", collapse=", ", sep="")`.
+
+\color{black}
+\normalsize
+
+* $Q03$, `r tolower(question_labels[4])`: Se trata de un error no existente en ninguno de los vídeos. En los comentarios hay bastante más negativos en el vídeo $A$ que en el $B$.  
+
+\scriptsize
+\color{blue}
+    > Subtitulado $A$ $Q03$: `r paste("'",(comments_df %>% filter(Item == "03" & Row %in% c(21, 100, 119, 123, 14)) %>%  arrange(Group, Response))$Comment, "'", collapse=", ", sep="")`.
+
+\color{black}
+\normalsize
+
+* $Q02$, `r tolower(question_labels[3])`: Se trata de un error introducido en el subtitulado $B$. En los comentarios al subtitulado $A$ hay bastantes que se quejan del número excesivo de líneas.  
+
+\scriptsize
+\color{blue}
+    > Subtitulado $A$ $Q02$: `r paste("'",(comments_df %>% filter(Item == "02" & Row %in% c(50,41,100,108)) %>%  arrange(Group, Response))$Comment, "'", collapse=", ", sep="")`.
+
+\color{black}
+\normalsize
+
+
+* $Q10$, `r tolower(question_labels[11])`: Se trata de un error introducido en el subtitulado $B$. En los comentarios al subtitulado $A$ hay algunos que dicen que hay falta de sincronización y, por el contrario, en el $B$ que estaban bien sincronizados. Hay por tanto una falta de atención de algunos estudiantes para evaluar este aspecto del subtitulado.  
+
+\scriptsize
+\color{blue}
+    > Subtitulado $A$ $Q10$: `r paste("'",(comments_df %>% filter(Item == "10" & Row %in% c(111,123,99,88)) %>%  arrange(Group, Response))$Comment, "'", collapse=", ", sep="")`.
+
+\color{black}
+\normalsize
+
+\scriptsize
+\color{red}
+    > Subtitulado $B$ $Q10$: `r paste("'",(comments_df %>% filter(Item == "10" & Row %in% c(45,72,96,219,24,52)) %>%  arrange(Group, Response))$Comment, "'", collapse=", ", sep="")`.
+
+\color{black}
+\normalsize
+
+* $Q11$, `r tolower(question_labels[12])`: Se trata de un error introducido en el subtitulado $B$. Los comentarios al subtitulado $B$ denotan que muchos estudiantes no han tenido en cuenta el subtítulo debe permanecer al menos tres segundos en la pantalla.
+
+\scriptsize
+\color{red}
+    > Subtitulado $B$ $Q11$: `r paste("'",(comments_df %>% filter(Item == "11" & Row %in% c(102,120,52,219,48,124)) %>%  arrange(Group, Response))$Comment, "'", collapse=", ", sep="")`.
+
+\color{black}
+\normalsize
+
+
+* $Q12$, `r tolower(question_labels[13])`: Se trata de un error introducido en el subtitulado $B$. Los comentarios denotan que en general los alumnos conocen el número máximo de caracteres por línea, pero que no se han detenido a medir cuántos hay realmente. 
+
+\scriptsize
+\color{blue}
+    > Subtitulado $A$ $Q12$: `r paste("'",(comments_df %>% filter(Item == "12" & Row %in% c(142)) %>%  arrange(Group, Response))$Comment, "'", collapse=", ", sep="")`.
+
+\color{black}
+\normalsize
+
+\scriptsize
+\color{red}
+    > Subtitulado $B$ $Q12$: `r paste("'",(comments_df %>% filter(Item == "12" & Row %in% c(164,109,264)) %>%  arrange(Group, Response))$Comment, "'", collapse=", ", sep="")`.
+
+\color{black}
+\normalsize
+
+
+* $Q15$, `r tolower(question_labels[16])`: En este ítem no se han introducido diferencias entre subtitulados. Aquí parece que los comentarios reflejan que el estudiante conoce las normas del uso de puntos suspensivos pero no ha prestado atención a su utilización. También se observa diferencias a lahora de valoran un ítem en el que no tienen recurdo, dándose todo tipo de situaciones: Contestar "No sé / No contesto", contestar "Neutral" e incluso valorar positiva y negativamente.
+
+\scriptsize
+\color{blue}
+    > Subtitulado $A$ $Q15$: `r paste("'",(comments_df %>% filter(Item == "15" & Row %in% c(23,108,142,65,143)) %>%  arrange(Group, Response))$Comment, "'", collapse=", ", sep="")`.
+
+\color{black}
+\normalsize
+
+\scriptsize
+\color{red}
+    > Subtitulado $B$ $Q15$: `r paste("'",(comments_df %>% filter(Item == "15" & Row %in% c(85,53,103,200,62,124)) %>%  arrange(Group, Response))$Comment, "'", collapse=", ", sep="")`.
+
+\color{black}
+\normalsize
+
+
+* $Q16$, `r tolower(question_labels[17])`: En este ítem no se han introducido diferencias entre subtitulados. Tiene comparativamente menos comentarios que otros ítems y la mayoría reflejan que no había números en los subtítulos. La dispersión en las respuestas se debe, como en el caso de $Q15$, a que los estudiantes no saben qué valor de respuesta otorgar.
+
+\scriptsize
+\color{blue}
+    > Subtitulado $A$ $Q16$: `r paste("'",(comments_df %>% filter(Item == "16" & Row %in% c(108,65,119)) %>%  arrange(Group, Response))$Comment, "'", collapse=", ", sep="")`.
+
+\color{black}
+\normalsize
+
+\scriptsize
+\color{red}
+    > Subtitulado $B$ $Q16$: `r paste("'",(comments_df %>% filter(Item == "16" & Row %in% c(85,120,113)) %>%  arrange(Group, Response))$Comment, "'", collapse=", ", sep="")`.
+
+\color{black}
+\normalsize
+
+
+* $Q17$, `r tolower(question_labels[18])`: En este ítem no se han introducido diferencias entre subtitulados. Nuevamente los estudiantes detectan que no hay incorrecciones en el subtitulado pero no dan el mismo nivel de respuesta a esta circunstancia.
+
+\scriptsize
+\color{blue}
+    > Subtitulado $A$ $Q17$: `r paste("'",(comments_df %>% filter(Item == "17" & Row %in% c(108,113,14)) %>%  arrange(Group, Response))$Comment, "'", collapse=", ", sep="")`.
+
+\color{black}
+\normalsize
+
+\scriptsize
+\color{red}
+    > Subtitulado $B$ $Q17$: `r paste("'",(comments_df %>% filter(Item == "17" & Row %in% c(169,120,43,26)) %>%  arrange(Group, Response))$Comment, "'", collapse=", ", sep="")`.
+
+\color{black}
+\normalsize
 
 
 # Conclusión y trabajo futuro {#sec-conclusion}
