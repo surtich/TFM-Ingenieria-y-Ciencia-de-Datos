@@ -48,7 +48,7 @@ summary(glm_improve_seq)
 
 Se constata que el coeficiente del intercepto es positivo y significativo (`r round(coef(glm_improve_seq)[1],2)`). El intercepto es el $log\ odds$ de mejorar la valoración en $A$ sobre $B$ respecto a empeorar la valoración. La probabilidad de que la respuesta a un ítem sea mejor en el subtitulado $A$ que en el $B$ es `r round(plogis(coef(glm_improve_seq)[1]),2)`. Sin embargo, la secuencia no resulta significativa y además añadirla apenas reduce la "deviance", por lo que el modelo nulo sin predictores resulta más parsimonioso.
 
-Otra forma de plantear una Regresión Logística es crear una variable de respuesta dicotómica que tenga valor 1 cuando la respuesta sea positiva (valores 4 ó 5) y cero cuando no lo sea (valores 1, 2, 3). En la @sec-ordinal-3 se comentan los resultados de este modelo.
+Otra forma de plantear una Regresión Logística es crear una variable de respuesta dicotómica que tenga valor 1 cuando la respuesta sea positiva (valores 4 ó 5) y cero cuando no lo sea (valores 1, 2 ó 3). En la @sec-ordinal-3 se comentan los resultados de este modelo.
 
 ### Regresión Ordinal {#sec-ordinal-2}
 

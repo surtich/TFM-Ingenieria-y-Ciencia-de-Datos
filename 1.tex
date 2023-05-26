@@ -1,0 +1,405 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrartcl}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
+\@ifpackageloaded{fontawesome5}{}{\usepackage{fontawesome5}}
+\definecolor{quarto-callout-color}{HTML}{909090}
+\definecolor{quarto-callout-note-color}{HTML}{0758E5}
+\definecolor{quarto-callout-important-color}{HTML}{CC1914}
+\definecolor{quarto-callout-warning-color}{HTML}{EB9113}
+\definecolor{quarto-callout-tip-color}{HTML}{00A047}
+\definecolor{quarto-callout-caution-color}{HTML}{FC5300}
+\definecolor{quarto-callout-color-frame}{HTML}{acacac}
+\definecolor{quarto-callout-note-color-frame}{HTML}{4582ec}
+\definecolor{quarto-callout-important-color-frame}{HTML}{d9534f}
+\definecolor{quarto-callout-warning-color-frame}{HTML}{f0ad4e}
+\definecolor{quarto-callout-tip-color-frame}{HTML}{02b875}
+\definecolor{quarto-callout-caution-color-frame}{HTML}{fd7e14}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
+\makeatother
+\makeatletter
+\@ifundefined{shadecolor}{\definecolor{shadecolor}{rgb}{.97, .97, .97}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\makeatother
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[breakable, interior hidden, borderline west={3pt}{0pt}{shadecolor}, sharp corners, frame hidden, enhanced, boxrule=0pt]}{\end{tcolorbox}}\fi
+
+\hypertarget{motivaciuxf3n}{%
+\subsection{Motivación}\label{motivaciuxf3n}}
+
+Algunas personas tienen problemas de accesibilidad a contenidos
+multimedia. Añadir subtítulos a los vídeos facilita que muchas de ellas
+superen estas dificultades de accesibilidad ya que permiten la
+percepción visual de información que originalmente era acústica. Por
+ello, los subtítulos ayudan a las personas sordas o con discapacidad
+auditiva a acceder al contenido audiovisual y constituyen uno de los
+componentes fundamentales de la accesibilidad audiovisual {[}ver
+@jperez1{]}. En las \emph{Pautas de Accesibilidad para el Contenido Web,
+WCAG2.1} {[}ver @WCAG21{]} se incluyen pautas y criterios que deben
+seguirse en el subtitulado. La norma UNE 153010 {[}ver @aenor2012{]}
+sobre \emph{Subtitulado para personas sordas y personas con discapacidad
+auditiva} ``especifica requisitos y recomendaciones sobre la
+presentación del subtitulado para personas sordas y personas con
+discapacidad auditiva como medio de apoyo a la comunicación para
+facilitar la accesibilidad de los contenidos audiovisuales de la
+Sociedad de la Información.''
+
+Las plataformas de compartición de vídeos como Youtube o las de creación
+de cursos MOOC (Massive Open Online Course) como Coursera o EDX permiten
+en la actualidad la generación de subtítulos automáticos. Además,
+existen comunidades que se dedican a subtitular todo tipo de material
+multimedia. No obstante, frecuentemente los subtítulos producidos de
+esta manera no tienen en cuenta la necesidades de accesibilidad
+específicas de personas con problemas de audición. Estas personas
+normalmente van a necesitar un subtitulado cerrado (\emph{closed
+caption}). Este subtitulado consta de información interpretativa e
+incluye descripción textual de efectos sonoros junto con otros elementos
+como la perfecta sincronización con el hablante, el número de caracteres
+por línea, la exactitud del diálogo, la ubicación, el tamaño o el
+contraste del subtítulo. Así, @parton2016 realizó un estudio para
+determinar si los subtítulos automáticos generados por YouTube cumplen
+las necesidades de los estudiantes universitarios sordos. En el estudio
+se contabilizaron un total de 525 errores en 68 minutos de video (una
+tasa de 7.7 errores por minuto). La accesibilidad multimedia es, por lo
+tanto, una actividad importante y compleja que requiere dedicación y
+conocimiento específico y va más allá de verificar si el vídeo tiene o
+no subtítulos.
+
+\hypertarget{sec-objetivos}{%
+\subsection{Objetivos}\label{sec-objetivos}}
+
+El objetivo de este trabajo es responder a la siguiente pregunta de
+investigación:
+
+\begin{tcolorbox}[enhanced jigsaw, leftrule=.75mm, bottomtitle=1mm, toprule=.15mm, opacityback=0, bottomrule=.15mm, colframe=quarto-callout-note-color-frame, titlerule=0mm, colbacktitle=quarto-callout-note-color!10!white, arc=.35mm, breakable, toptitle=1mm, left=2mm, colback=white, coltitle=black, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Pregunta de investigación}, rightrule=.15mm, opacitybacktitle=0.6]
+
+¿Son los estudiantes de un curso de creación de materiales accesibles
+capaces de encontrar diferencias en la calidad del subtitulado de un
+vídeo?
+
+\end{tcolorbox}
+
+Los datos utilizados proceden de una actividad voluntaria sobre
+evaluación del subtitulado que se propuso a los estudiantes de la Sexta
+Edición de 2022 del \textbf{curso MOOC Materiales Digitales Accesibles}
+perteneciente al Canal Fundación ONCE en UNED Abierta. Este curso es una
+iniciativa del Real Patronato sobre Discapacidad en colaboración con la
+Fundación ONCE y la UNED. El curso está dirigido por los profesores
+Emilio Letón Molina y Alejandro Rodríguez Ascaso. El Canal Fundación
+ONCE se creó en 2016 y hasta marzo de 2023 casi de 23.000 estudiantes se
+han inscrito en alguno de sus cursos. En ellos se ofrece formación en
+conocimientos y habilidades necesarios para diseñar productos, entornos,
+sistemas y servicios desde una perspectiva de diseño universal:
+
+\begin{itemize}
+\tightlist
+\item
+  Reconocer las necesidades relacionadas con la accesibilidad.
+\item
+  Dar respuesta a estas necesidades, cada actor en la medida de sus
+  posibilidades.
+\item
+  Integrar soluciones de accesibilidad universales y específicas
+  utilizando la tecnología apropiada.
+\end{itemize}
+
+La Fundación ONCE, el Real Patronato sobre Discapacidad y la UNED
+colaboran para producir recursos educativos abiertos, gratuitos, de
+calidad y accesibles para todas las personas. Los cursos del Canal se
+ofrecen a través de UNED Abierta, portal de formación en formato MOOC
+sobre una instancia personalizada de la plataforma OpenEdX. En la
+actualidad la oferta es de nueve cursos. En el año 2022 se matricularon
+3.764 alumnos y aprobaron el 19,34\% de los matriculados.
+
+El curso de Materiales Digitales Accesibles se lleva realizando desde
+2017, se han matriculado en alguna de sus siete ediciones (hasta mayo de
+2023) más de 8.000 alumnos y tiene un porcentaje medio de aprobados
+sobre matriculados del 14,6\%. En la Sexta Edición se matricularon 1.261
+alumnos y aprobaron 165 (13,08\%).
+
+@jperez2 realizaron una experiencia similar a la planteada en este
+trabajo y llegaron a la conclusión de que evaluadores novatos pueden
+identificar problemas de accesibilidad en vídeos. Por lo tanto, la
+evaluación social propuesta por @kawanaka2008 se podría aplicar a los
+contenidos de vídeo en la Web. Sin embargo, también constataron que los
+evaluadores novatos pueden pasar por alto problemas sutiles de
+accesibilidad que requieren un conocimiento experto como, por ejemplo,
+la evaluación del contraste, ya que requieren herramientas adecuadas.
+Por ello, en este trabajo también se responderá a los siguientes
+objetivos específicos:
+
+\begin{tcolorbox}[enhanced jigsaw, leftrule=.75mm, bottomtitle=1mm, toprule=.15mm, opacityback=0, bottomrule=.15mm, colframe=quarto-callout-tip-color-frame, titlerule=0mm, colbacktitle=quarto-callout-tip-color!10!white, arc=.35mm, breakable, toptitle=1mm, left=2mm, colback=white, coltitle=black, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Objetivos específicos}, rightrule=.15mm, opacitybacktitle=0.6]
+
+¿Qué aspectos de la calidad del subtitulado son más fácilmente
+reconocibles por los estudiantes y en cuáles existe mayor dificultad?
+
+\end{tcolorbox}
+
+\hypertarget{descripciuxf3n-de-la-experiencia}{%
+\subsection{Descripción de la
+experiencia}\label{descripciuxf3n-de-la-experiencia}}
+
+La actividad de subtitulado fue voluntaria y sin influencia en la
+calificación final del alumno. Se realizó en el módulo ``Accesibilidad
+del material multimedia''. En este mismo módulo, y antes de la actividad
+de subtitulado, los alumnos hubieron completado las secciones
+``Accesibilidad de la información sonora'' y ``Accesibilidad de la
+información visual'', con lo cual adquirieron un conocimiento previo
+sobre creación de vídeos y subtítulos accesibles. Se estima que los
+estudiantes hubieron empleado unas tres horas de formación en
+accesibilidad multimedia (una de ellas específicamente en subtitulado)
+antes de realizar la actividad.
+
+De acuerdo al \textbf{compromiso ético} del Canal los datos de los
+estudiantes se han suministrado anonimizados usando un identificador
+generado con SHA512. Además, se han eliminado del estudio los datos de
+estudiantes que, a pesar de haber realizado la actividad de subtitulado,
+no dieron su consentimiento para que sus datos fueran utilizados en
+estudios científicos.
+
+La actividad consistió en ver dos vídeos idénticos de 43 segundos que
+solo se diferencian en la calidad del subtitulado. Los subtítulos del
+vídeo bien subtitulado se realizaron por un experto de FIAPAS
+(Confederación Española de Familias de Personas Sordas) siguiendo la
+norma UNE 153010 {[}ver @aenor2012{]}. El otro vídeo tenía un
+subtitulado similar pero se introdujeron pequeñas deficiencias, algunas
+de ellas inapreciables para alguien que carezca de conocimientos sobre
+accesibilidad. El orden de los vídeos fue aleatorio, de tal forma que
+una cohorte de alumnos vio primero el vídeo bien subtitulado y luego el
+mal subtitulado y la otra lo hizo al revés. Después de ver cada uno de
+los vídeos, los alumnos respondieron a una escala de Likert de 5 niveles
+y 18 ítems. Los 18 ítems de Likert responden a los criterios de la norma
+UNE 153010 {[}ver @aenor2012{]}.
+
+Los términos \textbf{escala de Likert} e ítem de Likert se prestan a
+menudo a confusión ya que se utilizan con distintos significados. En
+este trabajo se seguirá la convención más habitual {[}ver
+@uebersax2006{]} de denominar ítem de Likert a cada una de las preguntas
+de que consta un cuestionario o test, siendo la escala de Likert el
+conjunto de todos los ítems del cuestionario. Cada ítem se contestó
+marcando una opción de entre un conjunto ordenado de respuestas o
+niveles propuesto e idéntico para todos los ítems. Por ello, se debe
+evitar denominar escala a los niveles de un ítem.
+
+El diseño del experimento fue \textbf{triple ciego}: es decir, a los
+alumnos no se les informó de si estaban viendo el vídeo con mejor o con
+peor calidad de subtitulado. Los directores del MOOC tampoco conocieron
+esta información, como tampoco se conocía en el momento de analizar los
+datos, ya que los vídeos tienen identificaciones ofuscadas con CRC32b y
+no contienen ninguna indicación del tipo de subtitulado del
+vídeo\footnote{En la respuesta a cada ítem, el alumno pudo añadir
+  comentarios. Éstos fueron eliminados en la fase de análisis para que
+  no filtren información referente al tipo de subtitulado que el alumno
+  creyó estar contestando y solo se utilizaron en la fase de discusión
+  ver \textbf{?@sec-discusion}().}. El ``ciego fue liberado'' en la fase
+de elaboración de la discusión de este trabajo (ver
+\textbf{?@sec-discusion}).
+
+\hypertarget{organizaciuxf3n-del-trabajo}{%
+\subsection{Organización del
+trabajo}\label{organizaciuxf3n-del-trabajo}}
+
+En el capítulo \textbf{Marco teórico y estado del arte} (ver
+\textbf{?@sec-arte}) se enmarca la actividad de subtitulado en el
+contexto del modelado estadístico, describiendo sus principales
+características y proponiendo y justificando las técnicas y modelos que
+se van a utilizar. En este capítulo también se explica la forma en que
+se deben interpretar y evaluar los modelos.
+
+El capítulo \textbf{Materiales y métodos} (ver \textbf{?@sec-metodo})
+describe los ficheros de datos suministrados, la actividad de
+preprocesado realizada sobre los mismos y las variables que se
+utilizarán en el modelado estadístico.
+
+El capítulo \textbf{Modelado estadístico} (ver \textbf{?@sec-modelado})
+comienza con un Análisis Exploratorio de los datos, tras el que se
+describe cómo se han aplicado las técnicas de modelado presentadas en el
+Marco Teórico al diseño del experimento de la actividad de subtitulado.
+
+El capítulo de \textbf{Resultados} (ver \textbf{?@sec-resultados}) se
+presentan los resultados de los modelos seleccionados en el capítulo
+anterior.
+
+En el capítulo \textbf{Discusión} (ver \textbf{?@sec-discusion}) se
+utilizan los resultados del capítulo anterior para responder a la
+pregunta de investigación y a los objetivos específicos.
+
+Finalmente el capítulo \textbf{Conclusión y trabajo futuro} (ver
+\textbf{?@sec-conclusion}) se destina a recapitular los hallazgos
+encontrados aventurando posibles explicaciones a los mismos y propone
+líneas de investigación futuras en base a los resultados obtenidos.
+
+\hypertarget{convenciones-usadas}{%
+\subsection{Convenciones usadas}\label{convenciones-usadas}}
+
+En este trabajo se ha evitado en la medida de lo posible el uso de
+anglicismos traduciendo al español los términos ingleses cuando su uso
+sea habitual en la publicación científica en español. No obstante,
+algunos términos se han mantenido en inglés por no tener una traducción
+fácil o habitual. Es el caso, por ejemplo, de \emph{odds} y de
+\emph{odds ratio}. Se ha considerado que la utilización de los términos
+en español, \emph{cuota} y \emph{razón de momios} respectivamente,
+dificultan la comprensión y se ha preferido el inglés para estos casos.
+
+Los nombres de los modelos estadísticos se han escrito con la inicial de
+cada palabra en mayúscula. En los acrónimos generalmente se ha mantenido
+su correspondencia en inglés. Por ejemplo, Modelo Lineal Generalizado
+(GLM, Generalized Linear Model).
+
+Para los nombres de las variables utilizadas en el modelado estadístico
+se ha preferido el inglés. Por ejemplo, \emph{Treat} para referirse a
+los subtitulados y \emph{Response} para las respuestas. La razón de esta
+decisión es evitar la mezcla de idiomas en los resúmenes de los modelos
+o en los ejemplos de código.
+
+Este trabajo es reproducible. Para su elaboración se ha utilizado la
+herramienta de publicación científica Quarto y el lenguaje de
+programación R. Todas las figuras mostradas han sido generadas con R.
+
+
+
+\end{document}

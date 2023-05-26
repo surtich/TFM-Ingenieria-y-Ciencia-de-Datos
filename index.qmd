@@ -65,7 +65,7 @@ knitr::opts_chunk$set(dev.args = list(bg = "transparent"))
 set.seed(973)
 ```
 
-# Introducción {#intro}
+# Introducción {#sec-intro}
 
  
 {{< include 1.qmd >}}
