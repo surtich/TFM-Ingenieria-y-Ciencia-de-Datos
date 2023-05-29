@@ -4,7 +4,7 @@ source("_setup.R")
 
 # Resultados {#sec-resultados}
 
-En el @sec-modelado se realizó una exploración de los datos y se adecuaron los modelos presentados en el @sec-arte al diseño del experimento del subtitulado. En este capítulo se comentan los resultados de los modelos seleccionados siguiendo el mismo orden expositivo, comenzando por el análisis del $OR$, continuando por la Regresión Logística y finalizando con la Regresión Ordinal.
+En el @sec-modelado se realizó una exploración de los datos y se adecuaron los modelos presentados en el @sec-arte al diseño del experimento del subtitulado. En este capítulo se comentan los resultados de los modelos seleccionados siguiendo el mismo orden expositivo, comenzando por el análisis del \gls{OR}, continuando por la \gls{Regresión Logística} y finalizando con la \gls{Regresión Ordinal}.
 
 ### Comparación con *Odds Ratio* {#sec-or-3}
 
@@ -19,7 +19,7 @@ data.frame(summary(loddsratio(~ Treat + Seq + Response_l, data = df_all)) %>% un
     gt()
 ```
 
-Sin embargo, si se realiza este contraste entre subtítulos y periodos, se constata la existencia de un efecto periodo de signo contrario para los ítems 4 y 5 (ver @tbl-logor2).  El test es significativo porque el ratio entre subtítulos de respuestas con valor 4 es diferente en cada periodo habiendo mayor cantidad de respuestas 4 en el segundo periodo que en el primero. Con las respuestas 5 ocurre lo contrario: la proporción es mayor en el primer periodo. La @fig-or2 permite una comprobación visual. Esto indica que los estudiantes de ambos grupos prestaron más atención o fueron más exigentes en el segundo visionado y valoraron relativamente peor el segundo vídeo. Que el efecto periodo sea de signo contrario en dos respuestas no debe sorprender en este diseño de experimento, ya que un test es un juego de suma cero: la valoraciones que se ganan o se pierden en un nivel de respuesta necesariamente se reparten entre el resto de niveles. En cualquier caso, el efecto periodo es cuantitativa y cualitativamente pequeño. Al afectar solo al intercambio de valoraciones entre los niveles 4 y 5 es simplemente una pequeña corrección en la valoración del subtitulado y cualitativamente es poco importante ya que las respuestas 4 y 5 son ambas valoraciones positivas. 
+Sin embargo, si se realiza este contraste entre subtítulos y periodos, se constata la existencia de un \gls{efecto periodo} de signo contrario para los ítems 4 y 5 (ver @tbl-logor2).  El test es significativo porque el ratio entre subtítulos de respuestas con valor 4 es diferente en cada periodo habiendo mayor cantidad de respuestas 4 en el segundo periodo que en el primero. Con las respuestas 5 ocurre lo contrario: la proporción es mayor en el primer periodo. La @fig-or2 permite una comprobación visual. Esto indica que los estudiantes de ambos grupos prestaron más atención o fueron más exigentes en el segundo visionado y valoraron relativamente peor el segundo vídeo. Que el efecto periodo sea de signo contrario en dos respuestas no debe sorprender en este diseño de experimento, ya que un test es un juego de suma cero: la valoraciones que se ganan o se pierden en un nivel de respuesta necesariamente se reparten entre el resto de niveles. En cualquier caso, el efecto periodo es cuantitativa y cualitativamente pequeño. Al afectar solo al intercambio de valoraciones entre los niveles 4 y 5 es simplemente una pequeña corrección en la valoración del subtitulado y cualitativamente es poco importante ya que las respuestas 4 y 5 son ambas valoraciones positivas. 
 
 ```{r}
 #| label: tbl-logor2
@@ -52,7 +52,7 @@ glmer_positive_treat_subject_question <- glmer(I(Level == "Positivo") ~ Treat + 
 
 ```
 
-En la @sec-logistica-2 se explicó una forma de crear una variable dicotómica que permite ajustar los datos a una Regresión Logística. Concretamente, se creó la variable respuesta $Improve$ que compara si las respuestas de cada estudiante a cada Ítem entre los niveles de subtitulado ($A$ frente $B$) han mejorado (valor 1) o se han mantenido o empeorado (valor 0). El modelo que se propone en esta sección no tiene en cuenta el efecto secuencia ya que resultó no significativo en el análisis y, en cambio, se incluye como efectos aleatorios los estudiantes y los ítems sobre el intercepto ya que, como se ha explicado, son variables que no se pueden considerar independientes:
+En la @sec-logistica-2 se explicó una forma de crear una variable dicotómica que permite ajustar los datos a una Regresión Logística. Concretamente, se creó la variable respuesta $Improve$ que compara si las respuestas de cada estudiante a cada Ítem entre los niveles de subtitulado ($A$ frente $B$) han mejorado (valor 1) o se han mantenido o empeorado (valor 0). El modelo que se propone en esta sección no tiene en cuenta el \gls{efecto secuencia} ya que resultó no significativo en el análisis y, en cambio, se incluye como efectos aleatorios los estudiantes y los ítems sobre el intercepto ya que, como se ha explicado, son variables que no se pueden considerar independientes:
 
 > Improve ~ 1 + (1 | Subject) + (1 | Item)
 
@@ -69,7 +69,7 @@ glmer_improve_subject_question <- glmer(
 \normalsize
 
 
-El resumen del modelo ajustado con la función `glmer` del paquete `lme4` [ver @lme4] produce los resultados de la columna izquierda de la @tbl-selected-logistic. El intercepto del modelo ajustado es `r round(fixef(glmer_improve_subject_question)[[1]],3)` (std.error `r round((vcov(glmer_improve_subject_question)^.5)[1], 3)`). Por ello, la probabilidad de que se otorgue una mayor puntuación en $A$ que en $B$ es del `r paste(round(100/(1+exp(-fixef(glmer_improve_subject_question)[[1]])),2),"%", sep="")`. La proporción de varianza explicada por los efectos aleatorios ($ICC$) es `r round((performance::icc(glmer_improve_subject_question))$ICC_adjusted,3)`.
+El resumen del modelo ajustado con la función `glmer` del paquete `lme4` [ver @lme4] produce los resultados de la columna izquierda de la @tbl-selected-logistic. El intercepto del modelo ajustado es `r round(fixef(glmer_improve_subject_question)[[1]],3)` (std.error `r round((vcov(glmer_improve_subject_question)^.5)[1], 3)`). Por ello, la probabilidad de que se otorgue una mayor puntuación en $A$ que en $B$ es del `r paste(round(100/(1+exp(-fixef(glmer_improve_subject_question)[[1]])),2),"%", sep="")`. La proporción de varianza explicada por los efectos aleatorios (*\gls{ICC}*) es `r round((performance::icc(glmer_improve_subject_question))$ICC_adjusted,3)`.
 
 ```{r}
 #| eval: true
@@ -114,7 +114,7 @@ brm_treat.period.subject.item <- brm(
 ```
 
 
-En la @sec-ordinal-2 se evaluaron distintas parametrizaciones de la Regresión Ordinal Acumulativa tanto desde el punto de vista frecuentista como bayesiano, considerando únicamente efectos fijos y también efectos aleatorios. Finalmente, tanto en el análisis frecuentista como en el bayesiano, el modelo que resultó ser más parsimonioso (evaluado con $LRT$ y con $AIC$) es el de la @eq-mejor-modelo, que se reproduce aquí en sintaxis R:
+En la @sec-ordinal-2 se evaluaron distintas parametrizaciones de la Regresión Ordinal Acumulativa tanto desde el punto de vista frecuentista como bayesiano, considerando únicamente efectos fijos y también efectos aleatorios. Finalmente, tanto en el análisis frecuentista como en el bayesiano, el modelo que resultó ser más parsimonioso (evaluado con *\gls{LRT}* y con $AIC$) es el de la @eq-mejor-modelo, que se reproduce aquí en sintaxis R:
 
 \small
 

@@ -6,7 +6,7 @@ Es esta sección concreta la forma de aplicar los modelos presentados en el Marc
 
 [^or]: Esta técnica se ha omitido en el Marco teórico por considerarla conocida por el lector. Si se desea ampliar información se puede consultar @agresti2010 [p. 18].
 
-La métrica *Odds Ratio* ($OR$) permite medir la asociación entre dos variables con dos niveles cada una. En el diseño de experimento que se está analizando, los factores $Treat$, $Period$ y $Seq$ tienen todos 2 niveles y se puede contrastar si hay interacción entre cada par de factores para cada nivel de respuesta. Es decir, se contrasta la hipótesis $H_0: OR=1$ de ausencia de interacción frente a $H_1: OR \neq 1$ de existencia de interacción en algún nivel de respuesta. Por ejemplo, el $OR$ para el nivel respuesta $r$ entre subtítulos y secuencias se define de la siguiente forma:
+La métrica *\gls{odds ratio}* ($OR$) permite medir la asociación entre dos variables con dos niveles cada una. En el diseño de experimento que se está analizando, los factores $Treat$, $Period$ y $Seq$ tienen todos 2 niveles y se puede contrastar si hay interacción entre cada par de factores para cada nivel de respuesta. Es decir, se contrasta la hipótesis $H_0: OR=1$ de ausencia de interacción frente a $H_1: OR \neq 1$ de existencia de interacción en algún nivel de respuesta. Por ejemplo, el $OR$ para el nivel respuesta $r$ entre subtítulos y secuencias se define de la siguiente forma:
 
 $$
 OR_{(Treat, Seq \mid Response=r)}=\frac{
@@ -24,12 +24,12 @@ OR_{(Treat, Seq \mid Response=r)}=\frac{
 }
 $$
 
-Si los $odds$ son similares en cada nivel de respuesta, se acepta la hipótesis nula de que los grupos responden de forma similar a cada nivel de subtitulado. En la @sec-or-3 se puede consultar los resultados obtenidos. En esta misma sección se hace un test similar pero entre subtitulado y periodos. Para realizar el contraste de hipótesis se usa la función $loddsratio$ del paquete `vcd` [ver @vcd].
+Si los $\gls{odds}$ son similares en cada nivel de respuesta, se acepta la hipótesis nula de que los grupos responden de forma similar a cada nivel de subtitulado. En la @sec-or-3 se puede consultar los resultados obtenidos. En esta misma sección se hace un test similar pero entre subtitulado y periodos. Para realizar el contraste de hipótesis se usa la función $loddsratio$ del paquete `vcd` [ver @vcd].
 
 
 ### Regresión Logística {#sec-logistica-2}
 
-En la @sec-logistica se presentó el fundamento teórico de la Regresión Logística. En esta sección se justifica el uso de este modelo y se ajustan y comparan varios modelos. La variable respuesta se compone de 5 valores ordenados. Esto imposibilita usar directamente la Regresión Logística ya que requiere que la variable de respuesta sea dicotómica. No obstante, se puede comparar la respuesta que cada estudiante dio a cada uno de los subtitulados y comprobar si ha mejorado. Esto producirá una variable de respuesta binaria que permitirá el uso de la Regresión Logística. No obstante, esta transformación reducirá la cantidad de datos disponibles a la mitad e impedirá analizar el efecto periodo ya que al comparar los subtitulados, desaparece el periodo. Se ha creado una variable `Improve` con dos valores posibles: 1 cuando el estudiante valoró el ítem mejor en el subtitulado $A$ que en el $B$, 0 si empeoró o puntuó igual. Si en uno de los test contestó un ítem con "No sé / No contesto", se elimina ese ítem.
+En la @sec-logistica se presentó el fundamento teórico de la \gls{Regresión Logística}. En esta sección se justifica el uso de este modelo y se ajustan y comparan varios modelos. La variable respuesta se compone de 5 valores ordenados. Esto imposibilita usar directamente la Regresión Logística ya que requiere que la variable de respuesta sea dicotómica. No obstante, se puede comparar la respuesta que cada estudiante dio a cada uno de los subtitulados y comprobar si ha mejorado. Esto producirá una variable de respuesta binaria que permitirá el uso de la Regresión Logística. No obstante, esta transformación reducirá la cantidad de datos disponibles a la mitad e impedirá analizar el \gls{efecto periodo} ya que al comparar los subtitulados, desaparece el periodo. Se ha creado una variable `Improve` con dos valores posibles: 1 cuando el estudiante valoró el ítem mejor en el subtitulado $A$ que en el $B$, 0 si empeoró o puntuó igual. Si en uno de los test contestó un ítem con "No sé / No contesto", se elimina ese ítem.
 
 
 ```{r}
@@ -209,7 +209,7 @@ $$ {#eq-ordinal-3}
 
 \normalsize
 
-En el @sec-contrasts se demuestra que cuando el contraste es $sum$ la interacción entre periodo y subtitulado es equivalente al efecto secuencia. Es decir, que los modelos `Response ~ Treat*Period` y `Response ~ Treat + Period + Seq` son equivalentes. Esto no sucede cuando el contraste es $treatment$, que es el utilizado por defecto en R. En la @tbl-contrast se comparan los coeficientes de los cuatro modelos que se listan a continuación:
+En el @sec-contrasts se demuestra que cuando el contraste es $sum$ la interacción entre periodo y subtitulado es equivalente al \gls{efecto secuencia}. Es decir, que los modelos `Response ~ Treat*Period` y `Response ~ Treat + Period + Seq` son equivalentes. Esto no sucede cuando el contraste es $treatment$, que es el utilizado por defecto en R. En la @tbl-contrast se comparan los coeficientes de los cuatro modelos que se listan a continuación:
 
 * `Response ~ Treat * Period` con contraste `treatment`.
 * `Response ~ Treat + Period + Seq` con contraste `treatment`.

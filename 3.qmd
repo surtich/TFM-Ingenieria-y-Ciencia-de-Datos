@@ -10,10 +10,10 @@ En este capítulo se describen los ficheros de datos suministrados, se explica l
 
 Se dispuso de los siguientes ficheros `csv`:
 
-* Fichero `grade` contiene el identificador de estudiante y el grupo al que pertenece (campo `cohort`), ofuscado con SHA512 para no conocer la identidad real del estudiante y con CRC32b para no conocer si el grupo es el que el vio primero el vídeo bien subtitulado.
+* Fichero `grade` contiene el identificador de estudiante y el grupo al que pertenece (campo `cohort`), ofuscado con \gls{sha}-512 para no conocer la identidad real del estudiante y con \gls{crc}-32b para no conocer si el grupo es el que el vio primero el vídeo bien subtitulado.
 * Los ficheros `test1` y `test2` son las repuestas a las escalas de Likert sobre la calidad del subtitulado del primer y del segundo vídeo realizado por cada grupo respectivamente.
 
-En la @tbl-likert-levels se muestran los 5 niveles de cada uno de los ítems de la escala de Likert utilizados para valorar el subtitulado
+En la @tbl-likert-levels se muestran los 5 niveles de cada uno de los ítems de la \gls{escala de likert} utilizados para valorar el subtitulado
 ^[En la codificación original los valores asignados a cada respuesta eran diferentes: la opción "No sé / No contesto" se codificó con 5 y las demás opciones con una unidad menos que la mostrada. En este trabajo se ha hecho una rotación para asignar valores más usuales en la literatura científica sobre el tema.]. En la @tbl-likert-scale se muestran los 18 ítems de la escala de Likert que se propuso a los alumnos para que evaluaran cada uno de los vídeos.
 
 

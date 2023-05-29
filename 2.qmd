@@ -6,9 +6,9 @@ source("_setup.R")
 
 ## Características del diseño del experimento
 
-Como se dio en la Introducción (ver @sec-intro) en este trabajo se estudiarán las diferencias existentes entre dos niveles de subtitulado (uno correcto y otro con errores) a través de las respuestas de los alumnos a los ítems de las escalas de Likert de cada uno de los vídeos. Para ello se propondrán modelos estadísticos adecuados al diseño del experimento.
+Como se dijo en la Introducción (ver @sec-intro) en este trabajo se estudiarán las diferencias existentes entre dos niveles de subtitulado (uno correcto y otro con errores) a través de las respuestas de los alumnos a los ítems de las escalas de Likert de cada uno de los vídeos. Para ello se propondrán modelos estadísticos adecuados al diseño del experimento.
 
-El diseño del experimento de la actividad de subtitulado fue completamente aleatorizado y **cruzado *AB/BA***. En estos diseños se desea conocer el efecto de un factor con dos niveles sobre una variable respuesta. Para ello se asigna aleatoriamente a los participantes a dos grupos y se mide la variable respuesta en dos periodos en cada grupo. En el primer periodo a uno de los grupos se le asigna un nivel de factor y al otro grupo el otro nivel de factor. En el segundo periodo se intercambian los niveles de factor asignados a cada grupo (ver @fig-ab-ba). Este diseño se diferencia del diseño paralelo $AA/BB$ en el que el nivel de factor asignado a cada grupo se mantiene entre periodos (ver @fig-aa-bb). El diseño cruzado y paralelo se pueden combinar si los participantes se clasifican en cuatro grupos ($AA/AB/BA/BB$). Por último, se pueden hacer diseños con más periodos o/y con más factores o niveles de factor. Los diseños cruzados son habituales en estudios clínicos en investigación médica [ver @lim2021] y farmacológica para la evaluación de medicamentos genéricos.
+El diseño del experimento de la actividad de subtitulado fue completamente aleatorizado y **cruzado *AB/BA***. En estos diseños se desea conocer el efecto de un factor con dos niveles sobre una variable respuesta. Para ello se asigna aleatoriamente a los participantes a dos grupos y se mide la variable respuesta en dos periodos en cada grupo. En el primer periodo a uno de los grupos se le asigna un nivel de factor y al otro grupo el otro nivel de factor. En el segundo periodo se intercambian los niveles de factor asignados a cada grupo (ver @fig-ab-ba). Este diseño se diferencia del diseño paralelo $AA/BB$ en el que el nivel de factor asignado a cada grupo se mantiene entre periodos (ver @fig-aa-bb). El \gls{diseño cruzado} y paralelo se pueden combinar si los participantes se clasifican en cuatro grupos ($AA/AB/BA/BB$). Por último, se pueden hacer diseños con más periodos o/y con más factores o niveles de factor. Los diseños cruzados son habituales en estudios clínicos en investigación médica [ver @lim2021] y farmacológica para la evaluación de medicamentos genéricos.
 
 
 ```{mermaid}
@@ -49,13 +49,13 @@ flowchart LR
 ``` 
 
 
-Un diseño **completamente aleatorizado** [@lawson2015, pp. 18] "garantiza la validez del experimento contra sesgos causados por otras variables ocultas. Cuando las unidades experimentales se asignan aleatoriamente a los niveles de factor de tratamiento, se puede realizar una prueba exacta de la hipótesis de que el efecto del tratamiento es cero utilizando una prueba de aleatorización".
+Un **\gls{diseño completamente aleatorizado}** [@lawson2015, pp. 18] "garantiza la validez del experimento contra sesgos causados por otras variables ocultas. Cuando las unidades experimentales se asignan aleatoriamente a los niveles de factor de tratamiento, se puede realizar una prueba exacta de la hipótesis de que el efecto del tratamiento es cero utilizando una prueba de aleatorización".
 
 Siguiendo a @senn2022 [pp. 5-9], para que el ensayo sea de tipo cruzado no sería suficiente intercambiar las secuencias sino que debe ser objeto del ensayo el estudio de las diferencias entre los tratamientos individuales que componen las secuencias. Los principales problemas de un diseño cruzado son el abandono, `drop-out`, de alguno de los participantes y la interacción entre el tratamiento y el periodo o `carry-over`. Además, el análisis estadístico es más complicado, particularmente cuando la respuesta es ordinal y hay más de dos tratamientos. En la misma línea, @lui2016 [pp. 1-2] afirma que "el objetivo principal de un diseño cruzado es estudiar las diferencias entre tratamientos individuales (en lugar de las diferencias entre secuencias de tratamiento). Debido a que cada paciente sirve como su propio control, el diseño cruzado es una alternativa útil al diseño de grupos paralelos para aumentar la potencia".
 
-En un diseño cruzado pueden producirse efectos periodo y secuencia (o `carry-over`). El **efecto periodo** aplicado al experimento del subtitulado, se producirá si las respuestas del segundo periodo están influidas por haber realizado la primera actividad de subtitulado. El **efecto secuencia** se producirá si las respuestas fueran diferentes cuando se realizan en un orden que cuando se realizan en el otro. Como ejemplo de estos efectos se puede ver @senn2022 [pp. 35-53]. Se analiza un experimento que consistió en medir el flujo espiratorio máximo (PEF, por sus siglas en inglés) en 13 niños con edades entre los 7 y los 14 años con asma a los que se les administró salbutamol (un conocido broncodilatador) y formoterol (un broncodilatador de reciente aparición en el momento en que se realizó el estudio). Se hicieron dos grupos a los que se les administró ambos tratamientos en orden inverso dejando un periodo de lavado (`washout period`) entre aplicaciones. El efecto periodo resulta de medir si el PEF medio de los dos grupos es diferente entre periodos, y el efecto secuencia consiste en comprobar si hay diferencias significativas entre aplicar primero el tratamiento con salbutamol y luego con formoterol o hacerlo al revés.
+En un diseño cruzado pueden producirse efectos periodo y secuencia (o `carry-over`). El **efecto periodo** aplicado al experimento del subtitulado, se producirá si las respuestas del segundo periodo están influidas por haber realizado la primera actividad de subtitulado. El **efecto secuencia** se producirá si las respuestas fueran diferentes cuando se realizan en un orden que cuando se realizan en el otro. Como ejemplo de estos efectos se puede ver @senn2022 [pp. 35-53]. Se analiza un experimento que consistió en medir el flujo espiratorio máximo (PEF, por sus siglas en inglés) en 13 niños con edades entre los 7 y los 14 años con asma a los que se les administró salbutamol (un conocido broncodilatador) y formoterol (un broncodilatador de reciente aparición en el momento en que se realizó el estudio). Se hicieron dos grupos a los que se les administró ambos tratamientos en orden inverso dejando un periodo de lavado (`washout period`) entre aplicaciones. El \gls{efecto periodo} resulta de medir si el PEF medio de los dos grupos es diferente entre periodos, y el \gls{efecto secuencia} consiste en comprobar si hay diferencias significativas entre aplicar primero el tratamiento con salbutamol y luego con formoterol o hacerlo al revés.
 
-La segunda cuestión de relevancia es que las respuestas a los ítems de una escala de Likert son de **tipo ordinal**. Los test estadísticos *ANOVA* o *MANOVA* presuponen que la variable de respuesta es cuantitativa y con distribución normal. Tratar las respuestas a una escala de Likert como si fueran cuantitativas no es correcto por las siguientes razones:
+La segunda cuestión de relevancia es que las respuestas a los ítems de una \gls{escala de likert} son de **tipo ordinal**. Los test estadísticos *\gls{ANOVA}* o *\gls{MANOVA}* presuponen que la variable de respuesta es cuantitativa y con distribución normal. Tratar las respuestas a una escala de Likert como si fueran cuantitativas no es correcto por las siguientes razones:
 
 * Los niveles de respuesta no son necesariamente equidistantes: la distancia entre cada par de opciones de respuesta correlativos puede no ser la misma para todos los pares. Por ejemplo, la diferencia entre "Muy en desacuerdo" y "En desacuerdo" y la diferencia entre "De acuerdo" y "Muy de acuerdo" es de un nivel, pero psicológicamente puede ser percibida de forma diferente por cada sujeto.
 
@@ -65,8 +65,8 @@ La segunda cuestión de relevancia es que las respuestas a los ítems de una esc
 
 En @kruschke2018 se han analizado los problemas potenciales de tratar datos ordinales como si fueran cuantitativos constatando que se pueden presentar las siguientes situaciones:
 
-* Se pueden encontrar diferencias significativas entre grupos cuando no las hay: error de tipo I.
-* Se pueden obviar diferencias cuando en realidad sí existen: error de tipo II.
+* Se pueden encontrar diferencias significativas entre grupos cuando no las hay: \gls{error de tipo I}.
+* Se pueden obviar diferencias cuando en realidad sí existen: \gls{error de tipo II}.
 * Incluso se pueden invertir los efectos de un tratamiento.
 * También puede malinterpretarse la interacción entre factores.
 
@@ -78,7 +78,7 @@ En este trabajo se analiza si el nivel de subtitulado (correcto o defectuoso) in
 
 [^GLM]: No se deben confundir los Modelos Lineales Generales con los Modelos Lineales Generalizados. En los primeros, también llamados Modelos de Regresión Multivariante, se presupone que la variable respuesta tiene una relación lineal con los predictores y sus valores se distribuyen normalmente. Los segundos son una generalización de los primeros y permiten que la variable respuesta admita otras distribuciones además de la normal.
 
-El Modelo Lineal Generalizado (*Generalized Linear Model*, $GLM$) es un modelo en el que la variable respuesta no sigue una distribución Normal. Para especificar un $GLM$ son necesarios tres componentes [ver @agresti_2018, pp. 66-67]:
+El Modelo Lineal Generalizado (*Generalized Linear Model*, $GLM$) es un modelo en el que la variable respuesta no sigue una distribución Normal. Para especificar un \gls{GLM} son necesarios tres componentes [ver @agresti_2018, pp. 66-67]:
 
 * Un componente aleatorio que será una distribución de probabilidad de la familia exponencial. Se asume que la variable respuesta $Y$ se distribuye según este componente aleatorio.
 * Un componente lineal de predictores.
@@ -92,22 +92,22 @@ g(\mu)=\alpha+\beta_1x_1+...+\beta_px_p
 $$
 
 
-La estimación de coeficientes en *GLM* se realiza maximizando la función de verosimilitud (*Maximum Likelihood Estimation*, $MLE$). Es decir, que los coeficientes del modelo son aquellos que maximizan la probabilidad de los datos.
+La estimación de coeficientes en *GLM* se realiza maximizando la función de verosimilitud (*Maximum Likelihood Estimation*, *\gls{MLE}*). Es decir, que los coeficientes del modelo son aquellos que maximizan la probabilidad de los datos.
 
 ### Regresión Logística {#sec-logistica}
 
-La Regresión Logística es un caso particular de $GLM$ en el que la variable respuesta es dicotómica. Aunque la Regresión Logística no es aplicable directamente en las respuestas a una escala de Likert por ser éstas ordinales, se introduce aquí por dos motivos:
+La \gls{Regresión Logística} es un caso particular de $GLM$ en el que la variable respuesta es dicotómica. Aunque la Regresión Logística no es aplicable directamente en las respuestas a una escala de Likert por ser éstas ordinales, se introduce aquí por dos motivos:
 
 * En la sección de modelado (ver @sec-logistica-2), se propondrá una transformación de la variable respuesta para convertirla en dicotómica.
 * Además, en este capítulo se introducirá la Regresión Ordinal (ver @sec-ordinal). Este modelo se puede considerar una extensión de la Regresión Logística y permitirá tratar la variable respuesta como ordinal. De ahí el interés en presentar previamente la Regresión Logística.
   
-La Regresión Logística [ver @agresti_2018, pp. 68-69] es un caso particular de $GLM$ donde la variable respuesta, $Y$, es Benoulli o Binomial. Es decir, que $Y$ toma valores 0 ó 1. En una función de Bernoulli de parámetro $\pi$ ($E[Y] = P(Y=1) = \pi$), es necesaria una función que mapee los valores que puede tomar el componente lineal de rango $(-\infty, +\infty)$ a los valores que puede tomar $\pi$ en el rango $(0, 1)$. Una función que permite hacer esto es la función $logit$:
+La \gls{Regresión Logística} [ver @agresti_2018, pp. 68-69] es un caso particular de $GLM$ donde la variable respuesta, $Y$, es Benoulli o Binomial. Es decir, que $Y$ toma valores 0 ó 1. En una función de Bernoulli de parámetro $\pi$ ($E[Y] = P(Y=1) = \pi$), es necesaria una función que mapee los valores que puede tomar el componente lineal de rango $(-\infty, +\infty)$ a los valores que puede tomar $\pi$ en el rango $(0, 1)$. Una función que permite hacer esto es la *\gls{función logit}*:
 
 $$
 logit(Y=1) = log \left[\frac{P(Y=1)}{1-P(Y=1)} \right] = \alpha+\beta_1x_1+...+\beta_px_p
 $$ {#eq-logistic}
 
-La inversa de la función *logit* es la función *logística* y permite realizar el mapeo inverso para obtener la probabilidad:
+La inversa de la función *logit* es la *\gls{función logística}* y permite realizar el mapeo inverso para obtener la probabilidad:
 
 $$
 P(Y=1) = \frac{exp^{\alpha+\beta_1x_1+...+\beta_px_p}}{1 + exp^{\alpha+\beta_1x_1+...+\beta_px_p}}
@@ -115,8 +115,8 @@ $$
 
 La interpretación de los coeficientes es la siguiente [ver @frienly2015, p. 260]:
 
-* $\beta_j$ es el logaritmo del *odds ratio* asociado a una unidad de incremento de $x_j$.
-* $\alpha$ es el logaritmo del *odds* de $Y$ cuando $x_j=0, \forall j \in 1...p$.
+* $\alpha$ es el logaritmo del *\gls{odds}* de $Y$ cuando $x_j=0, \forall j \in 1...p$.
+* $\beta_j$ es el logaritmo del *\gls{odds ratio}* asociado a una unidad de incremento de $x_j$.
 
 El contraste de hipótesis para los coeficientes $\beta$:
 
@@ -136,7 +136,7 @@ W & = \frac{\hat\beta_j - 0}{se(\hat\beta_j)} \sim N(0,1)
 $$
 
 
-o con el Test de Razón de Verosimilitudes (*Likelihood Ratio Test*, $LRT$):
+o con el Test de Razón de Verosimilitudes (*Likelihood Ratio Test*, *\gls{LRT}*):
 
 $$
 \begin{aligned}
@@ -221,7 +221,7 @@ for (i in 1:3) {
 }
 ```
   
-Las respuestas a los ítems de una escala de Likert son ordinales. La Regresión Ordinal es una clase de $GLM$ que comparte muchas similitudes con la Regresión Logística (ver @sec-logistica) pero que tiene en consideración que los valores de la variable de respuesta están ordenados
+Las respuestas a los ítems de una escala de Likert son ordinales. La \gls{Regresión Ordinal} es una clase de $GLM$ que comparte muchas similitudes con la Regresión Logística (ver @sec-logistica) pero que tiene en consideración que los valores de la variable de respuesta están ordenados
 ^[Otras variantes de la Regresión Logística son la Regresión Categórica y la Regresión Multinomial. En estos tipos de *GLM* la variable respuesta puede adoptar varios valores pero no se asume que estén ordenados. La Regresión Categórica y la Regresión Multinomial están relacionadas en el mismo sentido en que lo están la Regresión Logística con función de enlace Bernoulli y con función de enlace Binomial. Es decir, que la Regresión Categórica se usa cuando las observaciones no están agrupadas y la Multinomial cuando sí lo están.]. Según @burkner2019 [pp. 3-11] hay tres clases de Regresión Ordinal:
 
 * Regresión Ordinal Acumulativa.
@@ -279,7 +279,7 @@ o, equivalentemente:
 
 $$\frac{\frac{\mathrm{Pr}(Y > k \mid x_j = x + 1)}{\mathrm{Pr}(Y \leq k \mid x_j = x + 1)}}{\frac{\mathrm{Pr}(Y > k \mid x_j = x)}{\mathrm{Pr}(Y \leq k \mid x_j = x)}} = \exp(\beta_{j})$$
 
-Es decir, que $\exp(\beta_{j})$ es el *odds ratio* (cambio relativo entre $odds$, $OR$) de que la variable respuesta esté por encima de una determinada categoría versus estar por debajo de ella para una unidad de incremento del predictor $x_j$. Un valor del coeficiente $\beta_j$ positivo indica que la relación entre el predictor $x_j$ y la función de $logit$ es positiva y, por lo tanto, se incrementa la probabilidad de un mayor valor de la variable respuesta.
+Es decir, que $\exp(\beta_{j})$ es el *odds ratio* (cambio relativo entre $odds$, \gls{OR}) de que la variable respuesta esté por encima de una determinada categoría versus estar por debajo de ella para una unidad de incremento del predictor $x_j$. Un valor del coeficiente $\beta_j$ positivo indica que la relación entre el predictor $x_j$ y la función de $logit$ es positiva y, por lo tanto, se incrementa la probabilidad de un mayor valor de la variable respuesta.
 
 #### Presunciones del modelo
 
@@ -302,7 +302,7 @@ Es decir, que la proporcionalidad de $odds$ de dos niveles de respuesta es indep
  
 ## Modelos multinivel {#sec-multinivel}
 
-Un modelo multinivel, anidado, jerárquico o mixto es un modelo en el que los datos están anidados en una estructura jerárquica. Se utilizan cuando se incumple la hipótesis de independencia entre las observaciones. Por ejemplo, si se quisiera evaluar el rendimiento de varios métodos de enseñanza, se podrían seleccionar aleatoriamente varios colegios participantes y en cada uno de ellos elegir varias clases en las que se impartiría uno de los métodos de enseñanza.  En este caso, los alumnos de una clase no son independientes de los alumnos de otra clase del mismo colegio y también es esperable que los alumnos de un mismo colegio sean más parecidos entre sí que los de otro colegio. Otra situación en la que se viola la condición de independencia entre observaciones es cuando se toman varias medidas del mismo sujeto. Este tipo de experimentos se llaman de medidas repetidas o longitudinales
+Un modelo multinivel (*\gls{GLMM}*, *Ganeralized Linear Mixed Model*ß), anidado, jerárquico o mixto es un modelo en el que los datos están anidados en una estructura jerárquica. Se utilizan cuando se incumple la hipótesis de independencia entre las observaciones. Por ejemplo, si se quisiera evaluar el rendimiento de varios métodos de enseñanza, se podrían seleccionar aleatoriamente varios colegios participantes y en cada uno de ellos elegir varias clases en las que se impartiría uno de los métodos de enseñanza.  En este caso, los alumnos de una clase no son independientes de los alumnos de otra clase del mismo colegio y también es esperable que los alumnos de un mismo colegio sean más parecidos entre sí que los de otro colegio. Otra situación en la que se viola la condición de independencia entre observaciones es cuando se toman varias medidas del mismo sujeto. Este tipo de experimentos se llaman de medidas repetidas o longitudinales
 ^[Hay una diferencia conceptual entre medidas repetidas y longitudinales. Una variable se dice que es longitudinal cuando se toman varias medidas de los sujetos objeto del estudio en diferentes momentos del tiempo. Para que sea considerada de medidas repetidas, las medidas de cada sujeto se toman con distintos niveles de factor. En la práctica la distinción es poco relevante ya que ambas situaciones se parametrizan de la misma forma.]. Cuando se da este supuesto, se considera que las medidas están anidadas en el sujeto [ver @Liu2202]. En un modelo multinivel no es necesario que todas las variables tengan una estructura jerárquica. Se distinguen entonces dos tipos de variables: Las conocidas como de efectos fijos son aquellas que se considera que tienen el mismo efecto en toda la población y, por lo tanto, se debe estimar un único coeficiente. Las variables de efectos aleatorios tienen un coeficiente diferente para cada elemento de la población y se supone que son una muestra de una población mucho mayor, como el caso de seleccionar aleatoriamente una muestra de colegios. Normalmente el coeficiente particular de cada elemento no es de interés para el investigador y se asume que tienen una media centrada en cero. El mayor interés de los efectos aleatorios es la estimación de su matriz de varianzas-covarianzas.
 
 La ecuación general de un modelo multinivel con dos niveles y un solo predictor con efectos aleatorios es [ver @chen2021, pp. 40]:
@@ -347,11 +347,11 @@ En @gelman2013 [p. 115] se evalúan tres posibilidades a la hora de definir un m
 
 * $Complete\ pooling$: Consiste en estimar un único parámetro para cada predictor. Es equivalente a un modelo con efectos fijos.
 * $No\ pooling$: Se estiman tantos parámetros como grupos haya de forma independiente.
-* $Partial\ pooling$: Es el modelo jerárquico. Es una mezcla de ambos, ya que, aunque se estima un parámetro para cada grupo (como en $no\ pooling$), esta estimación no es independiente, sino que se supone que las observaciones de un mismo grupo proceden de una misma distribución de probabilidad. Esto se traduce en que se produce una contracción ($shrinkage$) en la estimación de los parámetros hacia la media. Al influir la estimación de unas observaciones en otras, la estimación es de menor valor absoluto que la que resultaría en un modelo de $no\ pooling$. De esta forma se puede ver el $complete\ pooling$ y el $no\ pooling$ como dos casos particulares y extremos del $partial\ pooling$. La contracción de coeficientes en los modelos multinivel actúa como una regularización que puede evitar el sobreajuste.
+* $Partial\ pooling$: Es el modelo jerárquico. Es una mezcla de ambos, ya que, aunque se estima un parámetro para cada grupo (como en $no\ pooling$), esta estimación no es independiente, sino que se supone que las observaciones de un mismo grupo proceden de una misma distribución de probabilidad. Esto se traduce en que se produce una contracción (*\gls{shrinkage}*) en la estimación de los parámetros hacia la media. Al influir la estimación de unas observaciones en otras, la estimación es de menor valor absoluto que la que resultaría en un modelo de $no\ pooling$. De esta forma se puede ver el $complete\ pooling$ y el $no\ pooling$ como dos casos particulares y extremos del $partial\ pooling$. La contracción de coeficientes en los modelos multinivel actúa como una regularización que puede evitar el sobreajuste.
 
 Los modelos multinivel requieren supuestos adicionales en el nivel segundo y superiores que son similares a los supuestos para los modelos de efectos fijos [ver @chen2021, p. 43]. Para estimar los parámetros en un modelo multinivel se suele utilizar el método de Máxima Verosimilitud Restringida ($RMLE$), que es una variante de la estimación por Máxima Verosimilitud ($MLE$) en la que se hacen ajustes en los grados de libertad del modelo con efectos aleatorios para corregir el sesgo que se produce al usar $MLE$ en estos modelos.
 
-Para evaluar si la estructura anidada es adecuada se utiliza la Correlación Intra-Clase ($ICC$, Intra-Class Correlation). $ICC$ se puede interpretar como la proporción de la varianza explicada por la estructura de agrupamiento de la población. Se diferencia del Coeficiente de Determinación ($R2$) en que éste es la proporción de la varianza explicada por el modelo completo, mientras que $ICC$ es la varianza explicada por los efectos aleatorios [ver @performance]. La $ICC$ se calcula como el ratio de la varianza entre grupos y la varianza total [ver @chen2021, pp. 29-33]:
+Para evaluar si la estructura anidada es adecuada se utiliza la Correlación Intra-Clase (*\gls{ICC}*, Intra-Class Correlation). $ICC$ se puede interpretar como la proporción de la varianza explicada por la estructura de agrupamiento de la población. Se diferencia del Coeficiente de Determinación ($R2$) en que éste es la proporción de la varianza explicada por el modelo completo, mientras que $ICC$ es la varianza explicada por los efectos aleatorios [ver @performance]. La $ICC$ se calcula como el ratio de la varianza entre grupos y la varianza total [ver @chen2021, pp. 29-33]:
 
 $$
 ICC = \rho = \frac{\tau^2}{\tau^2+\sigma^2}
@@ -381,7 +381,7 @@ $$ {#eq-ypred}
 
 donde la última igualdad resulta de la independencia condicional de $y_{pred}$ e $y$ dado $\theta$ ($y_{pred} \perp\!\!\!\perp y \mid \theta$).
 
-Una crítica habitual a la inferencia bayesiana es que la elección de la distribución de probabilidad a priori es subjetiva. Aunque es cierto que hay un grado de subjetividad en esta elección, en realidad en el modelado frecuentista hay que tomar ciertas decisiones que también lo son, como por ejemplo la elección del nivel de significación o la forma que adopta la función de verosimilitud. En la práctica, si las observaciones son suficientemente informativas y la distribución a priori es poco informativa, la distribución de probabilidad a priori tendrá poca o nula influencia en la distribución a posteriori ya que estará dominada por la función de verosimilitud y los coeficientes estimados serán muy parecidos en ambos paradigmas. Sin embargo, en lo que diferirán es en la interpretación ya que, por ejemplo, en un modelo bayesiano se pueden interpretar los intervalos de confianza como la probabilidad de que el parámetro esté dentro del intervalo. Por eso a estos intervalos se les conoce como intervalos de credibilidad. Esa interpretación en un modelo frecuentista carecería de sentido ya que los parámetros del modelo no se consideran variables aleatorias y, por lo tanto, tendrán probabilidad 1 si el verdadero valor del parámetro cae dentro del intervalo y 0 si no lo hace. Para obtener la distribución de probabilidad a posteriori normalmente se recurre a métodos del simulación Métodos de Montcarlo basados en Cadenas de Márkov ($MCMC$).
+Una crítica habitual a la inferencia bayesiana es que la elección de la distribución de probabilidad a priori es subjetiva. Aunque es cierto que hay un grado de subjetividad en esta elección, en realidad en el modelado frecuentista hay que tomar ciertas decisiones que también lo son, como por ejemplo la elección del nivel de significación o la forma que adopta la función de verosimilitud. En la práctica, si las observaciones son suficientemente informativas y la distribución a priori es poco informativa, la distribución de probabilidad a priori tendrá poca o nula influencia en la distribución a posteriori ya que estará dominada por la función de verosimilitud y los coeficientes estimados serán muy parecidos en ambos paradigmas. Sin embargo, en lo que diferirán es en la interpretación ya que, por ejemplo, en un modelo bayesiano se pueden interpretar los intervalos de confianza como la probabilidad de que el parámetro esté dentro del intervalo. Por eso a estos intervalos se les conoce como intervalos de credibilidad. Esa interpretación en un modelo frecuentista carecería de sentido ya que los parámetros del modelo no se consideran variables aleatorias y, por lo tanto, tendrán probabilidad 1 si el verdadero valor del parámetro cae dentro del intervalo y 0 si no lo hace. Para obtener la distribución de probabilidad a posteriori normalmente se recurre a métodos del simulación Métodos de Montcarlo basados en Cadenas de Márkov (*\gls{MCMC}*).
 ^[En ocasiones se puede obtener una forma análitica de la distribución a posteriori si se elige una adecuada combinación de función de verosimilitud y distribución a priori conocidas como distribuciones conjugadas. Aunque esto evita la utilización de métodos de simulación, restringe las formas posibles de las distribuciones. En la actualidad, con el aumento de la capacidad de cálculo de los ordenadores, normalmente no es necesaria la utilización de distribuciones conjugadas.].
 
 Para comparar modelos entre sí se pueden usar varias medidas [ver @barreda2023]. Por ejemplo, la conocida como *log pointwise predictive density* o densidad predictiva puntal ($lpd$) se calcula como:

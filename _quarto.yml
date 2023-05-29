@@ -23,11 +23,11 @@ vídeos"
     - 4.qmd
     - 5.qmd
     #- 6.qmd
-    - 7.qmd
+    #- 7.qmd
   appendices:
     #- 75-Preprocesado.qmd
     #- 76-Setup.qmd
-   - 77-Contrasts.qmd
+    - 77-Contrasts.qmd
     #- 78-Bayesiano.qmd
 
   cover-image: "images/logo-cover.png"

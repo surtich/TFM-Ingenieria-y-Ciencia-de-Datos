@@ -5,7 +5,7 @@ Existen muchos paquetes en R para hacer inferencia bayesiana. Algunos de los má
 * OpenBUGS y WinBUGS: basado en el muestreo de Gibbs.
 * JAGS: también utiliza el muestreo de Gibbs.
 * Stan: Más moderno y con una comunidad de desarrollo más activa que los anteriores. Utiliza muestreo HMC (Hamiltonian Monte Carlo) y NUTS (no U-turn sampler). Stan tiene un lenguaje similar a C para definir modelos aunque hay muchos paquetes basados en Stan que facilitan la especificación de modelos con una sintaxis más sencilla. En este trabajo se utilizará uno de ellos, `brms` [ver @brms] . La sintaxis de especificación de modelos con este paquete es idéntica a la que se ha utilizado en la sección anterior.
-* INLA: Evita la simulación MCMC haciendo más rápida la convergencia. Es menos flexible ya que solo se pueden especificar modelos de la familia exponencial.
+* INLA: Evita la simulación *\gls{MCMC}* haciendo más rápida la convergencia. Es menos flexible ya que solo se pueden especificar modelos de la familia exponencial.
 
 Se han comparado múltiples modelos usando la función `LOO` que realiza una validación cruzada bayesiana `leave-one-out` similar a la que se explicó en la @sec-bayesiano. El mejor modelo ha resultado ser el mismo que se seleccionó en modelos mixtos (ver @eq-mejor-modelo). Es decir:
 

@@ -168,7 +168,7 @@ comments_df <- read_delim(
 ```
 
 
-En esta sección se discuten los resultados una vez "descubierto el ciego" y se responden a la pregunta de investigación y objetivos específicos planteados en la @sec-objetivos. Se reveló que el subtitulado que en este trabajo se ha denominado $A$ se corresponde que el vídeo correctamente subtitulado. Adicionalmente se ha suministrado un documento que contiene los errores introducidos en el subtitulado $B$. A partir del mismo, se ha elaborado la Tabla \ref{tbl-blind-errors} en la que se muestra la correspondencia de cada error con los ítems de la escala de Likert a la que respondieron los estudiantes (ver en la @tbl-likert-scale una descripción textual de cada ítem). Para `r length(q.no.errors)` de los `r length(q.no.errors) + length(q.errors)` ítems (`r paste(q.no.errors, collapse=", ")`) no se ha encontrado una adscripción clara en el documento de errores y, por lo tanto, sería esperable que las respuestas de los estudiantes fueran similares en ambos subtitulados en esos ítems.
+En esta sección se discuten los resultados una vez "descubierto el ciego" y se responden a la pregunta de investigación y objetivos específicos planteados en la @sec-objetivos. Se reveló que el subtitulado que en este trabajo se ha denominado $A$ se corresponde que el vídeo correctamente subtitulado. Adicionalmente se ha suministrado un documento que contiene los errores introducidos en el subtitulado $B$. A partir del mismo, se ha elaborado la Tabla \ref{tbl-blind-errors} en la que se muestra la correspondencia de cada error con los ítems de la \gls{escala de likert} a la que respondieron los estudiantes (ver en la @tbl-likert-scale una descripción textual de cada ítem). Para `r length(q.no.errors)` de los `r length(q.no.errors) + length(q.errors)` ítems (`r paste(q.no.errors, collapse=", ")`) no se ha encontrado una adscripción clara en el documento de errores y, por lo tanto, sería esperable que las respuestas de los estudiantes fueran similares en ambos subtitulados en esos ítems.
 
 ```{=tex}
 \begin{table}[]
@@ -233,9 +233,9 @@ En esta sección se discuten los resultados una vez "descubierto el ciego" y se 
 
 Para responder a las preguntas de investigación se van a utilizar los hallazgos del Análisis Exploratorio (ver @sec-eda) y los resultados de los tres modelos comentados en el @sec-resultados:
 
-* Regresión Logística con variable respuesta `Improve`, que calcula la probabilidad de que la respuesta a un ítem mejore entre subtitulados $A$ > $B$ (ver @sec-logistica-3).
-* Regresión Logística con variable respuesta `Positive`, que calcula la probabilidad de que la respuesta a un ítem sea positiva (4 ó 5).
-* Regresión Ordinal con variable Respuesta `Response`, que calcula la probabilidad de cada nivel de respuesta (ver @sec-ordinal-3).
+* \gls{Regresión Logística} con variable respuesta `Improve`, que calcula la probabilidad de que la respuesta a un ítem mejore entre subtitulados $A$ > $B$ (ver @sec-logistica-3).
+* \gls{Regresión Logística} con variable respuesta `Positive`, que calcula la probabilidad de que la respuesta a un ítem sea positiva (4 ó 5).
+* \gls{Regresión Ordinal} con variable Respuesta `Response`, que calcula la probabilidad de cada nivel de respuesta (ver @sec-ordinal-3).
 
 Por comodidad se vuelven a plantear aquí la pregunta de investigación y los objetivos específicos:
 
@@ -435,7 +435,7 @@ Para entender las motivaciones de las valoraciones de los alumnos en aquellos í
 
 # Conclusión y trabajo futuro {#sec-conclusion}
 
-Este trabajo ha prentendido responder a la pregunta de investigación de si los estudiantes de un curso de accesibilidad son capaces de identificar los errores en el subtitulado de un vídeo, y como objetivos específicos averiguar qué aspectos del subtitulado han sido más fácilmente reconocidos por los estudiantes y en cuáles han tenido más dificultad. Para ello se ha partido de una Exploración Inicial (ver @sec-eda) y se han propuesto varios modelos estadísticos que tengan en cuenta la naturaleza ordinal y dependiente de la variable respuesta (ver @sec-modelos-utilizados). Como variables explicativas se ha considerado el nivel de subtitulado, el periodo en el que se ha realizado cada test, la secuencia u orden de realización de los test, el estudiante que ha realizado el test y el ítem al que se responde.
+Este trabajo ha prentendido responder a la pregunta de investigación de si los estudiantes de un curso de \gls{accesibilidad} son capaces de identificar los errores en el subtitulado de un vídeo, y como objetivos específicos averiguar qué aspectos del subtitulado han sido más fácilmente reconocidos por los estudiantes y en cuáles han tenido más dificultad. Para ello se ha partido de una Exploración Inicial (ver @sec-eda) y se han propuesto varios modelos estadísticos que tengan en cuenta la naturaleza ordinal y dependiente de la variable respuesta (ver @sec-modelos-utilizados). Como variables explicativas se ha considerado el nivel de subtitulado, el periodo en el que se ha realizado cada test, la secuencia u orden de realización de los test, el estudiante que ha realizado el test y el ítem al que se responde.
 
 La conclusión más importante es que todos los análisis estadísticos realizados muestran que el nivel de subtitulado es la variable que mejor explica la respuesta a cada ítem. Los efectos secuencia y periodo son comparativamente de poca importancia y se traducen en que en general los estudiantes valoran peor el vídeo visto en el segundo periodo para un mismo nivel de subtitulado. Las variables estudiante e ítem se han tratado como efectos aleatorios por haber considerado que sus observaciones no son independientes. La varianza explicada por la variable estudiante ha sido más grande que la explicada por la variable ítem.
 

@@ -10,7 +10,7 @@ source("_setup.R")
 
 # Efecto secuencia e interacción tratamiento vs. periodo {#sec-contrasts}
 
-Se va a demostrar que el efecto secuencia es equivalente a la interacción de los factores tratamiento y periodo.
+Se va a demostrar que el \gls{efecto secuencia} es equivalente a la interacción de los factores tratamiento y periodo.
 
 ## Preparación
 

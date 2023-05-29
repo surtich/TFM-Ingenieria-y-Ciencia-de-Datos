@@ -1,10 +1,362 @@
 \cleardoublepage
 \selectlanguage{spanish}
 
-\newglossaryentry{likert}
+\newglossaryentry{escala de likert}
 {
-    name=Escala de Likert,
+    name=escala de Likert,
     description={Es una escala de evaluación ordinal utilizada en cuestionarios. Suele constar de 5 a 7 niveles desde "Totalmente en desacuerdo" hasta "Totalmente de acuerdo."}
+}
+
+\newglossaryentry{accesibilidad}
+{
+    name=accesibilidad,
+    description={Condición que deben cumplir los entornos, productos y servicios para que sean comprensibles, utilizables y practicables por todos los ciudadanos, incluidas las personas con discapacidad.}
+}
+
+
+\newglossaryentry{mooc}
+{
+    name=MOOC,
+    description={Curso en Línea Masivo y Abierto}
+}
+
+
+\newglossaryentry{sha}
+{
+    name=SHA,
+    description={Secure Hash Algorithm.
+    Es un algoritmo criptográfico cuyo propósito es generar un resumen único (hash) de mensaje
+    que garantiza la integridad de los datos.
+    }
+}
+
+
+\newglossaryentry{crc}
+{
+    name=CRC,
+    description={Comprobación de Redundancia Cíclica.
+    Es un algoritmo de detección de errores utilizado para garantizar la integridad de la información.
+    }
+}
+
+
+\newglossaryentry{subtitulado cerrado}
+{
+    name=subtitulado cerrado,
+    description={Subtitulado que incluye descripciones de sonidos y otros elementos relevantes en un contenido audiovisual.
+    El subtitulado cerrado es útil para personas con discapacidad auditiva o para aquellos que deseen ver
+    el contenido en lugares donde no se puede reproducir el sonido, como entornos ruidosos o silenciosos.
+    }
+}
+
+
+\newglossaryentry{triple ciego}
+{
+    name=triple ciego,
+    description={Diseño de experimento en el que tanto los participantes,
+    como los investigadores encargados de administrar el tratamiento y
+    los evaluadores de los resultados, desconocen quién está recibiendo cada nivel de tratamiento.}
+}
+
+
+\newglossaryentry{odds}
+{
+    name=odds,
+    description={
+        Es la proporción entre dos probabilidades complementarias. Matemáticamente:
+    $$
+        odds = \frac{P(evento)}{1- P(evento)}
+    $$
+    El odds puede tomar valores en el rango cero a infinito.
+    Si el valor del odds es 1, significa que la probabilidad del evento y su complementario son iguales.
+    Si el odds es mayor que 1, indica que la probabilidad del evento es mayor que la probabilidad de su complementario.
+    Por el contrario, si el odds es menor que 1, significa que la probabilidad del evento es menor que
+    la probabilidad de su complementario.}
+}
+
+\newglossaryentry{odds ratio}
+{
+    name=odds ratio,
+    description={
+        Es una medida de asociación entre dos variables dicotómicas.
+        Matemáticamente se define como la razón de dos \gls{odds}:
+        $$
+        \begin{aligned}
+        odds_{Y=1} &= \frac{P(X=1|Y=1)}{1-P(X=1|Y=1)}\\
+        odds_{Y=0} &= \frac{P(X=1|Y=0)}{1-P(X=1|Y=0)}\\
+        OR = OR_Y = OR_X &=\frac{\frac{P(X=1|Y=1)}{1-P(X=1|Y=1)}}{\frac{P(X=1|Y=0)}{1-P(X=1|Y=0)}}
+        \end{aligned}
+        $$
+        Si el OR es igual a 1, indica que no hay asociación entre las variables.
+        Si el OR es mayor que 1, indica una mayor probabilidad del $odds_{Y=1}$.
+        Si el OR es mayor que 1, indica una mayor probabilidad del $odds_{Y=0}$.
+    }
+}
+
+
+\newglossaryentry{OR}
+{
+    name=OR,
+    description={odds ratio},
+    see={odds ratio}
+}
+
+
+\newglossaryentry{GLM}
+{
+    name=GLM,
+    description={
+        Modelo Lineal Generalizado.
+        Es una extensión del Modelo Lineal General que permite variables de respuesta que siguen distribuciones
+        de probabilidad no normales.
+    }
+}
+
+
+\newglossaryentry{R}
+{
+    name=R,
+    description={Lenguaje de programación especializado en análisis estadístico y la generación de gráficos.}
+}
+
+
+
+\newglossaryentry{diseño completamente aleatorizado}
+{
+    name=diseño completamente aleatorizado,
+    description={
+        Diseño experimental en el cual los sujetos de estudio o las unidades experimentales se asignan de manera aleatoria
+        a diferentes tratamientos o grupos de tratamiento.
+        En este tipo de diseño, cada unidad experimental tiene la misma probabilidad de ser asignada a cualquier
+        tratamiento en particular. Se utiliza cuando no hay restricciones o consideraciones específicas sobre cómo
+        se deben asignar las unidades experimentales a los tratamientos.
+        Se asume que las unidades experimentales son homogéneas y que no hay factores de confusión o
+        variables ocultas que puedan influir en los resultados del experimento.
+        Este diseño es útil cuando el objetivo principal del estudio es comparar los efectos de diferentes
+        tratamientos. Al asignar las unidades de forma aleatoria, se busca reducir el sesgo y controlar
+        los factores de confusión desconocidos, ya que se espera que las diferencias observadas entre los grupos
+        sean principalmente el resultado de los tratamientos aplicados. El diseño completamente aleatorizado
+        es considerado uno de los diseños experimentales más simples y robustos.
+        Sin embargo, puede requerir un tamaño de muestra más grande para detectar diferencias significativas
+        entre los grupos de tratamiento debido a la aleatorización pura y la posible variabilidad
+        inherente en los datos.
+        }
+}
+
+
+\newglossaryentry{diseño cruzado}
+{
+    name=diseño cruzado,
+    description={
+        Diseño experimental en el cual los sujetos reciben diferentes tratamientos en distintas varios momentos o periodos.
+        Se realiza una asignación aleatoria para determinar el orden en el cual los tratamientos son recibidos.
+        El diseño más simple de este tipo involucra dos grupos de sujetos,
+        uno de los cuales recibe cada uno de dos tratamientos, A y B, en el orden AB,
+        mientras que el otro los recibe en orden inverso, BA.
+        Dado que la comparación de tratamientos se realiza "dentro del sujeto" en lugar de "entre sujetos", es probable
+        que se necesiten menos sujetos para lograr un poder estadístico determinado.
+        El análisis de estos diseños no es necesariamente sencillo debido a la posibilidad de efectos de secuencia y periodo.
+        Para minimizar este problema, a menudo se deja un período de lavado entre los periodos.
+    }
+}
+
+
+\newglossaryentry{efecto secuencia}
+{
+    name=efecto secuencia,
+    description={
+        En un \gls{diseño cruzado} es el efecto que se produce cuando el orden de las intervenciones afecta el resultado final.
+    }
+}
+
+
+\newglossaryentry{efecto periodo}
+{
+    name=efecto periodo,
+    description={
+        En un diseño experimental es el efecto que se produce cuando la aplicación de un tratamiento en un periodo
+        es afectado por la aplicación de otro tratamiento en un periodo anterior.
+    }
+}
+
+\newglossaryentry{ANOVA}
+{
+    name=ANOVA,
+    description={
+        El Análisis de la Varianza es un método para comparar dos o más medias de dos o más grupos
+        comparando la varianza de los datos entre grupos e intra grupos.
+    }
+}
+
+
+\newglossaryentry{MANOVA}
+{
+    name=MANOVA,
+    description={
+        El Análisis de Varianza Multivariado una extensión de \gls{ANOVA}
+        que se utiliza cuando se tienen múltiples variables respuesta.
+    }
+}
+
+
+
+\newglossaryentry{error de tipo I}
+{
+    name=error de tipo I,
+    description={
+        El error de tipo I o falso positivo es el error que se comete cuando se rechaza la hipótesis nula
+        siendo esta verdadera en la población.
+    }
+}
+
+
+\newglossaryentry{error de tipo II}
+{
+    name=error de tipo II,
+    description={
+        El error de tipo II o falso negativo es el error que se comete cuando no se rechaza la hipótesis nula
+        siendo esta falsa en la población.
+    }
+}
+
+
+\newglossaryentry{MLE}
+{
+    name=MLE,
+    description={
+        La Estimación de Máxima Verosimilitud es un método estadístico de estimación paramétrica
+        basado en la maximización de la función de verosimilitud de los datos observados.
+        La verosimilitud es la probabilidad de observar los datos en función de los parámetros del modelo.
+        El objetivo del MLE es encontrar los valores de los parámetros que maximizan
+        la probabilidad de obtener los datos observados.
+        En otras palabras, se busca encontrar los valores de los parámetros que hacen que los datos observados
+        sean más probables bajo el modelo propuesto.
+        En muchos casos, es más conveniente maximizar el logaritmo de la función de verosimilitud,
+        ya que simplifica los cálculos y no afecta la ubicación de los máximos por ser la función logarítmica
+        monótona creciente.        
+        }
+}
+
+
+\newglossaryentry{Regresión Logística}
+{
+    name=Regresión Logística,
+    description={
+        Modelo estadístico en el que la variable respuesta es binaria o dicotómica. Es un tipo particular de \gls{GLM}.}
+}
+
+
+\newglossaryentry{Regresión Ordinal}
+{
+    name=Regresión Ordinal,
+    description={
+        Modelo estadístico en el que la variable respuesta es ordinal. Es una extensión de la \gls{Regresión Logística}.}
+}
+
+
+\newglossaryentry{función logit}
+{
+    name=función logit,
+    description={
+        Función matemática utilizada en el contexto de la \gls{Regresión Logística} para transformar
+        la probabilidad de un evento en un valor continuo que abarca todo el intervalo real.
+        La función logit se define como el logaritmo natural del odds de un evento:        
+        $$
+        logit(evento) = log (\frac{P(evento)}{1-P(evento)})
+        $$
+    }
+}
+
+
+\newglossaryentry{función logística}
+{
+    name=función logística,
+    description={
+        También conocida como función sigmoide, es la función inversa de la \gls{función logit}.
+        es una función matemática que transforma una variable continua en un rango de valores entre 0 y 1.
+        Esta función se utiliza comúnmente en la \gls{Regresión Logística} para convertir los resultados de una combinación lineal
+        de variables predictoras en probabilidades:
+        $$
+        P(x) = \frac{1}{1 + e^{-x}}
+        $$
+    }
+}
+
+
+
+\newglossaryentry{LRT}
+{
+    name=LRT,
+    description={
+        El Test de Razón de Verosimilitudes en español, es una prueba estadística utilizada
+        para comparar dos modelos estadísticos y determinar cuál de ellos proporciona un mejor ajuste
+        a los datos observados.
+        La idea detrás del LRT es comparar la verosimilitud del modelo completo con la verosimilitud
+        del modelo reducido, que es un modelo en el que algunos de los parámetros se han igualado a cero.
+        Si la diferencia entre estas verosimilitudes es estadísticamente significativa,
+        se concluye que el modelo completo proporciona un mejor ajuste a los datos que el modelo reducido.
+    }
+}
+
+
+\newglossaryentry{GLMM}
+{
+    name=GLMM,
+    description={
+        Modelo estadístico también conocido como Modelo Multinivel o Modelo Jerárquico,
+        es una extensión de los modelos \gls{GLM} utilizado para analizar datos estructurados en diferentes niveles o niveles jerárquicos.
+        Este tipo de modelo es útil cuando los datos tienen una estructura anidada, como estudiantes dentro de escuelas,
+        pacientes dentro de hospitales o empleados dentro de empresas.
+        En un modelo multinivel, se reconoce que los datos están agrupados en diferentes niveles
+        y que las observaciones dentro de cada nivel son dependientes debido a la influencia del nivel
+        al que pertenecen. Por ejemplo, las puntuaciones de los estudiantes dentro de una escuela pueden no ser independientes
+        debido a la influencia del entorno escolar.
+        El modelo multinivel permite modelar tanto las variaciones entre los diferentes niveles
+        (variaciones entre escuelas, hospitales, empresas, etc.)
+        como las variaciones dentro de cada nivel (variaciones individuales dentro de cada escuela, hospital, empresa, etc.).
+        Esto se logra mediante la inclusión de términos aleatorios en el modelo que capturan
+        las variaciones entre los niveles. La ventaja de utilizar un modelo multinivel es que tiene en cuenta la estructura jerárquica de los datos y permite estimar los efectos tanto a nivel individual como a nivel de grupo. La estimación de un modelo multinivel generalmente se realiza mediante métodos de Máxima Verosimilitud Restringida (REML) o mediante el enfoque de Estimación de Máxima Verosimilitud (MLE).
+    }
+}
+
+
+\newglossaryentry{ICC}
+{
+    name=ICC,
+    description={
+        La Correlación Intraclase es una medida estadística utilizada para cuantificar la proporción de varianza total
+        de una variable que se debe a la variación entre grupos. Se utiliza en el contexto de modelos \gls{GLMM}
+        cuando las observaciones están agrupadas en diferentes unidades,
+        y mide la parte de la varianza explicada por los
+        efectos aleatorios.
+    }
+}
+
+\newglossaryentry{MCMC}
+{
+    name=MCMC,
+    description={
+        Los Métodos de Montecarlo basados en cadenas de Markov es un método estadístico utilizado para simular
+        muestras de una distribución de probabilidad.
+        El método de MCMC se basa en la construcción de una cadena de Markov,
+        que es una secuencia de valores generados a partir de una distribución de probabilidad condicional dada
+        la observación anterior en la cadena.
+        Estos valores se generan iterativamente, de manera que la distribución de probabilidad de los valores
+        de la cadena converge a la distribución de interés.        
+        La principal ventaja de MCMC es que permite aproximar
+        y obtener muestras representativas de la distribución de probabilidad de interés,
+        incluso cuando dicha distribución no se puede obtener de manera analítica o es
+        computacionalmente costosa de calcular.
+    }
+}
+
+
+\newglossaryentry{shrinkage}
+{
+    name=shrinkage,
+    description={
+        En el contexto de \gls{GLMM}, el término "shrinkage" (o "encogimiento" en español)
+        se refiere a un proceso mediante el cual los efectos estimados a nivel individual se ajustan hacia el valor promedio del grupo al que pertenecen.}
 }
 
 \printglossaries
