@@ -1,0 +1,357 @@
+---
+title: "Utilización de técnicas multivariantes para el estudio del aprendizaje de la mejora de la accesibilidad en el subtitulado de vídeos"
+author: "Javier Pérez Arteaga"
+institute: "Máster en Ingeniería y Ciencia de Datos"
+format:
+    revealjs:
+        toc: true
+        toc_float: true
+        toc-depth: 1
+        toc-location: body
+        toc-title: "Agenda"
+        logo: images/logo.png
+        output-file: tfm.html
+        slide-number: true
+        multiplex: true
+        theme: [simple, assets/monash.scss]
+        show-slide-number: all
+        controls: true
+        width: 1920
+        height: 1080
+        css: [assets/custom.css, assets/pacman.css, assets/tachyons-addon.css]
+        include-after: |
+            <link rel="stylesheet" href="assets/syntax-highlight.css">
+            <link rel="stylesheet" href="/assets/fontawesome-free-6.1.1-web/css/font-awesome.min.css">
+            <script defer src="/assets/fontawesome-free-6.1.1-web/js/all.min.js"></script>
+lang: es
+execute:
+  echo: false
+---
+
+```{r}
+setwd("/home/surtich/projects/TFMQ")
+source("_setup.R")
+
+rotating_text <- function(x, align = "center") {
+    glue::glue('
+<div style="overflow: hidden; height: 1.2em;">
+<ul class="content__container__list {align}" style="text-align: {align}">
+<li class="content__container__list__item">{x[1]}</li>
+<li class="content__container__list__item">{x[2]}</li>
+<li class="content__container__list__item">{x[3]}</li>
+<li class="content__container__list__item">{x[4]}</li>
+</ul>
+</div>')
+}
+```
+
+# Introducción
+
+## Objetivo del experimento
+
+
+::: {.callout-note}
+## Pregunta de investigación
+
+¿Son los estudiantes de un curso de creación de materiales accesibles capaces de evalaur las diferencias en la calidad del subtitulado de un vídeo?
+:::
+
+
+
+::: {.fragment .fade-in}
+
+::: {.callout-tip}
+## Objetivos específicos
+
+¿Qué aspectos de la calidad del subtitulado son más fácilmente reconocibles por los estudiantes y en cuáles existe mayor dificultad?
+:::
+:::
+
+## Descripción de la experiencia
+
+::: incremental 
+
+* Sexta Edición (2022) **curso MOOC Materiales Digitales Accesibles** perteneciente al Canal Fundación ONCE en UNED Abierta.
+* Iniciativa del Real Patronato sobre Discapacidad en colaboración con la Fundación ONCE y la UNED.
+* Dirigido por los profesores Emilio Letón Molina y Alejandro Rodríguez Ascaso.
+* Hasta mayo de 2023: 7 ediciones y más de 8.000 alumnos matriculados.
+* Sexta Edición: 1.261 alumnos matriculados y 165 (13,08%) aprobados.
+* En el módulo "Accesibilidad del material multimedia" se propuso una actividad de subtitulado.
+* Los alumnos vieron dos vídeos un bien subtitulado y otro con errores.
+* El orden en que vieron los vídeos se asignó aleatoriamente.
+* Después de ver cada uno de los vídeos realizaron un test de 18 preguntas.
+
+:::
+
+
+
+
+## Características del diseño del experimento {auto-animate=true}
+
+
+
+:::::: {.columns}
+
+:::::: {.column width="40%"}
+
+
+::: {.fragment .fade-in fragment-index=1}
+
+* Completamente aleatorizado.
+:::
+
+::: {.fragment .fade-in fragment-index=2}
+
+* Cruzado AB/BA.
+:::
+
+
+::: {.fragment .fade-in fragment-index=3}
+
+* Medidas repetidas.
+:::
+
+::: {.fragment .fade-in fragment-index=4}
+
+* Triple ciego.
+:::
+
+::: {.fragment .fade-in fragment-index=5}
+
+* De respuesta ordinal.
+
+:::
+:::
+
+:::::: {.column width="60%"}
+
+::: {.r-stack}
+
+::: {data-id="video"}
+
+::: {.fragment .fade-in fragment-index=1}
+
+![](images/video.png) 
+:::
+
+:::
+
+
+::: {data-id="video"}
+
+::: {.fragment .fade-in fragment-index=2}
+
+```{mermaid}
+%%| mermaid-format: png
+%%| fig-width: 20
+flowchart LR
+  subgraph Primer Periodo
+  C[Tratamiento A]
+  D[Tratamiento B]
+  end
+  subgraph Segundo Periodo
+  E[Tratamiento B]
+  F[Tratamiento A]
+  end
+  A[Sujetos participantes] --> B{Aleatorización}
+  B-- Secuencia AB --> C-.->E
+  B-- Secuencia BA --> D-.->F
+```
+:::
+:::
+
+
+::: {.fragment .fade-in fragment-index=4}
+
+::: {data-id="box-questions"}
+
+::: box  
+[Items de la escala de Likert]{.story}
+<br>
+
+```{r}
+questions.tbl <- tibble(Item = levels(df_all$Item), Texto = levels(df_all$Item_l)) %>%
+    arrange(Item) %>%
+    gt() %>%
+    tab_style(
+        style = list(
+            cell_fill(color = "#cfe0e3")
+        ),
+        locations = cells_body(
+            rows = 18
+        )
+    ) %>%
+    tab_options(
+        table.background.color = "#E6E6E6",
+        table.font.size = 20
+    )
+questions.tbl
+```
+:::
+:::
+:::
+::: {.fragment .fade-in fragment-index=5}
+
+
+::: {data-id="box-response"}
+
+::: box  
+[Niveles de los items de la escala de Likert]{.story}
+<br>
+```{r}
+response.tbl <- data.frame(`Valor` = 0:5, `Texto` = response_labels) %>%
+    gt() %>%
+    tab_style(
+        style = list(
+            cell_fill(color = "#cfe0e3")
+        ),
+        locations = cells_body(
+            rows = 1
+        )
+    ) %>%
+    tab_options(
+        table.background.color = "#E6E6E6",
+        table.font.size = 30
+    ) %>%
+    rm_header()
+response.tbl
+```
+:::
+
+:::
+
+:::
+
+
+:::
+:::
+:::
+
+# Marco teórico y estado del arte
+
+
+{{< include ordinal.qmd >}}
+{{< include glmm.qmd >}}
+{{< include contrast.qmd >}}
+
+# Modelado estadístico
+
+
+## Variables de interés {auto-animate=true}
+
+
+:::::: {.columns}
+
+:::::: {.column width="30%"}
+
+::: {data-id="box-response"}
+
+[Response]{.f1}
+
+::: box  
+```{r}
+response.tbl %>%
+    tab_options(
+        table.background.color = "#E6E6E6",
+        table.font.size = 20
+    )
+```
+:::
+
+:::
+
+
+::: {.fragment .fade-in fragment-index=5}
+::: {data-id="box-questions"}
+
+[Item]{.f1}
+
+::: box  
+```{r}
+questions.tbl
+```
+:::
+:::
+:::
+
+::::::
+
+:::::: {.column width="35%"}
+
+::: {data-id="video"}
+
+[Treat]{.f1}
+
+[¿$A$? ¿$B$?]{.f1}
+![](images/video.png) 
+
+[¿$A$? ¿$B$?]{.f1}
+![](images/video2.png) 
+:::
+
+::::::
+:::::: {.column width="35%"}
+
+::: {.fragment .fade-in fragment-index=1}
+[Period 1 vs. Period 2]{.f1}
+
+::: box  
+[Efecto periodo]{.story}
+<br>
+Efecto que se produce cuando las respuestas en el segundo periodo están influidas por haber realizado previamente el mismo test. 
+
+:::
+
+:::
+
+
+::: {.fragment .fade-in fragment-index=2}
+[Seq AB vs. Seq BA]{.f1}
+
+::: box  
+[Efecto secuencia]{.story}
+<br>
+Efecto que se produce cuando las respuestas en el segundo periodo son diferentes en función de si previamente se realizó el test $A$ o el test $B$. 
+
+:::
+
+::: {.fragment .fade-in fragment-index=3}
+
+["No test of treatment difference is possible without assuming the
+carryover effects are equal."]{.speech .monash-blue2}
+<span>John Lawson</span>
+
+
+:::
+
+::: {.fragment .fade-in fragment-index=4}
+[Subject]{.f1}
+<br>
+Estudiantes participantes en el estudio. 
+
+:::
+
+:::
+
+::::::
+::::::
+
+## Herramientas
+
+* ![Quarto](images/quarto.png){width=2in}: herramienta de publicación de documentación científica en <i class="fa-brands fa-r-project"></i>, $\mathrm{\LaTeX}$, <i class="fa-brands fa-markdown"></i> Markdown, ...
+* <i class="fa-brands fa-r-project"></i> lenguaje de programación estadístico:
+    * Manipulación de datos: tidyr, dplyr, ...
+    * Gráficos: ggplot2, pyplot
+    * Tablas: knitr, gt
+    * Modelado estadístico: lme4, stats, ordinal, vcd, VGAM, brms, stan, ...
+* ![](images/vscode.png){width=40px} VScode: Entorno de desarrollo.
+* <i class="fa-brands fa-github"></i> [memoiQ](https://github.com/EricMarcon/memoiQ): Plantilla memoria
+* <i class="fa-brands fa-github"></i> [emitanaka](https://github.com/emitanaka/talks): Plantilla presentación
+* Tanto la memoria como la presentación son reproducibles.
+
+
+
+{{< include eda.qmd >}}
+
+{{< include modelado.qmd >}}
+

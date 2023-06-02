@@ -1,0 +1,67 @@
+## Efecto secuencia vs interacción tratamiento periodo
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;margin-top:100px !important;border: 3px solid;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-9m4v{border-color:inherit;color:#986536;font-size:20px;font-weight:bold;text-align:center;vertical-align:top}
+.tg .tg-x1hj{border-color:inherit;font-size:20px;text-align:left;vertical-align:top}
+.tg .tg-a7zo{border-color:inherit;color:#646809;font-size:20px;text-align:left;vertical-align:top}
+.tg .tg-hxir{border-color:inherit;color:#9a0000;font-size:20px;text-align:left;vertical-align:top}
+.tg .tg-0luz{border-color:inherit;color:#3531ff;font-size:20px;text-align:left;vertical-align:top}
+.tg .tg-4f70{border-color:inherit;color:#986536;font-size:20px;text-align:left;vertical-align:top}
+.tg .tg-hcnr{border-color:inherit;color:#646809;font-size:20px;font-weight:bold;text-align:center;vertical-align:top}
+.tg .tg-0thq{border-color:inherit;color:#3531ff;font-size:20px;font-weight:bold;text-align:center;vertical-align:top}
+.tg .tg-spag{border-color:inherit;font-size:20px;font-weight:bold;text-align:left;vertical-align:top}
+.tg .tg-4qqe{border-color:inherit;font-size:20px;font-weight:bold;text-align:center;vertical-align:top}
+.tg .tg-bw4q{border-color:inherit;color:#9a0000;font-size:20px;font-weight:bold;text-align:center;vertical-align:top}
+</style>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-spag" rowspan="2"><br><br>Contrast</th>
+    <th class="tg-4qqe" rowspan="2"><br><br>Model<br><br></th>
+    <th class="tg-4qqe" colspan="4">Factor Levels</th>
+  </tr>
+  <tr>
+    <th class="tg-bw4q">TreatA<br>Period1<br>SeqAB</th>
+    <th class="tg-0thq">TreatA<br>Period2<br>SeqBA</th>
+    <th class="tg-hcnr">TreatB<br>Period1<br>SeqBA</th>
+    <th class="tg-9m4v">TreatB<br>Period2<br>SeqAB</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-4qqe" rowspan="2"><br>Treatment</td>
+    <td class="tg-x1hj">$Response \! = \! \beta_0 \! +\!  \beta_1Treat \! +\!  \beta_2Period \! +\!  \beta_3Treat\!:\!Period$</td>
+    <td class="tg-hxir">$Response \! = \! \beta_0$</td>
+    <td class="tg-0luz">$Response \! = \! \beta_0 \! +\!  \beta_2$</td>
+    <td class="tg-a7zo">$Response \! = \! \beta_0 \! +\!  \beta_1$</td>
+    <td class="tg-4f70">$Response \! = \! \beta_0 \! +\!  \beta_1 \! +\!  \beta_2 \! +\!  \beta_3$</td>
+  </tr>
+  <tr>
+    <td class="tg-x1hj">$Response \! = \! \beta_0 \! +\!  \beta_1Treat \! +\!  \beta_2Period \! +\!  \beta_3Seq$</td>
+    <td class="tg-hxir">$Response \! = \! \beta_0$</td>
+    <td class="tg-0luz">$Response \! = \! \beta_0 \! +\!  \beta_2 \! +\!  \beta_3$</td>
+    <td class="tg-a7zo">$Response \! = \! \beta_0 \! +\!  \beta_1 \! +\!  \beta_3$</td>
+    <td class="tg-4f70">$Response \! = \! \beta_0 \! +\!  \beta_1 \! +\!  \beta_2$</td>
+  </tr>
+  <tr>
+    <td class="tg-4qqe" rowspan="2"><br>Sum</td>
+    <td class="tg-x1hj">$Response \! = \! \beta_0 \! +\!  \beta_1Treat \! +\!  \beta_2Period \! +\!  \beta_3Treat\!:\!Period$</td>
+    <td class="tg-hxir">$Response \! = \! \beta_0 \! +\!  \beta_1 \! +\!  \beta_2 \! +\!  \beta_3$</td>
+    <td class="tg-0luz">$Response \! = \! \beta_0 \! +\!  \beta_1 \! -\! \beta_2 \! -\! \beta_3$</td>
+    <td class="tg-a7zo">$Response \! = \! \beta_0 \! -\! \beta_1 \! +\!  \beta_2 \! -\! \beta_3$</td>
+    <td class="tg-4f70">$Response \! = \! \beta_0 \! -\! \beta_1 \! -\! \beta_2 \! +\!  \beta_3$</td>
+  </tr>
+  <tr>
+    <td class="tg-x1hj">$Response \! = \! \beta_0 \! +\!  \beta_1Treat \! +\!  \beta_2Period \! +\!  \beta_3Seq$</td>
+    <td class="tg-hxir">$Response \! = \! \beta_0 \! +\!  \beta_1 \! +\!  \beta_2 \! +\!  \beta_3$</td>
+    <td class="tg-0luz">$Response \! = \! \beta_0 \! +\!  \beta_1 \! -\! \beta_2 \! -\! \beta_3$</td>
+    <td class="tg-a7zo">$Response \! = \! \beta_0 \! -\! \beta_1 \! +\!  \beta_2 \! -\! \beta_3$</td>
+    <td class="tg-4f70">$Response \! = \! \beta_0 \! -\!\beta_1 \! -\! \beta_2 \! +\!  \beta_3$</td>
+  </tr>
+</tbody>
+</table>

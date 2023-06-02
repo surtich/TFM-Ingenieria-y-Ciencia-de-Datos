@@ -1,0 +1,89 @@
+
+## Exploración inicial
+
+* Los estudiantes eligen participar o no voluntariamente en el estudio.
+* Los datos se suministran anonimizados.
+* Algunos de los estudiantes que realizaron la actividad de subtitulado no dieron su consentimiento para participar en el estudio y se han eliminado.
+* Algunos de los estudiantes solo realizaron la primera actividad de subtitulado y también se han eliminado.
+
+```{r}
+#| fig-align: center
+df_all %>%
+    distinct(Seq, Subject) %>%
+    group_by(Seq) %>%
+    count() %>%
+    ggplot(aes(x = Seq, y = n, fill = Seq)) +
+    geom_bar(stat = "identity") +
+    geom_text(aes(label = n, y = n / 2), size = 16) +
+    geom_text(aes(label = Seq, y = -3), size = 16) +
+    theme_void() +
+    theme(
+        legend.position = "none", plot.title = element_text(hjust = 0.6)
+    )
+```
+
+
+## Exploración inicial
+
+* El subtitulado denominado como $A$, muestra claramente mejores puntuaciones.
+* El comportamiento por grupos (secuencias) y periodos es similar con sutiles diferencias.
+
+```{r}
+#| fig-align: center
+#| out-width: 150%
+df_freqs <- df_all %>%
+    group_by(Period, Seq, Treat) %>%
+    count(Response) %>%
+    mutate(freq = n / sum(n)) %>%
+    ungroup()
+
+level_labeller <- function(variable, value) {
+    paste0(variable, " ", value)
+}
+
+
+df_freqs %>%
+    ggplot(aes(
+        x = Response, y = freq,
+        fill = Response
+    )) +
+    geom_bar(stat = "identity") +
+    facet_wrap(~ Seq + Period + Treat, nrow = 2, labeller = level_labeller) +
+    geom_text(aes(label = Response, y = 0.9), size = 5) +
+    geom_text(aes(label = formatC(freq, digits = 2, format = "f")), nudge_y = 0.1, size = 4) +
+    ylim(0, 1) +
+    theme(
+        legend.position = "none",
+        axis.line.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.text.x = element_blank(),
+        strip.text = element_text(size = 16), strip.background = element_blank()
+    ) +
+    labs(y = "Frecuencia relativa de respuesta", x = "Valor de la respuesta")
+```
+
+
+## Exploración inicial
+
+* En el subtitulado $A$ hay mayor homogeneidad entre grupos que en el $B$.
+* En el subtitulado $A$, los ítems $Q15$, $Q16$, $Q17$, tienen relativamente peores valoraciones.
+* En el subtitulado $B$, las peores valoraciones corresponden a los ítems $Q05$ y $Q09$.
+
+```{r}
+#| fig-align: center
+#| out-width: 80%
+df_response %>%
+    group_by(Seq, Treat, Item, Level) %>%
+    mutate(Item = factor(Item, levels = rev(levels(Item)))) %>%
+    count(Response) %>%
+    ggplot(aes(x = Item, y = n, fill = Level)) +
+    geom_bar(position = "fill", stat = "identity") +
+    scale_y_continuous(labels = scales::percent, expand = c(0, 0)) +
+    scale_fill_brewer(name = "Level:", type = "div", palette = "Spectral") +
+    ylab("Percentage") +
+    theme_bw() +
+    theme(legend.position = "top", axis.text.y = element_text(size = 7)) +
+    facet_grid(rows = vars(Seq), cols = vars(Treat)) +
+    coord_flip() +
+    labs(x = "Item", y = "Percentage", fill = "Response")
+```

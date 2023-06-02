@@ -57,7 +57,7 @@ En la parte de efectos fijos: los interceptos tienen valores similares al modelo
 #| label: fig-random-subject-var
 #| fig-cap: Distribución de interceptos aleatorios por estudiante en el modelo Response ~ Treat * Period + (1 | Subject)
 #| fig-scap: Distribución de interceptos aleatorios por estudiante.
-#| fig-height: 2
+#| fig-width: 4
 ranef(clmm_treat.period_subject) %>%
     data.frame() %>%
     ggplot(aes(y = X.Intercept.)) +

@@ -4,13 +4,35 @@ source("_setup.R")
 
 # Materiales y métodos {#sec-metodo}
 
-En este capítulo se describen los ficheros de datos suministrados, se explica la tarea de preprocesado realizada  sobre ellos y las variables que se han utilizado en el modelado estadístico.
+En este capítulo se describe la actividad de subtitulado de la que proceden los datos, los ficheros de datos suministrados, se explica la tarea de preprocesado realizada  sobre ellos y las variables que se han utilizado en el modelado estadístico.
+
+
+## Descripción de la experiencia {#sec-desc}
+
+La actividad de subtitulado ha sido cuidadosamente diseñada con un enfoque instruccional curado a través de las sucesivas ediciones del curso y así ofrecer los contenidos de forma alineada para que los estudiantes puedan realizar la evaluación del subtitulado de forma secuencial.
+
+La actividad fue voluntaria y sin influencia en la calificación final del alumno. Se realizó en el módulo "Accesibilidad del material multimedia". En este mismo módulo, y antes de la actividad de subtitulado, los alumnos hubieron completado las secciones "Accesibilidad de la información sonora" y "Accesibilidad de la información visual". Estos módulos constan de las siguientes actividades relacionadas con la actividad de subtitulado:
+
+* Vídeo: "Accesibilidad audiovisual: subtítulos".
+* Invitación a la participación en el foro.
+* Textos con referencias.
+* Test de nivel 1 y nivel 2: "Accesibilidad de información sonora"
+  
+Se estima que los estudiantes hubieron empleado unas tres horas de formación en accesibilidad multimedia (una de ellas específicamente en subtitulado) antes de realizar la actividad.
+
+De acuerdo al **compromiso ético** del Canal los datos de los estudiantes se han suministrado anonimizados usando un identificador generado con \gls{sha}-512. Además, se han eliminado del estudio los datos de estudiantes que, a pesar de haber realizado la actividad de subtitulado, no dieron su consentimiento para que sus datos fueran utilizados en estudios científicos.
+
+La actividad consistió en ver dos vídeos idénticos de 43 segundos que solo se diferencian en la calidad del subtitulado. Los subtítulos del vídeo bien subtitulado se realizaron por un experto de FIAPAS (Confederación Española de Familias de Personas Sordas) siguiendo la norma UNE 153010 [ver @aenor2012]. El otro vídeo tenía un subtitulado similar pero se introdujeron pequeñas deficiencias, algunas de ellas inapreciables para alguien que carezca de conocimientos sobre accesibilidad. El orden de los vídeos fue aleatorio, de tal forma que una cohorte de alumnos vio primero el vídeo bien subtitulado y luego el mal subtitulado y la otra lo hizo al revés. Después de ver cada uno de los vídeos, los alumnos respondieron a una \gls{escala de likert} de 5 niveles y 18 ítems. Los 18 ítems de Likert responden a los criterios de la norma UNE 153010 [ver @aenor2012].
+
+Los términos **escala de Likert** e ítem de Likert se prestan a menudo a confusión ya que se utilizan con distintos significados. En este trabajo se seguirá la convención más habitual [ver @uebersax2006] de denominar ítem de Likert a cada una de las preguntas de que consta un cuestionario o test, siendo la escala de Likert el conjunto de todos los ítems del cuestionario. Cada ítem se contestó marcando una opción de entre un conjunto ordenado de respuestas o niveles propuesto e idéntico para todos los ítems. Por ello, se debe evitar denominar escala a los niveles de un ítem.
+
+El diseño del experimento fue **\gls{triple ciego}**. Es decir, a los alumnos no se les informó de si estaban viendo el vídeo con mejor o con peor calidad de subtitulado; los directores del MOOC tampoco conocieron esta información, como tampoco se conocía en el momento de analizar los datos, ya que los vídeos tienen identificaciones ofuscadas con \gls{crc}-32b y no contienen ninguna indicación del tipo de subtitulado del vídeo^[En la respuesta a cada ítem, el alumno pudo añadir comentarios. Éstos fueron eliminados en la fase de análisis para que no filtren información referente al tipo de subtitulado que el alumno creyó estar contestando y solo se utilizaron en la fase de discusión ver @sec-discusion().]. El "ciego fue liberado" en la fase de elaboración de la discusión de este trabajo (ver @sec-discusion).
 
 ## Ficheros suministrados
 
 Se dispuso de los siguientes ficheros `csv`:
 
-* Fichero `grade` contiene el identificador de estudiante y el grupo al que pertenece (campo `cohort`), ofuscado con \gls{sha}-512 para no conocer la identidad real del estudiante y con \gls{crc}-32b para no conocer si el grupo es el que el vio primero el vídeo bien subtitulado.
+* Fichero `grade` contiene el identificador de estudiante (ofuscado con \gls{sha}-512 para no conocer su identidad real) y el grupo al que pertenece (campo `cohort`) ofuscado con \gls{crc}-32b.
 * Los ficheros `test1` y `test2` son las repuestas a las escalas de Likert sobre la calidad del subtitulado del primer y del segundo vídeo realizado por cada grupo respectivamente.
 
 En la @tbl-likert-levels se muestran los 5 niveles de cada uno de los ítems de la \gls{escala de likert} utilizados para valorar el subtitulado

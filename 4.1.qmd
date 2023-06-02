@@ -325,7 +325,7 @@ La @tbl-ordinal-com compara tres modelos ordinales con el contraste $sum$:
 
 Se constata que los coeficientes estimados en los tres modelos son significativos y de similar valor.
 
-\miniscule
+\scriptsize
 ```{r}
 #| label: tbl-ordinal-com
 #| tbl-cap: Comparación de modelos ordinales.
@@ -334,7 +334,7 @@ options(contrasts = rep("contr.sum", 2))
 clm_sum_null <- clm(Response ~ 1, data = df_response)
 clm_sum_treat <- clm(Response ~ Treat, data = df_response)
 
-modelsummary(list("Response ~ 1" = clm_sum_null, "Response ~ Treat" = clm_sum_treat, "Response ~ Treat:Period" = clm_sum_treat.period), estimate = "{estimate}{stars}", gof_omit = "RMSE", statistic = c("std.error", "conf.int"), shape = term:contrast ~ model + statistic, output = "gt", metrics = "Log.Lik.")
+modelsummary(list("Response ~ 1" = clm_sum_null, "Response ~ Treat" = clm_sum_treat, "Response ~ Treat:Period" = clm_sum_treat.period), estimate = "{estimate}{stars}", gof_omit = "RMSE", statistic = c("std.error"), shape = term:contrast ~ model + statistic, output = "gt", metrics = "Log.Lik.")
 ```
 \normalsize
 

@@ -57,20 +57,10 @@ $if(maintitlepage)$
 		
 	\end{flushright}
 
-  \SmallMargins % Margins
-  \newpage
-  \textblockorigin{\trimedge}{\trimtop} % verso
-  \begin{textblock*}{\textwidth}(\paperwidth-\spinemargin-\textwidth, \uppermargin)
-    #1
-  \end{textblock*}
-  \begin{textblock*}{\textwidth}[0,1](\paperwidth-\spinemargin-\textwidth, \uppermargin+\textheight+\footskip)
-    \centering
-    $if(maintitlepage.logo)$
-      \includegraphics[width=\paperwidth/4]{logo}\\ \bigskip
-    $endif$
-    #2
-  \end{textblock*}
- 
+  \evenpage
+  \SmallMargins
+  \thispagestyle{empty}
+  
 }
 $endif$
 

@@ -456,7 +456,7 @@ vídeos}
 
 \author{Javier Pérez Arteaga}
 
-\date{jun 2023}
+\date{junio 2023}
 
 
 % Main title page with filigrane
@@ -503,18 +503,10 @@ vídeos}
 		
 	\end{flushright}
 
-  \SmallMargins % Margins
-  \newpage
-  \textblockorigin{\trimedge}{\trimtop} % verso
-  \begin{textblock*}{\textwidth}(\paperwidth-\spinemargin-\textwidth, \uppermargin)
-    #1
-  \end{textblock*}
-  \begin{textblock*}{\textwidth}[0,1](\paperwidth-\spinemargin-\textwidth, \uppermargin+\textheight+\footskip)
-    \centering
-          \includegraphics[width=\paperwidth/4]{logo}\\ \bigskip
-        #2
-  \end{textblock*}
- 
+  \evenpage
+  \SmallMargins
+  \thispagestyle{empty}
+  
 }
 
 % Clear page and open an even one (\clearpage opens an odd one)
@@ -578,7 +570,7 @@ Phasellus vitae magna nec mi sagittis luctus vitae eu augue. Donec scelerisque l
 \addto\captionsspanish{
 \def\listtablename{\'Indice de tablas}%
 \def\tablename{Tabla}}
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, frame hidden, breakable, borderline west={3pt}{0pt}{shadecolor}, sharp corners, interior hidden, enhanced]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, frame hidden, boxrule=0pt, sharp corners, breakable, enhanced, interior hidden]}{\end{tcolorbox}}\fi
 
 % Contents
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -617,68 +609,53 @@ Phasellus vitae magna nec mi sagittis luctus vitae eu augue. Donec scelerisque l
 \section{Motivación}\label{motivaciuxf3n}}
 
 Algunas personas tienen problemas de \gls{accesibilidad} a contenidos
-multimedia. Añadir subtítulos a los vídeos facilita que muchas de ellas
-superen estas dificultades ya que permiten la percepción visual de
-información que originalmente era acústica. Por ello, los subtítulos
-ayudan a las personas sordas o con discapacidad auditiva a acceder al
-contenido audiovisual y constituyen uno de los componentes fundamentales
-de la accesibilidad audiovisual \autocite[ver][]{jperez1}. En las
-\emph{Pautas de Accesibilidad para el Contenido Web, WCAG2.1}
+multimedia. Por ejemplo, personas sordas o con discapacidad auditiva,
+personas que no dominen el idioma o que lo estén aprendiendo,
+situaciones en las que el contenido audiovisual se reproduce en entornos
+ruidosos o en los que el silencio es necesario. Añadir subtítulos a los
+vídeos facilita que se superen estas dificultades ya que permiten la
+percepción visual de información que originalmente era sonora. Por ello,
+los subtítulos constituyen uno de los componentes fundamentales de la
+accesibilidad audiovisual \autocite[ver][]{jperez1}. En las \emph{Pautas
+de Accesibilidad para el Contenido Web, WCAG 2.1}
 \autocite[ver][]{WCAG21} se incluyen pautas y criterios que deben
-seguirse en el subtitulado. La norma UNE 153010
-\autocite[ver][]{aenor2012} sobre \emph{Subtitulado para personas sordas
-y personas con discapacidad auditiva} \enquote{especifica requisitos y
-recomendaciones sobre la presentación del subtitulado para personas
-sordas y personas con discapacidad auditiva como medio de apoyo a la
-comunicación para facilitar la accesibilidad de los contenidos
-audiovisuales de la Sociedad de la Información.}
+seguirse en el contenido web, como la obligatoriedad de tener subtítulos
+en los vídeos. La norma UNE 153010 \autocite[ver][]{aenor2012} sobre
+\emph{Subtitulado para personas sordas y personas con discapacidad
+auditiva} especifica requisitos y recomendaciones sobre subtitulado para
+facilitar la accesibilidad a los contenidos audiovisuales.
 
-Las plataformas de compartición de vídeos como Youtube o las de creación
-de cursos \gls{mooc} como Coursera o EDX permiten en la actualidad la
-generación de subtítulos automáticos. Además, existen comunidades que se
-dedican a subtitular todo tipo de material multimedia. No obstante,
-frecuentemente los subtítulos producidos de esta manera no tienen en
-cuenta la necesidades de accesibilidad específicas de personas con
-problemas de audición. Estas personas normalmente van a necesitar un
-\gls{subtitulado cerrado} (\emph{closed caption}). Este subtitulado
-consta de información interpretativa e incluye descripción textual de
-efectos sonoros junto con otros elementos como la perfecta
-sincronización con el hablante, el número de caracteres por línea, la
-exactitud del diálogo, la ubicación, el tamaño o el contraste del
-subtítulo. Así, \textcite{parton2016} realizó un estudio para determinar
-si los subtítulos automáticos generados por YouTube cumplen las
-necesidades de los estudiantes universitarios sordos. En el estudio se
-contabilizaron un total de 525 errores en 68 minutos de video (una tasa
-de 7.7 errores por minuto). La accesibilidad multimedia es, por lo
-tanto, una actividad importante y compleja que requiere dedicación y
-conocimiento específico y va más allá de verificar si el vídeo tiene o
-no subtítulos.
+Las plataformas de compartición de vídeos, como YouTube, permiten en la
+actualidad la generación de subtítulos automáticos. Además, existen
+comunidades que se dedican a subtitular todo tipo de material
+multimedia. No obstante, frecuentemente los subtítulos producidos de
+esta manera no tienen en cuenta los criterios de calidad y de
+accesibilidad del subtitulado. Un subtitulado de calidad consta de
+información interpretativa e incluye descripción textual de efectos
+sonoros junto con otros elementos como la perfecta sincronización con el
+hablante, el tiempo de permanencia de subtítulo en la pantalla, el
+número de caracteres por línea y el número de líneas, la exactitud del
+diálogo, la ubicación, el tamaño, el contraste del subtítulo, etc. Así,
+\textcite{parton2016} realizó un estudio para determinar si los
+subtítulos automáticos generados por YouTube cumplen las necesidades de
+los estudiantes universitarios sordos. En el estudio se contabilizaron
+un total de 525 errores en 68 minutos de video (una tasa de 7.7 errores
+por minuto). Adecuar los subtítulos a las normas de accesibilidad es una
+tarea importante y compleja que requiere dedicación y conocimiento
+específico y va más allá de verificar si el vídeo tiene o no subtítulos.
 
-\hypertarget{sec-objetivos}{%
-\section{Objetivos}\label{sec-objetivos}}
-
-El objetivo de este trabajo es responder a la siguiente pregunta de
-investigación:
-
-\begin{tcolorbox}[enhanced jigsaw, colback=white, toptitle=1mm, opacityback=0, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Pregunta de investigación}, coltitle=black, bottomrule=.15mm, bottomtitle=1mm, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, titlerule=0mm, left=2mm, breakable, colframe=quarto-callout-note-color-frame, rightrule=.15mm, arc=.35mm, opacitybacktitle=0.6, leftrule=.75mm]
-
-¿Son los estudiantes de un curso de creación de materiales accesibles
-capaces de encontrar diferencias en la calidad del subtitulado de un
-vídeo?
-
-\end{tcolorbox}
-
-Los datos utilizados proceden de una actividad voluntaria sobre
-evaluación del subtitulado que se propuso a los estudiantes de la Sexta
-Edición de 2022 del \textbf{curso MOOC Materiales Digitales Accesibles}
-perteneciente al Canal Fundación ONCE en UNED Abierta. Este curso es una
-iniciativa del Real Patronato sobre Discapacidad en colaboración con la
-Fundación ONCE y la UNED. El curso está dirigido por los profesores
-Emilio Letón Molina y Alejandro Rodríguez Ascaso. El Canal Fundación
-ONCE se creó en 2016 y hasta marzo de 2023 casi de 23.000 estudiantes se
-han inscrito en alguno de sus cursos. En ellos se ofrece formación en
-conocimientos y habilidades necesarios para diseñar productos, entornos,
-sistemas y servicios desde una perspectiva de diseño universal:
+Este trabajo analiza datos que proceden de una actividad voluntaria
+sobre evaluación del subtitulado que se propuso a los estudiantes de la
+Sexta Edición de 2022 del \textbf{curso MOOC Materiales Digitales
+Accesibles} perteneciente al Canal Fundación ONCE en UNED Abierta. Este
+curso es una iniciativa del Real Patronato sobre Discapacidad en
+colaboración con la Fundación ONCE y la UNED. El curso está dirigido por
+los profesores Emilio Letón Molina y Alejandro Rodríguez Ascaso. El
+Canal Fundación ONCE se creó en 2016 y hasta marzo de 2023 casi de
+23.000 estudiantes se han inscrito en alguno de sus cursos. En ellos se
+ofrece formación en conocimientos y habilidades necesarios para diseñar
+productos, entornos, sistemas y servicios desde una perspectiva de
+diseño universal:
 
 \begin{itemize}
 \tightlist
@@ -700,89 +677,82 @@ ofrecen a través de UNED Abierta, portal de formación en formato
 En la actualidad la oferta es de nueve cursos. En el año 2022 se
 matricularon 3.764 alumnos y aprobaron el 19,34\% de los matriculados.
 
-El curso de Materiales Digitales Accesibles se lleva realizando desde
+El curso de Materiales Digitales Accesibles se viene realizando desde
 2017, se han matriculado en alguna de sus siete ediciones (hasta mayo de
 2023) más de 8.000 alumnos y tiene un porcentaje medio de aprobados
 sobre matriculados del 14,6\%. En la Sexta Edición se matricularon 1.261
-alumnos y aprobaron 165 (13,08\%).
+alumnos y aprobaron 165 (13,08\%). Estas cifras tan positivas son
+posibles gracias al buen funcionamiento del Canal que se concreta en la
+gran difusión de la existencia del MOOC, la actualización y ampliación
+constante de contenidos, una virtualización conforme a las WCAG
+\autocite[ver][]{WCAG21}, un diseño instruccional claro y una
+monitorización de la calidad. Para asegurar la calidad de los materiales
+y del diseño de los cursos desde el Canal se realizan también labores de
+investigación en el campo de los materiales digitales y la
+accesibilidad, línea de investigación en la que se enmarca el trabajo
+presente.
 
-\textcite{jperez2} realizaron una experiencia similar a la planteada en
-este trabajo y llegaron a la conclusión de que evaluadores novatos
-pueden identificar problemas de accesibilidad en vídeos. Por lo tanto,
-la evaluación social propuesta por \textcite{kawanaka2008} se podría
-aplicar a los contenidos de vídeo en la Web. Sin embargo, también
-constataron que los evaluadores novatos pueden pasar por alto problemas
-sutiles de accesibilidad que requieren un conocimiento experto como, por
-ejemplo, la evaluación del contraste, ya que requieren herramientas
-adecuadas. Por ello, en este trabajo también se responderá a los
-siguientes objetivos específicos:
+El MOOC busca la formación de los estudiantes para generar materiales
+digitales accesibles y para que aprendan a evaluar la accesibilidad de
+los mismos. Este trabajo tiene como objetivo evaluar si los estudiantes
+son capaces de valorar adecuadamente la calidad del subtitulado.
+\textcite{jperez2} realizaron una experiencia similar y llegaron a la
+conclusión de que evaluadores novatos pueden identificar problemas de
+accesibilidad en vídeos. En la misma línea de investigación, la
+evaluación social propuesta por \textcite{kawanaka2008} se podría
+aplicar a los contenidos de vídeo en la Web. A pesar de esto, ambos
+estudios constataron que los evaluadores novatos pueden pasar por alto
+problemas sutiles de accesibilidad que requieren un conocimiento experto
+como, por ejemplo, la evaluación del contraste, ya que requieren
+herramientas adecuadas.
 
-\begin{tcolorbox}[enhanced jigsaw, colback=white, toptitle=1mm, opacityback=0, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Objetivos específicos}, coltitle=black, bottomrule=.15mm, bottomtitle=1mm, colbacktitle=quarto-callout-tip-color!10!white, toprule=.15mm, titlerule=0mm, left=2mm, breakable, colframe=quarto-callout-tip-color-frame, rightrule=.15mm, arc=.35mm, opacitybacktitle=0.6, leftrule=.75mm]
+\hypertarget{sec-objetivos}{%
+\section{Objetivos}\label{sec-objetivos}}
 
-¿Qué aspectos de la calidad del subtitulado son más fácilmente
-reconocibles por los estudiantes y en cuáles existe mayor dificultad?
+A los estudiantes del MOOC se les propuso una actividad consistente en
+evaluar la calidad del subtitulado de dos vídeos, uno correctamente
+subtitulado y otro con errores (ver @Sección~\ref{sec-desc}).
+
+El objetivo de este trabajo es responder a la siguiente pregunta de
+investigación:
+
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, left=2mm, toptitle=1mm, opacitybacktitle=0.6, coltitle=black, leftrule=.75mm, colbacktitle=quarto-callout-note-color!10!white, bottomrule=.15mm, breakable, bottomtitle=1mm, colback=white, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Pregunta de investigación}, titlerule=0mm, colframe=quarto-callout-note-color-frame, arc=.35mm, rightrule=.15mm, toprule=.15mm]
+
+¿Son los estudiantes de un curso de creación de materiales accesibles
+capaces de evaluar las diferencias en la calidad del subtitulado de un
+vídeo?
 
 \end{tcolorbox}
 
-\hypertarget{descripciuxf3n-de-la-experiencia}{%
-\section{Descripción de la
-experiencia}\label{descripciuxf3n-de-la-experiencia}}
+Además también se responderá a los siguientes objetivos específicos:
 
-La actividad de subtitulado fue voluntaria y sin influencia en la
-calificación final del alumno. Se realizó en el módulo
-\enquote{Accesibilidad del material multimedia}. En este mismo módulo, y
-antes de la actividad de subtitulado, los alumnos hubieron completado
-las secciones \enquote{Accesibilidad de la información sonora} y
-\enquote{Accesibilidad de la información visual}, con lo cual
-adquirieron un conocimiento previo sobre creación de vídeos y subtítulos
-accesibles. Se estima que los estudiantes hubieron empleado unas tres
-horas de formación en accesibilidad multimedia (una de ellas
-específicamente en subtitulado) antes de realizar la actividad.
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, left=2mm, toptitle=1mm, opacitybacktitle=0.6, coltitle=black, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, breakable, bottomtitle=1mm, colback=white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Objetivo específico}, titlerule=0mm, colframe=quarto-callout-tip-color-frame, arc=.35mm, rightrule=.15mm, toprule=.15mm]
 
-De acuerdo al \textbf{compromiso ético} del Canal los datos de los
-estudiantes se han suministrado anonimizados usando un identificador
-generado con \gls{sha}-512. Además, se han eliminado del estudio los
-datos de estudiantes que, a pesar de haber realizado la actividad de
-subtitulado, no dieron su consentimiento para que sus datos fueran
-utilizados en estudios científicos.
+¿Qué aspectos de la calidad del subtitulado son más fácilmente
+reconocibles por los estudiantes?
 
-La actividad consistió en ver dos vídeos idénticos de 43 segundos que
-solo se diferencian en la calidad del subtitulado. Los subtítulos del
-vídeo bien subtitulado se realizaron por un experto de FIAPAS
-(Confederación Española de Familias de Personas Sordas) siguiendo la
-norma UNE 153010 \autocite[ver][]{aenor2012}. El otro vídeo tenía un
-subtitulado similar pero se introdujeron pequeñas deficiencias, algunas
-de ellas inapreciables para alguien que carezca de conocimientos sobre
-accesibilidad. El orden de los vídeos fue aleatorio, de tal forma que
-una cohorte de alumnos vio primero el vídeo bien subtitulado y luego el
-mal subtitulado y la otra lo hizo al revés. Después de ver cada uno de
-los vídeos, los alumnos respondieron a una \gls{escala de likert} de 5
-niveles y 18 ítems. Los 18 ítems de Likert responden a los criterios de
-la norma UNE 153010 \autocite[ver][]{aenor2012}.
+\end{tcolorbox}
 
-Los términos \textbf{escala de Likert} e ítem de Likert se prestan a
-menudo a confusión ya que se utilizan con distintos significados. En
-este trabajo se seguirá la convención más habitual
-\autocite[ver][]{uebersax2006} de denominar ítem de Likert a cada una de
-las preguntas de que consta un cuestionario o test, siendo la escala de
-Likert el conjunto de todos los ítems del cuestionario. Cada ítem se
-contestó marcando una opción de entre un conjunto ordenado de respuestas
-o niveles propuesto e idéntico para todos los ítems. Por ello, se debe
-evitar denominar escala a los niveles de un ítem.
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, left=2mm, toptitle=1mm, opacitybacktitle=0.6, coltitle=black, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, breakable, bottomtitle=1mm, colback=white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Objetivo específico}, titlerule=0mm, colframe=quarto-callout-tip-color-frame, arc=.35mm, rightrule=.15mm, toprule=.15mm]
 
-El diseño del experimento fue \textbf{\gls{triple ciego}}. Es decir, a
-los alumnos no se les informó de si estaban viendo el vídeo con mejor o
-con peor calidad de subtitulado. Los directores del MOOC tampoco
-conocieron esta información, como tampoco se conocía en el momento de
-analizar los datos, ya que los vídeos tienen identificaciones ofuscadas
-con \gls{crc}-32b y no contienen ninguna indicación del tipo de
-subtitulado del vídeo\footnote{En la respuesta a cada ítem, el alumno
-  pudo añadir comentarios. Éstos fueron eliminados en la fase de
-  análisis para que no filtren información referente al tipo de
-  subtitulado que el alumno creyó estar contestando y solo se utilizaron
-  en la fase de discusión ver Capítulo~\ref{sec-discusion}().}. El
-\enquote{ciego fue liberado} en la fase de elaboración de la discusión
-de este trabajo (ver Capítulo~\ref{sec-discusion}).
+¿Tienen los estudiantes dificultad en evaluar algún aspecto de la
+calidad del subtitulado?
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, left=2mm, toptitle=1mm, opacitybacktitle=0.6, coltitle=black, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, breakable, bottomtitle=1mm, colback=white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Objetivo específico}, titlerule=0mm, colframe=quarto-callout-tip-color-frame, arc=.35mm, rightrule=.15mm, toprule=.15mm]
+
+Efecto secuencia: ¿El orden en el que vieron los vídeos los estudiantes
+influye en la calidad del subtitulado percibida?
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, left=2mm, toptitle=1mm, opacitybacktitle=0.6, coltitle=black, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, breakable, bottomtitle=1mm, colback=white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Objetivo específico}, titlerule=0mm, colframe=quarto-callout-tip-color-frame, arc=.35mm, rightrule=.15mm, toprule=.15mm]
+
+Efecto periodo: ¿La evaluación del subtitulado del segundo vídeo visto
+está influida por haber evaluado un vídeo previamente?
+
+\end{tcolorbox}
 
 \hypertarget{organizaciuxf3n-del-trabajo}{%
 \section{Organización del trabajo}\label{organizaciuxf3n-del-trabajo}}
@@ -795,9 +765,10 @@ se van a utilizar. En este capítulo también se explica la forma en que
 se deben interpretar y evaluar los modelos.
 
 El capítulo \textbf{Materiales y métodos} (ver
-Capítulo~\ref{sec-metodo}) describe los ficheros de datos suministrados,
-la actividad de preprocesado realizada sobre los mismos y las variables
-que se utilizarán en el modelado estadístico.
+Capítulo~\ref{sec-metodo}) describe la actividad de subtitulado
+realizada por los alumnos, los ficheros de datos suministrados, la
+actividad de preprocesado realizada sobre los mismos y las variables que
+se utilizarán en el modelado estadístico.
 
 El capítulo \textbf{Modelado estadístico} (ver
 Capítulo~\ref{sec-modelado}) comienza con un Análisis Exploratorio de
@@ -813,10 +784,11 @@ En el capítulo \textbf{Discusión} (ver Capítulo~\ref{sec-discusion}) se
 utilizan los resultados del capítulo anterior para responder a la
 pregunta de investigación y a los objetivos específicos.
 
-Finalmente el capítulo \textbf{Conclusión y trabajo futuro} (ver
+Finalmente, el capítulo \textbf{Conclusión y trabajo futuro} (ver
 Capítulo~\ref{sec-conclusion}) se destina a recapitular los hallazgos
-encontrados aventurando posibles explicaciones a los mismos y propone
-líneas de investigación futuras en base a los resultados obtenidos.
+encontrados aventurando posibles explicaciones a los mismos, plantea
+limitaciones del estudio y propone líneas de investigación futuras en
+base a los resultados obtenidos.
 
 \hypertarget{convenciones-usadas}{%
 \section{Convenciones usadas}\label{convenciones-usadas}}
@@ -838,15 +810,19 @@ su correspondencia en inglés. Por ejemplo, Modelo Lineal Generalizado
 
 Para los nombres de las variables utilizadas en el modelado estadístico
 se ha preferido el inglés. Por ejemplo, \emph{Treat} para referirse a
-los subtitulados y \emph{Response} para las respuestas a los ítems de
-las escalas de Likert. La justificación de esta decisión es evitar la
-mezcla de idiomas en los resúmenes de los modelos o en los ejemplos de
-código.
+los subtitulados \footnote{En investigación médica es habitual denominar
+  tratamiento al medicamento en estudio. Por analogía en este trabajo se
+  llamará tratamiento al subtitulado.} y \emph{Response} para las
+respuestas a los ítems de las escalas de Likert. La justificación de
+esta decisión es evitar la mezcla de idiomas en los resúmenes de los
+modelos o en los ejemplos de código.
 
-Este trabajo es reproducible. Para su elaboración se ha utilizado la
-herramienta de publicación científica Quarto y el lenguaje de
-programación \gls{R}. Todas las figuras mostradas han sido generadas con
-R.
+El trabajo se ha elaborado siguiendo las pautas de reproducibilidad
+recomendadas para el desarrollo de una investigación científica. Se ha
+realizado con la herramienta de publicación científica Quarto que
+integra lenguajes como el lenguaje de programación \gls{R} o de
+publicación como Markdown o \LaTeX. Todas las figuras mostradas han sido
+generadas con R.
 
 \bookmarksetup{startatroot}
 
@@ -857,12 +833,11 @@ R.
 \section{Características del diseño del
 experimento}\label{caracteruxedsticas-del-diseuxf1o-del-experimento}}
 
-Como se dijo en la Introducción (ver Capítulo~\ref{sec-intro}) en este
-trabajo se estudiarán las diferencias existentes entre dos niveles de
-subtitulado (uno correcto y otro con errores) a través de las respuestas
-de los alumnos a los ítems de las escalas de Likert de cada uno de los
-vídeos. Para ello se propondrán modelos estadísticos adecuados al diseño
-del experimento.
+En este trabajo se estudiarán las diferencias existentes entre dos
+niveles de subtitulado (uno correcto y otro con errores) a través de las
+respuestas de los alumnos a los ítems de las escalas de Likert de cada
+uno de los vídeos (ver Sección~\ref{sec-desc}). Para ello se propondrán
+modelos estadísticos adecuados al diseño del experimento.
 
 El diseño del experimento de la actividad de subtitulado fue
 completamente aleatorizado y \textbf{cruzado \emph{AB/BA}}. En estos
@@ -1236,15 +1211,15 @@ tenga una relación lineal los predictores:
 entonces la función de probabilidad acumulada de los errores tendrá la
 misma forma que la de \(\tilde{Y}\):
 
-\[\mathrm{Pr}(\epsilon \leq z) = F(z)\]
+\[P(\epsilon \leq z) = F(z)\]
 
 Se puede calcular la distribución de probabilidad acumulada de \(Y\):
 
-\[\mathrm{Pr}(Y \leq k \mid \eta) = \mathrm{Pr}(\tilde{Y} \leq \tau_k \mid \eta) = \mathrm{Pr}(\eta + \epsilon \leq \tau_k) = \mathrm{Pr}(\epsilon \leq \tau_k - \eta) = F(\tau_k - \eta)\]
+\[P(Y \leq k \mid \eta) = P(\tilde{Y} \leq \tau_k \mid \eta) = P(\eta + \epsilon \leq \tau_k) = P(\epsilon \leq \tau_k - \eta) = F(\tau_k - \eta)\]
 
 Por lo que asumiendo la normalidad de los errores:
 
-\[\mathrm{Pr}(Y = k) = \Phi(\tau_k - \eta) - \Phi(\tau_{k - 1} - \eta)\]
+\[P(Y = k) = \Phi(\tau_k - \eta) - \Phi(\tau_{k - 1} - \eta)\]
 
 donde hay que estimar los umbrales y las pendientes de cada variable
 explicativa. La función anterior es la conocida como la función de
@@ -1264,16 +1239,16 @@ logit [P(Y \le k)] = \tau_{k} - \eta = \tau_{k} - (\beta_1 x_1 + \beta_2 x_2 + .
 
 En ese caso, se puede demostrar fácilmente que, por ejemplo:
 
-\[\frac{\frac{\mathrm{Pr}(Y \leq k \mid \eta)}{\mathrm{Pr}(Y > k \mid \eta)}}{\frac{\mathrm{Pr}(Y \leq k+1 \mid \eta)}{\mathrm{Pr}(Y > k+1 \mid \eta)}} = \exp(\tau_{k} - \tau_{k+1})\]
+\[\frac{\frac{P(Y \leq k \mid \eta)}{P(Y > k \mid \eta)}}{\frac{P(Y \leq k+1 \mid \eta)}{P(Y > k+1 \mid \eta)}} = \exp(\tau_{k} - \tau_{k+1})\]
 
 Y que \footnote{En la Sección~\ref{sec-ordinal-2} se demuestra esta
   fórmula.}:
 
-\[\frac{\frac{\mathrm{Pr}(Y \leq k \mid x_j = 1)}{\mathrm{Pr}(Y > k \mid x_j = 1)}}{\frac{\mathrm{Pr}(Y \leq k \mid x_j=0)}{\mathrm{Pr}(Y > k \mid x_j = 0)}} = \exp(-\beta_{j})\]
+\[\frac{\frac{P(Y \leq k \mid x_j = 1)}{P(Y > k \mid x_j = 1)}}{\frac{P(Y \leq k \mid x_j=0)}{P(Y > k \mid x_j = 0)}} = \exp(-\beta_{j})\]
 
 o, equivalentemente:
 
-\[\frac{\frac{\mathrm{Pr}(Y > k \mid x_j = x + 1)}{\mathrm{Pr}(Y \leq k \mid x_j = x + 1)}}{\frac{\mathrm{Pr}(Y > k \mid x_j = x)}{\mathrm{Pr}(Y \leq k \mid x_j = x)}} = \exp(\beta_{j})\]
+\[\frac{\frac{P(Y > k \mid x_j = x + 1)}{P(Y \leq k \mid x_j = x + 1)}}{\frac{P(Y > k \mid x_j = x)}{P(Y \leq k \mid x_j = x)}} = \exp(\beta_{j})\]
 
 Es decir, que \(\exp(\beta_{j})\) es el \emph{odds ratio} (cambio
 relativo entre \(odds\), \gls{OR}) de que la variable respuesta esté por
@@ -1324,42 +1299,42 @@ por lo que la constante de proporcionalidad debe ser similar para todos
 ellos.
 
 \hypertarget{sec-multinivel}{%
-\section{Modelos multinivel}\label{sec-multinivel}}
+\section{Modelos Multinivel Generalizado}\label{sec-multinivel}}
 
-Un modelo multinivel (\emph{\gls{GLMM}}, \emph{Ganeralized Linear Mixed
-Model}ß), anidado, jerárquico o mixto es un modelo en el que los datos
-están anidados en una estructura jerárquica. Se utilizan cuando se
-incumple la hipótesis de independencia entre las observaciones. Por
-ejemplo, si se quisiera evaluar el rendimiento de varios métodos de
-enseñanza, se podrían seleccionar aleatoriamente varios colegios
-participantes y en cada uno de ellos elegir varias clases en las que se
-impartiría uno de los métodos de enseñanza. En este caso, los alumnos de
-una clase no son independientes de los alumnos de otra clase del mismo
-colegio y también es esperable que los alumnos de un mismo colegio sean
-más parecidos entre sí que los de otro colegio. Otra situación en la que
-se viola la condición de independencia entre observaciones es cuando se
-toman varias medidas del mismo sujeto. Este tipo de experimentos se
-llaman de medidas repetidas o longitudinales \footnote{Hay una
-  diferencia conceptual entre medidas repetidas y longitudinales. Una
-  variable se dice que es longitudinal cuando se toman varias medidas de
-  los sujetos objeto del estudio en diferentes momentos del tiempo. Para
-  que sea considerada de medidas repetidas, las medidas de cada sujeto
-  se toman con distintos niveles de factor. En la práctica la distinción
-  es poco relevante ya que ambas situaciones se parametrizan de la misma
-  forma.}. Cuando se da este supuesto, se considera que las medidas
-están anidadas en el sujeto \autocite[ver][]{Liu2202}. En un modelo
-multinivel no es necesario que todas las variables tengan una estructura
-jerárquica. Se distinguen entonces dos tipos de variables: Las conocidas
-como de efectos fijos son aquellas que se considera que tienen el mismo
-efecto en toda la población y, por lo tanto, se debe estimar un único
-coeficiente. Las variables de efectos aleatorios tienen un coeficiente
-diferente para cada elemento de la población y se supone que son una
-muestra de una población mucho mayor, como el caso de seleccionar
-aleatoriamente una muestra de colegios. Normalmente el coeficiente
-particular de cada elemento no es de interés para el investigador y se
-asume que tienen una media centrada en cero. El mayor interés de los
-efectos aleatorios es la estimación de su matriz de
-varianzas-covarianzas.
+Un Modelo Multinivel Generalizado (\emph{\gls{GLMM}}, \emph{Generalized
+Linear Mixed Model}), anidado, jerárquico o mixto es un modelo en el que
+los datos están anidados en una estructura jerárquica. Se utilizan
+cuando se incumple la hipótesis de independencia entre las
+observaciones. Por ejemplo, si se quisiera evaluar el rendimiento de
+varios métodos de enseñanza, se podrían seleccionar aleatoriamente
+varios colegios participantes y en cada uno de ellos elegir varias
+clases en las que se impartiría uno de los métodos de enseñanza. En este
+caso, los alumnos de una clase no son independientes de los alumnos de
+otra clase del mismo colegio y también es esperable que los alumnos de
+un mismo colegio sean más parecidos entre sí que los de otro colegio.
+Otra situación en la que se viola la condición de independencia entre
+observaciones es cuando se toman varias medidas del mismo sujeto. Este
+tipo de experimentos se llaman de medidas repetidas o longitudinales
+\footnote{Hay una diferencia conceptual entre medidas repetidas y
+  longitudinales. Una variable se dice que es longitudinal cuando se
+  toman varias medidas de los sujetos objeto del estudio en diferentes
+  momentos del tiempo. Para que sea considerada de medidas repetidas,
+  las medidas de cada sujeto se toman con distintos niveles de factor.
+  En la práctica la distinción es poco relevante ya que ambas
+  situaciones se parametrizan de la misma forma.}. Cuando se da este
+supuesto, se considera que las medidas están anidadas en el sujeto
+\autocite[ver][]{Liu2202}. En un modelo multinivel no es necesario que
+todas las variables tengan una estructura jerárquica. Se distinguen
+entonces dos tipos de variables: Las conocidas como de efectos fijos son
+aquellas que se considera que tienen el mismo efecto en toda la
+población y, por lo tanto, se debe estimar un único coeficiente. Las
+variables de efectos aleatorios tienen un coeficiente diferente para
+cada elemento de la población y se supone que son una muestra de una
+población mucho mayor, como el caso de seleccionar aleatoriamente una
+muestra de colegios. Normalmente el coeficiente particular de cada
+elemento no es de interés para el investigador y se asume que tienen una
+media centrada en cero. El mayor interés de los efectos aleatorios es la
+estimación de su matriz de varianzas-covarianzas.
 
 La ecuación general de un modelo multinivel con dos niveles y un solo
 predictor con efectos aleatorios es \autocite[ver][pp.~40]{chen2021}:
@@ -1632,9 +1607,90 @@ pp.~175-176]{gelman2013}.
 \hypertarget{sec-metodo}{%
 \chapter{Materiales y métodos}\label{sec-metodo}}
 
-En este capítulo se describen los ficheros de datos suministrados, se
-explica la tarea de preprocesado realizada sobre ellos y las variables
-que se han utilizado en el modelado estadístico.
+En este capítulo se describe la actividad de subtitulado de la que
+proceden los datos, los ficheros de datos suministrados, se explica la
+tarea de preprocesado realizada sobre ellos y las variables que se han
+utilizado en el modelado estadístico.
+
+\hypertarget{sec-desc}{%
+\section{Descripción de la experiencia}\label{sec-desc}}
+
+La actividad de subtitulado ha sido cuidadosamente diseñada con un
+enfoque instruccional curado a través de las sucesivas ediciones del
+curso y así ofrecer los contenidos de forma alineada para que los
+estudiantes puedan realizar la evaluación del subtitulado de forma
+secuencial.
+
+La actividad fue voluntaria y sin influencia en la calificación final
+del alumno. Se realizó en el módulo \enquote{Accesibilidad del material
+multimedia}. En este mismo módulo, y antes de la actividad de
+subtitulado, los alumnos hubieron completado las secciones
+\enquote{Accesibilidad de la información sonora} y
+\enquote{Accesibilidad de la información visual}. Estos módulos constan
+de las siguientes actividades relacionadas con la actividad de
+subtitulado:
+
+\begin{itemize}
+\tightlist
+\item
+  Vídeo: \enquote{Accesibilidad audiovisual: subtítulos}.
+\item
+  Invitación a la participación en el foro.
+\item
+  Textos con referencias.
+\item
+  Test de nivel 1 y nivel 2: \enquote{Accesibilidad de información
+  sonora}
+\end{itemize}
+
+Se estima que los estudiantes hubieron empleado unas tres horas de
+formación en accesibilidad multimedia (una de ellas específicamente en
+subtitulado) antes de realizar la actividad.
+
+De acuerdo al \textbf{compromiso ético} del Canal los datos de los
+estudiantes se han suministrado anonimizados usando un identificador
+generado con \gls{sha}-512. Además, se han eliminado del estudio los
+datos de estudiantes que, a pesar de haber realizado la actividad de
+subtitulado, no dieron su consentimiento para que sus datos fueran
+utilizados en estudios científicos.
+
+La actividad consistió en ver dos vídeos idénticos de 43 segundos que
+solo se diferencian en la calidad del subtitulado. Los subtítulos del
+vídeo bien subtitulado se realizaron por un experto de FIAPAS
+(Confederación Española de Familias de Personas Sordas) siguiendo la
+norma UNE 153010 \autocite[ver][]{aenor2012}. El otro vídeo tenía un
+subtitulado similar pero se introdujeron pequeñas deficiencias, algunas
+de ellas inapreciables para alguien que carezca de conocimientos sobre
+accesibilidad. El orden de los vídeos fue aleatorio, de tal forma que
+una cohorte de alumnos vio primero el vídeo bien subtitulado y luego el
+mal subtitulado y la otra lo hizo al revés. Después de ver cada uno de
+los vídeos, los alumnos respondieron a una \gls{escala de likert} de 5
+niveles y 18 ítems. Los 18 ítems de Likert responden a los criterios de
+la norma UNE 153010 \autocite[ver][]{aenor2012}.
+
+Los términos \textbf{escala de Likert} e ítem de Likert se prestan a
+menudo a confusión ya que se utilizan con distintos significados. En
+este trabajo se seguirá la convención más habitual
+\autocite[ver][]{uebersax2006} de denominar ítem de Likert a cada una de
+las preguntas de que consta un cuestionario o test, siendo la escala de
+Likert el conjunto de todos los ítems del cuestionario. Cada ítem se
+contestó marcando una opción de entre un conjunto ordenado de respuestas
+o niveles propuesto e idéntico para todos los ítems. Por ello, se debe
+evitar denominar escala a los niveles de un ítem.
+
+El diseño del experimento fue \textbf{\gls{triple ciego}}. Es decir, a
+los alumnos no se les informó de si estaban viendo el vídeo con mejor o
+con peor calidad de subtitulado; los directores del MOOC tampoco
+conocieron esta información, como tampoco se conocía en el momento de
+analizar los datos, ya que los vídeos tienen identificaciones ofuscadas
+con \gls{crc}-32b y no contienen ninguna indicación del tipo de
+subtitulado del vídeo\footnote{En la respuesta a cada ítem, el alumno
+  pudo añadir comentarios. Éstos fueron eliminados en la fase de
+  análisis para que no filtren información referente al tipo de
+  subtitulado que el alumno creyó estar contestando y solo se utilizaron
+  en la fase de discusión ver Capítulo~\ref{sec-discusion}().}. El
+\enquote{ciego fue liberado} en la fase de elaboración de la discusión
+de este trabajo (ver Capítulo~\ref{sec-discusion}).
 
 \hypertarget{ficheros-suministrados}{%
 \section{Ficheros suministrados}\label{ficheros-suministrados}}
@@ -1644,11 +1700,10 @@ Se dispuso de los siguientes ficheros \texttt{csv}:
 \begin{itemize}
 \tightlist
 \item
-  Fichero \texttt{grade} contiene el identificador de estudiante y el
-  grupo al que pertenece (campo \texttt{cohort}), ofuscado con
-  \gls{sha}-512 para no conocer la identidad real del estudiante y con
-  \gls{crc}-32b para no conocer si el grupo es el que el vio primero el
-  vídeo bien subtitulado.
+  Fichero \texttt{grade} contiene el identificador de estudiante
+  (ofuscado con \gls{sha}-512 para no conocer su identidad real) y el
+  grupo al que pertenece (campo \texttt{cohort}) ofuscado con
+  \gls{crc}-32b.
 \item
   Los ficheros \texttt{test1} y \texttt{test2} son las repuestas a las
   escalas de Likert sobre la calidad del subtitulado del primer y del
@@ -2884,29 +2939,29 @@ contraste \(sum\):
 Se constata que los coeficientes estimados en los tres modelos son
 significativos y de similar valor.
 
-\miniscule
+\scriptsize
 
 \hypertarget{tbl-ordinal-com}{}
-\begin{longtable}{lcccccccccccc}
+\begin{longtable}{lcccccc}
 \caption{\label{tbl-ordinal-com}Comparación de modelos ordinales. }\tabularnewline
 
 \toprule
- & \multicolumn{4}{c}{Response \textasciitilde{} 1    } & \multicolumn{4}{c}{Response \textasciitilde{} Treat    } & \multicolumn{4}{c}{Response \textasciitilde{} Treat:Period    } \\ 
-\cmidrule(lr){2-5} \cmidrule(lr){6-9} \cmidrule(lr){10-13}
-  & Est. & S.E. & 2.5 \% & 97.5 \% & Est.  & S.E.  & 2.5 \%  & 97.5 \%  & Est.   & S.E.   & 2.5 \%   & 97.5 \%   \\ 
+ & \multicolumn{2}{c}{Response \textasciitilde{} 1    } & \multicolumn{2}{c}{Response \textasciitilde{} Treat    } & \multicolumn{2}{c}{Response \textasciitilde{} Treat:Period    } \\ 
+\cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}
+  & Est. & S.E. & Est.  & S.E.  & Est.   & S.E.   \\ 
 \midrule
-1|2  & -2.824*** & 0.080 & -2.980 & -2.668 & -3.112*** & 0.082 & -3.273 & -2.951 & -3.127*** & 0.082 & -3.288 & -2.965 \\ 
-2|3  & -1.418*** & 0.046 & -1.509 & -1.327 & -1.594*** & 0.049 & -1.691 & -1.497 & -1.608*** & 0.050 & -1.706 & -1.511 \\ 
-3|4  & -0.738*** & 0.039 & -0.815 & -0.661 & -0.804*** & 0.042 & -0.887 & -0.722 & -0.818*** & 0.042 & -0.901 & -0.736 \\ 
-4|5  & 0.596*** & 0.038 & 0.521 & 0.671 & 0.755*** & 0.042 & 0.673 & 0.837 & 0.750*** & 0.042 & 0.668 & 0.832 \\ 
-Treat1  &  &  &  &  & 0.860*** & 0.037 & 0.789 & 0.932 & 0.874*** & 0.037 & 0.802 & 0.946 \\ 
-Period1  &  &  &  &  &  &  &  &  & 0.140*** & 0.034 & 0.073 & 0.206 \\ 
-Treat1 × Period1  &  &  &  &  &  &  &  &  & 0.106** & 0.034 & 0.039 & 0.173 \\ 
-Num.Obs. & 2980 &  &  &  & 2980 &  &  &  & 2980 &  &  &  \\ 
-AIC & 8541.7 &  &  &  & 7942.2 &  &  &  & 7920.0 &  &  &  \\ 
-BIC & 8565.7 &  &  &  & 7972.2 &  &  &  & 7962.0 &  &  &  \\ 
-Log.Lik. & -4266.851 &  &  &  & -3966.107 &  &  &  & -3953.013 &  &  &  \\ 
-edf & 4 &  &  &  & 5 &  &  &  & 7 &  &  &  \\ 
+1|2  & -2.824*** & 0.080 & -3.112*** & 0.082 & -3.127*** & 0.082 \\ 
+2|3  & -1.418*** & 0.046 & -1.594*** & 0.049 & -1.608*** & 0.050 \\ 
+3|4  & -0.738*** & 0.039 & -0.804*** & 0.042 & -0.818*** & 0.042 \\ 
+4|5  & 0.596*** & 0.038 & 0.755*** & 0.042 & 0.750*** & 0.042 \\ 
+Treat1  &  &  & 0.860*** & 0.037 & 0.874*** & 0.037 \\ 
+Period1  &  &  &  &  & 0.140*** & 0.034 \\ 
+Treat1 × Period1  &  &  &  &  & 0.106** & 0.034 \\ 
+Num.Obs. & 2980 &  & 2980 &  & 2980 &  \\ 
+AIC & 8541.7 &  & 7942.2 &  & 7920.0 &  \\ 
+BIC & 8565.7 &  & 7972.2 &  & 7962.0 &  \\ 
+Log.Lik. & -4266.851 &  & -3966.107 &  & -3953.013 &  \\ 
+edf & 4 &  & 5 &  & 7 &  \\ 
 \bottomrule
 \end{longtable}
 
@@ -3788,7 +3843,7 @@ Period + (1 + Treat \textbar{} Subject) + (1 + Treat \textbar{} Item)}
 
 \end{figure}
 
-\tiny
+\scriptsize
 
 \hypertarget{tbl-model-comp}{}
 \begin{longtable}{lrrrrrr}
@@ -3798,7 +3853,7 @@ modelo ordinal. }\tabularnewline
 \toprule
  & \multicolumn{3}{c}{ordinal::clmm} & \multicolumn{3}{c}{brms::brm} \\ 
 \cmidrule(lr){2-4} \cmidrule(lr){5-7}
-Name & Estimation.clmm & conf.2.5\% & conf.97.5\% & Estimation.brm & cred.2.5\% & cred.97.5\% \\ 
+Name & Est. & conf.2.5\% & conf.97.5\% & Est. & cred.2.5\% & cred.97.5\% \\ 
 \midrule
 1|2 & -5.00 & -5.52 & -4.49 & -4.94 & -5.52 & -4.42 \\ 
 2|3 & -2.65 & -3.12 & -2.18 & -2.58 & -3.11 & -2.09 \\ 
@@ -3881,7 +3936,7 @@ nivel \(A\) las opciones 4 y 5 predominan.
 
 \begin{figure}[h]
 
-{\centering \includegraphics[width=1\textwidth,height=\textheight]{images/bayes-preg.png}
+{\centering \includegraphics[width=1.2\textwidth,height=\textheight]{images/bayes-preg.png}
 
 }
 
@@ -3899,75 +3954,84 @@ posteriori por tratamiento e ítem.}
 
 \normalsize
 
-En esta sección se discuten los resultados una vez \enquote{descubierto
-el ciego} y se responden a la pregunta de investigación y objetivos
-específicos planteados en la Sección~\ref{sec-objetivos}. Se reveló que
-el subtitulado que en este trabajo se ha denominado \(A\) se corresponde
-que el vídeo correctamente subtitulado. Adicionalmente se ha
-suministrado un documento que contiene los errores introducidos en el
-subtitulado \(B\). A partir del mismo, se ha elaborado la Tabla
-\ref{tbl-blind-errors} en la que se muestra la correspondencia de cada
-error con los ítems de la \gls{escala de likert} a la que respondieron
-los estudiantes (ver en la Tabla~\ref{tbl-likert-scale} una descripción
-textual de cada ítem). Para 7 de los 18 ítems (Q01, Q03, Q04, Q13, Q15,
-Q16, Q17) no se ha encontrado una adscripción clara en el documento de
-errores y, por lo tanto, sería esperable que las respuestas de los
-estudiantes fueran similares en ambos subtitulados en esos ítems.
+En este capítulo se discuten los resultados una vez \enquote{descubierto
+el ciego} y se responde a la pregunta de investigación y a los objetivos
+específicos planteados en la Sección~\ref{sec-objetivos}. Las respuestas
+a estas preguntas llevan a concluir que se ha cumplido el objetivo
+principal del estudio: los estudiantes del curso MOOC son capaces de
+evaluar las diferencias en la calidad del subtitulado de dos vídeos. Se
+discuten también las limitaciones del estudio y posibles mejoras al
+mismo.
+
+Una vez realizado el análisis estadístico y obtenidos los resultados
+(ver Capítulo~\ref{sec-resultados}) se reveló que el subtitulado que en
+este trabajo se ha denominado \(A\) se corresponde con el vídeo
+correctamente subtitulado. Adicionalmente se ha suministrado un
+documento que contiene los errores introducidos en el subtitulado \(B\).
+A partir del mismo, se ha elaborado la Tabla \ref{tbl-blind-errors} en
+la que se muestra la correspondencia de cada error con los ítems de la
+\gls{escala de likert} a la que respondieron los estudiantes (ver en la
+Tabla~\ref{tbl-likert-scale} una descripción textual de cada ítem). Para
+7 de los 18 ítems (Q01, Q03, Q04, Q13, Q15, Q16, Q17) no se ha
+encontrado una adscripción clara en el documento de errores y, por lo
+tanto, esos ítems sirven de control del test y sería esperable que en
+ellos las respuestas de los estudiantes fueran similares en ambos
+subtitulados.
 
 \begin{table}[]
 \caption{\label{tbl-blind-errors}Correspondencia entre los errores introducidos en el subtitulado del vídeo B y los ítems de la escala de Likert.}\tabularnewline
 \tiny
 \begin{adjustwidth}{-2.5cm}{}
-\begin{tabular}{@{}|c|l|l|l|@{}}
-\toprule
+\begin{tabular}{|c|l|l|l|}
+\hline
 \multicolumn{1}{|l|}{\textbf{Error nº}} &
-  \textbf{Subtítulo} &
+  \textbf{Subtítulo incorrecto} &
   \textbf{Requisito que se incumple} &
-  \textbf{Ítems} \\ \midrule
+  \textbf{Ítems} \\ \hline
 1 &
-  \begin{tabular}[c]{@{}l@{}}Correcto:\\ Hola, este vídeo nos va a servir\\ \\ Incorrecto:\\ Hola este video nos ba a servir\end{tabular} &
+  Hola este video nos ba a servir &
   \begin{tabular}[c]{@{}l@{}}Los subtítulos deben ser correctos\\ ortográfica y gramaticalmente.\end{tabular} &
-  Q05 \\ \midrule
+  Q05 \\ \hline
 2 &
-  \begin{tabular}[c]{@{}l@{}}Correcto: para hacer una práctica de subtitulado\\ \\ Incorrecto: para hacer una prácti\\ ca de subtitulado\end{tabular} &
+  \begin{tabular}[c]{@{}l@{}}para hacer una prácti\\ ca de subtitulado\end{tabular} &
   \begin{tabular}[c]{@{}l@{}}No se deben separar en dos líneas\\ las sílabas de la misma palabra.\end{tabular} &
-   \\ \midrule
+  Q14 \\ \hline
 3 &
-   &
+  \begin{tabular}[c]{@{}l@{}}Podemos pensar en personas \\ que no entienden bien \\ un determinado idioma\end{tabular} &
   \begin{tabular}[c]{@{}l@{}}Los subtítulos deben ocupar\\ dos líneas y, excepcionalmente tres.\end{tabular} &
-  Q02 \\ \midrule
+  Q02 \\ \hline
 4 &
-   &
+  \begin{tabular}[c]{@{}l@{}}Muchos ejemplos que \\ harán que estos subtítulos\end{tabular} &
   \begin{tabular}[c]{@{}l@{}}Las conjunciones y los nexos\\ deben ir en la línea inferior.\end{tabular} &
-  Q14 \\ \midrule
+  Q14 \\ \hline
 5 &
-  \begin{tabular}[c]{@{}l@{}}Incorrecto: El texto del subtítulo es válido,\\ pero su entrada debe producirse antes para que\\ coincida con la información sonora.\end{tabular} &
+  \begin{tabular}[c]{@{}l@{}}El texto del subtítulo es válido,\\ pero su entrada debe producirse antes para que\\ coincida con la información sonora.\end{tabular} &
   \begin{tabular}[c]{@{}l@{}}Las entradas y salidas de los subtítulos\\ deben coincidir con el movimiento labial,\\ con la locución y/o con la información sonora.\end{tabular} &
-  Q10, Q09 \\ \midrule
+  Q10, Q09 \\ \hline
 6 &
-  \begin{tabular}[c]{@{}l@{}}Correcto: (Teléfono) Perdonad\\ \\ Incorrecto: Perdonad\end{tabular} &
+  Perdonad &
   \begin{tabular}[c]{@{}l@{}}Deben describirse los efectos sonoros\\ que sean relevantes para la comprensión del vídeo.\end{tabular} &
-  Q09 \\ \midrule
+  Q09 \\ \hline
 7 &
-  \begin{tabular}[c]{@{}l@{}}Correcto: ¿Dígame? \\ (EMI) Hola, soy Emilio.\\ \\ Incorrecto: ¿Dígame? (EMI) Hola, soy Emilio.\end{tabular} &
+  ¿Dígame? (EMI) Hola, soy Emilio. &
   \begin{tabular}[c]{@{}l@{}}Para cada participante en el diálogo\\ debe comenzarse una nueva línea.\end{tabular} &
-  Q08 \\ \midrule
+  Q08 \\ \hline
 8 &
-  \begin{tabular}[c]{@{}l@{}}Correcto:\\ (ALE) Emilio, muy buenas. Mira,\\ precisamente estoy grabando el vídeo\\ \\ Incorrecto:\\ (ALE) Emilio, muy buenas. Mira, precisamente estoy grabando el vídeo\end{tabular} &
+  (ALE) Emilio, muy buenas. Mira, precisamente estoy grabando el vídeo &
   \begin{tabular}[c]{@{}l@{}}El máximo número de caracteres\\ por línea es 37.\end{tabular} &
-  Q12 \\ \midrule
+  Q12 \\ \hline
 9 &
-  \begin{tabular}[c]{@{}l@{}}Incorrecto: El texto del subtítulo es válido,\\ pero su duración debe ser de al menos 3 segundos.\end{tabular} &
+  \begin{tabular}[c]{@{}l@{}}El texto del subtítulo es válido,\\ pero su duración debe ser de al menos 3 segundos.\end{tabular} &
   \begin{tabular}[c]{@{}l@{}}La velocidad de exposición del subtítulo\\ debe permitir leerlo sin dificultad.\\ La velocidad recomendada para los subtítulos\\ es de unos 12 caracteres por segundo.\end{tabular} &
-  Q11 \\ \midrule
+  Q11 \\ \hline
 10 &
-  \begin{tabular}[c]{@{}l@{}}Correcto: Luego voy a verte al despacho ¿de acuerdo?\\ \\ Incorrecto: Luego voy a verte al despacho ¿Ok?\end{tabular} &
+  Luego voy a verte al despacho ¿Ok? &
   Los subtítulos deben ser literales. &
-  Q06 \\ \midrule
+  Q06 \\ \hline
 11 &
-  \begin{tabular}[c]{@{}l@{}}Correcto: (EMI) Muy bien, estupendo. Aquí estaré. \\ (ALE) Hasta luego\\ \\ Incorrecto: Muy bien, estupendo. Aquí estaré. \\ Hasta luego\end{tabular} &
+  \begin{tabular}[c]{@{}l@{}}Muy bien, estupendo. Aquí estaré. \\ Hasta luego\end{tabular} &
   \begin{tabular}[c]{@{}l@{}}Los diferentes personajes que intervienen en la\\ obra audiovisual deben estar claramente identificados.\end{tabular} &
-  Q07 \\ \bottomrule
+  Q07 \\ \hline
 \end{tabular}
 \end{adjustwidth}
 \normalsize
@@ -3995,67 +4059,124 @@ Capítulo~\ref{sec-resultados}:
   Sección~\ref{sec-ordinal-3}).
 \end{itemize}
 
-Por comodidad se vuelven a plantear aquí la pregunta de investigación y
-los objetivos específicos:
+Para mayor comodidad del lector se vuelven a plantear aquí la pregunta
+de investigación y los objetivos específicos:
 
-\begin{tcolorbox}[enhanced jigsaw, colback=white, toptitle=1mm, opacityback=0, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Pregunta de investigación}, coltitle=black, bottomrule=.15mm, bottomtitle=1mm, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, titlerule=0mm, left=2mm, breakable, colframe=quarto-callout-note-color-frame, rightrule=.15mm, arc=.35mm, opacitybacktitle=0.6, leftrule=.75mm]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, left=2mm, toptitle=1mm, opacitybacktitle=0.6, coltitle=black, leftrule=.75mm, colbacktitle=quarto-callout-note-color!10!white, bottomrule=.15mm, breakable, bottomtitle=1mm, colback=white, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Pregunta de investigación}, titlerule=0mm, colframe=quarto-callout-note-color-frame, arc=.35mm, rightrule=.15mm, toprule=.15mm]
 
 ¿Son los estudiantes de un curso de creación de materiales accesibles
-capaces de encontrar diferencias en la calidad del subtitulado de un
+capaces de evaluar las diferencias en la calidad del subtitulado de un
 vídeo?
 
 \end{tcolorbox}
 
-El subtitulado \(A\), que es el correcto, ha sido indubitablemente
-preferido por los estudiantes. Esto se ha constatado tanto en la
-exploración inicial como en cada uno de los tres modelos propuestos. Por
-ejemplo, en la exploración inicial se vio que la respuesta más frecuente
-en el subtitulado \(A\) es 5 y en el \(B\) es 4. El modelo con variable
+El subtitulado \(A\), que es el correcto, ha sido mejor evaluado por los
+estudiantes. Esto se ha constatado tanto en la exploración inicial como
+en cada uno de los tres modelos propuestos. Por ejemplo, en la
+exploración inicial se vio que la respuesta más frecuente en el
+subtitulado \(A\) es 5 y en el \(B\) es 4 y en ll modelo con variable
 respuesta \texttt{Improve} predice que la probabilidad de que se otorgue
 una mayor puntuación en \(A\) que en \(B\) es 59.95\%. Por lo tanto, se
 concluye respondiendo afirmativamente a la pregunta: los estudiantes del
-curso han sabido reconocer diferencias en el subtitulado de los vídeos.
+curso han sabido evaluar las diferencias en el subtitulado de los
+vídeos.
 
-\begin{tcolorbox}[enhanced jigsaw, colback=white, toptitle=1mm, opacityback=0, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Objetivos específicos}, coltitle=black, bottomrule=.15mm, bottomtitle=1mm, colbacktitle=quarto-callout-tip-color!10!white, toprule=.15mm, titlerule=0mm, left=2mm, breakable, colframe=quarto-callout-tip-color-frame, rightrule=.15mm, arc=.35mm, opacitybacktitle=0.6, leftrule=.75mm]
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, left=2mm, toptitle=1mm, opacitybacktitle=0.6, coltitle=black, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, breakable, bottomtitle=1mm, colback=white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Objetivo específico}, titlerule=0mm, colframe=quarto-callout-tip-color-frame, arc=.35mm, rightrule=.15mm, toprule=.15mm]
 
-¿Qué aspectos de la calidad del subtitulado son más fácilmente
-reconocibles por los estudiantes y en cuáles existe mayor dificultad?
+¿En qué pautas de subtitulado los estudiantes tienen mayor facilidad
+para reconocer diferencias entre un subtitulado correcto y otro
+incorrecto?
 
 \end{tcolorbox}
 
 La respuesta a esta pregunta requiere un análisis pormenorizado ítem a
-ítem. Se ha elaborado una tabla para cada uno de los tres modelos. La
-Figura~\ref{fig-logistic-compare} contiene las tablas correspondientes a
-los dos modelos de Regresión Logística. Para su correcta interpretación
-se deben tener en cuenta las siguientes premisas:
+ítem. Se ha elaborado una tabla para los dos modelos logísticos y otra
+para el modelo de Regresión Ordinal. La Figura~\ref{fig-or} contiene la
+tabla de los dos modelos logísticos. Para su correcta interpretación se
+deben tener en cuenta las siguientes premisas:
 
 \begin{itemize}
 \tightlist
 \item
+  En la parte izquierda se presentan los resultados del modelo logístico
+  con variable respuesta \texttt{Improve} y en la derecha el modelo
+  logístico con variable respuesta \texttt{Positive}.
+\item
+  En la parte superior se presentan los ítems en los que hay diferencias
+  en el subtitulado y que son objeto de este objetivo específico. En la
+  parte inferior se muestran los ítems que se usan como control ya que
+  no hay diferencias en ellos entre subtitulados y se analizan en el
+  objetivo correspondiente.
+\item
   La columna \texttt{Freq} es la frecuencia relativa de las tablas de
-  contingencia. La columna \texttt{Prob} son las probabilidades
-  predichas por cada uno de los modelos.
+  contingencia que resultan del análisis exploratorio. La columna
+  \texttt{Prob} son las probabilidades predichas por cada uno de los
+  modelos.
 \item
-  Los ítems de Likert en los que hay errores en el subtitulado \(B\) se
-  han resaltado con letra negrilla y fondo color púrpura. En los que no
-  hay errores la letra es normal y el fondo gris.
-\item
-  Cuanto más oscuro sea el color de fondo más inesperado es el
-  resultado.
+  Los datos se muestran con un fondo coloreado con una tonalidad más
+  oscura cuando más inesperado sea el resultado obtenido.
 \end{itemize}
 
-En el modelo con variable respuesta \texttt{Improve} (ver
-Figura~\ref{fig-or-improve}), los alumnos han sabido reconocer los ítems
-en los que no se han introducido errores (en los \(Q01\) y \(Q03\) con
-mucha incertidumbre). También han sido capaces de identificar
+En el modelo con variable respuesta \texttt{Improve} (ver parte
+izquierda de Figura~\ref{fig-or}), los alumnos han sabido de identificar
 correctamente errores de subtitulado en \(Q05\) (la corrección
 ortográfica y gramatical), \(Q06\) (la literalidad), \(Q07\) (la
 identificación de los personajes), \(Q08\) (la asignación de líneas a
 los personajes en los diálogos), \(Q09\) (la descripción de efectos
 sonoros) y \(Q14\) (la separación en líneas diferentes de sintagmas
-nominales, verbales y preposicionales). Sin embargo hay ítems en los que
-sí se han introducido errores y que apenas han sido valorados
-negativamente por los alumnos:
+nominales, verbales y preposicionales).
+
+En la parte derecha de la Figura~\ref{fig-or} se muestran las
+predicciones del modelo con variable respuesta \texttt{Positive} de
+obtener una respuesta con nivel 4 ó 5. Las conclusiones que se pueden
+extraer son muy similares a las del modelo con variable respuesta
+\texttt{Improve}.
+
+\begin{figure}[h]
+
+{\centering \includegraphics[width=\textwidth,height=0.7\textheight]{images/improve.png}
+
+}
+
+\caption{\label{fig-or}Predicciones de los modelos de Regresión
+Logística}
+
+\end{figure}
+
+En la Figura \ref{fig-prob-compare} se muestran las probabilidades por
+nivel de respuesta, ítem y nivel de subtitulado correspondiente al
+modelo de Regresión Ordinal y se comparan con las frecuencias de la
+tabla de contingencia. Los ítems con errores se presentan en negrita y
+recuadrados. Se observa que en el subtitulado \(A\) todas las respuestas
+a los ítems se concentran en valores positivos (4 ó 5). En el
+subtitulado \(B\) se espera que los ítems en los que se han introducido
+errores tengan peores valoraciones. Esto sucede claramente en \(Q05\) y
+en \(Q09\) y también aunque en menor medida en \(Q06\), \(Q07\), \(Q08\)
+y \(Q14\). Estos ítems coinciden con los que se han destacado en los dos
+modelos logísticos y son, por lo tanto, en los que los estudiantes
+reconocen más fácilmente diferencias entre subtitulados.
+
+\begin{figure}[h]
+\begin{adjustwidth}{-3.4cm}{}
+
+\includegraphics[width=1.2\linewidth]{images/bayes-probs.png} \hfill{}
+
+\caption{\label{fig-prob-compare}Predicciones del modelo de Regresión Logística.}
+
+\end{adjustwidth}
+\end{figure}
+
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, left=2mm, toptitle=1mm, opacitybacktitle=0.6, coltitle=black, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, breakable, bottomtitle=1mm, colback=white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Objetivo específico}, titlerule=0mm, colframe=quarto-callout-tip-color-frame, arc=.35mm, rightrule=.15mm, toprule=.15mm]
+
+¿En qué pautas de subtitulado los estudiantes tienen más dificultades
+para reconocer diferencias entre un subtitulado correcto y otro
+incorrecto?
+
+\end{tcolorbox}
+
+Los dos modelos logísticos (ver Figura~\ref{fig-or}) coinciden en que
+los estudiantes tienen dificultad para reconocer diferencias en el
+subtitulado en los ítems:
 
 \begin{itemize}
 \tightlist
@@ -4073,390 +4194,155 @@ negativamente por los alumnos:
   59.74\%.
 \end{itemize}
 
-La Figura~\ref{fig-or-positive} muestra las predicciones del modelo con
-variable respuesta \texttt{Positive} de obtener una respuesta con nivel
-4 ó 5. Las conclusiones que se pueden extraer son muy similares a las
-del modelo con variable respuesta \texttt{Improve}. Los ítems \(Q15\),
-\(Q16\) y \(Q17\) tienen una valoración comparativamente baja en ambos
-subtitulados e inferior en el \(B\) que en el \(A\) y ninguna de estas
-cosas era esperable que sucediera ya que no se han introducido este tipo
-de errores.
+En estos mismos ítems, el modelo ordinal (ver Figura
+\ref{fig-prob-compare}) predice más respuestas negativas en el
+subtitulado \(B\) que en el \(A\) pero aún así el subtitulado \(B\)
+tiene un alto número de respuestas positivas.
 
-\begin{figure}
-
-\begin{minipage}[t]{0.50\linewidth}
-
-{\centering 
-
-\raisebox{-\height}{
-
-\includegraphics{images/improve.png}
-
-}
-
-}
-
-\subcaption{\label{fig-or-improve}Modelo Improve (respuesta A
-\textgreater{} B)}
-\end{minipage}%
-%
-\begin{minipage}[t]{0.50\linewidth}
-
-{\centering 
-
-\raisebox{-\height}{
-
-\includegraphics{images/positive.png}
-
-}
-
-}
-
-\subcaption{\label{fig-or-positive}Modelo Positive (respuesta es 4 ó 5)}
-\end{minipage}%
-
-\caption{\label{fig-logistic-compare}Predicciones de los modelos de
-Regresión Logística}
-
-\end{figure}
-
-En la Figura \ref{fig-prob-compare} se muestra la probabilidad de nivel
-de respuesta por ítem y nivel de subtitulado correspondiente al modelo
-de Regresión Ordinal y se compara con la frecuencia de la tabla de
-contingencia. Los ítems con errores se muestran en negrita y
-recuadrados. Se observa que en el subtitulado \(A\) todas las respuestas
-a los ítems se concentran en valores positivos (4 ó 5). En este
-subtitulado \(A\) los ítems \(Q15\), \(Q16\) y \(Q17\) reciben bastantes
-respuestas negativas \footnote{El modelo ordinal no es capaz de predecir
-  esto debido a que, como estos ítems recibieron muchas contestaciones
-  \enquote{No sé / No contesto} y éstas se han eliminado del análisis,
-  el efecto \enquote{regresión a la media} que produce el modelado en
-  estos ítems es grande.}.
-
-En el subtitulado \(B\) se espera que los ítems en los que se han
-introducido errores tengan peores valoraciones. Esto sucede claramente
-en \(Q05\) y en \(Q09\) y también aunque en menor medida en \(Q06\),
-\(Q07\), \(Q08\) y \(Q14\). En \(Q18\) (los subtítulos del vídeo cumplen
-en general con los requisitos de accesibilidad) también se observan
-diferencias, lo que es una clara indicación de que los estudiantes han
-considerado que \(B\) es el subtitulado con errores. Sin embargo, hay
-una gran incertidumbre en las respuestas a los ítems \(Q02\), \(Q10\),
-\(Q11\) y \(Q12\). En todos ellos hay más respuestas negativas que en el
-subtitulado \(A\) pero se mantiene un elevado porcentaje de respuestas
-positivas. En los ítems en los que no se han introducido errores se
-deberían observar respuestas similares a las del subtitulado \(A\). Esto
-sucede en \(Q04\), \(Q13\), \(Q15\), \(Q16\) y \(Q17\). Pero no ocurre
-lo mismo en los ítems \(Q01\) y \(Q03\) ya que reciben peores
-valoraciones en \(B\) que en \(A\) de forma inesperada.
-
-Una cuestión interesante a destacar es que en general el análisis de las
-predicciones del modelo ordinal es más parsimonioso y estable que el
-análisis de las frecuencias relativas. Esto se va claramente en los
-ítems \(Q01\), \(Q07\) y \(Q08\). El análisis en bruto de las
-frecuencias muestra que las valoraciones de los estudiantes están
-polarizadas y evitan la contestación neutral. El modelo ha corregido
-esto y hecho unas predicciones más equilibradas.
-
-\begin{figure}[h]
-\begin{adjustwidth}{-3.4cm}{}
-
-\includegraphics[width=1.2\linewidth]{images/bayes-probs.png} \hfill{}
-
-\caption{\label{fig-prob-compare}Predicciones del modelo de Regresión Logística.}
-
-\end{adjustwidth}
-\end{figure}
-
-Para entender las motivaciones de las valoraciones de los alumnos en
-aquellos ítems que tienen una respuesta no deseada se han analizado los
-comentarios que dejaron \footnote{Estos comentarios se separaron en la
-  fase de preprocesado y no se han utilizado ni consultado hasta la
-  realización de este capítulo.}. La siguiente es una selección de
-comentarios por ítems:
+Para entender las motivaciones de las valoraciones de los alumnos se han
+analizado los comentarios que dejaron \footnote{Estos comentarios se
+  separaron en la fase de preprocesado y no se han utilizado ni
+  consultado hasta la realización de este capítulo.}. La siguiente es
+una selección de los comentarios más relevantes en cada ítem:
 
 \begin{itemize}
 \tightlist
 \item
-  \(Q01\), \textbf{la posición de los subtítulos}: Se trata de un error
-  no existente en ninguno de los vídeos. Sin embargo, una selección de
-  comentarios (hay otros ejemplos similares) evidencia que algunos
-  alumnos (pocos) han manifestado que no estaban bien posicionados los
-  subtítulos en \(A\) y que otros (bastantes) han comentado que en el
-  vídeo \(B\) los subtítulos no estaban bien posicionados.
+  \(Q02\), \textbf{el número de líneas por subtítulo}: En los
+  comentarios al subtitulado \(A\) hay bastantes que se quejan del
+  número excesivo de líneas.
 \end{itemize}
 
-\scriptsize
-\color{blue}
+\small
 
 \begin{quote}
-Subtitulado \(A\) \(Q01\): \enquote*{No estaban en la parte inferior de
-la pantalla}, \enquote*{en ocasiones no estan en la posicion que se
-espera}. \color{black} \normalsize
+Subtitulado \(A\): \enquote*{Se pueden hasta 3 pero no es recomendable},
+\enquote*{en ocasiones son 3 innecesariamente}, \enquote*{frases muy
+cortas}, \enquote*{No superaba las dos (creo recordar)}, \enquote*{Se
+cumple}.
 \end{quote}
 
-\scriptsize
-\color{red}
-
-\begin{quote}
-Subtitulado \(B\) \(Q01\): \enquote*{Se presentaba en diferentes
-posiciones}, \enquote*{cambian de sitio}, \enquote*{creo que podrian
-estar un poquito mas abajo}, \enquote*{Fallos corregidos},
-\enquote*{centrados}.
-\end{quote}
-
-\color{black}
-
-\normalsize
-
-\begin{itemize}
-\tightlist
-\item
-  \(Q03\), \textbf{la disposición del texto respecto a la caja donde se
-  muestran los subtítulos}: Se trata de un error no existente en ninguno
-  de los vídeos. En los comentarios hay bastante más negativos en el
-  vídeo \(A\) que en el \(B\).
-\end{itemize}
-
-\scriptsize
-\color{blue}
-
-\begin{quote}
-Subtitulado \(A\) \(Q03\): \enquote*{Mejor alineado a la izquierda},
-\enquote*{Palabras cortadas en los parrafos}, \enquote*{en algunos casos
-no esta centrado}, \enquote*{a veces se cortan palabras y otros
-detalles\ldots{}}, \enquote*{Mejor a la izquierda}, \enquote*{Centrado.
-Bien}, \enquote*{Adecuado}.
-\end{quote}
-
-\color{black}
-\normalsize
-
-\begin{itemize}
-\tightlist
-\item
-  \(Q02\), \textbf{el número de líneas por subtítulo}: Se trata de un
-  error introducido en el subtitulado \(B\). En los comentarios al
-  subtitulado \(A\) hay bastantes que se quejan del número excesivo de
-  líneas.
-\end{itemize}
-
-\scriptsize
-\color{blue}
-
-\begin{quote}
-Subtitulado \(A\) \(Q02\): \enquote*{Se pueden hasta 3 pero no es
-recomendable}, \enquote*{en ocasiones son 3 innecesariamente},
-\enquote*{frases muy cortas}, \enquote*{No superaba las dos (creo
-recordar)}, \enquote*{Se cumple}.
-\end{quote}
-
-\color{black}
 \normalsize
 
 \begin{itemize}
 \tightlist
 \item
   \(Q10\), \textbf{la sincronización de las entradas y salidas de los
-  subtítulos}: Se trata de un error introducido en el subtitulado \(B\).
-  En los comentarios al subtitulado \(A\) hay algunos que dicen que hay
-  falta de sincronización y, por el contrario, en el \(B\) que estaban
-  bien sincronizados. Hay por tanto una falta de atención de algunos
-  estudiantes para evaluar este aspecto del subtitulado.
+  subtítulos}: En los comentarios al subtitulado \(A\) hay algunos que
+  dicen que hay falta de sincronización y, por el contrario, en el \(B\)
+  que estaban bien sincronizados. Hay por tanto una falta de atención de
+  algunos estudiantes para evaluar este aspecto del subtitulado.
 \end{itemize}
 
-\scriptsize
-\color{blue}
+\small
 
 \begin{quote}
-Subtitulado \(A\) \(Q10\): \enquote*{Van a destiempo}, \enquote*{a veces
-hay retardo del texto sobre el audio}, \enquote*{No me dado cuenta.},
+Subtitulado \(A\): \enquote*{Van a destiempo}, \enquote*{a veces hay
+retardo del texto sobre el audio}, \enquote*{No me dado cuenta.},
 \enquote*{Estaban desincronizadas}.
 \end{quote}
 
-\color{black}
 \normalsize
 
-\scriptsize
-\color{red}
+\small
 
 \begin{quote}
-Subtitulado \(B\) \(Q10\): \enquote*{Regular.}, \enquote*{Sincronizado},
+Subtitulado \(B\): \enquote*{Regular.}, \enquote*{Sincronizado},
 \enquote*{bastante sincronizados}, \enquote*{va a la paz texto y
 lenguaje}, \enquote*{Estaba bien sincronizado}, \enquote*{Fallos
 corregidos}, \enquote*{sincronizadas con el audio y la imagen}.
 \end{quote}
 
-\color{black}
 \normalsize
 
 \begin{itemize}
 \tightlist
 \item
-  \(Q11\), \textbf{la velocidad de exposición de los subtítulos}: Se
-  trata de un error introducido en el subtitulado \(B\). Los comentarios
-  al subtitulado \(B\) denotan que muchos estudiantes no han tenido en
-  cuenta el subtítulo debe permanecer al menos tres segundos en la
-  pantalla.
+  \(Q11\), \textbf{la velocidad de exposición de los subtítulos}: Los
+  comentarios al subtitulado \(B\) denotan que muchos estudiantes no han
+  tenido en cuenta que el subtítulo debe permanecer al menos tres
+  segundos en la pantalla.
 \end{itemize}
 
-\scriptsize
-\color{red}
+\small
 
 \begin{quote}
-Subtitulado \(B\) \(Q11\): \enquote*{Sincronizado.}, \enquote*{me ha
-parecido un tiempo suficiente}, \enquote*{los pude leer bien},
-\enquote*{Buen tiempo para la lectura}, \enquote*{Se corresponde con los
-12 caracteres por segundo}, \enquote*{velocidad apropiada},
-\enquote*{Velocidad adequada para una buena lectura}.
+Subtitulado \(B\): \enquote*{Sincronizado.}, \enquote*{me ha parecido un
+tiempo suficiente}, \enquote*{los pude leer bien}, \enquote*{Buen tiempo
+para la lectura}, \enquote*{Se corresponde con los 12 caracteres por
+segundo}, \enquote*{velocidad apropiada}, \enquote*{Velocidad adequada
+para una buena lectura}.
 \end{quote}
 
-\color{black}
 \normalsize
 
 \begin{itemize}
 \tightlist
 \item
-  \(Q12\), \textbf{el máximo número de caracteres por línea}: Se trata
-  de un error introducido en el subtitulado \(B\). Los comentarios
-  denotan que en general los alumnos conocen el número máximo de
-  caracteres por línea, pero que no se han detenido a medir cuántos hay
-  realmente.
+  \(Q12\), \textbf{el máximo número de caracteres por línea}: Los
+  comentarios denotan que en general los alumnos conocen el número
+  máximo de caracteres por línea, pero que no se han detenido a medir
+  cuántos hay realmente.
 \end{itemize}
 
-\scriptsize
-\color{blue}
+\small
 
 \begin{quote}
-Subtitulado \(A\) \(Q12\): \enquote*{No sobrepasa los 40 caracteres}.
+Subtitulado \(A\): \enquote*{No sobrepasa los 40 caracteres}.
 \end{quote}
 
-\color{black}
 \normalsize
 
-\scriptsize
-\color{red}
+\small
 
 \begin{quote}
-Subtitulado \(B\) \(Q12\): \enquote*{No pasa de 37}, \enquote*{Se
-encuentran entre 12 y 37}.
+Subtitulado \(B\): \enquote*{No pasa de 37}, \enquote*{Se encuentran
+entre 12 y 37}.
 \end{quote}
 
-\color{black}
 \normalsize
 
-\begin{itemize}
-\tightlist
-\item
-  \(Q15\), \textbf{la utilización de puntos suspensivos}: En este ítem
-  no se han introducido diferencias entre subtitulados. Aquí parece que
-  los comentarios reflejan que el estudiante conoce las normas del uso
-  de puntos suspensivos pero no ha prestado atención a su utilización.
-  También se observan diferencias en las respuestas a la hora de valorar
-  un ítem del que no tienen recuerdo, dándose todo tipo de situaciones:
-  Contestar \enquote{No sé / No contesto}, contestar \enquote{Neutral} e
-  incluso valorar positiva y negativamente.
-\end{itemize}
+Se aprecia que los alumnos tienen dificultades para valorar las
+diferencias en la calidad del subtitulado en estos aspectos
+principalmente porque, aunque conozcan las normas de subtitulado, no han
+comprobado que se estén cumpliendo en los vídeos de la actividad.
 
-\scriptsize
-\color{blue}
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, left=2mm, toptitle=1mm, opacitybacktitle=0.6, coltitle=black, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, breakable, bottomtitle=1mm, colback=white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Objetivo específico}, titlerule=0mm, colframe=quarto-callout-tip-color-frame, arc=.35mm, rightrule=.15mm, toprule=.15mm]
 
-\begin{quote}
-Subtitulado \(A\) \(Q15\): \enquote*{Uso inadecuado de los puntos
-suspensivos}, \enquote*{No lo recuerdo}, \enquote*{No me he fijado si
-los tiene}, \enquote*{No recuerdo}, \enquote*{igual}.
-\end{quote}
+¿Son los estudiantes capaces de valorar de forma similar los aspectos
+del subtitulado que no cambian en los vídeos?
 
-\color{black}
-\normalsize
+\end{tcolorbox}
 
-\scriptsize
-\color{red}
-
-\begin{quote}
-Subtitulado \(B\) \(Q15\): \enquote*{solo he visto en una frase},
-\enquote*{Creo que cumple con las reglas gramaticales.}, \enquote*{No
-parece abusar de los puntos suspensivos}, \enquote*{Si se precisan, se
-deben poner}, \enquote*{No parece usar mucho los puntos suspensivos},
-\enquote*{Buen uso de los puntos supensivos}.
-\end{quote}
-
-\color{black}
-\normalsize
-
-\begin{itemize}
-\tightlist
-\item
-  \(Q16\), \textbf{la escritura de los números}: En este ítem no se han
-  introducido diferencias entre subtitulados. Tiene comparativamente
-  menos comentarios que otros ítems y la mayoría reflejan que no había
-  números en los subtítulos. La dispersión en las respuestas se debe,
-  como en el caso de \(Q15\), a que los estudiantes no saben qué valor
-  de respuesta otorgar.
-\end{itemize}
-
-\scriptsize
-\color{blue}
-
-\begin{quote}
-Subtitulado \(A\) \(Q16\): \enquote*{No lo recuerdo}, \enquote*{NO
-recuerdo}, \enquote*{no hay}, \enquote*{no hay}.
-\end{quote}
-
-\color{black}
-\normalsize
-
-\scriptsize
-\color{red}
-
-\begin{quote}
-Subtitulado \(B\) \(Q16\): \enquote*{creo que no hay}, \enquote*{No los
-he visto}, \enquote*{No lo he apreciado}.
-\end{quote}
-
-\color{black}
-\normalsize
-
-\begin{itemize}
-\tightlist
-\item
-  \(Q17\), \textbf{las incorrecciones en el habla}: En este ítem no se
-  han introducido diferencias entre subtitulados. Nuevamente los
-  estudiantes detectan que no hay incorrecciones en el subtitulado pero
-  no dan el mismo nivel de respuesta a esta circunstancia.
-\end{itemize}
-
-\scriptsize
-\color{blue}
-
-\begin{quote}
-Subtitulado \(A\) \(Q17\): \enquote*{No he visto}, \enquote*{No he visto
-ninguna}, \enquote*{No me ha parecido encontrarlas}, \enquote*{no las he
-visto}, \enquote*{No las he visto}, \enquote*{Si lo lleva en el
-original}.
-\end{quote}
-
-\color{black}
-\normalsize
-
-\scriptsize
-\color{red}
-
-\begin{quote}
-Subtitulado \(B\) \(Q17\): \enquote*{No observp}, \enquote*{No lo he
-apreciado}, \enquote*{no recuerdo incorrecciones}, \enquote*{No aparecen
-incorrecciones, o al menos no las he detectado.}, \enquote*{No hay
-incorrecciones en el video}.
-\end{quote}
-
-\color{black}
-\normalsize
+Los ítems en los que no se han introducido errores deberían ser
+valorados de forma similar por los estudiantes. En los modelos
+logísticos las probabilidades y frecuencias de estos ítems se muestran
+en la parte inferior de la tabla de la Figura~\ref{fig-or} y en las
+filas no resaltadas de la tabla de la Figura \ref{fig-prob-compare}. Se
+comprueba que los ítems \(Q04\) (el contraste entre los caracteres y el
+fondo) y \(Q13\) (la legibilidad de la tipografía) se valoran, como se
+esperaba, de forma positiva y similar en ambos subtitulados. Los ítems
+\(Q01\) (la posición de los subtítulos) y \(Q03\) (la disposición del
+texto respecto a la caja donde se muestran los subtítulos) se valoran
+positivamente en el subtitulado \(A\), pero en el subtitulado \(B\) hay
+una polarización de las valoraciones habiendo muchas positivas y
+negativas y pocas neutras. Por último, los ítems \(Q15\) (la utilización
+de puntos suspensivos), \(Q16\) (la escritura de los números) y \(Q17\)
+(las incorrecciones en el habla) tienen una valoración comparativamente
+inferior al resto de ítems en el subtitulado \(A\) y que esta valoración
+es inferior en el \(B\). Los estudiantes que han realizado comentarios
+en estos ítems indican que ninguno de ellos es aplicable a los vídeos.
+Ante esta circunstancia, los alumnos han consignado distintas
+valoraciones: algunos han contestado ·No sé / No contesto'', otros han
+dado valoraciones neutrales y, finalmente, otros han optado por
+valoraciones positivos y negativas.
 
 \bookmarksetup{startatroot}
 
 \hypertarget{sec-conclusion}{%
 \chapter{Conclusión y trabajo futuro}\label{sec-conclusion}}
 
-Este trabajo ha prentendido responder a la pregunta de investigación de
+Este trabajo ha pretendido responder a la pregunta de investigación de
 si los estudiantes de un curso de \gls{accesibilidad} son capaces de
 identificar los errores en el subtitulado de un vídeo, y como objetivos
 específicos averiguar qué aspectos del subtitulado han sido más
@@ -4488,7 +4374,7 @@ asignación de líneas a los personajes en los diálogos), \(Q09\) (la
 descripción de efectos sonoros) y \(Q14\) (la separación en líneas
 diferentes de sintagmas nominales, verbales y preposicionales).
 
-Sin embargo, han tenido más dificultades en indentificar los errores
+Sin embargo, han tenido más dificultades en identificar los errores
 introducidos en los ítems \(Q02\) (el número de líneas por subtítulo),
 \(Q10\) (la sincronización de las entradas y salidas de los subtítulos),
 \(Q11\) (la velocidad de exposición de los subtítulos) y \(Q12\) (el
@@ -4534,13 +4420,13 @@ suspensivos, números, \ldots). Este problema no es importante ya que es
 de suponer que en una situación de evaluación de subtitulado real
 realizarían un segundo visionado de los vídeos para asegurarse. Más
 preocupante resulta el segundo de los problemas detectados ya que podría
-estar también presente en otros ítems y haber pasado invadvertido en
-este trabajo. El problema en cuestión es que en estos ítems la respuesta
+estar también presente en otros ítems y haber pasado inadvertido en este
+trabajo. El problema en cuestión es que en estos ítems la respuesta
 esperable es \enquote{No sé / No contesto}. En la
 Tabla~\ref{tbl-no-response} se constató que estos son los ítems que más
 respuestas de este nivel reciben pero que esta respuesta no es masiva.
 Muchos estudiantes se decantan por valoraciones negativas, positivas o
-neutrales a pesar de haber indicado en los comentrios que la pregunta
+neutrales a pesar de haber indicado en los comentarios que la pregunta
 realizada no tiene aplicación en la actividad. Este problema es una
 preocupación general en análisis de escalas de Likert. Por ejemplo, ver
 \textcite{tutz2020} para una propuesta de modelado estadístico de la
@@ -4605,6 +4491,16 @@ aquí a modo de propuesta y sin ánimo de exhaustividad:
   actividad a profesionales del subtitulado para evaluar las semejanzas
   y diferencias entre grupos.
 \end{itemize}
+
+\bookmarksetup{startatroot}
+
+\hypertarget{referencias}{%
+\chapter*{Referencias}\label{referencias}}
+\addcontentsline{toc}{chapter}{Referencias}
+
+\markboth{Referencias}{Referencias}
+
+\printbibliography[heading=none]
 
 \cleardoublepage
 \phantomsection
@@ -5497,7 +5393,6 @@ mostrada es el modelo resultante teniendo en cuenta que:
 
 \SmallMargins
 
-\printbibliography
 \onecolumn
 
 

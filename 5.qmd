@@ -145,7 +145,7 @@ emmeans(clmm_treat.period.subject.item, ~ Response + Treat + Period, mode = "pro
 ```
 
 
-\tiny
+\scriptsize
 ```{r}
 #| label: tbl-model-comp
 #| tbl-scap: Comparación frecuentista/bayesiano de coeficientes estimados en el modelo Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item).
@@ -191,7 +191,8 @@ left_join(df_clmm, df_brm) %>%
         columns = c(Estimation.brm, `cred.2.5%`, `cred.97.5%`)
     ) %>%
     sub_missing(columns = everything(), missing_text = "") %>%
-    tab_options(table.font.size = 6)
+    tab_options(table.font.size = 6) %>%
+    cols_label(Estimation.clmm = "Est.", Estimation.brm = "Est.")
 ```
 \normalsize
 
@@ -211,7 +212,7 @@ En la @fig-pred-3 se representan 50 muestras de la esperanza de la distribución
 
 En definitiva, nuestro modelo predice que los estudiantes están bastante de acuerdo en que en los ítems $Q05$ y $Q09$ hay una diferencia de calidad importante entre subtitulados. También están de acuerdo en que en los ítems $Q04$ y $Q13$ no hay apenas cambio entre los subtitulados. En los ítems $Q15$, $Q16$ y $Q17$ hay una gran confusión en ambos niveles de subtitulado predominando la respuesta 4 y siendo muy parecidas las respuestas en ambos niveles. En el resto la confusión se circunscribe al nivel de subtitulado $B$, ya que en el nivel $A$ las opciones 4 y 5 predominan.
 
-![Muestreo de la función predictiva a posteriori por tratamiento e ítem.](images/bayes-preg.png){#fig-pred-3 width="100%"}
+![Muestreo de la función predictiva a posteriori por tratamiento e ítem.](images/bayes-preg.png){#fig-pred-3 width="120%"}
 
 ```{r}
 #| fig-height: 10
@@ -264,7 +265,7 @@ p +
         y = "Probability"
     ) +
     theme(
-        plot.margin = margin(0, 100, 0, 0),
+        plot.margin = margin(0, 100, 0, 0)
     ) +
     # This allows any labels or data to go past the grid
     coord_cartesian(clip = "off") +
@@ -284,8 +285,8 @@ p +
         # Expand limits so that the label doesn't get stuck
         xlim = c(0, 5),
         # Adjust size as needed!
-        size = 3.5
-    ) + scale_x_discrete(expand = c(0, 0), limits = c("A", "B"))
+        size = 5.5
+    ) + scale_x_discrete(expand = expansion(mult = c(0, .5)), limits = c("A", "B")) + theme(panel.spacing.x = unit(-5, "lines"), axis.title.x = element_text(size = 15), axis.title.y = element_text(size = 15), strip.text = element_text(size = 12))
 
 ```
 

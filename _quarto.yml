@@ -14,7 +14,7 @@ accesibilidad en el subtitulado de
 vídeos"
   author: "Javier Pérez Arteaga"
   date: "06/01/2023"
-  date-format: "MMM YYYY"
+  date-format: "MMMM YYYY"
   description: "TFM UNED Máster en Ingeniería y Ciencia de Datos"
   chapters:    
     - index.qmd
@@ -24,6 +24,7 @@ vídeos"
     - 5.qmd
     #- 6.qmd
     #- 7.qmd
+    - references.qmd
   appendices:
     #- 75-Preprocesado.qmd
     #- 76-Setup.qmd
