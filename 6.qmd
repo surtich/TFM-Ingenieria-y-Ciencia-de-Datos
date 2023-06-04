@@ -73,7 +73,7 @@ g <- inner_join(df_improve, df_positive) %>%
     cols_label(Freq_A = "Freq", Prob_A = "Prob", Freq_B = "Freq", Prob_B = "Prob")
 
 
-gtsave(g, "images/improve.png", expand=c(10,20,10,0))
+gtsave(g, "images/improve.png", expand = c(10, 20, 10, 0))
 ```
 
 
@@ -230,6 +230,7 @@ Una vez realizado el análisis estadístico y obtenidos los resultados (ver @sec
 \normalsize
 \end{table}
 ```
+## Respuestas a las preguntas de investigación y a los objetivos específicos
 
 Para responder a las preguntas de investigación se van a utilizar los hallazgos del Análisis Exploratorio (ver @sec-eda) y los resultados de los tres modelos comentados en el @sec-resultados:
 
@@ -261,7 +262,7 @@ La respuesta a esta pregunta requiere un análisis pormenorizado ítem a ítem. 
 * La columna `Freq` es la frecuencia relativa de las tablas de contingencia que resultan del análisis exploratorio. La columna `Prob` son las probabilidades predichas por cada uno de los modelos.
 * Los datos se muestran con un fondo coloreado con una tonalidad más oscura cuando más inesperado sea el resultado obtenido. 
 
-En el modelo con variable respuesta `Improve` (ver parte izquierda de @fig-or), los alumnos han sabido de identificar correctamente errores de subtitulado en $Q05$ (`r tolower(question_labels[6])`), $Q06$ (`r tolower(question_labels[7])`), $Q07$ (`r tolower(question_labels[8])`), $Q08$ (`r tolower(question_labels[9])`), $Q09$ (`r tolower(question_labels[10])`) y $Q14$ (`r tolower(question_labels[15])`).
+En el modelo con variable respuesta `Improve` (ver parte izquierda de @fig-or), los alumnos han identificado correctamente errores de subtitulado en $Q05$ (`r tolower(question_labels[6])`), $Q06$ (`r tolower(question_labels[7])`), $Q07$ (`r tolower(question_labels[8])`), $Q08$ (`r tolower(question_labels[9])`), $Q09$ (`r tolower(question_labels[10])`) y $Q14$ (`r tolower(question_labels[15])`).
 
 En la parte derecha de la @fig-or se muestran las predicciones del modelo con variable respuesta `Positive` de obtener una respuesta con nivel 4 ó 5. Las conclusiones que se pueden extraer son muy similares a las del modelo con variable respuesta `Improve`.
 
@@ -282,8 +283,6 @@ En la Figura \ref{fig-prob-compare} se muestran las probabilidades por nivel de 
 \end{figure}
 
 ```
-
-
 
 ::: {.callout-tip}
 ## Objetivo específico
@@ -351,7 +350,7 @@ Se aprecia que los alumnos tienen dificultades para valorar las diferencias en l
 ¿Son los estudiantes capaces de valorar de forma similar los aspectos del subtitulado que no cambian en los vídeos?
 :::
 
-Los ítems en los que no se han introducido errores deberían ser valorados de forma similar por los estudiantes. En los modelos logísticos las probabilidades y frecuencias de estos ítems se muestran en la parte inferior de la tabla de la @fig-or y en el modelo ordinal son las filas no resaltadas de la tabla de la Figura \ref{fig-prob-compare}. Se comprueba que los ítems $Q04$ (`r tolower(question_labels[5])`) y $Q13$ (`r tolower(question_labels[14])`) se valoran, como se esperaba, de forma positiva y similar en ambos subtitulados. Los ítems $Q01$ (`r tolower(question_labels[2])`) y $Q03$ (`r tolower(question_labels[4])`) se valoran positivamente en el subtitulado $A$, pero en el subtitulado $B$ hay una polarización de las valoraciones habiendo muchas positivas y negativas y pocas neutras. Por último, los ítems $Q15$ (`r tolower(question_labels[16])`), $Q16$ (`r tolower(question_labels[17])`) y $Q17$ (`r tolower(question_labels[18])`) tienen una valoración comparativamente inferior al resto de ítems en el subtitulado $A$.Esta valoración todavía inferior en el subtitulado $B$. Los estudiantes que han realizado comentarios en estos ítems indican que ninguno de ellos es aplicable a los vídeos. Ante esta circunstancia, los alumnos han consignado distintas valoraciones: algunos han contestado "No sé / No contesto", otros han consignado valoraciones neutrales y, finalmente, otros han optado por valoraciones positivas y negativas.
+Los ítems en los que no se han introducido errores deberían ser valorados de forma similar por los estudiantes. En los modelos logísticos las probabilidades y frecuencias de estos ítems se muestran en la parte inferior de la tabla de la @fig-or y en el modelo ordinal son las filas no resaltadas de la tabla de la Figura \ref{fig-prob-compare}. Se comprueba que los ítems $Q04$ (`r tolower(question_labels[5])`) y $Q13$ (`r tolower(question_labels[14])`) se valoran, como se esperaba, de forma positiva y similar en ambos subtitulados. Los ítems $Q01$ (`r tolower(question_labels[2])`) y $Q03$ (`r tolower(question_labels[4])`) se valoran positivamente en el subtitulado $A$, pero en el subtitulado $B$ hay una polarización de las valoraciones habiendo muchas positivas y negativas y pocas neutras. Por último, los ítems $Q15$ (`r tolower(question_labels[16])`), $Q16$ (`r tolower(question_labels[17])`) y $Q17$ (`r tolower(question_labels[18])`) tienen una valoración comparativamente inferior al resto de ítems en el subtitulado $A$.  Esta valoración es incluso inferior en el subtitulado $B$. Los estudiantes que han realizado comentarios en estos ítems indican que ninguno de ellos es aplicable a los vídeos. Ante esta circunstancia, los alumnos han consignado distintas valoraciones: algunos han contestado "No sé / No contesto", otros han consignado valoraciones neutrales y, finalmente, otros han optado por valoraciones positivas y negativas.
 
 ::: {.callout-tip}
 ## Objetivo específico
@@ -365,20 +364,31 @@ Efecto periodo: ¿La evaluación del subtitulado del segundo vídeo visto está 
 
 Estos objetivos se responden de forma conjunta por estar ambos efectos relacionados ya que, como se ha explicado, el efecto secuencia en un estudio cruzado $AB/BA$ es la interacción entre el tratamiento y el periodo. 
 
-En el modelo ordinal `Response ~ Treat * Period` (ver @sec-response-treat.period) se constató que tanto el periodo como la secuencia sin significativos. No obstante, estos efectos son mucho menos importantes que los debidos al subtitulado. Al introducir como variables explicativas el estudiante y el ítem (ver @sec-multinivel-2) tanto el efecto como la secuencia pasan a ser no significativos. En la @sec-or-3 se comprobó que estos efectos se producen porque la proporción de respuestas de nivel 5 en el subtitulado $A$ sobre el $B$ es superior en el primer periodo que en el segundo y lo contrario ocurre con las de nivel 4. En el  modelado logístico ni la secuencia ni el periodo resultaron significativos. Se concluye que ni el efecto secuencia ni el efecto periodo tienen significación estadística.
+En el modelo ordinal `Response ~ Treat * Period` (ver @sec-response-treat.period) se constató que tanto el periodo como la secuencia son significativos. No obstante, estos efectos son mucho menos importantes que los debidos al subtitulado. Al introducir como variables explicativas el estudiante y el ítem (ver @sec-multinivel-2) tanto el efecto como la secuencia pasan a ser no significativos. En la @sec-or-3 se comprobó que estos efectos se producen porque la proporción de respuestas de nivel 5 en el subtitulado $A$ sobre el $B$ es superior en el primer periodo que en el segundo y lo contrario ocurre con las de nivel 4. En el  modelado logístico ni la secuencia ni el periodo resultaron significativos. Se concluye que ni el efecto secuencia ni el efecto periodo tienen significación estadística.
 
+## Limitaciones del estudio
 
+Aunque el estudio ha permitido responder a la pregunta de investigación, tiene una serie de limitaciones cuya eliminación permitiría ampliar su ámbito:
+
+* Los datos proceden de un MOOC y la actividad fue voluntaria. Hay que suponer que sólo los estudiantes más altamente motivados habrán participado en ella.
+* El diseño cruzado no requirió un tiempo de lavado (tiempo entre tratamientos) como es habitual en este tipo de diseños. A pesar de que se ha descartado que el efecto periodo o el efecto secuencia hayan tenido una influencia importante en las respuestas a los test, sería interesante controlar el tiempo entre test y asegurar que los participantes han visto ambos vídeos e incluso que, cuando contestan al test, revisan el vídeo en lugar de fiarse de su memoria.
+* Sería interesante comprobar si las respuestas son diferentes si el estudiante dispone del test antes de ver el vídeo.
+* Se ha constatado, a través de los comentarios de los alumnos, que no utilizan criterios homogéneos cuando un ítem no es aplicable a los vídeos. Algunos alumnos contestan "No sé / No contesto", como es esperable, pero otros contestan "Neutral" y otros lo hacen negativa o positivamente. Sería deseable dar una información previa a los alumnos de cómo contestar al test.
+* Igualmente se ha constatado que los estudiantes tienden a dar puntuaciones más negativas a los ítems cuando saben que se trata del vídeo incorrectamente subtitulado incluso en aquellos ítems en que los vídeos son idénticos.
+* Hay ítems, como los relacionados con la tipografía, la posición de los subtítulos o el contraste, en los que al ser los vídeos idénticos, no es posible saber si los estudiantes son capaces de reconocer diferencias en la calidad del subtitulado.
+* Sería interesante comparar las respuestas de los estudiantes con la realizada por un grupo de expertos. 
+  
 # Conclusión y trabajo futuro {#sec-conclusion}
 
 Este trabajo ha pretendido responder a la pregunta de investigación de si los estudiantes de un curso de \gls{accesibilidad} son capaces de identificar los errores en el subtitulado de un vídeo, y como objetivos específicos averiguar qué aspectos del subtitulado han sido más fácilmente reconocidos por los estudiantes y en cuáles han tenido más dificultad. Para ello se ha partido de una Exploración Inicial (ver @sec-eda) y se han propuesto varios modelos estadísticos que tengan en cuenta la naturaleza ordinal y dependiente de la variable respuesta (ver @sec-modelos-utilizados). Como variables explicativas se ha considerado el nivel de subtitulado, el periodo en el que se ha realizado cada test, la secuencia u orden de realización de los test, el estudiante que ha realizado el test y el ítem al que se responde.
 
 La conclusión más importante es que todos los análisis estadísticos realizados muestran que el nivel de subtitulado es la variable que mejor explica la respuesta a cada ítem. Los efectos secuencia y periodo son comparativamente de poca importancia y se traducen en que en general los estudiantes valoran peor el vídeo visto en el segundo periodo para un mismo nivel de subtitulado. Las variables estudiante e ítem se han tratado como efectos aleatorios por haber considerado que sus observaciones no son independientes. La varianza explicada por la variable estudiante ha sido más grande que la explicada por la variable ítem.
 
-Los estudiantes han sabido reconocer los errores de subtitulado de los ítems $Q05$ (`r tolower(question_labels[6])`), $Q06$ (`r tolower(question_labels[7])`), $Q07$ (`r tolower(question_labels[8])`), $Q08$ (`r tolower(question_labels[9])`), $Q09$ (`r tolower(question_labels[10])`) y $Q14$ (`r tolower(question_labels[15])`).
+Los estudiantes han identificado errores de subtitulado de los ítems $Q05$ (`r tolower(question_labels[6])`), $Q06$ (`r tolower(question_labels[7])`), $Q07$ (`r tolower(question_labels[8])`), $Q08$ (`r tolower(question_labels[9])`), $Q09$ (`r tolower(question_labels[10])`) y $Q14$ (`r tolower(question_labels[15])`).
 
-Sin embargo, han tenido más dificultades en identificar los errores introducidos en los ítems $Q02$ (`r tolower(question_labels[3])`), $Q10$ (`r tolower(question_labels[11])`), $Q11$ (`r tolower(question_labels[12])`) y $Q12$ (`r tolower(question_labels[13])`). El análisis realizado sobre los comentarios a estos ítems, evidencia que los estudiantes han aprendido las normas que debe regir el subtitulado en estos aspectos pero que no han evaluado minuciosamente si se cumplen realmente. Hay que tener en consideración que esta fue una actividad voluntaria sin incidencia en la calificación del curso, y que en una situación real esto no habría sucedido y habrían realizado una corroboración minuciosa.
+Sin embargo, han tenido más dificultades en identificar los errores introducidos en los ítems $Q02$ (`r tolower(question_labels[3])`), $Q10$ (`r tolower(question_labels[11])`), $Q11$ (`r tolower(question_labels[12])`) y $Q12$ (`r tolower(question_labels[13])`). El análisis realizado sobre los comentarios a estos ítems, evidencia que los estudiantes han aprendido las normas que debe regir el subtitulado en estos aspectos pero que no han evaluado minuciosamente si se cumplen realmente. Hay que tener en consideración que esta fue una actividad voluntaria sin incidencia en la calificación del curso, y que en una situación real esto probablemente no habría sucedido ya que habrían realizado una comprobación minuciosa.
 
-En definitiva, los estudiantes conocen las normas de subtitulado y son capaces identificar los errores que no requieren una comprobación exhaustiva. En los que sí lo requieren, algunos estudiantes han contestado sin realizar las comprobaciones necesarias.
+En definitiva, los estudiantes conocen las normas de subtitulado y son capaces identificar los errores que no requieren una comprobación exhaustiva. En los que sí lo requieren, que son aquellos que tienen que ver con parámetros temporales (velocidad y sincronización) y espaciales (número de líneas y caracteres por línea), han tenido más dificultad. Esto está en consonancia con @khafik2022. En su estudio analizan el subtitulado en inglés producido por estudiantes cuya lengua nativa no es el inglés y concluyen que los errores más frecuentes son precisamente los que tienen que ver con parámetros temporales y espaciales.
 
 En cuanto a los ítems que tratan aspectos en los que no hay errores en ninguno de los vídeos, los estudiantes han valorado positivamente ambos subtitulados en los ítems $Q04$ (`r tolower(question_labels[5])`) y $Q13$ (`r tolower(question_labels[14])`). Esto no implica necesariamente que, de haber habido deficiencias en estos aspectos, las hubieran reconocido. De hecho, hay evidencias de que los estudiantes noveles tienen dificultades en la identificación de deficiencias en el contraste [ver @jperez2].
 
@@ -389,7 +399,7 @@ Los ítems $Q15$ (`r tolower(question_labels[16])`), $Q16$ (`r tolower(question_
 Estas conclusiones abren varias vías de investigación que se enumeran aquí a modo de propuesta y sin ánimo de exhaustividad:
 
 * Incorporar al modelo variables como el sexo, la edad, el lugar de nacimiento, el nivel de estudios o el grado de conocimientos de accesibilidad previo. En el momento de realizar este trabajo se disponía de esta información aunque de forma muy incompleta ya que la mayoría de los estudiantes participantes no suministraron la información personal.
-* Volver a realizar el análisis completo con los mismos datos pero incorporando desde el principio el conocimiento del subtitulado correcto y siendo más crítico con la calidad de los datos, lo que llevaría a eliminar alguno de los cuestiorarios.
+* Volver a realizar el análisis completo con los mismos datos pero incorporando desde el principio el conocimiento del subtitulado correcto y siendo más crítico con la calidad de los datos, lo que llevaría a eliminar alguno de los cuestionarios.
 * Analizar los datos de la edición del curso de 2023 para ver en qué medida los modelos y las conclusiones se mantienen o cambian.
 * Plantear mejoras en la recogida de datos como, por ejemplo, indicaciones detalladas de como responder en caso de duda, desconocimiento, inaplicabilidad, ....
 * Sería interesante ver cómo cambian las respuestas de los estudiantes si en ambos vídeos se introducen errores en el subtitulado en diferentes aspectos.

@@ -552,25 +552,49 @@ An explanatory sentence. Leave an empty line for line breaks.}
 \addcontentsline{toc}{chapter}{Resumen} % Añade al TOC.
 \end{center}   
 \makeatother
-TODO: Incluir un resumen del trabajo.
+En este trabajo se ha analizado si los estudiantes de la Sexta Edición (2022) del MOOC Materiales Digitales Accesibles
+perteneciente al Canal Fundación ONCE en UNED Abierta son capaces de evaluar las diferencias
+en la calidad de subtitulado de dos vídeos. Los estudiantes que voluntariamente decidieron
+participar en la actividad vieron dos vídeos idénticos, uno correctamente subtitulado y otro
+en el que se habían introducido errores en el subtitulado. El orden en el que vio los vídeos cada estudiante
+fue asignado aleatoriamente. Después de ver cada vídeo, el estudiante respondió una escala de Likert de 18
+ítems con cinco niveles. El estudio fue triple ciego ya que ni los estudiantes conocían la calidad
+de subtitulado del vídeo que estaban viendo, ni esa información era conocida por los instructores del curso, ni lo fue a la
+hora de realizar el análisis estadístico. Esta información fue revelada en la fase de discusión de este trabajo.
+El modelado estadístico realizado tuvo en cuenta la naturaleza ordinal y longitudinal de los datos. Como variable explicativa se
+utilizó la respuesta a los test y como variables explicativas el nivel de subtitulado, el periodo y la secuencia de visualización,
+el estudiante y el ítem de Likert. Se propusieron dos tipos de modelos lineales generalizados mixtos:
+El primero fue una Regresión Logística en el que la variable
+respuesta se dicotomizó y el segundo una Regresión Ordinal Acumulativa. Con este último se realizó tanto un análisis frecuentista
+como bayesiano. Las conclusiones de la exploración de los datos y del modelado estadístico son que estudiantes nóveles en accesibilidad
+son capaces de evaluar las diferencias de calidad en el subtitulado. Particularmente son capaces de percibir diferencias en la
+corrección ortográfica y gramatical, la literalidad, la identificación de los personajes, etc. Sin embargo, tienen dificultades en
+la percepción de la calidad cuando se trata de aspectos espaciales (número de líneas y de caracteres por línea)
+y temporales (sincronización y velocidad) del subtitulado.
 
 \phantomsection % Necesario con hyperref
 \chapter*{Agradecimientos} % Opción con * para que no aparezca en TOC ni numerada
 \addcontentsline{toc}{chapter}{Agradecimientos} % Añade al TOC.
 
 \hyphenpenalty=1000
+Agradezco sinceramente el interés y la dedicación de mis directores de TFM, Emilio Letón y Jorge Pérez. 
+Valoro especialmente las innumerables horas que hemos pasado reunidos, el tiempo que habéis dedicado a revisar mi trabajo
+y la confianza depositada en mí.
+Vuestro conocimiento experto en temas de accesibilidad y de modelado estadístico y los valiosos consejos que he recibido
+para dar forma y estructura
+a este documento han contribuido sin duda a hacer mejor este trabajo. 
+Confío en que mantengamos la colaboración en el futuro y pueda
+seguir aprendiendo de vosotros. Muchas gracias, Emilio. Muchas gracias, Jorge. 
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada nulla augue, ac facilisis risus pretium a. Ut bibendum risus id ex fermentum, at accumsan erat vulputate. In hac habitasse platea dictumst. Sed lobortis est a enim bibendum, ac pulvinar nulla aliquam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque efficitur justo id suscipit pretium. Proin iaculis sit amet nibh vel euismod. Aenean tincidunt faucibus ex, non vehicula ipsum tristique in. Fusce vel tincidunt lectus, vel rutrum nisi. Suspendisse malesuada lectus ac enim vehicula rhoncus. Nullam convallis justo in bibendum eleifend.
-
-Phasellus vitae magna nec mi sagittis luctus vitae eu augue. Donec scelerisque laoreet arcu, eget tempor mi ultricies vel. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum at blandit ex. Vestibulum eu sagittis mauris. In hac habitasse platea dictumst. Duis eget ante vel lacus sollicitudin convallis quis eu velit. Sed auctor sem non nisi hendrerit, vel tincidunt tortor bibendum.
-
-
-
+\begin{flushright}
+    Javier Pérez Arteaga
+    Madrid, junio de 2023
+\end{flushright} 
 \renewcommand{\listtablename}{Índice de tablas} % Cambiar el título del índice de tablas
 \addto\captionsspanish{
 \def\listtablename{\'Indice de tablas}%
 \def\tablename{Tabla}}
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, frame hidden, boxrule=0pt, sharp corners, breakable, enhanced, interior hidden]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, boxrule=0pt, frame hidden, borderline west={3pt}{0pt}{shadecolor}, sharp corners, enhanced, breakable]}{\end{tcolorbox}}\fi
 
 % Contents
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -716,7 +740,7 @@ subtitulado y otro con errores (ver @Sección~\ref{sec-desc}).
 El objetivo de este trabajo es responder a la siguiente pregunta de
 investigación:
 
-\begin{tcolorbox}[enhanced jigsaw, opacityback=0, left=2mm, toptitle=1mm, opacitybacktitle=0.6, coltitle=black, leftrule=.75mm, colbacktitle=quarto-callout-note-color!10!white, bottomrule=.15mm, breakable, bottomtitle=1mm, colback=white, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Pregunta de investigación}, titlerule=0mm, colframe=quarto-callout-note-color-frame, arc=.35mm, rightrule=.15mm, toprule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, colframe=quarto-callout-note-color-frame, coltitle=black, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, opacityback=0, left=2mm, colback=white, breakable, toptitle=1mm, opacitybacktitle=0.6, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Pregunta de investigación}, arc=.35mm, colbacktitle=quarto-callout-note-color!10!white, bottomrule=.15mm, titlerule=0mm]
 
 ¿Son los estudiantes de un curso de creación de materiales accesibles
 capaces de evaluar las diferencias en la calidad del subtitulado de un
@@ -726,28 +750,45 @@ vídeo?
 
 Además también se responderá a los siguientes objetivos específicos:
 
-\begin{tcolorbox}[enhanced jigsaw, opacityback=0, left=2mm, toptitle=1mm, opacitybacktitle=0.6, coltitle=black, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, breakable, bottomtitle=1mm, colback=white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Objetivo específico}, titlerule=0mm, colframe=quarto-callout-tip-color-frame, arc=.35mm, rightrule=.15mm, toprule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, colframe=quarto-callout-tip-color-frame, coltitle=black, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, opacityback=0, left=2mm, colback=white, breakable, toptitle=1mm, opacitybacktitle=0.6, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Objetivo específico}, arc=.35mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, titlerule=0mm]
 
-¿Qué aspectos de la calidad del subtitulado son más fácilmente
-reconocibles por los estudiantes?
-
-\end{tcolorbox}
-
-\begin{tcolorbox}[enhanced jigsaw, opacityback=0, left=2mm, toptitle=1mm, opacitybacktitle=0.6, coltitle=black, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, breakable, bottomtitle=1mm, colback=white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Objetivo específico}, titlerule=0mm, colframe=quarto-callout-tip-color-frame, arc=.35mm, rightrule=.15mm, toprule=.15mm]
-
-¿Tienen los estudiantes dificultad en evaluar algún aspecto de la
-calidad del subtitulado?
+¿En qué pautas de subtitulado los estudiantes tienen mayor facilidad
+para reconocer diferencias entre un subtitulado correcto y otro
+incorrecto?
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, opacityback=0, left=2mm, toptitle=1mm, opacitybacktitle=0.6, coltitle=black, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, breakable, bottomtitle=1mm, colback=white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Objetivo específico}, titlerule=0mm, colframe=quarto-callout-tip-color-frame, arc=.35mm, rightrule=.15mm, toprule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, colframe=quarto-callout-tip-color-frame, coltitle=black, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, opacityback=0, left=2mm, colback=white, breakable, toptitle=1mm, opacitybacktitle=0.6, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Objetivo específico}, arc=.35mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, titlerule=0mm]
+
+¿En qué pautas de subtitulado los estudiantes tienen mayor facilidad
+para reconocer diferencias entre un subtitulado correcto y otro
+incorrecto?
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, colframe=quarto-callout-tip-color-frame, coltitle=black, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, opacityback=0, left=2mm, colback=white, breakable, toptitle=1mm, opacitybacktitle=0.6, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Objetivo específico}, arc=.35mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, titlerule=0mm]
+
+¿En qué pautas de subtitulado los estudiantes tienen más dificultades
+para reconocer diferencias entre un subtitulado correcto y otro
+incorrecto?
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, colframe=quarto-callout-tip-color-frame, coltitle=black, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, opacityback=0, left=2mm, colback=white, breakable, toptitle=1mm, opacitybacktitle=0.6, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Objetivo específico}, arc=.35mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, titlerule=0mm]
+
+¿Son los estudiantes capaces de valorar de forma similar los aspectos
+del subtitulado que no cambian en los vídeos?
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, colframe=quarto-callout-tip-color-frame, coltitle=black, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, opacityback=0, left=2mm, colback=white, breakable, toptitle=1mm, opacitybacktitle=0.6, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Objetivo específico}, arc=.35mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, titlerule=0mm]
 
 Efecto secuencia: ¿El orden en el que vieron los vídeos los estudiantes
 influye en la calidad del subtitulado percibida?
 
 \end{tcolorbox}
 
-\begin{tcolorbox}[enhanced jigsaw, opacityback=0, left=2mm, toptitle=1mm, opacitybacktitle=0.6, coltitle=black, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, breakable, bottomtitle=1mm, colback=white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Objetivo específico}, titlerule=0mm, colframe=quarto-callout-tip-color-frame, arc=.35mm, rightrule=.15mm, toprule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, colframe=quarto-callout-tip-color-frame, coltitle=black, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, opacityback=0, left=2mm, colback=white, breakable, toptitle=1mm, opacitybacktitle=0.6, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Objetivo específico}, arc=.35mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, titlerule=0mm]
 
 Efecto periodo: ¿La evaluación del subtitulado del segundo vídeo visto
 está influida por haber evaluado un vídeo previamente?
@@ -4037,6 +4078,10 @@ subtitulados.
 \normalsize
 \end{table}
 
+\hypertarget{respuestas-a-las-preguntas-de-investigaciuxf3n-y-a-los-objetivos-especuxedficos}{%
+\section{Respuestas a las preguntas de investigación y a los objetivos
+específicos}\label{respuestas-a-las-preguntas-de-investigaciuxf3n-y-a-los-objetivos-especuxedficos}}
+
 Para responder a las preguntas de investigación se van a utilizar los
 hallazgos del Análisis Exploratorio (ver Sección~\ref{sec-eda}) y los
 resultados de los tres modelos comentados en el
@@ -4062,7 +4107,7 @@ Capítulo~\ref{sec-resultados}:
 Para mayor comodidad del lector se vuelven a plantear aquí la pregunta
 de investigación y los objetivos específicos:
 
-\begin{tcolorbox}[enhanced jigsaw, opacityback=0, left=2mm, toptitle=1mm, opacitybacktitle=0.6, coltitle=black, leftrule=.75mm, colbacktitle=quarto-callout-note-color!10!white, bottomrule=.15mm, breakable, bottomtitle=1mm, colback=white, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Pregunta de investigación}, titlerule=0mm, colframe=quarto-callout-note-color-frame, arc=.35mm, rightrule=.15mm, toprule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, colframe=quarto-callout-note-color-frame, coltitle=black, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, opacityback=0, left=2mm, colback=white, breakable, toptitle=1mm, opacitybacktitle=0.6, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Pregunta de investigación}, arc=.35mm, colbacktitle=quarto-callout-note-color!10!white, bottomrule=.15mm, titlerule=0mm]
 
 ¿Son los estudiantes de un curso de creación de materiales accesibles
 capaces de evaluar las diferencias en la calidad del subtitulado de un
@@ -4081,7 +4126,7 @@ concluye respondiendo afirmativamente a la pregunta: los estudiantes del
 curso han sabido evaluar las diferencias en el subtitulado de los
 vídeos.
 
-\begin{tcolorbox}[enhanced jigsaw, opacityback=0, left=2mm, toptitle=1mm, opacitybacktitle=0.6, coltitle=black, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, breakable, bottomtitle=1mm, colback=white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Objetivo específico}, titlerule=0mm, colframe=quarto-callout-tip-color-frame, arc=.35mm, rightrule=.15mm, toprule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, colframe=quarto-callout-tip-color-frame, coltitle=black, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, opacityback=0, left=2mm, colback=white, breakable, toptitle=1mm, opacitybacktitle=0.6, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Objetivo específico}, arc=.35mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, titlerule=0mm]
 
 ¿En qué pautas de subtitulado los estudiantes tienen mayor facilidad
 para reconocer diferencias entre un subtitulado correcto y otro
@@ -4118,7 +4163,7 @@ deben tener en cuenta las siguientes premisas:
 \end{itemize}
 
 En el modelo con variable respuesta \texttt{Improve} (ver parte
-izquierda de Figura~\ref{fig-or}), los alumnos han sabido de identificar
+izquierda de Figura~\ref{fig-or}), los alumnos han identificado
 correctamente errores de subtitulado en \(Q05\) (la corrección
 ortográfica y gramatical), \(Q06\) (la literalidad), \(Q07\) (la
 identificación de los personajes), \(Q08\) (la asignación de líneas a
@@ -4166,7 +4211,7 @@ reconocen más fácilmente diferencias entre subtitulados.
 \end{adjustwidth}
 \end{figure}
 
-\begin{tcolorbox}[enhanced jigsaw, opacityback=0, left=2mm, toptitle=1mm, opacitybacktitle=0.6, coltitle=black, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, breakable, bottomtitle=1mm, colback=white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Objetivo específico}, titlerule=0mm, colframe=quarto-callout-tip-color-frame, arc=.35mm, rightrule=.15mm, toprule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, colframe=quarto-callout-tip-color-frame, coltitle=black, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, opacityback=0, left=2mm, colback=white, breakable, toptitle=1mm, opacitybacktitle=0.6, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Objetivo específico}, arc=.35mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, titlerule=0mm]
 
 ¿En qué pautas de subtitulado los estudiantes tienen más dificultades
 para reconocer diferencias entre un subtitulado correcto y otro
@@ -4307,7 +4352,7 @@ diferencias en la calidad del subtitulado en estos aspectos
 principalmente porque, aunque conozcan las normas de subtitulado, no han
 comprobado que se estén cumpliendo en los vídeos de la actividad.
 
-\begin{tcolorbox}[enhanced jigsaw, opacityback=0, left=2mm, toptitle=1mm, opacitybacktitle=0.6, coltitle=black, leftrule=.75mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, breakable, bottomtitle=1mm, colback=white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Objetivo específico}, titlerule=0mm, colframe=quarto-callout-tip-color-frame, arc=.35mm, rightrule=.15mm, toprule=.15mm]
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, colframe=quarto-callout-tip-color-frame, coltitle=black, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, opacityback=0, left=2mm, colback=white, breakable, toptitle=1mm, opacitybacktitle=0.6, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Objetivo específico}, arc=.35mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, titlerule=0mm]
 
 ¿Son los estudiantes capaces de valorar de forma similar los aspectos
 del subtitulado que no cambian en los vídeos?
@@ -4317,25 +4362,106 @@ del subtitulado que no cambian en los vídeos?
 Los ítems en los que no se han introducido errores deberían ser
 valorados de forma similar por los estudiantes. En los modelos
 logísticos las probabilidades y frecuencias de estos ítems se muestran
-en la parte inferior de la tabla de la Figura~\ref{fig-or} y en las
-filas no resaltadas de la tabla de la Figura \ref{fig-prob-compare}. Se
-comprueba que los ítems \(Q04\) (el contraste entre los caracteres y el
-fondo) y \(Q13\) (la legibilidad de la tipografía) se valoran, como se
-esperaba, de forma positiva y similar en ambos subtitulados. Los ítems
-\(Q01\) (la posición de los subtítulos) y \(Q03\) (la disposición del
-texto respecto a la caja donde se muestran los subtítulos) se valoran
-positivamente en el subtitulado \(A\), pero en el subtitulado \(B\) hay
-una polarización de las valoraciones habiendo muchas positivas y
-negativas y pocas neutras. Por último, los ítems \(Q15\) (la utilización
-de puntos suspensivos), \(Q16\) (la escritura de los números) y \(Q17\)
-(las incorrecciones en el habla) tienen una valoración comparativamente
-inferior al resto de ítems en el subtitulado \(A\) y que esta valoración
-es inferior en el \(B\). Los estudiantes que han realizado comentarios
-en estos ítems indican que ninguno de ellos es aplicable a los vídeos.
-Ante esta circunstancia, los alumnos han consignado distintas
-valoraciones: algunos han contestado ·No sé / No contesto'', otros han
-dado valoraciones neutrales y, finalmente, otros han optado por
-valoraciones positivos y negativas.
+en la parte inferior de la tabla de la Figura~\ref{fig-or} y en el
+modelo ordinal son las filas no resaltadas de la tabla de la Figura
+\ref{fig-prob-compare}. Se comprueba que los ítems \(Q04\) (el contraste
+entre los caracteres y el fondo) y \(Q13\) (la legibilidad de la
+tipografía) se valoran, como se esperaba, de forma positiva y similar en
+ambos subtitulados. Los ítems \(Q01\) (la posición de los subtítulos) y
+\(Q03\) (la disposición del texto respecto a la caja donde se muestran
+los subtítulos) se valoran positivamente en el subtitulado \(A\), pero
+en el subtitulado \(B\) hay una polarización de las valoraciones
+habiendo muchas positivas y negativas y pocas neutras. Por último, los
+ítems \(Q15\) (la utilización de puntos suspensivos), \(Q16\) (la
+escritura de los números) y \(Q17\) (las incorrecciones en el habla)
+tienen una valoración comparativamente inferior al resto de ítems en el
+subtitulado \(A\). Esta valoración es incluso inferior en el subtitulado
+\(B\). Los estudiantes que han realizado comentarios en estos ítems
+indican que ninguno de ellos es aplicable a los vídeos. Ante esta
+circunstancia, los alumnos han consignado distintas valoraciones:
+algunos han contestado \enquote{No sé / No contesto}, otros han
+consignado valoraciones neutrales y, finalmente, otros han optado por
+valoraciones positivas y negativas.
+
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, colframe=quarto-callout-tip-color-frame, coltitle=black, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, opacityback=0, left=2mm, colback=white, breakable, toptitle=1mm, opacitybacktitle=0.6, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Objetivo específico}, arc=.35mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, titlerule=0mm]
+
+Efecto secuencia: ¿El orden en el que vieron los vídeos los estudiantes
+influye en la calidad del subtitulado percibida?
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced jigsaw, bottomtitle=1mm, colframe=quarto-callout-tip-color-frame, coltitle=black, toprule=.15mm, leftrule=.75mm, rightrule=.15mm, opacityback=0, left=2mm, colback=white, breakable, toptitle=1mm, opacitybacktitle=0.6, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Objetivo específico}, arc=.35mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, titlerule=0mm]
+
+Efecto periodo: ¿La evaluación del subtitulado del segundo vídeo visto
+está influida por haber evaluado un vídeo previamente?
+
+\end{tcolorbox}
+
+Estos objetivos se responden de forma conjunta por estar ambos efectos
+relacionados ya que, como se ha explicado, el efecto secuencia en un
+estudio cruzado \(AB/BA\) es la interacción entre el tratamiento y el
+periodo.
+
+En el modelo ordinal
+\texttt{Response\ \textasciitilde{}\ Treat\ *\ Period} (ver
+Sección~\ref{sec-response-treat.period}) se constató que tanto el
+periodo como la secuencia son significativos. No obstante, estos efectos
+son mucho menos importantes que los debidos al subtitulado. Al
+introducir como variables explicativas el estudiante y el ítem (ver
+Sección~\ref{sec-multinivel-2}) tanto el efecto como la secuencia pasan
+a ser no significativos. En la Sección~\ref{sec-or-3} se comprobó que
+estos efectos se producen porque la proporción de respuestas de nivel 5
+en el subtitulado \(A\) sobre el \(B\) es superior en el primer periodo
+que en el segundo y lo contrario ocurre con las de nivel 4. En el
+modelado logístico ni la secuencia ni el periodo resultaron
+significativos. Se concluye que ni el efecto secuencia ni el efecto
+periodo tienen significación estadística.
+
+\hypertarget{limitaciones-del-estudio}{%
+\section{Limitaciones del estudio}\label{limitaciones-del-estudio}}
+
+Aunque el estudio ha permitido responder a la pregunta de investigación,
+tiene una serie de limitaciones cuya eliminación permitiría ampliar su
+ámbito:
+
+\begin{itemize}
+\tightlist
+\item
+  Los datos proceden de un MOOC y la actividad fue voluntaria. Hay que
+  suponer que sólo los estudiantes más altamente motivados habrán
+  participado en ella.
+\item
+  El diseño cruzado no requirió un tiempo de lavado (tiempo entre
+  tratamientos) como es habitual en este tipo de diseños. A pesar de que
+  se ha descartado que el efecto periodo o el efecto secuencia hayan
+  tenido una influencia importante en las respuestas a los test, sería
+  interesante controlar el tiempo entre test y asegurar que los
+  participantes han visto ambos vídeos e incluso que, cuando contestan
+  al test, revisan el vídeo en lugar de fiarse de su memoria.
+\item
+  Sería interesante comprobar si las respuestas son diferentes si el
+  estudiante dispone del test antes de ver el vídeo.
+\item
+  Se ha constatado, a través de los comentarios de los alumnos, que no
+  utilizan criterios homogéneos cuando un ítem no es aplicable a los
+  vídeos. Algunos alumnos contestan \enquote{No sé / No contesto}, como
+  es esperable, pero otros contestan \enquote{Neutral} y otros lo hacen
+  negativa o positivamente. Sería deseable dar una información previa a
+  los alumnos de cómo contestar al test.
+\item
+  Igualmente se ha constatado que los estudiantes tienden a dar
+  puntuaciones más negativas a los ítems cuando saben que se trata del
+  vídeo incorrectamente subtitulado incluso en aquellos ítems en que los
+  vídeos son idénticos.
+\item
+  Hay ítems, como los relacionados con la tipografía, la posición de los
+  subtítulos o el contraste, en los que al ser los vídeos idénticos, no
+  es posible saber si los estudiantes son capaces de reconocer
+  diferencias en la calidad del subtitulado.
+\item
+  Sería interesante comparar las respuestas de los estudiantes con la
+  realizada por un grupo de expertos.
+\end{itemize}
 
 \bookmarksetup{startatroot}
 
@@ -4367,8 +4493,8 @@ observaciones no son independientes. La varianza explicada por la
 variable estudiante ha sido más grande que la explicada por la variable
 ítem.
 
-Los estudiantes han sabido reconocer los errores de subtitulado de los
-ítems \(Q05\) (la corrección ortográfica y gramatical), \(Q06\) (la
+Los estudiantes han identificado errores de subtitulado de los ítems
+\(Q05\) (la corrección ortográfica y gramatical), \(Q06\) (la
 literalidad), \(Q07\) (la identificación de los personajes), \(Q08\) (la
 asignación de líneas a los personajes en los diálogos), \(Q09\) (la
 descripción de efectos sonoros) y \(Q14\) (la separación en líneas
@@ -4383,13 +4509,19 @@ comentarios a estos ítems, evidencia que los estudiantes han aprendido
 las normas que debe regir el subtitulado en estos aspectos pero que no
 han evaluado minuciosamente si se cumplen realmente. Hay que tener en
 consideración que esta fue una actividad voluntaria sin incidencia en la
-calificación del curso, y que en una situación real esto no habría
-sucedido y habrían realizado una corroboración minuciosa.
+calificación del curso, y que en una situación real esto probablemente
+no habría sucedido ya que habrían realizado una comprobación minuciosa.
 
 En definitiva, los estudiantes conocen las normas de subtitulado y son
 capaces identificar los errores que no requieren una comprobación
-exhaustiva. En los que sí lo requieren, algunos estudiantes han
-contestado sin realizar las comprobaciones necesarias.
+exhaustiva. En los que sí lo requieren, que son aquellos que tienen que
+ver con parámetros temporales (velocidad y sincronización) y espaciales
+(número de líneas y caracteres por línea), han tenido más dificultad.
+Esto está en consonancia con \textcite{khafik2022}. En su estudio
+analizan el subtitulado en inglés producido por estudiantes cuya lengua
+nativa no es el inglés y concluyen que los errores más frecuentes son
+precisamente los que tienen que ver con parámetros temporales y
+espaciales.
 
 En cuanto a los ítems que tratan aspectos en los que no hay errores en
 ninguno de los vídeos, los estudiantes han valorado positivamente ambos
@@ -4472,7 +4604,7 @@ aquí a modo de propuesta y sin ánimo de exhaustividad:
   Volver a realizar el análisis completo con los mismos datos pero
   incorporando desde el principio el conocimiento del subtitulado
   correcto y siendo más crítico con la calidad de los datos, lo que
-  llevaría a eliminar alguno de los cuestiorarios.
+  llevaría a eliminar alguno de los cuestionarios.
 \item
   Analizar los datos de la edición del curso de 2023 para ver en qué
   medida los modelos y las conclusiones se mantienen o cambian.
