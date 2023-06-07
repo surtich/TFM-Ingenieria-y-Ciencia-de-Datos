@@ -20,20 +20,20 @@ La actividad fue voluntaria y sin influencia en la calificación final del alumn
   
 Se estima que los estudiantes hubieron empleado unas tres horas de formación en accesibilidad multimedia (una de ellas específicamente en subtitulado) antes de realizar la actividad.
 
-De acuerdo al **compromiso ético** del Canal los datos de los estudiantes se han suministrado anonimizados usando un identificador generado con \gls{sha}-512. Además, se han eliminado del estudio los datos de estudiantes que, a pesar de haber realizado la actividad de subtitulado, no dieron su consentimiento para que sus datos fueran utilizados en estudios científicos.
+De acuerdo al **compromiso ético** del Canal Fundación ONCE, los datos de los estudiantes se han suministrado anonimizados usando un identificador generado con \gls{sha}-512. Además, se han eliminado del estudio los datos de estudiantes que, a pesar de haber realizado la actividad de subtitulado, no dieron su consentimiento para que sus datos fueran utilizados en estudios científicos.
 
-La actividad consistió en ver dos vídeos idénticos de 43 segundos que solo se diferencian en la calidad del subtitulado. Los subtítulos del vídeo bien subtitulado se realizaron por un experto de FIAPAS (Confederación Española de Familias de Personas Sordas) siguiendo la norma UNE 153010 [ver @aenor2012]. El otro vídeo tenía un subtitulado similar pero se introdujeron pequeñas deficiencias, algunas de ellas inapreciables para alguien que carezca de conocimientos sobre accesibilidad. El orden de los vídeos fue aleatorio, de tal forma que una cohorte de alumnos vio primero el vídeo bien subtitulado y luego el mal subtitulado y la otra lo hizo al revés. Después de ver cada uno de los vídeos, los alumnos respondieron a una \gls{escala de likert} de 5 niveles y 18 ítems. Los 18 ítems de Likert responden a los criterios de la norma UNE 153010 [ver @aenor2012].
+La actividad consistió en ver dos vídeos idénticos de 43 segundos que solo se diferencian en la calidad del subtitulado. Los subtítulos del vídeo bien subtitulado se realizaron por un experto de FIAPAS (Confederación Española de Familias de Personas Sordas) siguiendo la norma UNE 153010 [ver @aenor2012]. El otro vídeo tenía un subtitulado similar pero se introdujeron pequeñas deficiencias, algunas de ellas inapreciables para alguien que carezca de conocimientos sobre accesibilidad. El orden de los vídeos fue aleatorio, de tal forma que una cohorte (grupo) de alumnos vio primero el vídeo bien subtitulado y luego el mal subtitulado y la otra lo hizo al revés. Después de ver cada uno de los vídeos, los alumnos respondieron a una \gls{escala de likert} de 5 niveles y 18 ítems. Los 18 ítems de Likert responden a los criterios de la norma UNE 153010 [ver @aenor2012].
 
 Los términos **escala de Likert** e ítem de Likert se prestan a menudo a confusión ya que se utilizan con distintos significados. En este trabajo se seguirá la convención más habitual [ver @uebersax2006] de denominar ítem de Likert a cada una de las preguntas de que consta un cuestionario o test, siendo la escala de Likert el conjunto de todos los ítems del cuestionario. Cada ítem se contestó marcando una opción de entre un conjunto ordenado de respuestas o niveles propuesto e idéntico para todos los ítems. Por ello, se debe evitar denominar escala a los niveles de un ítem.
 
-El diseño del experimento fue **\gls{triple ciego}**. Es decir, a los alumnos no se les informó de si estaban viendo el vídeo con mejor o con peor calidad de subtitulado; los directores del MOOC tampoco conocieron esta información, como tampoco se conocía en el momento de analizar los datos, ya que los vídeos tienen identificaciones ofuscadas con \gls{crc}-32b y no contienen ninguna indicación del tipo de subtitulado del vídeo^[En la respuesta a cada ítem, el alumno pudo añadir comentarios. Éstos fueron eliminados en la fase de análisis para que no filtren información referente al tipo de subtitulado que el alumno creyó estar contestando y solo se utilizaron en la fase de discusión ver @sec-discusion().]. El "ciego fue liberado" en la fase de elaboración de la discusión de este trabajo (ver @sec-discusion).
+El diseño del experimento fue **\gls{triple ciego}**. Es decir, a los alumnos no se les informó de si estaban viendo el vídeo con mejor o con peor calidad de subtitulado; los directores del MOOC tampoco conocieron esta información, como tampoco se conocía en el momento de analizar los datos, ya que los vídeos tienen identificaciones ofuscadas con \gls{crc}-32b y no contienen ninguna indicación del tipo de subtitulado del vídeo^[En la respuesta a cada ítem, el alumno pudo añadir comentarios. Éstos fueron eliminados en la fase de análisis para que no filtren información referente al tipo de subtitulado que el alumno creyó estar contestando y solo se utilizaron en la fase de discusión (ver @sec-discusion).]. El "ciego fue liberado" en la fase de elaboración de la discusión de este trabajo (ver @sec-discusion).
 
 ## Ficheros suministrados
 
 Se dispuso de los siguientes ficheros `csv`:
 
-* Fichero `grade` contiene el identificador de estudiante (ofuscado con \gls{sha}-512 para no conocer su identidad real) y el grupo al que pertenece (campo `cohort`) ofuscado con \gls{crc}-32b.
-* Los ficheros `test1` y `test2` son las repuestas a las escalas de Likert sobre la calidad del subtitulado del primer y del segundo vídeo realizado por cada grupo respectivamente.
+* Fichero `grade`: contiene el identificador de estudiante (ofuscado con \gls{sha}-512 para no conocer su identidad real) y el grupo al que pertenece (campo `cohort`) ofuscado con \gls{crc}-32b.
+* Ficheros `test1` y `test2`: son las repuestas a las escalas de Likert sobre la calidad del subtitulado del primer y del segundo vídeo realizado por cada grupo respectivamente.
 
 En la @tbl-likert-levels se muestran los 5 niveles de cada uno de los ítems de la \gls{escala de likert} utilizados para valorar el subtitulado
 ^[En la codificación original los valores asignados a cada respuesta eran diferentes: la opción "No sé / No contesto" se codificó con 5 y las demás opciones con una unidad menos que la mostrada. En este trabajo se ha hecho una rotación para asignar valores más usuales en la literatura científica sobre el tema.]. En la @tbl-likert-scale se muestran los 18 ítems de la escala de Likert que se propuso a los alumnos para que evaluaran cada uno de los vídeos.
@@ -78,7 +78,7 @@ En esta sección se describen las transformaciones realizadas con los ficheros s
 
 * Se eliminaron los datos de los estudiantes que, aun habiendo realizado la actividad, no dieron su consentimiento para participar en el estudio.
 
-* El valor del campo `cohort`, que se indica el valor anonimizado para el grupo, se sustituyó por una letra, $A$ o $B$. En el momento en que se realizó este proceso se desconocía qué vídeo vio primero cada cohorte.
+* El valor del campo `cohort`, que indica el valor anonimizado para el grupo, se sustituyó por una letra, $A$ o $B$. En el momento en que se realizó este proceso se desconocía qué vídeo vio primero cada cohorte.
 
 * Se leyeron los ficheros de test y se procesaron. Se utilizó el nombre del fichero (`test1` o `test2`) para saber de qué vídeo se estaba respondiendo el test
 ^[Se reitera que en el momento de realizar este proceso se desconocía si el vídeo es el correctamente subtitulado o el otro. La única información que se almacenó es si se estaba respondiendo al vídeo que se vio primero.].
@@ -104,7 +104,7 @@ En esta sección se describen las transformaciones realizadas con los ficheros s
 
 ## Variables utilizadas
 
-En la @tbl-variables se describen las características más relevantes de las principales variables que se utilizarán en el modelado y en el análisis estadístico. La variable dependiente o respuesta en todos los modelos es `Response` y contiene las respuestas a todos los ítems (de 0 a 5). La variable explicativa principal es el factor `Treat` y permite diferenciar los dos niveles de subtitulado ($A$ o $B$). Los factores `Period` y `Seq` sirven para evaluar la presencia de efectos periodo y secuencia respectivamente. El factor `Period` toma valores 1 ó 2 en función de si trata del primer o del segundo periodo. El factor `Seq` toma valores $AB$ o $BA$ dependiendo de si se vio primero el vídeo con subtitulado $A$ o con subtitulado $B$. En este trabajo los términos secuencia y grupo se usan indistintamente. Por último, los factores `Subject` e `Item` son variables explicativas que se tratan como efectos aleatorios en el modelado multinivel (ver @sec-multinivel-2) y corresponden respectivamente a los estudiantes y a los ítems de la escala de Likert.
+En la @tbl-variables se describen las características más relevantes de las principales variables que se utilizarán en el modelado y en el análisis estadístico. La variable dependiente o respuesta en los modelos ordinales `Response` y contiene las respuestas a todos los ítems (de 0 a 5). En los modelos logísticos se usa como variable respuesta `Leve` o `Improve`. La variable explicativa principal es el factor `Treat` y permite diferenciar los dos niveles de subtitulado ($A$ o $B$). Los factores `Period` y `Seq` sirven para evaluar la presencia de efectos periodo y secuencia respectivamente. El factor `Period` toma valores 1 ó 2 en función de si trata del primer o del segundo periodo. El factor `Seq` toma valores $AB$ o $BA$ dependiendo de si se vio primero el vídeo con subtitulado $A$ o con subtitulado $B$. En este trabajo los términos secuencia y grupo se usan indistintamente. Por último, los factores `Subject` e `Item` son variables explicativas que se tratan como efectos aleatorios en el modelado multinivel (ver @sec-multinivel-2) y corresponden respectivamente a los estudiantes y a los ítems de la escala de Likert.
 
 \footnotesize
 
@@ -144,18 +144,21 @@ tibble(
 
 ## `Dataframes` utilizados
 
-Se van a usar dos `dataframes`:
+Se van a usar tres `dataframes` construidos en el preprocesado:
 
 * `df_response` contiene las respuestas con valor de 1 a 5. Se han eliminado las de valor 0 ("No sé / No contesto"). Se utiliza cuando se traten las respuestas como ordinales y, por lo tanto, como ordenadas.
 * `df_all` incluye todas las respuestas de 0 a 5. Se utiliza cuando se traten las respuestas como categóricas y no ordenadas.
+* `df_improve`: Es un `dataframe` en el que la variable respuesta es `Improve` usado en el modelado logístico. Es una variable dicotómica que muestra si la respuesta es mejor en el subtitulado $A$ que en el $B$ (`Improve`= `Response` $A$ > `Response` $B$).
 
-La estructura de estos `dataframes` es la siguiente:
+La estructura de los dos primeros `dataframes` es la siguiente:
 
 ```{r}
 str(df_response %>% dplyr::select(Seq, Period, Treat, Subject, Item, Response, Level), strict.width = "cut")
 ``` 
 
 En la @tbl-df_response se muestran algunos ejemplos de datos. Concretamente se muestran las respuestas a tres ítems de dos estudiantes que vieron los vídeos en distinto orden.
+
+\clearpage
 
 ```{r}
 #| label: tbl-df_response

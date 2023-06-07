@@ -89,7 +89,7 @@ mTreat[1]
 ```
 \normalsize
 
-Que la pendiente (parámetro $TreatB$) es la diferencia entre las medias tratamientos:
+y que la pendiente (parámetro $TreatB$) es la diferencia entre las medias tratamientos:
 
 \scriptsize
 ```{r}
@@ -217,7 +217,7 @@ options(contrasts = rep("contr.sum", 2))
 ```
 \normalsize
 
-Y se vuelven a ajustar los modelos que ya usarán el `contraste suma`, se comprueba que ahora tienen los mismos coeficientes y el coeficiente $Seq1$
+Y se vuelven a ajustar los modelos (que ya usarán el `contraste suma`), se comprueba que ahora tienen los mismos coeficientes y el coeficiente $Seq1$
 del modelo que incorpora el efecto secuencia (@tbl-l4) es igual que el coeficiente $Treat1:Period1$ del modelo que incorpora la interacción entre tratamiento y periodo (@tbl-l5).
 Obsérvese que los nombres de los coeficientes han cambiado respecto al `contraste de tratamiento`. Esto sucede porque la interpretación de los coeficientes varía como se explica a continuación.
 
@@ -253,7 +253,7 @@ Ahora los niveles son 1 y -1
 ^[El nivel de referencia del factor tendrá valor 1 y el otro -1. Por ejemplo, en la variable `Treat`, $A$ tendrá +1 y $B$ tendrá valor -1.]
 en vez de 0 y 1 que se utilizan en el contraste de tratamiento. La interpretación es la siguiente:
 
-* El interceptor es la media de la media de cada uno de los niveles de factor. ¿Por qué?. El interceptor es el valor de la variable de respuesta cuando cuando todas las variables explicativas valen 0. Esto sucede en la media de la variable de respuesta ya que cero es el valor que está en la mitad de +1 y -1. Se comprueba que la media global coincide con el interceptor del modelo l4 (@tbl-l4):
+* El intercepto es la media de la media de cada uno de los niveles de factor. ¿Por qué?. El intercepto es el valor de la variable de respuesta cuando cuando todas las variables explicativas valen 0. Esto sucede en la media de la variable de respuesta ya que cero es el valor que está en la mitad de +1 y -1. Se comprueba que la media global coincide con el intercepto del modelo l4 (@tbl-l4):
 
 \scriptsize
 ```{r}

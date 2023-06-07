@@ -30,6 +30,10 @@ test_all_df <- test_all_df %>%
 
 # Modelado estadístico {#sec-modelado}
 
+Este capítulo comienza con un análisis exploratorio de los datos. Continúa
+proponiendo diversas formas de adecuar el modelado estadístico
+que se explicó en el Marco Teórico (ver @sec-arte) al diseño del experimento
+del subtitulado. La selección de los modelos se realiza en el @sec-resultados.
 
 ## Análisis Exploratorio {#sec-eda}
 
@@ -72,8 +76,6 @@ washout_periods_df <- test_all_df %>%
     pivot_wider(id_cols = c(User, Group), names_from = Test, values_from = c(Row, LastTry), names_prefix = "Test") %>%
     mutate(diff_sec = difftime(LastTry_Test02, LastTry_Test01, units = "secs")) %>%
     dplyr::select(Group, Row_Test01, Row_Test02, User, diff_sec)
-
-
 
 ```
 
@@ -152,6 +154,8 @@ distinct_response__summary_df %>%
 
 La tabla @tbl-distinct2 muestra los test de respuesta única y el valor de esa respuesta. Se aprecia que la mayoría de estos test tienen valor de respuesta 4, la secuencia mayoritaria es la $BA$ y el test el $A$. El estudiante 4 responde ambos test utilizando el mismo valor de respuesta en todos los ítems.
 
+\clearpage
+
 ```{r}
 #| label: tbl-distinct2
 #| tbl-cap: Test en los que todos los ítems se contestan con el mismo valor de respuesta.
@@ -222,7 +226,7 @@ Se constata que algunos test tienen valores que no parecen muy razonables. Por e
 
 ### Comparación de los subtítulos $A$ y $B$ entre grupos {#sec-eda-3}
 
-La @fig-diff presenta una forma de comparar los dos test realizados por los estudiantes. Para cada estudiante se comparó ítem a ítem sus dos test y se contabilizó la diferencia entre el número de ítems en los que la puntuación en el segundo vídeo fue superior y en los que lo fue inferior (las que no variaron de puntuación no se consideraron). En el eje $x$ se muestran las diferencias entre respuestas. Cantidades negativas indican que hay más respuestas en el segundo de los test que han empeorado respecto al primero de las que han mejorado. En el eje $y$ se representa el número de estudiantes para cada diferencia. Esta frecuencia se representa en negativo cuando la diferencia en el eje x sea negativa para facilitar la comparación^[En la comparación se han omitido aquellas respuestas en las que el estudiante contestó "No sé / No contesto" en el ítem correspondiente de uno de los test.]. Esto es una forma de evaluar si el estudiante valoró mejor o no el segundo vídeo que el primero. 
+La @fig-diff presenta una forma de comparar los dos test realizados por los estudiantes. Para cada estudiante se comparó ítem a ítem sus dos test y se contabilizó la diferencia entre el número de ítems en los que la puntuación en el segundo vídeo fue superior y en los que lo fue inferior (las que no variaron de puntuación no se consideraron). En el eje $x$ se muestran las diferencias entre respuestas. Cantidades negativas indican que hay más respuestas en el segundo de los test que han empeorado respecto al primero de las que han mejorado. En el eje $y$ se representa el número de estudiantes para cada diferencia. Esta frecuencia se representa en negativo cuando la diferencia en el eje x sea negativa para facilitar la comparación^[En la comparación se han omitido aquellas respuestas en las que el estudiante contestó "No sé / No contesto" en el ítem correspondiente de uno de los test.]. Esto es una forma de evaluar si el estudiante valoró mejor el segundo vídeo que el primero. 
 
 
 ```{r}
@@ -267,7 +271,7 @@ compare_test_df %>% ggplot(aes(x = Total, y = n, fill = Total >= 0)) +
     labs(y = "Cantidad de test (negativo cuando x sea negativo)", x = "Diferencias entre test de un estudiante (negativo cuando el segundo test es valorado peor)")
 ```
 
-Se aprecia que en el grupo $AB$ las diferencias tienden a ser negativas y en el $BA$ positivas. Esto estaría indicando que los estudiantes valoran mejor el subtitulado de nivel $A$ en ambas secuencias. Por ello es esperable que las respuestas de los estudiantes del grupo $AB$ hayan empeorado y que las diferencias sean negativas y que lo contrario haya sucedido con las del grupo $BA$. La diferencia más frecuente en el grupo $AB$ es `r -((compare_test_df %>% arrange(n)) %>% head(1))$Total` y en el grupo $BA$ este valor es `r ((compare_test_df %>% arrange(n)) %>% tail(1))$Total`.
+Se aprecia que en el grupo $AB$ las diferencias tienden a ser negativas y en el $BA$ positivas. Esto estaría indicando que los estudiantes valoran mejor el subtitulado de nivel $A$ en ambas secuencias. Por ello, es esperable que las respuestas de los estudiantes del grupo $AB$ hayan empeorado y que las diferencias sean negativas y que lo contrario haya sucedido con las del grupo $BA$. La diferencia más frecuente en el grupo $AB$ es `r -((compare_test_df %>% arrange(n)) %>% head(1))$Total` y en el grupo $BA$ este valor es `r ((compare_test_df %>% arrange(n)) %>% tail(1))$Total`.
 Resulta llamativo que haya estudiantes cuyas contestaciones estén tan alejadas de la tendencia de su grupo. En la @tbl-diff se muestran los tiempos que han transcurrido entre la realización de los test de aquellos estudiantes cuyas respuestas difieren de forma importante de su grupo. Son aquellos que aparecen en azul en la secuencia $AB$ y en rojo en la secuencia $BA$. Se observa que casi todos son tiempos entre actividades muy cortos. En cualquier caso y, como no son muchos, se ha decidido no eliminarlos y realizar el análisis con ellos.
 
 ```{r}
@@ -373,7 +377,7 @@ En la @tbl-resume se muestra la frecuencia absoluta del valor de respuesta para 
 
 * El tratamiento (subtitulado) con nivel $A$ presenta claramente mayores valores de respuesta que el $B$ como ya se había visto (ver @fig-diff).
 
-* En general los dos grupos muestran bastante acuerdo en el subtitulado en ambos niveles: En el nivel de tratamiento $A$ los dos grupos tienen una frecuencia relativa similar de respuestas positivas (valores 4 y 5). El grupo $AB$ tiene un `r get_freqs(Seq="AB", Treat="A", Response=c(4,5))` de respuestas positivas y el grupo $BA$ `r get_freqs(Seq="BA", Treat="A", Response=c(4,5))`. No obstante, el grupo $AB$ tiene más respuestas con valor 5 que el grupo $BA$ (`r get_freqs(Seq="AB", Treat="A", Response=5)` frente a `r get_freqs(Seq="BA", Treat="A", Response=5)`). La valoración es también similar entre grupos en el nivel de tratamiento $B$: el grupo $AB$ tiene `r get_freqs(Seq="AB", Treat="B", Response=c(4,5))` de respuestas positivas y `r get_freqs(Seq="BA", Treat="B", Response=c(4,5))` el grupo $BA$. Las valoraciones negativas (1, 2), la neutra (3) y la 'No sé / No contesto' (0) son también muy similares en ambos grupos.
+* En general los dos grupos ($AB$ y $BA$) muestran bastante acuerdo en el subtitulado en ambos niveles: En el nivel de tratamiento $A$ los dos grupos tienen una frecuencia relativa similar de respuestas positivas (valores 4 y 5). El grupo $AB$ tiene un `r get_freqs(Seq="AB", Treat="A", Response=c(4,5))` de respuestas positivas y el grupo $BA$ `r get_freqs(Seq="BA", Treat="A", Response=c(4,5))`. No obstante, el grupo $AB$ tiene más respuestas con valor 5 que el grupo $BA$ (`r get_freqs(Seq="AB", Treat="A", Response=5)` frente a `r get_freqs(Seq="BA", Treat="A", Response=5)`). La valoración es también similar entre grupos en el nivel de tratamiento $B$: el grupo $AB$ tiene `r get_freqs(Seq="AB", Treat="B", Response=c(4,5))` de respuestas positivas y `r get_freqs(Seq="BA", Treat="B", Response=c(4,5))` el grupo $BA$. Las valoraciones negativas (1, 2), la neutra (3) y la 'No sé / No contesto' (0) son también muy similares en ambos grupos.
 
 ```{r}
 #| label: fig-freqs
@@ -429,7 +433,7 @@ El gráfico @fig-levels muestra la frecuencia relativa por grupo y por test de l
  * Los niveles 4 y 5 se consideran positivos.
  * El nivel 0 ("No sé / No contesto") se excluye en este análisis.
 
-Se muestra en primer lugar el ítem 18 por ser una valoración global del subtitulado y que resume la opinión que sobre el mismo tiene el estudiante. Se vuelve a constatar que el subtitulado $A$ es mejor valorado por los estudiantes, pero ahora se confirma que en los 18 ítems ambos grupos tienen más puntuaciones positivas y menos negativas en el subtitulado $A$ que en el $B$. También se vuelve a constatar que los dos grupos valoran de forma muy similar los dos niveles de subtitulado en todos los ítems. En el nivel de subtitulado $A$ los ítems $Q15$, $Q16$ y $Q17$ obtienen relativamente peores valoraciones (consultar la @tbl-likert-scale para ver el texto de los ítems) y estas son similares en ambos subtitulados. Hay algunos ítems que son valoradas de forma positiva incluso en el nivel de subtitulado $B$ (por ejemplo $Q04$ o $Q13$). Por último, los ítems $Q05$ y $Q09$ (también la $Q14$ pero solo para el grupo $BA$) tienen una valoración muy negativa en el nivel de subtitulado $B$.
+Se muestra en primer lugar el ítem 18 por ser una valoración global del subtitulado y que resume la opinión que sobre el mismo tiene el estudiante. Se vuelve a constatar que el subtitulado $A$ es mejor valorado por los estudiantes, pero ahora se confirma que en los 18 ítems ambos grupos tienen más puntuaciones positivas y menos negativas en el subtitulado $A$ que en el $B$. También se vuelve a constatar que los dos grupos valoran de forma muy similar los dos niveles de subtitulado en todos los ítems. En el nivel de subtitulado $A$ los ítems $Q15$, $Q16$ y $Q17$ obtienen relativamente peores valoraciones (consultar la @tbl-likert-scale para ver el texto de los ítems) y estas son similares en ambos subtitulados. Hay algunos ítems que son valorados de forma muy positiva incluso en el nivel de subtitulado $B$ (por ejemplo $Q04$ o $Q13$). Por último, los ítems $Q05$ y $Q09$ (también la $Q14$ pero solo para el grupo $BA$) tienen una valoración muy negativa en el nivel de subtitulado $B$.
 
 ```{r}
 #| label: fig-levels
@@ -493,9 +497,12 @@ likert_df %>%
     plot()
 ```
 
-En la @tbl-no-response se muestran las contestaciones "No sé / No contesto" por subtitulado e ítem. Se observa que hay relativamente pocas contestaciones "No śe / No contesto" y que éstas se concentran en los ítems $Q14$, $Q15$, $Q16$ y $Q17$. 
+En la @tbl-no-response se muestran las contestaciones "No sé / No contesto" por subtitulado e ítem
+^[Solo se muestran los ítems que tienen respuestas "No sé / No contesto" en alguno de los subtitulados.]. Se observa que hay relativamente pocas contestaciones "No sé / No contesto" y que éstas se concentran en los ítems $Q14$, $Q15$, $Q16$ y $Q17$.
+El número de respuestas "No sé / No contesto" está razonablemente equilibrado entre
+subtitulados excepto en el ítem $Q10$. 
 
-\tiny
+\small
 ```{r}
 #| label: tbl-no-response
 #| tbl-cap: Contestaciones "No sé / No contesto" por nivel de subtitulado e ítem
@@ -505,6 +512,7 @@ df_all %>%
     count() %>%
     arrange(Treat, Item) %>%
     pivot_wider(id_cols = c(Treat), names_from = c(Item), values_from = c(n)) %>%
+    select_if(~ !all(. == 0)) %>%
     gt()
 ```
 \normalsize

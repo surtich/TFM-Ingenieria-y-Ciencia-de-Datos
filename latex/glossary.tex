@@ -67,10 +67,10 @@
     $$
         odds = \frac{P(evento)}{1- P(evento)}
     $$
-    El odds puede tomar valores en el rango cero a infinito.
-    Si el valor del odds es 1, significa que la probabilidad del evento y su complementario son iguales.
-    Si el odds es mayor que 1, indica que la probabilidad del evento es mayor que la probabilidad de su complementario.
-    Por el contrario, si el odds es menor que 1, significa que la probabilidad del evento es menor que
+    El $odds$ puede tomar valores en el rango cero a infinito.
+    Si el valor del $odds$ es 1, significa que la probabilidad del evento y su complementario son iguales.
+    Si el $odds$ es mayor que 1, indica que la probabilidad del evento es mayor que la probabilidad de su complementario.
+    Por el contrario, si el $odds$ es menor que 1, significa que la probabilidad del evento es menor que
     la probabilidad de su complementario.}
 }
 
@@ -128,7 +128,7 @@
         Diseño experimental en el cual los sujetos de estudio o las unidades experimentales se asignan de manera aleatoria
         a diferentes tratamientos o grupos de tratamiento.
         En este tipo de diseño, cada unidad experimental tiene la misma probabilidad de ser asignada a cualquier
-        tratamiento en particular. Se utiliza cuando no hay restricciones o consideraciones específicas sobre cómo
+        tratamiento en particular. Se utiliza cuando no hay restricciones o consideraciones específicas sobre como
         se deben asignar las unidades experimentales a los tratamientos.
         Se asume que las unidades experimentales son homogéneas y que no hay factores de confusión o
         variables ocultas que puedan influir en los resultados del experimento.
@@ -148,15 +148,15 @@
 {
     name=diseño cruzado,
     description={
-        Diseño experimental en el cual los sujetos reciben diferentes tratamientos en distintas varios momentos o periodos.
+        Diseño experimental en el cual los sujetos reciben diferentes tratamientos en varios momentos o periodos.
         Se realiza una asignación aleatoria para determinar el orden en el cual los tratamientos son recibidos.
         El diseño más simple de este tipo involucra dos grupos de sujetos,
-        uno de los cuales recibe cada uno de dos tratamientos, A y B, en el orden AB,
-        mientras que el otro los recibe en orden inverso, BA.
+        uno de los cuales recibe cada uno de dos tratamientos, $A$ y $B$, en el orden $AB$,
+        mientras que el otro los recibe en orden inverso, $BA$.
         Dado que la comparación de tratamientos se realiza "dentro del sujeto" en lugar de "entre sujetos", es probable
         que se necesiten menos sujetos para lograr un poder estadístico determinado.
         El análisis de estos diseños no es necesariamente sencillo debido a la posibilidad de efectos de secuencia y periodo.
-        Para minimizar este problema, a menudo se deja un período de lavado entre los periodos.
+        Para minimizar este problema, a menudo se deja un tiempo de lavado entre tratamientos.
     }
 }
 
@@ -260,7 +260,7 @@
     description={
         Función matemática utilizada en el contexto de la \gls{Regresión Logística} para transformar
         la probabilidad de un evento en un valor continuo que abarca todo el intervalo real.
-        La función logit se define como el logaritmo natural del odds de un evento:        
+        La función logit se define como el logaritmo natural del $odds$ de un evento:        
         $$
         logit(evento) = log (\frac{P(evento)}{1-P(evento)})
         $$
@@ -273,8 +273,8 @@
     name=función logística,
     description={
         También conocida como función sigmoide, es la función inversa de la \gls{función logit}.
-        es una función matemática que transforma una variable continua en un rango de valores entre 0 y 1.
-        Esta función se utiliza comúnmente en la \gls{Regresión Logística} para convertir los resultados de una combinación lineal
+        Es una función matemática que transforma una variable continua en un rango de valores entre 0 y 1.
+        Se utiliza comúnmente en la \gls{Regresión Logística} para convertir los resultados de una combinación lineal
         de variables predictoras en probabilidades:
         $$
         P(x) = \frac{1}{1 + e^{-x}}
@@ -303,8 +303,8 @@
 {
     name=GLMM,
     description={
-        Modelo estadístico también conocido como Modelo Multinivel o Modelo Jerárquico,
-        es una extensión de los modelos \gls{GLM} utilizado para analizar datos estructurados en diferentes niveles o niveles jerárquicos.
+        Modelo Lineal Generalizado Mixto. Modelo estadístico también conocido como Modelo Multinivel o Modelo Jerárquico.
+        Es una extensión de los modelos \gls{GLM} utilizado para analizar datos estructurados en diferentes niveles o niveles jerárquicos.
         Este tipo de modelo es útil cuando los datos tienen una estructura anidada, como estudiantes dentro de escuelas,
         pacientes dentro de hospitales o empleados dentro de empresas.
         En un modelo multinivel, se reconoce que los datos están agrupados en diferentes niveles

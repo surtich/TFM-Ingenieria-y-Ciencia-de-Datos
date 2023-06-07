@@ -71,7 +71,7 @@ Es importante asegurar que el entrenamiento ha convergido a su distribución a p
 es inferior a 1.1 y el de `ESS`
 ^[`ESS` (Efficient Sample Size) es una estimación del número de muestras independientes obtenidas en el muestreo $MCMC$.]
 superior a 400 en todos los parámetros, que son umbrales que no se deberían violar [ver @burkner2019]. En la
-@fig-trace se comprueba que las cadenas $MCMC$ de muestreo de la distribución a posteriori se mezclan correctamente y no se aprecia autocorrelación en ninguno de los parámetros. Por último, en la @fig-predictive se muestra una comparación entre los histogramas construidos con los datos de las respuestas a los test con los intervalos de credibilidad marginales de la función predictiva a posteriori del modelo. En la mayoría de los ítems, el muestreo se ajusta bastante bien al histograma de respuestas; aunque en algunos ítems, como el `Q16` o el `Q17`, se aprecian diferencias relevantes.
+@fig-trace se comprueba que las cadenas $MCMC$ de muestreo de la distribución a posteriori se mezclan correctamente y no se aprecia autocorrelación en ninguno de los parámetros. Por último, en la @fig-predictive se muestra una comparación entre los histogramas construidos con los datos de las respuestas a los test con los intervalos de credibilidad marginales de la función predictiva a posteriori del modelo. En la mayoría de los ítems el muestreo se ajusta bastante bien al histograma de respuestas; aunque en algunos ítems, como el `Q16` o el `Q17`, se aprecian diferencias relevantes.
  
 ```{r}
 #| label: fig-trace

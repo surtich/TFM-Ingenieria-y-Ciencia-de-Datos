@@ -8,7 +8,7 @@ En el @sec-modelado se realizó una exploración de los datos y se adecuaron los
 
 ### Comparación con *Odds Ratio* {#sec-or-3}
 
-El contraste de hipótesis del $log\ OR$ del nivel subtitulado y secuencia (ver @sec-or-2) no produce significación estadística en ningún nivel de respuesta, por lo que según esta prueba estadística el orden en el que se ven los vídeos no influiría en la respuesta de los estudiantes (ver @tbl-logor1).
+El contraste de hipótesis del $log\ OR$ del nivel subtitulado y secuencia (ver @sec-or-2) no produce significación estadística en ningún nivel de respuesta por lo que, según esta prueba estadística, el orden en el que se ven los vídeos no influye en la respuesta de los estudiantes (ver @tbl-logor1).
 
 ```{r}
 #| label: tbl-logor1
@@ -19,7 +19,7 @@ data.frame(summary(loddsratio(~ Treat + Seq + Response_l, data = df_all)) %>% un
     gt()
 ```
 
-Sin embargo, si se realiza este contraste entre subtítulos y periodos, se constata la existencia de un \gls{efecto periodo} de signo contrario para los ítems 4 y 5 (ver @tbl-logor2).  El test es significativo porque el ratio entre subtítulos de respuestas con valor 4 es diferente en cada periodo habiendo mayor cantidad de respuestas 4 en el segundo periodo que en el primero. Con las respuestas 5 ocurre lo contrario: la proporción es mayor en el primer periodo. La @fig-or2 permite una comprobación visual. Esto indica que los estudiantes de ambos grupos prestaron más atención o fueron más exigentes en el segundo visionado y valoraron relativamente peor el segundo vídeo. Que el efecto periodo sea de signo contrario en dos respuestas no debe sorprender en este diseño de experimento, ya que un test es un juego de suma cero: la valoraciones que se ganan o se pierden en un nivel de respuesta necesariamente se reparten entre el resto de niveles. En cualquier caso, el efecto periodo es cuantitativa y cualitativamente pequeño. Al afectar solo al intercambio de valoraciones entre los niveles 4 y 5 es simplemente una pequeña corrección en la valoración del subtitulado y cualitativamente es poco importante ya que las respuestas 4 y 5 son ambas valoraciones positivas. 
+Sin embargo, si se realiza este contraste entre subtítulos y periodos, se constata la existencia de un \gls{efecto periodo} de signo contrario para los ítems 4 y 5 (ver @tbl-logor2).  El test es significativo porque el ratio entre subtítulos de respuestas con valor 4 es diferente en cada periodo habiendo mayor cantidad de respuestas 4 en el segundo periodo que en el primero. Con las respuestas 5 ocurre lo contrario: la proporción es mayor en el primer periodo. La @fig-or2 permite una comprobación visual. Esto indica que los estudiantes de ambos grupos prestaron más atención o fueron más exigentes en el segundo visionado y valoraron relativamente peor el segundo vídeo. Que el efecto periodo sea de signo contrario en dos respuestas no debe sorprender en este diseño de experimento, ya que un test es un juego de suma cero: la valoraciones que se ganan o se pierden en un nivel de respuesta necesariamente se reparten entre el resto de niveles. En cualquier caso, el efecto periodo es cuantitativa y cualitativamente pequeño. Al afectar solo al intercambio de valoraciones entre los niveles 4 y 5, es simplemente una pequeña corrección en la valoración del subtitulado y cualitativamente es poco importante ya que las respuestas 4 y 5 son ambas valoraciones positivas. 
 
 ```{r}
 #| label: tbl-logor2
@@ -52,7 +52,7 @@ glmer_positive_treat_subject_question <- glmer(I(Level == "Positivo") ~ Treat + 
 
 ```
 
-En la @sec-logistica-2 se explicó una forma de crear una variable dicotómica que permite ajustar los datos a una Regresión Logística. Concretamente, se creó la variable respuesta $Improve$ que compara si las respuestas de cada estudiante a cada Ítem entre los niveles de subtitulado ($A$ frente $B$) han mejorado (valor 1) o se han mantenido o empeorado (valor 0). El modelo que se propone en esta sección no tiene en cuenta el \gls{efecto secuencia} ya que resultó no significativo en el análisis y, en cambio, se incluye como efectos aleatorios los estudiantes y los ítems sobre el intercepto ya que, como se ha explicado, son variables que no se pueden considerar independientes:
+En la @sec-logistica-2 se explicó una forma de crear una variable dicotómica que permite ajustar los datos a una Regresión Logística. Concretamente, se creó la variable respuesta $Improve$ que compara si las respuestas de cada estudiante a cada Ítem entre los niveles de subtitulado ($A$ frente $B$) han mejorado (valor 1) o se han mantenido o empeorado (valor 0). El modelo que se propone en esta sección no tiene en cuenta el \gls{efecto secuencia} porque resultó no significativo en el análisis y, en cambio, se incluye como efectos aleatorios los estudiantes y los ítems sobre el intercepto ya que, como se ha explicado, son variables que no se pueden considerar independientes:
 
 > Improve ~ 1 + (1 | Subject) + (1 | Item)
 
@@ -79,7 +79,8 @@ modelsummary(list("Improve (A>B)" = glmer_improve_subject_question, "Level == 'P
 ``` 
 
 
-Una forma alternativa de Regresión Logística es simplemente saber si cada respuesta es positiva (4 ó 5) frente a si es negativa o neutra (1, 2, ó 3). Como efecto fijo se incorpora el nivel de subtitulado y como efectos aleatorios el estudiante y el ítem ambos con intercepto y pendiente sobre el subtitulado variables por tener mejor valor de $AIC$. La fórmula del modelo es la siguiente:
+Una forma alternativa de Regresión Logística es simplemente saber si cada respuesta es positiva (4 ó 5) frente a si es negativa o neutra (1, 2, ó 3). Como efecto fijo se incorpora el nivel de subtitulado y como efectos aleatorios el estudiante y el ítem ambos con intercepto y pendiente sobre el subtitulado variables por tener mejor valor de $AIC$ que otros modelos probados
+^[Por problemas de convergencia, no se ha podido ajustar el modelo I(Level == "Positivo") ~ Treat*Period + (1 + Treat | Subject) + (1 + Treat | Item)]. La fórmula del modelo es la siguiente:
 
 \small
 
@@ -124,7 +125,7 @@ En la @sec-ordinal-2 se evaluaron distintas parametrizaciones de la Regresión O
 \normalsize
 
 
-Este modelo incluye como efectos fijos el nivel de subtitulado (`Treat`), el periodo (`Period`) y su interacción; y como efectos aleatorios el estudiante (`Subject`) y el ítem (`Item`). Ambos con interceptos y pendientes variables por nivel de subtítulo. Los coeficientes estimados son muy similares tanto en el paradigma frecuentista como en el bayesiano. En la @tbl-model-comp se comparan las estimaciones producidas por ambos modelos. Como ya se dijo, el efecto más importante es el debido al subtitulado (coeficiente frecuentista `r round(coef(clmm_treat.period.subject.item)[5], 3)`). En comparación con él, los efectos debido al periodo y la secuencia son muy pequeños (coeficientes `r round(coef(clmm_treat.period.subject.item)[6], 3)` y `r round(coef(clmm_treat.period.subject.item)[7], 3)` respectivamente). La proporción de la varianza explicada debida a efectos aleatorios ($ICC$) es `r round((performance::icc(clmm_treat.period.subject.item))$ICC_adjusted,3)`.
+Este modelo incluye como efectos fijos el nivel de subtitulado (`Treat`), el periodo (`Period`) y su interacción; y como efectos aleatorios el estudiante (`Subject`) y el ítem (`Item`). Ambos con interceptos y pendientes variables por nivel de subtítulo. Los coeficientes estimados son muy similares tanto en el paradigma frecuentista como en el bayesiano. En la @tbl-model-comp se comparan las estimaciones producidas por ambos modelos. Como ya se dijo, el efecto más importante es el debido al subtitulado (coeficiente frecuentista `r round(coef(clmm_treat.period.subject.item)[5], 3)`). En comparación con él, los efectos debido al periodo y la secuencia son muy pequeños y no significativos (coeficientes `r round(coef(clmm_treat.period.subject.item)[6], 3)` y `r round(coef(clmm_treat.period.subject.item)[7], 3)` respectivamente). La proporción de la varianza explicada debida a efectos aleatorios ($ICC$) es `r round((performance::icc(clmm_treat.period.subject.item))$ICC_adjusted,3)`.
 
 
 
@@ -204,13 +205,13 @@ En la @fig-pred-3 se representan 50 muestras de la esperanza de la distribución
 
 - En los ítems $Q15$, $Q16$ y $Q17$, la opción de respuesta más probable es 4. El modelo asigna una baja probabilidad de respuesta a la opción 1 y similares al resto. La probabilidad de la opción 5 decrece ligeramente entre subtitulado $A$ y $B$ y lo contrario ocurre con las opciones 2 y 3.
 
-- Los ítems $Q01$, $Q02$, $Q03$, $Q10$, $Q11$ y $Q12$ son similares a las anteriores. Particularmente en lo referente a que la respuesta más probable en el subtitulado $B$ es 4. En el subtitulado $A$ hay preferencia por 4 y 5. El nivel 5 cae acusadamente en el subtitulado $B$ y en este nivel aumenta ligeramente la probabilidad de respuesta 2 y 3.
+- Las muestras de los ítems $Q01$, $Q02$, $Q03$, $Q10$, $Q11$ y $Q12$ son similares a las anteriores. Particularmente en lo referente a que la respuesta más probable en el subtitulado $B$ es 4. En el subtitulado $A$ hay preferencia por 4 y 5. El nivel 5 cae acusadamente en el subtitulado $B$ y en este nivel aumenta ligeramente la probabilidad de respuesta 2 y 3.
 
-- Los ítems $Q06$, $Q07$, $Q14$ y $Q18$ no son muy diferentes de los anteriores. En general el modelo predice mayor probabilidad de respuesta para 5 en el subtitulado $A$ pero este valor es con alta probabilidad cercano a cero en el subtitulado $B$. En el subtitulado $B$ la probabilidad de respuesta 2, 3 ó 4 es similar.
+- Los ítems $Q06$, $Q07$, $Q14$ y $Q18$ tampoco son muy diferentes de los anteriores. En general el modelo predice mayor probabilidad de respuesta para 5 en el subtitulado $A$ pero este valor es con alta probabilidad cercano a cero en el subtitulado $B$. En el subtitulado $B$ la probabilidad de respuesta 2, 3 ó 4 es similar.
 
 - Los ítems $Q05$, $Q08$ y $Q09$ son los que más diferencias entre subtitulados presentan. La respuesta más probable en el subtitulado $A$ es 5 (en $Q08$ y en $Q09$ muy parecida a 4). Por contra, en el subtitulado $B$ las respuestas 4 y 5 tienden a cero, siendo la más probable la respuesta 2. En los ítems $Q05$ y $Q09$ la segunda respuesta más probable al subtitulado $B$ es 1 y 4 en el ítem $Q08$.
 
-En definitiva, nuestro modelo predice que los estudiantes están bastante de acuerdo en que en los ítems $Q05$ y $Q09$ hay una diferencia de calidad importante entre subtitulados. También están de acuerdo en que en los ítems $Q04$ y $Q13$ no hay apenas cambio entre los subtitulados. En los ítems $Q15$, $Q16$ y $Q17$ hay una gran confusión en ambos niveles de subtitulado predominando la respuesta 4 y siendo muy parecidas las respuestas en ambos niveles. En el resto la confusión se circunscribe al nivel de subtitulado $B$, ya que en el nivel $A$ las opciones 4 y 5 predominan.
+En definitiva, el modelo predice que los estudiantes están bastante de acuerdo en que en los ítems $Q05$ y $Q09$ hay una diferencia de calidad importante entre subtitulados. También están de acuerdo en que en los ítems $Q04$ y $Q13$ no hay apenas cambio entre los subtitulados. En los ítems $Q15$, $Q16$ y $Q17$ hay una gran confusión en ambos niveles de subtitulado predominando la respuesta 4 y siendo muy parecidas las respuestas en ambos niveles. En el resto la confusión se circunscribe al nivel de subtitulado $B$, ya que en el nivel $A$ las opciones 4 y 5 predominan.
 
 ![Muestreo de la función predictiva a posteriori por tratamiento e ítem.](images/bayes-preg.png){#fig-pred-3 width="120%"}
 

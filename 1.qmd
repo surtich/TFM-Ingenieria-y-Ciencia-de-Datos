@@ -6,21 +6,21 @@ Añadir subtítulos a los vídeos facilita que se superen estas dificultades ya 
 
 Las plataformas de compartición de vídeos, como YouTube, permiten en la actualidad la generación de subtítulos automáticos. Además, existen comunidades que se dedican a subtitular todo tipo de material multimedia. No obstante, frecuentemente los subtítulos producidos de esta manera no tienen en cuenta los criterios de calidad y de accesibilidad del subtitulado. Un subtitulado de calidad consta de información interpretativa e incluye descripción textual de efectos sonoros junto con otros elementos como la perfecta sincronización con el hablante, el tiempo de permanencia de subtítulo en la pantalla, el número de caracteres por línea y el número de líneas, la exactitud del diálogo, la ubicación, el tamaño, el contraste del subtítulo, etc. Así, @parton2016 realizó un estudio para determinar si los subtítulos automáticos generados por YouTube cumplen las necesidades de los estudiantes universitarios sordos. En el estudio se contabilizaron un total de 525 errores en 68 minutos de video (una tasa de 7.7 errores por minuto). Adecuar los subtítulos a las normas de accesibilidad es una tarea importante y compleja que requiere dedicación y conocimiento específico y va más allá de verificar si el vídeo tiene o no subtítulos.
 
-Este trabajo analiza datos que proceden de una actividad voluntaria sobre evaluación del subtitulado que se propuso a los estudiantes de la Sexta Edición de 2022 del **curso MOOC Materiales Digitales Accesibles** perteneciente al Canal Fundación ONCE en UNED Abierta. Este curso es una iniciativa del Real Patronato sobre Discapacidad en colaboración con la Fundación ONCE y la UNED. El curso está dirigido por los profesores Emilio Letón Molina y Alejandro Rodríguez Ascaso. El Canal Fundación ONCE se creó en 2016 y hasta marzo de 2023 casi de 23.000 estudiantes se han inscrito en alguno de sus cursos. En ellos se ofrece formación en conocimientos y habilidades necesarios para diseñar productos, entornos, sistemas y servicios desde una perspectiva de diseño universal:
+Este trabajo analiza datos que proceden de una actividad voluntaria sobre evaluación del subtitulado que se propuso a los estudiantes de la Sexta Edición de 2022 del **curso MOOC Materiales Digitales Accesibles** perteneciente al Canal Fundación ONCE en UNED Abierta. Este curso es una iniciativa del Real Patronato sobre Discapacidad en colaboración con la Fundación ONCE y la UNED. El curso está dirigido por los profesores Emilio Letón Molina y Alejandro Rodríguez Ascaso. El Canal Fundación ONCE se creó en 2016 y hasta marzo de 2023 casi 23.000 estudiantes se han inscrito en alguno de sus cursos. En ellos se ofrece formación en conocimientos y habilidades necesarios para diseñar productos, entornos, sistemas y servicios desde una perspectiva de diseño universal:
 
 * Reconocer las necesidades relacionadas con la accesibilidad.
 * Dar respuesta a estas necesidades, cada actor en la medida de sus posibilidades.
 * Integrar soluciones de accesibilidad universales y específicas utilizando la tecnología apropiada.
 
-La Fundación ONCE, el Real Patronato sobre Discapacidad y la UNED colaboran para producir recursos educativos abiertos, gratuitos, de calidad y accesibles para todas las personas. Los cursos del Canal se ofrecen a través de UNED Abierta, portal de formación en formato \gls{mooc} sobre una instancia personalizada de la plataforma OpenEdX. En la actualidad la oferta es de nueve cursos. En el año 2022 se matricularon 3.764 alumnos y aprobaron el 19,34% de los matriculados.
+La Fundación ONCE, el Real Patronato sobre Discapacidad y la UNED colaboran para producir recursos educativos abiertos, gratuitos, de calidad y accesibles para todas las personas. Los cursos del Canal se ofrecen a través de UNED \nobreak Abierta, portal de formación en formato \gls{mooc} sobre una instancia personalizada de la plataforma OpenEdX. En la actualidad la oferta es de nueve cursos. En el año 2022 se matricularon 3.764 alumnos y aprobaron el 19,34% de los matriculados.
 
-El curso de Materiales Digitales Accesibles se viene realizando desde 2017, se han matriculado en alguna de sus siete ediciones (hasta mayo de 2023) más de 8.000 alumnos y tiene un porcentaje medio de aprobados sobre matriculados del 14,6%. En la Sexta Edición se matricularon 1.261 alumnos y aprobaron 165 (13,08%). Estas cifras tan positivas son posibles gracias al buen funcionamiento del Canal que se concreta en la gran difusión de la existencia del MOOC, la actualización y ampliación constante de contenidos, una virtualización conforme a las WCAG [ver @WCAG21], un diseño instruccional claro y una monitorización de la calidad. Para asegurar la calidad de los materiales y del diseño de los cursos desde el Canal se realizan también labores de investigación en el campo de los materiales digitales y la accesibilidad, línea de investigación en la que se enmarca el trabajo presente.
+El curso de Materiales Digitales Accesibles se viene realizando desde 2017, se han matriculado en alguna de sus siete ediciones (hasta mayo de 2023) más de 8.000 alumnos y tiene un porcentaje medio de aprobados sobre matriculados del 14,6%. En la Sexta Edición se matricularon 1.261 alumnos y aprobaron 165 (13,08%). Estas cifras tan positivas son posibles gracias al buen funcionamiento del Canal que se concreta en la gran difusión de la existencia del MOOC, la actualización y ampliación constante de contenidos, una virtualización conforme a las WCAG [ver @WCAG21], un diseño instruccional claro y una monitorización de la calidad. Para asegurar la calidad de los materiales y del diseño de los cursos, desde el Canal se realizan también labores de investigación en el campo de los materiales digitales y la accesibilidad, línea de investigación en la que se enmarca el trabajo presente.
 
-El MOOC busca la formación de los estudiantes para generar materiales digitales accesibles y para que aprendan a evaluar la accesibilidad de los mismos. Este trabajo tiene como objetivo evaluar si los estudiantes son capaces de valorar adecuadamente la calidad del subtitulado. @jperez2 realizaron una experiencia similar y llegaron a la conclusión de que evaluadores novatos pueden identificar problemas de accesibilidad en vídeos. En la misma línea de investigación, la evaluación social propuesta por @kawanaka2008 se podría aplicar a los contenidos de vídeo en la Web. A pesar de esto, ambos estudios constataron que los evaluadores novatos pueden pasar por alto problemas sutiles de accesibilidad que requieren un conocimiento experto como, por ejemplo, la evaluación del contraste, ya que requieren herramientas adecuadas.
+El MOOC busca la formación de los estudiantes para generar materiales digitales accesibles y para que aprendan a evaluar la accesibilidad de los mismos. Este trabajo tiene como objetivo evaluar si los estudiantes son capaces de valorar adecuadamente la calidad del subtitulado. @jperez2 realizaron una experiencia similar y llegaron a la conclusión de que evaluadores novatos pueden identificar problemas de accesibilidad en vídeos. En la misma línea de investigación, la evaluación social propuesta por @kawanaka2008 se podría aplicar a los contenidos de vídeo en la Web. A pesar de esto, ambos estudios constataron que los evaluadores novatos pueden pasar por alto problemas sutiles de accesibilidad que requieren un conocimiento experto como, por ejemplo, la evaluación del contraste, ya que requieren herramientas de comprobación adecuadas.
 
 ## Objetivos {#sec-objetivos}
 
-A los estudiantes del MOOC se les propuso una actividad consistente en evaluar la calidad del subtitulado de dos vídeos, uno correctamente subtitulado y otro con errores (ver @@sec-desc).   
+A los estudiantes del MOOC se les propuso una actividad consistente en evaluar la calidad del subtitulado de dos vídeos, uno correctamente subtitulado y otro con errores (ver @sec-desc).   
 
 El objetivo de este trabajo es responder a la siguiente pregunta de investigación:
 
@@ -30,7 +30,7 @@ El objetivo de este trabajo es responder a la siguiente pregunta de investigaci�
 ¿Son los estudiantes de un curso de creación de materiales accesibles capaces de evaluar las diferencias en la calidad del subtitulado de un vídeo?
 :::
 
-Además también se responderá a los siguientes objetivos específicos:
+Además, también se responderá a los siguientes objetivos específicos:
 
 ::: {.callout-tip}
 ## Objetivo específico
@@ -41,22 +41,14 @@ Además también se responderá a los siguientes objetivos específicos:
 ::: {.callout-tip}
 ## Objetivo específico
 
-¿En qué pautas de subtitulado los estudiantes tienen mayor facilidad para reconocer diferencias entre un subtitulado correcto y otro incorrecto?
+¿En qué pautas de subtitulado los estudiantes tienen mayor dificultad para reconocer diferencias entre un subtitulado correcto y otro incorrecto?
 :::
-
-::: {.callout-tip}
-## Objetivo específico
-
-¿En qué pautas de subtitulado los estudiantes tienen más dificultades para reconocer diferencias entre un subtitulado correcto y otro incorrecto?
-:::
-
 
 ::: {.callout-tip}
 ## Objetivo específico
 
 ¿Son los estudiantes capaces de valorar de forma similar los aspectos del subtitulado que no cambian en los vídeos?
 :::
-
 
 ::: {.callout-tip}
 ## Objetivo específico
@@ -75,14 +67,14 @@ En el capítulo **Marco teórico y estado del arte** (ver @sec-arte) se enmarca 
 
 El capítulo **Materiales y métodos** (ver @sec-metodo) describe la actividad de subtitulado realizada por los alumnos, los ficheros de datos suministrados, la actividad de preprocesado realizada sobre los mismos y las variables que se utilizarán en el modelado estadístico.
 
-El capítulo **Modelado estadístico** (ver @sec-modelado) comienza con un Análisis Exploratorio de los datos, tras el que se describe cómo se han aplicado las técnicas de modelado presentadas en el Marco Teórico al diseño del experimento de la actividad de subtitulado. 
+El capítulo **Modelado estadístico** (ver @sec-modelado) comienza con un Análisis Exploratorio de los datos, tras el que se describe como se han aplicado las técnicas de modelado presentadas en el Marco Teórico al diseño del experimento de la actividad de subtitulado. 
 
 En el capítulo de **Resultados** (ver @sec-resultados) se presentan los resultados de los modelos seleccionados en el capítulo anterior.
 
 En el capítulo **Discusión** (ver @sec-discusion) se utilizan los resultados del capítulo anterior para responder a la pregunta de investigación y a los objetivos específicos y
 se plantean las limitaciones del estudio.
 
-Finalmente, el capítulo **Conclusión y trabajo futuro** (ver @sec-conclusion) se destina a recapitular los hallazgos encontrados aventurando posibles explicaciones a los mismos, plantea limitaciones del estudio y propone líneas de investigación futuras en base a los resultados obtenidos.
+Finalmente, el capítulo **Conclusión y trabajo futuro** (ver @sec-conclusion) se destina a recapitular los hallazgos encontrados aventurando posibles explicaciones a los mismos y propone líneas de investigación futuras en base a los resultados obtenidos.
 
 ## Convenciones usadas
 
@@ -90,8 +82,8 @@ En este trabajo se ha evitado en la medida de lo posible el uso de anglicismos t
 
 Los nombres de los modelos estadísticos se han escrito con la inicial de cada palabra en mayúscula. En los acrónimos generalmente se ha mantenido su correspondencia en inglés. Por ejemplo, Modelo Lineal Generalizado (GLM, Generalized Linear Model).
 
-Para los nombres de las variables utilizadas en el modelado estadístico se ha preferido el inglés. Por ejemplo, *Treat* para referirse a los subtitulados
-^[En investigación médica es habitual denominar tratamiento al medicamento en estudio. Por analogía en este trabajo se llamará tratamiento al subtitulado.]
+Para denominar las variables utilizadas en el modelado estadístico se ha preferido el inglés. Por ejemplo, *Treat* para referirse a los subtitulados
+^[En investigación médica es habitual denominar tratamiento al medicamento en estudio. Por analogía, en este trabajo se llamará tratamiento al subtitulado.]
  y *Response* para las respuestas a los ítems de las escalas de Likert. La justificación de esta decisión es evitar la mezcla de idiomas en los resúmenes de los modelos o en los ejemplos de código.
 
-El trabajo se ha elaborado siguiendo las pautas de reproducibilidad recomendadas para el desarrollo de una investigación científica. Se ha realizado con la herramienta de publicación científica Quarto que integra lenguajes como el lenguaje de programación \gls{R} o de publicación como Markdown o \LaTeX. Todas las figuras mostradas han sido generadas con R.
+El trabajo se ha elaborado siguiendo las pautas de reproducibilidad recomendadas en el desarrollo de una investigación científica. Se ha realizado con la herramienta de publicación científica Quarto que integra lenguajes como el lenguaje de programación \gls{R} y de publicación como Markdown o \LaTeX. Todas las figuras mostradas han sido generadas con R.
