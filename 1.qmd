@@ -35,13 +35,13 @@ Además, también se responderá a los siguientes objetivos específicos:
 ::: {.callout-tip}
 ## Objetivo específico
 
-¿En qué pautas de subtitulado los estudiantes tienen mayor facilidad para reconocer diferencias entre un subtitulado correcto y otro incorrecto?
+¿En qué pautas de subtitulado los estudiantes tienen mayor **facilidad** para reconocer diferencias entre un subtitulado correcto y otro incorrecto?
 :::
 
 ::: {.callout-tip}
 ## Objetivo específico
 
-¿En qué pautas de subtitulado los estudiantes tienen mayor dificultad para reconocer diferencias entre un subtitulado correcto y otro incorrecto?
+¿En qué pautas de subtitulado los estudiantes tienen mayor **dificultad** para reconocer diferencias entre un subtitulado correcto y otro incorrecto?
 :::
 
 ::: {.callout-tip}

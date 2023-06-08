@@ -1,0 +1,265 @@
+
+## Repuesta a la pregunta de investigación y a los objetivos específicos
+
+```{r}
+#| eval: true
+#| cache: false
+
+q.errors <- c("Q02", "Q05", "Q06", "Q07", "Q08", "Q09", "Q10", "Q11", "Q12", "Q14", "Q18")
+q.no.errors <- setdiff(levels(df_response$Item), q.errors)
+``` 
+
+```{r}
+#| eval: true
+#| cache: false
+
+improve_question <- 1 / (1 + exp(-ranef(glmer_improve_subject_question)$Item - fixef(glmer_improve_subject_question)))
+
+improve_question <- cbind(rownames(improve_question), improve_question)
+colnames(improve_question) <- c("Item", "Prob")
+
+df_improve2 <- inner_join(
+    df_improve %>% group_by(Item) %>% summarize(n = n(), improve = sum(Improve), Freq = improve / n) %>% select(Item, Freq),
+    improve_question
+)
+
+newdata <- df_response %>%
+    select(Treat, Item) %>%
+    distinct()
+
+Prob <- predict(glmer_positive_treat_subject_question,
+    type = "response", newdata = newdata,
+    re.form = ~ (1 + Treat | Item)
+)
+
+df_positive <- cbind(newdata, Prob)
+df_positive <- inner_join(
+    df_response %>%
+        group_by(Treat, Item) %>%
+        summarize(Freq = sum(Level == "Positivo") / n()) %>%
+        ungroup(),
+    df_positive
+)
+df_positive <- df_positive %>%
+    pivot_wider(id_cols = Item, names_from = Treat, values_from = c(Freq, Prob)) %>%
+    select(1, 2, 4, 3, 5)
+
+```
+
+```{r}
+options(contrasts = rep("contr.sum", 2))
+brm_treat.period.subject.item <- brm(
+    Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item),
+    data = df_response,
+    family = cumulative("logit"),
+    iter = 4000,
+    sample_prior = TRUE,
+    file = "../models/brm_treat.period.subject.item",
+    file_refit = "on_change"
+)
+set.seed(100)
+df_prob_data <- df_response %>%
+    dplyr::select(Subject, Period, Seq, Treat, Response, Item) %>%
+    arrange(Treat, Item, Response) %>%
+    group_by(Treat, Item, Response, .drop = F) %>%
+    summarize(n = n()) %>%
+    ungroup(Response) %>%
+    mutate(acc = cumsum(n), `Prob_data` = n / last(acc)) %>%
+    pivot_wider(
+        id_cols = c(Treat, Item),
+        names_from = c(Response),
+        values_from = c(Prob_data),
+        names_glue = "{Response}_{.value}"
+    )
+
+df_prob_model <- epred_draws(brm_treat.period.subject.item, expand.grid(list(Period = c(1, 2), Treat = levels(df_response$Treat), Item = levels(df_response$Item))), re_formula = ~ (1 + Treat | Item)) %>%
+    group_by(Treat, Item, .category) %>%
+    summarize(q10 = quantile(.epred, probs = 0.1), q50 = quantile(.epred, probs = 0.5), q90 = quantile(.epred, probs = 0.9)) %>%
+    ungroup() %>%
+    pivot_wider(
+        names_from = c(.category),
+        values_from = c(q10, q50, q90),
+        names_glue = "{.category}_{.value}"
+    )
+
+g3 <- inner_join(df_prob_data, df_prob_model) %>%
+    pivot_wider(id_cols = Item, names_from = Treat, values_from = starts_with(paste(1:5))) %>%
+    dplyr::select(Item, ends_with("A"), ends_with("B")) %>%
+    ungroup() %>%
+    gt() %>%
+    fmt_number(columns = contains("_q"), decimals = 1, scale = 100) %>%
+    fmt_percent(columns = contains("_data"), decimals = 1) %>%
+    cols_merge(columns = c("1_q10_A", "1_q50_A", "1_q90_A"), pattern = "{2}%") %>%
+    cols_merge(columns = c("2_q10_A", "2_q50_A", "2_q90_A"), pattern = "{2}%") %>%
+    cols_merge(columns = c("3_q10_A", "3_q50_A", "3_q90_A"), pattern = "{2}%") %>%
+    cols_merge(columns = c("4_q10_A", "4_q50_A", "4_q90_A"), pattern = "{2}%") %>%
+    cols_merge(columns = c("5_q10_A", "5_q50_A", "5_q90_A"), pattern = "{2}%") %>%
+    cols_merge(columns = c("1_q10_B", "1_q50_B", "1_q90_B"), pattern = "{2}%") %>%
+    cols_merge(columns = c("2_q10_B", "2_q50_B", "2_q90_B"), pattern = "{2}%") %>%
+    cols_merge(columns = c("3_q10_B", "3_q50_B", "3_q90_B"), pattern = "{2}%") %>%
+    cols_merge(columns = c("4_q10_B", "4_q50_B", "4_q90_B"), pattern = "{2}%") %>%
+    cols_merge(columns = c("5_q10_B", "5_q50_B", "5_q90_B"), pattern = "{2}%") %>%
+    cols_label_with(
+        fn = function(x) substr(x, 1, 1), columns = matches("Prob|[1-5]")
+    ) %>%
+    tab_spanner(label = "Data Frequencies", ends_with("Prob_data_A"), level = 1, id = "data_A") %>%
+    tab_spanner(label = "Model Prob.", ends_with("_q10_A"), level = 1, id = "model_A") %>%
+    tab_spanner(label = "Data Frequencies", ends_with("Prob_data_B"), level = 1, id = "data_B") %>%
+    tab_spanner(label = "Model Prob.", ends_with("_q10_B"), level = 1, id = "model_B") %>%
+    tab_spanner(label = "Treat A", ends_with("_A"), level = 2) %>%
+    tab_spanner(label = "Treat B", ends_with("_B"), level = 2) %>%
+    data_color(method = "numeric", columns = ends_with("A"), palette = "ggsci::blue_material", direction = "row") %>%
+    data_color(method = "numeric", columns = ends_with("B"), palette = "ggsci::orange_material", direction = "row") %>%
+    cols_align(align = "center", columns = everything()) %>%
+    tab_style(style = cell_borders(sides = c("top", "bottom"), color = "blue", weight = px(3.5), style = "dashed"), locations = cells_body(rows = Item %in% q.errors, columns = ends_with("_A"))) %>%
+    tab_style(
+        style = cell_borders(sides = c("right"), color = "blue", weight = px(3.5), style = "dashed"),
+        locations = cells_body(rows = Item %in% q.errors, columns = Item)
+    ) %>%
+    tab_style(
+        style = cell_borders(sides = c("top", "bottom"), color = "#ff4d00", weight = px(3.5), style = "dashed"),
+        locations = cells_body(rows = Item %in% q.errors, columns = ends_with("_B"))
+    ) %>%
+    tab_style(
+        style = cell_borders(sides = c("right"), color = "#ff4d00", weight = px(3.5), style = "dashed"),
+        locations = cells_body(rows = Item %in% q.errors, columns = "5_q10_B")
+    ) %>%
+    gt_highlight_rows(rows = Item %in% q.errors, columns = Item) %>%
+    tab_style(style = cell_text(weight = "bold"), cells_body(rows = Item %in% q.errors))
+```
+
+
+<style>
+  .fragment.blur {
+    filter: blur(5px);
+  }
+  .fragment.blur.current-fragment {
+    filter: none;
+  }
+  .fragment.custom {
+    font-size: 30px;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  .fragment.top {
+    margin: 0 auto;
+  }
+  .fragment.bottom {
+    margin: 0 auto;
+    align-self: end;
+  } 
+</style>
+
+:::: {.columns}
+::: {.column width="50%"}
+::: {.fragment .custom .blur fragment-index=1}
+::: {.callout-note}
+## Pregunta de investigación
+
+¿Son los estudiantes de un curso de creación de materiales accesibles capaces de evaluar las diferencias en la calidad del subtitulado de un vídeo?
+:::
+:::
+
+::: {.fragment .custom .blur fragment-index=2}
+::: {.callout-tip}
+## Objetivo específico
+
+¿En qué pautas de subtitulado los estudiantes tienen mayor **facilidad** para reconocer diferencias entre un subtitulado correcto y otro incorrecto?
+:::
+
+::: {.callout-tip}
+## Objetivo específico
+
+¿En qué pautas de subtitulado los estudiantes tienen mayor **dificultad** para reconocer diferencias entre un subtitulado correcto y otro incorrecto?
+:::
+:::
+
+::: {.fragment .custom .blur fragment-index=3}
+::: {.callout-tip}
+## Objetivo específico
+
+¿Son los estudiantes capaces de valorar de forma similar los aspectos del subtitulado que no cambian en los vídeos?
+:::
+:::
+::: {.fragment .custom .blur fragment-index=5}
+::: {.callout-tip}
+## Objetivo específico
+Efecto secuencia: ¿El orden en el que vieron los vídeos los estudiantes influye en la calidad del subtitulado percibida?
+:::
+
+::: {.callout-tip}
+## Objetivo específico
+Efecto periodo: ¿La evaluación del subtitulado del segundo vídeo visto está influida por haber evaluado un vídeo previamente?
+:::
+:::
+
+
+
+:::
+
+::: {.column width="50%"}
+::: {.r-stack}
+
+::: {.fragment .fade-in-then-out .top fragment-index=1}
+* El subtitulado $A$ ha sido mejor evaluado por los estudiantes.
+* El modelo con variable respuesta `Improve` predice que la probabilidad de que se otorgue una mayor puntuación en $A$ que en $B$ es `r paste(round(100/(1+exp(-fixef(glmer_improve_subject_question)[[1]])),2),"%", sep="")`.
+:::
+::: {.fragment .fade-in-then-out fragment-index=2}
+```{r}
+inner_join(df_improve2, df_positive) %>% filter(Item %in% q.errors) %>%
+    gt() %>%
+    tab_spanner(label = "Improve Model", columns = c(Freq, Prob), level = 2) %>%
+    tab_spanner(label = "Positive Model", columns = c(Freq_A, Prob_A, Freq_B, Prob_B), level = 2) %>%
+    tab_spanner(label = "Treat A", ends_with("_A"), level = 1) %>%
+    tab_spanner(label = "Treat B", ends_with("_B"), level = 1) %>%
+    tab_row_group(label = "Evaluated Items", rows = Item %in% q.errors) %>%
+    fmt_percent(decimals = 1) %>%
+    data_color(
+        rows = Item %in% q.errors, columns = Prob, palette = "ggsci::grey_material", target_columns = c(Freq, Prob), reverse = T, domain = c(0.4, 1)
+    ) %>%
+    data_color(
+        rows = Item %in% q.errors, columns = Prob_B, palette = "ggsci::grey_material", target_columns = c(Freq_B, Prob_B)
+    ) %>%
+    cols_label(Freq_A = "Freq", Prob_A = "Prob", Freq_B = "Freq", Prob_B = "Prob") %>%
+    tab_options(table.font.size = 35)
+```
+:::
+
+::: {.fragment .fade-in-then-out fragment-index=3}
+```{r}
+inner_join(df_improve2, df_positive) %>% filter(Item %in% q.no.errors) %>%
+    gt() %>%
+        tab_spanner(label = "Improve Model", columns = c(Freq, Prob), level = 2) %>%
+        tab_spanner(label = "Positive Model", columns = c(Freq_A, Prob_A, Freq_B, Prob_B), level = 2) %>%
+        tab_spanner(label = "Treat A", ends_with("_A"), level = 1) %>%
+        tab_spanner(label = "Treat B", ends_with("_B"), level = 1) %>%
+        tab_row_group(label = "Control Items", row = Item %in% q.no.errors) %>%
+        fmt_percent(decimals = 1) %>%
+        data_color(
+            rows = Item %in% q.no.errors, columns = Prob, palette = "ggsci::grey_material", target_columns = c(Freq, Prob), domain = c(0, 1)
+        ) %>%
+        data_color(
+            rows = Item %in% q.no.errors, columns = Prob_B, palette = "ggsci::grey_material", target_columns = c(Freq_B, Prob_B), reverse = T, , domain = c(-0.5, 1)
+        ) %>%
+        cols_label(Freq_A = "Freq", Prob_A = "Prob", Freq_B = "Freq", Prob_B = "Prob") %>%
+        tab_options(table.font.size = 35)
+```
+:::
+
+
+::: {.fragment .fade-in-then-out .bottom fragment-index=4}
+```{r}
+g3
+```
+:::
+
+::: {.fragment .fade-in-then-out .bottom fragment-index=5}
+* En el modelo ordinal `Response ~ Treat * Period` se constató que tanto el periodo como la secuencia son significativos.
+* Estos efectos son mucho menos importantes que los debidos al subtitulado.
+* Al introducir como variables explicativas el estudiante y el ítem tanto el periodo como la secuencia pasan a ser no significativos. 
+:::
+
+
+:::
+:::
+:::

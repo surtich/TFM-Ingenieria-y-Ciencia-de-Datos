@@ -238,6 +238,8 @@ clm_sum_treat.period <-
         data = df_response, link = "logit"
     )
 
+saveRDS(clm_sum_treat.period, file = "models/clm_sum_treat.period.rds")
+
 clm_sum_treat_period_seq <-
     clm(
         Response ~ Treat + Period + Seq,

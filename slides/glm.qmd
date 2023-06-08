@@ -1,0 +1,25 @@
+## GLM
+::: {.incremental}
+* No se debe confundir un Modelo Lineal Generalizado con un Modelo Lineal General.
+* Se usan cuando la variable respuesta no es normal.
+* Tiene tres componentes:
+  * Un componente aleatorio que será una distribución de probabilidad de la
+familia exponencial que sigue la variable respuesta Y.
+  * Un componente lineal de predictores:
+$$
+\alpha+\beta_1x_1+...+\beta_px_p
+$$
+
+
+  * Una función de enlace $g$ que relaciona $\mu=E(Y)$ con los predictores, de tal forma que:
+$$
+g(\mu)=\alpha+\beta_1x_1+...+\beta_px_p
+$$
+
+* La estimación de coeficientes en *GLM* se realiza maximizando la función de verosimilitud (*Maximum Likelihood Estimation*, *MLE*).
+* La Regresión Logística es un caso particular de $GLM$ en la que $Y$ es Bernoulli:  
+$$
+logit(Y=1) = log \left[\frac{P(Y=1)}{1-P(Y=1)} \right] = \alpha+\beta_1x_1+...+\beta_px_p
+$$
+
+:::

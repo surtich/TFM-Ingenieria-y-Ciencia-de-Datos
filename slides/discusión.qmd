@@ -1,0 +1,93 @@
+
+# Discusión
+
+## Correspondencia entre los ítems y los errores del subtitulado del vídeo B
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-x1hj{border-color:inherit;font-size:22px;text-align:left;vertical-align:top}
+.tg .tg-spag{border-color:inherit;font-size:22px;font-weight:bold;text-align:left;vertical-align:top}
+.tg .tg-9d8n{border-color:inherit;font-size:22px;text-align:center;vertical-align:top}
+</style>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-spag">Error nº</th>
+    <th class="tg-spag">Subtítulo incorrecto</th>
+    <th class="tg-spag">Requisito que se incumple</th>
+    <th class="tg-spag">Ítems</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-9d8n">1<br></td>
+    <td class="tg-x1hj">Hola este video nos ba a servir</td>
+    <td class="tg-x1hj">Los subtítulos deben ser correctos<br>ortográfica y gramaticalmente.</td>
+    <td class="tg-x1hj">Q05<br></td>
+  </tr>
+  <tr>
+    <td class="tg-9d8n">2</td>
+    <td class="tg-x1hj">para hacer una prácti<br>ca de subtitulado</td>
+    <td class="tg-x1hj">No se deben separar en dos líneas<br>las sílabas de la misma palabra.</td>
+    <td class="tg-x1hj">Q14</td>
+  </tr>
+  <tr>
+    <td class="tg-9d8n">3</td>
+    <td class="tg-x1hj">Podemos pensar en personas <br>que no entienden bien <br>un determinado idioma<br><br></td>
+    <td class="tg-x1hj">Los subtítulos deben ocupar<br>dos líneas y, excepcionalmente tres.</td>
+    <td class="tg-x1hj">Q02</td>
+  </tr>
+  <tr>
+    <td class="tg-9d8n">4</td>
+    <td class="tg-x1hj">Muchos ejemplos que <br>harán que estos subtítulos</td>
+    <td class="tg-x1hj">Las conjunciones y los nexos<br>deben ir en la línea inferior.</td>
+    <td class="tg-x1hj">Q14</td>
+  </tr>
+  <tr>
+    <td class="tg-9d8n">5</td>
+    <td class="tg-x1hj">El texto del subtítulo es válido,<br>pero su entrada debe producirse antes para que<br>coincida con la información sonora.</td>
+    <td class="tg-x1hj">Las entradas y salidas de los subtítulos<br>deben coincidir con el movimiento labial,<br>con la locución y/o con la información sonora.</td>
+    <td class="tg-x1hj">Q10, Q09</td>
+  </tr>
+  <tr>
+    <td class="tg-9d8n">6</td>
+    <td class="tg-x1hj">Perdonad</td>
+    <td class="tg-x1hj">Deben describirse los efectos sonoros<br>que sean relevantes para la comprensión del vídeo.</td>
+    <td class="tg-x1hj">Q09<br></td>
+  </tr>
+  <tr>
+    <td class="tg-9d8n">7</td>
+    <td class="tg-x1hj">¿Dígame? (EMI) Hola, soy Emilio.<br></td>
+    <td class="tg-x1hj">Para cada participante en el diálogo<br>debe comenzarse una nueva línea.</td>
+    <td class="tg-x1hj">Q08<br></td>
+  </tr>
+  <tr>
+    <td class="tg-9d8n">8</td>
+    <td class="tg-x1hj">(ALE) Emilio, muy buenas. Mira, precisamente estoy grabando el vídeo<br></td>
+    <td class="tg-x1hj">El máximo número de caracteres<br>por línea es 37.</td>
+    <td class="tg-x1hj">Q12<br></td>
+  </tr>
+  <tr>
+    <td class="tg-9d8n">9</td>
+    <td class="tg-x1hj">El texto del subtítulo es válido,<br>pero su duración debe ser de al menos 3 segundos.</td>
+    <td class="tg-x1hj">La velocidad de exposición del subtítulo<br>debe permitir leerlo sin dificultad.<br>La velocidad recomendada para los subtítulos<br>es de unos 12 caracteres por segundo.</td>
+    <td class="tg-x1hj">Q11</td>
+  </tr>
+  <tr>
+    <td class="tg-9d8n">10</td>
+    <td class="tg-x1hj">Luego voy a verte al despacho ¿Ok?<br></td>
+    <td class="tg-x1hj">Los subtítulos deben ser literales.</td>
+    <td class="tg-x1hj">Q06</td>
+  </tr>
+  <tr>
+    <td class="tg-9d8n">11</td>
+    <td class="tg-x1hj">Muy bien, estupendo. Aquí estaré. <br>Hasta luego</td>
+    <td class="tg-x1hj">Los diferentes personajes que intervienen en la<br>obra audiovisual deben estar claramente identificados.</td>
+    <td class="tg-x1hj"><br>Q07</td>
+  </tr>
+</tbody>
+</table>

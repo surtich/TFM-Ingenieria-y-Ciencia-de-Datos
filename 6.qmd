@@ -23,7 +23,7 @@ improve_question <- 1 / (1 + exp(-ranef(glmer_improve_subject_question)$Item - f
 improve_question <- cbind(rownames(improve_question), improve_question)
 colnames(improve_question) <- c("Item", "Prob")
 
-df_improve <- inner_join(
+df_improve2 <- inner_join(
     df_improve %>% group_by(Item) %>% summarize(n = n(), improve = sum(Improve), Freq = improve / n) %>% select(Item, Freq),
     improve_question
 )
@@ -49,7 +49,7 @@ df_positive <- df_positive %>%
     pivot_wider(id_cols = Item, names_from = Treat, values_from = c(Freq, Prob)) %>%
     select(1, 2, 4, 3, 5)
 
-g <- inner_join(df_improve, df_positive) %>%
+g <- inner_join(df_improve2, df_positive) %>%
     gt() %>%
     tab_spanner(label = "Improve Model", columns = c(Freq, Prob), level = 2) %>%
     tab_spanner(label = "Positive Model", columns = c(Freq_A, Prob_A, Freq_B, Prob_B), level = 2) %>%
@@ -364,7 +364,7 @@ Efecto periodo: ¿La evaluación del subtitulado del segundo vídeo visto está 
 
 Estos objetivos se responden de forma conjunta por estar ambos efectos relacionados ya que, como se ha explicado, el efecto secuencia en un estudio cruzado $AB/BA$ es la interacción entre el tratamiento y el periodo. 
 
-En el modelo ordinal `Response ~ Treat * Period` (ver @sec-response-treat.period) se constató que tanto el periodo como la secuencia son significativos. No obstante, estos efectos son mucho menos importantes que los debidos al subtitulado. Al introducir como variables explicativas el estudiante y el ítem (ver @sec-multinivel-2) tanto el efecto como la secuencia pasan a ser no significativos. En la @sec-or-3 se comprobó que estos efectos se producen porque la proporción de respuestas de nivel 5 en el subtitulado $A$ sobre el $B$ es superior en el primer periodo que en el segundo y lo contrario ocurre con las de nivel 4. En el  modelado logístico ni la secuencia ni el periodo resultaron significativos. Se concluye que ni el efecto secuencia ni el efecto periodo tienen significación estadística.
+En el modelo ordinal `Response ~ Treat * Period` (ver @sec-response-treat.period) se constató que tanto el periodo como la secuencia son significativos. No obstante, estos efectos son mucho menos importantes que los debidos al subtitulado. Al introducir como variables explicativas el estudiante y el ítem (ver @sec-multinivel-2) tanto el periodo como la secuencia pasan a ser no significativos. En la @sec-or-3 se comprobó que estos efectos se producen porque la proporción de respuestas de nivel 5 en el subtitulado $A$ sobre el $B$ es superior en el primer periodo que en el segundo y lo contrario ocurre con las de nivel 4. Se concluye que ni el efecto secuencia ni el efecto periodo son importantes al no tener significación estadística.
 
 ## Limitaciones del estudio
 

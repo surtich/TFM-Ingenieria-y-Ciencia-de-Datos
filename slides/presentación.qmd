@@ -26,6 +26,7 @@ format:
 lang: es
 execute:
   echo: false
+fig-cap-location: top
 ---
 
 ```{r}
@@ -53,7 +54,7 @@ rotating_text <- function(x, align = "center") {
 ::: {.callout-note}
 ## Pregunta de investigación
 
-¿Son los estudiantes de un curso de creación de materiales accesibles capaces de evalaur las diferencias en la calidad del subtitulado de un vídeo?
+¿Son los estudiantes de un curso de creación de materiales accesibles capaces de evaluar las diferencias en la calidad del subtitulado de un vídeo?
 :::
 
 
@@ -61,10 +62,33 @@ rotating_text <- function(x, align = "center") {
 ::: {.fragment .fade-in}
 
 ::: {.callout-tip}
-## Objetivos específicos
+## Objetivo específico
 
-¿Qué aspectos de la calidad del subtitulado son más fácilmente reconocibles por los estudiantes y en cuáles existe mayor dificultad?
+¿En qué pautas de subtitulado los estudiantes tienen mayor **facilidad** para reconocer diferencias entre un subtitulado correcto y otro incorrecto?
 :::
+
+::: {.callout-tip}
+## Objetivo específico
+
+¿En qué pautas de subtitulado los estudiantes tienen mayor **dificultad** para reconocer diferencias entre un subtitulado correcto y otro incorrecto?
+:::
+
+::: {.callout-tip}
+## Objetivo específico
+
+¿Son los estudiantes capaces de valorar de forma similar los aspectos del subtitulado que no cambian en los vídeos?
+:::
+
+::: {.callout-tip}
+## Objetivo específico
+Efecto secuencia: ¿El orden en el que vieron los vídeos los estudiantes influye en la calidad del subtitulado percibida?
+:::
+
+::: {.callout-tip}
+## Objetivo específico
+Efecto periodo: ¿La evaluación del subtitulado del segundo vídeo visto está influida por haber evaluado un vídeo previamente?
+:::
+
 :::
 
 ## Descripción de la experiencia
@@ -230,6 +254,8 @@ response.tbl
 # Marco teórico y estado del arte
 
 
+{{< include glm.qmd >}}
+
 {{< include ordinal.qmd >}}
 {{< include glmm.qmd >}}
 {{< include contrast.qmd >}}
@@ -336,6 +362,19 @@ Estudiantes participantes en el estudio.
 ::::::
 ::::::
 
+## Ejemplo de `dataset df_response`
+
+
+```{r}
+df_response %>%
+    dplyr::select(Seq, Period, Treat, Subject, Item, Response) %>%
+    filter(Subject %in% c(33, 35) & Item %in% c("Q18", "Q01", "Q02")) %>%
+    arrange(desc(Subject), Item, Period) %>%
+    gt() %>%
+    tab_options(table.font.size = 35)
+``` 
+
+
 ## Herramientas
 
 * ![Quarto](images/quarto.png){width=2in}: herramienta de publicación de documentación científica en <i class="fa-brands fa-r-project"></i>, $\mathrm{\LaTeX}$, <i class="fa-brands fa-markdown"></i> Markdown, ...
@@ -353,5 +392,14 @@ Estudiantes participantes en el estudio.
 
 {{< include eda.qmd >}}
 
-{{< include modelado.qmd >}}
+{{< include modelado_logístico.qmd >}}
 
+{{< include modelado_ordinal.qmd >}}
+
+
+{{< include discusión.qmd >}}
+
+{{< include discusión2.qmd >}}
+
+
+{{< include conclusión.qmd >}}

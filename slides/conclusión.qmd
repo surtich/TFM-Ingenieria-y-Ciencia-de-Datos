@@ -1,0 +1,46 @@
+
+# Conclusiones
+
+## Conclusiones
+
+::: {.incremental}
+* El nivel de subtitulado es la variable que mejor explica la respuesta a cada ítem.
+* Los efectos secuencia y periodo son comparativamente de poca importancia.
+* Los estudiantes han identificado errores de subtitulado de los ítems:
+  * `r question_labels[6]` ($Q05$).
+  * `r question_labels[7]` ($Q06$).
+  * `r question_labels[8]` ($Q07$).
+  * `r question_labels[9]` ($Q08$).
+  * `r question_labels[10]` ($Q09$).
+  * `r question_labels[15]` ($Q14$).
+:::
+
+
+## Conclusiones
+
+::: {.incremental}
+* Sin embargo, han tenido problemas en la identificación de errores de subtitulado en:
+  * Aspectos temporales:
+    * `r question_labels[11]` ($Q10$).
+    * `r question_labels[12]` ($Q12$).
+  * Aspectos espaciales:
+    * `r question_labels[3]` ($Q02$).
+    * `r question_labels[13]` ($Q12$).
+:::
+
+
+## Conclusiones
+
+::: {.incremental}
+* Ítems de control (idénticos en ambos vídeos):
+  * Bien valorados por los estudiantes:
+    * `r question_labels[5]` ($Q04$).
+    * `r question_labels[14]` ($Q13$).
+  * Mal valorados en $B$:
+    * `r question_labels[2]` ($Q01$).
+    * `r question_labels[4]` ($Q03$).
+  * No presentes en los vídeos, no bien valorados en $A$, peor en $B$:
+    * `r question_labels[16]` ($Q15$).
+    * `r question_labels[17]` ($Q16$).
+    * `r question_labels[18]` ($Q17$).
+:::

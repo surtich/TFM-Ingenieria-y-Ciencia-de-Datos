@@ -1,0 +1,72 @@
+## Regresión Logística
+
+::: {.fragment .fade-in}
+* La Regresión Logística requiere una variable respuesta dicotómica.
+:::
+
+::: {.fragment .fade-in}
+* La variable `Response` es ordinal.
+:::
+
+::: {.fragment .fade-in}
+* Se puede dicotomizar:
+:::
+
+:::: {.columns}
+::: {.column width="50%"}
+::: {.fragment .fade-in}
+
+¿Es mejor la respuesta en subtitulado $A$ que en $B$?
+
+```{r}
+#| tbl-cap: Muestra de df_improve
+df_improve %>%
+    filter(Subject == 35) %>%
+    head(5) %>%
+    gt() %>%
+    tab_options(table.font.size = 25)
+```
+:::
+:::
+
+::: {.column width="50%"}
+::: {.fragment .fade-in}
+
+
+¿Es la respuesta positiva?
+
+```{r}
+#| tbl-cap: Muestra de df_response con variable Level
+df_response %>%
+    select(Subject, Item, Seq, Treat, Response, Level) %>%
+    arrange(Item) %>%
+    filter(Subject == 38) %>%
+    head(6) %>%
+    gt() %>%
+    tab_options(table.font.size = 25)
+```
+
+:::
+:::
+:::
+
+## Regresión Logística
+
+```{r}
+#| eval: false
+#| echo: true
+options(contrasts = rep("contr.sum", 2))
+glmer_improve_subject_question <- glmer(Improve ~ 1 + (1 | Subject) + (1 | Item), family = "binomial", data = df_improve)
+
+glmer_positive_treat_subject_question <- glmer(
+    I(Level == "Positivo") ~ Treat + (1 + Treat | Subject) + (1 + Treat | Item), family = "binomial", df_response
+)
+```
+
+
+```{r}
+glmer_improve_subject_question = readRDS("../models/glmer_improve_subject_question.rds")
+glmer_positive_treat_subject_question = readRDS("../models/glmer_positive_treat_subject_question.rds")
+modelsummary(list("Improve (A>B)" = glmer_improve_subject_question, "Level == 'Positivo'" = glmer_positive_treat_subject_question), estimate = "{estimate}{stars}", metrics = c("AIC", "BIC", "Log.Lik."), gof_omit = "RMSE|R2|ICC", output = "gt") %>%
+    tab_options(table.font.size = 35)
+```

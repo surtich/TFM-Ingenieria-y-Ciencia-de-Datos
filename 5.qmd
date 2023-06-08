@@ -47,9 +47,10 @@ fourfold(xtabs(~ Treat + Period + Response, data = df_all))
 ```{r}
 options(contrasts = rep("contr.sum", 2))
 glmer_improve_subject_question <- glmer(Improve ~ 1 + (1 | Subject) + (1 | Item), family = "binomial", data = df_improve)
+saveRDS(glmer_improve_subject_question, file = "models/glmer_improve_subject_question.rds")
 
 glmer_positive_treat_subject_question <- glmer(I(Level == "Positivo") ~ Treat + (1 + Treat | Subject) + (1 + Treat | Item), family = "binomial", df_response)
-
+saveRDS(glmer_positive_treat_subject_question, file = "models/glmer_positive_treat_subject_question.rds")
 ```
 
 En la @sec-logistica-2 se explicó una forma de crear una variable dicotómica que permite ajustar los datos a una Regresión Logística. Concretamente, se creó la variable respuesta $Improve$ que compara si las respuestas de cada estudiante a cada Ítem entre los niveles de subtitulado ($A$ frente $B$) han mejorado (valor 1) o se han mantenido o empeorado (valor 0). El modelo que se propone en esta sección no tiene en cuenta el \gls{efecto secuencia} porque resultó no significativo en el análisis y, en cambio, se incluye como efectos aleatorios los estudiantes y los ítems sobre el intercepto ya que, como se ha explicado, son variables que no se pueden considerar independientes:
@@ -72,10 +73,11 @@ glmer_improve_subject_question <- glmer(
 El resumen del modelo ajustado con la función `glmer` del paquete `lme4` [ver @lme4] produce los resultados de la columna izquierda de la @tbl-selected-logistic. El intercepto del modelo ajustado es `r round(fixef(glmer_improve_subject_question)[[1]],3)` (std.error `r round((vcov(glmer_improve_subject_question)^.5)[1], 3)`). Por ello, la probabilidad de que se otorgue una mayor puntuación en $A$ que en $B$ es del `r paste(round(100/(1+exp(-fixef(glmer_improve_subject_question)[[1]])),2),"%", sep="")`. La proporción de varianza explicada por los efectos aleatorios (*\gls{ICC}*) es `r round((performance::icc(glmer_improve_subject_question))$ICC_adjusted,3)`.
 
 ```{r}
-#| eval: true
-#| label: tbl-selected-logistic
-#| tbl-cap: Resumen de los modelos de Regresión Logística.
-modelsummary(list("Improve (A>B)" = glmer_improve_subject_question, "Level == 'Positivo'" = glmer_positive_treat_subject_question), gof_omit = "RMSE|R2|ICC", output = "kableExtra")
+tbl.selected.logistic <- modelsummary(list("Improve (A>B)" = glmer_improve_subject_question, "Level == 'Positivo'" = glmer_positive_treat_subject_question), gof_omit = "RMSE|R2|ICC", output = "kableExtra")
+``` 
+
+```{r}
+tbl.selected.logistic
 ``` 
 
 

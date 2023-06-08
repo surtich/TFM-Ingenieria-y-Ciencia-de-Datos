@@ -81,7 +81,7 @@ En este trabajo se analiza si el nivel de subtitulado (correcto o defectuoso) in
 El Modelo Lineal Generalizado (*Generalized Linear Model*, $GLM$) es un modelo en el que la variable respuesta no sigue una distribución Normal. Para especificar un \gls{GLM} son necesarios tres componentes [ver @agresti_2018, pp. 66-67]:
 
 * Un componente aleatorio que será una distribución de probabilidad de la familia exponencial. Se asume que la variable respuesta $Y$ se distribuye según este componente aleatorio.
-* Un componente lineal de predictores.
+* Un componente lineal de predictores:
 $$
 \alpha+\beta_1x_1+...+\beta_px_p
 $$
