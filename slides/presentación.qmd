@@ -95,7 +95,7 @@ Efecto periodo: ¿La evaluación del subtitulado del segundo vídeo visto está 
 
 ::: incremental 
 
-* Sexta Edición (2022) **curso MOOC Materiales Digitales Accesibles** perteneciente al Canal Fundación ONCE en UNED Abierta.
+* Sexta Edición (2022) **curso MOOC Materiales Digitales Accesibles** perteneciente al Canal Fundación ONCE en UNED.
 * Iniciativa del Real Patronato sobre Discapacidad en colaboración con la Fundación ONCE y la UNED.
 * Dirigido por los profesores Emilio Letón Molina y Alejandro Rodríguez Ascaso.
 * Hasta mayo de 2023: 7 ediciones y más de 8.000 alumnos matriculados.
@@ -190,7 +190,7 @@ flowchart LR
 ::: {data-id="box-questions"}
 
 ::: box  
-[Items de la escala de Likert]{.story}
+[Ítems de la escala de Likert]{.story}
 <br>
 
 ```{r}
@@ -220,7 +220,7 @@ questions.tbl
 ::: {data-id="box-response"}
 
 ::: box  
-[Niveles de los items de la escala de Likert]{.story}
+[Niveles de los ítems de la escala de Likert]{.story}
 <br>
 ```{r}
 response.tbl <- data.frame(`Valor` = 0:5, `Texto` = response_labels) %>%
@@ -258,7 +258,6 @@ response.tbl
 
 {{< include ordinal.qmd >}}
 {{< include glmm.qmd >}}
-{{< include contrast.qmd >}}
 
 # Modelado estadístico
 
@@ -391,6 +390,9 @@ df_response %>%
 
 
 {{< include eda.qmd >}}
+
+{{< include contrast.qmd >}}
+
 
 {{< include modelado_logístico.qmd >}}
 

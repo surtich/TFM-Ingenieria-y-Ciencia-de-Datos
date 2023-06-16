@@ -7,19 +7,19 @@
 familia exponencial que sigue la variable respuesta Y.
   * Un componente lineal de predictores:
 $$
-\alpha+\beta_1x_1+...+\beta_px_p
+\tau+\beta_1x_1+...+\beta_px_p
 $$
 
 
   * Una función de enlace $g$ que relaciona $\mu=E(Y)$ con los predictores, de tal forma que:
 $$
-g(\mu)=\alpha+\beta_1x_1+...+\beta_px_p
+g(\mu)=\tau+\beta_1x_1+...+\beta_px_p
 $$
 
 * La estimación de coeficientes en *GLM* se realiza maximizando la función de verosimilitud (*Maximum Likelihood Estimation*, *MLE*).
 * La Regresión Logística es un caso particular de $GLM$ en la que $Y$ es Bernoulli:  
 $$
-logit(Y=1) = log \left[\frac{P(Y=1)}{1-P(Y=1)} \right] = \alpha+\beta_1x_1+...+\beta_px_p
+logit(Y=1) = log \left[\frac{P(Y=1)}{1-P(Y=1)} \right] = \tau+\beta_1x_1+...+\beta_px_p
 $$
 
 :::

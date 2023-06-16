@@ -1,0 +1,91 @@
+### Modelado bayesiano {#sec-bayesiano-2}
+
+Existen muchos paquetes en R para hacer inferencia bayesiana. Algunos de los más populares son:
+
+* OpenBUGS y WinBUGS: basado en el muestreo de Gibbs.
+* JAGS: también utiliza el muestreo de Gibbs.
+* Stan: Más moderno y con una comunidad de desarrollo más activa que los anteriores. Utiliza muestreo HMC (Hamiltonian Monte Carlo) y NUTS (no U-turn sampler). Stan tiene un lenguaje similar a C para definir modelos aunque hay muchos paquetes basados en Stan que facilitan la especificación de modelos con una sintaxis más sencilla. En este trabajo se utilizará uno de ellos, `brms` [ver @brms] . La sintaxis de especificación de modelos con este paquete es idéntica a la que se ha utilizado en la sección anterior.
+* INLA: Evita la simulación *\gls{MCMC}* haciendo más rápida la convergencia. Es menos flexible ya que solo se pueden especificar modelos de la familia exponencial.
+
+Se han comparado múltiples modelos usando la función `LOO` que realiza una validación cruzada bayesiana `leave-one-out` similar a la que se explicó en la @sec-bayesiano. El mejor modelo ha resultado ser el mismo que se seleccionó en modelos mixtos (ver @eq-mejor-modelo). Es decir:
+
+\small
+> Response ~ Treat*Period + (1 + Treat  | Subject) + (1 + Treat | Item)
+\normalsize
+
+\scriptsize
+```{r}
+#| echo: true
+#| cache: true
+options(contrasts = rep("contr.sum", 2))
+brm_treat.period.subject.item <- brm(
+    Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item),
+    data = df_response,
+    family = cumulative("logit"),
+    iter = 4000,
+    sample_prior = TRUE,
+    file = "models/brm_treat.period.subject.item",
+    file_refit = "on_change"
+)
+```
+\normalsize
+
+El modelo utiliza como factores con efectos fijos (`complete pooling` en terminología bayesiana) el nivel de subtitulado y el periodo y la interacción entre ambos; y como efectos aleatorios (`partial pooling`) los sujetos y los ítems del test, cada uno de ellos con un intercepto y un nivel de subtitulado variable. El resumen del modelo es el siguiente:
+
+\tiny
+```{r}
+#| echo: true
+summary(brm_treat.period.subject.item)
+```
+\normalsize
+
+
+Se han mantenido las distribuciones de probabilidad a priori que por defecto utiliza `brm` confiando en que sus parámetros son adecuados. Sin embargo, conviene comprobar que realmente sea así. En la @tbl-priors se muestran las distribuciones a priori de los parámetros aleatorios del modelo. En la @fig-priors se constata que toman valores razonables y no informativos.
+
+\tiny
+```{r}
+#| label: tbl-priors
+#| tbl-cap: Distribuciones a priori del modelo ordinal seleccionado.
+#| tbl-scap: Distribuciones a priori del modelo Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item).
+prior_summary(brm_treat.period.subject.item) %>%
+    gt() %>%
+    tab_options(table.font.size = 6)
+```
+\normalsize
+
+```{r}
+#| label: fig-priors
+#| fig-cap: Distribuciones a priori del modelo Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item).
+#| fig-scap: Distribuciones a priori del modelo seleccionado.
+prior_draws(brm_treat.period.subject.item) %>%
+    pivot_longer(cols = everything(), names_to = "term", values_to = "value") %>%
+    ggplot(aes(x = value, y = term, fill = term)) +
+    geom_violin() +
+    labs(y = NULL) +
+    coord_cartesian(xlim = c(-7.5, 7.5)) +
+    theme(legend.position = "none")
+```
+
+Es importante asegurar que el entrenamiento ha convergido a su distribución a posteriori. En la tabla de resumen se constata que el valor de `Rhat`
+^[`Rhat` es una medida utilizada para evaluar la convergencia de las Cadenas de Markov Monte Carlo ($MCMC$) en el muestreo bayesiano. Compara la varianza de cada cadena individual de $MCMC$ con la varianza entre diferentes cadenas. Si las cadenas convergen, se espera que sus valores sean similares y, por lo tanto, el valor de `Rhat` será próximo a 1.]
+es inferior a 1.1 y el de `ESS`
+^[`ESS` (Efficient Sample Size) es una estimación del número de muestras independientes obtenidas en el muestreo $MCMC$.]
+superior a 400 en todos los parámetros, que son umbrales que no se deberían violar [ver @burkner2019]. En la
+@fig-trace se comprueba que las cadenas $MCMC$ de muestreo de la distribución a posteriori se mezclan correctamente y no se aprecia autocorrelación en ninguno de los parámetros. Por último, en la @fig-predictive se muestra una comparación entre los histogramas construidos con los datos de las respuestas a los test con los intervalos de credibilidad marginales de la función predictiva a posteriori del modelo. En la mayoría de los ítems el muestreo se ajusta bastante bien al histograma de respuestas; aunque en algunos ítems, como el `Q16` o el `Q17`, se aprecian diferencias relevantes.
+ 
+```{r}
+#| label: fig-trace
+#| fig-cap: Cadenas MCMC del modelo Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item).
+#| fig-scap: Cadenas MCMC del modelo seleccionado.
+#| cache: true
+#| fig-height: 3
+mcmc_plot(brm_treat.period.subject.item, type = "trace", variable = c("b_[^:]*$"), regex = T) + theme(legend.position = "top")
+```
+
+```{r}
+#| label: fig-predictive
+#| fig-cap: Comparación de los valores reales con los obtenidos a partir de la función predictiva a posteriori del modelo Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item).
+#| fig-scap: Verificación usando la función predictiva a posteriori del modelo seleccionado.
+#| fig-height: 7
+pp_check(brm_treat.period.subject.item, type = "bars_grouped", group = "Item", ndraws = 1000, facet_args = list(ncol = 6)) + theme(legend.position = "top")
+```

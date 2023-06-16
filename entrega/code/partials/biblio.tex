@@ -1,0 +1,13 @@
+% Bibliography
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\SmallMargins
+
+$if(biblatex)$
+$if(longbibliography)$
+\twocolumn
+\renewcommand*{\bibfont}{\scriptsize}
+$endif$
+\printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
+\onecolumn
+$endif$

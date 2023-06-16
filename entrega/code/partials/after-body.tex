@@ -1,0 +1,41 @@
+
+% Back cover
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Even page, small margins, no running head, no page number.
+\evenpage
+\SmallMargins
+\thispagestyle{empty}
+
+$if(backcoverfontsize)$
+\begin{$backcoverfontsize$}
+$endif$
+
+$if(backcover)$
+\begin{description}
+
+$for(backcover)$
+\selectlanguage{$backcover.language$}
+\item[$backcover.abstractlabel$]
+$backcover.abstract$
+\item[$backcover.keywordlabel$]
+$for(backcover.keywords)$$backcover.keywords$$sep$, $endfor$.
+~\\
+$endfor$
+
+\end{description}
+$endif$
+
+$if(backcoverfontsize)$
+\end{$backcoverfontsize$}
+$endif$
+
+$if(cover-image)$
+\vspace*{\fill}
+\makeatletter
+% The filename has .png extension that must be eliminated
+\filename@parse{$cover-image$}
+% parse stores the file name in base. Extension starts at the first dot, so don't use dots in file names.
+\centering\includegraphics[width=.3\textwidth]{\filename@base}
+\makeatother
+$endif$

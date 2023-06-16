@@ -1,0 +1,81 @@
+% Title, author, date from YAML to LaTeX
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+$if(title)$
+\title{$title$$if(thanks)$\thanks{$thanks$}$endif$}
+$endif$
+
+$if(author)$
+\author{$for(author)$$author$$sep$ \and $endfor$}
+$endif$
+
+\date{$date$}
+
+
+% Main title page with filigrane
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+$if(maintitlepage)$
+% Text blocks
+\usepackage[absolute,overlay]{textpos}
+  \setlength{\TPHorizModule}{1mm}
+  \setlength{\TPVertModule}{1mm}
+
+\newcommand{\MainTitlePage}[2]{
+  \pagestyle{empty}
+    \begin{center}
+		\includegraphics[width=10cm]{images/logo.png}
+		\LARGE
+		\mbox{Universidad Nacional de Educación a Distancia}
+		\LARGE
+		\mbox{Escuela Técnica Superior de Informática}
+
+		\LARGE
+		\mbox{Máster en Ingeniería y Ciencia de Datos}
+
+		\vspace{2cm}
+		
+		\LARGE
+		\textbf{Trabajo Fin de Máster}
+		
+		\LARGE
+		\textbf{\thetitle}
+
+		
+		\vspace{2cm}		
+		
+	\end{center}  
+	
+	\begin{flushright}
+		\LARGE
+		\begin{tabular}{ r l }
+			Autor: & \theauthor \\
+			Directores: & Emilio Letón Molina \\
+			& Jorge Pérez Martín \\
+			Fecha de realización: & \thedate
+		\end{tabular}
+		
+	\end{flushright}
+
+  \evenpage
+  \SmallMargins
+  \thispagestyle{empty}
+  
+}
+$endif$
+
+% Clear page and open an even one (\clearpage opens an odd one)
+\newcommand{\evenpage}{
+  \clearpage
+  \strictpagecheck % slower but efficient detection of odd/even pages
+  \checkoddpage
+  \ifoddpage
+    \thispagestyle{empty}
+    ~\\ % Print a character or the page will not exist
+    \newpage
+  \else
+    % do nothing
+  \fi
+
+  
+}
