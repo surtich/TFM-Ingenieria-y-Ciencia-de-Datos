@@ -1,6 +1,12 @@
 
 ## Exploración inicial
 
+
+::: {.notes}
+Pags 29-34
+:::
+
+
 * Los estudiantes eligen participar o no voluntariamente en el estudio.
 * Los datos se suministran anonimizados.
 * Algunos de los estudiantes que realizaron la actividad de subtitulado no dieron su consentimiento para participar en el estudio y se han eliminado.
@@ -24,6 +30,19 @@ df_all %>%
 
 
 ## Exploración inicial
+
+::: {.notes}
+pag 34, figura 4.4
+
+A mejor que B.
+
+Secuencia AB mejor BA (más 5)
+
+Secuencia AB menos BA (menos 4+5)
+
+Periodo 1 mejor que periodo 2.
+:::
+
 
 * El subtitulado denominado como $A$, muestra claramente mejores puntuaciones.
 * El comportamiento por grupos (secuencias) y periodos es similar con sutiles diferencias.
@@ -64,6 +83,24 @@ df_freqs %>%
 
 
 ## Exploración inicial
+
+
+::: {.notes}
+pag 36, fig 4.5
+
+A mejor que B.
+
+AB similar a BA
+
+B respuestas dispares
+
+En A Q15,Q16 Y Q17 -> Baja puntuación. -> Similar A y B
+
+En B, Q04 y Q13 alta puntuación
+
+En B, Q05 y Q09 baja puntuación.
+:::
+
 
 * En el subtitulado $A$ hay mayor homogeneidad entre grupos que en el $B$.
 * En el subtitulado $A$, los ítems $Q15$, $Q16$, $Q17$, tienen relativamente peores valoraciones.

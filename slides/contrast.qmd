@@ -1,5 +1,11 @@
 ## Efecto secuencia vs interacción tratamiento periodo
 
+
+::: {.notes}
+Pags 90, tabla A.6
+:::
+
+
 <style type="text/css">
 .tg  {border-collapse:collapse;border-spacing:0;margin-top:100px !important;border: 3px solid;}
 .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;

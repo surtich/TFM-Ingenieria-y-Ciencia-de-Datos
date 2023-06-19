@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@400;700&display=swap');
 
+#TOC li {
+  font-size: 4rem;
+  margin-top: 3.5rem;
+}
+
 #title-slide {
   font-size: 30px !important;
 }

@@ -1,0 +1,76 @@
+
+
+## Regresión Logística
+
+
+::: {.notes}
+Tabla 5.3 pag 59
+
+Modelos finales. Comentar variables.
+
+Comentar que en Improve no se incluye secuencia.
+
+Comentar que en positive no se incluye secuencia -> error de convergencia.
+
+Comentar que varianza explicada debida al sujeto es mayor que la debida a ítem.
+:::
+
+
+```{r}
+#| eval: false
+#| echo: true
+options(contrasts = rep("contr.sum", 2))
+glmer_improve_subject_question <- glmer(Improve ~ 1 + (1 | Subject) + (1 | Item), family = "binomial", data = df_improve)
+
+glmer_positive_treat_subject_question <- glmer(
+    I(Level == "Positivo") ~ Treat + (1 + Treat | Subject) + (1 + Treat | Item), family = "binomial", df_response
+)
+```
+
+
+```{r}
+glmer_improve_subject_question = readRDS("../models/glmer_improve_subject_question.rds")
+glmer_positive_treat_subject_question = readRDS("../models/glmer_positive_treat_subject_question.rds")
+modelsummary(list("Improve (A>B)" = glmer_improve_subject_question, "Level == 'Positivo'" = glmer_positive_treat_subject_question), estimate = "{estimate}{stars}", metrics = c("AIC", "BIC", "Log.Lik."), gof_omit = "RMSE|R2|ICC", output = "gt") %>%
+    tab_options(table.font.size = 35)
+```
+
+## Regresión Ordinal
+
+
+::: {.notes}
+Tabla 4.11 (derecha) pag 45 + Tabla 5.4 (izquierda) pag 60-61
+Pendientes positivas
+Periodo y secuencia no son significativos en modelos mixtos
+Tratamiento más importante.
+:::
+
+
+```{r}
+#| eval: false
+#| echo: true
+options(contrasts = rep("contr.sum", 2))
+clm_sum_treat.period <- clm(
+    Response ~ Treat * Period,
+    data = df_response, link = "logit"
+)
+
+clmm_treat.period.subject.item <- clmm(
+    Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item),
+    data = df_response
+)
+```
+
+
+```{r}
+clm_sum_treat.period <- readRDS("../models/clm_sum_treat.period.rds")
+clmm_treat.period.subject.item <- readRDS("../models/clmm_treat.period.subject.item.rds")
+
+models <- list()
+models[[format(clm_sum_treat.period$formula)]] <- clm_sum_treat.period
+models[[gsub("\\s+", " ", paste(format(clmm_treat.period.subject.item$formula, trim = T), collapse = ""))]] <- clmm_treat.period.subject.item
+modelsummary(models, estimate = "{estimate}{stars}", gof_omit = c("RMSE"), statistic = c("std.error", "conf.int"), metrics = c("AIC", "BIC", "Log.Lik."), shape = term:contrast ~ model + statistic, output = "gt") %>%
+    cols_hide(columns = c(2)) %>%
+    tab_options(table.font.size = 25)
+```
+

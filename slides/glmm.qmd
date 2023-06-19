@@ -1,5 +1,28 @@
 ## GLMM
 
+::: {.notes}
+pag 15 y 16
+
+Modelos Generalizados Multinivel, jerárquicos o mixtos.
+
+La variable respuesta además de no ser normal, los valores no son independientes unos de otros.
+
+En nuestro caso medidas repetidas (dependencia en el sujeto) y además preguntas no independientes (dependencia en los 
+ítems).
+Parte fija, parte aleatoria.
+
+Parámetros en color.
+
+No interesan los coeficientes de efectos aleatorios.
+
+Complete pooling -> Sólo efectos fijos.
+
+No pooling -> estimar indepedientemente los coeficientes de cada sujeto
+
+Partial pooling: Compromiso, regresión a la media.
+:::
+
+
 $$
 \begin{aligned}
 Nivel\ 1: & y_{ij}     & = & \beta_{0j} + \beta_{1j}x_{1ij} + \epsilon_{ij} \\

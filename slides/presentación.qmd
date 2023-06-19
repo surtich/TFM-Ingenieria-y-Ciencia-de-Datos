@@ -1,14 +1,15 @@
 ---
-title: "Utilización de técnicas multivariantes para el estudio del aprendizaje de la mejora de la accesibilidad en el subtitulado de vídeos"
-author: "Javier Pérez Arteaga"
-institute: "Máster en Ingeniería y Ciencia de Datos"
+title: "<h2><img src='images/logo.png'><br>Máster en Ingeniería y Ciencia de Datos<br><br>Utilización de técnicas multivariantes<br>para el estudio del aprendizaje de la mejora de la<br>accesibilidad en el subtitulado de vídeos</h2>
+"
+author: "Autor: Javier Pérez Arteaga<br>Directores: Emilio Letón Molina y Jorge Pérez Martín"
+institute: "junio 2023"
 format:
     revealjs:
         toc: true
         toc_float: true
         toc-depth: 1
         toc-location: body
-        toc-title: "Agenda"
+        toc-title: "Índice"
         logo: images/logo.png
         output-file: tfm.html
         slide-number: true
@@ -48,8 +49,39 @@ rotating_text <- function(x, align = "center") {
 
 # Introducción
 
+## Motivación
+
+
+::: {.notes}
+Pags 1 y 2
+:::
+
+
+::: incremental 
+
+* Sexta Edición (2022) **MOOC Materiales Digitales Accesibles** perteneciente al Canal Fundación ONCE en UNED.
+* Iniciativa del Real Patronato sobre Discapacidad en colaboración con la Fundación ONCE y la UNED.
+* Dirigido por los profesores Emilio Letón Molina y Alejandro Rodríguez Ascaso.
+* Hasta mayo de 2023: 7 ediciones y más de 8.000 alumnos matriculados.
+* Sexta Edición: 1.261 alumnos matriculados y 165 (13,08%) aprobados.
+* En el módulo "Accesibilidad del material multimedia" se propuso una actividad de subtitulado.
+* Los alumnos vieron dos vídeos un bien subtitulado y otro con errores.
+* El orden en que vieron los vídeos se asignó aleatoriamente.
+* Después de ver cada uno de los vídeos realizaron un test de 18 preguntas.
+
+:::
+
+
+
+
+
+
 ## Objetivo del experimento
 
+
+::: {.notes}
+Pag 3
+:::
 
 ::: {.callout-note}
 ## Pregunta de investigación
@@ -91,32 +123,47 @@ Efecto periodo: ¿La evaluación del subtitulado del segundo vídeo visto está 
 
 :::
 
-## Descripción de la experiencia
 
-::: incremental 
+## Herramientas
 
-* Sexta Edición (2022) **curso MOOC Materiales Digitales Accesibles** perteneciente al Canal Fundación ONCE en UNED.
-* Iniciativa del Real Patronato sobre Discapacidad en colaboración con la Fundación ONCE y la UNED.
-* Dirigido por los profesores Emilio Letón Molina y Alejandro Rodríguez Ascaso.
-* Hasta mayo de 2023: 7 ediciones y más de 8.000 alumnos matriculados.
-* Sexta Edición: 1.261 alumnos matriculados y 165 (13,08%) aprobados.
-* En el módulo "Accesibilidad del material multimedia" se propuso una actividad de subtitulado.
-* Los alumnos vieron dos vídeos un bien subtitulado y otro con errores.
-* El orden en que vieron los vídeos se asignó aleatoriamente.
-* Después de ver cada uno de los vídeos realizaron un test de 18 preguntas.
 
+::: {.notes}
+Pags 5
 :::
 
 
+* ![Quarto](images/quarto.png){width=2in}: herramienta de publicación de documentación científica en <i class="fa-brands fa-r-project"></i>, $\mathrm{\LaTeX}$, <i class="fa-brands fa-markdown"></i> Markdown, ...
+* <i class="fa-brands fa-r-project"></i> lenguaje de programación estadístico:
+    * Manipulación de datos: tidyr, dplyr, ...
+    * Gráficos: ggplot2, pyplot
+    * Tablas: knitr, gt
+    * Modelado estadístico: lme4, stats, ordinal, vcd, VGAM, brms, stan, ...
+* ![](images/vscode.png){width=40px} VScode: Entorno de desarrollo.
+* <i class="fa-brands fa-github"></i> [memoiQ](https://github.com/EricMarcon/memoiQ): Plantilla memoria
+* <i class="fa-brands fa-github"></i> [emitanaka](https://github.com/emitanaka/talks): Plantilla presentación
+* Tanto la memoria como la presentación son reproducibles.
 
+
+
+
+# Marco teórico y estado del arte
 
 ## Características del diseño del experimento {auto-animate=true}
+
+
+::: {.notes}
+Pags 7-9
+
+Ítems pag 23 tabla 3.1
+
+Respuestas pag 24 tabla 3.2
+:::
 
 
 
 :::::: {.columns}
 
-:::::: {.column width="40%"}
+:::::: {.column width="50%"}
 
 
 ::: {.fragment .fade-in fragment-index=1}
@@ -124,20 +171,22 @@ Efecto periodo: ¿La evaluación del subtitulado del segundo vídeo visto está 
 * Completamente aleatorizado.
 :::
 
+
 ::: {.fragment .fade-in fragment-index=2}
 
-* Cruzado AB/BA.
+* Triple ciego.
 :::
 
 
 ::: {.fragment .fade-in fragment-index=3}
 
-* Medidas repetidas.
+* Cruzado AB/BA.
 :::
+
 
 ::: {.fragment .fade-in fragment-index=4}
 
-* Triple ciego.
+* Medidas repetidas.
 :::
 
 ::: {.fragment .fade-in fragment-index=5}
@@ -147,23 +196,28 @@ Efecto periodo: ¿La evaluación del subtitulado del segundo vídeo visto está 
 :::
 :::
 
-:::::: {.column width="60%"}
+:::::: {.column width="50%"}
 
 ::: {.r-stack}
 
-::: {data-id="video"}
-
-::: {.fragment .fade-in fragment-index=1}
+::: {.fragment .fade-in-then-out fragment-index=1}
 
 ![](images/video.png) 
-:::
+
+![](images/video2.png) 
 
 :::
 
+::: {.fragment .fade-in-then-out fragment-index=2}
 
-::: {data-id="video"}
+![](images/video.png) 
 
-::: {.fragment .fade-in fragment-index=2}
+![](images/video2.png) 
+
+:::
+
+
+::: {.fragment .fade-in-then-out fragment-index=3}
 
 ```{mermaid}
 %%| mermaid-format: png
@@ -182,10 +236,8 @@ flowchart LR
   B-- Secuencia BA --> D-.->F
 ```
 :::
-:::
 
-
-::: {.fragment .fade-in fragment-index=4}
+::: {.fragment .fade-in-then-out fragment-index=4}
 
 ::: {data-id="box-questions"}
 
@@ -251,18 +303,21 @@ response.tbl
 :::
 :::
 
-# Marco teórico y estado del arte
-
 
 {{< include glm.qmd >}}
 
 {{< include ordinal.qmd >}}
 {{< include glmm.qmd >}}
 
-# Modelado estadístico
+# Materiales y métodos
 
 
-## Variables de interés {auto-animate=true}
+## Variables utilizadas {auto-animate=true}
+
+
+::: {.notes}
+Pags 26 tabla 3.3
+:::
 
 
 :::::: {.columns}
@@ -364,6 +419,11 @@ Estudiantes participantes en el estudio.
 ## Ejemplo de `dataset df_response`
 
 
+::: {.notes}
+Pags 27, tabla 3.4
+:::
+
+
 ```{r}
 df_response %>%
     dplyr::select(Seq, Period, Treat, Subject, Item, Response) %>%
@@ -373,20 +433,7 @@ df_response %>%
     tab_options(table.font.size = 35)
 ``` 
 
-
-## Herramientas
-
-* ![Quarto](images/quarto.png){width=2in}: herramienta de publicación de documentación científica en <i class="fa-brands fa-r-project"></i>, $\mathrm{\LaTeX}$, <i class="fa-brands fa-markdown"></i> Markdown, ...
-* <i class="fa-brands fa-r-project"></i> lenguaje de programación estadístico:
-    * Manipulación de datos: tidyr, dplyr, ...
-    * Gráficos: ggplot2, pyplot
-    * Tablas: knitr, gt
-    * Modelado estadístico: lme4, stats, ordinal, vcd, VGAM, brms, stan, ...
-* ![](images/vscode.png){width=40px} VScode: Entorno de desarrollo.
-* <i class="fa-brands fa-github"></i> [memoiQ](https://github.com/EricMarcon/memoiQ): Plantilla memoria
-* <i class="fa-brands fa-github"></i> [emitanaka](https://github.com/emitanaka/talks): Plantilla presentación
-* Tanto la memoria como la presentación son reproducibles.
-
+# Modelado estadístico
 
 
 {{< include eda.qmd >}}
@@ -398,10 +445,13 @@ df_response %>%
 
 {{< include modelado_ordinal.qmd >}}
 
+# Resultados
+
+{{< include resultados.qmd >}}
 
 {{< include discusión.qmd >}}
 
-{{< include discusión2.qmd >}}
+{{< include discusión3.qmd >}}
 
 
 {{< include conclusión.qmd >}}

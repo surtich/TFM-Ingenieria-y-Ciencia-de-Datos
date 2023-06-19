@@ -1,5 +1,11 @@
 ## Regresión Logística
 
+
+::: {.notes}
+Pags 37
+:::
+
+
 ::: {.fragment .fade-in}
 * La Regresión Logística requiere una variable respuesta dicotómica.
 :::
@@ -41,6 +47,7 @@ df_response %>%
     select(Subject, Item, Seq, Treat, Response, Level) %>%
     arrange(Item) %>%
     filter(Subject == 38) %>%
+    mutate(Level == "Positivo") %>%
     head(6) %>%
     gt() %>%
     tab_options(table.font.size = 25)
@@ -49,24 +56,3 @@ df_response %>%
 :::
 :::
 :::
-
-## Regresión Logística
-
-```{r}
-#| eval: false
-#| echo: true
-options(contrasts = rep("contr.sum", 2))
-glmer_improve_subject_question <- glmer(Improve ~ 1 + (1 | Subject) + (1 | Item), family = "binomial", data = df_improve)
-
-glmer_positive_treat_subject_question <- glmer(
-    I(Level == "Positivo") ~ Treat + (1 + Treat | Subject) + (1 + Treat | Item), family = "binomial", df_response
-)
-```
-
-
-```{r}
-glmer_improve_subject_question = readRDS("../models/glmer_improve_subject_question.rds")
-glmer_positive_treat_subject_question = readRDS("../models/glmer_positive_treat_subject_question.rds")
-modelsummary(list("Improve (A>B)" = glmer_improve_subject_question, "Level == 'Positivo'" = glmer_positive_treat_subject_question), estimate = "{estimate}{stars}", metrics = c("AIC", "BIC", "Log.Lik."), gof_omit = "RMSE|R2|ICC", output = "gt") %>%
-    tab_options(table.font.size = 35)
-```

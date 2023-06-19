@@ -1,6 +1,24 @@
 
 ## Repuesta a la pregunta de investigación y a los objetivos específicos
 
+
+::: {.notes}
+Pags 66-71
+
+FACILIDAD
+Q05, Q09, Q06, Q07, Q08, Q09, Q14
+
+DIFICULTAD
+Q02,Q10,Q11,Q12
+
+CONTROL
+
+OK Q04,Q13
+B positivo pero inferior a A Q01, Q03
+MAL EN AMBOS Q15,Q16,Q17
+:::
+
+
 ```{r}
 #| eval: true
 #| cache: false
@@ -13,6 +31,7 @@ q.no.errors <- setdiff(levels(df_response$Item), q.errors)
 #| eval: true
 #| cache: false
 
+options(contrasts = rep("contr.sum", 2))
 improve_question <- 1 / (1 + exp(-ranef(glmer_improve_subject_question)$Item - fixef(glmer_improve_subject_question)))
 
 improve_question <- cbind(rownames(improve_question), improve_question)

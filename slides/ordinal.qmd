@@ -147,6 +147,19 @@ fig1.2
 ## Regresión Ordinal {auto-animate=true}
 
 
+::: {.notes}
+Pags 12-14
+
+Regresión Ordinal Acumulativa -> más usada. Modeliza la distribución de frecuencia acumulada
+
+Regresión Logística modeliza el logaritmo del odds de la de la respuesta positiva.
+
+Regresión Ordinal Acumulativa -> logaritmo del odds de que el nivel de respuesta sea menor que $k$.
+
+Comentar parametrización Acumulativa -> signo menos para que la relación del nivel de respuesta y el coeficiente sea positivo.
+
+Interpretación: Para los coeficientes beta cambia el menor a a mayor.
+:::
 
 :::::: {.columns}
 

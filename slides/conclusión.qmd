@@ -16,20 +16,26 @@
 :::
 
 
-## Conclusiones
+## Conclusión
+
+
+::: {.notes}
+Pags 73 y 74
+:::
+
 
 ::: {.incremental}
 * Sin embargo, han tenido problemas en la identificación de errores de subtitulado en:
   * Aspectos temporales:
     * `r question_labels[11]` ($Q10$).
-    * `r question_labels[12]` ($Q12$).
+    * `r question_labels[12]` ($Q11$).
   * Aspectos espaciales:
     * `r question_labels[3]` ($Q02$).
     * `r question_labels[13]` ($Q12$).
 :::
 
 
-## Conclusiones
+## Conclusión
 
 ::: {.incremental}
 * Ítems de control (idénticos en ambos vídeos):
