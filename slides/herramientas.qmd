@@ -1,0 +1,21 @@
+
+## Herramientas {visibility="uncounted"}
+
+
+::: {.notes}
+Pags 5
+:::
+
+
+* <div style="display:inline-block; position: relative; top: 20px">![](images/quarto.png){width=2in}</div>: herramienta de publicación de documentación científica en <i class="fa-brands fa-r-project"></i>, $\mathrm{\LaTeX}$, <i class="fa-brands fa-markdown"></i> Markdown, ...
+* <i class="fa-brands fa-r-project"></i>: lenguaje de programación estadístico:
+    * Manipulación de datos: tidyr, dplyr, ...
+    * Gráficos: ggplot2, pyplot
+    * Tablas: knitr, gt
+    * Modelado estadístico: lme4, stats, ordinal, vcd, VGAM, brms, stan, ...
+* ![](images/vscode.png){width=40px} VScode: Entorno de desarrollo.
+* <i class="fa-brands fa-github"></i> [memoiQ](https://github.com/EricMarcon/memoiQ): Plantilla memoria
+* <i class="fa-brands fa-github"></i> [emitanaka](https://github.com/emitanaka/talks): Plantilla presentación
+* Tanto la memoria como la presentación son reproducibles.
+
+

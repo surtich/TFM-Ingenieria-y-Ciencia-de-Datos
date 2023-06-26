@@ -1,0 +1,17 @@
+
+## {background-color="#006dae"}
+
+<h1 style="text-align: center;">¡Muchas gracias por vuestra atención!</h1>
+
+<br>
+
+<h2 style="text-align: center;"><i class="fa-solid fa-book"></i> Utilización de técnicas multivariantes<br>para el estudio del aprendizaje de la mejora de la<br>accesibilidad en el subtitulado de vídeos</h2>
+
+<br>
+
+<div style="text-align: center;">
+* <div style="display: flex; align-items: center"><img src="images/yo.jpeg" style="border-radius:50%;" width="100px"> Realizado por: Javier Pérez  Arteaga</div>
+* <i class="fa-solid fa-envelope"></i> jperez40@alumno.uned.es 
+* <i class="fa-brands fa-github"></i> [surtich](https://github.com/surtich)
+* <i class="fa-brands fa-linkedin"></i> [Javier Pérez Arteaga](https://www.linkedin.com/in/javier-perez-arteaga/)
+</div>

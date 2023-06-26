@@ -1,0 +1,4 @@
+- source: presentación.qmd
+  quarto-pub:
+    - id: 34a3c30c-779b-4889-9068-69ef53caeb97
+      url: 'https://surtich.quarto.pub/tfm_slides'

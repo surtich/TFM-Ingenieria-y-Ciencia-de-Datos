@@ -146,7 +146,13 @@ g3 <- inner_join(df_prob_data, df_prob_model) %>%
         locations = cells_body(rows = Item %in% q.errors, columns = "5_q10_B")
     ) %>%
     gt_highlight_rows(rows = Item %in% q.errors, columns = Item) %>%
-    tab_style(style = cell_text(weight = "bold"), cells_body(rows = Item %in% q.errors))
+    tab_style(style = cell_text(weight = "bold"), cells_body(rows = Item %in% q.errors)) %>%
+    text_transform(
+        fn = function(Item) {
+            lapply(Item, function(item) paste0("<div title='", question_labels[as.integer(substr(item, 2, 3)) %% 18 + 1], "'>", item, "</div>"))
+        },
+        locations = cells_body(columns = Item)
+    )
 
 g4 <- inner_join(df_improve2, df_positive) %>%
     filter(Item %in% q.errors) %>%
@@ -164,7 +170,13 @@ g4 <- inner_join(df_improve2, df_positive) %>%
         rows = Item %in% q.errors, columns = Prob_B, palette = "ggsci::grey_material", target_columns = c(Freq_B, Prob_B)
     ) %>%
     cols_label(Freq_A = "Freq", Prob_A = "Prob", Freq_B = "Freq", Prob_B = "Prob") %>%
-    tab_options(table.font.size = 30)
+    tab_options(table.font.size = 30) %>%
+    text_transform(
+        fn = function(Item) {
+            lapply(Item, function(item) paste0("<div title='", question_labels[as.integer(substr(item, 2, 3)) %% 18 + 1], "'>", item, "</div>"))
+        },
+        locations = cells_body(columns = Item)
+    )
 ```
 
 
@@ -188,9 +200,7 @@ g4 <- inner_join(df_improve2, df_positive) %>%
     align-self: end;
   } 
 </style>
-::: {.r-stack}
-::: {.fragment .fade-in-then-out fragment-index=1}
-
+  
 ::: {.callout-note}
 ## Pregunta de investigación
 
@@ -198,11 +208,8 @@ g4 <- inner_join(df_improve2, df_positive) %>%
 :::
 * El subtitulado $A$ ha sido mejor evaluado por los estudiantes.
 * El modelo con variable respuesta `Improve` predice que la probabilidad de que se otorgue una mayor puntuación en $A$ que en $B$ es `r paste(round(100/(1+exp(-fixef(glmer_improve_subject_question)[[1]])),2),"%", sep="")`.
-:::
 
-
-::: {.fragment .fade-in-then-out fragment-index=2}
-
+## Repuesta a la pregunta de investigación y a los objetivos específicos {transition="none" visibility="uncounted"}
 
 ::: {.callout-tip}
 ## Objetivo específico
@@ -228,9 +235,27 @@ g3
 
 
 :::
+
+## Repuesta a la pregunta de investigación y a los objetivos específicos {transition="none" visibility="hidden"}
+
+::: {.callout-tip}
+## Objetivo específico
+
+¿En qué pautas de subtitulado los estudiantes tienen mayor **facilidad** para reconocer diferencias entre un subtitulado correcto y otro incorrecto?
 :::
 
-::: {.fragment .fade-in-then-out fragment-index=3}
+Los estudiantes han identificado errores de subtitulado de los ítems:
+
+::: {.incremental}
+* `r question_labels[6]` ($Q05$).
+* `r question_labels[7]` ($Q06$).
+* `r question_labels[8]` ($Q07$).
+* `r question_labels[9]` ($Q08$).
+* `r question_labels[10]` ($Q09$).
+* `r question_labels[15]` ($Q14$).
+:::
+
+## Repuesta a la pregunta de investigación y a los objetivos específicos {transition="none" visibility="uncounted"}
 
 
 ::: {.callout-tip}
@@ -257,10 +282,28 @@ g3
 :::
 ::::
 
+## Repuesta a la pregunta de investigación y a los objetivos específicos {transition="none" visibility="hidden"}
+
+::: {.callout-tip}
+## Objetivo específico
+
+¿En qué pautas de subtitulado los estudiantes tienen mayor **dificultad** para reconocer diferencias entre un subtitulado correcto y otro incorrecto?
+:::
+
+Los estudiantes han tenido problemas en la identificación de errores de subtitulado en:
+
+::: {.incremental}
+* Aspectos temporales:
+  * `r question_labels[11]` ($Q10$).
+  * `r question_labels[12]` ($Q11$).
+* Aspectos espaciales:
+  * `r question_labels[3]` ($Q02$).
+  * `r question_labels[13]` ($Q12$).
 :::
 
 
-::: {.fragment .fade-in-then-out fragment-index=4}
+
+## Repuesta a la pregunta de investigación y a los objetivos específicos {transition="none" visibility="uncounted"}
 
 
 ::: {.callout-tip}
@@ -291,7 +334,13 @@ inner_join(df_improve2, df_positive) %>%
         rows = Item %in% q.no.errors, columns = Prob_B, palette = "ggsci::grey_material", target_columns = c(Freq_B, Prob_B), reverse = T, , domain = c(-0.5, 1)
     ) %>%
     cols_label(Freq_A = "Freq", Prob_A = "Prob", Freq_B = "Freq", Prob_B = "Prob") %>%
-    tab_options(table.font.size = 30)
+    tab_options(table.font.size = 30) %>%
+    text_transform(
+        fn = function(Item) {
+            lapply(Item, function(item) paste0("<div title='", question_labels[as.integer(substr(item, 2, 3)) %% 18 + 1], "'>", item, "</div>"))
+        },
+        locations = cells_body(columns = Item)
+    )
 ```
 
 :::
@@ -305,9 +354,34 @@ g3
 
 
 :::
+
+
+## Repuesta a la pregunta de investigación y a los objetivos específicos {transition="none" visibility="hidden"}
+
+
+::: {.callout-tip}
+## Objetivo específico
+
+¿Son los estudiantes capaces de valorar de forma similar los aspectos del subtitulado que no cambian en los vídeos?
 :::
 
-::: {.fragment .fade-in-then-out fragment-index=5}
+Ítems de control (idénticos en ambos vídeos):
+
+::: {.incremental}
+* Bien valorados por los estudiantes:
+  * `r question_labels[5]` ($Q04$).
+  * `r question_labels[14]` ($Q13$).
+* Mal valorados en $B$:
+  * `r question_labels[2]` ($Q01$).
+  * `r question_labels[4]` ($Q03$).
+* No presentes en los vídeos, no bien valorados en $A$, peor en $B$:
+  * `r question_labels[16]` ($Q15$).
+  * `r question_labels[17]` ($Q16$).
+  * `r question_labels[18]` ($Q17$).
+:::
+
+
+## Repuesta a la pregunta de investigación y a los objetivos específicos {transition="none" visibility="uncounted"}
 
 ::: {.callout-tip}
 ## Objetivo específico
@@ -322,5 +396,3 @@ Efecto periodo: ¿La evaluación del subtitulado del segundo vídeo visto está 
 * En el modelo ordinal `Response ~ Treat * Period` se constató que tanto el periodo como la secuencia son significativos.
 * Estos efectos son mucho menos importantes que los debidos al subtitulado.
 * Al introducir como variables explicativas el estudiante y el ítem tanto el periodo como la secuencia pasan a ser no significativos. 
-:::
-:::

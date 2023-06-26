@@ -5,6 +5,10 @@ author: "Autor: Javier Pérez Arteaga<br>Directores: Emilio Letón Molina y Jorg
 institute: "junio 2023"
 format:
     revealjs:
+        transition: slide
+        background-transition: fade
+        embed-resources: true
+        pdf-separate-fragments: true
         toc: true
         toc_float: true
         toc-depth: 1
@@ -22,8 +26,8 @@ format:
         css: [assets/custom.css, assets/pacman.css, assets/tachyons-addon.css]
         include-after: |
             <link rel="stylesheet" href="assets/syntax-highlight.css">
-            <link rel="stylesheet" href="/assets/fontawesome-free-6.1.1-web/css/font-awesome.min.css">
-            <script defer src="/assets/fontawesome-free-6.1.1-web/js/all.min.js"></script>
+            <link rel="stylesheet" href="assets/fontawesome-free-6.1.1-web/css/fontawesome.min.css">
+            <script defer src="assets/fontawesome-free-6.1.1-web/js/all.min.js"></script>
 lang: es
 execute:
   echo: false
@@ -61,7 +65,7 @@ Pags 1 y 2
 
 * Sexta Edición (2022) **MOOC Materiales Digitales Accesibles** perteneciente al Canal Fundación ONCE en UNED.
 * Iniciativa del Real Patronato sobre Discapacidad en colaboración con la Fundación ONCE y la UNED.
-* Dirigido por los profesores Emilio Letón Molina y Alejandro Rodríguez Ascaso.
+* MOOC dirigido por los profesores Emilio Letón Molina y Alejandro Rodríguez Ascaso.
 * Hasta mayo de 2023: 7 ediciones y más de 8.000 alumnos matriculados.
 * Sexta Edición: 1.261 alumnos matriculados y 165 (13,08%) aprobados.
 * En el módulo "Accesibilidad del material multimedia" se propuso una actividad de subtitulado.
@@ -91,7 +95,7 @@ Pag 3
 
 
 
-::: {.fragment .fade-in}
+::: {.fragment .fade-up}
 
 ::: {.callout-tip}
 ## Objetivo específico
@@ -122,27 +126,6 @@ Efecto periodo: ¿La evaluación del subtitulado del segundo vídeo visto está 
 :::
 
 :::
-
-
-## Herramientas
-
-
-::: {.notes}
-Pags 5
-:::
-
-
-* ![Quarto](images/quarto.png){width=2in}: herramienta de publicación de documentación científica en <i class="fa-brands fa-r-project"></i>, $\mathrm{\LaTeX}$, <i class="fa-brands fa-markdown"></i> Markdown, ...
-* <i class="fa-brands fa-r-project"></i> lenguaje de programación estadístico:
-    * Manipulación de datos: tidyr, dplyr, ...
-    * Gráficos: ggplot2, pyplot
-    * Tablas: knitr, gt
-    * Modelado estadístico: lme4, stats, ordinal, vcd, VGAM, brms, stan, ...
-* ![](images/vscode.png){width=40px} VScode: Entorno de desarrollo.
-* <i class="fa-brands fa-github"></i> [memoiQ](https://github.com/EricMarcon/memoiQ): Plantilla memoria
-* <i class="fa-brands fa-github"></i> [emitanaka](https://github.com/emitanaka/talks): Plantilla presentación
-* Tanto la memoria como la presentación son reproducibles.
-
 
 
 
@@ -260,7 +243,9 @@ questions.tbl <- tibble(Item = levels(df_all$Item), Texto = levels(df_all$Item_l
     tab_options(
         table.background.color = "#E6E6E6",
         table.font.size = 20
-    )
+    ) %>% 
+    cols_label(Item="Ítem")
+ 
 questions.tbl
 ```
 :::
@@ -304,10 +289,7 @@ response.tbl
 :::
 
 
-{{< include glm.qmd >}}
-
-{{< include ordinal.qmd >}}
-{{< include glmm.qmd >}}
+{{< include modelado.qmd >}}
 
 # Materiales y métodos
 
@@ -438,9 +420,6 @@ df_response %>%
 
 {{< include eda.qmd >}}
 
-{{< include contrast.qmd >}}
-
-
 {{< include modelado_logístico.qmd >}}
 
 {{< include modelado_ordinal.qmd >}}
@@ -455,3 +434,14 @@ df_response %>%
 
 
 {{< include conclusión.qmd >}}
+
+
+{{< include despedida.qmd >}}
+
+# Apéndices {visibility="uncounted"}
+
+{{< include herramientas.qmd >}}
+{{< include glm.qmd >}}
+{{< include ordinal.qmd >}}
+{{< include glmm.qmd >}}
+{{< include contrast.qmd >}}

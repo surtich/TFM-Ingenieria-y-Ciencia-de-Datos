@@ -1,4 +1,4 @@
-## GLMM
+## GLMM {visibility="uncounted"}
 
 ::: {.notes}
 pag 15 y 16

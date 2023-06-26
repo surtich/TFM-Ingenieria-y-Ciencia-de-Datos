@@ -1,6 +1,6 @@
 
 
-## Regresión Logística
+## Regresión Logística (enfoque frecuentista)
 
 
 ::: {.notes}
@@ -19,6 +19,7 @@ Comentar que varianza explicada debida al sujeto es mayor que la debida a ítem.
 ```{r}
 #| eval: false
 #| echo: true
+#| code-line-numbers:  "2|4-6"
 options(contrasts = rep("contr.sum", 2))
 glmer_improve_subject_question <- glmer(Improve ~ 1 + (1 | Subject) + (1 | Item), family = "binomial", data = df_improve)
 
@@ -31,11 +32,12 @@ glmer_positive_treat_subject_question <- glmer(
 ```{r}
 glmer_improve_subject_question = readRDS("../models/glmer_improve_subject_question.rds")
 glmer_positive_treat_subject_question = readRDS("../models/glmer_positive_treat_subject_question.rds")
+
 modelsummary(list("Improve (A>B)" = glmer_improve_subject_question, "Level == 'Positivo'" = glmer_positive_treat_subject_question), estimate = "{estimate}{stars}", metrics = c("AIC", "BIC", "Log.Lik."), gof_omit = "RMSE|R2|ICC", output = "gt") %>%
     tab_options(table.font.size = 35)
 ```
 
-## Regresión Ordinal
+## Regresión Ordinal (enfoque frecuentista) {auto-animate=true}
 
 
 ::: {.notes}
@@ -45,10 +47,11 @@ Periodo y secuencia no son significativos en modelos mixtos
 Tratamiento más importante.
 :::
 
-
+::: {data-id="code_ordinal"}
 ```{r}
 #| eval: false
 #| echo: true
+#| code-line-numbers:  "2-5|7-10"
 options(contrasts = rep("contr.sum", 2))
 clm_sum_treat.period <- clm(
     Response ~ Treat * Period,
@@ -61,10 +64,14 @@ clmm_treat.period.subject.item <- clmm(
 )
 ```
 
+:::
+
+::: {data-id="table_ordinal"}
 
 ```{r}
 clm_sum_treat.period <- readRDS("../models/clm_sum_treat.period.rds")
 clmm_treat.period.subject.item <- readRDS("../models/clmm_treat.period.subject.item.rds")
+brm_treat.period.subject.item <- readRDS("../models/brm_treat.period.subject.item.rds")
 
 models <- list()
 models[[format(clm_sum_treat.period$formula)]] <- clm_sum_treat.period
@@ -73,4 +80,77 @@ modelsummary(models, estimate = "{estimate}{stars}", gof_omit = c("RMSE"), stati
     cols_hide(columns = c(2)) %>%
     tab_options(table.font.size = 25)
 ```
+
+:::
+
+
+## Regresión Ordinal (comparación frecuentista vs bayesiano) {auto-animate=true}
+
+::: {data-id="code_ordinal"}
+```{r}
+#| eval: false
+#| echo: true
+#| code-line-numbers:  "6-10"
+options(contrasts = rep("contr.sum", 2))
+clmm_treat.period.subject.item <- clmm(
+    Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item),
+    data = df_response
+)
+brm_treat.period.subject.item <- brm(
+    Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item),
+    data = df_response,
+    family = cumulative("logit")
+)
+```
+:::
+
+::: {data-id="table_ordinal"}
+
+```{r}
+df_clmm <- coef(clmm_treat.period.subject.item) %>% data.frame()
+colnames(df_clmm) <- c("Estimation.clmm")
+
+df_clmm <- bind_cols(df_clmm, confint(clmm_treat.period.subject.item))
+
+df_clmm_ranef_coefs <- c(
+    attr(VarCorr(clmm_treat.period.subject.item)$Item, "stddev")[1],
+    attr(VarCorr(clmm_treat.period.subject.item)$Item, "stddev")[2],
+    attr(VarCorr(clmm_treat.period.subject.item)$Subject, "stddev")[1],
+    attr(VarCorr(clmm_treat.period.subject.item)$Subject, "stddev")[2],
+    attr(VarCorr(clmm_treat.period.subject.item)$Item, "correlation")[2, 1],
+    attr(VarCorr(clmm_treat.period.subject.item)$Subject, "correlation")[2, 1]
+) %>% data.frame()
+
+rownames(df_clmm_ranef_coefs) <- c("Item.sd(Intercept)", "Item.sd(Treat1)", "Subject.sd(Intercept)", "Subject.sd(Treat1)", "Item.cor(Intercept,Treat1)", "Subject.cor(Intercept,Treat1)")
+colnames(df_clmm_ranef_coefs) <- c("Estimation.clmm")
+
+df_clmm <- bind_rows(df_clmm, df_clmm_ranef_coefs)
+df_brm <- (broom.mixed::tidyMCMC(brm_treat.period.subject.item, conf.int = T))[1:13, ]
+
+colnames(df_clmm) <- c("Estimation.clmm", "conf.2.5%", "conf.97.5%")
+colnames(df_brm) <- c("Name", "Estimation.brm", "std.error", "cred.2.5%", "cred.97.5%")
+df_brm$Name <- rownames(df_clmm)
+df_clmm$Name <- df_brm$Name
+df_clmm <- df_clmm %>% tibble()
+
+left_join(df_clmm, df_brm) %>%
+    relocate(Name) %>%
+    mutate(across(where(is.numeric), ~ round(., 3))) %>%
+    select(-c("std.error")) %>%
+    gt() %>%
+    tab_spanner(
+        label = "ordinal::clmm",
+        columns = c(Estimation.clmm, `conf.2.5%`, `conf.97.5%`)
+    ) %>%
+    tab_spanner(
+        label = "brms::brm",
+        columns = c(Estimation.brm, `cred.2.5%`, `cred.97.5%`)
+    ) %>%
+    sub_missing(columns = everything(), missing_text = "") %>%
+    tab_options(table.font.size = 6) %>%
+    cols_label(Estimation.clmm = "Est.", Estimation.brm = "Est.") %>%
+    tab_options(table.font.size = 25)
+```
+
+:::
 

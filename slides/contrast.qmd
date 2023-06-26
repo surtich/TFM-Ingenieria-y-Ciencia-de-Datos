@@ -1,4 +1,4 @@
-## Efecto secuencia vs interacción tratamiento periodo
+## Efecto secuencia vs interacción tratamiento periodo  {visibility="uncounted"}
 
 
 ::: {.notes}

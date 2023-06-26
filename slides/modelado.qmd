@@ -1,0 +1,17 @@
+## Modelos
+
+
+::: {.notes}
+:::
+
+::: {.incremental}
+* GLM
+  * Extensión del Modelo Lineal General usado cuando la variable respuesta no es normal.
+  * La estimación de coeficientes en *GLM* se realiza maximizando la función de verosimilitud (*MLE*).
+  * Modelos utilizados:
+      * Regresión Logística
+      * Regresión Ordinal Acumulativa
+* GLMM
+  * Extensión de GLM en la que no se puede asumir la independencia de las observaciones.
+* Enfoque Bayesiano.
+:::
