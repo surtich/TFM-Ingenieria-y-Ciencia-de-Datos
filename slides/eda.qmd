@@ -105,6 +105,7 @@ En B, Q05 y Q09 baja puntuación.
 * En el subtitulado $A$ hay mayor homogeneidad entre grupos que en el $B$.
 * En el subtitulado $A$, los ítems $Q15$, $Q16$, $Q17$, tienen relativamente peores valoraciones.
 * En el subtitulado $B$, las peores valoraciones corresponden a los ítems $Q05$ y $Q09$.
+* En el subtitulado $B$, las mejores valoraciones corresponden a los ítems $Q04$ y $Q13$.
 
 ```{r}
 #| fig-align: center

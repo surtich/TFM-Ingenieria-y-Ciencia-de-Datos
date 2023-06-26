@@ -170,7 +170,7 @@ g4 <- inner_join(df_improve2, df_positive) %>%
         rows = Item %in% q.errors, columns = Prob_B, palette = "ggsci::grey_material", target_columns = c(Freq_B, Prob_B)
     ) %>%
     cols_label(Freq_A = "Freq", Prob_A = "Prob", Freq_B = "Freq", Prob_B = "Prob") %>%
-    tab_options(table.font.size = 30) %>%
+    tab_options(table.font.size = 25) %>%
     text_transform(
         fn = function(Item) {
             lapply(Item, function(item) paste0("<div title='", question_labels[as.integer(substr(item, 2, 3)) %% 18 + 1], "'>", item, "</div>"))
@@ -200,7 +200,9 @@ g4 <- inner_join(df_improve2, df_positive) %>%
     align-self: end;
   } 
 </style>
-  
+
+::: {.panel-tabset}
+### Pregunta  
 ::: {.callout-note}
 ## Pregunta de investigación
 
@@ -209,7 +211,7 @@ g4 <- inner_join(df_improve2, df_positive) %>%
 * El subtitulado $A$ ha sido mejor evaluado por los estudiantes.
 * El modelo con variable respuesta `Improve` predice que la probabilidad de que se otorgue una mayor puntuación en $A$ que en $B$ es `r paste(round(100/(1+exp(-fixef(glmer_improve_subject_question)[[1]])),2),"%", sep="")`.
 
-## Repuesta a la pregunta de investigación y a los objetivos específicos {transition="none" visibility="uncounted"}
+### Facilidad
 
 ::: {.callout-tip}
 ## Objetivo específico
@@ -255,8 +257,7 @@ Los estudiantes han identificado errores de subtitulado de los ítems:
 * `r question_labels[15]` ($Q14$).
 :::
 
-## Repuesta a la pregunta de investigación y a los objetivos específicos {transition="none" visibility="uncounted"}
-
+### Dificultad
 
 ::: {.callout-tip}
 ## Objetivo específico
@@ -302,9 +303,7 @@ Los estudiantes han tenido problemas en la identificación de errores de subtitu
 :::
 
 
-
-## Repuesta a la pregunta de investigación y a los objetivos específicos {transition="none" visibility="uncounted"}
-
+### Ítems de control
 
 ::: {.callout-tip}
 ## Objetivo específico
@@ -334,7 +333,7 @@ inner_join(df_improve2, df_positive) %>%
         rows = Item %in% q.no.errors, columns = Prob_B, palette = "ggsci::grey_material", target_columns = c(Freq_B, Prob_B), reverse = T, , domain = c(-0.5, 1)
     ) %>%
     cols_label(Freq_A = "Freq", Prob_A = "Prob", Freq_B = "Freq", Prob_B = "Prob") %>%
-    tab_options(table.font.size = 30) %>%
+    tab_options(table.font.size = 25) %>%
     text_transform(
         fn = function(Item) {
             lapply(Item, function(item) paste0("<div title='", question_labels[as.integer(substr(item, 2, 3)) %% 18 + 1], "'>", item, "</div>"))
@@ -380,8 +379,7 @@ g3
   * `r question_labels[18]` ($Q17$).
 :::
 
-
-## Repuesta a la pregunta de investigación y a los objetivos específicos {transition="none" visibility="uncounted"}
+### Efectos secuencia y periodo
 
 ::: {.callout-tip}
 ## Objetivo específico
@@ -396,3 +394,5 @@ Efecto periodo: ¿La evaluación del subtitulado del segundo vídeo visto está 
 * En el modelo ordinal `Response ~ Treat * Period` se constató que tanto el periodo como la secuencia son significativos.
 * Estos efectos son mucho menos importantes que los debidos al subtitulado.
 * Al introducir como variables explicativas el estudiante y el ítem tanto el periodo como la secuencia pasan a ser no significativos. 
+
+:::

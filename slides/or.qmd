@@ -1,0 +1,15 @@
+## Comparación con *Odds Ratio*  {visibility="uncounted" data-hide-slide-number="true"}
+
+```{r}
+#| tbl-cap: Log OR ~ Treat + Period + Response
+data.frame(summary(loddsratio(~ Treat + Period + Response_l, data = df_all)) %>% unclass(), check.names = F) %>%
+    rownames_to_column("Response") %>%
+    mutate_if(is.numeric, round, 3) %>%
+    gt() %>%
+    tab_options(table.font.size = 25)
+```
+```{r}
+#| fig-width: 15
+#| fig-align: center
+fourfold(xtabs(~ Treat + Period + Response, data = df_all), fontsize = 20)
+```

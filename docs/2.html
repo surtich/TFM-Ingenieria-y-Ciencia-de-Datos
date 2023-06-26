@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.333">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="TFM UNED Máster en Ingeniería y Ciencia de Datos">
+
+<title>Utilización de técnicas multivariantes para el estudio del aprendizaje de la mejora de la accesibilidad en el subtitulado de vídeos - 2&nbsp; Marco teórico y estado del arte</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./3.html" rel="next">
+<link href="./index.html" rel="prev">
+<link href="./images/logo.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "Sin resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar"
+  }
+}</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./2.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Marco teórico y estado del arte</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Utilización de técnicas multivariantes para el estudio del aprendizaje de la mejora de la accesibilidad en el subtitulado de vídeos</a> 
+        <div class="sidebar-tools-main">
+    <a href="./Utilización-de-técnicas-multivariantes-para-el-estudio-del-aprendizaje-de-la-mejora-de-la-accesibilidad-en-el-subtitulado-de-vídeos.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Utilities for R.</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Marco teórico y estado del arte</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Materiales y métodos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Leemos el tibble preprocesado</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Resultados</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Referencias</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Apéndices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./77-Contrasts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Efecto secuencia e interacción tratamiento vs.&nbsp;periodo</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#características-del-diseño-del-experimento" id="toc-características-del-diseño-del-experimento" class="nav-link active" data-scroll-target="#características-del-diseño-del-experimento"><span class="header-section-number">2.1</span> Características del diseño del experimento</a></li>
+  <li><a href="#sec-glm" id="toc-sec-glm" class="nav-link" data-scroll-target="#sec-glm"><span class="header-section-number">2.2</span> Modelos Lineales Generalizados </a>
+  <ul class="collapse">
+  <li><a href="#sec-logistica" id="toc-sec-logistica" class="nav-link" data-scroll-target="#sec-logistica"><span class="header-section-number">2.2.1</span> Regresión Logística</a></li>
+  <li><a href="#sec-ordinal" id="toc-sec-ordinal" class="nav-link" data-scroll-target="#sec-ordinal"><span class="header-section-number">2.2.2</span> Regresión Ordinal</a></li>
+  </ul></li>
+  <li><a href="#sec-multinivel" id="toc-sec-multinivel" class="nav-link" data-scroll-target="#sec-multinivel"><span class="header-section-number">2.3</span> Modelos Multinivel Generalizados</a></li>
+  <li><a href="#sec-bayesiano" id="toc-sec-bayesiano" class="nav-link" data-scroll-target="#sec-bayesiano"><span class="header-section-number">2.4</span> Modelado bayesiano</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-arte" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Marco teórico y estado del arte</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="características-del-diseño-del-experimento" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="características-del-diseño-del-experimento"><span class="header-section-number">2.1</span> Características del diseño del experimento</h2>
+<p>En este trabajo se estudiarán las diferencias existentes entre dos niveles de subtitulado (uno correcto y otro con errores) a través de las respuestas de los estudiantes a una escala de Likert de 18 ítems que fue respondida tras visualizar cada vídeo (ver <a href="3.html#sec-desc"><span>Sección&nbsp;3.1</span></a>). Para ello se propondrán modelos estadísticos adecuados al diseño del experimento.</p>
+<p>El diseño del experimento de la actividad de subtitulado fue completamente aleatorizado y <strong>cruzado <em>AB/BA</em></strong>. En estos diseños se desea conocer el efecto de un factor con dos niveles sobre una variable respuesta. Para ello, se asigna aleatoriamente a los participantes a dos grupos y se mide la variable respuesta en dos periodos en cada grupo. En el primer periodo, a uno de los grupos se le asigna un nivel de factor y al otro grupo el otro nivel de factor. En el segundo periodo se intercambian los niveles de factor asignados a cada grupo (ver <a href="#fig-ab-ba">Figura&nbsp;<span>2.1</span></a>). Este diseño se diferencia del diseño paralelo <span class="math inline">\(AA/BB\)</span> en el que el nivel de factor asignado a cada grupo se mantiene entre periodos (ver <a href="#fig-aa-bb">Figura&nbsp;<span>2.2</span></a>). El y paralelo se pueden combinar si los participantes se clasifican en cuatro grupos (<span class="math inline">\(AA/AB/BA/BB\)</span>). Por último, se pueden hacer diseños con más periodos o/y con más factores o niveles de factor. Los diseños cruzados son habituales en estudios clínicos en investigación médica <span class="citation" data-cites="lim2021">(ver <a href="references.html#ref-lim2021" role="doc-biblioref">Lim y In 2021</a>)</span> y farmacológica para la evaluación de medicamentos genéricos.</p>
+<div class="cell" data-fig-width="6">
+<div class="cell-output-display">
+<div id="fig-ab-ba" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-ab-ba">flowchart LR
+  subgraph Primer Periodo
+  C[Tratamiento A]
+  D[Tratamiento B]
+  end
+  subgraph Segundo Periodo
+  E[Tratamiento B]
+  F[Tratamiento A]
+  end
+  A[Sujetos participantes] --&gt; B{Aleatorización}
+  B-- Secuencia AB --&gt; C-.-&gt;E
+  B-- Secuencia BA --&gt; D-.-&gt;F
+</pre>
+</div>
+<figcaption class="figure-caption">Figura&nbsp;2.1: Diagrama de diseño cruzado AB/BA</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-fig-width="6">
+<div class="cell-output-display">
+<div id="fig-aa-bb" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-aa-bb">flowchart LR
+  subgraph Primer Periodo
+  C[Tratamiento A]
+  D[Tratamiento B]
+  end
+  subgraph Segundo Periodo
+  E[Tratamiento A]
+  F[Tratamiento B]
+  end
+  A[Sujetos participantes] --&gt; B{Aleatorización}
+  B-- Secuencia AA --&gt; C-.-&gt;E
+  B-- Secuencia BB --&gt; D-.-&gt;F
+</pre>
+</div>
+<figcaption class="figure-caption">Figura&nbsp;2.2: Diagrama de diseño paralelo AA/BB</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Un <strong></strong> <span class="citation" data-cites="lawson2015">(<a href="references.html#ref-lawson2015" role="doc-biblioref">Lawson 2015, 18</a>)</span> “garantiza la validez del experimento contra sesgos causados por otras variables ocultas. Cuando las unidades experimentales se asignan aleatoriamente a los niveles de factor de tratamiento, se puede realizar una prueba exacta de la hipótesis de que el efecto del tratamiento es cero utilizando una prueba de aleatorización”.</p>
+<p>Siguiendo a <span class="citation" data-cites="senn2022">Senn (<a href="references.html#ref-senn2022" role="doc-biblioref">2022, 5-9</a>)</span>, para que el ensayo sea de tipo cruzado no sería suficiente intercambiar las secuencias sino que debe ser objeto del ensayo el estudio de las diferencias entre los tratamientos individuales que componen las secuencias. En la misma línea, <span class="citation" data-cites="lui2016">Lui (<a href="references.html#ref-lui2016" role="doc-biblioref">2016, 1-2</a>)</span> afirma que “el objetivo principal de un diseño cruzado es estudiar las diferencias entre tratamientos individuales (en lugar de las diferencias entre secuencias de tratamiento). Debido a que cada paciente sirve como su propio control, el diseño cruzado es una alternativa útil al diseño de grupos paralelos para aumentar la potencia”.</p>
+<p>Los principales problemas de un diseño cruzado son el abandono (<code>drop-out</code>), de alguno de los participantes y la interacción entre el tratamiento y el periodo o efecto secuencia (<code>carry-over</code> o contaminación). Además, el análisis estadístico es más complicado, particularmente cuando la respuesta es ordinal y hay más de dos tratamientos. Aplicado al experimento del subtitulado, se producirá <strong>efecto secuencia</strong> si las respuestas a los cuestionarios fueran diferentes cuando los vídeos se ven en un orden que cuando se ven en el otro. Además hay que tener en consideración de la existencia del <strong>efecto periodo</strong>, que se producirá si las respuestas del segundo periodo están influidas por haber realizado la primera actividad de subtitulado. Como ejemplo de estos efectos se puede ver <span class="citation" data-cites="senn2022">Senn (<a href="references.html#ref-senn2022" role="doc-biblioref">2022, 35-53</a>)</span>: Se analiza un experimento que consistió en medir el flujo espiratorio máximo (PEF, por sus siglas en inglés) en 13 niños con edades entre los 7 y los 14 años con asma a los que se les administró salbutamol (un conocido broncodilatador) y formoterol (un broncodilatador de reciente aparición en el momento en que se realizó el estudio). Se hicieron dos grupos a los que se les administró ambos tratamientos en orden inverso dejando un periodo de lavado (<code>washout period</code>) entre aplicaciones. El resulta de medir si el PEF medio de los dos grupos es diferente entre periodos, y el consiste en comprobar si hay diferencias significativas entre aplicar primero el tratamiento con salbutamol y luego con formoterol o hacerlo al revés.</p>
+<p>Otra cuestión de relevancia es que las respuestas a los ítems de una son de <strong>tipo ordinal</strong>. Los test estadísticos <em></em> o <em></em> presuponen que la variable de respuesta es cuantitativa y con distribución normal. Tratar las respuestas a una escala de Likert como si fueran cuantitativas no es correcto por las siguientes razones:</p>
+<ul>
+<li><p>Los niveles de respuesta no son necesariamente equidistantes: la distancia entre cada par de opciones de respuesta correlativos puede no ser la misma para todos los pares. Por ejemplo, la diferencia entre “Muy en desacuerdo” y “En desacuerdo” y la diferencia entre “De acuerdo” y “Muy de acuerdo” es de un nivel, pero psicológicamente puede ser percibida de forma diferente por cada sujeto.</p></li>
+<li><p>La distribución de las respuestas ordinales puede ser no normal. En particular esto sucederá si hay muchas respuestas en los extremos del cuestionario.</p></li>
+<li><p>Las varianzas de las variables no observadas que subyacen a las variables ordinales observadas pueden diferir entre grupos, tratamientos, periodos, etc.</p></li>
+</ul>
+<p>En <span class="citation" data-cites="kruschke2018">Liddell y Kruschke (<a href="references.html#ref-kruschke2018" role="doc-biblioref">2018</a>)</span> se han analizado los problemas potenciales de tratar datos ordinales como si fueran cuantitativos constatando que se pueden presentar las siguientes situaciones:</p>
+<ul>
+<li>Se pueden encontrar diferencias significativas entre grupos cuando no las hay: .</li>
+<li>Se pueden obviar diferencias cuando en realidad sí existen: .</li>
+<li>Incluso se pueden invertir los efectos de un tratamiento.</li>
+<li>También puede malinterpretarse la interacción entre factores.</li>
+</ul>
+<p>Otra cuestión que hay que tener en cuenta es que, al tratarse de un diseño cruzado, es de <strong>medidas repetidas</strong> ya que cada sujeto realiza dos veces el test, uno con cada vídeo y que, por lo tanto, las respuestas a cada test de un mismo sujeto no son independientes. Además, tampoco se pueden considerar independientes los ítems que componen el test ya que los ítems pretenden medir la misma variable latente: la calidad del subtitulado.</p>
+<p>En este trabajo se analiza si el nivel de subtitulado (correcto o defectuoso) influye en el nivel de respuesta a los ítems de la escala de Likert, que es la variable dependiente. Se evalúa también la existencia de efectos secuencia y periodo y la influencia que tienen sobre el nivel de respuesta el estudiante y el propio ítem.</p>
+</section>
+<section id="sec-glm" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="sec-glm"><span class="header-section-number">2.2</span> Modelos Lineales Generalizados <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></h2>
+<p>El Modelo Lineal Generalizado (<em>Generalized Linear Model</em>, <span class="math inline">\(GLM\)</span>) es un modelo en el que la variable respuesta no sigue una distribución Normal. Para especificar un son necesarios tres componentes <span class="citation" data-cites="agresti_2018">(ver <a href="references.html#ref-agresti_2018" role="doc-biblioref">Agresti 2018, 66-67</a>)</span>:</p>
+<ul>
+<li><p>Un componente aleatorio que será una distribución de probabilidad de la familia exponencial. Se asume que la variable respuesta <span class="math inline">\(Y\)</span> se distribuye según este componente aleatorio.</p></li>
+<li><p>Un componente lineal de predictores: <span class="math display">\[
+\tau+\beta_1x_1+...+\beta_px_p
+\]</span></p></li>
+<li><p>Una función de enlace <span class="math inline">\(g\)</span> que relaciona <span class="math inline">\(\mu=E(Y)\)</span> con los predictores, de tal forma que: <span class="math display">\[
+g(\mu)=\tau+\beta_1x_1+...+\beta_px_p
+\]</span></p></li>
+</ul>
+<p>La estimación de coeficientes en <em>GLM</em> se realiza maximizando la función de verosimilitud (<em>Maximum Likelihood Estimation</em>, <em></em>). Es decir, que los coeficientes del modelo son aquellos que maximizan la probabilidad de los datos.</p>
+<section id="sec-logistica" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="sec-logistica"><span class="header-section-number">2.2.1</span> Regresión Logística</h3>
+<p>La es un caso particular de <span class="math inline">\(GLM\)</span> en el que la variable respuesta es dicotómica. Aunque la Regresión Logística no es aplicable directamente a las respuestas de una escala de Likert por ser éstas ordinales, se introduce aquí por dos motivos:</p>
+<ul>
+<li>En la sección de modelado (ver <a href="4.html#sec-logistica-2"><span>Sección&nbsp;4.2.2</span></a>), se propondrán dos transformaciones de la variable respuesta para convertirla en dicotómica.</li>
+<li>Además, en este capítulo se introducirá la Regresión Ordinal (ver <a href="#sec-ordinal"><span>Sección&nbsp;2.2.2</span></a>). Este modelo se puede considerar una extensión de la Regresión Logística y permitirá tratar la variable respuesta como ordinal. De ahí el interés en presentar previamente la Regresión Logística.</li>
+</ul>
+<p>Como se ha dicho, la <span class="citation" data-cites="agresti_2018">(ver <a href="references.html#ref-agresti_2018" role="doc-biblioref">Agresti 2018, 68-69</a>)</span> es un caso particular de <span class="math inline">\(GLM\)</span> donde la variable respuesta, <span class="math inline">\(Y\)</span>, es dicotómica o Bernoulli. Es decir, que <span class="math inline">\(Y\)</span> toma valores 0 ó 1. En una función de Bernoulli de parámetro <span class="math inline">\(\pi\)</span> (<span class="math inline">\(E[Y] = P(Y=1) = \pi\)</span>), es necesaria una función que mapee los valores que puede tomar el componente lineal de rango <span class="math inline">\((-\infty, +\infty)\)</span> a los valores que puede tomar <span class="math inline">\(\pi\)</span> en el rango <span class="math inline">\((0, 1)\)</span>. Una función que permite hacer esto es la <em></em>:</p>
+<p><span id="eq-logistic"><span class="math display">\[
+logit(Y=1) = log \left[\frac{P(Y=1)}{1-P(Y=1)} \right] = \tau+\beta_1x_1+...+\beta_px_p
+\tag{2.1}\]</span></span></p>
+<p>La inversa de la función <em>logit</em> es la <em></em> y permite realizar el mapeo inverso para obtener la probabilidad:</p>
+<p><span class="math display">\[
+P(Y=1) = \frac{1}{1 + exp^{-\tau-\beta_1x_1...-\beta_px_p}}
+\]</span></p>
+<p>La interpretación de los coeficientes es la siguiente <span class="citation" data-cites="frienly2015">(ver <a href="references.html#ref-frienly2015" role="doc-biblioref">Friendly, Meyer, y Zeileis 2015, 260</a>)</span>:</p>
+<ul>
+<li><span class="math inline">\(\tau\)</span> es el logaritmo del <em></em> de <span class="math inline">\(Y\)</span> cuando <span class="math inline">\(x_j=0, \forall j \in 1...p\)</span>.</li>
+<li><span class="math inline">\(\beta_j\)</span> es el logaritmo del <em></em> asociado a una unidad de incremento de <span class="math inline">\(x_j\)</span>.</li>
+</ul>
+<p>El contraste de hipótesis para los coeficientes <span class="math inline">\(\beta\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+H_0: \beta_j =  0 \\
+H_1: \beta_j \ne  0
+\end{aligned}
+\]</span></p>
+<p>se puede realizar con el Test de Wald:</p>
+<p><span class="math display">\[
+\begin{aligned}
+W &amp; = \frac{\hat\beta_j - 0}{se(\hat\beta_j)} \sim N(0,1)
+\end{aligned}
+\]</span></p>
+<p>o con el Test de Razón de Verosimilitudes (<em>Likelihood Ratio Test</em>, <em></em>):</p>
+<p><span class="math display">\[
+\begin{aligned}
+LRT = \Lambda &amp;= -2 \log \frac{L(\widehat{reducido})}{L(\widehat{completo})}\\
+&amp;= -2 \log L(\widehat{reducido}) + 2 \log L(\widehat{completo}) \sim \chi^2_r
+\end{aligned}
+\]</span></p>
+<p>donde:</p>
+<ul>
+<li>r es el número de <span class="math inline">\(\beta's\)</span> iguales a cero.</li>
+<li><span class="math inline">\(L(\widehat{reducido})\)</span> es el valor que maximiza la función de verosimilitud en la que algunos (<span class="math inline">\(r\)</span>) de los <span class="math inline">\(\beta's\)</span> han sido igualados a cero.</li>
+<li><span class="math inline">\(L(\widehat{completo})\)</span> es el valor que maximiza la función de verosimilitud en el modelo que incluye todos los <span class="math inline">\(\beta's\)</span>.</li>
+</ul>
+<p><span class="math inline">\(LTR\)</span> permite comprobar la hipótesis de que uno o varios coeficientes sean cero. Para comparar modelos no anidados, se puede usar el Criterio de Información de Akaike (AIC) o el Criterio de Información Bayesiano (BIC), que se definen respectivamente:</p>
+<p><span id="eq-aic"><span class="math display">\[
+\begin{aligned}
+AIC &amp;: -2 \log L + 2p \\
+BIC &amp;: -2 \log L + p \log(n)
+\end{aligned}
+\tag{2.2}\]</span></span></p>
+<p>donde <span class="math inline">\(L\)</span> es el valor de maxima verosimilitud y el segundo sumando es una penalización que será mayor cuanto más complejo sea el modelo (<em>p = número de parámetros</em>, <em>n = observaciones</em>).</p>
+</section>
+<section id="sec-ordinal" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="sec-ordinal"><span class="header-section-number">2.2.2</span> Regresión Ordinal</h3>
+<p>Las respuestas a los ítems de una escala de Likert son ordinales. La es una clase de <span class="math inline">\(GLM\)</span> que comparte muchas similitudes con la Regresión Logística (ver <a href="#sec-logistica"><span>Sección&nbsp;2.2.1</span></a>) pero que tiene en consideración que los valores de la variable de respuesta están ordenados <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Según <span class="citation" data-cites="burkner2019">Bürkner y Vuorre (<a href="references.html#ref-burkner2019" role="doc-biblioref">2019, 3-11</a>)</span> hay tres clases de Regresión Ordinal:</p>
+<ul>
+<li>Regresión Ordinal Acumulativa.</li>
+<li>Regresión Ordinal Secuencial.</li>
+<li>Regresión Ordinal Adyacente.</li>
+</ul>
+<p>Las regresiones ordinales secuencial y adyacente presuponen que para alcanzar un nivel se ha tenido que pasar previamente por los anteriores. En un ítem de Likert esto carece de sentido y, por lo tanto, se descartan estos modelos y se prefiere el <em>Modelo Acumulativo</em> (<em>Cumulative Model</em>, <span class="math inline">\(CM\)</span>) que además es el más utilizado <span class="citation" data-cites="burkner2019">(ver <a href="references.html#ref-burkner2019" role="doc-biblioref">Bürkner y Vuorre 2019, 23-24</a>)</span>.</p>
+<p><span class="math inline">\(CM\)</span> presupone que la variable ordinal observada, <span class="math inline">\(Y\)</span>, proviene de la categorización de una variable latente (no observada) continua, <span class="math inline">\(\tilde{Y}\)</span>. Hay <span class="math inline">\(K\)</span> umbrales <span class="math inline">\(\tau_k\)</span> que particionan <span class="math inline">\(\tilde{Y}\)</span> en <span class="math inline">\(K + 1\)</span> categorías ordenadas observables (ver <a href="#fig-cumulative">Figura&nbsp;<span>2.3</span></a>). Si se asume que <span class="math inline">\(\tilde{Y}\)</span> tiene una cierta distribución (por ejemplo, normal) con distribución acumulada <span class="math inline">\(F\)</span>, se calcula la probabilidad de que <span class="math inline">\(Y\)</span> sea la categoría <span class="math inline">\(k\)</span> de esta forma:</p>
+<p><span class="math display">\[Pr(Y = k) = F(\tau_k) - F(\tau_{k-1})\]</span></p>
+<div class="cell" data-freeze="true">
+<div class="cell-output-display">
+<div id="fig-cumulative" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="2_files/figure-html/fig-cumulative-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figura&nbsp;2.3: Función latente en una regresión ordinal acumulativa.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Por ejemplo en la <a href="#fig-cumulative">Figura&nbsp;<span>2.3</span></a>: <span class="math inline">\(Pr(Y = 2) = F(\tau_2) - F(\tau_{1})\)</span>. Suponiendo que <span class="math inline">\(\tilde{Y}\)</span> tenga una relación lineal los predictores:</p>
+<p><span class="math display">\[\tilde{Y} = \eta + \epsilon = \beta_1 x_1 + \beta_2 x_2 + ... + \beta_p x_p + \epsilon\]</span></p>
+<p>entonces la función de probabilidad acumulada de los errores tendrá la misma forma que la de <span class="math inline">\(\tilde{Y}\)</span>:</p>
+<p><span class="math display">\[P(\epsilon \leq z) = F(z)\]</span></p>
+<p>Se puede calcular la distribución de probabilidad acumulada de <span class="math inline">\(Y\)</span>:</p>
+<p><span class="math display">\[P(Y \leq k \mid \eta) = P(\tilde{Y} \leq \tau_k \mid \eta) = P(\eta + \epsilon \leq \tau_k) = P(\epsilon \leq \tau_k - \eta) = F(\tau_k - \eta)\]</span></p>
+<p>Por lo que asumiendo la normalidad de los errores:</p>
+<p><span class="math display">\[P(Y = k) = \Phi(\tau_k - \eta) - \Phi(\tau_{k - 1} - \eta)\]</span></p>
+<p>donde hay que estimar los umbrales <span class="math inline">\(\tau_k\)</span> y las pendientes de cada variable explicativa. La función anterior es la conocida como la función de enlace <code>probit</code>. La interpretación de los coeficientes con esta función de enlace no resulta intuitiva. Por ello en este trabajo se va a utilizar la función de enlace <code>logit</code>. Con esta función de enlace la interpretación de los coeficientes es parecida a la de los coeficientes de la regresión logística. Además, en la práctica, los coeficientes estimados suelen tener valores similares a los de la función <code>probit</code>. Para entender como se deben interpretar los coeficientes del modelo <span class="math inline">\(CM\)</span> se parte del supuesto de que el <span class="math inline">\(logit\)</span> de la función de probabilidad es lineal:</p>
+<p><span id="eq-ordinal"><span class="math display">\[
+logit [P(Y \le k)] = \tau_{k} - \eta = \tau_{k} - (\beta_1 x_1 + \beta_2 x_2 + ... + \beta_p x_p)
+\tag{2.3}\]</span></span></p>
+<p>En ese caso, se puede demostrar fácilmente que, por ejemplo:</p>
+<p><span class="math display">\[\frac{\frac{P(Y \leq k \mid \eta)}{P(Y &gt; k \mid \eta)}}{\frac{P(Y \leq k+1 \mid \eta)}{P(Y &gt; k+1 \mid \eta)}} = \exp(\tau_{k} - \tau_{k+1})\]</span></p>
+<p>Y que <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>:</p>
+<p><span class="math display">\[\frac{\frac{P(Y \leq k \mid x_j = 1)}{P(Y &gt; k \mid x_j = 1)}}{\frac{P(Y \leq k \mid x_j=0)}{P(Y &gt; k \mid x_j = 0)}} = \exp(-\beta_{j})\]</span></p>
+<p>o, equivalentemente:</p>
+<p><span class="math display">\[\frac{\frac{P(Y &gt; k \mid x_j = x + 1)}{P(Y \leq k \mid x_j = x + 1)}}{\frac{P(Y &gt; k \mid x_j = x)}{P(Y \leq k \mid x_j = x)}} = \exp(\beta_{j})\]</span></p>
+<p>Es decir, que <span class="math inline">\(\exp(\beta_{j})\)</span> es el <em>odds ratio</em> (cambio relativo entre <span class="math inline">\(odds\)</span>, ) de que la variable respuesta esté por encima de una determinada categoría versus estar por debajo de ella para una unidad de incremento del predictor <span class="math inline">\(x_j\)</span>. Un valor del coeficiente <span class="math inline">\(\beta_j\)</span> positivo indica que la relación entre el predictor <span class="math inline">\(x_j\)</span> y la función de <span class="math inline">\(logit\)</span> es positiva y, por lo tanto, se incrementa la probabilidad de un mayor valor de la variable respuesta.</p>
+<section id="presunciones-del-modelo" class="level4" data-number="2.2.2.1">
+<h4 data-number="2.2.2.1" class="anchored" data-anchor-id="presunciones-del-modelo"><span class="header-section-number">2.2.2.1</span> Presunciones del modelo</h4>
+<p>Este modelo se denomina proporcional ya que se asume que cada predictor tiene los mismos efectos sobre todos los niveles de la variable de respuesta ordinal <span class="citation" data-cites="Liu2202">(ver <a href="references.html#ref-Liu2202" role="doc-biblioref">Liu 2022</a>, chap.&nbsp;5)</span>. Es decir, que los <span class="math inline">\(odds\)</span> de los niveles de respuesta deben ser proporcionales para los mismos valores de las variables explicativas. Esta suposición frecuentemente no es realista y se puede relajar permitiendo estimar un coeficiente diferente para cada nivel de la variable respuesta. Sin embargo, el incremento del número de coeficientes dificulta la interpretabilidad del modelo. <span class="citation" data-cites="harrell2020">Harrell (<a href="references.html#ref-harrell2020" role="doc-biblioref">2020</a>)</span> aboga por usar este modelo incluso aunque la suposición de proporcionalidad no se cumpla:</p>
+<blockquote class="blockquote">
+<p>“Ningún modelo se ajusta perfectamente a los datos, …, la aproximación ofrecida por el modelo <span class="math inline">\(CM\)</span> sigue siendo bastante útil. Y un análisis unificado del modelo <span class="math inline">\(CM\)</span> es decididamente mejor que recurrir a análisis ineficientes y arbitrarios de valores dicotomizados de Y.”</p>
+</blockquote>
+<p>Matemáticamente la presunción de la proporcionalidad de los <span class="math inline">\(odds\)</span> se demuestra a partir de la <a href="#eq-ordinal">Ecuación&nbsp;<span>2.3</span></a>. Si se fijan los predictores en un valor arbitrario <span class="math inline">\(X=x\)</span> y se consideran dos niveles de respuesta cualesquiera <span class="math inline">\(k\)</span> y <span class="math inline">\(l\)</span>, entonces:</p>
+<p><span id="eq-ordinal2"><span class="math display">\[
+\begin{aligned}
+logit [P(Y \le k | X = x)] - logit [P(Y \le l | X = x)] = \tau_{k} - \tau_{l} \\
+\frac{odds(P(Y \le k | X = x))}{odds(P(Y \le l | X = x))}  =  \exp(\tau_{k} - \tau_{l}) \implies \\
+odds(P(Y \le k | X = x))  \propto odds(P(Y \le l | X = x))
+\end{aligned}
+\tag{2.4}\]</span></span></p>
+<p>Es decir, que la proporcionalidad de <span class="math inline">\(odds\)</span> de dos niveles de respuesta es independiente de los valores concretos de los predictores, por lo que la constante de proporcionalidad debe ser similar para todos ellos.</p>
+</section>
+</section>
+</section>
+<section id="sec-multinivel" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="sec-multinivel"><span class="header-section-number">2.3</span> Modelos Multinivel Generalizados</h2>
+<p>Un Modelo Multinivel Generalizado (<em></em>, <em>Generalized Linear Mixed Model</em>), anidado, jerárquico o mixto es un modelo en el que los datos están anidados en una estructura jerárquica. Se utilizan cuando se incumple la hipótesis de independencia entre las observaciones. Por ejemplo, si se quisiera evaluar el rendimiento de varios métodos de enseñanza, se podrían seleccionar aleatoriamente varios colegios participantes y en cada uno de ellos elegir varias clases en las que se impartiría uno de los métodos de enseñanza. En este caso, los alumnos de una clase no son independientes de los alumnos de otra clase del mismo colegio y también es esperable que los alumnos de un mismo colegio sean más parecidos entre sí que los de otro colegio. Otra situación en la que se viola la condición de independencia entre observaciones es cuando se toman varias medidas del mismo sujeto. Este tipo de experimentos se llaman de medidas repetidas o longitudinales <a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. Cuando se da este supuesto, se considera que las medidas están anidadas en el sujeto <span class="citation" data-cites="Liu2202">(ver <a href="references.html#ref-Liu2202" role="doc-biblioref">Liu 2022</a>)</span>. En un modelo multinivel no es necesario que todas las variables tengan una estructura jerárquica. Se distinguen entonces dos tipos de variables: Las conocidas como de efectos fijos son aquellas que se considera que tienen el mismo efecto en toda la población y, por lo tanto, se debe estimar un único coeficiente. Las variables de efectos aleatorios tienen un coeficiente diferente para cada elemento de la población y se supone que son una muestra de una población mucho mayor, como el caso de seleccionar aleatoriamente una muestra de colegios. Normalmente el coeficiente particular de cada elemento no es de interés para el investigador y se asume que tienen una media centrada en cero. El mayor interés de los efectos aleatorios es la estimación de su matriz de varianzas-covarianzas.</p>
+<p>La ecuación general de un modelo multinivel con dos niveles y un solo predictor con efectos aleatorios es <span class="citation" data-cites="chen2021">(ver <a href="references.html#ref-chen2021" role="doc-biblioref">Chen y Chen 2021, 40</a>)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+Nivel\ 1: &amp; y_{ij}     &amp; = &amp; \beta_{0j} + \beta_{1j}x_{1ij} + \epsilon_{ij} \\
+Nivel\ 2: &amp; \beta_{0j} &amp; = &amp; \beta_{0} + U_{0j} &amp; (intercepto\ aleatorio) \\
+          &amp; \beta_{1j} &amp; = &amp; \beta_{1} + U_{1j} &amp; (pendiente\ aleatoria) \\
+\end{aligned}
+\]</span></p>
+<p>Los errores del modelo se distribuyen:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{Error intra grupo: } &amp;  \epsilon_{ij} \sim N(0, \sigma^2) \\
+\text{Error entre grupos: } &amp;
+\begin{pmatrix}
+     U_{0j} \\
+     U_{1j} \\
+\end{pmatrix}
+\sim
+N
+\begin{pmatrix}
+\begin{pmatrix}
+     0 \\
+     0 \\
+\end{pmatrix},
+\begin{pmatrix}
+     \tau_0^2 &amp; \tau_0\tau_1\rho_{01} \\
+     \tau_0\tau_1\rho_{01} &amp;  \tau_1^2 \\
+\end{pmatrix}
+\end{pmatrix}
+\end{aligned}
+\]</span></p>
+<p>donde <span class="math inline">\(j\)</span> son los grupos que varían <span class="math inline">\(j = 1,...,J\)</span> (<span class="math inline">\(J\)</span> es el número de grupos); <span class="math inline">\(ij\)</span> es la observación <span class="math inline">\(i\)</span>-ésima del grupo <span class="math inline">\(j\)</span> (<span class="math inline">\(i = 1,...,n_j\)</span>, <span class="math inline">\(n_j\)</span> es el número de observaciones del grupo <span class="math inline">\(j\)</span>). El modelo se compone de una parte fija <span class="math inline">\(\beta_0 + \beta_1 x_{1ij}\)</span> y una aleatoria <span class="math inline">\(U_{0j} + U_{1j} x_{1ij} + \epsilon{ij}\)</span>. Los parámetros de este modelo son el intercepto y la pendiente de efectos fijos (<span class="math inline">\(\beta_0\)</span> y <span class="math inline">\(\beta_1\)</span>), la varianza intra-grupos (<span class="math inline">\(\sigma^2\)</span>), la varianza inter-grupos del intercepto aleatoria (<span class="math inline">\(\tau_0\)</span>) y de la pendiente aleatoria (<span class="math inline">\(\tau_1\)</span>), y la correlación entre intercepto y pendiente aleatorias (<span class="math inline">\(\rho_{01}\)</span>).</p>
+<p>En <span class="citation" data-cites="gelman2013">Gelman et&nbsp;al. (<a href="references.html#ref-gelman2013" role="doc-biblioref">2013, 115</a>)</span> se evalúan tres posibilidades a la hora de definir un modelo:</p>
+<ul>
+<li><span class="math inline">\(Complete\ pooling\)</span>: Consiste en estimar un único parámetro para cada predictor. Es equivalente a un modelo con efectos fijos.</li>
+<li><span class="math inline">\(No\ pooling\)</span>: Se estiman tantos parámetros como grupos haya de forma independiente.</li>
+<li><span class="math inline">\(Partial\ pooling\)</span>: Es el modelo jerárquico. Es una mezcla de ambos, ya que, aunque se estima un parámetro para cada grupo (como en <span class="math inline">\(no\ pooling\)</span>), esta estimación no es independiente, sino que se supone que las observaciones de un mismo grupo proceden de una misma distribución de probabilidad. Esto se traduce en que se produce una contracción (<em></em>) en la estimación de los parámetros hacia la media. Al influir la estimación de unas observaciones en otras, la estimación es de menor valor absoluto que la que resultaría en un modelo de <span class="math inline">\(no\ pooling\)</span>. De esta forma se puede ver el <span class="math inline">\(complete\ pooling\)</span> y el <span class="math inline">\(no\ pooling\)</span> como dos casos particulares y extremos del <span class="math inline">\(partial\ pooling\)</span>. La contracción de coeficientes en los modelos multinivel actúa como una regularización que puede evitar el sobreajuste.</li>
+</ul>
+<p>Los modelos multinivel requieren supuestos adicionales en el nivel segundo y superiores que son similares a los supuestos para los modelos de efectos fijos <span class="citation" data-cites="chen2021">(ver <a href="references.html#ref-chen2021" role="doc-biblioref">Chen y Chen 2021, 43</a>)</span>. Para estimar los parámetros en un modelo multinivel se suele utilizar el método de Máxima Verosimilitud Restringida (<span class="math inline">\(RMLE\)</span>), que es una variante de la estimación por Máxima Verosimilitud (<span class="math inline">\(MLE\)</span>) en la que se hacen ajustes en los grados de libertad del modelo con efectos aleatorios para corregir el sesgo que se produce al usar <span class="math inline">\(MLE\)</span> en estos modelos.</p>
+<p>Para evaluar si la estructura anidada es adecuada se utiliza la Correlación Intra-Clase (<em></em>, Intra-Class Correlation). <span class="math inline">\(ICC\)</span> se puede interpretar como la proporción de la varianza explicada por la estructura de agrupamiento de la población. Se diferencia del Coeficiente de Determinación (<span class="math inline">\(R2\)</span>) en que éste es la proporción de la varianza explicada por el modelo completo, mientras que <span class="math inline">\(ICC\)</span> es la varianza explicada por los efectos aleatorios <span class="citation" data-cites="performance">(ver <a href="references.html#ref-performance" role="doc-biblioref">Lüdecke et&nbsp;al. 2021</a>)</span>. La <span class="math inline">\(ICC\)</span> se calcula como el ratio de la varianza entre grupos y la varianza total <span class="citation" data-cites="chen2021">(ver <a href="references.html#ref-chen2021" role="doc-biblioref">Chen y Chen 2021, 29-33</a>)</span>:</p>
+<p><span class="math display">\[
+ICC = \rho = \frac{\tau^2}{\tau^2+\sigma^2}
+\]</span></p>
+<p>donde <span class="math inline">\(\tau^2\)</span> es la varianza poblacional entre grupos y <span class="math inline">\(\sigma^2\)</span> es la varianza de la población dentro del grupo. <span class="math inline">\(ICC\)</span> oscila entre 0 (ausencia de varianza entre grupos) y 1 (no varianza intra-grupos). Cuanto más proxima a 1 sea <span class="math inline">\(ICC\)</span> mayor evidencia hay de la existencia de una estructura anidada. Sin embargo, no hay un consenso sobre el umbral concreto que debe tener <span class="math inline">\(ICC\)</span> para decidir si es preferible o no la estructura anidada <span class="citation" data-cites="chen2021">(ver <a href="references.html#ref-chen2021" role="doc-biblioref">Chen y Chen 2021, 33</a>)</span>. <span class="math inline">\(ICC\)</span> se estima a partir de la varianza de los coeficientes y residual aleatorias calculadas por el modelo. En modelos <span class="math inline">\(GLM\)</span> no se calcula la varianza residual y se recurre a métodos de simulación para estimar <span class="math inline">\(ICC\)</span>.</p>
+</section>
+<section id="sec-bayesiano" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="sec-bayesiano"><span class="header-section-number">2.4</span> Modelado bayesiano</h2>
+<p>El paradigma frecuentista parte de la suposición de que los datos son generados a partir de una variable aleatoria <span class="math inline">\(Y\)</span> y para estimar los coeficientes se maximiza la función de verosimilitud <span class="math inline">\(p(y | \theta)\)</span> que depende del parámetro desconocido <span class="math inline">\(\theta\)</span>. En el análisis bayesiano se considera que <span class="math inline">\(\theta\)</span> es una variable aleatoria ya que hay incertidumbre respecto a su valor. Esto se traduce en que se debe asignar una distribución de probabilidad <span class="math inline">\(p(\theta)\)</span>, conocida como distribución a priori, que expresa nuestra creencia sobre los valores que puede tomar <span class="math inline">\(\theta\)</span>. En la inferencia bayesiana se usa la distribución de probabilidad a posteriori <span class="math inline">\(p(\theta | y)\)</span> que es proporcional al producto de la función de verosimilitud y de la distribución de probabilidad a priori <span class="citation" data-cites="nicenboim2023">(ver <a href="references.html#ref-nicenboim2023" role="doc-biblioref">Nicenboim Bruno 2023</a>)</span>:</p>
+<p><span class="math display">\[
+\hbox{Posterior} = \frac{\hbox{Likelihood} \times \hbox{Prior}}{\hbox{Marginal Likelihood}}
+\Rightarrow p(\theta|y) = \cfrac{ p(y|\theta) \times p(\theta) }{p(y)} \propto p(y|\theta) \times p(\theta)
+\]</span></p>
+<p>En la inferencia bayesiana hay dos fuentes de incertidumbre: Por un lado hay que contar con la variabilidad de <span class="math inline">\(Y\)</span>, ya que si se toman varias muestras, los valores <span class="math inline">\(y_i\)</span> obtenidos serán diferentes. Además, existe otra incertidumbre que proviene del desconocimiento del valor de <span class="math inline">\(\theta\)</span>. En la estimación frecuentista, debido a que se utilizan estimaciones puntuales de <span class="math inline">\(\theta\)</span>, no se tiene en cuenta esta incertidumbre. La <a href="#eq-ypred">Ecuación&nbsp;<span>2.5</span></a> se corresponde con la distribución predictiva a posteriori que tiene en consideración ambas incertidumbres: <span id="eq-ypred"><span class="math display">\[
+\begin{aligned}
+p(y_{pred}\mid y ) &amp; = \int_{\theta} p(y_{pred}, \theta \mid y)\, d\theta= \int_{\theta}
+p(y_{pred}\mid \theta,y)p(\theta \mid y)\, d\theta \\
+&amp; = \int_{\theta} p(y_{pred}\mid \theta) p(\theta \mid y)\, d\theta
+\end{aligned}
+\tag{2.5}\]</span></span></p>
+<p>donde la última igualdad resulta de la independencia condicional de <span class="math inline">\(y_{pred}\)</span> e <span class="math inline">\(y\)</span> dado <span class="math inline">\(\theta\)</span> (<span class="math inline">\(y_{pred} \perp\!\!\!\perp y \mid \theta\)</span>).</p>
+<p>Una crítica habitual a la inferencia bayesiana es que la elección de la distribución de probabilidad a priori es subjetiva. Aunque es cierto que hay un grado de subjetividad en esta elección, en realidad en el modelado frecuentista hay que tomar ciertas decisiones que también lo son, como por ejemplo la elección del nivel de significación o la forma que adopta la función de verosimilitud. En la práctica, si las observaciones son suficientemente informativas y la distribución a priori es poco informativa, la distribución de probabilidad a priori tendrá poca o nula influencia en la distribución a posteriori ya que estará dominada por la función de verosimilitud y los coeficientes estimados serán muy parecidos en ambos paradigmas. Sin embargo, en lo que diferirán es en la interpretación ya que, por ejemplo, en un modelo bayesiano se pueden interpretar los intervalos de confianza como la probabilidad de que el parámetro esté dentro del intervalo. Por eso a estos intervalos se les conoce como intervalos de credibilidad. Esa interpretación en un modelo frecuentista carecería de sentido ya que los parámetros del modelo no se consideran variables aleatorias y, por lo tanto, tendrán probabilidad 1 si el verdadero valor del parámetro cae dentro del intervalo y 0 si no lo hace. Para obtener la distribución de probabilidad a posteriori normalmente se recurre a métodos del simulación <em></em> (Métodos de Montecarlo basados en Cadenas de Markov). <a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>.</p>
+<p>Para comparar modelos entre sí se pueden usar varias medidas <span class="citation" data-cites="barreda2023">(ver <a href="references.html#ref-barreda2023" role="doc-biblioref">Barreda S. 2023</a>)</span>. Por ejemplo, la conocida como <em>log pointwise predictive density</em> o densidad predictiva puntal (<span class="math inline">\(lpd\)</span>) se calcula como: <span class="math display">\[
+\widehat{\mathrm{lpd}} = \sum_{i=1}^{N} \mathrm{log} (p(y_{i} | \theta))
+\]</span></p>
+<p>La <span class="math inline">\(lpd\)</span> es la densidad conjunta de observar los datos dada la estructura del modelo y las estimaciones de los parámetros <span class="math inline">\(\theta\)</span>. Aunque las probabilidades a priori no se incluyen en su cálculo, sí influyen en la estimación de <span class="math inline">\(\theta\)</span> y, por lo tanto, tienen un efecto en los valores de <span class="math inline">\(lpd\)</span>. Mayores valores de <span class="math inline">\(lpd\)</span> estarían indicando un mejor modelo. El problema con esta métrica es que se utilizan los datos tanto para estimar el modelo como para seleccionar el mejor modelo. Esto va a producir un sobreajuste y tenderá a favorecer los modelos más complejos. Una métrica mejor es la <em>expected log pointwise predictive density</em> o densidad predictiva puntual esperada (<span class="math inline">\(elpd\)</span>). Se define en términos de valores fuera de la muestra <span class="math inline">\(\tilde{y}\)</span> en lugar de con los valores de la muestra <span class="math inline">\(y\)</span>:</p>
+<p><span class="math display">\[
+\mathrm{elpd} = \sum_{i=1}^{N} \mathbb{E}(\mathrm{log} (p(\tilde{y}_i | \theta)))
+\]</span></p>
+<p>En la práctica no se puede saber el valor de <span class="math inline">\(elpd\)</span> ya que no se conoce el proceso que genera verdaderos valores <span class="math inline">\(\tilde{y}\)</span>. Una forma de estimar <span class="math inline">\(elpd\)</span> que empíricamente se ha demostrado que funciona es penalizar <span class="math inline">\(lpd\)</span> con el número de parámetros <span class="math inline">\(p\)</span> de forma análoga a lo que se hace en <span class="math inline">\(AIC\)</span> (ver <a href="#eq-aic">Ecuación&nbsp;<span>2.2</span></a>):</p>
+<p><span class="math display">\[
+\widehat{\mathrm{elpd}} = \widehat{\mathrm{lpd}} - \mathrm{p}
+\]</span></p>
+<p>El problema es que en modelos multinivel conocer el número de parámetros no es sencillo ya que los parámetros asociados a efectos aleatorios no se pueden considerar que sean completamente independientes. El número efectivo de parámetros va a depender de la importancia de la regresión hacia la media que sufra cada parámetro. Además, en lugar de usar una estimación puntual, se puede utilizar toda la distribución de valores de la simulación. La métrica <em>widely available information criterion</em> o “criterio de información ampliamente disponible” (<span class="math inline">\(WAIC\)</span>) es una forma de estimar <span class="math inline">\(lpd\)</span> que usa toda la distribución de probabilidad a posteriori:</p>
+<p><span class="math display">\[
+\widehat{\mathrm{lpd}} = \sum_{i=1}^{n} \mathrm{log} (\frac{1}{S} \sum_{s=1}^{S} p(y_{i} | \theta^s))
+\]</span></p>
+<p>donde <span class="math inline">\(S\)</span> es el tamaño de la muestra y el sumatorio interior es la media de densidad en un punto <span class="math inline">\(i\)</span>. Para penalizar los modelos más complejos, se usa la varianza de la función de densidad logarítmica:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\widehat{\mathrm{elpd}}_{WAIC} &amp;= \widehat{\mathrm{lpd}} - \mathrm{p_{WAIC}} \\
+\mathrm{p_{\mathrm{WAIC}}} &amp;= \sum_{i=1}^{n} \mathrm{Var}_{s=1}^{\,S}(\mathrm{log} (p(y_{i} | \theta^s)))
+\end{aligned}
+\]</span></p>
+<p>Una forma alternativa de evaluar un modelo es mediante validación cruzada (<span class="math inline">\(CV\)</span>, Cross Validation). La validación cruzada más popular es <em>K-fold-CV</em>. Con esta técnica se divide el conjunto de datos en <span class="math inline">\(K\)</span> partes y se entrena el modelo separando sucesivamente cada una de las partes que se usan para evaluar el modelo. Los valores estimados resultan de promediar los <span class="math inline">\(K\)</span> resultados. El problema es que cuanto menor sea <span class="math inline">\(K\)</span> más inestables son los resultados obtenidos, y cuanto mayor sea <span class="math inline">\(K\)</span> más veces hay que reentrenar el modelo. Un caso extremo de validación cruzada, que produce gran estabilidad en las estimaciones, es dejar un dato fuera cada vez (<em>Leave One Out</em>, <span class="math inline">\(LOO\)</span>, <span class="math inline">\(K\)</span> = <span class="math inline">\(N\)</span>). La dificultad es que requiere estimar el modelo tantas veces como datos se tengan. Para evitar esto, hay formas de aproximar <span class="math inline">\(\widehat{\mathrm{elpd}}\)</span> basadas en <span class="math inline">\(LOO\)</span> sin tener que reentrenar el modelo. La fórmula es la siguiente:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\widehat{\mathrm{elpd}}_{LOO} \approx \sum_{i=1}^{n} \mathrm{log} (p(y_{i} | \theta_{y_{-i}}))
+\end{aligned}
+\]</span></p>
+<p>donde <span class="math inline">\(\theta_{y_{-i}}\)</span> es la estimación de <span class="math inline">\(\theta\)</span> que resulta tras eliminar la observación <span class="math inline">\(y_{i}\)</span> <span class="citation" data-cites="gelman2013">(ver <a href="references.html#ref-gelman2013" role="doc-biblioref">Gelman et&nbsp;al. 2013, 175-76</a>)</span>.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-agresti_2018" class="csl-entry" role="listitem">
+Agresti, Alan. 2018. <span>«An introduction to categorical data analysis, 3rd Edition»</span>. <em>Wiley.com</em>. <a href="https://www.wiley.com/en-us/An+Introduction+to+Categorical+Data+Analysis%2C+3rd+Edition-p-9781119405283">https://www.wiley.com/en-us/An+Introduction+to+Categorical+Data+Analysis%2C+3rd+Edition-p-9781119405283</a>.
+</div>
+<div id="ref-barreda2023" class="csl-entry" role="listitem">
+Barreda S., Silbert N. 2023. <em>Bayesian Multilevel Models for Repeated Measures Data: A Conceptual and Practical Introduction in R</em>. 1st ed. Routledge. <a href="https://doi.org/10.4324/9781003285878">https://doi.org/10.4324/9781003285878</a>.
+</div>
+<div id="ref-burkner2019" class="csl-entry" role="listitem">
+Bürkner, Paul-Christian, y Matti Vuorre. 2019. <span>«Ordinal Regression Models in Psychology: A Tutorial»</span>. <em>Advances in Methods and Practices in Psychological Science</em> 2 (febrero): 251524591882319. <a href="https://doi.org/10.1177/2515245918823199">https://doi.org/10.1177/2515245918823199</a>.
+</div>
+<div id="ref-chen2021" class="csl-entry" role="listitem">
+Chen, Ding-Geng, y Jenny Chen. 2021. <em>Statistical Regression Modeling with R: Longitudinal and Multi-level Modeling</em>. <a href="https://doi.org/10.1007/978-3-030-67583-7">https://doi.org/10.1007/978-3-030-67583-7</a>.
+</div>
+<div id="ref-frienly2015" class="csl-entry" role="listitem">
+Friendly, Michael, David Meyer, y Achim Zeileis. 2015. <em>Discrete Data Analysis with R: Visualization and Modeling Techniques for Categorical and Count Data</em>. <em>Discrete Data Analysis with R: Visualization and Modeling Techniques for Categorical and Count Data</em>. <a href="https://doi.org/10.1201/b19022">https://doi.org/10.1201/b19022</a>.
+</div>
+<div id="ref-gelman2013" class="csl-entry" role="listitem">
+Gelman, Andrew, John Carlin, Hal Stern, David Dunson, Aki Vehtari, y Donald Rubin. 2013. <em>Bayesian Data Analysis</em>. <a href="https://doi.org/10.1201/b16018">https://doi.org/10.1201/b16018</a>.
+</div>
+<div id="ref-harrell2020" class="csl-entry" role="listitem">
+Harrell, F. 2020. <span>«Violation of Proportional Odds is Not Fatal»</span>. <a href="https://www.fharrell.com/post/po/">https://www.fharrell.com/post/po/</a>.
+</div>
+<div id="ref-lawson2015" class="csl-entry" role="listitem">
+Lawson, J. 2015. <span>«Design and Analysis of Experiments with R (1st ed.)»</span>. Editado por Chapman y Hall/CRC. <a href="https://doi.org/10.1201/b17883">https://doi.org/10.1201/b17883</a>.
+</div>
+<div id="ref-kruschke2018" class="csl-entry" role="listitem">
+Liddell, Torrin M., y John K. Kruschke. 2018. <span>«Analyzing ordinal data with metric models: What could possibly go wrong?»</span> <em>Journal of Experimental Social Psychology</em> 79: 328-48. <a href="https://doi.org/10.1016/j.jesp.2018.08.009">https://doi.org/10.1016/j.jesp.2018.08.009</a>.
+</div>
+<div id="ref-lim2021" class="csl-entry" role="listitem">
+Lim, Chi-Yeon, y Junyong In. 2021. <span>«Considerations for crossover design in clinical study»</span>. <em>Korean Journal of Anesthesiology</em> 74 (julio). <a href="https://doi.org/10.4097/kja.21165">https://doi.org/10.4097/kja.21165</a>.
+</div>
+<div id="ref-Liu2202" class="csl-entry" role="listitem">
+Liu, Xing. 2022. <em>Categorical Data Analysis and Multilevel Modeling Using R</em>. Editado por SAGE Publications Ltd.
+</div>
+<div id="ref-performance" class="csl-entry" role="listitem">
+Lüdecke, Daniel, Mattan S. Ben-Shachar, Indrajeet Patil, Philip Waggoner, y Dominique Makowski. 2021. <span>«<span>performance</span>: An <span>R</span> Package for Assessment, Comparison and Testing of Statistical Models»</span>. <em>Journal of Open Source Software</em> 6 (60): 3139. <a href="https://doi.org/10.21105/joss.03139">https://doi.org/10.21105/joss.03139</a>.
+</div>
+<div id="ref-lui2016" class="csl-entry" role="listitem">
+Lui, Kung-Jong. 2016. <em>Crossover Designs: Testing, Estimation, and Sample Size</em>. <em>Crossover designs: Testing, estimation, and sample size</em>. <a href="https://doi.org/10.1002/9781119114710">https://doi.org/10.1002/9781119114710</a>.
+</div>
+<div id="ref-nicenboim2023" class="csl-entry" role="listitem">
+Nicenboim Bruno, Vasishth Shravan, Schad Daniel. 2023. <span>«An Introduction to Bayesian Data Analysis for Cognitive Science»</span>. 2023. <a href="https://vasishth.github.io/bayescogsci/book/">https://vasishth.github.io/bayescogsci/book/</a>.
+</div>
+<div id="ref-senn2022" class="csl-entry" role="listitem">
+Senn, Stephen. 2022. <span>«Cross‐over Trials In Clinical Research»</span>. Editado por Ltd John Wiley. <a href="https://doi.org/10.1002/0470854596">https://doi.org/10.1002/0470854596</a>.
+</div>
+</div>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>No se deben confundir los Modelos Lineales Generales con los Modelos Lineales Generalizados. En los primeros, también llamados Modelos de Regresión Multivariante, se presupone que las variables respuesta tienen una relación lineal con los predictores y sus valores se distribuyen normalmente. Los segundos son una generalización de los primeros y permiten que la variable respuesta admita otras distribuciones además de la normal.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Otras variantes de la Regresión Logística son la Regresión Categórica y la Regresión Multinomial. En estos tipos de <em>GLM</em> la variable respuesta puede adoptar varios valores pero no se asume que estén ordenados. La Regresión Categórica y la Regresión Multinomial están relacionadas en el mismo sentido en que lo están la Regresión Logística con función de enlace Bernoulli y con función de enlace Binomial. Es decir, que la Regresión Categórica se usa cuando las observaciones no están agrupadas y la Multinomial cuando sí lo están.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>En la <a href="4.html#sec-ordinal-2"><span>Sección&nbsp;4.2.3</span></a> se demuestra esta fórmula.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Hay una diferencia conceptual entre medidas repetidas y longitudinales. Una variable se dice que es longitudinal cuando se toman varias medidas de los sujetos objeto del estudio en diferentes momentos del tiempo. Para que sea considerada de medidas repetidas, las medidas de cada sujeto se toman con distintos niveles de factor. En la práctica la distinción es poco relevante ya que ambas situaciones se parametrizan de la misma forma.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>En ocasiones se puede obtener una forma análitica de la distribución a posteriori si se elige una adecuada combinación de función de verosimilitud y distribución a priori conocidas como distribuciones conjugadas. Aunque esto evita la utilización de métodos de simulación, restringe las formas posibles de las distribuciones. En la actualidad, con el aumento de la capacidad de cálculo de los ordenadores, normalmente no es necesaria la utilización de distribuciones conjugadas.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Utilities for R.</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./3.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Materiales y métodos</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

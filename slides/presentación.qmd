@@ -2,11 +2,10 @@
 title: "<h2><img src='images/logo.png'><br>Máster en Ingeniería y Ciencia de Datos<br><br>Utilización de técnicas multivariantes<br>para el estudio del aprendizaje de la mejora de la<br>accesibilidad en el subtitulado de vídeos</h2>
 "
 author: "Autor: Javier Pérez Arteaga<br>Directores: Emilio Letón Molina y Jorge Pérez Martín"
-institute: "junio 2023"
+institute: "29 de junio 2023"
 format:
     revealjs:
         transition: slide
-        background-transition: fade
         embed-resources: true
         pdf-separate-fragments: true
         toc: true
@@ -28,6 +27,15 @@ format:
             <link rel="stylesheet" href="assets/syntax-highlight.css">
             <link rel="stylesheet" href="assets/fontawesome-free-6.1.1-web/css/fontawesome.min.css">
             <script defer src="assets/fontawesome-free-6.1.1-web/js/all.min.js"></script>
+        include-after-body: 
+            - text: |
+                <script type="text/javascript">
+                    Reveal.addEventListener('slidechanged', (event) => {
+                        const isSnOn = (event.currentSlide.dataset.hideSlideNumber !== 'true');
+                        const isCtrlOn = (event.currentSlide.dataset.hideControls !== 'true');
+                        Reveal.configure({ slideNumber: isSnOn ? 'c/t' : false, controls: isCtrlOn });
+                    });
+                </script>
 lang: es
 execute:
   echo: false
@@ -438,10 +446,12 @@ df_response %>%
 
 {{< include despedida.qmd >}}
 
-# Apéndices {visibility="uncounted"}
+# Apéndices {.unnumbered visibility="uncounted" data-hide-slide-number="true"}
 
 {{< include herramientas.qmd >}}
 {{< include glm.qmd >}}
 {{< include ordinal.qmd >}}
 {{< include glmm.qmd >}}
 {{< include contrast.qmd >}}
+{{< include or.qmd >}}
+{{< include bayesiano.qmd >}}

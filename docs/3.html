@@ -1,0 +1,2164 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.333">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="TFM UNED Máster en Ingeniería y Ciencia de Datos">
+
+<title>Utilización de técnicas multivariantes para el estudio del aprendizaje de la mejora de la accesibilidad en el subtitulado de vídeos - 3&nbsp; Materiales y métodos</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./4.html" rel="next">
+<link href="./2.html" rel="prev">
+<link href="./images/logo.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "Sin resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./3.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Materiales y métodos</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Utilización de técnicas multivariantes para el estudio del aprendizaje de la mejora de la accesibilidad en el subtitulado de vídeos</a> 
+        <div class="sidebar-tools-main">
+    <a href="./Utilización-de-técnicas-multivariantes-para-el-estudio-del-aprendizaje-de-la-mejora-de-la-accesibilidad-en-el-subtitulado-de-vídeos.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Utilities for R.</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Marco teórico y estado del arte</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Materiales y métodos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Leemos el tibble preprocesado</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Resultados</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Referencias</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Apéndices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./77-Contrasts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Efecto secuencia e interacción tratamiento vs.&nbsp;periodo</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#sec-desc" id="toc-sec-desc" class="nav-link active" data-scroll-target="#sec-desc"><span class="header-section-number">3.1</span> Descripción de la experiencia</a></li>
+  <li><a href="#ficheros-suministrados" id="toc-ficheros-suministrados" class="nav-link" data-scroll-target="#ficheros-suministrados"><span class="header-section-number">3.2</span> Ficheros suministrados</a></li>
+  <li><a href="#sec-preprocesado" id="toc-sec-preprocesado" class="nav-link" data-scroll-target="#sec-preprocesado"><span class="header-section-number">3.3</span> Preprocesado</a></li>
+  <li><a href="#variables-utilizadas" id="toc-variables-utilizadas" class="nav-link" data-scroll-target="#variables-utilizadas"><span class="header-section-number">3.4</span> Variables utilizadas</a></li>
+  <li><a href="#dataframes-utilizados" id="toc-dataframes-utilizados" class="nav-link" data-scroll-target="#dataframes-utilizados"><span class="header-section-number">3.5</span> <code>Dataframes</code> utilizados</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-metodo" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Materiales y métodos</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>En este capítulo se describe la actividad de subtitulado de la que proceden los datos y los ficheros de datos suministrados; se explica la tarea de preprocesado realizada sobre ellos y las variables que se han utilizado en el modelado estadístico.</p>
+<section id="sec-desc" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="sec-desc"><span class="header-section-number">3.1</span> Descripción de la experiencia</h2>
+<p>La actividad de subtitulado, cuyos resultados se analizan en este trabajo, ha sido cuidadosamente diseñada con un enfoque instruccional curado a través de las sucesivas ediciones del curso y así ofrecer los contenidos de forma alineada para que los estudiantes puedan realizar la evaluación del subtitulado de forma secuencial.</p>
+<p>La actividad fue voluntaria y sin influencia en la calificación final del alumno. Se realizó en el módulo “Accesibilidad del material multimedia”. En este mismo módulo, y antes de la actividad de subtitulado, los alumnos hubieron completado las secciones “Accesibilidad de la información sonora” y “Accesibilidad de la información visual”. Estos módulos constan de las siguientes actividades relacionadas con la actividad de subtitulado:</p>
+<ul>
+<li>Vídeo: “Accesibilidad audiovisual: subtítulos”.</li>
+<li>Invitación a la participación en el foro.</li>
+<li>Textos con referencias.</li>
+<li>Test de nivel 1 y nivel 2: “Accesibilidad de información sonora”</li>
+</ul>
+<p>Se estima que los estudiantes hubieron empleado unas tres horas de formación en accesibilidad multimedia (una de ellas específicamente en subtitulado) antes de realizar la actividad.</p>
+<p>De acuerdo al <strong>compromiso ético</strong> del Canal Fundación ONCE en UNED, los datos de los estudiantes se han suministrado anonimizados usando un identificador generado con -512. Además, se han eliminado del estudio los datos de estudiantes que, a pesar de haber realizado la actividad de subtitulado, no dieron su consentimiento para que sus datos fueran utilizados en estudios científicos.</p>
+<p>La actividad consistió en ver dos vídeos idénticos de 43 segundos que solo se diferencian en la calidad del subtitulado. El vídeo original fue diseñado de tal forma que su subtitulado presentara características específicas relacionadas con los requisitos incluidos en la norma de subtitulado. Por ejemplo, la existencia de sonidos relevantes para la trama sin correspondencia visual, la existencia de más de un interlocutor, o de diálogos que comprometían la velocidad máxima de subtitulado. Los subtítulos fueron realizados por una experta de FIAPAS (Confederación Española de Familias de Personas Sordas) siguiendo la norma UNE 153010 <span class="citation" data-cites="aenor2012">(ver <a href="references.html#ref-aenor2012" role="doc-biblioref">AENOR 2012</a>)</span>. El otro vídeo tenía un subtitulado similar pero se introdujeron pequeñas deficiencias, algunas de ellas inapreciables para alguien que carezca de conocimientos sobre accesibilidad. El orden de los vídeos fue aleatorio, de tal forma que una cohorte (grupo) de alumnos vio primero el vídeo bien subtitulado y luego el mal subtitulado y la otra lo hizo al revés. Después de ver cada uno de los vídeos, los alumnos respondieron a una de 5 niveles y 18 ítems. Los 18 ítems de Likert responden a criterios de la norma UNE 153010 <span class="citation" data-cites="aenor2012">(ver <a href="references.html#ref-aenor2012" role="doc-biblioref">AENOR 2012</a>)</span>.</p>
+<p>Los términos <strong>escala de Likert</strong> e ítem de Likert se prestan a menudo a confusión ya que se utilizan con distintos significados. En este trabajo se seguirá la convención más habitual <span class="citation" data-cites="uebersax2006">(ver <a href="references.html#ref-uebersax2006" role="doc-biblioref">Uebersax 2006</a>)</span> de denominar ítem de Likert a cada una de las preguntas de que consta un cuestionario o test, siendo la escala de Likert el conjunto de todos los ítems del cuestionario. Cada ítem se contestó marcando una opción de entre un conjunto ordenado de respuestas o niveles propuesto e idéntico para todos los ítems. Por ello, se debe evitar denominar escala a los niveles de un ítem.</p>
+<p>El diseño del experimento fue <strong></strong>. Es decir, a los alumnos no se les informó de si estaban viendo el vídeo con mejor o con peor calidad de subtitulado; los directores del MOOC tampoco conocieron esta información, como tampoco se conocía en el momento de analizar los datos, ya que los vídeos tienen identificaciones ofuscadas con -32b y no contienen ninguna indicación del tipo de subtitulado del vídeo<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. El “ciego fue liberado” en la fase de elaboración de la discusión de este trabajo (ver <a href="5.html"><span>Capítulo&nbsp;6</span></a>).</p>
+</section>
+<section id="ficheros-suministrados" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="ficheros-suministrados"><span class="header-section-number">3.2</span> Ficheros suministrados</h2>
+<p>Se dispuso de los siguientes ficheros <code>csv</code>:</p>
+<ul>
+<li>Fichero <code>grade</code>: contiene el identificador de estudiante (ofuscado con -512 para no conocer su identidad real) y el grupo al que pertenece (campo <code>cohort</code>) ofuscado con -32b.</li>
+<li>Ficheros <code>test1</code> y <code>test2</code>: son las repuestas a las escalas de Likert sobre la calidad del subtitulado del primer y del segundo vídeo realizado por cada grupo respectivamente.</li>
+</ul>
+<p>En la <a href="#tbl-likert-scale">Tabla&nbsp;<span>3.1</span></a> se muestran los 18 ítems de la escala de Likert que se propuso a los alumnos para que evaluaran cada uno de los vídeos. En la <a href="#tbl-likert-levels">Tabla&nbsp;<span>3.2</span></a> se muestran los 5 niveles de cada uno de los ítems de la utilizados para valorar el subtitulado <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-likert-scale" class="anchored">
+
+<div id="pqdxbvsxez" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pqdxbvsxez table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#pqdxbvsxez thead, #pqdxbvsxez tbody, #pqdxbvsxez tfoot, #pqdxbvsxez tr, #pqdxbvsxez td, #pqdxbvsxez th {
+  border-style: none;
+}
+
+#pqdxbvsxez p {
+  margin: 0;
+  padding: 0;
+}
+
+#pqdxbvsxez .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#pqdxbvsxez .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#pqdxbvsxez .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#pqdxbvsxez .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#pqdxbvsxez .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pqdxbvsxez .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pqdxbvsxez .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pqdxbvsxez .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#pqdxbvsxez .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#pqdxbvsxez .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#pqdxbvsxez .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#pqdxbvsxez .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#pqdxbvsxez .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#pqdxbvsxez .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#pqdxbvsxez .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#pqdxbvsxez .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#pqdxbvsxez .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#pqdxbvsxez .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#pqdxbvsxez .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pqdxbvsxez .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#pqdxbvsxez .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#pqdxbvsxez .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#pqdxbvsxez .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pqdxbvsxez .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#pqdxbvsxez .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#pqdxbvsxez .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pqdxbvsxez .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pqdxbvsxez .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#pqdxbvsxez .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pqdxbvsxez .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#pqdxbvsxez .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pqdxbvsxez .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pqdxbvsxez .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pqdxbvsxez .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pqdxbvsxez .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pqdxbvsxez .gt_left {
+  text-align: left;
+}
+
+#pqdxbvsxez .gt_center {
+  text-align: center;
+}
+
+#pqdxbvsxez .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#pqdxbvsxez .gt_font_normal {
+  font-weight: normal;
+}
+
+#pqdxbvsxez .gt_font_bold {
+  font-weight: bold;
+}
+
+#pqdxbvsxez .gt_font_italic {
+  font-style: italic;
+}
+
+#pqdxbvsxez .gt_super {
+  font-size: 65%;
+}
+
+#pqdxbvsxez .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#pqdxbvsxez .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#pqdxbvsxez .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#pqdxbvsxez .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#pqdxbvsxez .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#pqdxbvsxez .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#pqdxbvsxez .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><caption>Tabla&nbsp;3.1:  <p>Ítems de la escala de Likert.</p> </caption>
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Item">Item</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Texto">Texto</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="Item" class="gt_row gt_left">Q01</td>
+<td headers="Texto" class="gt_row gt_left">La posición de los subtítulos</td></tr>
+    <tr><td headers="Item" class="gt_row gt_left">Q02</td>
+<td headers="Texto" class="gt_row gt_left">El número de líneas por subtítulo</td></tr>
+    <tr><td headers="Item" class="gt_row gt_left">Q03</td>
+<td headers="Texto" class="gt_row gt_left">La disposición del texto respecto a la caja donde se muestran los subtítulos</td></tr>
+    <tr><td headers="Item" class="gt_row gt_left">Q04</td>
+<td headers="Texto" class="gt_row gt_left">El contraste entre los caracteres y el fondo</td></tr>
+    <tr><td headers="Item" class="gt_row gt_left">Q05</td>
+<td headers="Texto" class="gt_row gt_left">La corrección ortográfica y gramatical</td></tr>
+    <tr><td headers="Item" class="gt_row gt_left">Q06</td>
+<td headers="Texto" class="gt_row gt_left">La literalidad</td></tr>
+    <tr><td headers="Item" class="gt_row gt_left">Q07</td>
+<td headers="Texto" class="gt_row gt_left">La identificación de los personajes</td></tr>
+    <tr><td headers="Item" class="gt_row gt_left">Q08</td>
+<td headers="Texto" class="gt_row gt_left">La asignación de líneas a los personajes en los diálogos</td></tr>
+    <tr><td headers="Item" class="gt_row gt_left">Q09</td>
+<td headers="Texto" class="gt_row gt_left">La descripción de efectos sonoros</td></tr>
+    <tr><td headers="Item" class="gt_row gt_left">Q10</td>
+<td headers="Texto" class="gt_row gt_left">La sincronización de las entradas y salidas de los subtítulos</td></tr>
+    <tr><td headers="Item" class="gt_row gt_left">Q11</td>
+<td headers="Texto" class="gt_row gt_left">La velocidad de exposición de los subtítulos</td></tr>
+    <tr><td headers="Item" class="gt_row gt_left">Q12</td>
+<td headers="Texto" class="gt_row gt_left">El máximo número de caracteres por línea</td></tr>
+    <tr><td headers="Item" class="gt_row gt_left">Q13</td>
+<td headers="Texto" class="gt_row gt_left">La legibilidad de la tipografía</td></tr>
+    <tr><td headers="Item" class="gt_row gt_left">Q14</td>
+<td headers="Texto" class="gt_row gt_left">La separación en líneas diferentes de sintagmas nominales, verbales y preposicionales</td></tr>
+    <tr><td headers="Item" class="gt_row gt_left">Q15</td>
+<td headers="Texto" class="gt_row gt_left">La utilización de puntos suspensivos</td></tr>
+    <tr><td headers="Item" class="gt_row gt_left">Q16</td>
+<td headers="Texto" class="gt_row gt_left">La escritura de los números</td></tr>
+    <tr><td headers="Item" class="gt_row gt_left">Q17</td>
+<td headers="Texto" class="gt_row gt_left">Las incorrecciones en el habla</td></tr>
+    <tr><td headers="Item" class="gt_row gt_left">Q18</td>
+<td headers="Texto" class="gt_row gt_left">Los subtítulos del vídeo cumplen en general con los requisitos de accesibilidad</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-likert-levels" class="anchored">
+
+<div id="rzovznwqig" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+  
+  <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" bgcolor="#FFFFFF"><caption>Tabla&nbsp;3.2:  <p>Niveles de los ítems de la escala de Likert.</p> </caption>
+  <thead style="border-style: none;">
+    
+    <tr class="gt_col_headings" style="border-style: none; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3;">
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="values" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: right; font-variant-numeric: tabular-nums;" bgcolor="#FFFFFF" valign="bottom" align="right">values</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="levels" style="border-style: none; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: left;" bgcolor="#FFFFFF" valign="bottom" align="left">levels</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body" style="border-style: none; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3;">
+    <tr style="border-style: none;"><td headers="values" class="gt_row gt_right" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: right; font-variant-numeric: tabular-nums;" valign="middle" align="right">0</td>
+<td headers="levels" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left">No sé / No contesto</td></tr>
+    <tr style="border-style: none;"><td headers="values" class="gt_row gt_right" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: right; font-variant-numeric: tabular-nums;" valign="middle" align="right">1</td>
+<td headers="levels" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left">Muy en desacuerdo</td></tr>
+    <tr style="border-style: none;"><td headers="values" class="gt_row gt_right" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: right; font-variant-numeric: tabular-nums;" valign="middle" align="right">2</td>
+<td headers="levels" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left">En desacuerdo</td></tr>
+    <tr style="border-style: none;"><td headers="values" class="gt_row gt_right" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: right; font-variant-numeric: tabular-nums;" valign="middle" align="right">3</td>
+<td headers="levels" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left">Neutral</td></tr>
+    <tr style="border-style: none;"><td headers="values" class="gt_row gt_right" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: right; font-variant-numeric: tabular-nums;" valign="middle" align="right">4</td>
+<td headers="levels" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left">De acuerdo</td></tr>
+    <tr style="border-style: none;"><td headers="values" class="gt_row gt_right" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: right; font-variant-numeric: tabular-nums;" valign="middle" align="right">5</td>
+<td headers="levels" class="gt_row gt_left" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;" valign="middle" align="left">Muy de acuerdo</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-preprocesado" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="sec-preprocesado"><span class="header-section-number">3.3</span> Preprocesado</h2>
+<p>Los datos personales de los estudiantes se suministraron anonimizados para evitar conocer su identidad. De acuerdo con el compromiso ético del Canal, del estudio se han eliminado 19 estudiantes que, a pesar de haber realizado la actividad, no dieron su consentimiento para que sus datos se utilizaran en estudios científicos. Tras este proceso, se dispone de 198 cuestionarios correspondientes a 111 alumnos. Hay 24 estudiantes que solo realizaron el primero de los test por lo que se han eliminado del estudio. De estos, 46 manifestaron tener sexo femenino, 19 masculino y el resto (22) prefirieron no suministrar esta información. Se constata que hay un claro sesgo hacia el sexo femenino entre los participantes en la actividad de subtitulado.</p>
+<p>En esta sección se describen las transformaciones realizadas con los ficheros suministrados:</p>
+<ul>
+<li><p>Se leyó el fichero <code>grade</code>. El número de fila con el que el estudiante aparece en el fichero se utilizó como identificador del estudiante para mantener la trazabilidad y comprobar que las transformaciones realizadas son correctas.</p></li>
+<li><p>Se eliminaron los datos de los estudiantes que, aun habiendo realizado la actividad, no dieron su consentimiento para participar en el estudio.</p></li>
+<li><p>El valor del campo <code>cohort</code>, que indica el valor anonimizado para el grupo, se sustituyó por una letra, <span class="math inline">\(A\)</span> o <span class="math inline">\(B\)</span>. En el momento en que se realizó este proceso se desconocía qué vídeo vio primero cada cohorte.</p></li>
+<li><p>Se leyeron los ficheros de test y se procesaron. Se utilizó el nombre del fichero (<code>test1</code> o <code>test2</code>) para saber de qué vídeo se estaba respondiendo el test <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p></li>
+<li><p>Se seleccionaron los ítems que contienen las respuestas y se renombraron para que fuera más fácil saber de qué ítem se trataba <a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. Se convirtió el campo <code>LastTry</code>, que contiene la fecha y hora de realización del test, a formato fecha y hora.</p></li>
+<li><p>Se realizaron algunas comprobaciones como la ausencia de valores nulos en las variables más relevantes y la no existencia de inconsistencias o errores de procesado.</p></li>
+<li><p>Se eliminaron los comentarios y se grabaron en un fichero aparte para que no revelaran información que habría podido descubrir el tipo de subtitulado que piensa que estaba evaluando el estudiante.</p></li>
+<li><p>Se renombraron las variables (ver <a href="#tbl-variables">Tabla&nbsp;<span>3.3</span></a>).</p></li>
+<li><p>Se eliminaron del estudio los estudiantes que solo han realizado uno de los test.</p></li>
+<li><p>Se transformaron las variables que lo requirieron en factores. El ítem 18 se fijó como referencia en el factor <code>Item</code> ya que es una valoración general del subtitulado.</p></li>
+<li><p>Se rotaron los valores de respuesta para que “No sé / No contesto” tenga valor 0 y el resto de 1 a 5 desde “Muy en desacuerdo”, 1, hasta “Muy de acuerdo”, 5.</p></li>
+<li><p>Se crearon los factores <code>Level</code> con los niveles <code>negativo</code>, <code>neutral</code> y <code>positivo</code> dependiendo de si la respuesta es 1 ó 2, 3, 4 ó 5 respectivamente e <code>Improve</code> con valores 0 ó 1, dependiendo de si la respuesta en el test <span class="math inline">\(A\)</span> es mejor (1) o igual o peor (0) que la del <span class="math inline">\(B\)</span> para cada ítem y estudiante.</p></li>
+<li><p>Se transformó el <code>dataframe</code> de formato ancho a largo. Los ficheros de respuestas originales se suministraron en formato ancho. Es decir, que cada fila es un test que contiene 18 columnas para las respuestas a cada ítem. Los nombres de las columnas son <span class="math inline">\(Q01\)</span>, <span class="math inline">\(Q02\)</span>, …, <span class="math inline">\(Q18\)</span> y tienen valores de 0 a 5 con las respuestas. La mayoría de los paquetes de R utilizados requieren que los datos estén en formato largo. Esto que quiere decir que cada fila tendrá una única respuesta por lo que habrá únicamente dos columnas, <span class="math inline">\(Item\)</span> y <span class="math inline">\(Response\)</span>. En la primera se almacena el identificador del ítem (<span class="math inline">\(Q01\)</span>, <span class="math inline">\(Q02\)</span>, …, <span class="math inline">\(Q18\)</span>) y en la segunda el valor de la respuesta (de 0 a 5). De esta forma, un test pasó de ocupar una fila y 18 columnas en el formato ancho a 18 filas y dos columnas en el largo.</p></li>
+</ul>
+</section>
+<section id="variables-utilizadas" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="variables-utilizadas"><span class="header-section-number">3.4</span> Variables utilizadas</h2>
+<p>En la <a href="#tbl-variables">Tabla&nbsp;<span>3.3</span></a> se describen las características más relevantes de las principales variables que se utilizarán en el modelado y en el análisis estadístico. La variable dependiente o respuesta en los modelos ordinales es <code>Response</code> y contiene las respuestas a todos los ítems (de 0 a 5). En los modelos logísticos se usa como variable respuesta <code>Level</code> o <code>Improve</code>. La variable explicativa principal es el factor <code>Treat</code> y permite diferenciar los dos niveles de subtitulado (<span class="math inline">\(A\)</span> o <span class="math inline">\(B\)</span>). Los factores <code>Period</code> y <code>Seq</code> sirven para evaluar la presencia de efectos periodo y secuencia respectivamente. El factor <code>Period</code> toma valores 1 ó 2 en función de si trata del primer o del segundo periodo. El factor <code>Seq</code> toma valores <span class="math inline">\(AB\)</span> o <span class="math inline">\(BA\)</span> dependiendo de si se vio primero el vídeo con subtitulado <span class="math inline">\(A\)</span> o con subtitulado <span class="math inline">\(B\)</span>. En este trabajo los términos secuencia y grupo se usan indistintamente. Por último, los factores <code>Subject</code> e <code>Item</code> son variables explicativas que se tratan como efectos aleatorios en el modelado multinivel (ver <a href="4.html#sec-multinivel-2"><span>Sección&nbsp;4.2.4</span></a>) y corresponden respectivamente a los estudiantes y a los ítems de la escala de Likert.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-variables" class="anchored">
+
+<div id="vruwuaxsft" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#vruwuaxsft table {
+  font-family: 'Noto Sans', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#vruwuaxsft thead, #vruwuaxsft tbody, #vruwuaxsft tfoot, #vruwuaxsft tr, #vruwuaxsft td, #vruwuaxsft th {
+  border-style: none;
+}
+
+#vruwuaxsft p {
+  margin: 0;
+  padding: 0;
+}
+
+#vruwuaxsft .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #F6F6F6;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #40C5FF;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 3px;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#vruwuaxsft .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#vruwuaxsft .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #F6F6F6;
+  border-bottom-width: 0;
+}
+
+#vruwuaxsft .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #F6F6F6;
+  border-top-width: 0;
+}
+
+#vruwuaxsft .gt_heading {
+  background-color: #F6F6F6;
+  text-align: left;
+  border-bottom-color: #F6F6F6;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vruwuaxsft .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vruwuaxsft .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #40C5FF;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #ECECEC;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vruwuaxsft .gt_col_heading {
+  color: #333333;
+  background-color: #F6F6F6;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#vruwuaxsft .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #F6F6F6;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#vruwuaxsft .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#vruwuaxsft .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#vruwuaxsft .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #ECECEC;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#vruwuaxsft .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#vruwuaxsft .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #F6F6F6;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #BEBEBE;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #BEBEBE;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#vruwuaxsft .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #F6F6F6;
+  font-size: 100%;
+  font-weight: bold;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #BEBEBE;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #BEBEBE;
+  vertical-align: middle;
+}
+
+#vruwuaxsft .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#vruwuaxsft .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#vruwuaxsft .gt_row {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: white;
+  border-top-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#vruwuaxsft .gt_stub {
+  color: #333333;
+  background-color: #F6F6F6;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vruwuaxsft .gt_stub_row_group {
+  color: #333333;
+  background-color: #F6F6F6;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#vruwuaxsft .gt_row_group_first td {
+  border-top-width: 1px;
+}
+
+#vruwuaxsft .gt_row_group_first th {
+  border-top-width: 1px;
+}
+
+#vruwuaxsft .gt_summary_row {
+  color: #333333;
+  background-color: #F6F6F6;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vruwuaxsft .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#vruwuaxsft .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#vruwuaxsft .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vruwuaxsft .gt_grand_summary_row {
+  color: #333333;
+  background-color: #F6F6F6;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vruwuaxsft .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#vruwuaxsft .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vruwuaxsft .gt_striped {
+  background-color: #ECECEC;
+}
+
+#vruwuaxsft .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 3px;
+  border-bottom-color: #FFFFFF;
+}
+
+#vruwuaxsft .gt_footnotes {
+  color: #333333;
+  background-color: #F6F6F6;
+  border-bottom-style: none;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vruwuaxsft .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vruwuaxsft .gt_sourcenotes {
+  color: #333333;
+  background-color: #F6F6F6;
+  border-bottom-style: none;
+  border-bottom-width: 0px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vruwuaxsft .gt_sourcenote {
+  font-size: 12px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vruwuaxsft .gt_left {
+  text-align: left;
+}
+
+#vruwuaxsft .gt_center {
+  text-align: center;
+}
+
+#vruwuaxsft .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#vruwuaxsft .gt_font_normal {
+  font-weight: normal;
+}
+
+#vruwuaxsft .gt_font_bold {
+  font-weight: bold;
+}
+
+#vruwuaxsft .gt_font_italic {
+  font-style: italic;
+}
+
+#vruwuaxsft .gt_super {
+  font-size: 65%;
+}
+
+#vruwuaxsft .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#vruwuaxsft .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#vruwuaxsft .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#vruwuaxsft .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#vruwuaxsft .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#vruwuaxsft .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#vruwuaxsft .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><caption>Tabla&nbsp;3.3:  <p>Descripción de las variables más importantes.</p> </caption>
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Nombre">Nombre</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Descripción">Descripción</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Tipo">Tipo</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Valores">Valores</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="Nombre" class="gt_row gt_left" style="border-top-width: 0px; border-top-style: solid; border-top-color: white;">Response</td>
+<td headers="Descripción" class="gt_row gt_left" style="border-top-width: 0px; border-top-style: solid; border-top-color: white;">Respuesta a los ítems del test.</td>
+<td headers="Tipo" class="gt_row gt_left" style="border-top-width: 0px; border-top-style: solid; border-top-color: white;">Factor ordenado</td>
+<td headers="Valores" class="gt_row gt_left" style="border-top-width: 0px; border-top-style: solid; border-top-color: white;">De 0 a 5</td></tr>
+    <tr><td headers="Nombre" class="gt_row gt_left gt_striped">Level</td>
+<td headers="Descripción" class="gt_row gt_left gt_striped">Valoración de la respuesta.</td>
+<td headers="Tipo" class="gt_row gt_left gt_striped">Factor ordenado</td>
+<td headers="Valores" class="gt_row gt_left gt_striped">Negativo, Neutral, Positivo<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></td></tr>
+    <tr><td headers="Nombre" class="gt_row gt_left">Improve</td>
+<td headers="Descripción" class="gt_row gt_left">Mejor respuesta en test A que en B.</td>
+<td headers="Tipo" class="gt_row gt_left">Factor</td>
+<td headers="Valores" class="gt_row gt_left">1 ó 0</td></tr>
+    <tr><td headers="Nombre" class="gt_row gt_left gt_striped">Treat</td>
+<td headers="Descripción" class="gt_row gt_left gt_striped">Subtítulos</td>
+<td headers="Tipo" class="gt_row gt_left gt_striped">Factor</td>
+<td headers="Valores" class="gt_row gt_left gt_striped">A o B</td></tr>
+    <tr><td headers="Nombre" class="gt_row gt_left">Period</td>
+<td headers="Descripción" class="gt_row gt_left">Periodo</td>
+<td headers="Tipo" class="gt_row gt_left">Factor</td>
+<td headers="Valores" class="gt_row gt_left">1 ó 2<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>2</sup></span></td></tr>
+    <tr><td headers="Nombre" class="gt_row gt_left gt_striped">Seq</td>
+<td headers="Descripción" class="gt_row gt_left gt_striped">Secuencia de aplicación de los tratamientos.</td>
+<td headers="Tipo" class="gt_row gt_left gt_striped">Factor</td>
+<td headers="Valores" class="gt_row gt_left gt_striped">AB o BA</td></tr>
+    <tr><td headers="Nombre" class="gt_row gt_left">Subject</td>
+<td headers="Descripción" class="gt_row gt_left">Identificación del estudiante</td>
+<td headers="Tipo" class="gt_row gt_left">Factor</td>
+<td headers="Valores" class="gt_row gt_left">Numérico</td></tr>
+    <tr><td headers="Nombre" class="gt_row gt_left gt_striped">Item</td>
+<td headers="Descripción" class="gt_row gt_left gt_striped">Número del ítem</td>
+<td headers="Tipo" class="gt_row gt_left gt_striped">Factor</td>
+<td headers="Valores" class="gt_row gt_left gt_striped">Q01, Q02, ..., Q18</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="4"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> Positivo cuando Response sea 4 ó 5, Negativo cuando sea 1 ó 2 y Neutral para 3.</td>
+    </tr>
+    <tr>
+      <td class="gt_footnote" colspan="4"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>2</sup></span> 1 para el primer vídeo visto y 2 el segundo.</td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="dataframes-utilizados" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="dataframes-utilizados"><span class="header-section-number">3.5</span> <code>Dataframes</code> utilizados</h2>
+<p>Se van a usar tres <code>dataframes</code> construidos en el preprocesado:</p>
+<ul>
+<li><code>df_response</code> contiene las respuestas con valor de 1 a 5. Se han eliminado las de valor 0 (“No sé / No contesto”). Se utiliza cuando se traten las respuestas como ordinales y, por lo tanto, como ordenadas.</li>
+<li><code>df_all</code> incluye todas las respuestas de 0 a 5. Se utiliza cuando se traten las respuestas como categóricas y no ordenadas.</li>
+<li><code>df_improve</code>: Es un <code>dataframe</code> en el que la variable respuesta es <code>Improve</code> usado en el modelado logístico. Es una variable dicotómica que muestra si la respuesta es mejor en el subtitulado <span class="math inline">\(A\)</span> que en el <span class="math inline">\(B\)</span> (<code>Improve</code>= <code>Response</code> <span class="math inline">\(A\)</span> &gt; <code>Response</code> <span class="math inline">\(B\)</span>).</li>
+</ul>
+<p>La estructura de los dos primeros <code>dataframes</code> es la siguiente:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [2,980 × 7] (S3: tbl_df/tbl/data.frame)
+ $ Seq     : Factor w/ 2 levels "AB","BA": 1 1 1 1 1 1 1 1 1 1 ...
+ $ Period  : Factor w/ 2 levels "1","2": 1 1 1 1 1 1 1 1 1 1 ...
+ $ Treat   : Factor w/ 2 levels "A","B": 1 1 1 1 1 1 1 1 1 1 ...
+ $ Subject : Factor w/ 87 levels "4","33","35",..: 1 1 1 1 1 1 1 1 1 1 ...
+ $ Item    : Factor w/ 18 levels "Q18","Q01","Q02",..: 1 2 3 4 5 6 7 8 9 10 ...
+ $ Response: Ord.factor w/ 5 levels "1"&lt;"2"&lt;"3"&lt;"4"&lt;..: 3 3 3 3 3 3 3 3 3 3 ...
+ $ Level   : Ord.factor w/ 3 levels "Negativo"&lt;"Neutral"&lt;..: 2 2 2 2 2 2 2 2 2..</code></pre>
+</div>
+</div>
+<p>En la <a href="#tbl-df_response">Tabla&nbsp;<span>3.4</span></a> se muestran algunos ejemplos de datos. Concretamente se muestran las respuestas a tres ítems de dos estudiantes que vieron los vídeos en distinto orden.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-df_response" class="anchored">
+
+<div id="fzkmpaqbae" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#fzkmpaqbae table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#fzkmpaqbae thead, #fzkmpaqbae tbody, #fzkmpaqbae tfoot, #fzkmpaqbae tr, #fzkmpaqbae td, #fzkmpaqbae th {
+  border-style: none;
+}
+
+#fzkmpaqbae p {
+  margin: 0;
+  padding: 0;
+}
+
+#fzkmpaqbae .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#fzkmpaqbae .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#fzkmpaqbae .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#fzkmpaqbae .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#fzkmpaqbae .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#fzkmpaqbae .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#fzkmpaqbae .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#fzkmpaqbae .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#fzkmpaqbae .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#fzkmpaqbae .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#fzkmpaqbae .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#fzkmpaqbae .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#fzkmpaqbae .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#fzkmpaqbae .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#fzkmpaqbae .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#fzkmpaqbae .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#fzkmpaqbae .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#fzkmpaqbae .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#fzkmpaqbae .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fzkmpaqbae .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#fzkmpaqbae .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#fzkmpaqbae .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#fzkmpaqbae .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fzkmpaqbae .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#fzkmpaqbae .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#fzkmpaqbae .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#fzkmpaqbae .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fzkmpaqbae .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#fzkmpaqbae .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#fzkmpaqbae .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#fzkmpaqbae .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#fzkmpaqbae .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#fzkmpaqbae .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fzkmpaqbae .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#fzkmpaqbae .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fzkmpaqbae .gt_left {
+  text-align: left;
+}
+
+#fzkmpaqbae .gt_center {
+  text-align: center;
+}
+
+#fzkmpaqbae .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#fzkmpaqbae .gt_font_normal {
+  font-weight: normal;
+}
+
+#fzkmpaqbae .gt_font_bold {
+  font-weight: bold;
+}
+
+#fzkmpaqbae .gt_font_italic {
+  font-style: italic;
+}
+
+#fzkmpaqbae .gt_super {
+  font-size: 65%;
+}
+
+#fzkmpaqbae .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#fzkmpaqbae .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#fzkmpaqbae .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#fzkmpaqbae .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#fzkmpaqbae .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#fzkmpaqbae .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#fzkmpaqbae .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><caption>Tabla&nbsp;3.4:  <p>Muestra del dataframe preparado para el modelado estadístico en
+formato largo.</p> </caption>
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Seq">Seq</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Period">Period</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Treat">Treat</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Subject">Subject</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Item">Item</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Response">Response</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Level">Level</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="Seq" class="gt_row gt_center">AB</td>
+<td headers="Period" class="gt_row gt_center">1</td>
+<td headers="Treat" class="gt_row gt_center">A</td>
+<td headers="Subject" class="gt_row gt_center">35</td>
+<td headers="Item" class="gt_row gt_center">Q18</td>
+<td headers="Response" class="gt_row gt_center">5</td>
+<td headers="Level" class="gt_row gt_center">Positivo</td></tr>
+    <tr><td headers="Seq" class="gt_row gt_center">AB</td>
+<td headers="Period" class="gt_row gt_center">2</td>
+<td headers="Treat" class="gt_row gt_center">B</td>
+<td headers="Subject" class="gt_row gt_center">35</td>
+<td headers="Item" class="gt_row gt_center">Q18</td>
+<td headers="Response" class="gt_row gt_center">4</td>
+<td headers="Level" class="gt_row gt_center">Positivo</td></tr>
+    <tr><td headers="Seq" class="gt_row gt_center">AB</td>
+<td headers="Period" class="gt_row gt_center">1</td>
+<td headers="Treat" class="gt_row gt_center">A</td>
+<td headers="Subject" class="gt_row gt_center">35</td>
+<td headers="Item" class="gt_row gt_center">Q01</td>
+<td headers="Response" class="gt_row gt_center">5</td>
+<td headers="Level" class="gt_row gt_center">Positivo</td></tr>
+    <tr><td headers="Seq" class="gt_row gt_center">AB</td>
+<td headers="Period" class="gt_row gt_center">2</td>
+<td headers="Treat" class="gt_row gt_center">B</td>
+<td headers="Subject" class="gt_row gt_center">35</td>
+<td headers="Item" class="gt_row gt_center">Q01</td>
+<td headers="Response" class="gt_row gt_center">5</td>
+<td headers="Level" class="gt_row gt_center">Positivo</td></tr>
+    <tr><td headers="Seq" class="gt_row gt_center">AB</td>
+<td headers="Period" class="gt_row gt_center">1</td>
+<td headers="Treat" class="gt_row gt_center">A</td>
+<td headers="Subject" class="gt_row gt_center">35</td>
+<td headers="Item" class="gt_row gt_center">Q02</td>
+<td headers="Response" class="gt_row gt_center">5</td>
+<td headers="Level" class="gt_row gt_center">Positivo</td></tr>
+    <tr><td headers="Seq" class="gt_row gt_center">AB</td>
+<td headers="Period" class="gt_row gt_center">2</td>
+<td headers="Treat" class="gt_row gt_center">B</td>
+<td headers="Subject" class="gt_row gt_center">35</td>
+<td headers="Item" class="gt_row gt_center">Q02</td>
+<td headers="Response" class="gt_row gt_center">4</td>
+<td headers="Level" class="gt_row gt_center">Positivo</td></tr>
+    <tr><td headers="Seq" class="gt_row gt_center">BA</td>
+<td headers="Period" class="gt_row gt_center">1</td>
+<td headers="Treat" class="gt_row gt_center">B</td>
+<td headers="Subject" class="gt_row gt_center">33</td>
+<td headers="Item" class="gt_row gt_center">Q18</td>
+<td headers="Response" class="gt_row gt_center">2</td>
+<td headers="Level" class="gt_row gt_center">Negativo</td></tr>
+    <tr><td headers="Seq" class="gt_row gt_center">BA</td>
+<td headers="Period" class="gt_row gt_center">2</td>
+<td headers="Treat" class="gt_row gt_center">A</td>
+<td headers="Subject" class="gt_row gt_center">33</td>
+<td headers="Item" class="gt_row gt_center">Q18</td>
+<td headers="Response" class="gt_row gt_center">4</td>
+<td headers="Level" class="gt_row gt_center">Positivo</td></tr>
+    <tr><td headers="Seq" class="gt_row gt_center">BA</td>
+<td headers="Period" class="gt_row gt_center">1</td>
+<td headers="Treat" class="gt_row gt_center">B</td>
+<td headers="Subject" class="gt_row gt_center">33</td>
+<td headers="Item" class="gt_row gt_center">Q01</td>
+<td headers="Response" class="gt_row gt_center">4</td>
+<td headers="Level" class="gt_row gt_center">Positivo</td></tr>
+    <tr><td headers="Seq" class="gt_row gt_center">BA</td>
+<td headers="Period" class="gt_row gt_center">2</td>
+<td headers="Treat" class="gt_row gt_center">A</td>
+<td headers="Subject" class="gt_row gt_center">33</td>
+<td headers="Item" class="gt_row gt_center">Q01</td>
+<td headers="Response" class="gt_row gt_center">4</td>
+<td headers="Level" class="gt_row gt_center">Positivo</td></tr>
+    <tr><td headers="Seq" class="gt_row gt_center">BA</td>
+<td headers="Period" class="gt_row gt_center">1</td>
+<td headers="Treat" class="gt_row gt_center">B</td>
+<td headers="Subject" class="gt_row gt_center">33</td>
+<td headers="Item" class="gt_row gt_center">Q02</td>
+<td headers="Response" class="gt_row gt_center">4</td>
+<td headers="Level" class="gt_row gt_center">Positivo</td></tr>
+    <tr><td headers="Seq" class="gt_row gt_center">BA</td>
+<td headers="Period" class="gt_row gt_center">2</td>
+<td headers="Treat" class="gt_row gt_center">A</td>
+<td headers="Subject" class="gt_row gt_center">33</td>
+<td headers="Item" class="gt_row gt_center">Q02</td>
+<td headers="Response" class="gt_row gt_center">4</td>
+<td headers="Level" class="gt_row gt_center">Positivo</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-aenor2012" class="csl-entry" role="listitem">
+AENOR. 2012. <span>«UNE 153010 Subtitulado para personas sordas y personas con discapacidad auditiva»</span>. Asociación Española de Normalización y Certificación.
+</div>
+<div id="ref-uebersax2006" class="csl-entry" role="listitem">
+Uebersax, John S. 2006. <span>«Likert scales: dispelling the confusion»</span>. <em>Statistical Methods for Rater Agreement website</em>. <a href="https://www.john-uebersax.com/stat/likert.htm">https://www.john-uebersax.com/stat/likert.htm</a>.
+</div>
+</div>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>En la respuesta a cada ítem, el alumno pudo añadir comentarios. Éstos fueron eliminados en la fase de análisis para que no filtren información referente al tipo de subtitulado que el alumno creyó estar contestando y solo se utilizaron en la fase de discusión (ver <a href="5.html"><span>Capítulo&nbsp;6</span></a>).<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>En la codificación original los valores asignados a cada respuesta eran diferentes: la opción “No sé / No contesto” se codificó con 5 y las demás opciones con una unidad menos que la mostrada. En este trabajo se ha hecho una rotación para asignar valores más usuales en la literatura científica sobre el tema.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Se reitera que en el momento de realizar este proceso se desconocía si el vídeo es el correctamente subtitulado o el otro. La única información que se almacenó es si se estaba respondiendo al vídeo que se vio primero.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>En los ficheros suministrados la respuesta a cada ítem ocupaba varios campos. Se seleccionó en cada ítem el que contiene el valor de la respuesta y se convirtió a numérico.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./2.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Marco teórico y estado del arte</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./4.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Leemos el tibble preprocesado</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

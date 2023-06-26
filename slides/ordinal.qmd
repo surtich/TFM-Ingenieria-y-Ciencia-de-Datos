@@ -88,7 +88,7 @@ fig1.2 <- plot_ly(y = data[3][[1]]$x, color = data[3][[1]]$y, type = "box") %>% 
 
 
 
-## Regresión Ordinal {visibility="uncounted"}
+## Regresión Ordinal {visibility="uncounted" data-hide-slide-number="true"}
 
 
 :::::: {.columns}
@@ -108,7 +108,7 @@ fig1
 ::::::
 ::::::
 
-## Regresión Ordinal {auto-animate=true, visibility="uncounted"}
+## Regresión Ordinal {auto-animate=true, visibility="uncounted" data-hide-slide-number="true"}
 
 :::::: {.columns}
 
@@ -144,7 +144,7 @@ fig1.2
 ::::::
 
 
-## Regresión Ordinal {auto-animate=true, visibility="uncounted"}
+## Regresión Ordinal {auto-animate=true, visibility="uncounted" data-hide-slide-number="true"}
 
 
 ::: {.notes}
@@ -193,7 +193,7 @@ fig5
 <br>
 $$
 \begin{aligned}
-P(Y \le k) &= logistic\left[\tau_k-\beta_1x_1-...-\beta_px_p \right] \\
+P(Y \le k) &= logistic\left[\tau_k-\beta_1x_1 ... -\beta_px_p \right] \\
 P(Y = k) &=  P(Y \le k) - P(Y \le k-1)
 \end{aligned}
 $$
@@ -286,7 +286,7 @@ $$
 ::: box
 [Ecuación Regresión Ordinal]{.story}
 <br>
-$$logit [Y \color{red}{\le k}] = log \left[\frac{P(Y \color{red}{\le k})}{1-P(Y \color{red}{\le k})} \right] = \tau_{\color{red}{k}} \color{red}{-} \beta_1 x_1 \color{red}{-} \beta_2 x_2 \color{red}{-} ... \color{red}{-} \beta_p x_p$$
+$$logit [Y \color{red}{\le k}] = log \left[\frac{P(Y \color{red}{\le k})}{1-P(Y \color{red}{\le k})} \right] = \tau_{\color{red}{k}} \color{red}{-} \beta_1 x_1 \color{red}{-} \beta_2 x_2 ... \color{red}{-} \beta_p x_p$$
 :::
 :::
 :::

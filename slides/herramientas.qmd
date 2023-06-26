@@ -1,5 +1,5 @@
 
-## Herramientas {visibility="uncounted"}
+## Herramientas {visibility="uncounted" data-hide-slide-number="true"}
 
 
 ::: {.notes}

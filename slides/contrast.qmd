@@ -1,5 +1,4 @@
-## Efecto secuencia vs interacción tratamiento periodo  {visibility="uncounted"}
-
+## Efecto secuencia vs interacción tratamiento periodo  {visibility="uncounted" data-hide-slide-number="true"}
 
 ::: {.notes}
 Pags 90, tabla A.6

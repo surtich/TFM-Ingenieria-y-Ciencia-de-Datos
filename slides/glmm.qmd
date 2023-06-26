@@ -1,4 +1,4 @@
-## GLMM {visibility="uncounted"}
+## GLMM {visibility="uncounted" data-hide-slide-number="true"}
 
 ::: {.notes}
 pag 15 y 16

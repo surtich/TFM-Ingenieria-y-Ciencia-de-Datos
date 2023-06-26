@@ -1,0 +1,2448 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.333">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="TFM UNED Máster en Ingeniería y Ciencia de Datos">
+
+<title>Utilización de técnicas multivariantes para el estudio del aprendizaje de la mejora de la accesibilidad en el subtitulado de vídeos - 5&nbsp; Resultados</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="next">
+<link href="./4.html" rel="prev">
+<link href="./images/logo.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "Sin resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar"
+  }
+}</script>
+
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./5.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Resultados</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Utilización de técnicas multivariantes para el estudio del aprendizaje de la mejora de la accesibilidad en el subtitulado de vídeos</a> 
+        <div class="sidebar-tools-main">
+    <a href="./Utilización-de-técnicas-multivariantes-para-el-estudio-del-aprendizaje-de-la-mejora-de-la-accesibilidad-en-el-subtitulado-de-vídeos.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Utilities for R.</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Marco teórico y estado del arte</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Materiales y métodos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Leemos el tibble preprocesado</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./5.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Resultados</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Referencias</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Apéndices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./77-Contrasts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Efecto secuencia e interacción tratamiento vs.&nbsp;periodo</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#sec-or-3" id="toc-sec-or-3" class="nav-link active" data-scroll-target="#sec-or-3"><span class="header-section-number">5.0.1</span> Comparación con <em>Odds Ratio</em></a></li>
+  <li><a href="#modelado" id="toc-modelado" class="nav-link" data-scroll-target="#modelado"><span class="header-section-number">5.0.2</span> Modelado</a></li>
+  <li><a href="#sec-discusion" id="toc-sec-discusion" class="nav-link" data-scroll-target="#sec-discusion"><span class="header-section-number">6</span> Discusión</a>
+  <ul class="collapse">
+  <li><a href="#respuestas-a-las-preguntas-de-investigación-y-a-los-objetivos-específicos" id="toc-respuestas-a-las-preguntas-de-investigación-y-a-los-objetivos-específicos" class="nav-link" data-scroll-target="#respuestas-a-las-preguntas-de-investigación-y-a-los-objetivos-específicos"><span class="header-section-number">6.1</span> Respuestas a las preguntas de investigación y a los objetivos específicos</a></li>
+  <li><a href="#limitaciones-del-estudio" id="toc-limitaciones-del-estudio" class="nav-link" data-scroll-target="#limitaciones-del-estudio"><span class="header-section-number">6.2</span> Limitaciones del estudio</a></li>
+  </ul></li>
+  <li><a href="#sec-conclusion" id="toc-sec-conclusion" class="nav-link" data-scroll-target="#sec-conclusion"><span class="header-section-number">7</span> Conclusión y trabajo futuro</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-resultados" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Resultados</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>En el <a href="4.html"><span>Capítulo&nbsp;4</span></a> se realizó una exploración de los datos y se adecuaron los modelos presentados en el <a href="2.html"><span>Capítulo&nbsp;2</span></a> al diseño del experimento del subtitulado. En este capítulo se comentan los resultados de los modelos seleccionados siguiendo el mismo orden expositivo, comenzando por el análisis del , continuando por la y finalizando con la .</p>
+<section id="sec-or-3" class="level3" data-number="5.0.1">
+<h3 data-number="5.0.1" class="anchored" data-anchor-id="sec-or-3"><span class="header-section-number">5.0.1</span> Comparación con <em>Odds Ratio</em></h3>
+<p>El contraste de hipótesis del <span class="math inline">\(log\ OR\)</span> del nivel subtitulado y secuencia (ver <a href="4.html#sec-or-2"><span>Sección&nbsp;4.2.1</span></a>) no produce significación estadística en ningún nivel de respuesta por lo que, según esta prueba estadística, el orden en el que se ven los vídeos no influye en la respuesta de los estudiantes (ver <a href="#tbl-logor1">Tabla&nbsp;<span>5.1</span></a>).</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-logor1" class="anchored">
+
+<div id="gspgmohais" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#gspgmohais table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#gspgmohais thead, #gspgmohais tbody, #gspgmohais tfoot, #gspgmohais tr, #gspgmohais td, #gspgmohais th {
+  border-style: none;
+}
+
+#gspgmohais p {
+  margin: 0;
+  padding: 0;
+}
+
+#gspgmohais .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#gspgmohais .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#gspgmohais .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#gspgmohais .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#gspgmohais .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#gspgmohais .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gspgmohais .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#gspgmohais .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#gspgmohais .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#gspgmohais .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#gspgmohais .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#gspgmohais .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#gspgmohais .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#gspgmohais .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#gspgmohais .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#gspgmohais .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#gspgmohais .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#gspgmohais .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#gspgmohais .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gspgmohais .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#gspgmohais .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#gspgmohais .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#gspgmohais .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gspgmohais .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#gspgmohais .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#gspgmohais .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gspgmohais .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gspgmohais .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#gspgmohais .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gspgmohais .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#gspgmohais .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gspgmohais .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#gspgmohais .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gspgmohais .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#gspgmohais .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gspgmohais .gt_left {
+  text-align: left;
+}
+
+#gspgmohais .gt_center {
+  text-align: center;
+}
+
+#gspgmohais .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#gspgmohais .gt_font_normal {
+  font-weight: normal;
+}
+
+#gspgmohais .gt_font_bold {
+  font-weight: bold;
+}
+
+#gspgmohais .gt_font_italic {
+  font-style: italic;
+}
+
+#gspgmohais .gt_super {
+  font-size: 65%;
+}
+
+#gspgmohais .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#gspgmohais .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#gspgmohais .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#gspgmohais .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#gspgmohais .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#gspgmohais .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#gspgmohais .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><caption>Tabla&nbsp;5.1:  <p>Log OR ~ Treat + Seq + Response</p> </caption>
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Response">Response</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Estimate">Estimate</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Std. Error">Std. Error</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="z value">z value</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Pr(&amp;gt;|z|)">Pr(&gt;|z|)</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="Response" class="gt_row gt_left">No sé / No contesto</td>
+<td headers="Estimate" class="gt_row gt_right">0.190</td>
+<td headers="Std. Error" class="gt_row gt_right">0.327</td>
+<td headers="z value" class="gt_row gt_right">0.580</td>
+<td headers="Pr(>|z|)" class="gt_row gt_right">0.562</td></tr>
+    <tr><td headers="Response" class="gt_row gt_left">Muy en desacuerdo</td>
+<td headers="Estimate" class="gt_row gt_right">-0.135</td>
+<td headers="Std. Error" class="gt_row gt_right">1.012</td>
+<td headers="z value" class="gt_row gt_right">-0.134</td>
+<td headers="Pr(>|z|)" class="gt_row gt_right">0.894</td></tr>
+    <tr><td headers="Response" class="gt_row gt_left">En desacuerdo</td>
+<td headers="Estimate" class="gt_row gt_right">-0.244</td>
+<td headers="Std. Error" class="gt_row gt_right">0.291</td>
+<td headers="z value" class="gt_row gt_right">-0.838</td>
+<td headers="Pr(>|z|)" class="gt_row gt_right">0.402</td></tr>
+    <tr><td headers="Response" class="gt_row gt_left">Neutral</td>
+<td headers="Estimate" class="gt_row gt_right">0.152</td>
+<td headers="Std. Error" class="gt_row gt_right">0.214</td>
+<td headers="z value" class="gt_row gt_right">0.711</td>
+<td headers="Pr(>|z|)" class="gt_row gt_right">0.477</td></tr>
+    <tr><td headers="Response" class="gt_row gt_left">De acuerdo</td>
+<td headers="Estimate" class="gt_row gt_right">-0.210</td>
+<td headers="Std. Error" class="gt_row gt_right">0.134</td>
+<td headers="z value" class="gt_row gt_right">-1.570</td>
+<td headers="Pr(>|z|)" class="gt_row gt_right">0.116</td></tr>
+    <tr><td headers="Response" class="gt_row gt_left">Muy de acuerdo</td>
+<td headers="Estimate" class="gt_row gt_right">0.117</td>
+<td headers="Std. Error" class="gt_row gt_right">0.137</td>
+<td headers="z value" class="gt_row gt_right">0.855</td>
+<td headers="Pr(>|z|)" class="gt_row gt_right">0.393</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</div>
+<p>Sin embargo, si se realiza este contraste entre subtítulos y periodos, se constata la existencia de un de signo contrario para los ítems 4 y 5 (ver <a href="#tbl-logor2">Tabla&nbsp;<span>5.2</span></a>). El test es significativo porque el ratio entre subtítulos de respuestas con valor 4 es diferente en cada periodo habiendo mayor cantidad de respuestas 4 en el segundo periodo que en el primero. Con las respuestas 5 ocurre lo contrario: la proporción es mayor en el primer periodo. La <a href="#fig-or2">Figura&nbsp;<span>5.1</span></a> permite una comprobación visual. Esto indica que los estudiantes de ambos grupos prestaron más atención o fueron más exigentes en el segundo visionado y valoraron relativamente peor el segundo vídeo. Que el efecto periodo sea de signo contrario en dos respuestas no debe sorprender en este diseño de experimento, ya que un test es un juego de suma cero: la valoraciones que se ganan o se pierden en un nivel de respuesta necesariamente se reparten entre el resto de niveles. En cualquier caso, el efecto periodo es cuantitativa y cualitativamente pequeño. Al afectar solo al intercambio de valoraciones entre los niveles 4 y 5, es simplemente una pequeña corrección en la valoración del subtitulado y cualitativamente es poco importante ya que las respuestas 4 y 5 son ambas valoraciones positivas.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-logor2" class="anchored">
+
+<div id="erdgnrjszs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#erdgnrjszs table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#erdgnrjszs thead, #erdgnrjszs tbody, #erdgnrjszs tfoot, #erdgnrjszs tr, #erdgnrjszs td, #erdgnrjszs th {
+  border-style: none;
+}
+
+#erdgnrjszs p {
+  margin: 0;
+  padding: 0;
+}
+
+#erdgnrjszs .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#erdgnrjszs .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#erdgnrjszs .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#erdgnrjszs .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#erdgnrjszs .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#erdgnrjszs .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#erdgnrjszs .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#erdgnrjszs .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#erdgnrjszs .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#erdgnrjszs .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#erdgnrjszs .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#erdgnrjszs .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#erdgnrjszs .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#erdgnrjszs .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#erdgnrjszs .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#erdgnrjszs .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#erdgnrjszs .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#erdgnrjszs .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#erdgnrjszs .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#erdgnrjszs .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#erdgnrjszs .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#erdgnrjszs .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#erdgnrjszs .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#erdgnrjszs .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#erdgnrjszs .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#erdgnrjszs .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#erdgnrjszs .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#erdgnrjszs .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#erdgnrjszs .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#erdgnrjszs .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#erdgnrjszs .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#erdgnrjszs .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#erdgnrjszs .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#erdgnrjszs .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#erdgnrjszs .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#erdgnrjszs .gt_left {
+  text-align: left;
+}
+
+#erdgnrjszs .gt_center {
+  text-align: center;
+}
+
+#erdgnrjszs .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#erdgnrjszs .gt_font_normal {
+  font-weight: normal;
+}
+
+#erdgnrjszs .gt_font_bold {
+  font-weight: bold;
+}
+
+#erdgnrjszs .gt_font_italic {
+  font-style: italic;
+}
+
+#erdgnrjszs .gt_super {
+  font-size: 65%;
+}
+
+#erdgnrjszs .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#erdgnrjszs .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#erdgnrjszs .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#erdgnrjszs .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#erdgnrjszs .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#erdgnrjszs .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#erdgnrjszs .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><caption>Tabla&nbsp;5.2:  <p>Log OR ~ Treat + Period + Response</p> </caption>
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Response">Response</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Estimate">Estimate</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Std. Error">Std. Error</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="z value">z value</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Pr(&amp;gt;|z|)">Pr(&gt;|z|)</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="Response" class="gt_row gt_left">No sé / No contesto</td>
+<td headers="Estimate" class="gt_row gt_right">0.335</td>
+<td headers="Std. Error" class="gt_row gt_right">0.327</td>
+<td headers="z value" class="gt_row gt_right">1.022</td>
+<td headers="Pr(>|z|)" class="gt_row gt_right">0.307</td></tr>
+    <tr><td headers="Response" class="gt_row gt_left">Muy en desacuerdo</td>
+<td headers="Estimate" class="gt_row gt_right">0.135</td>
+<td headers="Std. Error" class="gt_row gt_right">1.012</td>
+<td headers="z value" class="gt_row gt_right">0.134</td>
+<td headers="Pr(>|z|)" class="gt_row gt_right">0.894</td></tr>
+    <tr><td headers="Response" class="gt_row gt_left">En desacuerdo</td>
+<td headers="Estimate" class="gt_row gt_right">-0.121</td>
+<td headers="Std. Error" class="gt_row gt_right">0.291</td>
+<td headers="z value" class="gt_row gt_right">-0.416</td>
+<td headers="Pr(>|z|)" class="gt_row gt_right">0.677</td></tr>
+    <tr><td headers="Response" class="gt_row gt_left">Neutral</td>
+<td headers="Estimate" class="gt_row gt_right">0.055</td>
+<td headers="Std. Error" class="gt_row gt_right">0.214</td>
+<td headers="z value" class="gt_row gt_right">0.259</td>
+<td headers="Pr(>|z|)" class="gt_row gt_right">0.796</td></tr>
+    <tr><td headers="Response" class="gt_row gt_left">De acuerdo</td>
+<td headers="Estimate" class="gt_row gt_right">-0.851</td>
+<td headers="Std. Error" class="gt_row gt_right">0.134</td>
+<td headers="z value" class="gt_row gt_right">-6.367</td>
+<td headers="Pr(>|z|)" class="gt_row gt_right">0.000</td></tr>
+    <tr><td headers="Response" class="gt_row gt_left">Muy de acuerdo</td>
+<td headers="Estimate" class="gt_row gt_right">0.486</td>
+<td headers="Std. Error" class="gt_row gt_right">0.137</td>
+<td headers="z value" class="gt_row gt_right">3.557</td>
+<td headers="Pr(>|z|)" class="gt_row gt_right">0.000</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-or2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="5_files/figure-html/fig-or2-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figura&nbsp;5.1: OR ~ Treat + Period + Response</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="modelado" class="level3" data-number="5.0.2">
+<h3 data-number="5.0.2" class="anchored" data-anchor-id="modelado"><span class="header-section-number">5.0.2</span> Modelado</h3>
+<section id="sec-logistica-3" class="level4" data-number="5.0.2.1">
+<h4 data-number="5.0.2.1" class="anchored" data-anchor-id="sec-logistica-3"><span class="header-section-number">5.0.2.1</span> Regresión Logística</h4>
+<p>En la <a href="4.html#sec-logistica-2"><span>Sección&nbsp;4.2.2</span></a> se explicó una forma de crear una variable dicotómica que permite ajustar los datos a una Regresión Logística. Concretamente, se creó la variable respuesta <span class="math inline">\(Improve\)</span> que compara si las respuestas de cada estudiante a cada Ítem entre los niveles de subtitulado (<span class="math inline">\(A\)</span> frente <span class="math inline">\(B\)</span>) han mejorado (valor 1) o se han mantenido o empeorado (valor 0). El modelo que se propone en esta sección no tiene en cuenta el porque resultó no significativo en el análisis y, en cambio, se incluye como efectos aleatorios los estudiantes y los ítems sobre el intercepto ya que, como se ha explicado, son variables que no se pueden considerar independientes:</p>
+<blockquote class="blockquote">
+<p>Improve ~ 1 + (1 | Subject) + (1 | Item)</p>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>glmer_improve_subject_question <span class="ot">&lt;-</span> <span class="fu">glmer</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    Improve <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Subject) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Item),</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="st">"binomial"</span>, <span class="at">data =</span> df_improve</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>El resumen del modelo ajustado con la función <code>glmer</code> del paquete <code>lme4</code> <span class="citation" data-cites="lme4">(ver <a href="references.html#ref-lme4" role="doc-biblioref">Bates et&nbsp;al. 2015</a>)</span> produce los resultados de la columna izquierda de la <a href="#tbl-selected-logistic">Tabla&nbsp;<span>5.3</span></a>. El intercepto del modelo ajustado es 0.465 (std.error 0.295). Por ello, la probabilidad de que se otorgue una mayor puntuación en <span class="math inline">\(A\)</span> que en <span class="math inline">\(B\)</span> es del 61.42%. La proporción de varianza explicada por los efectos aleatorios (<em></em>) es 0.534.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-selected-logistic" class="anchored">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>Tabla&nbsp;5.3: Resumen de los modelos de Regresión Logística.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">&nbsp;Improve (A&gt;B)</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Level == 'Positivo'</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: center;">0.465</td>
+<td style="text-align: center;">1.474***</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: center;">(0.295)</td>
+<td style="text-align: center;">(0.284)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Treat1</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">1.548***</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">(0.223)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SD (Intercept Subject)</td>
+<td style="text-align: center;">1.703</td>
+<td style="text-align: center;">1.590</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SD (Treat1 Subject)</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">1.082</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Cor (Intercept~Treat1 Subject)</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">-0.093</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SD (Intercept Item)</td>
+<td style="text-align: center;">0.931</td>
+<td style="text-align: center;">0.893</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SD (Treat1 Item)</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">0.726</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; box-shadow: 0px 1.5px;">Cor (Intercept~Treat1 Item)</td>
+<td style="text-align: center; box-shadow: 0px 1.5px;"></td>
+<td style="text-align: center; box-shadow: 0px 1.5px;">-0.119</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Num.Obs.</td>
+<td style="text-align: center;">1451</td>
+<td style="text-align: center;">2980</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">AIC</td>
+<td style="text-align: center;">1553.6</td>
+<td style="text-align: center;">2390.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BIC</td>
+<td style="text-align: center;">1569.5</td>
+<td style="text-align: center;">2438.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+<p>Una forma alternativa de Regresión Logística es simplemente saber si cada respuesta es positiva (4 ó 5) frente a si es negativa o neutra (1, 2, ó 3). Como efecto fijo se incorpora el nivel de subtitulado y como efectos aleatorios el estudiante y el ítem ambos con intercepto y pendiente sobre el subtitulado variables por tener mejor valor de <span class="math inline">\(AIC\)</span> que otros modelos probados <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. La fórmula del modelo es la siguiente:</p>
+<blockquote class="blockquote">
+<p>I(Level == “Positivo”) ~ Treat + (1 + Treat | Subject) + (1 + Treat | Item)</p>
+</blockquote>
+<p>En la columna derecha de la <a href="#tbl-selected-logistic">Tabla&nbsp;<span>5.3</span></a> se muestra el resumen del modelo. En este caso, el intercepto tiene una valor de 1.474. Por lo que la probabilidad de respuesta positiva en cualquier ítem y nivel de subtitulado es 81.4%. El coeficiente <code>Treat1</code> es significativo y tiene valor 1.548 y es el valor en <code>logits</code> que se añade o se quita en función de si el subtitulado es el <span class="math inline">\(A\)</span> o el <span class="math inline">\(B\)</span>. Esto se traduce en que la posibilidad de una respuesta positiva en el subtitulado <span class="math inline">\(A\)</span> es 95.4%. En el subtitulado <span class="math inline">\(B\)</span> esta probabilidad se reduce a 48.2%. Por último, el valor de <span class="math inline">\(ICC\)</span> del modelo es 0.604</p>
+</section>
+<section id="sec-ordinal-3" class="level4" data-number="5.0.2.2">
+<h4 data-number="5.0.2.2" class="anchored" data-anchor-id="sec-ordinal-3"><span class="header-section-number">5.0.2.2</span> Regresión Ordinal</h4>
+<p>En la <a href="4.html#sec-ordinal-2"><span>Sección&nbsp;4.2.3</span></a> se evaluaron distintas parametrizaciones de la Regresión Ordinal Acumulativa tanto desde el punto de vista frecuentista como bayesiano, considerando únicamente efectos fijos y también efectos aleatorios. Finalmente, tanto en el análisis frecuentista como en el bayesiano, el modelo que resultó ser más parsimonioso (evaluado con <em></em> y con <span class="math inline">\(AIC\)</span>) es el de la <a href="4.html#eq-mejor-modelo">Ecuación&nbsp;<span>4.2</span></a>, que se reproduce aquí en sintaxis R:</p>
+<blockquote class="blockquote">
+<p>Response ~ Treat*Period + (1 + Treat | Subject) + (1 + Treat | Item)</p>
+</blockquote>
+<p>Este modelo incluye como efectos fijos el nivel de subtitulado (<code>Treat</code>), el periodo (<code>Period</code>) y su interacción; y como efectos aleatorios el estudiante (<code>Subject</code>) y el ítem (<code>Item</code>). Ambos con interceptos y pendientes variables por nivel de subtítulo. Los coeficientes estimados son muy similares tanto en el paradigma frecuentista como en el bayesiano. En la <a href="#tbl-model-comp">Tabla&nbsp;<span>5.4</span></a> se comparan las estimaciones producidas por ambos modelos. Como ya se dijo, el efecto más importante es el debido al subtitulado (coeficiente frecuentista 1.432). En comparación con él, los efectos debido al periodo y la secuencia son muy pequeños y no significativos (coeficientes 0.173 y 0.14 respectivamente). La proporción de la varianza explicada debida a efectos aleatorios (<span class="math inline">\(ICC\)</span>) es 0.579.</p>
+<p>En la <a href="#fig-probs-clmm_treat.period.subject.question">Figura&nbsp;<span>5.2</span></a> se muestran las predicciones del modelo por nivel de subtítulo y periodo. El modelo predice para el subtitulado <span class="math inline">\(B\)</span> el nivel 4 de respuesta como el más probable seguido del 3, mientras para el subtitulado <span class="math inline">\(A\)</span> el nivel de respuesta más probable es el 5 seguido del 4. En el subtitulado <span class="math inline">\(B\)</span> apenas hay diferencias entre periodos, sin embargo, en el subtitulado <span class="math inline">\(A\)</span> hay mayor probabilidad del nivel de respuesta 5 en el periodo 1 y nivel de respuesta 4 en el periodo 2.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-probs-clmm_treat.period.subject.question" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="5_files/figure-html/fig-probs-clmm_treat.period.subject.question-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figura&nbsp;5.2: Probabilidades de respuesta para el modelo ordinal Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item)</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-tbl-scap="Comparación frecuentista/bayesiano de coeficientes estimados en el modelo Response ~ Treat * Period + (1 + Treat | Subject) + (1 + Treat | Item).">
+<div class="cell-output-display">
+<div id="tbl-model-comp" class="anchored">
+
+<div id="uwpgcczfks" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#uwpgcczfks table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#uwpgcczfks thead, #uwpgcczfks tbody, #uwpgcczfks tfoot, #uwpgcczfks tr, #uwpgcczfks td, #uwpgcczfks th {
+  border-style: none;
+}
+
+#uwpgcczfks p {
+  margin: 0;
+  padding: 0;
+}
+
+#uwpgcczfks .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 6px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#uwpgcczfks .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#uwpgcczfks .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#uwpgcczfks .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#uwpgcczfks .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#uwpgcczfks .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#uwpgcczfks .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#uwpgcczfks .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#uwpgcczfks .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#uwpgcczfks .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#uwpgcczfks .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#uwpgcczfks .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#uwpgcczfks .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#uwpgcczfks .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#uwpgcczfks .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#uwpgcczfks .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#uwpgcczfks .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#uwpgcczfks .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#uwpgcczfks .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#uwpgcczfks .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#uwpgcczfks .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#uwpgcczfks .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#uwpgcczfks .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#uwpgcczfks .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#uwpgcczfks .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#uwpgcczfks .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#uwpgcczfks .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#uwpgcczfks .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#uwpgcczfks .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#uwpgcczfks .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#uwpgcczfks .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#uwpgcczfks .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#uwpgcczfks .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#uwpgcczfks .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#uwpgcczfks .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#uwpgcczfks .gt_left {
+  text-align: left;
+}
+
+#uwpgcczfks .gt_center {
+  text-align: center;
+}
+
+#uwpgcczfks .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#uwpgcczfks .gt_font_normal {
+  font-weight: normal;
+}
+
+#uwpgcczfks .gt_font_bold {
+  font-weight: bold;
+}
+
+#uwpgcczfks .gt_font_italic {
+  font-style: italic;
+}
+
+#uwpgcczfks .gt_super {
+  font-size: 65%;
+}
+
+#uwpgcczfks .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#uwpgcczfks .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#uwpgcczfks .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#uwpgcczfks .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#uwpgcczfks .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#uwpgcczfks .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#uwpgcczfks .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false"><caption>Tabla&nbsp;5.4:  <p>Comparación frecuentista/bayesiano de coeficientes estimados en el
+modelo ordinal.</p> </caption>
+  <thead>
+    
+    <tr class="gt_col_headings gt_spanner_row">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" scope="col" id="Name">Name</th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="3" scope="colgroup" id="ordinal::clmm">
+        <span class="gt_column_spanner">ordinal::clmm</span>
+      </th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="3" scope="colgroup" id="brms::brm">
+        <span class="gt_column_spanner">brms::brm</span>
+      </th>
+    </tr>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Est.">Est.</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="conf.2.5%">conf.2.5%</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="conf.97.5%">conf.97.5%</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Est.">Est.</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="cred.2.5%">cred.2.5%</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="cred.97.5%">cred.97.5%</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="Name" class="gt_row gt_left">1|2</td>
+<td headers="Estimation.clmm" class="gt_row gt_right">-5.00</td>
+<td headers="conf.2.5%" class="gt_row gt_right">-5.52</td>
+<td headers="conf.97.5%" class="gt_row gt_right">-4.49</td>
+<td headers="Estimation.brm" class="gt_row gt_right">-4.94</td>
+<td headers="cred.2.5%" class="gt_row gt_right">-5.52</td>
+<td headers="cred.97.5%" class="gt_row gt_right">-4.42</td></tr>
+    <tr><td headers="Name" class="gt_row gt_left">2|3</td>
+<td headers="Estimation.clmm" class="gt_row gt_right">-2.65</td>
+<td headers="conf.2.5%" class="gt_row gt_right">-3.12</td>
+<td headers="conf.97.5%" class="gt_row gt_right">-2.18</td>
+<td headers="Estimation.brm" class="gt_row gt_right">-2.58</td>
+<td headers="cred.2.5%" class="gt_row gt_right">-3.11</td>
+<td headers="cred.97.5%" class="gt_row gt_right">-2.09</td></tr>
+    <tr><td headers="Name" class="gt_row gt_left">3|4</td>
+<td headers="Estimation.clmm" class="gt_row gt_right">-1.37</td>
+<td headers="conf.2.5%" class="gt_row gt_right">-1.83</td>
+<td headers="conf.97.5%" class="gt_row gt_right">-0.90</td>
+<td headers="Estimation.brm" class="gt_row gt_right">-1.30</td>
+<td headers="cred.2.5%" class="gt_row gt_right">-1.82</td>
+<td headers="cred.97.5%" class="gt_row gt_right">-0.82</td></tr>
+    <tr><td headers="Name" class="gt_row gt_left">4|5</td>
+<td headers="Estimation.clmm" class="gt_row gt_right">1.18</td>
+<td headers="conf.2.5%" class="gt_row gt_right">0.72</td>
+<td headers="conf.97.5%" class="gt_row gt_right">1.65</td>
+<td headers="Estimation.brm" class="gt_row gt_right">1.25</td>
+<td headers="cred.2.5%" class="gt_row gt_right">0.74</td>
+<td headers="cred.97.5%" class="gt_row gt_right">1.75</td></tr>
+    <tr><td headers="Name" class="gt_row gt_left">Treat1</td>
+<td headers="Estimation.clmm" class="gt_row gt_right">1.43</td>
+<td headers="conf.2.5%" class="gt_row gt_right">1.02</td>
+<td headers="conf.97.5%" class="gt_row gt_right">1.84</td>
+<td headers="Estimation.brm" class="gt_row gt_right">1.46</td>
+<td headers="cred.2.5%" class="gt_row gt_right">1.01</td>
+<td headers="cred.97.5%" class="gt_row gt_right">1.92</td></tr>
+    <tr><td headers="Name" class="gt_row gt_left">Period1</td>
+<td headers="Estimation.clmm" class="gt_row gt_right">0.17</td>
+<td headers="conf.2.5%" class="gt_row gt_right">-0.09</td>
+<td headers="conf.97.5%" class="gt_row gt_right">0.43</td>
+<td headers="Estimation.brm" class="gt_row gt_right">0.17</td>
+<td headers="cred.2.5%" class="gt_row gt_right">-0.09</td>
+<td headers="cred.97.5%" class="gt_row gt_right">0.44</td></tr>
+    <tr><td headers="Name" class="gt_row gt_left">Treat1:Period1</td>
+<td headers="Estimation.clmm" class="gt_row gt_right">0.14</td>
+<td headers="conf.2.5%" class="gt_row gt_right">-0.18</td>
+<td headers="conf.97.5%" class="gt_row gt_right">0.46</td>
+<td headers="Estimation.brm" class="gt_row gt_right">0.14</td>
+<td headers="cred.2.5%" class="gt_row gt_right">-0.20</td>
+<td headers="cred.97.5%" class="gt_row gt_right">0.47</td></tr>
+    <tr><td headers="Name" class="gt_row gt_left">Item.sd(Intercept)</td>
+<td headers="Estimation.clmm" class="gt_row gt_right">0.70</td>
+<td headers="conf.2.5%" class="gt_row gt_right"></td>
+<td headers="conf.97.5%" class="gt_row gt_right"></td>
+<td headers="Estimation.brm" class="gt_row gt_right">0.75</td>
+<td headers="cred.2.5%" class="gt_row gt_right">0.53</td>
+<td headers="cred.97.5%" class="gt_row gt_right">1.15</td></tr>
+    <tr><td headers="Name" class="gt_row gt_left">Item.sd(Treat1)</td>
+<td headers="Estimation.clmm" class="gt_row gt_right">0.68</td>
+<td headers="conf.2.5%" class="gt_row gt_right"></td>
+<td headers="conf.97.5%" class="gt_row gt_right"></td>
+<td headers="Estimation.brm" class="gt_row gt_right">0.75</td>
+<td headers="cred.2.5%" class="gt_row gt_right">0.53</td>
+<td headers="cred.97.5%" class="gt_row gt_right">1.12</td></tr>
+    <tr><td headers="Name" class="gt_row gt_left">Subject.sd(Intercept)</td>
+<td headers="Estimation.clmm" class="gt_row gt_right">1.49</td>
+<td headers="conf.2.5%" class="gt_row gt_right"></td>
+<td headers="conf.97.5%" class="gt_row gt_right"></td>
+<td headers="Estimation.brm" class="gt_row gt_right">1.53</td>
+<td headers="cred.2.5%" class="gt_row gt_right">1.29</td>
+<td headers="cred.97.5%" class="gt_row gt_right">1.85</td></tr>
+    <tr><td headers="Name" class="gt_row gt_left">Subject.sd(Treat1)</td>
+<td headers="Estimation.clmm" class="gt_row gt_right">1.17</td>
+<td headers="conf.2.5%" class="gt_row gt_right"></td>
+<td headers="conf.97.5%" class="gt_row gt_right"></td>
+<td headers="Estimation.brm" class="gt_row gt_right">1.21</td>
+<td headers="cred.2.5%" class="gt_row gt_right">1.01</td>
+<td headers="cred.97.5%" class="gt_row gt_right">1.45</td></tr>
+    <tr><td headers="Name" class="gt_row gt_left">Item.cor(Intercept,Treat1)</td>
+<td headers="Estimation.clmm" class="gt_row gt_right">-0.53</td>
+<td headers="conf.2.5%" class="gt_row gt_right"></td>
+<td headers="conf.97.5%" class="gt_row gt_right"></td>
+<td headers="Estimation.brm" class="gt_row gt_right">-0.49</td>
+<td headers="cred.2.5%" class="gt_row gt_right">-0.78</td>
+<td headers="cred.97.5%" class="gt_row gt_right">0.01</td></tr>
+    <tr><td headers="Name" class="gt_row gt_left">Subject.cor(Intercept,Treat1)</td>
+<td headers="Estimation.clmm" class="gt_row gt_right">-0.13</td>
+<td headers="conf.2.5%" class="gt_row gt_right"></td>
+<td headers="conf.97.5%" class="gt_row gt_right"></td>
+<td headers="Estimation.brm" class="gt_row gt_right">-0.11</td>
+<td headers="cred.2.5%" class="gt_row gt_right">-0.34</td>
+<td headers="cred.97.5%" class="gt_row gt_right">0.14</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</div>
+<p>En la <a href="#fig-pred-3">Figura&nbsp;<span>5.3</span></a> se representan 50 muestras de la esperanza de la distribución predictiva a posteriori para cada ítem y nivel de subtitulado marginalizados por periodo y estudiante. La primera conclusión que se puede extraer es que el modelo tiene bastante incertidumbre sobre los valores de respuesta a cada ítem no superando casi nunca el 50% de probabilidad para todos los ítems y niveles de subtitulado. En general se observa en la mayoría de los ítems del nivel de subtitulado <span class="math inline">\(A\)</span> que los alumnos están bastante seguros de que la respuesta a los ítems debe ser 4 ó 5, asignando una muy baja probabilidad a los valores 1, 2, ó 3, pero habiendo bastante incertidumbre respecto cuál de los dos valores (4 ó 5) asignar. En el nivel de subtitulado <span class="math inline">\(B\)</span> la situación es bastante más confusa. Aunque la opción de respuesta preferida es 4 y las menos preferidas son la 5 y la 1, hay bastante mezcla entre las opciones de respuesta 2, 3 y 4. En cuanto al análisis individualizado por ítem se llega a las siguientes conclusiones:</p>
+<ul>
+<li><p>En los ítems <span class="math inline">\(Q04\)</span> y <span class="math inline">\(Q13\)</span> los estudiantes no aprecian defectos en el subtitulado ni diferencias entre un nivel y otro. Son valoradas en ambos subtitulados con puntuaciones de 4 y de 5.</p></li>
+<li><p>En los ítems <span class="math inline">\(Q15\)</span>, <span class="math inline">\(Q16\)</span> y <span class="math inline">\(Q17\)</span>, la opción de respuesta más probable es 4. El modelo asigna una baja probabilidad de respuesta a la opción 1 y similares al resto. La probabilidad de la opción 5 decrece ligeramente entre subtitulado <span class="math inline">\(A\)</span> y <span class="math inline">\(B\)</span> y lo contrario ocurre con las opciones 2 y 3.</p></li>
+<li><p>Las muestras de los ítems <span class="math inline">\(Q01\)</span>, <span class="math inline">\(Q02\)</span>, <span class="math inline">\(Q03\)</span>, <span class="math inline">\(Q10\)</span>, <span class="math inline">\(Q11\)</span> y <span class="math inline">\(Q12\)</span> son similares a las anteriores. Particularmente en lo referente a que la respuesta más probable en el subtitulado <span class="math inline">\(B\)</span> es 4. En el subtitulado <span class="math inline">\(A\)</span> hay preferencia por 4 y 5. El nivel 5 cae acusadamente en el subtitulado <span class="math inline">\(B\)</span> y en este nivel aumenta ligeramente la probabilidad de respuesta 2 y 3.</p></li>
+<li><p>Los ítems <span class="math inline">\(Q06\)</span>, <span class="math inline">\(Q07\)</span>, <span class="math inline">\(Q14\)</span> y <span class="math inline">\(Q18\)</span> tampoco son muy diferentes de los anteriores. En general el modelo predice mayor probabilidad de respuesta para 5 en el subtitulado <span class="math inline">\(A\)</span> pero este valor es con alta probabilidad cercano a cero en el subtitulado <span class="math inline">\(B\)</span>. En el subtitulado <span class="math inline">\(B\)</span> la probabilidad de respuesta 2, 3 ó 4 es similar.</p></li>
+<li><p>Los ítems <span class="math inline">\(Q05\)</span>, <span class="math inline">\(Q08\)</span> y <span class="math inline">\(Q09\)</span> son los que más diferencias entre subtitulados presentan. La respuesta más probable en el subtitulado <span class="math inline">\(A\)</span> es 5 (en <span class="math inline">\(Q08\)</span> y en <span class="math inline">\(Q09\)</span> muy parecida a 4). Por contra, en el subtitulado <span class="math inline">\(B\)</span> las respuestas 4 y 5 tienden a cero, siendo la más probable la respuesta 2. En los ítems <span class="math inline">\(Q05\)</span> y <span class="math inline">\(Q09\)</span> la segunda respuesta más probable al subtitulado <span class="math inline">\(B\)</span> es 1 y 4 en el ítem <span class="math inline">\(Q08\)</span>.</p></li>
+</ul>
+<p>En definitiva, el modelo predice que los estudiantes están bastante de acuerdo en que en los ítems <span class="math inline">\(Q05\)</span> y <span class="math inline">\(Q09\)</span> hay una diferencia de calidad importante entre subtitulados. También están de acuerdo en que en los ítems <span class="math inline">\(Q04\)</span> y <span class="math inline">\(Q13\)</span> no hay apenas cambio entre los subtitulados. En los ítems <span class="math inline">\(Q15\)</span>, <span class="math inline">\(Q16\)</span> y <span class="math inline">\(Q17\)</span> hay una gran confusión en ambos niveles de subtitulado predominando la respuesta 4 y siendo muy parecidas las respuestas en ambos niveles. En el resto la confusión se circunscribe al nivel de subtitulado <span class="math inline">\(B\)</span>, ya que en el nivel <span class="math inline">\(A\)</span> las opciones 4 y 5 predominan.</p>
+<div id="fig-pred-3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="images/bayes-preg.png" class="img-fluid figure-img" style="width:120.0%"></p>
+<figcaption class="figure-caption">Figura&nbsp;5.3: Muestreo de la función predictiva a posteriori por tratamiento e ítem.</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="sec-discusion" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Discusión</h1>
+<p>En este capítulo se discuten los resultados una vez “descubierto el ciego” y se responde a la pregunta de investigación y a los objetivos específicos planteados en la <a href="index.html#sec-objetivos"><span>Sección&nbsp;1.2</span></a>. Las respuestas a estas preguntas llevan a concluir que se ha cumplido el objetivo principal del estudio: los estudiantes del curso MOOC son capaces de evaluar las diferencias en la calidad del subtitulado de dos vídeos. Se discuten también las limitaciones del estudio y posibles mejoras al mismo.</p>
+<p>Una vez realizado el análisis estadístico y obtenidos los resultados (ver <a href="#sec-resultados"><span>Capítulo&nbsp;5</span></a>) se reveló que el subtitulado que en este trabajo se ha denominado <span class="math inline">\(A\)</span> se corresponde con el vídeo correctamente subtitulado. Adicionalmente se ha suministrado un documento que contiene los errores introducidos en el subtitulado <span class="math inline">\(B\)</span>. A partir del mismo, se ha elaborado la Tabla <span class="math inline">\(\ref{tbl-blind-errors}\)</span> en la que se muestra la correspondencia de cada error con los ítems de la a la que respondieron los estudiantes (ver en la <a href="3.html#tbl-likert-scale">Tabla&nbsp;<span>3.1</span></a> una descripción textual de cada ítem). Para 7 de los 18 ítems (Q01, Q03, Q04, Q13, Q15, Q16, Q17) no se ha encontrado una adscripción clara en el documento de errores y, por lo tanto, esos ítems sirven de control del test y sería esperable que en ellos las respuestas de los estudiantes fueran similares en ambos subtitulados.</p>
+<section id="respuestas-a-las-preguntas-de-investigación-y-a-los-objetivos-específicos" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="respuestas-a-las-preguntas-de-investigación-y-a-los-objetivos-específicos"><span class="header-section-number">6.1</span> Respuestas a las preguntas de investigación y a los objetivos específicos</h2>
+<p>Para responder a las preguntas de investigación se van a utilizar los hallazgos del Análisis Exploratorio (ver <a href="4.html#sec-eda"><span>Sección&nbsp;4.1</span></a>) y los resultados de los tres modelos comentados en el <a href="#sec-resultados"><span>Capítulo&nbsp;5</span></a>:</p>
+<ul>
+<li> con variable respuesta <code>Improve</code>, que calcula la probabilidad de que la respuesta a un ítem mejore entre subtitulados <span class="math inline">\(A\)</span> &gt; <span class="math inline">\(B\)</span> (ver <a href="#sec-logistica-3"><span>Sección&nbsp;5.0.2.1</span></a>).</li>
+<li> con variable respuesta <code>Positive</code>, que calcula la probabilidad de que la respuesta a un ítem sea positiva (4 ó 5).</li>
+<li> con variable Respuesta <code>Response</code>, que calcula la probabilidad de cada nivel de respuesta (ver <a href="#sec-ordinal-3"><span>Sección&nbsp;5.0.2.2</span></a>).</li>
+</ul>
+<p>Para mayor comodidad del lector se vuelven a plantear aquí la pregunta de investigación y los objetivos específicos:</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Pregunta de investigación
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>¿Son los estudiantes de un curso de creación de materiales accesibles capaces de evaluar las diferencias en la calidad del subtitulado de un vídeo?</p>
+</div>
+</div>
+<p>El subtitulado <span class="math inline">\(A\)</span>, que es el correcto, ha sido mejor evaluado por los estudiantes. Esto se ha constatado tanto en la exploración inicial como en cada uno de los tres modelos propuestos. Por ejemplo, en la exploración inicial se vio que la respuesta más frecuente en el subtitulado <span class="math inline">\(A\)</span> es 5 y en el <span class="math inline">\(B\)</span> es 4 y en el modelo con variable respuesta <code>Improve</code> predice que la probabilidad de que se otorgue una mayor puntuación en <span class="math inline">\(A\)</span> que en <span class="math inline">\(B\)</span> es 61.42%. Por lo tanto, se concluye respondiendo afirmativamente a la pregunta: los estudiantes del curso han sabido evaluar las diferencias en el subtitulado de los vídeos.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Objetivo específico
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>¿En qué pautas de subtitulado los estudiantes tienen mayor <strong>facilidad</strong> para reconocer diferencias entre un subtitulado correcto y otro incorrecto?</p>
+</div>
+</div>
+<p>La respuesta a esta pregunta requiere un análisis pormenorizado ítem a ítem. Se ha elaborado una tabla para los dos modelos logísticos y otra para el modelo de Regresión Ordinal. La <a href="#fig-or">Figura&nbsp;<span>6.1</span></a> contiene la tabla de los dos modelos logísticos. Para su correcta interpretación se deben tener en cuenta las siguientes premisas:</p>
+<ul>
+<li>En la parte izquierda se presentan los resultados del modelo logístico con variable respuesta <code>Improve</code> y en la derecha el modelo logístico con variable respuesta <code>Positive</code>.</li>
+<li>En la parte superior se presentan los ítems en los que hay diferencias en el subtitulado y que son objeto de este objetivo específico. En la parte inferior se muestran los ítems que se usan como control ya que no hay diferencias en ellos entre subtitulados y se analizan en el objetivo correspondiente.</li>
+<li>La columna <code>Freq</code> es la frecuencia relativa de las tablas de contingencia que resultan del análisis exploratorio. La columna <code>Prob</code> son las probabilidades predichas por cada uno de los modelos.</li>
+<li>Los datos se muestran con un fondo coloreado con una tonalidad más oscura cuando más inesperado sea el resultado obtenido.</li>
+</ul>
+<p>En el modelo con variable respuesta <code>Improve</code> (ver parte izquierda de <a href="#fig-or">Figura&nbsp;<span>6.1</span></a>), los alumnos han valorado claramente de forma superior el subtitulado <span class="math inline">\(A\)</span> que el <span class="math inline">\(B\)</span> en los ítems <span class="math inline">\(Q05\)</span> (la corrección ortográfica y gramatical), <span class="math inline">\(Q06\)</span> (la literalidad), <span class="math inline">\(Q08\)</span> (la asignación de líneas a los personajes en los diálogos), <span class="math inline">\(Q09\)</span> (la descripción de efectos sonoros) y <span class="math inline">\(Q14\)</span> (la separación en líneas diferentes de sintagmas nominales, verbales y preposicionales).</p>
+<p>En la parte derecha de la <a href="#fig-or">Figura&nbsp;<span>6.1</span></a> se muestran las predicciones del modelo con variable respuesta <code>Positive</code> de obtener una respuesta con nivel 4 ó 5. Coincide con el modelo anterior en los ítems peor valorados en el subtitulado <span class="math inline">\(B\)</span>. Además, habría que añadir el ítem <span class="math inline">\(Q07\)</span> (la identificación de los personajes), que tiene mayor probabilidad de valoración no positiva.</p>
+<div id="fig-or" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="images/improve.png" style="height:70.0%" class="figure-img"></p>
+<figcaption class="figure-caption">Figura&nbsp;6.1: Predicciones de los modelos de Regresión Logística</figcaption>
+</figure>
+</div>
+<p>En la Figura <span class="math inline">\(\ref{fig-prob-compare}\)</span> se muestran las probabilidades por nivel de respuesta, ítem y nivel de subtitulado correspondiente al modelo de Regresión Ordinal y se comparan con las frecuencias de la tabla de contingencia. Los ítems con errores se presentan en negrita y recuadrados. Se observa que en el subtitulado <span class="math inline">\(A\)</span> todas las respuestas a los ítems se concentran en valores positivos (4 ó 5). En el subtitulado <span class="math inline">\(B\)</span> se espera que los ítems en los que se han introducido errores tengan peores valoraciones. Esto sucede claramente en <span class="math inline">\(Q05\)</span> y en <span class="math inline">\(Q09\)</span> y también aunque en menor medida en <span class="math inline">\(Q06\)</span>, <span class="math inline">\(Q07\)</span>, <span class="math inline">\(Q08\)</span> y <span class="math inline">\(Q14\)</span>. Estos ítems coinciden con los que se han destacado anteriormente y son, por lo tanto, en los que los estudiantes reconocen más fácilmente diferencias entre subtitulados.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Objetivo específico
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>¿En qué pautas de subtitulado los estudiantes tienen mayor <strong>dificultad</strong> para reconocer diferencias entre un subtitulado correcto y otro incorrecto?</p>
+</div>
+</div>
+<p>Los dos modelos logísticos (ver <a href="#fig-or">Figura&nbsp;<span>6.1</span></a>) coinciden en que los estudiantes tienen dificultad para reconocer diferencias en el subtitulado en los ítems:</p>
+<ul>
+<li><span class="math inline">\(Q02\)</span> (el número de líneas por subtítulo) con probabilidad predicha de mejorar la valoración de 68.56%.</li>
+<li><span class="math inline">\(Q10\)</span> (la sincronización de las entradas y salidas de los subtítulos) con probabilidad de mejora 55.34%.</li>
+<li><span class="math inline">\(Q11\)</span> (la velocidad de exposición de los subtítulos) con probabilidad 57.53%.</li>
+<li><span class="math inline">\(Q12\)</span> (el máximo número de caracteres por línea) con probabilidad 63.7%.</li>
+</ul>
+<p>En estos mismos ítems, el modelo ordinal (ver Figura <span class="math inline">\(\ref{fig-prob-compare}\)</span>) predice más respuestas negativas en el subtitulado <span class="math inline">\(B\)</span> que en el <span class="math inline">\(A\)</span> pero aún así el subtitulado <span class="math inline">\(B\)</span> tiene un alto número de respuestas positivas.</p>
+<p>Para entender las motivaciones de las valoraciones de los alumnos, se han analizado los comentarios que dejaron <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. La siguiente es una selección de los comentarios más relevantes en cada ítem:</p>
+<ul>
+<li><span class="math inline">\(Q02\)</span>, <strong>el número de líneas por subtítulo</strong>: En los comentarios al subtitulado <span class="math inline">\(A\)</span> hay bastantes que se quejan del número excesivo de líneas.</li>
+</ul>
+<blockquote class="blockquote">
+<p>Subtitulado <span class="math inline">\(A\)</span>: ‘Se pueden hasta 3 pero no es recomendable’, ‘en ocasiones son 3 innecesariamente’, ‘frases muy cortas’, ‘No superaba las dos (creo recordar)’, ‘Se cumple’.</p>
+</blockquote>
+<ul>
+<li><span class="math inline">\(Q10\)</span>, <strong>la sincronización de las entradas y salidas de los subtítulos</strong>: En los comentarios al subtitulado <span class="math inline">\(A\)</span> hay algunos que dicen que hay falta de sincronización y, por el contrario, en el <span class="math inline">\(B\)</span> que estaban bien sincronizados. Hay por tanto una falta de atención de algunos estudiantes para evaluar este aspecto del subtitulado.</li>
+</ul>
+<blockquote class="blockquote">
+<p>Subtitulado <span class="math inline">\(A\)</span>: ‘Van a destiempo’, ‘a veces hay retardo del texto sobre el audio’, ‘No me dado cuenta.’, ‘Estaban desincronizadas’.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Subtitulado <span class="math inline">\(B\)</span>: ‘Regular.’, ‘Sincronizado’, ‘bastante sincronizados’, ‘va a la paz texto y lenguaje’, ‘Estaba bien sincronizado’, ‘Fallos corregidos’, ‘sincronizadas con el audio y la imagen’.</p>
+</blockquote>
+<ul>
+<li><span class="math inline">\(Q11\)</span>, <strong>la velocidad de exposición de los subtítulos</strong>: Los comentarios al subtitulado <span class="math inline">\(B\)</span> indican que muchos estudiantes no han tenido en cuenta que el subtítulo debe permanecer al menos tres segundos en la pantalla.</li>
+</ul>
+<blockquote class="blockquote">
+<p>Subtitulado <span class="math inline">\(B\)</span>: ‘Sincronizado.’, ‘me ha parecido un tiempo suficiente’, ‘los pude leer bien’, ‘Buen tiempo para la lectura’, ‘Se corresponde con los 12 caracteres por segundo’, ‘velocidad apropiada’, ‘Velocidad adequada para una buena lectura’.</p>
+</blockquote>
+<ul>
+<li><span class="math inline">\(Q12\)</span>, <strong>el máximo número de caracteres por línea</strong>: Los comentarios denotan que en general los alumnos conocen el número máximo de caracteres por línea, pero que no se han detenido a medir cuántos hay realmente.</li>
+</ul>
+<blockquote class="blockquote">
+<p>Subtitulado <span class="math inline">\(A\)</span>: ‘No sobrepasa los 40 caracteres’.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Subtitulado <span class="math inline">\(B\)</span>: ‘No pasa de 37’, ‘Se encuentran entre 12 y 37’.</p>
+</blockquote>
+<p>Se aprecia que los alumnos tienen dificultades para valorar las diferencias en la calidad del subtitulado en estos aspectos principalmente porque, aunque conozcan las normas de subtitulado, no han comprobado que se estén cumpliendo en los vídeos de la actividad.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Objetivo específico
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>¿Son los estudiantes capaces de valorar de forma similar los aspectos del subtitulado que no cambian en los vídeos?</p>
+</div>
+</div>
+<p>Los ítems en los que no se han introducido errores deberían ser valorados de forma similar por los estudiantes. En los modelos logísticos las probabilidades y frecuencias de estos ítems se muestran en la parte inferior de la tabla de la <a href="#fig-or">Figura&nbsp;<span>6.1</span></a> y en el modelo ordinal son las filas no resaltadas de la tabla de la Figura <span class="math inline">\(\ref{fig-prob-compare}\)</span>. Se comprueba que los ítems <span class="math inline">\(Q04\)</span> (el contraste entre los caracteres y el fondo) y <span class="math inline">\(Q13\)</span> (la legibilidad de la tipografía) se valoran, como se esperaba, de forma positiva y similar en ambos subtitulados. Los ítems <span class="math inline">\(Q01\)</span> (la posición de los subtítulos) y <span class="math inline">\(Q03\)</span> (la disposición del texto respecto a la caja donde se muestran los subtítulos) se valoran positivamente en el subtitulado <span class="math inline">\(A\)</span>, pero en el subtitulado <span class="math inline">\(B\)</span> hay una polarización de las valoraciones habiendo muchas positivas y negativas y pocas neutras. Por último, los ítems <span class="math inline">\(Q15\)</span> (la utilización de puntos suspensivos), <span class="math inline">\(Q16\)</span> (la escritura de los números) y <span class="math inline">\(Q17\)</span> (las incorrecciones en el habla) tienen una valoración comparativamente inferior al resto de ítems en el subtitulado <span class="math inline">\(A\)</span>. Esta valoración es incluso inferior en el subtitulado <span class="math inline">\(B\)</span>. Los estudiantes que han realizado comentarios en estos ítems indican que ninguno de ellos es aplicable a los vídeos. Ante esta circunstancia, los alumnos han consignado distintas valoraciones: algunos han contestado “No sé / No contesto”, otros han consignado valoraciones neutrales y, finalmente, otros han optado por valoraciones positivas y negativas.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Objetivo específico
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Efecto secuencia: ¿El orden en el que vieron los vídeos los estudiantes influye en la calidad del subtitulado percibida?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Objetivo específico
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Efecto periodo: ¿La evaluación del subtitulado del segundo vídeo visto está influida por haber evaluado un vídeo previamente?</p>
+</div>
+</div>
+<p>Estos objetivos se responden de forma conjunta por estar ambos efectos relacionados ya que, como se ha explicado, el efecto secuencia en un estudio cruzado <span class="math inline">\(AB/BA\)</span> es la interacción entre el tratamiento y el periodo.</p>
+<p>En el modelo ordinal <code>Response ~ Treat * Period</code> (ver <a href="4.html#sec-response-treat.period"><span>Sección&nbsp;4.2.3.3</span></a>) se constató que tanto el periodo como la secuencia son significativos. No obstante, estos efectos son mucho menos importantes que los debidos al subtitulado. Al introducir como variables explicativas el estudiante y el ítem (ver <a href="4.html#sec-multinivel-2"><span>Sección&nbsp;4.2.4</span></a>) tanto el periodo como la secuencia pasan a ser no significativos. En la <a href="#sec-or-3"><span>Sección&nbsp;5.0.1</span></a> se comprobó que estos efectos se producen porque la proporción de respuestas de nivel 5 en el subtitulado <span class="math inline">\(A\)</span> sobre el <span class="math inline">\(B\)</span> es superior en el primer periodo que en el segundo y lo contrario ocurre con las de nivel 4. Se concluye que ni el efecto secuencia ni el efecto periodo son importantes al no tener significación estadística.</p>
+</section>
+<section id="limitaciones-del-estudio" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="limitaciones-del-estudio"><span class="header-section-number">6.2</span> Limitaciones del estudio</h2>
+<p>Aunque el estudio ha permitido responder a la pregunta de investigación, tiene una serie de limitaciones cuya eliminación permitiría ampliar su ámbito:</p>
+<ul>
+<li>Los datos proceden de un MOOC y la actividad fue voluntaria. Hay que suponer que solo los estudiantes más altamente motivados habrán participado en ella.</li>
+<li>El diseño cruzado no requirió un tiempo de lavado (tiempo entre tratamientos) como es habitual en este tipo de diseños. A pesar de que se ha descartado que el efecto periodo o el efecto secuencia hayan tenido una influencia importante en las respuestas a los test, sería interesante controlar el tiempo entre test y asegurar que los participantes han visto ambos vídeos e incluso que, cuando contestan al test, revisan el vídeo en lugar de fiarse de su memoria.</li>
+<li>En el Análisis Exploratorio (ver <a href="4.html#sec-eda"><span>Sección&nbsp;4.1</span></a>) se constató que algunos estudiantes emplearon muy poco tiempo en responder a la actividad y que algunos estudiantes responden siempre con el mismo nivel de respuesta. Sería interesante realizar el estudio eliminando los test de calidad dudosa, para lo cual se debería contar con una muestra mayor.</li>
+<li>Sería interesante comprobar si las respuestas son diferentes si el estudiante dispone del test antes de ver el vídeo.</li>
+<li>En los comentarios de los alumnos se reflejan la existencia de problemas en el subtitulado <span class="math inline">\(B\)</span> del ítem <span class="math inline">\(Q01\)</span> (la posición de los subtítulos) y en subtitulado <span class="math inline">\(A\)</span> del ítem <span class="math inline">\(Q03\)</span> (la disposición del texto respecto a la caja donde se muestran los subtítulos). En estos ítems no debería haber deficiencias de subtitulado. Sería conveniente que un experto en subtitulado evaluara si realmente los subtítulos son correctos en estos aspectos o si es que no han sido evaluados adecuadamente por los estudiantes.</li>
+<li>Se ha constatado, a través de los comentarios de los alumnos, que no utilizan criterios homogéneos cuando un ítem no es aplicable a los vídeos. Algunos alumnos contestan “No sé / No contesto”, como es esperable, pero otros contestan “Neutral” y otros lo hacen negativa o positivamente. Sería deseable dar una información previa a los alumnos de cómo contestar al test.</li>
+<li>Igualmente se ha constatado que los estudiantes tienden a dar puntuaciones más negativas a los ítems cuando saben que se trata del vídeo incorrectamente subtitulado incluso en aquellos ítems en que los vídeos son idénticos.</li>
+<li>Hay ítems, como los relacionados con la tipografía, la posición de los subtítulos o el contraste, en los que al ser los vídeos idénticos, no es posible saber si los estudiantes son capaces de reconocer diferencias en la calidad del subtitulado.</li>
+<li>Sería interesante comparar las respuestas de los estudiantes con las realizadas por un grupo de expertos.</li>
+</ul>
+</section>
+</section>
+<section id="sec-conclusion" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Conclusión y trabajo futuro</h1>
+<p>Este trabajo ha pretendido responder a la pregunta de investigación de si los estudiantes de un curso de son capaces de identificar los errores en el subtitulado de un vídeo, y como objetivos específicos averiguar qué aspectos del subtitulado han sido más fácilmente reconocidos por los estudiantes y en cuáles han tenido más dificultad. Para ello se ha partido de una Exploración Inicial (ver <a href="4.html#sec-eda"><span>Sección&nbsp;4.1</span></a>) y se han propuesto varios modelos estadísticos que tengan en cuenta la naturaleza ordinal y dependiente de la variable respuesta (ver <a href="4.html#sec-modelos-utilizados"><span>Sección&nbsp;4.2</span></a>). Como variables explicativas se ha considerado el nivel de subtitulado, el periodo en el que se ha realizado cada test, la secuencia u orden de realización de los test, el estudiante que ha realizado el test y el ítem al que se responde.</p>
+<p>La conclusión más importante es que todos los análisis estadísticos realizados muestran que el nivel de subtitulado es la variable que mejor explica la respuesta a cada ítem. Los efectos secuencia y periodo son comparativamente de poca importancia y se traducen en que en general los estudiantes valoran peor el vídeo visto en el segundo periodo para un mismo nivel de subtitulado. Las variables estudiante e ítem se han tratado como efectos aleatorios por haber considerado que sus observaciones no son independientes. La varianza explicada por la variable estudiante ha sido más grande que la explicada por la variable ítem.</p>
+<p>Los estudiantes han identificado errores de subtitulado de los ítems <span class="math inline">\(Q05\)</span> (la corrección ortográfica y gramatical), <span class="math inline">\(Q06\)</span> (la literalidad), <span class="math inline">\(Q07\)</span> (la identificación de los personajes), <span class="math inline">\(Q08\)</span> (la asignación de líneas a los personajes en los diálogos), <span class="math inline">\(Q09\)</span> (la descripción de efectos sonoros) y <span class="math inline">\(Q14\)</span> (la separación en líneas diferentes de sintagmas nominales, verbales y preposicionales).</p>
+<p>Sin embargo, han tenido más dificultades en identificar los errores introducidos en los ítems <span class="math inline">\(Q02\)</span> (el número de líneas por subtítulo), <span class="math inline">\(Q10\)</span> (la sincronización de las entradas y salidas de los subtítulos), <span class="math inline">\(Q11\)</span> (la velocidad de exposición de los subtítulos) y <span class="math inline">\(Q12\)</span> (el máximo número de caracteres por línea). El análisis realizado sobre los comentarios a estos ítems, evidencia que los estudiantes han aprendido las normas que debe regir el subtitulado en estos aspectos pero que no han evaluado minuciosamente si se cumplen realmente. Hay que tener en consideración que esta fue una actividad voluntaria sin incidencia en la calificación del curso, y que en una situación real esto probablemente no habría sucedido ya que habrían realizado una comprobación minuciosa.</p>
+<p>En definitiva, los estudiantes conocen las normas de subtitulado y son capaces identificar los errores que no requieren una comprobación exhaustiva. En los que sí lo requieren, que son aquellos que tienen que ver con parámetros temporales (velocidad y sincronización) y espaciales (número de líneas y caracteres por línea), han tenido más dificultad. Esto está en consonancia con <span class="citation" data-cites="khafik2022">Khafik y Pratama (<a href="references.html#ref-khafik2022" role="doc-biblioref">2022</a>)</span>. En su estudio analizan el subtitulado en inglés producido por estudiantes cuya lengua nativa no es el inglés y concluyen que los errores más frecuentes son precisamente los que tienen que ver con parámetros temporales y espaciales.</p>
+<p>En cuanto a los ítems que tratan aspectos en los que no hay errores en ninguno de los vídeos, los estudiantes han valorado positivamente ambos subtitulados en los ítems <span class="math inline">\(Q04\)</span> (el contraste entre los caracteres y el fondo) y <span class="math inline">\(Q13\)</span> (la legibilidad de la tipografía). Esto no implica necesariamente que, de haber habido deficiencias en estos aspectos, las hubieran reconocido. De hecho, hay evidencias de que los estudiantes noveles tienen dificultades en la identificación de deficiencias en el contraste <span class="citation" data-cites="jperez2">(ver <a href="references.html#ref-jperez2" role="doc-biblioref">Molanes-López et&nbsp;al. 2021</a>)</span>.</p>
+<p>Los ítems <span class="math inline">\(Q15\)</span> (la utilización de puntos suspensivos), <span class="math inline">\(Q16\)</span> (la escritura de los números) y <span class="math inline">\(Q17\)</span> (las incorrecciones en el habla) preguntan cuestiones que no se producen en los vídeos y que son relativamente fáciles de verificar. En las respuestas de los estudiantes han confluido varios problemas verificables a través de los comentarios a los ítems. Por un lado, algunos estudiantes manifiestan que no recuerdan con seguridad la existencia de lo preguntado (puntos suspensivos, números, …). Este problema no es importante ya que es de suponer que en una situación de evaluación de subtitulado real realizarían un segundo visionado de los vídeos para asegurarse. Más preocupante resulta el segundo de los problemas detectados ya que podría estar también presente en otros ítems y haber pasado inadvertido en este trabajo. El problema en cuestión es que en estos ítems la respuesta esperable es “No sé / No contesto”. En la <a href="4.html#tbl-no-response">Tabla&nbsp;<span>4.6</span></a> se constató que estos son los ítems que más respuestas de este nivel reciben pero que esta respuesta no es masiva. Muchos estudiantes se decantan por valoraciones negativas, positivas o neutrales a pesar de haber indicado en los comentarios que la pregunta realizada no tiene aplicación en la actividad. Este problema es una preocupación general en análisis de escalas de Likert. Por ejemplo, ver <span class="citation" data-cites="tutz2020">Tutz (<a href="references.html#ref-tutz2020" role="doc-biblioref">2020</a>)</span> para una propuesta de modelado estadístico de la categoría neutral en una escala de Likert. Un tercer problema detectado en estos ítems, que es probable que también haya tenido incidencia en otros ítems, es que, a pesar de que los comentarios revelan que los estudiantes piensan que estos ítems no tienen aplicación en ninguno de los vídeos, obtienen peor valoración en el subtitulado <span class="math inline">\(B\)</span> que en el <span class="math inline">\(A\)</span>. Esto estaría indicando que las contestaciones de los estudiantes sufren cierto “efecto de ventana rota”. La hipótesis que aquí se plantea para explicar por qué el subtitulado <span class="math inline">\(B\)</span> ha obtenido peores respuestas que el <span class="math inline">\(A\)</span> incluso en ítems en los que el estudiante sabe que los subtitulados son idénticos es la siguiente: Hay ítems como <span class="math inline">\(Q05\)</span> (la corrección ortográfica y gramatical) que son fáciles de evaluar y responder por los estudiantes. Si el estudiante encuentra una falta de ortografía en un subtitulado, estaría psicológicamente condicionado a ser más crítico con cualquier otro aspecto del subtitulado. Ante una pregunta que el estudiante no recuerda haber encontrado (por ejemplo, la presencia de puntos suspensivos) tiende a otorgar una valoración inferior en el subtitulado con faltas de ortografía porque considera que existe la posibilidad de haber pasado por alto la presencia de puntos suspensivos. Esto no sucede en todos los casos. Por ejemplo, en la pregunta sobre el contraste (ítem <span class="math inline">\(Q04\)</span>), la diferencia entre subtitulados aunque existe es menor. La hipótesis expuesta es coherente con este hecho ya que, mientras que los puntos suspensivos son algo puntual cuya existencia el estudiante sabe que puede pasar inadvertida, el contraste es algo que afecta o puede afectar a todo el subtitulado del vídeo.</p>
+<p>Estas conclusiones abren varias vías de investigación que se enumeran aquí a modo de propuesta y sin ánimo de exhaustividad:</p>
+<ul>
+<li>Incorporar al modelo variables como el sexo, la edad, el lugar de nacimiento, el nivel de estudios o el grado de conocimientos de accesibilidad previo. En el momento de realizar este trabajo se disponía de esta información aunque de forma muy incompleta ya que la mayoría de los estudiantes participantes no suministraron la información personal.</li>
+<li>Volver a realizar el análisis completo con los mismos datos pero incorporando desde el principio el conocimiento del subtitulado correcto y siendo más crítico con la calidad de los datos, lo que llevaría a eliminar alguno de los cuestionarios.</li>
+<li>Analizar los datos de la edición del curso de 2023 para ver en qué medida los modelos y las conclusiones se mantienen o cambian.</li>
+<li>Plantear mejoras en la recogida de datos como, por ejemplo, indicaciones detalladas de como responder en caso de duda, desconocimiento, inaplicabilidad, ….</li>
+<li>Sería interesante ver como cambian las respuestas de los estudiantes si en ambos vídeos se introducen errores en el subtitulado en diferentes aspectos.</li>
+<li>Añadir errores de subtitulado para todos o casi todos los ítems.</li>
+<li>Además de las respuestas de los estudiantes, se podría plantear la actividad a profesionales del subtitulado para evaluar las semejanzas y diferencias entre grupos.</li>
+</ul>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-lme4" class="csl-entry" role="listitem">
+Bates, Douglas, Martin Mächler, Ben Bolker, y Steve Walker. 2015. <span>«Fitting Linear Mixed-Effects Models Using <span>lme4</span>»</span>. <em>Journal of Statistical Software</em> 67 (1): 1-48. <a href="https://doi.org/10.18637/jss.v067.i01">https://doi.org/10.18637/jss.v067.i01</a>.
+</div>
+<div id="ref-khafik2022" class="csl-entry" role="listitem">
+Khafik, Muhammad, y Ikke Dewi Pratama. 2022. <span>«Analyzing Errors in Students’ Subtitle Products»</span>. <em>ELE Reviews: English Language Education Reviews</em> 2 (1): 59-73. <a href="https://doi.org/10.22515/elereviews.v2i1.5180">https://doi.org/10.22515/elereviews.v2i1.5180</a>.
+</div>
+<div id="ref-jperez2" class="csl-entry" role="listitem">
+Molanes-López, Elisa M., Alejandro Rodriguez-Ascaso, Emilio Letón, y Jorge Pérez-Martín. 2021. <span>«Assessment of Video Accessibility by Students of a MOOC on Digital Materials for All»</span>. <em>IEEE Access</em> 9: 72357-67. <a href="https://doi.org/10.1109/ACCESS.2021.3079199">https://doi.org/10.1109/ACCESS.2021.3079199</a>.
+</div>
+<div id="ref-tutz2020" class="csl-entry" role="listitem">
+Tutz, Gerhard. 2020. <span>«Hierarchical Models for the Analysis of Likert Scales in Regression and Item Response Analysis: Hierarchical Models»</span>. <em>International Statistical Review</em> 89 (julio). <a href="https://doi.org/10.1111/insr.12396">https://doi.org/10.1111/insr.12396</a>.
+</div>
+</div>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Por problemas de convergencia, no se ha podido ajustar el modelo I(Level == “Positivo”) ~ Treat*Period + (1 + Treat | Subject) + (1 + Treat | Item)<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Estos comentarios se separaron en la fase de preprocesado y no se han utilizado ni consultado hasta la realización de este capítulo.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./4.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Leemos el tibble preprocesado</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link">
+        <span class="nav-page-text">Referencias</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

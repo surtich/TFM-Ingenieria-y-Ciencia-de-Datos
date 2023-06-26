@@ -1,0 +1,76 @@
+## Muestreo de la función predictiva a posteriori por tratamiento e ítem  {visibility="uncounted" data-hide-slide-number="true"}
+
+```{r}
+#| fig-height: 10
+#| fig-width: 18
+
+pred2_brm <- brm_treat.period.subject.item %>%
+    epred_draws(ndraws = 50, newdata = expand.grid(list(Period = c(1, 2), Treat = levels(df_response$Treat), Item = levels(df_response$Item))), re_formula = ~ (1 + Treat | Item), by = c("Treat", "Item"), category = "Response") %>%
+    select(Period, Treat, Item, Response, Probability = .epred, .draw) %>%
+    mutate(q50 = ave(Probability, FUN = function(x) quantile(x, .5, type = 3, na.rm = TRUE))) %>%
+    ungroup() %>%
+    group_by(.draw, Response) %>%
+    mutate(indices = cur_group_id()) %>%
+    ungroup()
+
+colors <- viridis(
+    option = "plasma",
+    begin = 0,
+    end = 0.9,
+    direction = -1,
+    n = 5
+)
+
+questions_vector <- setNames(levels(df_response$Item_lr), levels(df_response$Item))
+
+question_labeller <- function(string) paste0(string, ": ", questions_vector[string])
+
+# Plotting the fitted draws
+p <- pred2_brm %>%
+    ggplot(aes(
+        x = Treat,
+        y = Probability,
+        color = Response,
+        # Don't forget the indices!
+        group = indices
+    )) +
+    facet_wrap(~Item, nrow = 3, labeller = as_labeller(question_labeller)) +
+    geom_line(alpha = 0.4) +
+    scale_color_manual(values = colors) +
+    # We won't need these
+    guides(
+        color = FALSE,
+        label = FALSE,
+        scale = "none"
+    ) +
+    theme_ipsum_ps(base_family = NULL)
+p +
+    labs(
+        x = "Treat",
+        y = "Probability"
+    ) +
+    # theme(
+    #    plot.margin = margin(0, 100, 0, 0)
+    # ) +
+    # This allows any labels or data to go past the grid
+    coord_cartesian(clip = "off") +
+    # Finally, our labels. We filter the data to avoid having a million of them
+    geom_text_repel(
+        data = pred2_brm %>% filter(Probability == q50 & Item %in% c("Q05", "Q11", "Q17") & Period == 2, Treat == "B") %>% distinct(Treat,
+            Period, Item, Response,
+            .keep_all = TRUE
+        ) %>% mutate(Response_l = ordered(Response, labels = levels(df_response$Response_l))),
+        aes(label = Response_l),
+        direction = "y",
+        hjust = 0,
+        segment.size = 0.2,
+        # Move the labels to the right
+        nudge_x = 0.1,
+        na.rm = TRUE,
+        # Expand limits so that the label doesn't get stuck
+        xlim = c(0, 6),
+        # Adjust size as needed!
+        size = 4
+    ) + scale_x_discrete(expand = expansion(mult = c(0, .5)), limits = c("A", "B")) + theme(panel.spacing.x = unit(-5, "lines"), axis.title.x = element_text(size = 15), axis.title.y = element_text(size = 15), strip.text = element_text(size = 12))
+
+```
